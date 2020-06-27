@@ -154,7 +154,7 @@ td {
 			</form>
 		</section>
 		
-			<%@ include file="../common/footer.jsp"%>
+			<footer><%@ include file="../common/footer.jsp"%></footer>
 	
 	
 	<script>
