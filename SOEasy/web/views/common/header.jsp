@@ -89,7 +89,7 @@
 
 <body>
 		<div id="headerWrap">
-		<img src="../../images/logo/logo1.png" alt="로고 사진" id="logo">&nbsp;&nbsp;
+		<a href="../main/guestMain.jsp"><img src="../../images/logo/logo1.png" alt="로고 사진" id="logo"></a>&nbsp;&nbsp;
 		<div id="search">
 		<input type = "text" name = "search" id="searchBar">
 		<label>	<img src="../../images/icon/search.png" alt="돋보기" id="dot" ></label>
