@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1 align = "center">손쉬운 공유 오피스 플랫폼 SO Easy</h1>
-	<h3 align="center"><a href="views/member/loginForm.jsp">로그인 진행</a></h3>
+	<script>
+		location.href ="views/main/guestMain.jsp";
+	</script>
 </body>
 </html>
