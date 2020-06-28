@@ -67,34 +67,34 @@
 			- 복사기, 프린트, Wifi, 개별 냉난방 서비스 제공<br>
 			- 월 1회 무료 변호사, 변리사, 세무사 등 서비스 제공<br><br>
 		</p>
-		
+		<br>
 		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
 			운영시간
 		</b></p>
 		
-		<table style="margin-left: 220px;">
+		<table style="margin-left: 220px; border-spacing:15px;">
 			<tr>
-				<td><b>월</b>   00:00 ~ 24:00&nbsp;&nbsp;&nbsp;&nbsp;<br><br></td>
-				<td><span style="color:blue;"><b>토</b></span>   00:00 ~ 24:00<br><br></td>
+				<td style="padding:20px;"><b>월</b>   00:00 ~ 24:00<</td>
+				<td style="padding:20px;"><span style="color:blue;"><b>토</b></span>   00:00 ~ 24:00</td>
 			</tr>
 			<tr>
-				<td><b>화</b>   00:00 ~ 24:00<br><br></td>
-				<td><span style="color:red;"><b>일</b></span>    00:00 ~ 24:00<br><br></td>
+				<td style="padding:20px;"><b>화</b>   00:00 ~ 24:00</td>
+				<td style="padding:20px;"><span style="color:red;"><b>일</b></span>    00:00 ~ 24:00</td>
 			</tr>
 			<tr>
-				<td><b>수</b>   00:00 ~ 24:00<br><br></td>
-				<td></td>
+				<td style="padding:20px;"><b>수</b>   00:00 ~ 24:00</td>
+				<td style="padding:20px;"></td>
 			</tr>
 			<tr>
-				<td><b>목</b>   00:00 ~ 24:00<br><br></td>
-				<td></td>
+				<td style="padding:20px;"><b>목</b>   00:00 ~ 24:00</td>
+				<td style="padding:20px;"></td>
 			</tr>
 			<tr>
-				<td><b>금</b>   00:00 ~ 24:00<br><br></td>
-				<td></td>
+				<td style="padding:20px;"><b>금</b>   00:00 ~ 24:00</td>
+				<td style="padding:20px;"></td>
 			</tr>
 		</table>
-		
+		<br><br>
 		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
 			편의시설
 		</b></p>
@@ -106,40 +106,40 @@
 		
 		<table style="margin-left:220px;">
 			<tr>
-				<td><b>이용 8일 전&nbsp;&nbsp;&nbsp;&nbsp;</b><br><br></td>
-				<td>100% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 8일 전</b></td>
+				<td style="padding:20px;">100% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 7일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 7일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 6일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 6일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 5일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 5일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 4일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 4일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 3일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 3일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 2일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 2일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 1일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 1일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 당일</b><br><br></td>
-				<td><b style="color:red;">환불불가</b><br><br></td>
+				<td style="padding:20px;"><b>이용 당일</b></td>
+				<td style="padding:20px;"><b style="color:red;">환불불가</b></td>
 			</tr>
 		</table>
 
