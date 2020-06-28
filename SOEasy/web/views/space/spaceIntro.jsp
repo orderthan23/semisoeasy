@@ -190,7 +190,7 @@
 		</div>
 		
 		<br><br>
-		<!-- 이거 빨간줄 가는거 아무리봐도 태그 안닫힌건 없는거같아서 비쥬얼스튜디오 코드 프로그램에 복붙해서 봤더니 거기선 에러 안나요 이클립스에서만 빨간줄가요ㅠ -->
+
 		<p style="margin-left:220px; font-size:30px;"><b>
 			이용후기&nbsp;&nbsp;&nbsp;<span style="color:#40a4b6;">1개</span>
 		</b><span style="font-size:20px;"><b>&nbsp;&nbsp;&nbsp;평균평점</b></span><span style="color:#40a4b6; font-size:20px;">&nbsp;&nbsp;5</span></p>
