@@ -1,24 +1,29 @@
 @charset "UTF-8";
-@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
-	
-html,body{
-	height : 100%
-}
-header{
 
-	margin : 0 auto;
-	padding : 0;
-	
+@import
+	url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css)
+	;
+
+html, body {
+	height: 100%
 }
-section{
-	min-height : 90%;
+
+
+header {
+	margin: 0 auto;
+	padding: 0;
+	display: block;
+}
+
+section {
+	min-height: 90%;
 	font-family: 'NanumSquare', sans-serif;
 	background: #ECECEC38;
 	font-weight: bolder;
-	
-	
 }
-nav{
-	background : #ECECEC38;
-	
+
+nav {
+	background: #ECECEC38;
+	display: block;
 }
+

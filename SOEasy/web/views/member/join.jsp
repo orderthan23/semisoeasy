@@ -6,12 +6,16 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
-	<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="../../css/layout.css">
+
 <title>SO Easy</title>
 <style>
-
+#joinTable {
+	margin: 0 auto;
+}
 
 .input-group {
 	width: 450px;
@@ -20,7 +24,7 @@
 	position: relative;
 }
 
-input {
+#joinTable tr td input {
 	border: none;
 	border-bottom: 1px solid #888;
 	font-size: 15px;
@@ -56,12 +60,7 @@ tr {
 	height: 100px;
 }
 
-table {
-	margin: auto;
-	padding: 0;
-}
-
-button {
+.input-group button {
 	background: #3DB6AE;
 	width: 120px;
 	height: 40px;
@@ -72,7 +71,7 @@ button {
 }
 
 .checkRule {
-	/* height: 20px;
+	/* 	height: 20px;
 	opacity : 1;
 	visibility : visible; */
 	height: 40px;
@@ -82,28 +81,28 @@ button {
 
 h1 {
 	font-size: 60px;
-	font-weight : bolder;
-}
-
-td {
-	align: center;
+	font-weight: bolder;
 }
 
 #joinTable tr td {
 	left: 50px;
 }
 
-.checkbox {
-	margin-left : 100px auto;
-}
-.submitButton{
-	width : 400px;
+.submitButton {
+	width: 400px;
+	background: #3DB6AE;
+	border-radius: 10px;
+	height: 40px;
+	border-style: none;
+	color: white;
+	font-size: 15px;
 }
 </style>
 </head>
 <body>
 	<header>
-	 	<%@ include file="../common/header.jsp"%>
+		<%@ include file="../common/header.jsp"%>
+
 	</header>
 
 	<nav></nav>
@@ -112,16 +111,15 @@ td {
 
 
 
-		<form action="" method="post">
-			<table id="joinTable">
+		<form action="" method="post" id="joinForm">
+			<table id="joinTable" align="center">
 				<tr>
 					<td><h1 align="center">회원가입</h1>
 					<td>
 				</tr>
 				<tr>
-					<td class="input-group"><label for="id"
-						class="input">아이디</label> <input type="text" id="id"
-						placeholder="아이디" />
+					<td class="input-group"><label for="id" class="input">아이디</label>
+						<input type="text" id="id" placeholder="아이디" />
 						<button>아이디 중복 확인</button></td>
 				</tr>
 
@@ -166,10 +164,9 @@ td {
 				</tr>
 				<tr class="checkRule">
 
-					<td class="checkbox">
-							<input type="checkbox" name="rule" id="rule2" value="이용약관동의"><label
-								for="rule2" class="check">개인정보지침 동의</label>
-					</td>
+					<td class="checkbox"><input type="checkbox" name="rule"
+						id="rule2" value="이용약관동의"><label for="rule2" class="check">개인정보지침
+							동의</label></td>
 				</tr>
 				<tr class="checkRule">
 					<td><input type="checkbox" name="rule" id="rule3" value="모두"><label
@@ -177,16 +174,17 @@ td {
 				</tr>
 
 				<tr>
-					<td><button type="submit" name="transfer" id="trans" class="submitButton">회원 가입 완료</button></td>
+					<td><button type="submit" name="transfer" id="trans"
+							class="submitButton">회원 가입 완료</button></td>
 				</tr>
 
 
 			</table>
-			
 		</form>
+
 	</section>
 	<footer>
-	<%@ include file="../common/footer.jsp"%>
+		<%@ include file="../common/footer.jsp"%>
 	</footer>
 	<script>
 		$('input').click(function() {

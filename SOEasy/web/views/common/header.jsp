@@ -1,105 +1,109 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <style>
-	#headerWrap input{
-	  	height : 10%;
-	  	width : 100%;
-	}
-	
-	#logo{
-		width :60px;
-		height : 60px;
-	
-	}
-	#searchBar{
-		display:inline-block;
-		width :560px;
-		height : 65px;
-		border-style : none;
-		
-		
-	
-	
-	}
-	#searchBar:focus{
-		outline : none;
-		top : 0;
-	}
-	
-	#search{
-		
-		width: 600px;
-		height: 60px;
-		border-radius: 10px;
-		border-style:solid;
-		border-width:2px;
-		border-color: black;
-		display : inline-block;
-		align : center;
-		align-content: center;
-		text-align: center; 
-		position : absolute;
-		top : 10px;
-	
-	}
-	.subMenu{
-		float: right;
-		
-		display: inline-block;
-		width : 120px;
-		height : 60px;
-		marigin : 20px auto;
-		align : center;
-		font-size : 20px;
-		font-weight : bold;
-		align-content: center;
-		text-align: center; 
-		
-		
-		
-		
-		
-		
-	}
-	
-	
-	.sub{
-		text-decoration: none;
-		color : black;
-		text-align: center;
-		font-family: 'NanumSquare', sans-serif;
-		
-		
-	}
-	.sub:hover{
-		font-size:1.3em;
-	}
-	#dot{
-		width: 40px;
-		height: 40px;
-		float: right;
-		line-height: 10px;
-			
-		
-	}
-</style>
+#headerWrap input {
+	height: 10%;
+	display: inline;
+}
 
+.subMenu {
+	
+	display: inline-block;
+	width: 120px;
+	height: 60px;
+	margin: 0 auto;
+	
+	align: center;
+	font-size: 20px;
+	font-weight: bold;
+	float: right;
+	
+}
+.subMenu a{
+	
+	text-decoration : none;
+	color: black;
+	text-align: center;
+	display: inline;
+	font-family: 'NanumSquare', sans-serif;
+	
+}
+
+#logo {
+	width: 58px;
+	height: 58px;
+	display: inline;
+	float: left;
+}
+
+
+#searchBar {
+	display: block;
+	width: 480px;
+	height: 100px;
+	margin: 0 auto;
+	margin-left: 10px;
+	border: none;
+	padding: 16px;
+	text-align: center;
+	font-size: 20px;
+	font-family: 'NanumSquare', sans-serif;
+}
+#searchBar:focus {
+	border-style: none;
+	outline: none;
+}
+
+
+
+#searchOn {
+	vertical-align: middle;
+	background: none;
+	outline: none;
+	border: none;
+	
+}
+
+#headerWrap form {
+	display: inline-block;
+	width: 600px;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 10px;
+}
+
+
+
+
+.sub:hover {
+	font-size: 1.3em;
+}
+
+
+
+</style>
 <body>
-		<div id="headerWrap">
-		<a href="../main/guestMain.jsp"><img src="../../images/logo/logo1.png" alt="로고 사진" id="logo"></a>&nbsp;&nbsp;
-		<div id="search">
-		<input type = "text" name = "search" id="searchBar">
-		<label>	<img src="../../images/icon/search.png" alt="돋보기" id="dot" ></label>
-		</div>
-			<span class="subMenu"><br><a href="../member/join.jsp" class="sub">회원가입</a></span>
-			<span class="subMenu"><br><a href="../member/loginForm.jsp" class="sub">로그인</a></span>
-			<span class="subMenu"><br><a href="#" class="sub" align="center">공간 등록</a></span>
-			<span class="subMenu"><br><a href="#" class="sub" align="center">공지 사항</a></span>
-		</div>
-		
-		
-		
+	<div id="headerWrap">
+		<span class="subMenu"><br>
+		<a href="/login/views/member/join.jsp" class="sub">회원가입</a></span> <span
+			class="subMenu"><br>
+		<a href="/login/views/member/loginForm.jsp" class="sub">로그인</a></span> <span
+			class="subMenu"><br>
+		<a href="/login/views/space/insertSpaceStep1.jsp" class="sub" align="center">공간 등록</a></span> <span class="subMenu"><br>
+		<a href="/login/views/board/board.jsp" class="sub" align="center">공지 사항</a></span> &nbsp;&nbsp;
+		<form action="" method="get">
+			<input type="text" name="search" id="searchBar">
+			 <button type="submit" id=searchOn src=""><img src="/login/images/icon/search.png" width="40px" height="40px"></button>	
+
+		</form>
+		<img src="/login/images/logo/logo1.png" alt="로고 사진" id="logo"
+			onclick="location.href='../main/guestMain.jsp'">
+
+
+	</div>
+
+
 </body>
