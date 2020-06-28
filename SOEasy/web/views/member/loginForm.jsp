@@ -19,12 +19,13 @@
 	position: relative;
 }
 
-input {
+.loginForm {
 	border: none;
 	border-bottom: 1px solid #888;
 	font-size: 15px;
 	display: inline;
 	background: #ECECEC38;
+	width: 400px;
 }
 
 .loginForm:focus {
@@ -60,7 +61,7 @@ table {
 	padding: 0;
 }
 
-button {
+.input-group button {
 	background: #3DB6AE;
 	width: 400px;
 	height: 40px;
@@ -70,7 +71,7 @@ button {
 	border-color: #ECECEC38;
 }
 
-h1 {
+#loginTitle {
 	font-size: 60px;
 	font-weight: bolder;
 	margin: 0 auto;
@@ -78,13 +79,9 @@ h1 {
 	text-align: center;
 }
 
-td {
-	
-}
 
-.loginForm {
-	width: 400px;
-}
+
+
 
 .findAndJoin {
 	margin: 24px;
@@ -120,7 +117,7 @@ td {
 		<section align="center">
 			<br><br>
 			
-			<h1>SO Easy</h1>
+			<h1 id="loginTitle">SO Easy</h1>
 			<h2>로그인</h2>
 			<form action="<%=request.getContextPath()%>/login" method="post">
 				<table>

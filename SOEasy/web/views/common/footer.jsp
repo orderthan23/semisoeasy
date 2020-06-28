@@ -63,11 +63,11 @@
 
 		<p id="copyRight">Copyright © 2020- SO Easy All Right Reserved</p>
 		<ul>
-			<li class="rules"><a href="#">이용약관</a></li>
-			<li class="rules"><a href="#">개인정보지침</a></li>
+			<li class="rules"><a href="/login/views/common/rule1.jsp">이용약관</a></li>
+			<li class="rules"><a href="/login/views/common/rule2.jsp">개인정보지침</a></li>
 			<li class="rules"><a href="#">운영정책</a></li>
 		</ul>
-		<label id="footerLogo"><img src="../../images/logo/logo2.png"
+		<label id="footerLogo"><img src="/login/images/logo/logo2.png"
 			alt="로고"> </label>
 
 	</div>
