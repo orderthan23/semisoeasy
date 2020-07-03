@@ -12,13 +12,19 @@
 	    background :#3DB6AE;
 	    line-height: middle;
 		vertical-align: middle;
+		texti-align : center;
+		both : clear;
+	}
+	
+	#ruleBox{
+		
 	}
 	#titleLetters{
 		
-		margin: 0 auto;
-		padding : 0;
-		font-size : 40px;
 		
+		font-size : 40px;
+		text-align : center;
+		line-height : 85px;
 	}
 	.ruleResource{
 		font-size : 15px;
@@ -32,19 +38,20 @@
 		font-weight: bolder;
 	}
 	
+	
 </style>
 <title>Insert title here</title>
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
 	<section>
-		<div id="ruleTitle">
-		
-		<h1  id="titleLetters" align="center">SO Easy 이용 약관</h1>
+		<div align="center" id="ruleTitle">
+	
+		<h1 id="titleLetters">SO Easy 이용 약관</h1>
 		
 		</div>
 		
-			
+&nbsp;&nbsp;<div id="ruleBox">
 <p class="ruleSubtitle">제 1 조 (목적)</p> 
 <pre class="ruleResource">[https://www.soeasy.kr] 온라인 서비스(이하 “서비스”라고 합니다.)의 이용과 관련하여 회사와 회원과의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</pre> 
 <p class="ruleSubtitle">제 2 조 (정의)</p>
@@ -192,6 +199,7 @@ C. 호스트 예약 승인 : “회원”이 공간 예약을 신청한 후 12�
 2. "회사"와 "회원"간 발생한 분쟁에 관한 소송은 제소 당시의 "회원"의 주소를 관할하는 지방법원을 전속관할로 하고, 주소가 없는 경우 거소를 관할하는 지방법원의 전속관할로 합니다. 단, 제소 당시 "회원"의 주소 또는 거소가 명확하지 아니한 경우의 관할법원은 민사소송법에 따라 정합니다. 
 3. 해외에 주소나 거소가 있는 "회원"의 경우 "회사"와 "회원"간 발생한 분쟁에 관한 소송은 전항에도 불구하고 대한민국 서울중앙지방법원을 관할법원으로 합니다. 부칙 이 약관은 2019년 04월 03일부터 적용됩니다.
 </pre>
+</div>	
 	</section>
 	<footer><%@ include file="../common/footer.jsp"%></footer>
 </body>

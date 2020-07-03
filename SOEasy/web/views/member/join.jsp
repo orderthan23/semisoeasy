@@ -7,14 +7,15 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+
 <link rel="stylesheet" href="../../css/layout.css">
 
 <title>SO Easy</title>
 <style>
 #joinTable {
 	margin: 0 auto;
+	clear : both;
+	
 }
 
 .input-group {
