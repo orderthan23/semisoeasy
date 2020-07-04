@@ -104,11 +104,11 @@
 				<span style="display:inline-block;">
 					
 					<h1>비밀번호</h1>
-					<br>
+					
 					<input type="password" name="userPwd" placeholder="비밀번호를 입력하세요">
 					<br><br>
 					<button id="deleteButton">탈퇴하기</button>
-					
+					<br><br><br>
 				</span>
 
 			</div>
