@@ -174,7 +174,7 @@
 		</table>
 		<br><br>
 		
-		<!-- 호스트정보 -->
+		<!-- 호스트 정보 -->
 		<table align="center" width="800px">
 			<tr>
 				<td style="color:#40a4b6; margin-left:330px; font-size:20px; width:200px; height:50px;"><b>호스트 정보</b></td>
