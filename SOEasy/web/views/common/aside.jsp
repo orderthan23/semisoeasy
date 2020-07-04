@@ -143,13 +143,13 @@ aside ul li a img {
 	float: right;
 }
 
-/* #menu {
+ #menu {
 	position: relative;
 	top: -15px;
 	left : 20px;
-} */
+} 
 
-/* #menu a {
+ #menu a {
 	font-weight: bolder;
 	margin-left : 50px;
 	font-size: 18px;
@@ -158,7 +158,7 @@ aside ul li a img {
 #menu a:first-child {
 	font-size: 40px;
 	margin-left: 60px;
-} */
+} 
 </style>
 <title>Document</title>
 </head>
