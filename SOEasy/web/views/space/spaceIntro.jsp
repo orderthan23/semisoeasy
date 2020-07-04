@@ -22,17 +22,16 @@
 		<section style="margin:auto; margin-left:120px; padding:0;">
 		
 		<h1 style="color:#40a4b6; margin-left:210px; font-weight: bolder;">성수동 인생공간 코워킹스페이스</h1>
-		<table>
-			<tr> <!-- 가격이랑 버튼이랑 가운데 정렬 valign 속성도 안먹힘 -->
-				<td><p style="color:#c4c4c4; margin-left:210px; font-size:25px;">300,000원 / 1개월 </p>&nbsp;&nbsp;&nbsp;</td>
-				<!-- <td><span id="reserve"><img src="../images/rsBtn.png" alt="예약버튼" id="reserveButton"></span></td> -->
-				<td><button onclick="test1();" style="background:#40b4a6; width:70px; height:30px; outline:0; border:0; color:white;">예  약</button></td>
+		<table style="border-spacing:15px; margin-left:200px">
+			<tr>
+				<td style="padding:15px; color:#c4c4c4; font-size:25px;">300,000원 / 1개월 </td>
+				<td style="padding:15px"><button onclick="test1();" style="background:#40b4a6; width:70px; height:30px; outline:0; border:0; color:white; cursor:pointer;">예  약</button></td>
 			</tr>
 		</table>
-		<table style="margin-left:210px;">
+		<table style="margin-left:210px; border-spacing:10px;">
 			<tr>
-				<td><img src="../../images/icon/share.png" style="width:30px;">&nbsp;&nbsp;</td>
-				<td><img src="../../images/icon/heart.png" style="width:30px;"></td>
+				<td style="padding:10px;"><img src="../../images/icon/share.png" style="width:35px;"></td>
+				<td style="padding:10px;"><img src="../../images/icon/heart.png" style="width:35px;"></td>
 			</tr>
 		</table>
 		<br>
@@ -64,82 +63,117 @@
 			1~2인의 경우 SHARE OFFICE로 이용가능<br>
 			- 공동현관 도어락, 개별 오피스 열쇠 제공<br>
 			- 24시간 첨단경호시스템<br>
-			- 복사기, 프린트, Wifi, 개별 냉난방 서비스 제공<br>
-			- 월 1회 무료 변호사, 변리사, 세무사 등 서비스 제공<br><br>
+			- 복사기, 프린트, Wifi, 개별 냉난방 서비스 제공!<br>
+			- 월 1회 무료 변호사, 변리사, 세무사 등 서비스 제공!<br><br>
 		</p>
-		
+		<br>
 		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
 			운영시간
 		</b></p>
 		
-		<table style="margin-left: 220px;">
+		<table style="margin-left: 220px; border-spacing:15px;">
 			<tr>
-				<td><b>월</b>   00:00 ~ 24:00&nbsp;&nbsp;&nbsp;&nbsp;<br><br></td>
-				<td><span style="color:blue;"><b>토</b></span>   00:00 ~ 24:00<br><br></td>
+				<td style="padding:20px;"><b>월</b>00:00 ~ 24:00</td>
+				<td style="padding:20px;"><span style="color:blue;"><b>토</b></span>00:00 ~ 24:00</td>
 			</tr>
 			<tr>
-				<td><b>화</b>   00:00 ~ 24:00<br><br></td>
-				<td><span style="color:red;"><b>일</b></span>    00:00 ~ 24:00<br><br></td>
+				<td style="padding:20px;"><b>화</b>00:00 ~ 24:00</td>
+				<td style="padding:20px;"><span style="color:red;"><b>일</b></span>00:00 ~ 24:00</td>
 			</tr>
 			<tr>
-				<td><b>수</b>   00:00 ~ 24:00<br><br></td>
-				<td></td>
+				<td style="padding:20px;"><b>수</b>00:00 ~ 24:00</td>
+				<td style="padding:20px;"></td>
 			</tr>
 			<tr>
-				<td><b>목</b>   00:00 ~ 24:00<br><br></td>
-				<td></td>
+				<td style="padding:20px;"><b>목</b>00:00 ~ 24:00</td>
+				<td style="padding:20px;"></td>
 			</tr>
 			<tr>
-				<td><b>금</b>   00:00 ~ 24:00<br><br></td>
-				<td></td>
+				<td style="padding:20px;"><b>금</b>00:00 ~ 24:00</td>
+				<td style="padding:20px;"></td>
 			</tr>
 		</table>
-		
+		<br><br>
 		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
 			편의시설
 		</b></p>
-		
-		<img src="../images/service.png" style="margin-left:220px; width:800px;"><br><br>
+		<!-- 편의시설 사진들 넣기 -->
+		<table style="margin-left:220px; border-spacing:15px;">
+			<tr>
+				<td style="padding:22px;"><img src="../../images/icon/24h.png" width="100px" style="opacity:0.2;"></td>
+				<td style="padding:22px;"><img src="../../images/icon/365days.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/airCon.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/animal.png" width="100px" style="opacity:0.2;"></td>
+				<td style="padding:22px;"><img src="../../images/icon/beam.png" width="100px" style="opacity:0.2;"></td>
+				<td style="padding:22px;"><img src="../../images/icon/board.png" width="100px"></td>
+			</tr>
+			<tr>
+				<td style="padding:22px;"><img src="../../images/icon/cafe.png" width="100px" style="opacity:0.2;"></td>
+				<td style="padding:22px;"><img src="../../images/icon/copyPrint.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/delivery.png" width="100px" style="opacity:0.2;"></td>
+				<td style="padding:22px;"><img src="../../images/icon/doorLock.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/fax.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/heater.png" width="100px"></td>
+			</tr>
+			<tr>
+				<td style="padding:22px;"><img src="../../images/icon/kitchen.png" width="100px" style="opacity:0.2;"></td>
+				<td style="padding:22px;"><img src="../../images/icon/locker.png" width="100px" style="opacity:0.2;"></td>
+				<td style="padding:22px;"><img src="../../images/icon/mail.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/parking.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/rounge.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/snack.png" width="100px" style="opacity:0.2;"></td>
+			</tr>
+			<tr>
+				<td style="padding:22px;"><img src="../../images/icon/terrace.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/tv.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/wareHouse.png" width="100px" style="opacity:0.2;"></td>
+				<td style="padding:22px;"><img src="../../images/icon/waterMachine.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/wifi.png" width="100px"></td>
+				<td style="padding:22px;"><img src="../../images/icon/plug.png" width="100px"></td>
+			</tr>
+		</table>
+
+		<br><br>	
 		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
 			이용기간
 		</b></p>
 		
 		<table style="margin-left:220px;">
 			<tr>
-				<td><b>이용 8일 전&nbsp;&nbsp;&nbsp;&nbsp;</b><br><br></td>
-				<td>100% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 8일 전</b></td>
+				<td style="padding:20px;">100% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 7일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 7일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 6일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 6일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 5일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 5일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 4일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 4일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 3일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 3일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 2일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 2일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 1일 전</b><br><br></td>
-				<td>90% 환불<br><br></td>
+				<td style="padding:20px;"><b>이용 1일 전</b></td>
+				<td style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td><b>이용 당일</b><br><br></td>
-				<td><b style="color:red;">환불불가</b><br><br></td>
+				<td style="padding:20px;"><b>이용 당일</b></td>
+				<td style="padding:20px;"><b style="color:red;">환불불가</b></td>
 			</tr>
 		</table>
 
@@ -190,16 +224,16 @@
 		</div>
 		
 		<br><br>
-		<!-- 이거 빨간줄 가는거 아무리봐도 태그 안닫힌건 없는거같아서 비쥬얼스튜디오 코드 프로그램에 복붙해서 봤더니 거기선 에러 안나요 이클립스에서만 빨간줄가요ㅠ -->
+
 		<p style="margin-left:220px; font-size:30px;"><b>
 			이용후기&nbsp;&nbsp;&nbsp;<span style="color:#40a4b6;">1개</span>
 		</b><span style="font-size:20px;"><b>&nbsp;&nbsp;&nbsp;평균평점</b></span><span style="color:#40a4b6; font-size:20px;">&nbsp;&nbsp;5</span></p>
 
 		<table>
           	<tr>
-          		<td rowspan="2"><img src="../images/soeasyProf.png" style="margin-left:220px; width:50px;"></td>
+          		<td rowspan="2"><img src="../../images/etc/soeasyProf.png" style="margin-left:220px; width:50px;"></td>
           		<td><h3>&nbsp;&nbsp;이호정&nbsp;&nbsp;</h3></td>
-          		<td><img src="../images/star.png" style="width:100px;"></td>
+          		<td><img src="../../images/etc/star.png" style="width:100px;"></td>
           		<td><h5>&nbsp;&nbsp;&nbsp;신고하기</h5></td>
           	</tr>
           	<tr>
@@ -216,7 +250,7 @@
 		<footer><%@ include file="../common/footer.jsp"%></footer>
 		<script>
 			function test1() {
-				alert('예약버튼누름');
+				location.href="<%=request.getContextPath()%>/views/space/spaceReser.jsp";
 			}
 		</script>
 </body>
