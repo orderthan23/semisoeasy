@@ -8,7 +8,7 @@
 <!-- Bootstrap core CSS -->
 <link href="/login/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom styles for this template -->
+<!-- Custom styles for this template  -->
 <link href="/login/css/blog-post.css" rel="stylesheet">
 <style>
 </style>
