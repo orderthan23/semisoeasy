@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../css/layout.css">
-<!-- Bootstrap core CSS  -->
+<!-- Bootstrap core CSS   -->
 <link href="/login/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
