@@ -73,6 +73,7 @@
 	border-style: solid;
 	border-width: 2px;
 	border-radius: 10px;
+	clear:both;
 }
 
 
@@ -95,7 +96,7 @@
 		<a href="/login/views/space/insertSpaceStep1.jsp" class="sub" align="center">공간 등록</a></span> <span class="subMenu"><br>
 		<a href="/login/views/board/board.jsp" class="sub" align="center">공지 사항</a></span> &nbsp;&nbsp;
 		<form action="" method="get">
-			<input type="text" name="search" id="searchBar">
+			<input type="search" name="search" id="searchBar">
 			 <button type="submit" id=searchOn src=""><img src="/login/images/icon/search.png" width="40px" height="40px"></button>	
 
 		</form>

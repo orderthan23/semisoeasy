@@ -4,17 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../js/validate.js"></script>
 
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+
 <link rel="stylesheet" href="../../css/layout.css">
 
 <title>SO Easy</title>
 <style>
 #joinTable {
 	margin: 0 auto;
+	clear : both;
+	
 }
 
 .input-group {
@@ -97,6 +98,16 @@ h1 {
 	color: white;
 	font-size: 15px;
 }
+
+#validate1{
+	font-weight: bold;
+	font-size : 15px;
+	font-family : sans-serif;
+}
+.input-group p {
+	font-size : 13px;
+	font-weight : normal;
+}
 </style>
 </head>
 <body>
@@ -118,15 +129,20 @@ h1 {
 					<td>
 				</tr>
 				<tr>
-					<td class="input-group"><label for="id" class="input">아이디</label>
-						<input type="text" id="id" placeholder="아이디" />
-						<button>아이디 중복 확인</button></td>
+					<td class="input-group" id="id-zone"><label for="id" class="input">아이디</label>
+						<input type="text" id="userId" placeholder="아이디" onkeyup="setTimeout(checkingId(),200);"/>
+						<button type="button" onclick="checkSameId();">아이디 중복 확인</button>
+						<p></p>
+						</td>
 				</tr>
 
 				<tr>
-					<td class="input-group"><label for="nickName" class="input">닉네임
-					</label> <input type="text" id="nickName" placeholder="닉네임" />
-						<button>닉네임 중복 확인</button></td>
+					<td class="input-group" id="nickName-zone"><label for="nickName" class="input">닉네임
+					</label> <input type="text" id="nickName" placeholder="닉네임" onkeyup="setTimeout(checkingNickName(),200)" />
+						<button type="button" onclick="checkSameNickName();">닉네임 중복 확인</button>
+						<p></p>
+						</td>
+						
 				</tr>
 
 				<tr>
@@ -136,13 +152,19 @@ h1 {
 
 
 				<tr>
-					<td class="input-group"><label for="password" class="input">비밀번호</label>
-						<input type="password" id="password" placeholder="비밀번호" /></td>
+					<td class="input-group" id="password-zone">
+						<pre id="validate1">                                               0/16자</pre>
+						<label for="password" class="input" >비밀번호</label>
+						<input type="password" id="password" placeholder="비밀번호" onkeyup="setTimeout(checkPwdLength(),200);" />
+						<p></p>
+					</td>
 				</tr>
 
 				<tr>
-					<td class="input-group"><label for="password02" class="input">비밀번호
-							확인</label> <input type="password" id="password2" placeholder="비밀번호 확인" />
+					<td class="input-group" id="password2-zone">
+					<label for="password02" class="input">비밀번호 확인</label>
+					 <input type="password" id="password2" placeholder="비밀번호 확인" onkeyup="setTimeout(checkPwdSame(),200);" />
+							<p></p>
 					</td>
 				</tr>
 
@@ -153,9 +175,12 @@ h1 {
 				</tr>
 
 				<tr>
-					<td class="input-group"><label for="email" class="input">이메일</label>
-						<input type="email" id="email" placeholder="이메일" />
-						<button>이메일 인증</button></td>
+					<td class="input-group" id="email-zone"><label for="email" class="input">이메일</label>
+						<input type="email" id="email" placeholder="이메일" onkeyup="setTimeout(checkingEmail(),200)" />
+						<button type="button" onclick="checkCertifiedEmail();">이메일 인증</button>
+						<p></p>
+						</td>
+						
 				</tr>
 
 				<tr class="checkRule">
@@ -174,8 +199,8 @@ h1 {
 				</tr>
 
 				<tr>
-					<td><button type="submit" name="transfer" id="trans"
-							class="submitButton">회원 가입 완료</button></td>
+					<td><button type="button" name="transfer" id="trans"
+							class="submitButton" onclick="checkAll();">회원 가입 완료</button></td>
 				</tr>
 
 
@@ -187,24 +212,12 @@ h1 {
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
 	<script>
+		//디자인  메소드
 		$('input').click(function() {
 			$(this).attr('placeholder', '');
 			$(this).parent().find('label').addClass('label-top');
 		});
 		
-		$(function() { //전체선택 체크박스 클릭 
-			$("#rule3").click(function() {
-				//만약 전체 선택 체크박스가 체크된상태일경우
-				if ($("#rule3").prop("checked")) {
-					//해당화면에 전체 checkbox들을 체크해준다
-					$("input[type=checkbox]").prop("checked", true);
-					// 전체선택 체크박스가 해제된 경우 
-				} else {
-					//해당화면에 모든 checkbox들의 체크를해제시킨다.
-					$("input[type=checkbox]").prop("checked", false);
-				}
-			})
-		});
 	</script>
 </body>
 </html>

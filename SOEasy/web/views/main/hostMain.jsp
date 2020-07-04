@@ -24,16 +24,8 @@
 				<%
 					for (int j = 1; j <= row; i++, j++) {
 				%>
-				<%
-					if (i > 30) {
-								break;
-							}
-				%>
-				
-
-			
-				<div class="max-w-3xl mx-auto">
-        <div class="flex items-center justify-center min-h-screen">
+					<div class="max-w-3xl mx-auto">
+        <div class="flex items-center justify-center min-h-screen" style="display : inline; margin:0"> 
             <div class="max-w-sm w-full sm:w-1/2 lg:w-1/3 py-6 px-3">
                 <div class="bg-white shadow-xl rounded-lg overflow-hidden">
                     <div class="bg-cover bg-center h-56 p-4" style="background-image: url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)">
@@ -52,7 +44,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                 </div>
+           
+				<%
+					if (i > 30) {
+								break;
+							}
+				%>
+				
+
+			
+			
 			
 
 				<%
