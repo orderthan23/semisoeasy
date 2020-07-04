@@ -4,8 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="/login/css/layout.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>SO Easy</title>
 <style>
+	body {
+		font-family: 'NanumSquare', sans-serif;
+	}
 	#moHead {
 		padding:0.05px;
 		background-color: lightgray;
@@ -29,8 +35,44 @@
 		border-radius: 5px;
 		
 	}
+	input
 	#rinfo {
 		text-align: top;
+		display: table-cell;
+    	vertical-align: top;
+    	margin-top:0;
+	}
+	.info {
+		width:245px;
+		height:20px;
+		align:right;
+	}
+	.number {
+		width:200px;
+		height:20px;
+		text-align:center;
+	}
+	.tInfo {
+		align:right;
+	}
+	.btn1 {
+		background: #3DB6AE;
+		width: 40px;
+		height: 25px;
+		border-radius:5px;
+		color: white;
+		font-weight: border;
+		border-color: #ECECEC38;
+		vertical-align: top;
+	}
+	.btn2 {
+		background: #3DB6AE;
+		width: 70px;
+		height: 30px;
+		border-radius: 5px;
+		color: white;
+		font-weight: border;
+		border-color: #ECECEC38;
 	}
 </style>
 </head>
@@ -41,16 +83,16 @@
 		<table>
 			<tr>
 				<td class="title"><b>예약 일정 선택   </b></td>
-				<td colspan="2"><input type="date" /> ~ <input type="date"/></td>
+				<td colspan="2"><input type="date"/> ~ <input type="date"/></td>
 			</tr>
 			<tr>
 				<td class="title"><b>예약 인원 선택</b></td>
-				<td colspan="2"><div align="center" id="number">1</div><td>
+				<td colspan="4"><button class="btn1"><</button>&nbsp;&nbsp;&nbsp;&nbsp;<textarea class="number" style="resize:none">1</textarea>&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn1">></button><td>
 			</tr>
 			<tr>
-				<td colspan="2" class="title"><b>공간 선택</b></td>
-				<td id="select" align="left">
-					<select name="place" align="left">
+				<td class="title"><b>공간 선택</b></td>
+				<td colspan="2" id="select">
+					<select name="place">
 						<option>=====선택=====</option>
 						<option value="place1" label="센터1">센터1</option>
 						<option value="place2" label="센터2">센터2</option>
@@ -61,35 +103,37 @@
 				</td>
 			</tr>
 			<tr>
-				<td rowspan="5" class="title" id="rInfo">예약자 정보</td>
+				<td rowspan="6" class="title" id="rInfo">예약자 정보<br><br><br><br><br><br></td>
 			</tr>
 			<tr>
 				<td>예약자명</td>
-				<td><input type="text" id="name1"></td>
+				<td class="tInfo"><input type="text" class="info" id="name1"></td>
 			</tr>
+			<tr><td></td></tr>
 			<tr>
 				<td>사용자명</td>
-				<td><input type="text" id="name2"></td>
+				<td class="tInfo"><input type="text" class="info" id="name2"></td>
 			</tr>
 			<tr>
 				<td>연락처</td>
-				<td><input type="tel" id="tel"></td>
+				<td class="tInfo"><input type="tel" class="info" id="tel"></td>
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td><input type="email" id="email"></td>
+				<td class="tInfo"><input type="email" class="info" id="email"></td>
 			</tr>
 			<tr>
 				<td class="title">요청사항</td>
-				<td colspan="2"><textarea cols="35" rows="10" id="textarea">
+				<td colspan="2"><textarea cols="37" rows="10" id="textarea" style="resize:none;">
 				</textarea></td>
 			</tr>
 		</table>
 		<br>
    		<div align="center">
-	      	<button id="btnL" type="submit">결제</button>
-	      	<button class="btnR" id="" type="reset">취소</button>
-	      	<button class="btnR" id="" type="submit">확인</button>
+	      	<button class="btn2" id="btnL" type="submit">결제</button>
+	      	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	      	<button class="btn2" id="btnR" type="reset">취소</button>
+	      	<button class="btn2" id="btnR" type="submit">확인</button>
   		</div>
   		
   		

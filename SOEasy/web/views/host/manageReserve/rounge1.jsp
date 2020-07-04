@@ -5,6 +5,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	body {
+		background-color:#ECECEC;
+		
+	}
+	.l1 {
+		padding:0.05px;
+		background-color: lightgray;
+		font-weight: bolder;
+		text-align:left;
+	}
+	#box {
+		background-color: white;
+	}
+	button {
+		 border: lightgrey 2px solid;
+		 background: white;
+		 
+	}
+	.day {
+		background-color: lightblue;
+	}
+	.month {
+		
+	}
+	.exp {
+		background-color: pink;
+		
+	}
+	.pay {
+		border: dashed;
+	}
+</style>
 </head>
 <body>
 	<header><%@ include file="../../common/header.jsp"%></header>
@@ -28,14 +61,14 @@
 		<br> <img src="">
 
 		<div class="l1">라운지 이용고객 관리
-		<textarea class="kind" cols="6" rows="1" style="resize:none" readonly>미결제</textarea>
-		<textarea class="kind" cols="6" rows="1" style="resize:none" readonly>기간만료</textarea>
-		<textarea class="kind" cols="6" rows="1" style="resize:none" readonly>월 회원</textarea>
-		<textarea class="kind" cols="6" rows="1" style="resize:none" readonly>일 회원</textarea>
+		<textarea class="kind"  id="pay" cols="6" rows="1" style="resize:none" readonly>미결제</textarea>
+		<textarea class="kind" id="exp" cols="6" rows="1" style="resize:none" readonly>기간만료</textarea>
+		<textarea class="kind" id="month" cols="6" rows="1" style="resize:none" readonly>월 회원</textarea>
+		<textarea class="kind" id="day" cols="6" rows="1" style="resize:none" readonly>일 회원</textarea>
 		</div>
 
 		
-		<div>
+		<div id="box">
 		
 		
 		
@@ -66,7 +99,48 @@
 		<label>라운지 이용</label><br>
 		<label>6/29</label>
 		</button>
+		
+		<div class="btn2" id="btn2"></div>
+		
+		
 		</div>
+		
+		
+		
+		<script>
+		var month = 12;
+		var day = 7;
+		var pay = 2;
+		var expiration = 3;
+		
+		var month = 12;
+		var day = 7;
+		var pay = 2;
+		var expiration = 3;
+		
+		var name = "이호정";
+		var kind = "일권"
+		var nKind = 1;
+		var term = "7/4 - 8/3";
+		
+		
+		$(function(){
+			$('#btn2').append(function(){
+		        var sentence = "";
+		        sentence +='<button>';
+		        sentence +='<div>' + nKind + kind + '</div>';
+		        sentence+='<div>'+ name +'</div>';
+		        sentence+='<div>라운지 이용</div>';
+		        sentence+='<div>'+ term +'</div>';
+	            sentence +="</button>";
+		        
+		        return sentence;
+		    });
+		});
+	
+		
+		
+		</script>
 	</section>
 
 </body>
