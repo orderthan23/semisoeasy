@@ -10,63 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.visual {
-	position: relative;
-	width: 100%;
-}
 
-.visual button {
-	position: absolute;
-	z-index: 10;
-	top: 50%;
-	transform: translateY(-50%);
-	width: 71px;
-	height: 71px;
-	border: none;
-	border-radius: 100%;
-	background: rgba(0, 0, 0, .5);
-}
-
-.visual button:before {
-	font-family: 'xeicon';
-	color: #fff;
-	font-size: 45px;
-}
-
-.visual button.slick-prev {
-	left: 50px;
-	font-size: 0;
-	color: transparent;
-}
-
-.visual button.slick-prev::before {
-	content: "\e93d";
-	font-family: 'xeicon';
-}
-
-.visual button.slick-next {
-	right: 50px;
-	font-size: 0;
-	color: transparent;
-}
-
-.visual button.slick-next::before {
-	content: "\e940";
-	font-family: 'xeicon';
-}
-
-.visual div p {
-	position: absolute;
-	top: 30%;
-	transform: translateX(80%);
-	font-size: 40px;
-	font-weight: bolder;
-	color: beige;
-}
-
-.visual div {
-	opacity: 0.8;
-}
 
 .photobox {
 	padding: 20px;

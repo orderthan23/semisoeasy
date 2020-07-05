@@ -69,7 +69,7 @@
 
 #headerWrap form {
 	display: inline-block;
-	width: 600px;
+	width: 550px;
 	border-style: solid;
 	border-width: 2px;
 	border-radius: 10px;

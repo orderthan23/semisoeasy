@@ -181,31 +181,31 @@ aside ul li a img {
 		<aside class="menu">
 			<ul>
 				<li class="profile" align="center"><img
-					src="../../images/etc/hazard.png" alt="프로필" width="110px"
+					src="/login/images/etc/hazard.png" alt="프로필" width="110px"
 					height="110px"></li>
 				<li class="profile"><p class="userName">흑당마라민트초코</p></li>
 				<li class="profile"><p class="grade">host</p></li>
 				<hr>
 				<li><p class="subtitle">예약 목록</p></li>
 				<li><a href="#">이용 내역 리스트<img
-						src="../../images/etc/arrow.png" alt="화살표">
+						src="/login/images/etc/arrow.png" alt="화살표">
 				</a></li>
-				<li><a href="#">찜 리스트 <img src="../../images/etc/arrow.png"
+				<li><a href="#">찜 리스트 <img src="/login/images/etc/arrow.png"
 						alt="화살표"></a></li>
-				<li><a href="#">리뷰 목록<img src="../../images/etc/arrow.png"
+				<li><a href="#">리뷰 목록<img src="/login/images/etc/arrow.png"
 						alt="화살표"></a></li>
 				<hr>
 				<li><p class="subtitle">내 공간 관리</p></li>
 				<li><a href="#">예약 일정관리<img
-						src="../../images/etc/arrow.png" alt="화살표"></a></li>
+						src="/login/images/etc/arrow.png" alt="화살표"></a></li>
 				<li><a href="#">공간 정보 수정<img
-						src="../../images/etc/arrow.png" alt="화살표"></a></li>
-				<li><a href="#">공간 정산<img src="../../images/etc/arrow.png"
+						src="/login/images/etc/arrow.png" alt="화살표"></a></li>
+				<li><a href="#">공간 정산<img src="/login/images/etc/arrow.png"
 						alt="화살표"></a></li>
 				<hr>
 				<li><a href="#">개인 정보 관리<img
-						src="../../images/etc/arrow.png" alt="화살표"></a></li>
-				<li><a href="#">공지 사항<img src="../../images/etc/arrow.png"
+						src="/login/images/etc/arrow.png" alt="화살표"></a></li>
+				<li><a href="#">공지 사항<img src="/login/images/etc/arrow.png"
 						alt="화살표"></a></li>
 
 			</ul>
