@@ -13,6 +13,7 @@ header {
 	margin: 0 auto;
 	padding: 0;
 	display: block;
+	width: 100%;
 }
 
 section {
@@ -26,5 +27,11 @@ section {
 nav {
 	background: #ECECEC38;
 	display: block;
+	width: 100%;
+}
+footer{
+	
+	width : 100%;
+	
 }
 

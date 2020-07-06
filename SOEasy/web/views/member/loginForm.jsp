@@ -1,14 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	int errorCode =0;
+	String msg = (String)request.getAttribute("msg");
+
+	if(request.getAttribute("errorCode")!=null){
+			errorCode = (int)request.getAttribute("errorCode");
+			
+	}else{
+		errorCode = 0;
+	}
+	
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>SO Easy 로그인</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="/login/css/layout.css">
 <style>
 
 
@@ -144,7 +156,7 @@ table {
 
 					<tr>
 						<td class="input-group">
-							<button type="submit">로그인</button>
+							<button type="button" onclick="checkNullLogin();">로그인</button>
 						</td>
 					</tr>
 				</table>
@@ -155,10 +167,30 @@ table {
 	
 	
 	<script>
+		$(document).ready(function(){
+			var msg = '<%=msg%>';
+			var errorCode = <%=errorCode%>;
+			if(errorCode > 0){
+				alert(msg);
+				console.log(msg);
+			}
+			
+		});
 		$('input').click(function() {
 			$(this).attr('placeholder', '');
 			$(this).parent().find('label').addClass('label-top');
 		});
+		
+		function checkNullLogin(){
+			if($('#id').val().length==0 ||$('#password').val().length==0){
+				alert("정보를 모두 입력해주세요.");
+				return;
+			}
+			else{
+				$('form').submit();
+			}
+			
+		}
 	</script>
 </body>
 </html>

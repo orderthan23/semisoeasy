@@ -19,7 +19,7 @@ public class MemberService {
 		Member loginUser = new Member();
 		
 		if(result >= LoginServlet.LOGIN_GUEST) {
-			loginUser = md.selectOne(con,requestMember);;
+			loginUser = md.selectOne(con,requestMember);
 			loginUser.setStatus(result);
 		}else {
 			loginUser.setStatus(LoginServlet.LOGIN_FAILED);
