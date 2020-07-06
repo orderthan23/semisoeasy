@@ -141,12 +141,13 @@
        	border-width: 2px;
        	border-color : black;
        }
-       #chartWrap button{
+       .outputOther{
        	float : right;
        	margin-bottom: 5px;
        	margin-left : 5px;
        	background: #E4EEFA;
        	border-radius : 5px;
+       	border-width: 0.5px;
        	font-size: 15px;
        	font-weight: normal;
       
@@ -171,8 +172,7 @@
        #reportBox table tr td label{
        	font-size : 30px;
        	color : #40A6B4;
-       	font-weigth : bolder;
-       	
+       	font-weight : bolder;
        }
        #reportBox table tr td:nth-child(2){
        	text-align: right;
@@ -184,6 +184,22 @@
        #reportBox table tr td h1{
        	margin: 0;
        	margin-bottom : 10px;
+       	font-weight: bolder;
+       }
+       
+       #checkCalExplain{
+       	display : inline-block;
+       	width: 50%;
+       }
+       
+       #checkCalSubmit{
+       	width: 276px;
+       	height: 106px;
+       	background : #40A6B4;
+       	border-radius: 20px;
+       	font-weight : bolder;
+       	font-size : 40px;
+       	border: none;
        }
 
         
@@ -237,7 +253,7 @@
 		<!--  정산 보고서 시작 -->
 		<div id="chartWrap">
 		
-			<h1 style="font-size:30px">정산 보고서</h1>
+			<h1 style="font-size:30px; font-weight:bolder">정산 보고서</h1>
 			<p style="font-size:25px">조회할 기간을 선택하세요</p>
 			<select class="chooseChart1">
 				<option>단위기간</option>
@@ -246,8 +262,8 @@
 				<option>보고서 유형</option>
 			</select>
 			<br>
-			<button>EXCEL로 내보내기</button>
-			<button>PDF로 내보내기</button>
+			<button class="outputOther">EXCEL로 내보내기</button>
+			<button class="outputOther">PDF로 내보내기</button>
 				<!--  결제 건 표 시작 -->
 			<table>
 				<tr>
@@ -324,7 +340,7 @@
 			
 			<!--  정산 금액 조회  시작-->
 			<div id="howReport" style="width: 50%; display: inline-block">
-				<h1 >정산 금액</h1>
+				<h1 style="font-size:30px; font-weight:bolder" >정산 금액</h1>
 				<p>정산금액은 다음과 같이 계산 됩니다.</p>
 				<p>판매액수-환불액 =&nbsp; <label>판매 총액</label></p>
 				<p>환불이 없는 경우 중개 수수료 액 = 판매총액 X 중개수수료(0.1)&nbsp;<label>수수료액1</label></p>
@@ -367,15 +383,26 @@
 				
 				<br><br><br><br><br>
 				</div>
-				<div id="checkCal">
-					<div></div>
-				</div>
-			
 			</div>
+			<br><br><br>
+			<div id="checkCal">
+					<div id="checkCalExplain">
+						<h1 style="font-size:30px; font-weight:bolder">정산 확인</h1>
+						<p>정산 확인 기간 : 20.07.01 ~ 20.07.08</p>
+						<p>정산 결과의 이상이 없으시다면 정산 확인 버튼을 눌러주세요.</p>
+						<p>확인 기간 내 미확인 시 해당 금액으로 정산 완료 되며</p>
+						<p>이의 신청시 다음 번 정산에 반영됩니다.</p>
+					</div>
+					<div style="display:inline-block">
+						<button id="checkCalSubmit">정산 확인</button>
+						<p>정산 금액 산정에 관해 오류가 없으며 해당 정산을 진행함에 동의합니다.</p>
+						<br><br>
+					</div>
+				</div>
 			<br>
 			<br>
 			<div id="chartZone">
-				<h1>차트</h1>
+				<h1 style="font-size:30px; font-weight:bolder">차트</h1>
 				<canvas id="myChart" width="80%" height="30"></canvas>
 			</div>
 			<br><br><br><br>
