@@ -57,23 +57,23 @@
 
         .visual div p {
             position : absolute;
-     	   top: 35%;
-            transform: translateX(80%);
+     	  	 top: 35%;
+           	left: 30%;
             font-size: 60px;
             font-weight: bolder;
             color : black;
        
 
         }
-        .visual div{
-            opacity : 1;
-        }
+       
          .visual div p label {
            
             font-weight: bolder;
 			font-size : 30px;
-       
-
+        }
+        
+        .slick-list{
+        	width: 100%;
         }
 
     </style>
@@ -86,21 +86,21 @@
 				style="background-image: url(../../images/area/area22-4.png); display: block; height: 600px; width: 100%; background-repeat : no-repeat; background-size : cover;">
 				<p>나만의 오피스 찾고 싶다면?<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SO EASY!<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Easily Buy a Share office</label>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Easily Buy a Share office</label>
 				</p>
 			</div>
 			<div 
 				style="background-image: url(../../images/area/area22-5.png); display: block; height: 600px; width: 100%; background-repeat : no-repeat; background-size : cover;">
 				<p>나만의 오피스 찾고 싶다면?<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SO EASY!<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Easily Buy a Share office</label>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Easily Buy a Share office</label>
 				</p>
 			</div>
 			<div 
 				style="background-image: url(../../images/area/area22-1.png); display: block; height: 600px; width: 100%; background-repeat : no-repeat; background-size : cover;">
 				<p>나만의 오피스 찾고 싶다면?<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SO EASY!<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Easily Buy a Share office</label>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Easily Buy a Share office</label>
 				</p>
 			</div>
 		</div>
@@ -113,7 +113,8 @@
   fade: true,
   cssEase: 'linear',
   autoplay: true,
-  autoplaySpeed: 2000
+  autoplaySpeed: 2000,
+  
 
 });
 

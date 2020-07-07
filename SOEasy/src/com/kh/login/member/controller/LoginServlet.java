@@ -31,11 +31,13 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 1. 전송값에 한글이 있을 경우 인코딩 처리 해야함
 		request.setCharacterEncoding("UTF-8");
+		int errorCode=0;
 
 		// 2. 전송 값 꺼내서 변수에 담기
+		
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
-
+		
 		// 3. 비지니스 로직을 처리할 서비스 클래스의 메소드로 전송할 떄 파라미터가 많으면 vo에 담는다
 		Member requestMember = new Member();
 		requestMember.setUserId(userId);
@@ -51,22 +53,21 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 			
-			if(loginUser.getStatus()==LOGIN_GUEST) {
+			
 				response.sendRedirect("/login/views/main/guestMain.jsp");
-			}else if(loginUser.getStatus()==LOGIN_HOST) {
-				response.sendRedirect("/login/views/main/hostMain.jsp");
-			}else {
-				response.sendRedirect("/login/views/main/adminMain.jsp");
-			}
+			
 			
 		} else {
-			view = "views/common/errorPage.jsp";
+			view = "views/member/loginForm.jsp";
 			String msg = "일치하는 정보가 없습니다 다시 로그인 하세요.";
-
+			errorCode = 1;
+			
 			request.setAttribute("msg", msg);
+			request.setAttribute("errorCode", errorCode);
 			RequestDispatcher rd = request.getRequestDispatcher(view);
 			rd.forward(request, response);
 		}
+		
 
 	}
 

@@ -1,229 +1,227 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
-/* Hamburger button styles. */
-.hamburger-button {
-	position: relative;
-	transition: .3s ease-in-out;
-	width: 45px;
-	height: 34px;
-	display: block;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+.subMenu {
+  text-decoration: none;
+  display: inline-block;
+}
+#togg_menu {
+  position: absolute;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 13px 10 0 0px;
+  z-index: 1;
+}
+span.bar {
+  display: block;
+  width: 30px;
+  height: 3px;
+  margin-top: 6px;
+  background: #343333;
+  border-radius: 2px;
 }
 
-.hamburger-button span {
-	position: absolute;
-	height: 8px;
-	border-radius: 4px;
-	width: 100%;
-	background-color: #3D4146;
-	top: 0;
-	transition: transform .2s ease-in-out, opacity .2s ease-in-out;
-}
-/*  */
-.hamburger-button span:nth-child(1) {
-	top: 15px;
+#togg_menu:focus ~ #navWrap > .megaMenu {
+  transform: translateX(0px);
+  -webkit-transform: translateX(0px);
+     -moz-transform: translateX(0px);
+      -ms-transform: translateX(0px);
+       -o-transform: translateX(0px);
 }
 
-.hamburger-button span:nth-child(2), .hamburger-button span:nth-child(3)
-	{
-	top: 28px;
+#navWrap{
+  position: relative;
+  height: 70px;
+
 }
 
-.hamburger-button span:nth-child(4) {
-	top: 41px;
+#profileZone{
+ border-radius: 50%;
+ width:100px;
+ height:100px;
+ margin-left:auto;
+ margin-right: auto;
+
+}
+ .megaMenu {
+  transform: translateX(-270px);
+  -ms-transform: translateX(-270px);
+  -o-transform: translateX(-270px);
+  -webkit-transform: translateX(-270px);
+  -moz-transform: translateX(-270px);
+          transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+     -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+       -o-transition: all 0.3s ease-in-out;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  top: 0px;
+  left: 0;
+  background:#3DB6AE;
+  opacity : 0.9;
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  padding-top: 50px;
+  z-index: 100;
+  border-right: 2px solid #ddd;
+          box-shadow: 2px 2px 50px 3px #000;
+  -webkit-box-shadow: 2px 2px 50px 3px #000;
+     -moz-box-shadow: 2px 2px 50px 3px #000;
+      -ms-box-shadow: 2px 2px 50px 3px #000;
+       -o-box-shadow: 2px 2px 50px 3px #000;
+}
+.subTitle {
+          transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+     -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+       -o-transition: all 0.3s ease-in-out;
+       margin : 10px;
+
+}
+.megaMenu li hr{
+	border:solid 1px;
+	border-color: lightgray;
+	opacity : 0.5;
+	
 }
 
-.hamburger-button.active span {
-	background-color: black;
+ 
+.subTitle a:hover {
+  color: #fff;
 }
 
-.hamburger-button.active span:nth-child(1), .hamburger-button.active span:nth-child(4)
-	{
-	opacity: 0;
+
+
+.infoZone{
+	text-align: center;
+	font-size : 16px;
+	font-weight: bolder;
+	padding: 10px 0;
 }
 
-.hamburger-button.active span:nth-child(2) {
-	transform: rotate(45deg);
-}
-
-.hamburger-button.active span:nth-child(3) {
-	transform: rotate(-45deg);
-}
-
-.overlay {
-	position: fixed;
-	background: #3DB6AE;
-	width: 20%;
-	height: 0%;
-	opacity: 0;
-	visibility: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transition: 0.3s;
-}
-
-aside ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-aside ul li {
-	margin: 1rem 0;
-	opacity: 0;
-}
-
-aside ul li a {
+.subTitle {
+	
 	text-decoration: none;
+	list-style: none;
+	width: 80%;
+	margin-left : auto;
+	margin-right : auto;
+	margin-top : 30px;
+}
+.mainTitle{
+	
+	text-decoration: none;
+	list-style: none;
+	width: 80%;
+	margin-left : auto;
+	margin-right : auto;
+}
+.subNav{
+	font-size : 18px;
+	font-weight : bolder;
 	color: black;
-	font-weight: bold;
-	font-size: 20px;
-	font-family: 'NanumSquare', sans-serif;
-	opacity: 0.90;
-	transition: opacity 0.2s ease;
+  	text-align: center;
+  	text-decoration:none;
+  	background: #3DB6AE;
+
+  	width: 90%;
+    transition: all 0.3s ease-in-out;
+  	-webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+.mainNav{
+	font-size : 25px;
+	font-weight : bolder;
+	color: black;
+  	text-align: center;
+  	text-decoration:none;
+  	background: #3DB6AE;
+
+  	width: 90%;
 }
 
-aside ul li a :hover {
-	opacity: 1;
+#navWrap h1 {
+  position: absolute;
+  padding-top: 6px;
+  margin: 0;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 16px;
+  font-weight:bolder;
+  z-index: 1;
 }
-
-@keyframes fadeInLeft{
-    0%{opacity : 0; transform : translateY(-25%);}
-    100%{opacity : 1; transform: translateY(0);}
-  }
-
-
-
-.overlay.visible {
-	height: 100%;
-	opacity: .85;
-	visibility: visible;
-}
-
-.overlay.overlay.visible aside ul li {
-	animation: fadeInLeft 0.3s ease forwards;
-}
-
-#hamburger-box {
-	background: #3DB6AE;
-	display: inline-block;
-	width: 90px;
-	height: 66px;
-}
-
-.subtitle {
-	font-size: 30px;
-	font-weight: bolder;
-}
-
-.grade {
-	color: white;
-	font-size: 15px;
-	text-align: center;
-}
-
-.userName {
-	color: white;
-	font-size: 20px;
-	text-align: center;
-}
-
-.profile {
-	margin: 0.5rem auto;
-}
-
-aside ul li a img {
-	float: right;
-}
-
- #menu {
-	position: relative;
-	top: -15px;
-	left : 20px;
-} 
-
- #menu a {
-	font-weight: bolder;
-	margin-left : 50px;
-	font-size: 18px;
-}
-
-#menu a:first-child {
-	font-size: 40px;
-	margin-left: 60px;
-} 
 </style>
-<title>Document</title>
 </head>
 <body>
-	<div id="hamburger-box">
 
-		<a href="#" class="hamburger-button" align="center"> <span></span>
-			<span></span> <span></span> <span></span>
-		</a>
-
-	</div>
-	<div style="display: inline-block;" id="menu">
-		<a>개인정보 관리</a>&nbsp;&nbsp; <a>개인정보 수정</a> <a>프로필 사진 변경</a> <a>회원
-			탈퇴</a> <a></a>
-
-	</div>
-	<hr width="100%" style="margin: 0 auto">
-
-	<div class="overlay">
-		<aside class="menu">
-			<ul>
-				<li class="profile" align="center"><img
-					src="../../images/etc/hazard.png" alt="프로필" width="110px"
-					height="110px"></li>
-				<li class="profile"><p class="userName">흑당마라민트초코</p></li>
-				<li class="profile"><p class="grade">host</p></li>
-				<hr>
-				<li><p class="subtitle">예약 목록</p></li>
-				<li><a href="#">이용 내역 리스트<img
-						src="../../images/etc/arrow.png" alt="화살표">
-				</a></li>
-				<li><a href="#">찜 리스트 <img src="../../images/etc/arrow.png"
-						alt="화살표"></a></li>
-				<li><a href="#">리뷰 목록<img src="../../images/etc/arrow.png"
-						alt="화살표"></a></li>
-				<hr>
-				<li><p class="subtitle">내 공간 관리</p></li>
-				<li><a href="#">예약 일정관리<img
-						src="../../images/etc/arrow.png" alt="화살표"></a></li>
-				<li><a href="#">공간 정보 수정<img
-						src="../../images/etc/arrow.png" alt="화살표"></a></li>
-				<li><a href="#">공간 정산<img src="../../images/etc/arrow.png"
-						alt="화살표"></a></li>
-				<hr>
-				<li><a href="#">개인 정보 관리<img
-						src="../../images/etc/arrow.png" alt="화살표"></a></li>
-				<li><a href="#">공지 사항<img src="../../images/etc/arrow.png"
-						alt="화살표"></a></li>
-
-			</ul>
-			<!--  -->
-		</aside>
-	</div>
-	<script>
-        $(function() {
-	$('.hamburger-button').on('click', function(event){
-		event.preventDefault();
-		
-		$(this).toggleClass('active');
-        $('.overlay').toggleClass('visible');
-       
-
-	});
-});
+  <head>
+    <meta charset="UTF-8">
+    <meta name="veiwport" content="initial-scale=1, width=device-width" />
     
-    </script>
-</body>
+    <title>SO Easy</title>
+  </head>
+  <body>  
+  
+    <button id='togg_menu'>
+        <span class='bar'></span>
+        <span class='bar'></span>
+        <span class='bar'></span>
+    </button>
+
+  <div id="navWrap">
+      <h1></h1>
+      <ul class='megaMenu'>
+      	<li class="infoZone"><div id="profileZone" style="background-image: url(/login/images/etc/hazard.png)"></div></li>
+      	<li class="infoZone">흑당마라민트초코</li>
+      	<li class="infoZone">HOST</li>
+      	<li><hr></li>
+         
+        <li class="mainTitle"><a href='#' class="mainNav">예약목록</a></li>
+        <li class="subTitle"><a href='#' class="subNav">이용 내역 </a> </li>
+        <li class="subTitle"><a href='#' class="subNav">찜 리스트 </a> </li>
+        <li class="subTitle"><a href='#' class="subNav">리뷰 목록 </a></li>
+ 		<li><hr></li>
+    
+        <li class="mainTitle"><a href='' class="mainNav">내 공간 관리</a></li>
+        <li class="subTitle"><a href='/login/views/host/manageReserve/reserveStep1.jsp' class="subNav">예약 일정 관리</a></li>
+        <li class="subTitle"><a href='#' class="subNav">공간 정보 수정</a></li>
+        <li class="subTitle"><a href='/login/views/host/balance/predict.jsp' class="subNav">공간 정산</a></li>
+   		<li><hr></li>
+        <li class="mainTitle"><a href='#' class="mainNav">기타</a></li>
+        <li class="subTitle"><a href='/login/views/member/updateMember.jsp' class="subNav">개인 정보 관리</a></li>
+        <li class="subTitle"><a href='/login/views/board/board.jsp' class="subNav">공지 사항</a></li>
+        <li class="subTitle"><a href='#' class="subNav">Q & A</a></li>
+          
+          
+      </ul>
+    
+  </div>
+  	
+
+    
+
+    
+  
+  </body>
+    
 </html>
+

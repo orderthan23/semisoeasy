@@ -185,12 +185,12 @@ h1 {
 
 				<tr class="checkRule">
 					<td><input type="checkbox" name="rule" id="rule1" value="이용약관"><label
-						for="rule1" class="check">이용약관 동의</label></td>
+						for="rule1" class="check" onclick="turnRule1();">이용약관 동의</label></td>
 				</tr>
 				<tr class="checkRule">
 
 					<td class="checkbox"><input type="checkbox" name="rule"
-						id="rule2" value="이용약관동의"><label for="rule2" class="check">개인정보지침
+						id="rule2" value="이용약관동의"><label for="rule2" class="check" onclick="turnRule2();">개인정보지침
 							동의</label></td>
 				</tr>
 				<tr class="checkRule">
@@ -217,6 +217,14 @@ h1 {
 			$(this).attr('placeholder', '');
 			$(this).parent().find('label').addClass('label-top');
 		});
+		
+		function turnRule1(){
+			window.open('../common/rule1.jsp', 'window팝업', 'width=1000px, height=800px, menubar=no, status=no, resizable=no, toolbar=no');  
+		}
+		
+		function turnRule2(){
+			window.open('../common/rule2.jsp', 'window팝업', 'width=1000px, height=800px, menubar=no, status=no, resizable=no, toolbar=no');  
+		}
 		
 	</script>
 </body>

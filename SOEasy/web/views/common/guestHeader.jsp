@@ -4,8 +4,6 @@
 <html>
 <head>
 <style>
-
-
 #headerWrap input {
 	height: 10%;
 	display: inline;
@@ -17,7 +15,6 @@
 	width: 120px;
 	height: 60px;
 	margin: 0 auto;
-	
 	align: center;
 	font-size: 20px;
 	font-weight: bold;
@@ -78,17 +75,22 @@
 	clear:both;
 }
 
+
+
+
 .sub:hover {
 	font-size: 1.3em;
 }
+
+
 
 </style>
 <body>
 	<div id="headerWrap">
 		<span class="subMenu"><br>
-		<a href="/login/views/member/join.jsp" class="sub">회원가입</a></span> <span
+		<a onclick="logout();" class="sub">로그아웃</a></span> <span
 			class="subMenu"><br>
-		<a href="/login/views/member/loginForm.jsp" class="sub">로그인</a></span> <span
+		<a href="/login/views/member/updateMember.jsp" class="sub">마이페이지</a></span> <span
 			class="subMenu"><br>
 		<a href="/login/views/space/insertSpaceStep1.jsp" class="sub" align="center">공간 등록</a></span> <span class="subMenu"><br>
 		<a href="/login/views/board/board.jsp" class="sub" align="center">공지 사항</a></span> &nbsp;&nbsp;

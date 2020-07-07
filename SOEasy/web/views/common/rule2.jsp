@@ -40,11 +40,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<header><%@ include file="../common/header.jsp"%></header>
+	
 	<section>
 		<div id="ruleTitle">
 		
-		<h1  id="titleLetters" align="center">개인정보 처리방침</h1>
+		<h1  id="titleLetters" align="center" style="margin:0;">개인정보 처리방침</h1>
 		
 		</div>
 		
@@ -154,6 +154,7 @@ i'mport	결제처리
 2. 이 개인정보처리방침은 2019.04.03 부터 적용됩니다.
 </pre>
 	</section>
+	<br><br>
 	<footer><%@ include file="../common/footer.jsp"%></footer>
 </body>
 </html>
