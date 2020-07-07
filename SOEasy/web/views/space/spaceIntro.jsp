@@ -14,11 +14,13 @@
 
   <!-- Custom styles for this template -->
   <link href="/login/css/blog-post.css" rel="stylesheet">
+  
+  <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=k6u8c2j8h2"></script>
 </head>
 <body>
-		<header><%@ include file="../common/header.jsp"%></header>
-		<nav><%@ include file="../common/aside.jsp"%></nav>
-	
+		<header><%@ include file="../common/header.jsp" %></header>
+		<nav><%@ include file="../common/aside.jsp" %></nav>
+		
 		<section style="margin:auto; margin-left:120px; padding:0;">
 		
 		<h1 style="color:#40a4b6; margin-left:210px; font-weight: bolder;">성수동 인생공간 코워킹스페이스</h1>
@@ -36,7 +38,7 @@
 		</table>
 		<br>
 		<img src="../../images/area/area18-1.png" style="margin-left:210px; width:850px;">
-		<p style="font-size:30px; margin-left:210px";>
+		<p style="font-size:30px; margin-left:210px">
 			동네에서 만나는 따뜻한 <br>
 			코워킹스페이스
 		</p>
@@ -97,6 +99,7 @@
 		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
 			편의시설
 		</b></p>
+		
 		<!-- 편의시설 사진들 넣기 -->
 		<table style="margin-left:220px; border-spacing:15px;">
 			<tr>
@@ -176,7 +179,22 @@
 				<td style="padding:20px;"><b style="color:red;">환불불가</b></td>
 			</tr>
 		</table>
-
+		<br><br>
+		
+		<div id="map" style="width:100%; height:800px;"></div>
+		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=k6u8c2j8h2&callback=initMap"></script>
+    	<script type="text/javascript">
+        var map = null;
+		
+        function initMap() {
+            map = new naver.maps.Map('map', {
+                center: new naver.maps.LatLng(37.3595704, 127.105399),
+                zoom: 10
+            });
+        }
+        
+    	</script>
+		
 		<hr>
 		
 		<p style="margin-left:220px; font-size:30px;"><b>
