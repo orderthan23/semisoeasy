@@ -35,7 +35,7 @@
 		border-radius: 5px;
 		
 	}
-	input
+	
 	#rinfo {
 		text-align: top;
 		display: table-cell;
@@ -87,7 +87,11 @@
 			</tr>
 			<tr>
 				<td class="title"><b>예약 인원 선택</b></td>
-				<td colspan="4"><button class="btn1"><</button>&nbsp;&nbsp;&nbsp;&nbsp;<textarea class="number" style="resize:none">1</textarea>&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn1">></button><td>
+				<td colspan="4">
+					<input class=btn1 type=button value="<" onClick="javascript:this.form.amount.value--;">
+					<input class=number type=text name=amount value=1 readonly>
+					<input class=btn1 type=button value=">" onClick="javascript:this.form.amount.value++;">
+				</td>
 			</tr>
 			<tr>
 				<td class="title"><b>공간 선택</b></td>
@@ -130,12 +134,12 @@
 		</table>
 		<br>
    		<div align="center">
-	      	<button class="btn2" id="btnL" type="submit">결제</button>
+	      	<!-- <button class="btn2" id="btnL" type="submit">결제</button> -->
+	      	<button class="btn2" id="btnL" onclick="window.open('pay.jsp', 'PopupWin', 'width=500, height=450')">결제</button>
 	      	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	      	<button class="btn2" id="btnR" type="reset">취소</button>
-	      	<button class="btn2" id="btnR" type="submit">확인</button>
+	      	<button class="btn2" id="btnR" type="reset" onclick="self.close()">취소</button>
+	      	<button class="btn2" id="btnR" type="submit" onclick="self.close()">확인</button>
   		</div>
-  		
   		
 	</form>
 </div>

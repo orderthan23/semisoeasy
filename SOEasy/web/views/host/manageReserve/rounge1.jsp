@@ -4,39 +4,109 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="/login/css/layout.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>SO Easy</title>
 <style>
 	body {
 		background-color:#ECECEC;
 		
 	}
-	.l1 {
+	#reserve {
+		background: #3DB6AE;
+		width: 100px;
+		height: 35px;
+		border-radius:5px;
+		color: white;
+		font-weight: border;
+		border-color: #ECECEC38;
+		vertical-align: top;
+		font-size: 1.2em;
+		margin-left: 5%;
+	}
+	.l2 {
+		margin-left: 5%;
+		margin-right: 5%;
 		padding:0.05px;
 		background-color: lightgray;
 		font-weight: bolder;
-		text-align:left;
 	}
+	.l1 {
+		margin-left: 5%;
+		margin-right: 5%;
+		padding:0.05px;
+		font-weight: bolder;
+		font-size: 1.5em;
+	}
+	
 	#box {
+		margin-left: 5%;
+		margin-right: 5%;
 		background-color: white;
 	}
-	button {
-		 border: lightgrey 2px solid;
-		 background: white;
+	#btn3 {
+		width: 120px;
+		height: 90px;
+		margin:1%;
+		border: lightgrey 2px solid;
+		background: white;
 		 
 	}
-	.day {
+	#day {
+		margin:1%;
+		width: 120px;
+		height: 90px;
+		border: lightgrey 2px solid;
 		background-color: lightblue;
 	}
-	.month {
-		
+	#month {
+		margin:1%;
+		width: 120px;
+		height: 90px;
+		border: lightgrey 2px solid;
+		background-color: white;
 	}
-	.exp {
+	#exp {
+		margin:1%;
+		width: 120px;
+		height: 90px;
+		border: lightgrey 2px solid;
 		background-color: pink;
 		
 	}
-	.pay {
-		border: dashed;
+	#unpaid {
+		margin:1%;
+		width: 120px;
+		height: 90px;
+		border: lightgrey 2px dashed;
+		background-color: white;
 	}
+	#dayT {
+		margin:5px;
+		border: lightgrey 2px solid;
+		background-color: lightblue;
+	}
+	#monthT {
+		margin:5px;
+		border: lightgrey 2px solid;
+		background-color: white;
+	}
+	#expT {
+		margin:5px;
+		border: lightgrey 2px solid;
+		background-color: pink;
+		
+	}
+	#unpaidT {
+		margin:5px;
+		border: lightgrey 2px dashed;
+		background-color: white;
+	}
+	.kind {
+		align: right;
+	}
+	
 </style>
 </head>
 <body>
@@ -54,17 +124,18 @@
 	<hr>
 	<br>
 	<section>
-		<button class="btn1">
-			<label>직접 예약</label>
-		</button>
-
-		<br> <img src="">
-
-		<div class="l1">라운지 이용고객 관리
-		<textarea class="kind"  id="pay" cols="6" rows="1" style="resize:none" readonly>미결제</textarea>
-		<textarea class="kind" id="exp" cols="6" rows="1" style="resize:none" readonly>기간만료</textarea>
-		<textarea class="kind" id="month" cols="6" rows="1" style="resize:none" readonly>월 회원</textarea>
-		<textarea class="kind" id="day" cols="6" rows="1" style="resize:none" readonly>일 회원</textarea>
+		<button class="reserve" id="reserve" onclick="window.open('reserveModal1.jsp', 'PopupWin', 'width=500, height=550')">직접 예약</button>
+		
+		<div class="l1" align="center">
+			라운지 이용고객 관리
+		</div>
+		<br>
+		<div class="l2" align="right">
+			<textarea class="kind"  id="unpaidT" cols="6" rows="1" style="resize:none" readonly>미결제</textarea>
+			<textarea class="kind" id="expT" cols="6" rows="1" style="resize:none" readonly>기간만료</textarea>
+			<textarea class="kind" id="monthT" cols="6" rows="1" style="resize:none" readonly>월 회원</textarea>
+			<textarea class="kind" id="dayT" cols="6" rows="1" style="resize:none" readonly>일 회원</textarea>
+		
 		</div>
 
 		
@@ -72,28 +143,115 @@
 		
 		
 		
-		<button border=>
+		<button id="month">
 		<label>1개월권</label><br>
 		<label>이호정</label><br>
 		<label>라운지 이용</label><br>
 		<label>6/22~7/21</label>
 		</button>
 		
-		<button border=>
+		<button id="exp">
 		<label>1개월권</label><br>
 		<label>고종현</label><br>
 		<label>라운지 이용</label><br>
 		<label>6/10~7/9</label>
 		</button>
 		
-		<button border=>
+		<button id="unpaid">
 		<label>1개월권</label><br>
 		<label>김범근</label><br>
 		<label>라운지 이용</label><br>
 		<label>6/28~7/27</label>
 		</button>
 		
-		<button border=>
+		<button id="day">
+		<label>1일권</label><br>
+		<label>장욱</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/29</label>
+		</button>
+		
+		
+		<button id="month">
+		<label>1개월권</label><br>
+		<label>이호정</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/22~7/21</label>
+		</button>
+		
+		<button id="exp">
+		<label>1개월권</label><br>
+		<label>고종현</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/10~7/9</label>
+		</button>
+		
+		<button id="unpaid">
+		<label>1개월권</label><br>
+		<label>김범근</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/28~7/27</label>
+		</button>
+		
+		<button id="day">
+		<label>1일권</label><br>
+		<label>장욱</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/29</label>
+		</button>
+		
+		
+		<button id="month">
+		<label>1개월권</label><br>
+		<label>이호정</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/22~7/21</label>
+		</button>
+		
+		<button id="exp">
+		<label>1개월권</label><br>
+		<label>고종현</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/10~7/9</label>
+		</button>
+		
+		<button id="unpaid">
+		<label>1개월권</label><br>
+		<label>김범근</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/28~7/27</label>
+		</button>
+		
+		<button id="day">
+		<label>1일권</label><br>
+		<label>장욱</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/29</label>
+		</button>
+		
+		
+		<button id="month">
+		<label>1개월권</label><br>
+		<label>이호정</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/22~7/21</label>
+		</button>
+		
+		<button id="exp">
+		<label>1개월권</label><br>
+		<label>고종현</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/10~7/9</label>
+		</button>
+		
+		<button id="unpaid">
+		<label>1개월권</label><br>
+		<label>김범근</label><br>
+		<label>라운지 이용</label><br>
+		<label>6/28~7/27</label>
+		</button>
+		
+		<button id="day">
 		<label>1일권</label><br>
 		<label>장욱</label><br>
 		<label>라운지 이용</label><br>
@@ -126,8 +284,16 @@
 		
 		$(function(){
 			$('#btn2').append(function(){
+				var kinds = null;
+				var bgId = null;
+				switch(kinds){
+				case month: bgId = month; break;
+				case pay: bgId = pay; break;
+				case exp: bgId = exp; break;
+				case day: bgId = day; break;
+				}
 		        var sentence = "";
-		        sentence +='<button>';
+		        sentence +='<button id=' + bgId + '>';
 		        sentence +='<div>' + nKind + kind + '</div>';
 		        sentence+='<div>'+ name +'</div>';
 		        sentence+='<div>라운지 이용</div>';
