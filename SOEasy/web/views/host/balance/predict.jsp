@@ -27,123 +27,135 @@
 
 
 <style>
-	section h1 label{
-		font-size : 40px;
-		color : #3DB6AE;
-	}
-	#titleWrap{
-		width : 80%;
-		margin-left: auto;
-		margin-right: auto;
-		
-	}
-	#visualWrap{
-		background: linear-gradient(180deg, #968E8E 0%, rgba(255, 255, 255, 0) 100%), rgba(0, 0, 0, 0.1);
-		width:100%;
-	}
-	.visual{
-            position: relative;
-            width: 80%;
-            margin-left : auto;
-            margin-right : auto;
-           
-        
-        }
-        .visual button{
-            position : absolute;
-            z-index: 10;
-            top: 50%;
-            transform: translateY(-50%);
-            width : 71px;
-            height : 71px;
-            border: none;
-            border-radius: 100%;
-            background: rgba(0,0,0,.5);
+section h1 label {
+	font-size: 40px;
+	color: #3DB6AE;
+}
 
-            
-        }
-        .visual button:before{
-            font-family: 'xeicon';
-            color: #fff;
-            font-size : 45px;
-        }
-        .visual button.slick-prev {
-            left: 50px;
-            font-size : 0;
-            color : transparent;
+#titleWrap {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
 
-        }
-        .visual button.slick-prev::before{
-            content:"\e93d";
-            font-family: 'xeicon';
-        }
+#visualWrap {
+	background: linear-gradient(180deg, #968E8E 0%, rgba(255, 255, 255, 0)
+		100%), rgba(0, 0, 0, 0.1);
+	width: 100%;
+}
 
-        .visual button.slick-next{
-            right: 50px;
-            font-size : 0;
-            color : transparent;
-        }
+.visual {
+	position: relative;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
 
-        .visual button.slick-next::before{
-            content:"\e940";
-            font-family: 'xeicon';
-        }
-        
-        	
-        
-		.visual article p {
-			font-size : 20px;
-			font-weight : bolder;
-		}
-        .spacePrice{
-        	color : #979797;
-        	
-        }
-      
-     	th{
-     		background: #E4EEFA;
-     		width: 6.2%;
-     		font-size: 17px;
-     		font-weight: bolder; 
-     		
-     	}
-     	
-     	#total td{
-     		background:#3DB6AE;
-     		font-size: 15px;
-     		text-align : center;
-     		height : 20px;
-     		
-     	}
-     	#chartWrap{
-     		width: 80%;
-     		margin-left: auto;
-     		margin-right : auto;
-     	}
-     	#PGFee{
-     		width: 15%;
-     	}
-	       
-       .pCompleteInfo td{
-       	text-align: center;
-       	height : 30px;
-       	background : #fff;
-       }
-       #chartWrap table{
-       	width: 100%;
-       }
-       #visualWrap article{
-       	width: 100%;
-       	resize: none;
-       }
+.visual button {
+	position: absolute;
+	z-index: 10;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 71px;
+	height: 71px;
+	border: none;
+	border-radius: 100%;
+	background: rgba(0, 0, 0, .5);
+}
 
-        
+.visual button:before {
+	font-family: 'xeicon';
+	color: #fff;
+	font-size: 45px;
+}
+
+.visual button.slick-prev {
+	left: 50px;
+	font-size: 0;
+	color: transparent;
+}
+
+.visual button.slick-prev::before {
+	content: "\e93d";
+	font-family: 'xeicon';
+}
+
+.visual button.slick-next {
+	right: 50px;
+	font-size: 0;
+	color: transparent;
+}
+
+.visual button.slick-next::before {
+	content: "\e940";
+	font-family: 'xeicon';
+}
+
+.visual article p {
+	font-size: 20px;
+	font-weight: bolder;
+}
+
+.spacePrice {
+	color: #979797;
+}
+
+th {
+	background: #E4EEFA;
+	width: 6.2%;
+	font-size: 17px;
+	font-weight: bolder;
+}
+
+#total td {
+	background: #3DB6AE;
+	font-size: 15px;
+	text-align: center;
+	height: 20px;
+}
+
+#chartWrap {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#PGFee {
+	width: 15%;
+}
+
+.pCompleteInfo td {
+	text-align: center;
+	height: 30px;
+	background: #fff;
+}
+
+#chartWrap table {
+	width: 100%;
+}
+
+#visualWrap article {
+	width: 100%;
+	resize: none;
+}
+
+
 </style>
 <title>Insert title here</title>
 </head>
 <body>
-	<header>	<%@ include file="../../common/header.jsp"%></header>
-	<nav><%@ include file="../../common/aside.jsp" %></nav>
+	<header><%@ include file="../../common/header.jsp"%></header>
+	
+	<nav><%@ include file="../../common/aside.jsp" %>
+	<div class="colMenu">
+		<label class="colMenuTitle">공간 정산</label>
+		<a class="colMenuButton selectedButton" href="/login/views/host/balance/predict.jsp">예상 수익</a>
+		<a class="colMenuButton" href="/login/views/host/balance/calculate.jsp">정산 조회</a>
+		<a class="colMenuButton" href="/login/views/host/balance/problemCalculate.jsp">이의 신청</a>
+	<br><br>
+	</div>
+	<hr style="margin : 0">
+	</nav>
 	<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<section>
 		<br>
