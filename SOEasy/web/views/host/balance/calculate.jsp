@@ -403,6 +403,11 @@
 			<br>
 			<div id="chartZone">
 				<h1 style="font-size:30px; font-weight:bolder">차트</h1>
+				<select id="chartType" onchange="updateChartType();">
+					<option value="bar" >막대 차트</option>
+					<option value="line">꺾은선 차트</option>
+					<option value="radar">레이더 차트</option>
+				</select>
 				<canvas id="myChart" width="80%" height="30"></canvas>
 			</div>
 			<br><br><br><br>
@@ -413,46 +418,41 @@
 	
 	<footer><%@ include file="../../common/footer.jsp" %></footer>
 	<script>
+		let datas =[<%for(int a : arr){%> <%=a%>,<%	} %>];
+			myData=	{
+	        labels: ['2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06','2020-07-07',
+	        	'2020-07-08','2020-07-09','2020-07-10','2020-07-11','2020-07-12','2020-07-13','2020-07-14',
+	        	'2020-07-15','2020-07-16','2020-07-17','2020-07-18','2020-07-19','2020-07-20','2020-07-21',
+	        	'2020-07-22','2020-07-23','2020-07-24','2020-07-25','2020-07-26','2020-07-27','2020-07-28',
+	        	'2020-07-29','2020-07-30','2020-07-31'],
+	        datasets: [{
+	            label: '린가드 코워킹 스페이스',
+	        
+	            data: datas,
+	            backgroundColor: [
+	            	<%for (int i=0; i<31; i++){ %>
+	            	'#3DB6AE',
+	            	<%} %>
+	           
+	            	
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    }
+		
 		//차트 로직
 		var ctx = document.getElementById('myChart').getContext('2d');
 		var myChart = new Chart(ctx, {
 		    type: 'bar',
-		    data: {
-		        labels: ['2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06','2020-07-07',
-		        	'2020-07-08','2020-07-09','2020-07-10','2020-07-11','2020-07-12','2020-07-13','2020-07-14',
-		        	'2020-07-15','2020-07-16','2020-07-17','2020-07-18','2020-07-19','2020-07-20','2020-07-21',
-		        	'2020-07-22','2020-07-23','2020-07-24','2020-07-25','2020-07-26','2020-07-27','2020-07-28',
-		        	'2020-07-29','2020-07-30','2020-07-31'],
-		        datasets: [{
-		            label: '# of Votes',
-		        
-		            data: [
-		            	<%for(int a : arr){%>
-		            	 <%=a%>,		
-		            	
-		            	<%	} %>
-		            	
-		            	
-		          	
-		            ],
-		            backgroundColor: [
-		            	<%for (int i=0; i<31; i++){ %>
-		            	'#3DB6AE',
-		            	<%} %>
-		           
-		            	
-		            ],
-		            borderColor: [
-		                'rgba(255, 99, 132, 1)',
-		                'rgba(54, 162, 235, 1)',
-		                'rgba(255, 206, 86, 1)',
-		                'rgba(75, 192, 192, 1)',
-		                'rgba(153, 102, 255, 1)',
-		                'rgba(255, 159, 64, 1)'
-		            ],
-		            borderWidth: 1
-		        }]
-		    },
+		    data: myData,
 		    options: {
 		        scales: {
 		            yAxes: [{
@@ -464,6 +464,14 @@
 		    }
 		});
 		
+		function updateChartType(){
+			
+			 myChart.destroy();
+			   myChart = new Chart(ctx, {
+			     type: document.getElementById("chartType").value,
+			     data: myData,
+			   });
+		}
 		
 		$(document).ready(function(){
 			var tPrice = 0;//결제금액 총액을 구하는 변수

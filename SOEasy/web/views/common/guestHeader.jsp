@@ -15,7 +15,6 @@
 	width: 120px;
 	height: 60px;
 	margin: 0 auto;
-	
 	align: center;
 	font-size: 20px;
 	font-weight: bold;

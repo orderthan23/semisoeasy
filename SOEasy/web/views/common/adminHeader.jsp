@@ -10,12 +10,10 @@
 }
 
 .subMenu {
-	
 	display: inline-block;
 	width: 120px;
 	height: 60px;
 	margin: 0 auto;
-	
 	align: center;
 	font-size: 20px;
 	font-weight: bold;
@@ -23,13 +21,11 @@
 	
 }
 .subMenu a{
-	
 	text-decoration : none;
 	color: black;
 	text-align: center;
 	display: inline;
 	font-family: 'NanumSquare', sans-serif;
-	
 }
 
 #logo {
@@ -57,14 +53,11 @@
 	outline: none;
 }
 
-
-
 #searchOn {
 	vertical-align: middle;
 	background: none;
 	outline: none;
 	border: none;
-	
 }
 
 #headerWrap form {

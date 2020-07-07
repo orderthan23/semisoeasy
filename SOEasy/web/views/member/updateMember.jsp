@@ -10,7 +10,6 @@
 	#pwQuestBox{
 		display :block;
 		width : 600px;
-		
 		margin-left : auto;
 		margin-right : auto;
 		margin-left : auto;
