@@ -309,7 +309,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td>공간명*</td>
+					<td>여기부터 고치기*</td>
 					<td><input type="text" maxlength="20" name="space-name" id="space-name"></td>
 					<td></td>
 				</tr>
