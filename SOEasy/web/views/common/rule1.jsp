@@ -17,7 +17,7 @@
 	}
 	
 	#ruleBox{
-		
+		width:80%;
 	}
 	#titleLetters{
 		
@@ -43,11 +43,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<header><%@ include file="../common/header.jsp"%></header>
+	
 	<section>
 		<div align="center" id="ruleTitle">
 	
-		<h1 id="titleLetters">SO Easy 이용 약관</h1>
+		<h1 id="titleLetters" style="margin:0;">SO Easy 이용 약관</h1>
 		
 		</div>
 		
@@ -201,6 +201,7 @@ C. 호스트 예약 승인 : “회원”이 공간 예약을 신청한 후 12�
 </pre>
 </div>	
 	</section>
+	<br><br>
 	<footer><%@ include file="../common/footer.jsp"%></footer>
 </body>
 </html>

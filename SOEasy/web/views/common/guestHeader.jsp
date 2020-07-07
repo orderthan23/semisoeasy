@@ -101,7 +101,7 @@
 
 		</form>
 		<img src="/login/images/logo/logo1.png" alt="로고 사진" id="logo"
-			onclick="location.href='../main/guestMain.jsp'">
+			onclick="location.href='/login/views/main/guestMain.jsp'">
 
 
 	</div>

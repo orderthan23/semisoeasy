@@ -4,6 +4,8 @@
 <html>
 <head>
 <style>
+
+
 #headerWrap input {
 	height: 10%;
 	display: inline;
@@ -76,14 +78,9 @@
 	clear:both;
 }
 
-
-
-
 .sub:hover {
 	font-size: 1.3em;
 }
-
-
 
 </style>
 <body>
@@ -101,7 +98,7 @@
 
 		</form>
 		<img src="/login/images/logo/logo1.png" alt="로고 사진" id="logo"
-			onclick="location.href='../main/guestMain.jsp'">
+			onclick="location.href='/login/views/main/guestMain.jsp'">
 
 
 	</div>

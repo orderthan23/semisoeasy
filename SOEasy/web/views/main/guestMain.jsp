@@ -111,14 +111,14 @@ h1 {
 		<br>
 		<div style="width:90%; margin-left:auto; margin-right:auto;">
 		<h1>테마전!</h1>
-		<div style="display:inline-block; width:60%;" id="themeList" >
+		<div style="display:inline-block; width:55%;" id="themeList" >
 			<button>외근이 잦아요!<br> 코워킹 스페이스</button>
 			<button>직원이 많아요!<br> 임대사무실</button>
 			<button>하루만 이용!<br> 코워킹라운지</button>
 			<br><br>
 		</div>
 		
-		<div style="display: inline-block; width: 35%; background : #EBEBEB; border-radius:5px;" id="localList">
+		<div style="display: inline-block; width: 30%; background : #EBEBEB; border-radius:5px;" id="localList">
 			
 			<table align="center" style=" width:90%; ">
 				<tr>
