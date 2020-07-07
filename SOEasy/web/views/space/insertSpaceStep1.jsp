@@ -107,6 +107,9 @@
 		border: 1px solid black;
 		border-radius: 10px;
 	}
+	input[type=checkbox]{
+		cursor: pointer;
+	}
 	#add-tag{
 		width: 60%;
 	}
@@ -116,11 +119,29 @@
 		border: 1px solid black;
 		border-radius: 10px;
 	}
-	.warning{
-		display: none;
-	}
 	.btnArea{
 		margin: 50px;
+	}
+	img{
+		max-width: 100%;
+		max-height: 100%;
+		margin: auto;
+	}
+	.thumbnail{
+		border: 1px solid black;
+		border-radius: 10px;
+		display: inline-block;
+		text-align: center;
+		vertical-align: middle;
+	}
+	#cap{
+		border: 1px solid black;
+		border-radius: 10px;
+		text-align: center;
+	}
+	#capital-img{
+		text-align: center;
+		vertical-align: middle;
 	}
 </style>
 </head>
@@ -272,8 +293,8 @@
 					<td></td>
 					<td>대표 이미지*</td>
 					<td>
-						<div id="titleImgArea">
-							<img id="capital-img" width="450" height="250">
+						<div id="cap" style="width: 450px; height: 250px; overflow: hidden;">
+							<img id="capital-img" src="../../images/icon/addImg.png">
 						</div>
 					</td>
 					<td></td>
@@ -281,20 +302,30 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td class="warning" id="capital-img-not" style="text-align:right;">대표 이미지를 추가하셔야 합니다.</td>
+					<td class="warning" id="thumbnail-img-not" style="text-align:right;">상세 이미지를 추가하셔야 합니다.</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td>상세 이미지*</td>
-					<td>
-						<div id="thumbnailArea">
-							<img id="thumnail-1" width="220px" height="150px">
-							<img id="thumnail-2" width="220px" height="150px">
-							<img id="thumnail-3" width="220px" height="150px">
-							<img id="thumnail-4" width="220px" height="150px">
-							<img id="thumnail-5" width="220px" height="150px">
-							<img id="thumnail-6" width="220px" height="150px">
+					<td class="thumbnail-area">
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-1" src="../../images/icon/addImg.png">
+						</div>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-2" src="../../images/icon/addImg.png">
+						</div>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-3" src="../../images/icon/addImg.png">
+						</div>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-4" src="../../images/icon/addImg.png">
+						</div>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-5" src="../../images/icon/addImg.png">
+						</div>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-6" src="../../images/icon/addImg.png">
 						</div>
 					</td>
 					<td></td>
@@ -306,13 +337,13 @@
 				<tr>
 					<td></td>
 					<td>공간 주소*</td>
-					<td><input type="text" placeholder="공간 주소를 입력하세요." id="roadAddrPart1"  name="roadAddrPart1">&nbsp;&nbsp;<button type="button" onclick="goPopup();">검색</button></td>
+					<td><input type="text" placeholder="공간 주소를 입력하세요." id="roadAddrPart1"  name="space-address1" readonly>&nbsp;&nbsp;<button type="button" onclick="goPopup();">검색</button></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td></td>
-					<td><input type="text" placeholder="상세 주소를 입력하세요." id="addrDetail"  name="addrDetail"></td>
+					<td><input type="text" placeholder="상세 주소를 입력하세요." id="addrDetail"  name="space-address2" readonly></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -323,20 +354,14 @@
 					<td></td>
 					<td>공간 필수 기능*</td>
 					<td>
-						<table>
-							<tr>
-								<td></td>
-								<td><input type="checkbox" name="agree-1" value="wifi">&nbsp;&nbsp;쾌적하고 빠른 WIFI</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td><input type="checkbox" name="agree-2" value="concent">&nbsp;&nbsp;넉넉한 콘센트</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td><input type="checkbox" name="agree-3" value="wifi">&nbsp;&nbsp;철저한 예약관리</td>
-							</tr>
-						</table>
+						<input type="checkbox" class="rule" id="rule1" name="rule1" value="wifi"><label for="rule1">  쾌적하고 빠른 WIFI</label>
+						<br>
+						<input type="checkbox" class="rule" id="rule2" name="rule2" value="concent"><label for="rule2">  넉넉한 콘센트</label>
+						<br>
+						<input type="checkbox" class="rule" id="rule3" name="rule3" value="wifi"><label for="rule3">  철저한 예약관리</label>
+						<br>
+						<br>
+						<input type="checkbox" class="rule" id="rule4" name="rule4" value="wifi"><label for="rule4">  전체 동의</label>
 					</td>
 					<td></td>
 				</tr>
@@ -344,16 +369,16 @@
 			<div class="btnArea" align="center">
 				<button type="reset">초기화</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit">작성완료</button>
+				<button type="submit">다음으로</button>
 			</div>
 			<div id="fileArea">
-					<input type="file" id="cap-img" name="capital-img" onchange="load(this);">
-					<input type="file" id="thumbnailImg1" name="thumbnailImg1" onchange="loadImg(this, 1);">
-					<input type="file" id="thumbnailImg2" name="thumbnailImg2" onchange="loadImg(this, 2);">
-					<input type="file" id="thumbnailImg3" name="thumbnailImg3" onchange="loadImg(this, 3);">
-					<input type="file" id="thumbnailImg4" name="thumbnailImg4" onchange="loadImg(this, 4);">
-					<input type="file" id="thumbnailImg5" name="thumbnailImg5" onchange="loadImg(this, 5);">
-					<input type="file" id="thumbnailImg6" name="thumbnailImg6" onchange="loadImg(this, 6);">
+					<input type="file" id="cap-img" name="capital-img" onchange="load(this);" accept="image/*">
+					<input type="file" id="thumbnailImg1" name="thumbnailImg1" onchange="loadImg(this, 1);" accept="image/*">
+					<input type="file" id="thumbnailImg2" name="thumbnailImg2" onchange="loadImg(this, 2);" accept="image/*">
+					<input type="file" id="thumbnailImg3" name="thumbnailImg3" onchange="loadImg(this, 3);" accept="image/*">
+					<input type="file" id="thumbnailImg4" name="thumbnailImg4" onchange="loadImg(this, 4);" accept="image/*">
+					<input type="file" id="thumbnailImg5" name="thumbnailImg5" onchange="loadImg(this, 5);" accept="image/*">
+					<input type="file" id="thumbnailImg6" name="thumbnailImg6" onchange="loadImg(this, 6);" accept="image/*">
 			</div>
 		</form>
 	</section>
@@ -367,11 +392,12 @@
 		});
 		
 		function initSet(){
-			$("#warning-space-name").show();
+			$(".warning").show();
 		}
 	
 		function initEvent(){
-			$('#space-name').on('keyup', function(){
+			//경고메세지 출력 | 가리기
+			$("#space-name").on("keyup", function(){
 				var str = $("#space-name").val();
 				var len = str.length;
 				if(len > 0){
@@ -380,6 +406,7 @@
 					$("#warning-space-name").show();
 				}
 			});
+			
 			$("#office").click(function(){
 				if($("#office-check").is(":visible")){
 					$("#office").css("background", "white");
@@ -452,7 +479,26 @@
 				$("#intro-limit").text(len + " / " + maxlen)
 			});
 			
+			if($("#capital-img").src() == "../../images/icon/addImg.png"){
+				$("#capital-img-not").show();
+			} else {
+				$("#capital-img-not").hide();
+			}
+			if($(""));
+			
 		}//initEvent initEvent
+		//약관 전체 동의
+		$("#rule4").click(function() {
+			//만약 전체 선택 체크박스가 체크된상태일경우
+			if ($("#rule4").prop("checked")) {
+				//해당화면에 전체 checkbox들을 체크해준다
+				$(".rule").prop("checked", true);
+				// 전체선택 체크박스가 해제된 경우 
+			} else {
+				//해당화면에 모든 checkbox들의 체크를해제시킨다.
+				$(".rule").prop("checked", false);
+			}
+		});
 		
 		// 좌석 수 = 자유석 + 지정석
 		function count(){
