@@ -91,6 +91,7 @@
 	button:focus{
 		outline: none;
 	}
+	.OX{}
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width-device-width" initial-scale="1"> 
@@ -107,6 +108,7 @@
 		<option class="category">계정관련</option>
 		<option class="category">결제관련</option>
 	</select>
+
 	<div class="container">
 		<div class="row">
 			<table class="table table-striped" style="text-align:center	border: 1px solid #dk">
@@ -144,6 +146,8 @@
 현재 '역삼동 혼자사무실'의 호스트가 공간 삭제요청을 하여 삭제 처리하였습니다.
 다른 오피스를 이용 부탁드리겠습니다.</textArea>
 									<button id=answer class="awbtn" value="답변하기">답변하기</button>
+									<!-- 추후 삭제 할 예정 -->
+									<a href="adminFAQ.jsp" class="btn pull-right">자주묻는질문</a>
 						</div>
 			</div>
 		

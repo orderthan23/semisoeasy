@@ -13,7 +13,7 @@
 <style>
 .category {
 	position: relative;
-	left: 60px;
+	left: 135px;
 	top: 10px;
 }
 
@@ -39,16 +39,32 @@
 
 }
 .search{
-	postion:relative;
-	margin-left: 100px;
-	width: 300px;
+	position:relative;
+	margin-left: 62px;
+	margin-bottom : 30px;
+	width: 500px;
+	height: 50px;
 	outline:none;
-	border: 1px solid #60B4A6;
+	border: 2px solid #60B4A6;
+	align:right;
 }
 .logo{
 	color:#60B4A6
+	
+}
+input:focus {outline:none;}
+
+div > img {
+	float : right;
+}
+div > input {
+ 	position : relative;
+	top : 10px;
+	width: 400px;
 
 }
+
+
 </style>
 <title>SO Easy</title>
 </head>
@@ -59,7 +75,7 @@
 		<h2 class="logo" style="text-align: left;">자주 묻는 게시판(관리자)</h2>
 		<div class="search">
 			<input type="text" placeholder="검색어를 입력해주세요" style=border:none;>
-			<img src = "../images/icon/search.png">
+			<img id="searchImg"src = "/login/images/icon/search2.png">
 		</div>
 		<a href="writeboard.jsp" class="btn pull-right">FQA 등록</a> 
 		<select	class="category">

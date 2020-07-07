@@ -13,8 +13,8 @@
 <style>
 .category {
 	position: relative;
-	left: 80px;
-	top: 10px;
+	left: 160px;
+	top: -1px;
 }
 
 .btn {
@@ -22,11 +22,13 @@
 	background-color: #60B4A6;
 	left: 1132px;
 	color: black;
-	margin-bottom : -1px;
+	bottom:-50px;
 }
+
 
 .logo {
 	position: relative;
+	top : 30px;
 	left: 55px;
 }
 .answer {
@@ -37,6 +39,37 @@
 	text-decoration:none;
 
 }
+input:focus {outline:none;}
+
+	hr{
+		margin-top : -20px;
+	}
+.search{
+	position:relative;
+	margin-left: 62px;
+	margin-bottom : 30px;
+	width: 500px;
+	height: 50px;
+	outline:none;
+	border: 2px solid #60B4A6;
+	align:right;
+}
+
+.OX{
+	position: relative;
+	left: 1035px;
+	margin-top: -1px;
+	
+
+}
+div > img {
+	float:right;
+}
+div > input {
+	position : relative;
+	top : 10px;
+	width: 400px;
+}
 </style>
 <title>SO Easy</title>
 </head>
@@ -46,9 +79,18 @@
 	<section>
 		<h2 class="logo" style="text-align: left;">1대1문의(관리자)</h2>
 		<a href="writeboard.jsp" class="btn pull-right">글쓰기</a> 
+		<div class="search">
+			<input type="text" id="textId" placeholder="검색어를 입력해주세요" style=border:none;>
+			<img id="searchImg"src = "/login/images/icon/search2.png">
+		</div>
 		<select	class="category">
 			<option class="category">계정관련</option>
 			<option class="category">결제관련</option>
+		</select>
+		<select class="OX">
+			<option class="OX">선택</option>
+			<option class="OX">O</option>
+			<option class="OX">X</option>
 		</select>
 		<div class="container">
 			<div class="row">
