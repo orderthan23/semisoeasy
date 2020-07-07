@@ -6,26 +6,75 @@
 <meta charset="UTF-8">
 <title>SO Easy - 공간등록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	function goPopup(){
+	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+		var pop = window.open("../../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+	}
+
+
+	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+		//document.form.roadAddrPart1.value = roadAddrPart1;
+		$("#roadAddrPart1").val(roadAddrPart1);
+		//document.form.addrDetail.value = addrDetail;
+		$("#addrDetail").val(addrDetail);
+		/* document.form.engAddr.value = engAddr;
+		document.form.jibunAddr.value = jibunAddr;
+		document.form.zipNo.value = zipNo;
+		document.form.admCd.value = admCd;
+		document.form.rnMgtSn.value = rnMgtSn;
+		document.form.bdMgtSn.value = bdMgtSn;
+		document.form.detBdNmList.value = detBdNmList; */
+		/** 2017년 2월 추가제공 **/
+		/* document.form.bdNm.value = bdNm;
+		document.form.bdKdcd.value = bdKdcd;
+		document.form.siNm.value = siNm;
+		document.form.sggNm.value = sggNm;
+		document.form.emdNm.value = emdNm;
+		document.form.liNm.value = liNm;
+		document.form.rn.value = rn;
+		document.form.udrtYn.value = udrtYn;
+		document.form.buldMnnm.value = buldMnnm;
+		document.form.buldSlno.value = buldSlno;
+		document.form.mtYn.value = mtYn;
+		document.form.lnbrMnnm.value = lnbrMnnm;
+		document.form.lnbrSlno.value = lnbrSlno; */
+		/** 2017년 3월 추가제공 **/
+		/* document.form.emdNo.value = emdNo; */
+		
+}
+</script>
 <style>
 
 	.space-insert tr td input[type=text]{
 		width: 100%;
+		word-break:break-all;
+	}
+	#roadAddrPart1{
+		width: 70%
 	}
 	textarea{
 		border: 1px solid black;
 		border-radius: 10px;
 		width: 100%;
+		resize: none;
 	}
 	.check-distinct input[type=text]{
 		text-align: center;
 	}
 	.select-space{
-		width: 30%;
+		width: 40%;
 		height: 40px;
 		display: inline-block;
 		border: 1px solid black;
 		border-radius: 10px;
 		cursor: pointer;
+		margin: 10px;
 	}
 	.space-descrip{
 		margin: 50px;
@@ -58,17 +107,47 @@
 		border: 1px solid black;
 		border-radius: 10px;
 	}
-	#add-btn{
+	input[type=checkbox]{
+		cursor: pointer;
+	}
+	#add-tag{
 		width: 60%;
 	}
-	.warning{
-		display: none;
+	#space-tag{
+		width: 350px;
+		height: 200px;
+		border: 1px solid black;
+		border-radius: 10px;
+	}
+	.btnArea{
+		margin: 50px;
+	}
+	img{
+		max-width: 100%;
+		max-height: 100%;
+		margin: auto;
+	}
+	.thumbnail{
+		border: 1px solid black;
+		border-radius: 10px;
+		display: inline-block;
+		text-align: center;
+		vertical-align: middle;
+	}
+	#cap{
+		border: 1px solid black;
+		border-radius: 10px;
+		text-align: center;
+	}
+	#capital-img{
+		text-align: center;
+		vertical-align: middle;
 	}
 </style>
 </head>
 <body>
-	<header></header>
-	<nav></nav>
+	<header><%@ include file="../common/header.jsp"%></header>
+	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<div>
 			<h1 align="center">공간 등록</h1>
@@ -170,21 +249,21 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td>공간명</td>
-					<td><input type="text" maxlength="20" name="space-name" id="space-name" onchange="wSpaceName();"></td>
+					<td>공간명*</td>
+					<td><input type="text" maxlength="20" name="space-name" id="space-name"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td></td>
-					<td><p class="text-limit" id="space-intro"> ?<!-- 입력된 글자의 길이를 출력하도록 --> / 200 </p></td>
+					<td align="right"><p class="text-limit" id="intro-limit">0 / 200</p></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td>공간 소개</td>
 					<td>
-						<textarea rows="5" maxlength="200"></textarea>
+						<textarea rows="5" maxlength="200" name="space-intro" id="space-intro"></textarea>
 					</td>
 					<td></td>
 				</tr>
@@ -195,105 +274,130 @@
 				<tr>
 					<td></td>
 					<td>공간 태그</td>
-					<td><input type="text" id="add-btn"><button type="button" onclick="addTag();">추가</button></td>
+					<td><input type="text" id="add-tag" onclick="this.select();">&nbsp;&nbsp;<button type="button" onclick="addTag();">추가하기</button></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td></td>
-					<td><textarea name="space-tag" id="space-tag"></textarea></td>
+					<td><div id="space-tag"></div></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td></td>
-					<td class="warning" id="space-capital-img" style="text-align:right;">대표 이미지를 추가하셔야 합니다.</td>
+					<td class="warning" id="capital-img-not" style="text-align:right;">대표 이미지를 추가하셔야 합니다.</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td>대표 이미지</td>
-					<td><textarea rows="2" cols="40"></textarea><button onclick="">추가</button></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>상세 이미지</td>
-					<td><textarea rows="10" cols="40" placeholder="3장 이상을 등록하셔야 합니다."></textarea><button onclick="">추가</button></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>공간 주소</td>
-					<td><input type="text" placeholder="공간 주소를 입력하세요."><button onclick="">검색</button></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td><input type="text" placeholder="상세 주소를 입력하세요."></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>공간 필수 기능</td>
+					<td>대표 이미지*</td>
 					<td>
-						<table>
-							<tr>
-								<td>&nbsp;</td><td><input type="checkbox" name="agree-1" value="wifi">쾌적하고 빠른 WIFI</td>
-							</tr>
-							<tr>
-								<td></td><td><input type="checkbox" name="agree-2" value="concent">넉넉한 콘센트</td>
-							</tr>
-							<tr>
-								<td></td><td><input type="checkbox" name="agree-3" value="wifi">철저한 예약관리</td>
-							</tr>
-						</table>
+						<div id="cap" style="width: 450px; height: 250px; overflow: hidden;">
+							<img id="capital-img" src="../../images/icon/addImg.png">
+						</div>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td class="warning" id="thumbnail-img-not" style="text-align:right;">상세 이미지를 추가하셔야 합니다.</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>상세 이미지*</td>
+					<td class="thumbnail-area">
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-1" src="../../images/icon/addImg.png">
+						</div>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-2" src="../../images/icon/addImg.png">
+						</div>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-3" src="../../images/icon/addImg.png">
+						</div>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-4" src="../../images/icon/addImg.png">
+						</div>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-5" src="../../images/icon/addImg.png">
+						</div>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img id="thumnail-6" src="../../images/icon/addImg.png">
+						</div>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>공간 주소*</td>
+					<td><input type="text" placeholder="공간 주소를 입력하세요." id="roadAddrPart1"  name="space-address1" readonly>&nbsp;&nbsp;<button type="button" onclick="goPopup();">검색</button></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td><input type="text" placeholder="상세 주소를 입력하세요." id="addrDetail"  name="space-address2" readonly></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>공간 필수 기능*</td>
+					<td>
+						<input type="checkbox" class="rule" id="rule1" name="rule1" value="wifi"><label for="rule1">  쾌적하고 빠른 WIFI</label>
+						<br>
+						<input type="checkbox" class="rule" id="rule2" name="rule2" value="concent"><label for="rule2">  넉넉한 콘센트</label>
+						<br>
+						<input type="checkbox" class="rule" id="rule3" name="rule3" value="wifi"><label for="rule3">  철저한 예약관리</label>
+						<br>
+						<br>
+						<input type="checkbox" class="rule" id="rule4" name="rule4" value="wifi"><label for="rule4">  전체 동의</label>
 					</td>
 					<td></td>
 				</tr>
 			</table>
-				<!-- <tr>
-					<td><input type="submit" value="다음으로" style="align:center;"></td>
-					<td></td>
-					<td><input type="reset" value="초기화" style="align:center;"></td>
-				</tr> -->
+			<div class="btnArea" align="center">
+				<button type="reset">초기화</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit">다음으로</button>
+			</div>
+			<div id="fileArea">
+					<input type="file" id="cap-img" name="capital-img" onchange="load(this);" accept="image/*">
+					<input type="file" id="thumbnailImg1" name="thumbnailImg1" onchange="loadImg(this, 1);" accept="image/*">
+					<input type="file" id="thumbnailImg2" name="thumbnailImg2" onchange="loadImg(this, 2);" accept="image/*">
+					<input type="file" id="thumbnailImg3" name="thumbnailImg3" onchange="loadImg(this, 3);" accept="image/*">
+					<input type="file" id="thumbnailImg4" name="thumbnailImg4" onchange="loadImg(this, 4);" accept="image/*">
+					<input type="file" id="thumbnailImg5" name="thumbnailImg5" onchange="loadImg(this, 5);" accept="image/*">
+					<input type="file" id="thumbnailImg6" name="thumbnailImg6" onchange="loadImg(this, 6);" accept="image/*">
+			</div>
 		</form>
 	</section>
-	<footer></footer>
+	<footer>
+		<%@ include file="../common/footer.jsp"%>
+	</footer>
 	<script>
-		
-		//공간명 미작성 경고
-		/* function wSpaceName(){
-			if($("#space-name").val() == "" || $("#space-name").val() == null){
-				$("#warning-space-name").show();
-			} else {
-				$("#warning-space-name").hide();
-			}
-		}; */
 		$(function(){
 			initSet();
 			initEvent();
 		});
 		
 		function initSet(){
-			$("#warning-space-name").show();
+			$(".warning").show();
 		}
 	
 		function initEvent(){
-			$('#space-name').on('keyup', function(){
+			//경고메세지 출력 | 가리기
+			$("#space-name").on("keyup", function(){
 				var str = $("#space-name").val();
 				var len = str.length;
 				if(len > 0){
@@ -302,6 +406,7 @@
 					$("#warning-space-name").show();
 				}
 			});
+			
 			$("#office").click(function(){
 				if($("#office-check").is(":visible")){
 					$("#office").css("background", "white");
@@ -348,8 +453,7 @@
 					$("#space-descrip").css({"width":"auto", "height":"50px", "margin":"10px"}).html("개방된 공간에 개인 또는 여러 팀이 함께 이용할 수 있는 형태의 사무공간"+ '<br><br>' + "공간 운영방식에 따라 자유석또는 지정석으로 이용 가능");
 				}
 			});
-
-			
+			//좌석수 입력시 조건
 			$("#unfix-seat").click(function(){
 				if($(this).val == 0){
 					$(this).val("");
@@ -361,7 +465,40 @@
 				}
 			});
 			$("#total-seat").click(function(){count();});
+			
+			//공간 소개 입력시 글자 수 표시
+			$("#space-intro").on("keyup", function(){
+				var si = $("#space-intro").val();
+				var len = si.length;
+				var maxlen = 200;
+				$("#intro-limit").text(len + " / " + maxlen);
+			}).on("keypress", function(){
+				var si = $("#space-intro").val();
+				var len = si.length;
+				var maxlen = 200;
+				$("#intro-limit").text(len + " / " + maxlen)
+			});
+			
+			if($("#capital-img").src() == "../../images/icon/addImg.png"){
+				$("#capital-img-not").show();
+			} else {
+				$("#capital-img-not").hide();
+			}
+			if($(""));
+			
 		}//initEvent initEvent
+		//약관 전체 동의
+		$("#rule4").click(function() {
+			//만약 전체 선택 체크박스가 체크된상태일경우
+			if ($("#rule4").prop("checked")) {
+				//해당화면에 전체 checkbox들을 체크해준다
+				$(".rule").prop("checked", true);
+				// 전체선택 체크박스가 해제된 경우 
+			} else {
+				//해당화면에 모든 checkbox들의 체크를해제시킨다.
+				$(".rule").prop("checked", false);
+			}
+		});
 		
 		// 좌석 수 = 자유석 + 지정석
 		function count(){
@@ -375,8 +512,78 @@
 		
 		//태그 추가하기
 		function addTag(){
+			var tag = $("#add-tag").val();
+			var tags = $("#space-tag");
 			
-		}
+			var tag_input = $("<input>");
+			tag_input.attr("name", "space-tag");
+			tag_input.attr("type", "button");
+			tag_input.attr("value", "#"+tag);
+			
+			tags.append(tag_input);
+			$("#add-tag").val("");
+		};
+		
+		//이미지 추가하기
+		$(function(){
+			
+			$("#fileArea").hide();
+			
+			$("#capital-img").click(function(){
+				$("#cap-img").click();
+			});
+			$("#thumnail-1").click(function(){
+				$("#thumbnailImg1").click();
+			});
+			$("#thumnail-2").click(function(){
+				$("#thumbnailImg2").click();
+			});
+			$("#thumnail-3").click(function(){
+				$("#thumbnailImg3").click();
+			});
+			$("#thumnail-4").click(function(){
+				$("#thumbnailImg4").click();
+			});
+			$("#thumnail-5").click(function(){
+				$("#thumbnailImg5").click();
+			});
+			$("#thumnail-6").click(function(){
+				$("#thumbnailImg6").click();
+			});
+		});
+		
+		function load(value) {
+			if(value.files && value.files[0]){
+				var reader = new FileReader();
+				
+				reader.onload = function(e) {
+					$("#capital-img").attr("src", e.target.result);
+				}
+				
+				reader.readAsDataURL(value.files[0]);
+			}
+		};
+		
+		function loadImg(value, num) {
+			if(value.files && value.files[0]){
+				var reader = new FileReader();
+				
+				reader.onload = function(e) {
+					
+					switch(num){
+					case 1 : $("#thumnail-1").attr("src", e.target.result); break;
+					case 2 : $("#thumnail-2").attr("src", e.target.result); break;
+					case 3 : $("#thumnail-3").attr("src", e.target.result); break;
+					case 4 : $("#thumnail-4").attr("src", e.target.result); break;
+					case 5 : $("#thumnail-5").attr("src", e.target.result); break;
+					case 6 : $("#thumnail-6").attr("src", e.target.result); break;
+					}
+				}
+				
+				reader.readAsDataURL(value.files[0]);
+			}
+		};
+		
 	</script>
 </body>
 </html>
