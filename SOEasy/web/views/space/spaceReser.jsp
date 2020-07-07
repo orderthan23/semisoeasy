@@ -144,13 +144,13 @@
 			<tr>
 				<td style="color:#40a4b6; margin-left:330px; font-size:20px; width:200px; height:50px;"><b>예약자 정보</b></td>
 				<td width="150px"><b>예약자명</b></td>
-				<td width="200px"><input style="border: 1.5px solid #40a4b6;" type="text"></td>
+				<td width="200px"><input style="border: 1.5px solid #40a4b6;" type="text" id="reserNm"></td>
 				<td width="200px"></td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="150px"><b>사용자명</b></td>
-				<td><input style="border: 1.5px solid #40a4b6;" type="text" placeholder="사용자명을 입력하세요"></td>
+				<td><input style="border: 1.5px solid #40a4b6;" type="text" placeholder="사용자명을 입력하세요" id="userNm"></td>
 				<td><label for="reserSame"><input type="checkbox" id="reserSame">예약자와 동일</label></td>
 			</tr>
 			<tr>
@@ -294,7 +294,7 @@
 				<table width="650">
 					<tr>
 						<td style="color:#40a4b6; margin-left:30px; font-size:20px; width:150px; height:50px;"><b>서비스 동의</b></td>
-						<td><label for="all"><input type="checkbox" id="all"><b>전체 동의</b></label></td>
+						<td><label for="allAgr"><input type="checkbox" id="allAgr"><b>전체 동의</b></label></td>
 					</tr>
 					<tr>
 						<td height="50px"></td>
@@ -329,6 +329,51 @@
 		function push() {
 			alert('예약신청 버튼');
 		}
+		
+		//'예약자와 동일' 체크 시 사용자명 텍스트박스에 예약자명에 입력된 값 가져오기
+		$(document).ready(function(){
+			$("#reserSame").click(function(){
+				if($("#reserSame").prop("checked")) {
+					//예약자명 값을 사용자명에 가져오기
+				} else {
+					//빈칸
+				}
+			});
+		});
+
+		//전체동의 버튼 눌렀을 때 밑에 체크항목들도 다 체크되는 것
+		$(document).ready(function(){
+			$("#allAgr").click(function(){
+				if($("#allAgr").prop("checked")) {
+					$("#agr1").prop("checked", true);
+					$("#agr2").prop("checked", true);
+					$("#agr3").prop("checked", true);
+					$("#agr4").prop("checked", true);
+				} else {
+					$("#agr1").prop("checked", false);
+					$("#agr2").prop("checked", false);
+					$("#agr3").prop("checked", false);
+					$("#agr4").prop("checked", false);
+				}
+			});
+		});
+
 	</script>
+	
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
