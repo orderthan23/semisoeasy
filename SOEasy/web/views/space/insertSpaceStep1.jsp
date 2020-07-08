@@ -8,47 +8,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function goPopup(){
-	// 주소검색을 수행할 팝업 페이지를 호출합니다.
-	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
 		var pop = window.open("../../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-	
-	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
 	}
 
-
 	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		//document.form.roadAddrPart1.value = roadAddrPart1;
 		$("#roadAddrPart1").val(roadAddrPart1);
-		//document.form.addrDetail.value = addrDetail;
 		$("#addrDetail").val(addrDetail);
-		/* document.form.engAddr.value = engAddr;
-		document.form.jibunAddr.value = jibunAddr;
-		document.form.zipNo.value = zipNo;
-		document.form.admCd.value = admCd;
-		document.form.rnMgtSn.value = rnMgtSn;
-		document.form.bdMgtSn.value = bdMgtSn;
-		document.form.detBdNmList.value = detBdNmList; */
-		/** 2017년 2월 추가제공 **/
-		/* document.form.bdNm.value = bdNm;
-		document.form.bdKdcd.value = bdKdcd;
-		document.form.siNm.value = siNm;
-		document.form.sggNm.value = sggNm;
-		document.form.emdNm.value = emdNm;
-		document.form.liNm.value = liNm;
-		document.form.rn.value = rn;
-		document.form.udrtYn.value = udrtYn;
-		document.form.buldMnnm.value = buldMnnm;
-		document.form.buldSlno.value = buldSlno;
-		document.form.mtYn.value = mtYn;
-		document.form.lnbrMnnm.value = lnbrMnnm;
-		document.form.lnbrSlno.value = lnbrSlno; */
-		/** 2017년 3월 추가제공 **/
-		/* document.form.emdNo.value = emdNo; */
-		
-}
+	}
 </script>
+<link rel="stylesheet" href="../../css/layout.css">
 <style>
 
 	.space-insert tr td input[type=text]{
@@ -122,7 +90,7 @@
 	.btnArea{
 		margin: 50px;
 	}
-	img{
+	.thumbnail-in, #capital-img{
 		max-width: 100%;
 		max-height: 100%;
 		margin: auto;
@@ -150,15 +118,16 @@
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<div>
-			<h1 align="center">공간 등록</h1>
+			<h1 align="center" style="margin:0;">공간 등록</h1>
+			<br>
+			<br>
 		</div>
 		<form action="<%= request.getContextPath() %>/insertSpaceStep1" method="post">
 			<table class="space-insert" align="center" width="60%">
 				<tr>
-					<td width="10%"></td>
-					<td width="20%">공간 종류 *</td>
+					<td width="5%"></td>
+					<td width="20%" style="text-align:left;">공간 종류 *</td>
 					<td width="40%" align="center">
-						<!-- <input type="checkbox" name="kinds" id="office" value="office"><label for="office">독립 오피스</label> -->
 						<span class="select-space" id="office">
 							독립 오피스
 						</span>
@@ -167,7 +136,7 @@
 							코워킹 스페이스
 						</span>
 					</td>
-					<td width="10%"></td>
+					<td width="5%"></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -185,7 +154,6 @@
 									<td width="30%">공간 사이즈*</td>
 									<td width="60%">
 										<input type="text" name="space-size" size="30%" onclick="this.select();">
-										<!-- <input type="hidden" name="kinds" value="office"> -->
 									</td>
 									<td>m<sup>2</sup></td>
 								</tr>
@@ -215,7 +183,6 @@
 									<td width="30%">자유석</td>
 									<td width="60%">
 										<input type="text" name="unfix-seat" id="unfix-seat" size="30%" value="0" onkeyup="count();" onclick="this.select();">
-										<!-- <input type="hidden" name="kinds" value="cowork"> -->
 									</td>
 									<td width="10%">석</td>
 								</tr>
@@ -285,13 +252,58 @@
 				</tr>
 				<tr>
 					<td></td>
+					<td style="vertical-align: top;"><br>편의시설 *</td>
+					<td>
+						<table style="border-spacing:15px; text-align:center;">
+							<tr>
+								<td><label for="24h"><img src="../../images/icon/24h.png" width="100px"><br><input type="checkbox" name="conv" id="24h" value="24h"></label></td>
+								<td><label for="365days"><img src="../../images/icon/365days.png" width="100px"><br><input type="checkbox" name="conv" id="365days" value="365days"></label></td>
+								<td><label for="airCon"><img src="../../images/icon/airCon.png" width="100px"><br><input type="checkbox" name="conv" id="airCon" value="airCon"></label></td>
+								<td><label for="animal"><img src="../../images/icon/animal.png" width="100px"><br><input type="checkbox" name="conv" id="animal" value="animal"></label></td>
+							</tr>
+							<tr>
+								<td><label for="beam"><img src="../../images/icon/beam.png" width="100px"><br><input type="checkbox" name="conv" id="beam" value="beam"></label></td>
+								<td><label for="board"><img src="../../images/icon/board.png" width="100px"><br><input type="checkbox" name="conv" id="board" value="board"></label></td>
+								<td><label for="cafe"><img src="../../images/icon/cafe.png" width="100px"><br><input type="checkbox" name="conv" id="cafe" value="cafe"></label></td>
+								<td><label for="copyPrint"><img src="../../images/icon/copyPrint.png" width="100px"><br><input type="checkbox" name="conv" id="copyPrint" value="copyPrint"></label></td>
+							</tr>
+							<tr>
+								<td><label for="delivery"><img src="../../images/icon/delivery.png" width="100px"><br><input type="checkbox" name="conv" id="delivery" value="delivery"></label></td>
+								<td><label for="doorLock"><img src="../../images/icon/doorLock.png" width="100px"><br><input type="checkbox" name="conv" id="doorLock" value="doorLock"></label></td>
+								<td><label for="fax"><img src="../../images/icon/fax.png" width="100px"><br><input type="checkbox" name="conv" id="fax" value="fax"></label></td>
+								<td><label for="heater"><img src="../../images/icon/heater.png" width="100px"><br><input type="checkbox" name="conv" id="heater" value="heater"></label></td>
+							</tr>
+							<tr>
+								<td><label for="kitchen"><img src="../../images/icon/kitchen.png" width="100px"><br><input type="checkbox" name="conv" id="kitchen" value="kitchen"></label></td>
+								<td><label for="locker"><img src="../../images/icon/locker.png" width="100px"><br><input type="checkbox" name="conv" id="locker" value="locker"></label></td>
+								<td><label for="mail"><img src="../../images/icon/mail.png" width="100px"><br><input type="checkbox" name="conv" id="mail" value="mail"></label></td>
+								<td><label for="parking"><img src="../../images/icon/parking.png" width="100px"><br><input type="checkbox" name="conv" id="parking" value="parking"></label></td>
+							</tr>
+							<tr>
+								<td><label for="rounge"><img src="../../images/icon/rounge.png" width="100px"><br><input type="checkbox" name="conv" id="rounge" value="rounge"></label></td>
+								<td><label for="snack"><img src="../../images/icon/snack.png" width="100px"><br><input type="checkbox" name="conv" id="snack" value="snack"></label></td>
+								<td><label for="terrace"><img src="../../images/icon/terrace.png" width="100px"><br><input type="checkbox" name="conv" id="terrace" value="terrace"></label></td>
+								<td><label for="tv"><img src="../../images/icon/tv.png" width="100px"><br><input type="checkbox" name="conv" id="tv" value="tv"></label></td>
+							</tr>
+							<tr>
+								<td><label for="wareHouse"><img src="../../images/icon/wareHouse.png" width="100px"><br><input type="checkbox" name="conv" id="wareHouse" value="wareHouse"></label></td>
+								<td><label for="waterMachine"><img src="../../images/icon/waterMachine.png" width="100px"><br><input type="checkbox" name="conv" id="waterMachine" value="waterMachine"></label></td>
+								<td style="display:none;"><input type="checkbox" name="conv" value="wifi" checked></td>
+								<td style="display:none;"><input type="checkbox" name="conv" value="plug" checked></td>
+							</tr>
+						</table>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
 					<td></td>
 					<td class="warning" id="capital-img-not" style="text-align:right;">대표 이미지를 추가하셔야 합니다.</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td>대표 이미지*</td>
+					<td style="vertical-align: top;"><br>대표 이미지*</td>
 					<td>
 						<div id="cap" style="width: 450px; height: 250px; overflow: hidden;">
 							<img id="capital-img" src="../../images/icon/addImg.png">
@@ -307,25 +319,27 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td>상세 이미지*</td>
+					<td style="vertical-align: top;"><br>상세 이미지*</td>
 					<td class="thumbnail-area">
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img id="thumnail-1" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-1" src="../../images/icon/addImg.png">
 						</div>
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img id="thumnail-2" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-2" src="../../images/icon/addImg.png">
+						</div>
+						<br>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img class="thumbnail-in" id="thumnail-3" src="../../images/icon/addImg.png">
 						</div>
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img id="thumnail-3" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-4" src="../../images/icon/addImg.png">
+						</div>
+						<br>
+						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
+							<img class="thumbnail-in" id="thumnail-5" src="../../images/icon/addImg.png">
 						</div>
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img id="thumnail-4" src="../../images/icon/addImg.png">
-						</div>
-						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img id="thumnail-5" src="../../images/icon/addImg.png">
-						</div>
-						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img id="thumnail-6" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-6" src="../../images/icon/addImg.png">
 						</div>
 					</td>
 					<td></td>
@@ -352,7 +366,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td>공간 필수 기능*</td>
+					<td style="vertical-align: top;"><br>공간 필수 기능*</td>
 					<td>
 						<input type="checkbox" class="rule" id="rule1" name="rule1" value="wifi"><label for="rule1">  쾌적하고 빠른 WIFI</label>
 						<br>
@@ -443,14 +457,14 @@
 					$("#cowork").css("background", "#3DB6AE");
 					$("#cowork-check").show();
 					$("#space-descrip").show();
-					$("#space-descrip").css({"width":"auto", "height":"50px", "margin":"10px"}).html("개방된 공간에 개인 또는 여러 팀이 함께 이용할 수 있는 형태의 사무공간"+ '<br><br>' + "공간 운영방식에 따라 자유석또는 지정석으로 이용 가능");
+					$("#space-descrip").css({"width":"auto", "height":"50px", "margin":"10px"}).html("개방된 공간에 개인 또는 여러 팀이 함께" + '<br>' + "이용할 수 있는 형태의 사무공간"+ '<br>' + "공간 운영방식에 따라 자유석또는 지정석으로 이용 가능");
 				} else {
 					$("#kinds").val("cowork");
 					$("#office").css("background", "white");
 					$("#cowork").css("background", "#3DB6AE");
 					$("#cowork-check").show();
 					$("#space-descrip").show();
-					$("#space-descrip").css({"width":"auto", "height":"50px", "margin":"10px"}).html("개방된 공간에 개인 또는 여러 팀이 함께 이용할 수 있는 형태의 사무공간"+ '<br><br>' + "공간 운영방식에 따라 자유석또는 지정석으로 이용 가능");
+					$("#space-descrip").css({"width":"auto", "height":"50px", "margin":"10px"}).html("개방된 공간에 개인 또는 여러 팀이 함께" + '<br>' + "이용할 수 있는 형태의 사무공간"+ '<br>' + "공간 운영방식에 따라 자유석또는 지정석으로 이용 가능");
 				}
 			});
 			//좌석수 입력시 조건
@@ -479,14 +493,8 @@
 				$("#intro-limit").text(len + " / " + maxlen)
 			});
 			
-			if($("#capital-img").src() == "../../images/icon/addImg.png"){
-				$("#capital-img-not").show();
-			} else {
-				$("#capital-img-not").hide();
-			}
-			if($(""));
-			
 		}//initEvent initEvent
+		
 		//약관 전체 동의
 		$("#rule4").click(function() {
 			//만약 전체 선택 체크박스가 체크된상태일경우
@@ -558,6 +566,9 @@
 				
 				reader.onload = function(e) {
 					$("#capital-img").attr("src", e.target.result);
+					if(e.target.result !== "../../images/icon/addImg.png"){
+						$("#capital-img-not").hide();
+					}
 				}
 				
 				reader.readAsDataURL(value.files[0]);

@@ -8,46 +8,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function goPopup(){
-	// 주소검색을 수행할 팝업 페이지를 호출합니다.
-	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
 		var pop = window.open("../../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-	
-	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
 	}
 
 
 	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		//document.form.roadAddrPart1.value = roadAddrPart1;
 		$("#roadAddrPart1").val(roadAddrPart1);
-		//document.form.addrDetail.value = addrDetail;
 		$("#addrDetail").val(addrDetail);
-		/* document.form.engAddr.value = engAddr;
-		document.form.jibunAddr.value = jibunAddr;
-		document.form.zipNo.value = zipNo;
-		document.form.admCd.value = admCd;
-		document.form.rnMgtSn.value = rnMgtSn;
-		document.form.bdMgtSn.value = bdMgtSn;
-		document.form.detBdNmList.value = detBdNmList; */
-		/** 2017년 2월 추가제공 **/
-		/* document.form.bdNm.value = bdNm;
-		document.form.bdKdcd.value = bdKdcd;
-		document.form.siNm.value = siNm;
-		document.form.sggNm.value = sggNm;
-		document.form.emdNm.value = emdNm;
-		document.form.liNm.value = liNm;
-		document.form.rn.value = rn;
-		document.form.udrtYn.value = udrtYn;
-		document.form.buldMnnm.value = buldMnnm;
-		document.form.buldSlno.value = buldSlno;
-		document.form.mtYn.value = mtYn;
-		document.form.lnbrMnnm.value = lnbrMnnm;
-		document.form.lnbrSlno.value = lnbrSlno; */
-		/** 2017년 3월 추가제공 **/
-		/* document.form.emdNo.value = emdNo; */
-		
-}
+	}
 </script>
 <style>
 
@@ -63,27 +31,6 @@
 		border-radius: 10px;
 		width: 100%;
 		resize: none;
-	}
-	.check-distinct input[type=text]{
-		text-align: center;
-	}
-	.select-space{
-		width: 40%;
-		height: 40px;
-		display: inline-block;
-		border: 1px solid black;
-		border-radius: 10px;
-		cursor: pointer;
-		margin: 10px;
-	}
-	.space-descrip{
-		margin: 50px;
-	}
-	.detail-descrip{
-		font-size: 10px;
-		text-align: right;
-		margin: 0;
-		padding: 0;
 	}
 	.warning{
 		font-size: 10px;
@@ -106,15 +53,6 @@
 	input[type=checkbox]{
 		cursor: pointer;
 	}
-	#add-tag{
-		width: 60%;
-	}
-	#space-tag{
-		width: 350px;
-		height: 200px;
-		border: 1px solid black;
-		border-radius: 10px;
-	}
 	.btnArea{
 		margin: 50px;
 	}
@@ -122,22 +60,6 @@
 		max-width: 100%;
 		max-height: 100%;
 		margin: auto;
-	}
-	.thumbnail{
-		border: 1px solid black;
-		border-radius: 10px;
-		display: inline-block;
-		text-align: center;
-		vertical-align: middle;
-	}
-	#cap{
-		border: 1px solid black;
-		border-radius: 10px;
-		text-align: center;
-	}
-	#capital-img{
-		text-align: center;
-		vertical-align: middle;
 	}
 	.box-file-input label{
     display:inline-block;
@@ -164,6 +86,12 @@
 		border: 1px solid black;
 		border-radius: 10px;
 		height: 30px;
+	}
+	#cal-email1{
+		width: 40%;
+	}
+	#cal-email2{
+		width: 50%;
 	}
 </style>
 </head>
@@ -299,7 +227,7 @@
 					<td></td>
 					<td>
 						<input type="text" placeholder="상세 주소를 입력하세요." id="addrDetail"  name="bsns-address2" readonly>
-						<br><input type="checkbox" id="equal-space" style="float:right;">공간 주소와 동일<!-- 공간주소 받아와서 체크시 자동으로 입력되게 -->
+						<br><div style="text-align:right;"><label><input type="checkbox" id="equal-space">공간 주소와 동일</label></div><!-- 공간주소 받아와서 체크시 자동으로 입력되게 -->
 					</td>
 					<td></td>
 				</tr>
@@ -309,9 +237,15 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td>여기부터 고치기*</td>
-					<td><input type="text" maxlength="20" name="space-name" id="space-name"></td>
-					<td></td>
+					<td>정산용 이메일 *</td>
+					<td>
+						<input type="text" class="email" name="cal-email" id="cal-email1">
+						 @ 
+						<input type="text" class="email" name="cal-email" id="cal-email2">
+					</td>
+					<td>
+					
+					</td>
 				</tr>
 				<tr>
 					<td></td>
