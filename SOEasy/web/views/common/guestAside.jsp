@@ -15,7 +15,7 @@
 }
 #togg_menu {
   position: absolute;
-  width: 10%;
+  width: 100%;
   border: none;
   outline: none;
   background: transparent;
@@ -44,25 +44,18 @@ span.bar {
 #navWrap{
   position: relative;
   height: 70px;
-  width: 10%;
-  display : inline-block;
 
 }
 
 #profileZone{
- border-radius: 50%;
  width:100px;
  height:100px;
+ border-radius: 50px;
+ border : solid;
  margin-left:auto;
  margin-right: auto;
  overflow: hidden;
- border: solid;
 
-}
-#profileZone img{
- 	width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
  .megaMenu {
   transform: translateX(-270px);
@@ -179,9 +172,10 @@ span.bar {
   font-weight:bolder;
   z-index: 1;
 }
-#navWrap h1 label{
-	margin-right : 150px;
-	font-size : 30px;
+#profileZone img{
+	width:100%;
+	height: 100%;
+	object-fit: cover;
 }
 </style>
 </head>
@@ -204,9 +198,9 @@ span.bar {
   <div id="navWrap">
       <h1></h1>
       <ul class='megaMenu'>
-      	<li class="infoZone"><div id="profileZone"><img src="/login/images/etc/hazard.png"></div></li>
-      	<li class="infoZone">흑당마라민트초코</li>
-      	<li class="infoZone">HOST</li>
+      	<li class="infoZone"><div id="profileZone"><img src="/login/images/etc/lingard.png"></div></li>
+      	<li class="infoZone">린가드</li>
+      	<li class="infoZone">GUEST</li>
       	<li><hr></li>
          
         <li class="mainTitle"><a href='#' class="mainNav">예약목록</a></li>
@@ -214,12 +208,8 @@ span.bar {
         <li class="subTitle"><a href='#' class="subNav">찜 리스트 </a> </li>
         <li class="subTitle"><a href='#' class="subNav">리뷰 목록 </a></li>
  		<li><hr></li>
-    
-        <li class="mainTitle"><a href='' class="mainNav">내 공간 관리</a></li>
-        <li class="subTitle"><a href='/login/views/host/manageReserve/reserveStep1.jsp' class="subNav">예약 일정 관리</a></li>
-        <li class="subTitle"><a href='#' class="subNav">공간 정보 수정</a></li>
-        <li class="subTitle"><a href='/login/views/host/balance/predict.jsp' class="subNav">공간 정산</a></li>
-   		<li><hr></li>
+            
+   	
         <li class="mainTitle"><a href='#' class="mainNav">기타</a></li>
         <li class="subTitle"><a href='/login/views/member/updateMember.jsp' class="subNav">개인 정보 관리</a></li>
         <li class="subTitle"><a href='/login/views/board/board.jsp' class="subNav">공지 사항</a></li>

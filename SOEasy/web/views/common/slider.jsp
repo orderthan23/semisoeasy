@@ -62,6 +62,7 @@
             font-size: 60px;
             font-weight: bolder;
             color : black;
+            text-shadow: 1px 2px 2px #ffffff;
        
 
         }
@@ -74,6 +75,9 @@
         
         .slick-list{
         	width: 100%;
+        }
+        .visual div{
+        	""
         }
 
     </style>

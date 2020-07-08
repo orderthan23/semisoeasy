@@ -68,6 +68,14 @@
 	<header><%@ include file="../common/header.jsp"%></header>
 	<nav>
 	<%@ include file="../common/aside.jsp"%>
+	<div class="colMenu">
+		<label class="colMenuTitle">개인 정보 관리</label>
+		<a class="colMenuButton" href="login/views/member/updateMember">개인 정보 수정</a>
+		<a class="colMenuButton">프로필 정보 수정</a>
+		<a class="colMenuButton selectedButton" href="login/views/member/deleteMember.jsp">회원 탈퇴</a>
+		<br><br>
+	</div>
+	<hr style="margin:0">
 
 	
 	</nav>

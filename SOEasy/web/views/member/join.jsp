@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="../../js/validate.js"></script>
+ <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 
 <link rel="stylesheet" href="../../css/layout.css">
@@ -171,13 +172,22 @@ h1 {
 				<tr>
 					<td class="input-group"><label for="phoneNum" class="input">연락처
 					</label> <input type="tel" id="phoneNum" placeholder="연락처" />
-						<button>본인 인증</button></td>
+						<button type="button" onclick="IMP.certification();">본인 인증</button></td>
 				</tr>
 
 				<tr>
 					<td class="input-group" id="email-zone"><label for="email" class="input">이메일</label>
 						<input type="email" id="email" placeholder="이메일" onkeyup="setTimeout(checkingEmail(),200)" />
 						<button type="button" onclick="checkCertifiedEmail();">이메일 인증</button>
+						<p></p>
+						</td>
+						
+				</tr>
+				
+				<tr>
+					<td class="input-group" id="email-zone"><label for="email" class="input">인증번호</label>
+						<input type="text" id="emailCode" placeholder="인증번호를 입력해주세요" onclick="" />
+						<button type="button" onclick="checkCertifiedEmail();">인증 확인</button>
 						<p></p>
 						</td>
 						
@@ -212,6 +222,39 @@ h1 {
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
 	<script>
+	//본인 인증 코드
+
+//iamport 대신 자신의 "가맹점 식별코드"를 사용하시면 됩니다
+IMP.init('imp14313139'); 
+IMP.certification({
+    merchant_uid : 'merchant_' + new Date().getTime() //본인인증과 연관된 가맹점 내부 주문번호가 있다면 넘겨주세요
+}, function(rsp) {
+    if ( rsp.success ) {
+    	 // 인증성공
+        console.log(rsp.imp_uid);
+        console.log(rsp.merchant_uid);
+        
+        $.ajax({
+				type : 'POST',
+				url : '/certifications/confirm',
+				dataType : 'json',
+				data : {
+					imp_uid : rsp.imp_uid
+				}
+		 }).done(function(rsp) {
+		 		// 이후 Business Logic 처리하시면 됩니다.
+		 });
+        	
+    } else {
+    	 // 인증취소 또는 인증실패
+        var msg = '인증에 실패하였습니다.';
+        msg += '에러내용 : ' + rsp.error_msg;
+
+        alert(msg);
+    }
+});
+	
+
 		//디자인  메소드
 		$('input').click(function() {
 			$(this).attr('placeholder', '');

@@ -154,7 +154,7 @@ h1 {
 		</div>
 		<br><br>
 		<h1>NOW 인기 공간</h1>
-		<table align="center" position="relative" id="spaceBoard">
+		<table align="center"  id="spaceBoard">
 
 		</table>
 		</div>

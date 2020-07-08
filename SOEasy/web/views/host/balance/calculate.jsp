@@ -208,7 +208,16 @@
 </head>
 <body>
 	<header>	<%@ include file="../../common/header.jsp"%></header>
-	<nav><%@ include file="../../common/aside.jsp" %></nav>
+	<nav><%@ include file="../../common/aside.jsp" %>
+		<div class="colMenu">
+			<label class="colMenuTitle">공간 정산</label>
+			<a class="colMenuButton" href="/login/views/host/balance/predict.jsp">예상 수익</a>
+			<a class="colMenuButton selectedButton" href="/login/views/host/balance/calculate.jsp">정산 조회</a>
+			<a class="colMenuButton" href="/login/views/host/balance/problemCalculate.jsp">이의 신청</a>
+			<br><br>
+	</div>
+	<hr style="margin : 0">
+	</nav>
 	<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<section>
 		<br>
