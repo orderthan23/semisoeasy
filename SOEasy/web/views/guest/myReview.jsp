@@ -60,7 +60,7 @@
 <nav><%@ include file="../../views/common/aside.jsp" %>
 	<div class="colMenu">
 		<label class="colMenuTitle">예약 목록</label>
-		<a class="colMenuButton" href="/login/views/member/updateMember">예약 내역 리스트</a>
+		<a class="colMenuButton" href="/login/views/guest/reserveList.jsp">예약 내역 리스트</a>
 		<a class="colMenuButton" href="/login/views/guest/pick.jsp">찜 리스트</a>
 		<a class="colMenuButton selectedButton"  href="/login/views/guest/myReview.jsp">리뷰 목록</a>
 		<br><br>
