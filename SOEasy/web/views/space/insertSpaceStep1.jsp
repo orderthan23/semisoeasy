@@ -16,6 +16,7 @@
 		$("#addrDetail").val(addrDetail);
 	}
 </script>
+<link rel="stylesheet" href="../../css/layout.css">
 <style>
 
 	.space-insert tr td input[type=text]{
@@ -117,7 +118,9 @@
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<div>
-			<h1 align="center">공간 등록</h1>
+			<h1 align="center" style="margin:0;">공간 등록</h1>
+			<br>
+			<br>
 		</div>
 		<form action="<%= request.getContextPath() %>/insertSpaceStep1" method="post">
 			<table class="space-insert" align="center" width="60%">
