@@ -32,27 +32,6 @@
 		width: 100%;
 		resize: none;
 	}
-	.check-distinct input[type=text]{
-		text-align: center;
-	}
-	.select-space{
-		width: 40%;
-		height: 40px;
-		display: inline-block;
-		border: 1px solid black;
-		border-radius: 10px;
-		cursor: pointer;
-		margin: 10px;
-	}
-	.space-descrip{
-		margin: 50px;
-	}
-	.detail-descrip{
-		font-size: 10px;
-		text-align: right;
-		margin: 0;
-		padding: 0;
-	}
 	.warning{
 		font-size: 10px;
 		text-align: right;
@@ -74,15 +53,6 @@
 	input[type=checkbox]{
 		cursor: pointer;
 	}
-	#add-tag{
-		width: 60%;
-	}
-	#space-tag{
-		width: 350px;
-		height: 200px;
-		border: 1px solid black;
-		border-radius: 10px;
-	}
 	.btnArea{
 		margin: 50px;
 	}
@@ -90,22 +60,6 @@
 		max-width: 100%;
 		max-height: 100%;
 		margin: auto;
-	}
-	.thumbnail{
-		border: 1px solid black;
-		border-radius: 10px;
-		display: inline-block;
-		text-align: center;
-		vertical-align: middle;
-	}
-	#cap{
-		border: 1px solid black;
-		border-radius: 10px;
-		text-align: center;
-	}
-	#capital-img{
-		text-align: center;
-		vertical-align: middle;
 	}
 	.box-file-input label{
     display:inline-block;
@@ -132,6 +86,12 @@
 		border: 1px solid black;
 		border-radius: 10px;
 		height: 30px;
+	}
+	#cal-email1{
+		width: 40%;
+	}
+	#cal-email2{
+		width: 50%;
 	}
 </style>
 </head>
@@ -267,7 +227,7 @@
 					<td></td>
 					<td>
 						<input type="text" placeholder="상세 주소를 입력하세요." id="addrDetail"  name="bsns-address2" readonly>
-						<br><input type="checkbox" id="equal-space" style="float:right;">공간 주소와 동일<!-- 공간주소 받아와서 체크시 자동으로 입력되게 -->
+						<br><div style="text-align:right;"><label><input type="checkbox" id="equal-space">공간 주소와 동일</label></div><!-- 공간주소 받아와서 체크시 자동으로 입력되게 -->
 					</td>
 					<td></td>
 				</tr>
@@ -277,9 +237,15 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td>여기부터 고치기*</td>
-					<td><input type="text" maxlength="20" name="space-name" id="space-name"></td>
-					<td></td>
+					<td>정산용 이메일 *</td>
+					<td>
+						<input type="text" class="email" name="cal-email" id="cal-email1">
+						 @ 
+						<input type="text" class="email" name="cal-email" id="cal-email2">
+					</td>
+					<td>
+					
+					</td>
 				</tr>
 				<tr>
 					<td></td>

@@ -494,11 +494,6 @@
 			});
 			
 		}//initEvent initEvent
-		/* function checkImg(){
-			var imgPath = $("#capital-img").attr("src");
-			
-			
-		}		 */
 		
 		//약관 전체 동의
 		$("#rule4").click(function() {
