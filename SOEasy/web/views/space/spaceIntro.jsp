@@ -4,7 +4,80 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        .visual{
+            position: relative;
+            width: 100%;
+        
+        }
+        .visual button{
+            position : absolute;
+            z-index: 10;
+            top: 50%;
+            transform: translateY(-50%);
+            width : 71px;
+            height : 71px;
+            border: none;
+            border-radius: 100%;
+            background: rgba(0,0,0,.5);
+
+            
+        }
+        .visual button:before{
+            font-family: 'xeicon';
+            color: #fff;
+            font-size : 45px;
+        }
+        .visual button.slick-prev {
+            left: 50px;
+            font-size : 0;
+            color : transparent;
+
+        }
+        .visual button.slick-prev::before{
+            content:"\e93d";
+            font-family: 'xeicon';
+        }
+
+        .visual button.slick-next{
+            right: 50px;
+            font-size : 0;
+            color : transparent;
+        }
+
+        .visual button.slick-next::before{
+            content:"\e940";
+            font-family: 'xeicon';
+        }
+
+        .visual div p {
+            position : absolute;
+     	  	 top: 35%;
+           	left: 30%;
+            font-size: 60px;
+            font-weight: bolder;
+            color : black;
+       
+
+        }
+       
+         .visual div p label {
+           
+            font-weight: bolder;
+			font-size : 30px;
+        }
+        
+        .slick-list{
+        	width: 100%;
+        }
+
+    </style>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <title>SO Easy</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="../../css/layout.css">
@@ -13,8 +86,7 @@
 
   <!-- Custom styles for this template -->
   <link href="/login/css/blog-post.css" rel="stylesheet">
-  
-  <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=k6u8c2j8h2"></script>
+
 </head>
 <body>
 		<header><%@ include file="../common/header.jsp" %></header>
@@ -36,7 +108,20 @@
 			</tr>
 		</table>
 		<br>
-		<img src="../../images/area/area18-1.png" style="margin-left:210px; width:850px;">
+		
+		<div class="visual">
+			<div 
+				style="background-image: url(../../images/area/area22-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
+			</div>
+			<div 
+				style="background-image: url(../../images/area/area23-2.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
+			</div>
+			<div 
+				style="background-image: url(../../images/area/area23-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
+			</div>
+		</div>
+		
+		<br><br>
 		<p style="font-size:30px; margin-left:210px">
 			동네에서 만나는 따뜻한 <br>
 			코워킹스페이스
@@ -71,7 +156,6 @@
 		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
 			운영시간
 		</b></p>
-		
 		<table style="margin-left: 220px; border-spacing:15px;">
 			<tr>
 				<td style="padding:20px;"><b>월</b>00:00 ~ 24:00</td>
@@ -95,6 +179,31 @@
 			</tr>
 		</table>
 		<br><br>
+		
+		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
+			추가정보
+		</b></p>
+		<table style="margin-left: 220px; border-spacing:15px;">
+			<tr>
+				<td style="padding:20px;"><b>수용인원</b></td>
+				<td style="padding:20px;">1 ~ 5 명</td>
+			</tr>
+			<tr>
+				<td style="padding:20px;"><b>좌석유형</b></td>
+				<td style="padding:20px;">고정석</td>
+			</tr>
+			<tr>
+				<td style="padding:20px;"><b>재고</b></td>
+				<td style="padding:20px;">5개</td>
+			</tr>
+			<tr>
+				<td style="padding:20px;"><b>넓이</b></td>
+				<td style="padding:20px;">15평(49.58m²)</td>
+			</tr>
+		</table>
+		<br><br>
+		
+		
 		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
 			편의시설
 		</b></p>
@@ -180,19 +289,8 @@
 		</table>
 		<br><br>
 		
-		<div id="map" style="width:100%; height:800px;"></div>
-		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=k6u8c2j8h2&callback=initMap"></script>
-    	<script type="text/javascript">
-        var map = null;
+		<!-- 카카오맵 api -->
 		
-        function initMap() {
-            map = new naver.maps.Map('map', {
-                center: new naver.maps.LatLng(37.3595704, 127.105399),
-                zoom: 10
-            });
-        }
-        
-    	</script>
 		
 		<hr>
 		
@@ -251,7 +349,7 @@
           		<td rowspan="2"><img src="../../images/etc/soeasyProf.png" style="margin-left:220px; width:50px;"></td>
           		<td><h3>&nbsp;&nbsp;이호정&nbsp;&nbsp;</h3></td>
           		<td><img src="../../images/etc/star.png" style="width:100px;"></td>
-          		<td><h5>&nbsp;&nbsp;&nbsp;신고하기</h5></td>
+          		<td onclick="register();" style="cursor:pointer;"><h5>&nbsp;&nbsp;&nbsp;신고하기</h5></td>
           	</tr>
           	<tr>
           		<td colspan="3">&nbsp;&nbsp;잘썼습니다~~~~</td>
@@ -269,6 +367,19 @@
 			function test1() {
 				location.href="<%=request.getContextPath()%>/views/space/spaceReser.jsp";
 			}
+			
+			function register() {
+				window.open('registerPop.jsp', 'window팝업', 'width=700px, height=700px, menubar=no, status=no, resizable=no, toolbar=no');  
+			}
+			
+			$('.visual').slick({
+				  infinite: true,
+				  speed: 500,
+				  fade: true,
+				  cssEase: 'linear',
+				  autoplay: true,
+				  autoplaySpeed: 2000,
+			});
 		</script>
 </body>
 </html>
