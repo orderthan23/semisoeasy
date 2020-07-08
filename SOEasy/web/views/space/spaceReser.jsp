@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
@@ -334,13 +335,14 @@
 		$(document).ready(function(){
 			$("#reserSame").click(function(){
 				if($("#reserSame").prop("checked")) {
-					//예약자명 값을 사용자명에 가져오기
+					var reserNmVal = $("#reserNm").val();
+					$("#userNm").val(reserNmVal);
 				} else {
-					//빈칸
+					$("#userNm").val("");
 				}
 			});
 		});
-
+		
 		//전체동의 버튼 눌렀을 때 밑에 체크항목들도 다 체크되는 것
 		$(document).ready(function(){
 			$("#allAgr").click(function(){
