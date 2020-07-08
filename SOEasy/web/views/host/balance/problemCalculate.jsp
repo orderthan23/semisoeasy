@@ -247,11 +247,11 @@
 			
 				<% for(int i=1; i<=problemRequestQTY; i++){ %>
 				<tr>
-					<td>시발</td>
-					<td>시발</td>
-					<td colspan="2">시발</td>
-					<td colspan="2">시발</td>
-					<td><label>시발</label></td>
+					<td>린가두</td>
+					<td>호날두</td>
+					<td colspan="2">램파두</td>
+					<td colspan="2">제라두</td>
+					<td><label>야나두</label></td>
 				</tr>
 				<% } %>
 			</table>
