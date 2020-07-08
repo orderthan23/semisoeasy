@@ -243,15 +243,11 @@
 			}
 		});
 		
-		$("#day8-rate").on("keyup", function(){
+		$(".refund-input").on("keyup", function(){
 			var test = RegExp(/[0-9]/);
-			var rate = Number($("#day8-rate").val());
-			console.log(test);
-			console.log(typeof rate);
-			if(!test.test(rate)){
-				console.log(!test.test(rate));
-				console.log(typeof rate);
-				alert("숫자만 입력하실 수 있습니다.");
+			var rate = $(this).val();
+			if(!test.test(rate) || rate < 0 || rate > 100){
+				alert("0부터 100사이 값만 입력하실 수 있습니다.");
 				$(this).val("");
 			}
 		});
