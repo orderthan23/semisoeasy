@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>SO Easy - 공간등록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../../css/layout.css">
 <style>
 
 	.space-insert tr td input[type=text]{
@@ -36,9 +37,6 @@
 		border: 1px solid black;
 		border-radius: 10px;
 	}
-	.btnArea{
-		margin: 50px;
-	}
 	.refund-area input{
 		text-align: center;
 	}
@@ -49,13 +47,19 @@
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<div>
-			<h1 align="center">가격 정보</h1>
-			<pre align="center">                                                                              기본 가격은 VAT를 포함해야 합니다.</pre>
+			<h1 align="center" style="margin:0;">가격 정보</h1>
+			<br><br>
 		</div>
 		<form action="<%= request.getContextPath() %>/insertSpaceStep2" method="post">
-			<table class="space-insert" align="center" width="60%">
+			<table class="space-insert" align="center" width="70%">
 				<tr>
-					<td width="10%"></td>
+					<td></td>
+					<td></td>
+					<td><pre style="text-align:right;">기본 가격은 VAT를 포함해야 합니다.</pre></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td width="5%"></td>
 					<td width="20%">단위별 예약 금액 *</td>
 					<td width="40%" align="center">
 						<fieldset>
@@ -78,7 +82,7 @@
 							</table>
 						</fieldset>
 					</td>
-					<td width="10%"></td>
+					<td width="5%"></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -187,9 +191,11 @@
 				</tr>
 			</table>
 			<div class="btnArea" align="center">
+				<br><br><br><br><br><br>
 				<button type="reset">초기화</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit">다음으로</button>
+				<br><br><br><br><br><br>
 			</div>
 		</form>
 	</section>

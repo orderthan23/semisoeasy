@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SO Easy - 공간등록</title>
+<link rel="stylesheet" href="../../css/layout.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function goPopup(){
@@ -13,8 +14,7 @@
 
 
 	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
-		$("#roadAddrPart1").val(roadAddrPart1);
-		$("#addrDetail").val(addrDetail);
+		$("#roadFullAddr").val(roadFullAddr);
 	}
 </script>
 <style>
@@ -23,8 +23,8 @@
 		width: 100%;
 		word-break:break-all;
 	}
-	#roadAddrPart1{
-		width: 70%
+	#roadFullAddr{
+		width: 80%
 	}
 	textarea{
 		border: 1px solid black;
@@ -53,21 +53,18 @@
 	input[type=checkbox]{
 		cursor: pointer;
 	}
-	.btnArea{
-		margin: 50px;
-	}
 	img{
 		max-width: 100%;
 		max-height: 100%;
 		margin: auto;
 	}
 	.box-file-input label{
-    display:inline-block;
-    background:#23a3a7;
-    color:#fff;
-    padding:0px 15px;
-    line-height:35px;
-    cursor:pointer;
+	    display:inline-block;
+	    background:#23a3a7;
+	    color:#fff;
+	    padding:0px 15px;
+	    line-height:35px;
+	    cursor:pointer;
 	}
 	
 	.box-file-input label:after{
@@ -88,10 +85,34 @@
 		height: 30px;
 	}
 	#cal-email1{
-		width: 40%;
+		width: 35%;
 	}
 	#cal-email2{
 		width: 50%;
+	}
+	#cal-phone1{
+		text-align: center;
+		width: 20%;
+	}
+	#cal-phone2, #cal-phone3{
+		text-align: center;
+		width: 30%;
+	}
+	select {
+		width: 200px;
+		height: 33px;
+		padding: .5em .5em;
+		border: 1px solid #999;
+		font-family: inherit;
+		background: url('../../images/icon/arrow.jpg') no-repeat 95% 50%;
+		border-radius: 10px;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+	}
+	
+	select::-ms-expand {
+	    display: none;
 	}
 </style>
 </head>
@@ -100,10 +121,11 @@
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<div>
-			<h1 align="center">정산 정보</h1>
+			<h1 align="center" style="margin: 0px;">정산 정보</h1>
+			<br><br>
 		</div>
 		<form action="<%= request.getContextPath() %>/insertSpaceStep3" method="post">
-			<table class="space-insert" align="center" width="60%">
+			<table class="space-insert" align="center" width="70%">
 				<tr>
 					<td></td>
 					<td></td>
@@ -111,12 +133,12 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td width="10%"></td>
+					<td width="5%"></td>
 					<td width="20%">상호명 *</td>
 					<td width="40%">
 						<input type="text" maxlength="20" name="bsns-name" id="bsns-name">
 					</td>
-					<td width="10%"></td>
+					<td width="5%"></td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
@@ -128,7 +150,7 @@
 						<input type="text" name="bsns-license-no" id="bsns-license-no">
 						<br><br>
 						<div class="box-file-input">
-							<p class="filename" style="width:70%;">파일을 선택해주세요.</p>
+							<p class="filename" style="width: 65%;">파일을 선택해주세요.</p>
 							<label style="align:right;"><input type="file" class="file-input" name="bsns-license-img" id="bsns-license-img" accept="image/*,.pdf"></label>
 						</div>
 					</td>
@@ -196,7 +218,7 @@
 					<td></td>
 					<td>주 업태 *</td>
 					<td>
-						<input type="text" name="bsns-condition" size="30%" onclick="this.select();">
+						<input type="text" name="bsns-condition" style="width:40%;" onclick="this.select();">
 					</td>
 					<td></td>
 				</tr>
@@ -207,7 +229,7 @@
 					<td></td>
 					<td>주 종목 *</td>
 					<td>
-						<input type="text" name="bsns-event" size="30%" onclick="this.select();">
+						<input type="text" name="bsns-event" style="width:40%;" onclick="this.select();">
 					</td>
 					<td></td>
 				</tr>
@@ -218,16 +240,9 @@
 					<td></td>
 					<td>사업장 주소 *</td>
 					<td>
-						<input type="text" placeholder="사업장 주소를 입력하세요." id="roadAddrPart1"  name="bsns-address1" readonly>&nbsp;&nbsp;<button type="button" onclick="goPopup();">검색</button>
-					</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td>
-						<input type="text" placeholder="상세 주소를 입력하세요." id="addrDetail"  name="bsns-address2" readonly>
-						<br><div style="text-align:right;"><label><input type="checkbox" id="equal-space">공간 주소와 동일</label></div><!-- 공간주소 받아와서 체크시 자동으로 입력되게 -->
+						<input type="text" placeholder="사업장 주소를 입력하세요." id="roadFullAddr"  name="bsns-address" readonly>&nbsp;&nbsp;
+						<button type="button" onclick="goPopup();">검색</button>
+						<br><div style="text-align:right;"><label style="font-size:13px;"><input type="checkbox" id="equal-space" style="height:10px;"> 공간 주소와 동일</label></div><!-- 공간주소 받아와서 체크시 자동으로 입력되게 -->
 					</td>
 					<td></td>
 				</tr>
@@ -239,23 +254,92 @@
 					<td></td>
 					<td>정산용 이메일 *</td>
 					<td>
-						<input type="text" class="email" name="cal-email" id="cal-email1">
-						 @ 
-						<input type="text" class="email" name="cal-email" id="cal-email2">
+						<div>
+							<input type="text" class="email" name="cal-email1" id="cal-email1">
+							&nbsp;@&nbsp;
+							<input type="text" class="email" name="cal-email2" id="cal-email2">
+						</div>
 					</td>
 					<td>
-					
+						<select class="select-email" id="select-email">
+							<option id="naver">naver.com</option>
+							<option id="daum">daum.net</option>
+							<option id="gmail">gmail.com</option>
+							<option id="nate">nate.com</option>
+							<option id="self" selected>직접 입력</option>
+						</select>
 					</td>
 				</tr>
 				<tr>
 					<td></td>
 					<td>&nbsp;</td>
 				</tr>
+				<tr>
+					<td></td>
+					<td>정산용 연락처 *</td>
+					<td>
+						<div>
+							<input type="text" class="phone" name="cal-phone1" id="cal-phone1" maxlength="3">
+							&nbsp;-&nbsp;
+							<input type="text" class="phone" name="cal-phone2" id="cal-phone2" maxlength="4">
+							&nbsp;-&nbsp;
+							<input type="text" class="phone" name="cal-phone3" id="cal-phone3" maxlength="4">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>계좌 정보 *</td>
+					<td>
+						<table width="100%">
+							<tr>
+								<td>은행명</td>
+								<td>
+									<select name="cal-bank">
+										<option selected>은행 선택</option>
+										<option value="shinhan">신한은행</option>
+										<option value="kb">KB국민은행</option>
+										<option value="woori">우리은행</option>
+										<option value="hana">하나은행</option>
+										<option value="kakao">카카오뱅크</option>
+										<option value="kbank">케이뱅크</option>
+										<option value="kdb">KDB산업은행</option>
+										<option value="ibk">IBK기업은행</option>
+										<option value="nh">NH농협은행</option>
+										<option value="suhyup">수협은행</option>
+										<option value="daegu">대구은행</option>
+										<option value="busan">부산은행</option>
+										<option value="kn">경남은행</option>
+										<option value="jb">전북은행</option>
+										<option value="kwangju">광주은행</option>
+										<option value="jeju">제주은행</option>
+										<option value="post">우체국은행</option>
+										<option value="kfcc">새마을금고</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>예금주</td>
+								<td>
+									<input type="text" name="cal-acct-holder" style="width:50%;">
+								</td>
+							</tr>
+							<tr>
+								<td>계좌번호</td>
+								<td>
+									<input type="text" name="cal-acct-no">
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
 			</table>
 			<div class="btnArea" align="center">
+				<br><br><br><br><br><br>
 				<button type="reset">초기화</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit">작성완료</button>
+				<button type="submit">저장하기</button>
+				<br><br><br><br><br><br>
 			</div>
 		</form>
 	</section>
@@ -286,16 +370,30 @@
 			});
 		}//initEvent initEvent
 		
+		
+		$(".select-email").change(function(){
+			if($(this).val() == "직접 입력"){
+				$("#cal-email2").val("");
+			} else {
+				$("#cal-email2").val($(this).val());
+			}
+		});
+		
 	    $(".file-input").on("change", function(){
-	        
 	        $filename = $(this).val();
-
 	        if($filename == "")
 	            $filename = "파일을 선택해주세요.";
-
 	        $(".filename").text($filename);
-
 	    });
+	    
+	    $(".phone").on("keyup", function(){
+			var test = RegExp(/[0-9]/);
+			var rate = $(this).val();
+			if(!test.test(rate)){
+				alert("숫자만 입력해주세요.");
+				$(this).val("");
+			}
+		});
 		
 	</script>
 </body>
