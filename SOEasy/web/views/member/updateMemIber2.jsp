@@ -96,6 +96,34 @@ h1 {
 	font-size : 13px;
 	font-weight : normal;
 }
+
+#profileZone{
+ border-radius: 50%;
+ width:100px;
+ height:100px;
+ margin-left:auto;
+ margin-right: auto;
+ overflow: hidden;
+ border: solid;
+
+}
+#profileZone img{
+ 	width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+	
+#changeProfile{
+
+	background: #3DB6AE;
+	border : none;
+	color : white;
+	height : 30px;
+	border-radius: 5px;
+}
+#changeProfile:focus{
+	outline: none;
+}
 </style>
 </head>
 <body>
@@ -116,6 +144,16 @@ h1 {
 				<tr>
 					
 					<td><h1 align="center">SO EASY<br><br>개인정보 수정<hr></h1><td>
+				</tr>
+				<tr>
+					<td align="center" height="200px">
+						<div id="profileZone">
+							<img src="/login/images/etc/lingard.png">
+						</div>
+						<br>
+						<button id="changeProfile">프로필 사진 변경</button>
+			
+					</td>
 				</tr>
 				<tr>
 					<td class="input-group"><label for="id" class="input">아이디</label>

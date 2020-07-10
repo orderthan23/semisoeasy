@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../../css/layout.css">
 <style>
 	#deleteFrom{
@@ -22,14 +21,19 @@
 		background : #C4C4C4;
 		width : 1100px;
 		height : 300px;
+		
+		
+	
+	
 	}
 	
 	#explainBox p{
 			margin-left : 30px; 
 			margin-bottom : 10px;
 			font-weight : normal; 	
+			
+			
 	}
-	
 	textarea{
 		width : 70%;
 		height : 100px;
@@ -43,6 +47,7 @@
 	input[type=password]{
 		border : solid 3px lightgray;
 		border-radius: 10px;
+	
 	}
 	
 	input[type=password]:focus{
@@ -50,7 +55,7 @@
 	}
 	#deleteInfoBox div{
 		width: 500px;
-		height :400px;
+		
 	}
 	
 	#deleteButton{
@@ -68,6 +73,9 @@
 		width : 300px;
 		height : 30px;
 	}
+	#deleteInfoBox select{
+		height: 30px;
+	}
 	
 	deleteInfoBox div :nth-child(2){
 		line-height:  100px;
@@ -76,37 +84,35 @@
 <title>SO Easy</title>
 </head>
 <body>
-	<header><%@ include file="../common/header.jsp"%></header>
-	<nav>
-	<%@ include file="../common/aside.jsp"%>
-	<div class="colMenu">
-		<label class="colMenuTitle">개인 정보 관리</label>
-		<a class="colMenuButton" href="/login/views/member/updateMember.jsp">개인 정보 수정</a>
-		<a class="colMenuButton">프로필 정보 수정</a>
-		<a class="colMenuButton selectedButton" href="login/views/member/deleteMember.jsp">회원 탈퇴</a>
+	<header><%@include file="../common/header.jsp" %></header>
+	<nav><%@include file="../common/aside.jsp" %>
+		<div class="colMenu">
+		<label class="colMenuTitle">공간 정보 관리</label>
+		<a class="colMenuButton" href="/login/views/member/updateMember.jsp">공간 정보 수정</a>
+		<a class="colMenuButton" href="/login/views/space/insertSpaceStep1.jsp">공간 추가 등록</a>
+		<a class="colMenuButton selectedButton" href="/login/views/space/deleteSpace.jsp">공간 삭제 요청</a>
 		<br><br>
 	</div>
 	<hr style="margin:0">
-
-	
 	</nav>
 	<section>
-	<br>
+		<br>
 		<form action="" method="post" id="deleteForm">
 		<table align="center">
 			<tr>
-				<td colspan = "4"><p id="deleteTitle">회원 탈퇴</p></td>
+				<td colspan = "4"><p id="deleteTitle">공간 삭제 요청</p></td>
 			</tr>
 			
 			<tr>
 				<td><br><div id="explainBox">
 						<br><br>
-						<p>회원 탈퇴 진행 시 비회원의 접속 권한을 제외한 모든 기능의 사용 및 열람이 제한됩니다.</p>
-						<p>탈퇴한 아이디로는 다시 가입할 수 없으며, 아이디 및 데이터는 30일 이내 자사 방문을 통해 복구할 수 있습니다.</p>
-						<p>회원탈퇴 시 신중히 진행해 주시길 부탁드립니다.</p>
-						<p>회원탈퇴 시 데이터는 2년간 이관되어 보관되며 호스트는 반드시 공간 삭제 요청 후 SO Easy와의 계약을 해지 후에 탈퇴 가능합니다.</p>
-			   		    <p>부정가입을 방지하기 위해 탈퇴 후 동일한 아이디와 이메일로 3개월동안 재가입이 되지 않습니다.</p>
-						<p>궁금한 사항이 있으시면 고객센터로 문의 주시기 바랍니다.</p>
+						<p style="font-size : 20px; font-weight:bolder">그동안 SO Easy에 공간을 제공해 주셔서 감사합니다.</p>
+						<br>
+						<p>공간 삭제 요청은 자사와의 계약을 해지하는 것을 의미하며</p>
+						<p>등록된 공간의 정보는 모두 제거 되며 더이상 수익이 발생 되지 않습니다.</p>
+						<p>공간 삭제로 등록된 공간이 0개 이하 일시 게스트로 전환되며 기존 호스트의 권한에 접근 할 수 없습니다</p>
+						<p>공간 삭제 요청전 정산 정보를 모두 백업해 두십시오 추후 문제 발생시 자료의 부재건은 책임지지 않습니다.</p>
+						
 					</div></td>
 			</tr>
 			
@@ -114,17 +120,23 @@
 			<br><br>
 			<div align="center" id="deleteInfoBox">
 				<div style="display: inline-block;" >
-					<h1>탈퇴사유</h1>
+					<h1>삭제사유 
+					<select>
+					<option>공간 명</option>
+					<option>린가드 코워킹 스페이스</option>
+					<option>제라드 오피스</option>
+					
+					</select></h1>
 					<p>사유 남겨주시어 보완하여 더 좋은 서비스가 되도록 하겠습니다.</p>
 					<br>
-					<textarea>탈퇴 사유를 입력하시오.</textarea>
-				</div> &nbsp;&nbsp;
+					<textarea style="resize: none;">삭제 사유를 입력하시오.</textarea>
+				</div> 
 
 				<div style="display:inline-block;">
 					
 					<h1>비밀번호</h1>
-					
-					<input type="password" name="userPwd" placeholder="비밀번호를 입력하세요">
+				
+					<input type="password" name="userPwd" placeholder="비밀번호를 입력하세요" align="">
 					<br><br>
 					<button id="deleteButton">탈퇴하기</button>
 					<br><br><br>
@@ -136,10 +148,8 @@
 
 
 		</form>
-		
-		
 	</section>
+	<footer><%@ include file="../common/footer.jsp" %></footer>
 	
-	<footer><%@ include file="../common/footer.jsp"%></footer>
 </body>
 </html>

@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.kh.login.member.model.vo.Member"%>
+<%
+	Member loginUser =(Member)session.getAttribute("loginUser");
+	int userStatus=0;
+	if(loginUser!=null){
+		userStatus = loginUser.getStatus();
+	}
+	
+%>
 <!DOCTYPE html>
 <html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <head>
 <style>
 
@@ -86,12 +95,12 @@
 <body>
 	<div id="headerWrap">
 		<span class="subMenu"><br>
-		<a href="/login/views/member/join.jsp" class="sub">회원가입</a></span> <span
+		<a href="/login/views/member/join.jsp" class="sub" id="firstHeaderMenu">회원가입</a></span> <span
 			class="subMenu"><br>
-		<a href="/login/views/member/loginForm.jsp" class="sub">로그인</a></span> <span
+		<a href="/login/views/member/loginForm.jsp" class="sub" id="secondHeaderMenu">로그인</a></span> <span
 			class="subMenu"><br>
-		<a href="/login/views/space/insertSpaceStep1.jsp" class="sub" align="center">공간 등록</a></span> <span class="subMenu"><br>
-		<a href="/login/views/board/board.jsp" class="sub" align="center">공지 사항</a></span> &nbsp;&nbsp;
+		<a href="/login/views/space/insertSpaceStep1.jsp" class="sub" align="center" id="thirdHeaderMenu">공간 등록</a></span> <span class="subMenu"><br>
+		<a href="/login/views/board/board.jsp" class="sub" align="center" id="fourthHeaderMenu">공지 사항</a></span> &nbsp;&nbsp;
 		<form action="" method="get">
 			<input type="search" name="search" id="searchBar">
 			 <button type="submit" id=searchOn src=""><img src="/login/images/icon/search.png" width="40px" height="40px"></button>	
@@ -102,6 +111,26 @@
 
 
 	</div>
+	<script>
+		var userStatus = <%=userStatus%>;
+		$(function(){
+			
+			
+			switch(userStatus){
+			case 1: 
+			case 2: $('#firstHeaderMenu').attr("href","/logoutpage/").text("로그아웃");
+				    $('#secondHeaderMenu').attr("href","/login/views/member/updateMember.jsp").text("마이페이지"); break;
+					
+			case 3: $('#firstHeaderMenu').attr("href","/logoutpage/").text("로그아웃");
+					$('#secondHeaderMenu').attr("href","/login/views/member/updateMember.jsp").text("회원관리"); 
+					$('#thirdHeaderMenu').attr("href","/login/views/space/insertSpaceStep1.jsp").text("공간관리"); break; 
+			default : break;
+			}
+			
+	
+			
+		});
+	</script>
 
 
 </body>

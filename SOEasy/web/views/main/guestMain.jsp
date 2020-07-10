@@ -1,15 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.kh.login.member.model.vo.Member"%>
-<%	Member loginUser =(Member)session.getAttribute("loginUser");
+	pageEncoding="UTF-8" %>
+<%
 	int col = 30;
 	int row = 3;
-	int userStatus;
-	if(loginUser==null){
-		userStatus = 0;
-	}
-	else{
-		userStatus = loginUser.getStatus();
-	}
 %>
 <!DOCTYPE html>
 <html>
@@ -40,7 +33,7 @@ h1 {
 
 
 #themeList button{
-	width: 250px;
+	width: 200px;
 	height :150px;
 	background :#E9F6FD;
 	margin-left: 10px;
@@ -91,15 +84,7 @@ h1 {
 
 
 	<header>
-		<% if(userStatus==1 || userStatus==2){ %>
-		<%@ include file="../common/guestHeader.jsp"%>
-		<% }else if(userStatus==3){ %>
-		<%@ include file="../common/adminHeader.jsp"%>
-		<% }else{ %>
-		
 		<%@ include file="../common/header.jsp"%>
-		<%} %>
-		
 	</header>
 
 	<section>
@@ -111,7 +96,7 @@ h1 {
 		<br>
 		<div style="width:90%; margin-left:auto; margin-right:auto;">
 		<h1>테마전!</h1>
-		<div style="display:inline-block; width:55%;" id="themeList" >
+		<div style="display:inline-block; width:60%;" id="themeList" >
 			<button>외근이 잦아요!<br> 코워킹 스페이스</button>
 			<button>직원이 많아요!<br> 임대사무실</button>
 			<button>하루만 이용!<br> 코워킹라운지</button>

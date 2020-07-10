@@ -13,6 +13,8 @@
         .visual{
             position: relative;
             width: 100%;
+            
+            
         
         }
         .visual button{
@@ -57,7 +59,7 @@
 
         .visual div p {
             position : absolute;
-     	  	 top: 35%;
+     	  	 top: 20%;
            	left: 30%;
             font-size: 60px;
             font-weight: bolder;
@@ -87,21 +89,21 @@
 
     <div class="visual">
 			<div 
-				style="background-image: url(../../images/area/area22-4.png); display: block; height: 600px; width: 100%; background-repeat : no-repeat; background-size : cover;">
+				style="background-image: url(../../images/area/area22-4.png); display: block; height: 500px; width: 100%; background-repeat : no-repeat; background-size : cover;">
 				<p>나만의 오피스 찾고 싶다면?<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SO EASY!<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Easily Buy a Share office</label>
 				</p>
 			</div>
 			<div 
-				style="background-image: url(../../images/area/area22-5.png); display: block; height: 600px; width: 100%; background-repeat : no-repeat; background-size : cover;">
+				style="background-image: url(../../images/area/area22-5.png); display: block; height: 500px; width: 100%; background-repeat : no-repeat; background-size : cover;">
 				<p>나만의 오피스 찾고 싶다면?<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SO EASY!<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Easily Buy a Share office</label>
 				</p>
 			</div>
 			<div 
-				style="background-image: url(../../images/area/area22-1.png); display: block; height: 600px; width: 100%; background-repeat : no-repeat; background-size : cover;">
+				style="background-image: url(../../images/area/area22-1.png); display: block; height: 500px; width: 100%; background-repeat : no-repeat; background-size : cover;">
 				<p>나만의 오피스 찾고 싶다면?<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SO EASY!<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Easily Buy a Share office</label>

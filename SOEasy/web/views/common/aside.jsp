@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%-- 링크 타고 들어오는 비회원을 막기위한 코드 현재 뷰페이지 단에서 이기능을 작동하면 애들 테스트 몬함
+ <% if(userStatus ==0) {
+		request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+		request.getRequestDispatcher("../common/errorPage.jsp").forward(request, response);
+		
+	} %> --%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,14 +20,14 @@
 }
 #togg_menu {
   position: absolute;
-  width: 10%;
+  width: 3%;
   border: none;
   outline: none;
   background: transparent;
   cursor: pointer;
   padding: 13px 10 0 0px;
   z-index: 1;
-  top : 85px;
+  top : 90px;
 }
 span.bar {
   display: block;
@@ -43,8 +48,8 @@ span.bar {
 
 #navWrap{
   position: relative;
-  height: 70px;
-  width: 10%;
+	
+  width: 5%;
   display : inline-block;
 
 }
@@ -52,7 +57,7 @@ span.bar {
 #profileZone{
  border-radius: 50%;
  width:100px;
- height:100px;
+ height:80px;
  margin-left:auto;
  margin-right: auto;
  overflow: hidden;
@@ -100,7 +105,7 @@ span.bar {
      -moz-transition: all 0.3s ease-in-out;
       -ms-transition: all 0.3s ease-in-out;
        -o-transition: all 0.3s ease-in-out;
-       margin : 10px;
+       margin : 5px;
 
 }
 .megaMenu li hr{
@@ -119,7 +124,7 @@ span.bar {
 
 .infoZone{
 	text-align: center;
-	font-size : 16px;
+	font-size : 14px;
 	font-weight: bolder;
 	padding: 10px 0;
 }
@@ -131,7 +136,7 @@ span.bar {
 	width: 80%;
 	margin-left : auto;
 	margin-right : auto;
-	margin-top : 30px;
+	margin-top : 20px;
 }
 .mainTitle{
 	
@@ -142,7 +147,7 @@ span.bar {
 	margin-right : auto;
 }
 .subNav{
-	font-size : 18px;
+	font-size : 16px;
 	font-weight : bolder;
 	color: black;
   	text-align: center;
@@ -157,7 +162,7 @@ span.bar {
     -o-transition: all 0.3s ease-in-out;
 }
 .mainNav{
-	font-size : 25px;
+	font-size : 20px;
 	font-weight : bolder;
 	color: black;
   	text-align: center;
@@ -175,7 +180,7 @@ span.bar {
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  font-size: 16px;
+  font-size: 14px;
   font-weight:bolder;
   z-index: 1;
 }
@@ -206,30 +211,65 @@ span.bar {
       <ul class='megaMenu'>
       	<li class="infoZone"><div id="profileZone"><img src="/login/images/etc/hazard.png"></div></li>
       	<li class="infoZone">흑당마라민트초코</li>
-      	<li class="infoZone">HOST</li>
-      	<li><hr></li>
+      	<li class="infoZone" id="grade">HOST</li>
+      	<li><hr id="firstHr"></li>
          
-        <li class="mainTitle"><a href='#' class="mainNav">예약목록</a></li>
-        <li class="subTitle"><a href='#' class="subNav">이용 내역 </a> </li>
-        <li class="subTitle"><a href='#' class="subNav">찜 리스트 </a> </li>
-        <li class="subTitle"><a href='#' class="subNav">리뷰 목록 </a></li>
- 		<li><hr></li>
+        <li class="mainTitle"><a href='#' class="mainNav" id="firstMainNav">예약목록</a></li>
+        <li class="subTitle"><a href='#' class="subNav" id="firstSubNav">이용 내역 </a> </li>
+        <li class="subTitle"><a href='#' class="subNav" id="secondSubNav">찜 리스트 </a> </li>
+        <li class="subTitle"><a href='#' class="subNav" id="thirdSubNav">리뷰 목록 </a></li>
+ 		<li><hr id="secondHr"></li>
     
-        <li class="mainTitle"><a href='' class="mainNav">내 공간 관리</a></li>
-        <li class="subTitle"><a href='/login/views/host/manageReserve/reserveStep1.jsp' class="subNav">예약 일정 관리</a></li>
-        <li class="subTitle"><a href='#' class="subNav">공간 정보 수정</a></li>
-        <li class="subTitle"><a href='/login/views/host/balance/predict.jsp' class="subNav">공간 정산</a></li>
-   		<li><hr></li>
-        <li class="mainTitle"><a href='#' class="mainNav">기타</a></li>
-        <li class="subTitle"><a href='/login/views/member/updateMember.jsp' class="subNav">개인 정보 관리</a></li>
-        <li class="subTitle"><a href='/login/views/board/board.jsp' class="subNav">공지 사항</a></li>
-        <li class="subTitle"><a href='#' class="subNav">Q & A</a></li>
+        <li class="mainTitle"><a href='' class="mainNav" id="secondMainNav">내 공간 관리</a></li>
+        <li class="subTitle"><a href='/login/views/host/manageReserve/reserveStep1.jsp' class="subNav" id="fourthSubNav">예약 일정 관리</a></li>
+        <li class="subTitle"><a href='#' class="subNav" id="fifthSubNav">공간 정보 수정</a></li>
+        <li class="subTitle"><a href='/login/views/host/balance/predict.jsp' class="subNav" id="sixthSubNav">공간 정산</a></li>
+   		<li><hr id="thirdHr"></li>
+        <li class="mainTitle"><a href='#' class="mainNav" id="thirdMainNav">기타</a></li>
+        <li class="subTitle"><a href='/login/views/member/updateMember.jsp' class="subNav" id="seventhSubNav">개인 정보 관리</a></li>
+        <li class="subTitle"><a href='/login/views/board/board.jsp' class="subNav" id="eighthSubNav">공지 사항</a></li>
+        <li class="subTitle"><a href='#' class="subNav" id="ninthSubNav">Q & A</a></li>
           
           
       </ul>
-    
+    	
   </div>
+  	<script>
+  	$(function(){
+  		switch(userStatus){
+			
+			case 1:
+				$('#grade').text("GUEST");
+				$('#secondMainNav').hide();
+				$('#fourthSubNav').hide();
+				$('#fifthSubNav').hide();
+				$('#sixthSubNav').hide();
+				$('#secondHr').hide();
+				break;
+			
+			case 2:break;
+			case 3:
+				$('#grade').text("Adminstrator");
+				$('#firstMainNav').text("공간관리");
+				$('#secondMainNav').text("회원관리");
+				$('#thirdMainNav').text("기타메뉴");
+				$('#firstSubNav').attr("href","#").text("공간 검수 요청 조회");
+				$('#secondSubNav').attr("href","#").text("공간 삭제 요청 조회");
+				$('#thirdSubNav').attr("href","#").text("정산 관리");
+				$('#fourthSubNav').attr("href","#").text("회원 관리");
+				$('#fifthSubNav').attr("href","#").text("회원 복구 요청");
+				$('#sixthSubNav').attr("href","#").text("신고 건 조회");
+				$('#seventhSubNav').attr("href","#").text("Q&A 조회");
+				$('#eighthSubNav').attr("href","#").text("공지사항 작성");
+				$('#ninthSubNav').attr("href","#").text("관리자 홈");
+				break;
+			default : break;
+			}
+  			
   	
+  	});
+  		
+  	</script>
 
     
 
