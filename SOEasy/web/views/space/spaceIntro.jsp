@@ -7,8 +7,9 @@
     <style>
         .visual{
             position: relative;
-            width: 100%;
-        
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
         }
         .visual button{
             position : absolute;
@@ -20,8 +21,6 @@
             border: none;
             border-radius: 100%;
             background: rgba(0,0,0,.5);
-
-            
         }
         .visual button:before{
             font-family: 'xeicon';
@@ -32,7 +31,6 @@
             left: 50px;
             font-size : 0;
             color : transparent;
-
         }
         .visual button.slick-prev::before{
             content:"\e93d";
@@ -57,8 +55,6 @@
             font-size: 60px;
             font-weight: bolder;
             color : black;
-       
-
         }
        
          .visual div p label {
@@ -78,30 +74,38 @@
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+ <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+  />
 <title>SO Easy</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="../../css/layout.css">
-  <!-- Bootstrap core CSS -->
-  <link href="/login/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="/login/css/blog-post.css" rel="stylesheet">
+  
 
 </head>
 <body>
 		<header><%@ include file="../common/header.jsp" %></header>
 		<nav><%@ include file="../common/aside.jsp" %></nav>
 		
-		<section style="margin:auto; margin-left:120px; padding:0;">
-		
-		<h1 style="color:#40a4b6; margin-left:210px; font-weight: bolder;">성수동 인생공간 코워킹스페이스</h1>
-		<table style="border-spacing:15px; margin-left:200px">
+		<section>
+		<div style="width:75%; margin-left:auto; margin-right:auto;">
+		<!-- <div style="width:90%;"> -->
+		<!-- </div> -->
+		<table>
 			<tr>
-				<td style="padding:15px; color:#c4c4c4; font-size:25px;">300,000원 / 1개월 </td>
-				<td style="padding:15px"><button onclick="test1();" style="background:#40b4a6; width:70px; height:30px; outline:0; border:0; color:white; cursor:pointer;">예  약</button></td>
+				<td>
+					<p style="color:#40a4b6;  font-weight: bolder; margin-top:0; font-size:30px;">성수동 인생공간 코워킹스페이스</p>
+				</td>
 			</tr>
 		</table>
-		<table style="margin-left:210px; border-spacing:10px;">
+		<table>
+			<tr>
+				<td style="color:#c4c4c4; font-size:25px; width:250px;">300,000원 / 1개월 </td>
+				<td><button onclick="test1();" style="background:#40b4a6; width:70px; height:30px; font-size: 15px; outline:0; border:0; color:white; cursor:pointer;">예  약</button></td>
+			</tr>
+		</table>
+		<table>
 			<tr>
 				<td style="padding:10px;"><img src="../../images/icon/share.png" style="width:35px;"></td>
 				<td style="padding:10px;"><img src="../../images/icon/heart.png" style="width:35px;"></td>
@@ -122,15 +126,15 @@
 		</div>
 		
 		<br><br>
-		<p style="font-size:30px; margin-left:210px">
+		<p style="font-size:30px;">
 			동네에서 만나는 따뜻한 <br>
 			코워킹스페이스
 		</p>
 		<hr>
-		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
+		<p style="color:#40a4b6; font-size:20px;"><b>
 			소개
 		</b></p>
-		<p style="margin-left:220px;">
+		<p>
 			따뜻한 사람들을 위한 코워킹스페이스 성수동 인생공간입니다. <br><br>
 
 			성수동 인생공간은 자신의 인생일(천직)을 찾고, 이를 완성해나가는 사람들이 채워나가는 코<br>
@@ -153,10 +157,10 @@
 			- 월 1회 무료 변호사, 변리사, 세무사 등 서비스 제공!<br><br>
 		</p>
 		<br>
-		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
+		<p style="color:#40a4b6; font-size:20px;"><b>
 			운영시간
 		</b></p>
-		<table style="margin-left: 220px; border-spacing:15px;">
+		<table style="border-spacing:15px;">
 			<tr>
 				<td style="padding:20px;"><b>월</b>00:00 ~ 24:00</td>
 				<td style="padding:20px;"><span style="color:blue;"><b>토</b></span>00:00 ~ 24:00</td>
@@ -180,10 +184,10 @@
 		</table>
 		<br><br>
 		
-		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
+		<p style="color:#40a4b6; font-size:20px;"><b>
 			추가정보
 		</b></p>
-		<table style="margin-left: 220px; border-spacing:15px;">
+		<table style="border-spacing:15px;">
 			<tr>
 				<td style="padding:20px;"><b>수용인원</b></td>
 				<td style="padding:20px;">1 ~ 5 명</td>
@@ -203,13 +207,12 @@
 		</table>
 		<br><br>
 		
-		
-		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
+		<p style="color:#40a4b6; font-size:20px;"><b>
 			편의시설
 		</b></p>
 		
 		<!-- 편의시설 사진들 넣기 -->
-		<table style="margin-left:220px; border-spacing:15px;">
+		<table style="border-spacing:15px;">
 			<tr>
 				<td style="padding:22px;"><img src="../../images/icon/24h.png" width="100px" style="opacity:0.2;"></td>
 				<td style="padding:22px;"><img src="../../images/icon/365days.png" width="100px"></td>
@@ -245,11 +248,11 @@
 		</table>
 
 		<br><br>	
-		<p style="color:#40a4b6; margin-left:220px; font-size:20px;"><b>
+		<p style="color:#40a4b6; font-size:20px;"><b>
 			이용기간
 		</b></p>
 		
-		<table style="margin-left:220px;">
+		<table>
 			<tr>
 				<td style="padding:20px;"><b>이용 8일 전</b></td>
 				<td style="padding:20px;">100% 환불</td>
@@ -294,13 +297,13 @@
 		
 		<hr>
 		
-		<p style="margin-left:220px; font-size:30px;"><b>
+		<p style="font-size:30px;"><b>
 			Q & A&nbsp;&nbsp;&nbsp;<span style="color:#40a4b6;">1개</span>
 		</b></p>
 		
 		<table>
           	<tr>
-          		<td rowspan="2"><img src="../../images/etc/lingard.png" style="margin-left:220px; width:50px;"></td>
+          		<td rowspan="2"><img src="../../images/etc/lingard.png" style="width:50px;"></td>
           		<td><h3>&nbsp;&nbsp;이호정&nbsp;&nbsp;</h3></td>
 
           	</tr>
@@ -325,7 +328,7 @@
           	</tr>
         </table>
 		
-		<div class="card my-4" style="width:820px; margin-left:220px; height:230px;">
+		<div class="card my-4" style="width:820px; height:230px;">
           <h5 class="card-header">큐앤에이 작성</h5>
           <div class="card-body">
             <form>
@@ -340,15 +343,21 @@
 		
 		<br><br>
 
-		<p style="margin-left:220px; font-size:30px;"><b>
+		<p style="font-size:30px;"><b>
 			이용후기&nbsp;&nbsp;&nbsp;<span style="color:#40a4b6;">1개</span>
 		</b><span style="font-size:20px;"><b>&nbsp;&nbsp;&nbsp;평균평점</b></span><span style="color:#40a4b6; font-size:20px;">&nbsp;&nbsp;5</span></p>
 
 		<table>
           	<tr>
-          		<td rowspan="2"><img src="../../images/etc/soeasyProf.png" style="margin-left:220px; width:50px;"></td>
+          		<td rowspan="2"><img src="../../images/etc/soeasyProf.png" style="width:50px;"></td>
           		<td><h3>&nbsp;&nbsp;이호정&nbsp;&nbsp;</h3></td>
-          		<td><img src="../../images/etc/star.png" style="width:100px;"></td>
+          		<td>
+          			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
+          			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
+          			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
+          			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
+          			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
+          		</td>
           		<td onclick="register();" style="cursor:pointer;"><h5>&nbsp;&nbsp;&nbsp;신고하기</h5></td>
           	</tr>
           	<tr>
@@ -359,7 +368,8 @@
           		<td colspan="3"><p style="font-size: 15px; color:#c4c4c4;">&nbsp;&nbsp;2020. 06. 18</p></td>
           	</tr>
         </table>
-		<br><br><br>		
+		<br><br><br>
+		</div>		
 		</section>
 		
 		<footer><%@ include file="../common/footer.jsp"%></footer>

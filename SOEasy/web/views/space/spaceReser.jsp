@@ -12,9 +12,11 @@
 <style>
         .visual{
             position: relative;
-            width: 100%;
-        
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
         }
+        
         .visual button{
             position : absolute;
             z-index: 10;
@@ -25,36 +27,37 @@
             border: none;
             border-radius: 100%;
             background: rgba(0,0,0,.5);
-
-            
         }
+        
         .visual button:before{
             font-family: 'xeicon';
             color: #fff;
             font-size : 45px;
         }
+        
         .visual button.slick-prev {
             left: 50px;
             font-size : 0;
             color : transparent;
-
+		
         }
+        
         .visual button.slick-prev::before{
             content:"\e93d";
             font-family: 'xeicon';
         }
-
+		
         .visual button.slick-next{
             right: 50px;
             font-size : 0;
             color : transparent;
         }
-
+		
         .visual button.slick-next::before{
             content:"\e940";
             font-family: 'xeicon';
         }
-
+		
         .visual div p {
             position : absolute;
      	  	 top: 35%;
@@ -62,12 +65,9 @@
             font-size: 60px;
             font-weight: bolder;
             color : black;
-       
-
         }
-       
-         .visual div p label {
-           
+       	
+        .visual div p label {
             font-weight: bolder;
 			font-size : 30px;
         }
@@ -82,9 +82,12 @@
 	<header><%@ include file="../common/header.jsp"%></header>
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	
+	<section>
+	<div style="width:75%; margin-left:auto; margin-right:auto;">
+	
 	<!-- 공간명 / 가격 -->
-	<h1 style="color:#40a4b6; margin-left:330px; font-weight: bolder;">성수동 인생공간 코워킹스페이스</h1>
-	<table style="margin-left:330px">
+	<h1 style="color:#40a4b6; font-weight: bolder;">성수동 인생공간 코워킹스페이스</h1>
+	<table>
 		<tr>
 			<td style="color:#c4c4c4; font-size:25px;">300,000원 / 1개월 </td>
 		<tr>
@@ -133,7 +136,7 @@
 	<Br><br>
 	
 	<!-- 가격 정책 -->
-	<p style="color:#40a4b6; margin-left:330px; font-size:20px;"><b>
+	<p style="color:#40a4b6; font-size:20px;"><b>
 		가격정책
 	</b></p>
 	<div align="center">
@@ -146,11 +149,11 @@
 	<Br><br>
 	
 	<!-- 운영시간 -->
-	<p style="color:#40a4b6; margin-left:330px; font-size:20px;"><b>
-			운영시간
+	<p style="color:#40a4b6; font-size:20px;"><b>
+		운영시간
 	</b></p>
 		
-		<table style="border-spacing:15px; margin-left:330px;">
+		<table style="border-spacing:15px;">
 			<tr>
 				<td style="padding:10px;"><b>월</b>00:00 ~ 24:00</td>
 				<td style="padding:10px;"><span style="color:blue;"><b>토</b></span>00:00 ~ 24:00</td>
@@ -175,21 +178,21 @@
 		<br>
 		
 		<!-- 공간 주소 / 공간 유형 / 예약가능인원 / 예약일정설정 -->
-		<table style="margin-left:330px;">
+		<table>
 			<tr>
-				<td width="180px;" height="50px;" style="color:#40a4b6; margin-left:330px; font-size:20px;"><b>공간주소</b></td>
+				<td width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>공간주소</b></td>
 				<td>서울특별시 강남구 역삼로 215 남국빌딩 2층</td>
 			</tr>
 			<tr>
-				<td width="180px;" height="50px;" style="color:#40a4b6; margin-left:330px; font-size:20px;"><b>공간 유형</b></td>
+				<td width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>공간 유형</b></td>
 				<td>코워킹스페이스</td>
 			</tr>
 			<tr>
-				<td width="180px;" height="50px;" style="color:#40a4b6; margin-left:330px; font-size:20px;"><b>예약 가능 인원</b></td>
+				<td width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>예약 가능 인원</b></td>
 				<td>1~5명</td>
 			</tr>
 			<tr>
-				<td width="180px;" height="50px;" style="color:#40a4b6; margin-left:330px; font-size:20px;"><b>예약 일정 설정</b></td>
+				<td width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>예약 일정 설정</b></td>
 				<td></td>
 			</tr>
 		</table>
@@ -212,7 +215,7 @@
 		<!-- 예약 인원 선택 -->
 		<table align="center" width="800">
 			<tr>
-				<td style="color:#40a4b6; margin-left:330px; font-size:20px; width:200px;"><b>예약 인원 선택</b></td>
+				<td style="color:#40a4b6; font-size:20px; width:200px;"><b>예약 인원 선택</b></td>
 				<td style="width:200px;" colspan="2"><input style="border: 1.5px solid #40a4b6;" type="number" value="1"></td>
 				<td style="width:400px;">명</td>
 			</tr>
@@ -222,7 +225,7 @@
 		<!-- 예약자 정보 -->
 		<table align="center" width="800px">
 			<tr>
-				<td style="color:#40a4b6; margin-left:330px; font-size:20px; width:200px; height:50px;"><b>예약자 정보</b></td>
+				<td style="color:#40a4b6; font-size:20px; width:200px; height:50px;"><b>예약자 정보</b></td>
 				<td width="150px"><b>예약자명</b></td>
 				<td width="200px"><input style="border: 1.5px solid #40a4b6;" type="text" id="reserNm"></td>
 				<td width="200px"></td>
@@ -257,7 +260,7 @@
 		<!-- 호스트 정보 -->
 		<table align="center" width="800px">
 			<tr>
-				<td style="color:#40a4b6; margin-left:330px; font-size:20px; width:200px; height:50px;"><b>호스트 정보</b></td>
+				<td style="color:#40a4b6; font-size:20px; width:200px; height:50px;"><b>호스트 정보</b></td>
 				<td width="110px"><b>상호명</b></td>
 				<td>보케이션베케이션 코리아</td>
 			</tr>
@@ -287,7 +290,7 @@
 		<!-- 환불 정책 -->
 		<table align="center" width="800px">
 			<tr>
-				<td style="color:#40a4b6; margin-left:330px; font-size:20px; width:200px; height:50px;"><b>환불 정책</b></td>
+				<td style="color:#40a4b6; font-size:20px; width:200px; height:50px;"><b>환불 정책</b></td>
 				<td width="200px"><b>이용 8일 전</b></td>
 				<td>100% 환불</td>
 			</tr>
@@ -341,7 +344,7 @@
 				<!-- 예약결과 -->
 				<table width="650">
 					<tr>
-						<td style="color:#40a4b6; margin-left:30px; font-size:20px; width:150px; height:50px;"><b>예약 결과</b></td>
+						<td style="color:#40a4b6; font-size:20px; width:150px; height:50px;"><b>예약 결과</b></td>
 						<td><b>예약 날짜</b></td>
 						<td style="text-align:center;">----년 --월 --일 부터</td>
 						<td style="text-align:center;">----년 --월 --일 까지</td>
@@ -373,7 +376,7 @@
 				<!-- 서비스 동의 -->
 				<table width="650">
 					<tr>
-						<td style="color:#40a4b6; margin-left:30px; font-size:20px; width:150px; height:50px;"><b>서비스 동의</b></td>
+						<td style="color:#40a4b6; font-size:20px; width:150px; height:50px;"><b>서비스 동의</b></td>
 						<td><label for="allAgr"><input type="checkbox" id="allAgr"><b>전체 동의</b></label></td>
 					</tr>
 					<tr>
@@ -401,7 +404,8 @@
 		<div align="center">
 			<button onclick="push();" style="color:white; background:#40a4b6; width:120px; height:50px; font-size:20px; border:0; border-radius:10px; cursor:pointer;">예약 신청</button>
 		</div>
-		
+		</div>
+		</section>
 		<br><br><br>
 	<footer><%@ include file="../common/footer.jsp"%></footer>
 	
