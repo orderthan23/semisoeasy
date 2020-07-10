@@ -113,7 +113,6 @@
 					<td><a href="#"class="hide">자세히 보기</a></td>
 				</tr>
 				
-				
 				<%
 					}
 				%>

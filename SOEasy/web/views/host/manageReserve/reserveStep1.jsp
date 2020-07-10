@@ -194,7 +194,6 @@
 	
 	
 	
-	
 	<footer><%@ include file="../../common/footer.jsp"%></footer>
 	
 

@@ -77,6 +77,7 @@
 </style>
 </head>
 <body>
+
 <div align="center" id="moHead"><p id="moText1">&nbsp;&nbsp;&nbsp;&nbsp;직접 예약</p></div>
 <div align="center">
 	<form>

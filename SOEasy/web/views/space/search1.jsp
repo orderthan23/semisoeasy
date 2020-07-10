@@ -145,7 +145,6 @@ h1 {
 					<input class="price">~<input class="price">
 				</div>
 				 
-				
 			</td>
 			<td>
 				<select>

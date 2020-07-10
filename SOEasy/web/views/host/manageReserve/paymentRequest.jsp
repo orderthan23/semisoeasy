@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	
 	int placeQTY = 10;
 	int pCompleteQTY = 10;
 	int statement = 0;
