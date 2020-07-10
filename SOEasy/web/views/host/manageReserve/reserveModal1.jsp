@@ -135,7 +135,7 @@
 		<br>
    		<div align="center">
 	      	<!-- <button class="btn2" id="btnL" type="submit">결제</button> -->
-	      	<button class="btn2" id="btnL" onclick="window.open('pay.jsp', 'PopupWin', 'width=500, height=450')">결제</button>
+	      	<button class="btn2" id="btnL" onclick="window.open('/login/views/host/manageReserve/pay.jsp', 'PopupWin', 'width=500, height=450')">결제</button>
 	      	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	      	<button class="btn2" id="btnR" type="reset" onclick="self.close()">취소</button>
 	      	<button class="btn2" id="btnR" type="submit" onclick="self.close()">확인</button>

@@ -14,19 +14,17 @@
 		outline: 1px;
 		border-style: solid;
 	} */
-	/* .table1 {
+	.table1 {
 	    border-collapse: collapse;
 	    border-spacing: 0;
-	} */
+	}
 	
-	/* .table1 th {
-	    background: lightblue;
-	} */
 	
-	.table1 th, table td {
+	#table1 th, table td{
 	    border: lightgrey 1px solid;
-	    /* padding: .3em 0.6em; */
+	    padding: .3em 0.6em;
 	    /* padding: 2px 2px; */
+	    
 	}
 	#dayT {
 		text-align: center;
@@ -91,17 +89,20 @@
 	<header><%@ include file="../../common/header.jsp"%></header>
 	<nav>
 		<%@ include file="../../common/aside.jsp"%>
-		<label><a href="#">공간 일정 관리</a></label> <a href="#">예약 일정 관리</a> <label><a
-			href="rounge1.jsp">라운지 회원 관리</a></label> <label><a href="paymentRequest.jsp">결제 요청</a></label>
-
+		<div class="colMenu">
+		<label class="colMenuTitle">공간 일정 관리</label>
+		<a class="colMenuButton selectedButton" href="/login/views/host/manageReserve/reserveStep1.jsp">예약 일정 관리</a>
+		<a class="colMenuButton" href="/login/views/host/manageReserve/rounge1.jsp">라운지 회원 관리</a>
+		<a class="colMenuButton" href="/login/views/host/manageReserve/paymentRequest.jsp">결제 요청</a>
+	<br><br>
+	</div>
+	<hr style="margin : 0">
 	</nav>
 
-	<br>
-	<hr>
-	<br>
+	
 	<section>
 	<br>
-		<button class="reserve" id="reserve" onclick="window.open('reserveModal1.jsp', 'Window2', 'width=500, height=550')">직접 예약</button>
+		<button class="reserve" id="reserve" onclick="window.open('/login/views/host/manageReserve/reserveModal1.jsp', 'Window2', 'width=500, height=550')">직접 예약</button>
 		
 		<br>
 
@@ -135,14 +136,16 @@
 
 		</form>
 		<br>
-		<table align="center" id="table1" border="1">
+		<table align="center" id="table1">
 		</table>
 	</section>
 	<script>
 	var col = 31;
 	var row = 7
 	var spaceInfo = 1;
-	var dayInfo = 7;
+	var startInfo = 7;
+	var dayInfo = 15;
+	var name = "최우아";
 	$(function(){
 		   $('#table1').append(function(){
 	        var sentence = "";
@@ -163,34 +166,21 @@
 	                if(i>col){
 	                    break;
 	                }
-	                sentence+='<td';
-	                switch(spaceInfo){
-	                case 1: 
-	                	if(dayInfo == 0){
-			                sentence+='>';
-		                } else {
-		                	sentence+=' style="background:red;">'
-		                }
-	                	;break;
-	                case 2: 
-	                	if(dayInfo == 0){
-			                sentence+='>';
-		                } else {
-		                	sentence+=' style="background:red;">'
-		                }
-	                	;break;
-	                case 3: 
-	                	if(dayInfo == 0){
-			                sentence+='>';
-		                } else {
-		                	sentence+=' style="background:red;">'
-		                }
-	                	;break;
+	                if(j>31){
+	                	break;
 	                }
-	               
+	                sentence+='<td';
+	                if(spaceInfo == i){
+	                	if(startInfo == j){
+		                	sentence+=' colspan="' + dayInfo + '" style="background:red; color:white; text-align:center;"><label>' + name + '</label>';
+		                	j+= dayInfo-1;
+		                } else {
+			                sentence+='>';
+		                }
+	                } else {
+			                sentence+='>';
+	                }
 		            sentence+='</td>';
-	                /* sentence+='<button id="bar1">최우아</button>' */
-	                /* sentence+='></td>'; */
 	            }
 	            sentence +="</tr>";
 	        }
