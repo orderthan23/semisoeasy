@@ -28,8 +28,9 @@
 
 <style>
 section h1 label {
-	font-size: 40px;
+	font-size: 30px;
 	color: #3DB6AE;
+	font-weight: bolder;
 }
 
 #titleWrap {
@@ -103,13 +104,13 @@ section h1 label {
 th {
 	background: #E4EEFA;
 	width: 6.2%;
-	font-size: 17px;
+	font-size: 13px;
 	font-weight: bolder;
 }
 
 #total td {
 	background: #3DB6AE;
-	font-size: 15px;
+	font-size: 12px;
 	text-align: center;
 	height: 20px;
 }
@@ -128,6 +129,7 @@ th {
 	text-align: center;
 	height: 30px;
 	background: #fff;
+	font-size: 13px;
 }
 
 #chartWrap table {
@@ -161,11 +163,11 @@ th {
 		<br>
 
 		<div id="titleWrap">
-			<h1><%=name%>님의 <label>7월</label> 예상 수익 입니다.
+			<h1 style="font-size: 25px; font-weight:bolder;"><%=name%>님의 <label>7월</label> 예상 수익 입니다.
 			</h1>
 			<br>
 			<br>
-			<h2>
+			<h2 style="font-weight:bolder;">
 				등록된 공간 :
 				<%=placeQTY%>개
 			</h2>
@@ -199,7 +201,7 @@ th {
 		</div>
 
 		<div id="chartWrap">
-			<h1>
+			<h1 style="font-size: 25px; font-weight:bolder;">
 				이번 달 결제 완료 건 :
 				<%= pCompleteQTY %>건
 			</h1>
@@ -275,7 +277,7 @@ th {
 			<br>
 			<br>
 			<div id="chartZone">
-				<h1>차트</h1>
+				<h1 style="font-weight:bolder;">차트</h1>
 				<canvas id="myChart" width="80%" height="30"></canvas>
 			</div>
 			<br><br><br><br>

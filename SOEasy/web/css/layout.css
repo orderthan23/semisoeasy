@@ -36,9 +36,11 @@ footer {
 }
 
 .colMenu {
-	display: inline-block;
-	width: 60%;
-	margin: 0;
+	display: block;
+	width:  70%;
+	margin-left: 60px;
+	
+	
 }
 
 .colMenuTitle {

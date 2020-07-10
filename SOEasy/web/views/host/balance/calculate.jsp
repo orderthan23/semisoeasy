@@ -26,7 +26,7 @@
 
 <style>
 	section h1 label{
-		font-size : 40px;
+		font-size : 30px;
 		color : #3DB6AE;
 	}
 	#titleWrap{
@@ -101,14 +101,14 @@
      	th{
      		background: #E4EEFA;
      		width: 6.2%;
-     		font-size: 17px;
+     		font-size: 13px;
      		font-weight: bolder; 
      		
      	}
      	
      	#total td{
      		background:#3DB6AE;
-     		font-size: 15px;
+     		font-size: 13px;
      		text-align : center;
      		height : 20px;
      		
@@ -126,6 +126,7 @@
        	text-align: center;
        	height : 30px;
        	background : #fff;
+       	font-size: 12px;
        }
        #chartWrap table{
        	width: 100%;
@@ -136,7 +137,7 @@
        }
        
        .chooseChart1{
-       	font-size : 18px;
+       	font-size : 15px;
        	font-weight : border;
        	border-width: 2px;
        	border-color : black;
@@ -148,13 +149,16 @@
        	background: #E4EEFA;
        	border-radius : 5px;
        	border-width: 0.5px;
-       	font-size: 15px;
+       	font-size: 12px;
        	font-weight: normal;
       
        }
        
        #howReport p label{
        	color : #3DB6AE;
+       }
+       #howReport p {
+       	font-size: 14px;
        }
        
        #reportZone{
@@ -170,7 +174,7 @@
        	
        }
        #reportBox table tr td label{
-       	font-size : 30px;
+       	font-size : 20px;
        	color : #40A6B4;
        	font-weight : bolder;
        }
@@ -185,6 +189,7 @@
        	margin: 0;
        	margin-bottom : 10px;
        	font-weight: bolder;
+       	font-size : 20px;
        }
        
        #checkCalExplain{
@@ -193,12 +198,12 @@
        }
        
        #checkCalSubmit{
-       	width: 276px;
-       	height: 106px;
+       	width: 180px;
+       	height: 60px;
        	background : #40A6B4;
        	border-radius: 20px;
        	font-weight : bolder;
-       	font-size : 40px;
+       	font-size : 20px;
        	border: none;
        }
 
@@ -223,7 +228,7 @@
 		<br>
 
 		<div id="titleWrap">
-			<h1 style="font-size:30px; font-weight:bolder">정산을 조회 할  공간을 선택하세요</h1>
+			<h1 style="font-size:20px; font-weight:bolder">정산을 조회 할  공간을 선택하세요</h1>
 			<p style="font-weight:normal">최종 정산 금액은 수수료와 세금을 제외한 금액입니다.</p>
 			<br>
 			<br>
@@ -262,8 +267,8 @@
 		<!--  정산 보고서 시작 -->
 		<div id="chartWrap">
 		
-			<h1 style="font-size:30px; font-weight:bolder">정산 보고서</h1>
-			<p style="font-size:25px">조회할 기간을 선택하세요</p>
+			<h1 style="font-size:20px; font-weight:bolder">정산 보고서</h1>
+			<p style="font-size:15px">조회할 기간을 선택하세요</p>
 			<select class="chooseChart1">
 				<option>단위기간</option>
 			</select>
@@ -349,7 +354,7 @@
 			
 			<!--  정산 금액 조회  시작-->
 			<div id="howReport" style="width: 50%; display: inline-block">
-				<h1 style="font-size:30px; font-weight:bolder" >정산 금액</h1>
+				<h1 style="font-size:20px; font-weight:bolder" >정산 금액</h1>
 				<p>정산금액은 다음과 같이 계산 됩니다.</p>
 				<p>판매액수-환불액 =&nbsp; <label>판매 총액</label></p>
 				<p>환불이 없는 경우 중개 수수료 액 = 판매총액 X 중개수수료(0.1)&nbsp;<label>수수료액1</label></p>
@@ -359,7 +364,7 @@
 				<p>수수료는 게스트회원이  "회사"의 예약 및 결제시스템을 이용하여 호스트 회원의 공간을</p>
 				<p>결제 함으로써 호스트회원이 "회사"에 지불하는 수수료이며, 이는 VAT를 포함한 금액입니다.</p>
 				<br>
-				<h2>정산액은 매월 10일에 입금됩니다</h2>
+				<h2 style="font-size:20px;">정산액은 매월 10일에 입금됩니다</h2>
 			</div>
 			<div id="reportZone" style="width: 30%; display:inline-block;">
 				<div id="reportBox">
@@ -385,7 +390,7 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><label style="font-size : 38px">1,617,802</label></td>
+						<td><label style="font-size : 25px">1,617,802</label></td>
 						<td><h1>\</h1></td>
 					</tr>
 				</table>
@@ -396,7 +401,7 @@
 			<br><br><br>
 			<div id="checkCal">
 					<div id="checkCalExplain">
-						<h1 style="font-size:30px; font-weight:bolder">정산 확인</h1>
+						<h1 style="font-size:20px; font-weight:bolder">정산 확인</h1>
 						<p>정산 확인 기간 : 20.07.01 ~ 20.07.08</p>
 						<p>정산 결과의 이상이 없으시다면 정산 확인 버튼을 눌러주세요.</p>
 						<p>확인 기간 내 미확인 시 해당 금액으로 정산 완료 되며</p>

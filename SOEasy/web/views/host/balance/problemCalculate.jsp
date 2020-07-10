@@ -21,7 +21,7 @@
 
 <style>
 	section h1 label{
-		font-size : 40px;
+		font-size : 30px;
 		color : #3DB6AE;
 	}
 	#titleWrap{
@@ -40,7 +40,7 @@
      	th{
      		
      		width: 6.2%;
-     		font-size: 17px;
+     		font-size: 13px;
      		font-weight: bolder; 
      		
      	}
@@ -73,11 +73,11 @@
        #howReport p label{
        	color : #3DB6AE;
        }
-       
-       #reportZone{
-     
-       	
+       #howReport p{
+       	font-size: 14px;
        }
+       
+      
        #reportBox{
        	margin-left: auto;
        	margin-right: auto;
@@ -88,7 +88,7 @@
        	
        }
        #reportBox table tr td label{
-       	font-size : 30px;
+       	font-size : 20px;
        	color : #40A6B4;
        	font-weight : bolder;
        }
@@ -107,21 +107,27 @@
        
        #checkCalExplain{
        	display : inline-block;
-       	width: 50%;
+       	width: 60%;
        }
        
        #checkCalSubmit{
-       	width: 276px;
-       	height: 106px;
+       	width: 180px;
+       	height: 60px;
        	background : #40A6B4;
        	border-radius: 20px;
        	font-weight : bolder;
-       	font-size : 40px;
+       	font-size : 20px;
        	border: none;
        }
        
        #problemRequestList table tr td{
        	text-align: center;
+       	font-size: 13px;
+       }
+       
+       #problemRequestList table tr th{
+       	text-align: center;
+       	font-size: 15px;
        }
        #problemRequestList table tr:first-child{
        	background : #40A6B4;
@@ -147,6 +153,10 @@
         	width: 100px;
         	height : 30px;
         }
+        
+        #reportBox table tr td h1{
+        	font-size : 18px;
+        }
 
         
 </style>
@@ -164,15 +174,15 @@
 	</div>
 	<hr style="margin : 0">
 	</nav>
-	</nav>
 	<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<section>
+		
 		<br>
 		<div id="titleWrap">
 		<!--  정산 금액 조회  시작-->
 		<div id="howReport" style="width: 50%; display: inline-block">
 
-			<h1 style="font-size:30px; font-weight:bolder; margin:0"  >정산이 이상한가요?</h1>
+			<h1 style="font-size:25px; font-weight:bolder; margin:0"  >정산이 이상한가요?</h1>
 			<p>정산 이의신청을 해주세요!</p>
 			<br>
 			<p>정산금액은 다음과 같이 계산 됩니다.</p>
@@ -184,15 +194,15 @@
 			<p>수수료는 게스트회원이  "회사"의 예약 및 결제시스템을 이용하여 호스트 회원의 공간을</p>
 			<p>결제 함으로써 호스트회원이 "회사"에 지불하는 수수료이며, 이는 VAT를 포함한 금액입니다.</p>
 			<br>
-			<h2>정산액은 매월 10일에 입금됩니다</h2>
-		</div>
-
-		<div id="reportZone" style="width: 30%; display:inline-block;">
-			<div>
+			<h2 style="font-size : 20px;">정산액은 매월 10일에 입금됩니다</h2>
+		</div><!-- 
+		
+	 --><div id="reportZone" style="width: 50%; display:inline-block;">
+			<div style="width:80%; margin-left:auto; margin-right: auto;">
 				
-				<h1 style="font-size:30px;font-weight: bolder;">정산 금액을 확인해 보세요.</h1>
-				<label>단위 기간 및 공간을 선택하세요.</label>
-				<select class="selector">
+				<h1 style="font-size:25px;font-weight: bolder;">정산 금액을 확인해 보세요.</h1>
+				<p style="font-size: 13px;" >단위 기간 및 공간을 선택하세요.</p><br>
+				<select class="selector" align="center">
 					<option>단위 기간</option>
 				</select>
 				<select class="selector">
@@ -200,10 +210,10 @@
 				</select>
 				</div>
 				<div id="reportBox">
-				<br><br>
 				
-				<table>
-					<tr height="5px">
+				
+				<table align="center">
+					<tr height="20px">
 						<td><h1>판매 총액 :</h1></td>
 						<td><label>1,802,000</label></td>
 						<td><h1>\</h1></td>
@@ -224,7 +234,7 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><label style="font-size : 38px">1,617,802</label></td>
+						<td><label style="font-size : 20px">1,617,802</label></td>
 						<td><h1>\</h1></td>
 					</tr>
 				</table>
@@ -235,7 +245,7 @@
 			</div>
 			<br><br><br>
 			<div id="problemRequestList">
-			<h1 style="font-size:30px; font-weight:bolder">재정산 요청 목록 &nbsp; <label><%=problemRequestQTY%>개</label></h1>
+			<h1 style="font-size:25px; font-weight:bolder">재정산 요청 목록 &nbsp; <label><%=problemRequestQTY%>개</label></h1>
 			<table style=" border-collapse: collapse; border-spacing: 0;">
 				<tr>
 					<th>의뢰번호</th>
@@ -257,6 +267,7 @@
 			</table>
 			</div>
 		</div>
+	
 	</section>
 	<br><br><br><br>
 	<footer><%@ include file="../../common/footer.jsp" %></footer>

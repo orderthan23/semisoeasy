@@ -170,9 +170,9 @@ h1 {
 				</tr>
 
 				<tr>
-					<td class="input-group"><label for="phoneNum" class="input">연락처
+					<td class="input-group" id="phone-zone" ><label for="phoneNum" class="input">연락처
 					</label> <input type="tel" id="phoneNum" placeholder="연락처" />
-						<button type="button" onclick="IMP.certification();">본인 인증</button></td>
+						<button type="button" >본인 인증</button></td>
 				</tr>
 
 				<tr>
@@ -185,7 +185,7 @@ h1 {
 				</tr>
 				
 				<tr>
-					<td class="input-group" id="email-zone"><label for="email" class="input">인증번호</label>
+					<td class="input-group" id="email-certificate"><label for="emailCode" class="input">인증번호</label>
 						<input type="text" id="emailCode" placeholder="인증번호를 입력해주세요" onclick="" />
 						<button type="button" onclick="checkCertifiedEmail();">인증 확인</button>
 						<p></p>
@@ -225,35 +225,24 @@ h1 {
 	//본인 인증 코드
 
 //iamport 대신 자신의 "가맹점 식별코드"를 사용하시면 됩니다
-IMP.init('imp14313139'); 
-IMP.certification({
-    merchant_uid : 'merchant_' + new Date().getTime() //본인인증과 연관된 가맹점 내부 주문번호가 있다면 넘겨주세요
-}, function(rsp) {
-    if ( rsp.success ) {
-    	 // 인증성공
-        console.log(rsp.imp_uid);
-        console.log(rsp.merchant_uid);
-        
-        $.ajax({
-				type : 'POST',
-				url : '/certifications/confirm',
-				dataType : 'json',
-				data : {
-					imp_uid : rsp.imp_uid
-				}
-		 }).done(function(rsp) {
-		 		// 이후 Business Logic 처리하시면 됩니다.
-		 });
-        	
+ var IMP = window.IMP; // 생략해도 괜찮습니다.
+  IMP.init("imp14313139");  // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
+//IMP.certification(param, callback) 호출
+  $('#phone-zone button').click(function(){IMP.certification({ // param
+    merchant_uid: "ORD20180131-0000011",
+    popup : true
+  }, function (rsp) { // callback
+    if (rsp.success) {
+      alert("성공");
+      // 인증 성공 시 로직,
+     
     } else {
-    	 // 인증취소 또는 인증실패
-        var msg = '인증에 실패하였습니다.';
-        msg += '에러내용 : ' + rsp.error_msg;
-
-        alert(msg);
+     
+      // 인증 실패 시 로직,
+     alert("실패");
     }
-});
-	
+  });
+  });
 
 		//디자인  메소드
 		$('input').click(function() {
