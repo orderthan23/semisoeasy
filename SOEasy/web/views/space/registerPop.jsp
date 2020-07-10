@@ -17,11 +17,21 @@
 		height:35px;
 	}
 	
-	.btn {
+	#btn1 {
 		color:white;
 		background:#40a4b6;
 		border:0; 
 		border-radius:10px; 
+		cursor:pointer;
+		width:80px;
+		height:25px;
+	}
+	
+	#btn2 {
+		color:#40a4b6;
+		background:white;
+		border:solid #40a4b6;
+		border-radius:10px;
 		cursor:pointer;
 		width:80px;
 		height:25px;
@@ -102,7 +112,7 @@
 			}
 		});
 	});
-
+	
 	</script>
 </body>
 </html>
