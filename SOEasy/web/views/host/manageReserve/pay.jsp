@@ -24,6 +24,7 @@
 </style>
 </head>
 <body>
+
 	<div id="payment" tabindex="-1">
 		<div>
 			<h3><span id="payment_title"></span> :: 계산하기</h3>
@@ -50,6 +51,9 @@
 							<tbody id="payment_infos">
 								<tr>
 									<td colspan="4" align="center">주문내역 없음</td>
+								</tr>
+								<tr>
+									
 								</tr>
 							</tbody>
 						</table>

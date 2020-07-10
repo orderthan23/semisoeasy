@@ -113,18 +113,21 @@
 	<header><%@ include file="../../common/header.jsp"%></header>
 	<nav>
 		<%@ include file="../../common/aside.jsp"%>
-		<label><a href="">공간 일정 관리</a></label>
-		<a href="reserveStep1.jsp">예약 일정 관리</a>
-		<label><a href="#">라운지 회원 관리</a></label>
-		<label><a href="">결제 요청</a></label>
-
+		<div class="colMenu">
+		<label class="colMenuTitle">공간 일정 관리</label>
+		<a class="colMenuButton" href="/login/views/host/manageReserve/reserveStep1.jsp">예약 일정 관리</a>
+		<a class="colMenuButton selectedButton" href="/login/views/host/manageReserve/rounge1.jsp">라운지 회원 관리</a>
+		<a class="colMenuButton" href="/login/views/host/manageReserve/paymentRequest.jsp">결제 요청</a>
+	<br><br>
+	</div>
+	<hr style="margin : 0">
 	</nav>
 
 	<br>
 	<hr>
 	<br>
 	<section>
-		<button class="reserve" id="reserve" onclick="window.open('reserveModal1.jsp', 'PopupWin', 'width=500, height=550')">직접 예약</button>
+		<button class="reserve" id="reserve" onclick="window.open('/login/views/host/manageReserve/reserveModal1.jsp', 'PopupWin', 'width=500, height=550')">직접 예약</button>
 		
 		<div class="l1" align="center">
 			라운지 이용고객 관리
@@ -304,8 +307,7 @@
 		    });
 		});
 	
-		
-		
+			
 		</script>
 	</section>
 

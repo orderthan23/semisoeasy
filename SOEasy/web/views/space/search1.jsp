@@ -72,11 +72,6 @@ h1 {
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../../css/layout.css">
-  <!-- Bootstrap core CSS -->
-  <link href="/login/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="/login/css/blog-post.css" rel="stylesheet">
 <title>SO Easy</title>
 
 </head>
@@ -142,7 +137,7 @@ h1 {
 					<option>1주일권</option>
 				</select>
 			</td>
-			<td rowspan="2"><button style="background:#40a4b6; color:white; border:0px; border-radius:10px; width:70px; height:40px;">필터</button></td>
+			<td rowspan="2"><button style="background:#40a4b6; color:white; border:0px; border-radius:10px; width:90px; height:40px;">필터검색</button></td>
 		</tr>
 		<tr>
 			<td	colspan="2">
@@ -150,7 +145,6 @@ h1 {
 					<input class="price">~<input class="price">
 				</div>
 				 
-				
 			</td>
 			<td>
 				<select>
