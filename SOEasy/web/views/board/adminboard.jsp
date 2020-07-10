@@ -13,8 +13,8 @@
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+​
 }
-
 .writeButton{
   text-decoration: none;
   color : black;
@@ -35,9 +35,10 @@
 }
 #searchWrap{
 	
-	width: 40%;
+	width: 30%;
 	border: solid 1px #60B4A6;
 	border-radius: 30px;
+	
 }
 #searchWrap tr td input{
 	display: inline-block;
@@ -60,9 +61,6 @@
 ​#th{
 	border : 1px solid #60B4A6;
 }
-.logo{
-	color:#60B4A6
-}
 </style>
 <title>SO Easy</title>
 </head>
@@ -75,31 +73,31 @@
 		<a href="writeboard.jsp" class="writeButton">글쓰기</a> 
 		<table id="searchWrap" text-align="center" align="center">
 			<tr>
-			<td><input type=search placeholder="검색어를 입력하세요"></td>
-			<td><button type="submit"><img src="/login/images/icon/search2.png" width="25px" height="25px"></button>
+			<td colspan="6"><input type=search placeholder="검색어를 입력하세요">	</td>
+			<td><button type="submit" ><img src="/login/images/icon/search2.png" width="25px" height="25px"></button>
 			</tr>
 		</table>
 		<br>
 		<div style="width:90%; margin-left:auto; margin-right:auto;">
+		
 		</div>
-		<table style="width: 100%; border-collapse: collapse;"id="boardTable">
-		<tr>
-			<td align="center">
-				<select class="category">
-					<option class="category">계정관련</option>
-					<option class="category">결제관련</option>
-				</select>
-			</td>
-			<td colspan="4"></td>
+​
+			<table style="width: 100%; border-collapse: collapse;"
+				id="boardTable">
+				<tr>
 				<td align="center">
-					<select class="OX" style="">
-						<option class="OX">선택</option>
-						<option class="OX">O</option>
-						<option class="OX">X</option>
-					</select>
-				</td>	
-		</tr>
-				
+			<select class="category">
+				<option class="category">계정관련</option>
+				<option class="category">결제관련</option>
+			</select>
+				</td>
+		<td colspan="4"></td>
+		<td align="center"><select class="OX" style="">
+			<option class="OX">선택</option>
+			<option class="OX">O</option>
+			<option class="OX">X</option>
+		</select></td>	
+				</tr>
 				<tr>
 					<th>번호</th>
 					<th>분류</th>

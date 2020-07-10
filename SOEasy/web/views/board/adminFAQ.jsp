@@ -15,6 +15,7 @@
 	position: relative;
 	left: 135px;
 	top: 10px;
+	visibility:hidden;
 }
 
 .btn {
@@ -63,8 +64,22 @@ div > input {
 	width: 400px;
 
 }
-
-
+	.select-space{
+		position:relative;
+		text-align: center;
+		width: 300px;
+		height: 40px;
+		top: -5px;
+		display: inline-block;
+		border: 1px solid black;
+		border-radius: 10px;
+		cursor: pointer;
+		margin: 20px;
+		margin-top : 30px;
+	}
+	.select-space:hover{
+		background-color : #60B4A6;
+	}
 </style>
 <title>SO Easy</title>
 </head>
@@ -73,12 +88,15 @@ div > input {
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<h2 class="logo" style="text-align: left;">자주 묻는 게시판(관리자)</h2>
-		<div class="search">
+		<div class="search" width:"40%" >
 			<input type="text" placeholder="검색어를 입력해주세요" style=border:none;>
 			<img id="searchImg"src = "/login/images/icon/search2.png">
 		</div>
-		<a href="writeboard.jsp" class="btn pull-right">FQA 등록</a> 
-		<select	class="category">
+		<a href="adminInsertFAQ.jsp" class="btn pull-right">FQA 등록</a> 
+		<span class="select-space" id="notice">1대1문의</span>
+		<span class="select-space" id="faq">자주묻는게시판</span>
+		<span class="select-space" id="notice">공지사항</span>
+		<select	class="category" >
 			<option class="category">계정관련</option>
 			<option class="category">결제관련</option>
 		</select>
@@ -112,9 +130,11 @@ div > input {
 	</section>
 	<%@ include file="../common/footer.jsp"%>
 	<script>
-	
+				$("#notice").click(function(){
+					location.href="board.jsp";
+				});
 	</script>
 				
-			
+	
 </body>
 </html>
