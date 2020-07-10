@@ -3,170 +3,178 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<!-- 합쳐지고 최소화된 최신 자바스크립트  -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../../css/layout.css">
+​
 <style>
-	.category{
-		position : relative;
-		left : 150px;
-		top: 10px;
-		visibility:hidden;
-	}
-	.btn{
-		position :relative;
-		right : 47px;
-		background-color: #60B4A6;
-		color:black;
-	}
-	.logo{
-		position: relative;
-		left : 55px;
-	}
-		
-	}
-	hr{
-		margin-top : -20px;
-	}
-	.answer{
-		postion: relative;
-		width: 1170px;
-		height: 250px;
-		/*background-color : #dddddd*/
-		outline-top:none;
-		padding-left: 20px;
-		resize:none;
-		border : 1px solid #60B4A6;
-		font-size : 20px;
-		color : #dddddd;
-	}
-	.question{
-		postion: relative;
-		width: 1170px;
-		height: 150px;
-		/*background-color : #dddddd*/
-		margin-top : -20px;
-		outline-top:none;
-		padding-left: 20px;
-		resize:none;
-		border : 1px solid #60B4A6;
-		font-size : 20px;
-		color : #60B4A6;
-	}
-	.awbtn{
-		position :relative;
-		background-color: #60B4A6;
-		left: 1070px;
-		color:whtie;
-		width:100px;
-		text-align:center;
-		margin-top : -20px;
-		height:30px;
-	}
-	.wrap{
-		margin-top: -10px;
+#wrapper{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+​
+}
+.writeButton{
 	
-	}
-	.aTitle{
-		width: 975px;
-		height: 35px;
-		background-color:#60B4A6;
-		color:white;
-	}
+  text-decoration: none;
+  color : black;
+  float: right;
+  background : #60B4A6;
+  border-radius: 10px;
+  padding : 10px;
+  clear : both;
+  
+}
+#boardTable{
+	border : solid 2px #60B4A6;
+}
+#boardTable tr th{
+  background: #60B4A6;
+  color: white;
+  text-align: center;
+​
+}
+#boardTable tr{
+	height : 50px;
+	border-bottom : solid 1px #60B4A6;
+}
+​
+#boardTable tr textarea{
+	border: none;
+	height: 200px;
+	resize: none;
+	font-size: 15px;
+	background: transparent;
 	
-	.aDay{
-		width:195px;
-		height: 35px;
-		background-color:#60B4A6;
-		color:white;
-	}
+}
+​
+.answerButtons{
+	float: right;
+	background : #60B4A6;
+	font-size: 25px;
+	font-weight : bolder;
+	border-radius: 5px;
+	height : 50px;
+	margin-left : 10px;
+	border : none;
+}
+.answerButtons:hover{
+​
+	color : white;
+}
+.answerButtons:focus{
+	outline : none;
+	color : white;
+}
+.aTitle{
+	font-size: 25px;
+	font-weight: bolder;
+}
+​
+#searchWrap{
 	
-	textarea:focus {
-  		outline: none;
-	}
+	width: 30%;
+	border: solid 1px #60B4A6;
+	border-radius: 30px;
 	
-	button:focus{
-		outline: none;
-	}
-	.OX{}
+}
+#searchWrap tr td input{
+	display: inline-block;
+	border: none;
+	background: transparent;
+	width: 100%;
+	height: 100%;
+}
+#searchWrap tr td input:focus{
+	outline: none;
+}
+#searchWrap tr td button{
+	background : transparent;
+	border: none;
+	float: right;
+​
+}
+#searchWrap tr td button:focus{
+	outline: none;
+}
 </style>
 <meta charset="UTF-8">
-<meta name="viewport" content="width-device-width" initial-scale="1"> 
-<link rel="stylesheet" href="css/bootstrap.css">
 <title>Insert title here</title>
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
-	<h2 class ="logo" style= "text-align:left;">1대1문의(관리자)</h2>
-	<a href="board.jsp" class="btn pull-right">뒤로가기</a>
-	<select class="category">
-		<option class="category">계정관련</option>
-		<option class="category">결제관련</option>
-	</select>
-
-	<div class="container">
-		<div class="row">
-			<table class="table table-striped" style="text-align:center	border: 1px solid #dk">
-				<thead>
-					<tr>
-						<th style="background-color: #60B4A6; color:white; text-align:center;">번호</th>
-						<th style="background-color: #60B4A6; color:white; text-align:center;">카테고리</th>
-						<th style="background-color: #60B4A6; color:white; text-align:center;">제목</th>
-						<th style="background-color: #60B4A6; color:white; text-align:center;">작성자</th>
-						<th style="background-color: #60B4A6; color:white; text-align:center;">작성일자</th>
-						<th style="background-color: #60B4A6; color:white; text-align:center;"></th>
-					</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td style="text-align:center;">1</td>
-							<td style="text-align:center;">계정관련</td>
-							<td style="text-align:center;">이용했던 곳을 다시 이용하려는데 리스트에 보이지 않아요</td>
-							<td style="text-align:center;">coding12</td>
-							<td style="text-align:center;">2020-06-26</td>
-							<td style="text-align:center;"></td>
-						</tr>
-					</tbody>
-					<tfoot>
-					</tfoot>	
-			</table>		
-							<textArea class="question" readonly>제가 못 찾는 건지 잘 모르겠습니다만,상호명은 역삼동 혼자사무실이었던 것으로 기억합니다.</textArea>
-							<table class="wrap">
-							<tr>
-								<td class="aTitle" style="text-align:center;">답변</td>
-								<td class="aDay"style="text-align:center;">답변일자</td>
-							</tr>
-							</table>
-									<textArea class="answer" readonly>안녕하세요 coding12님?문의주신 내용에 대해서 답변해드리겠습니다.
-현재 '역삼동 혼자사무실'의 호스트가 공간 삭제요청을 하여 삭제 처리하였습니다.
-다른 오피스를 이용 부탁드리겠습니다.</textArea>
-									<button id=answer class="awbtn" value="답변하기">답변하기</button>
-									<!-- 추후 삭제 할 예정 -->
-									<a href="adminFAQ.jsp" class="btn pull-right">자주묻는질문</a>
-						</div>
-			</div>
+	<div id="wrapper">
+       
+		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">1대1문의(관리자)</h2>
 		
+		<br>
+		<table id="searchWrap" height="25px">
+			<tr>
+			<td colspan="6"><input type=search placeholder="검색어를 입력하세요" >	</td>
+			<td><button type="submit" ><img src="/login/images/icon/search2.png" width="25px" height="25px"></button>
+			</tr>
+		</table>
+		<a href="writeboard.jsp" class="writeButton">글쓰기</a> 
+		<br>
+		
+		<select	class="category">
+			<option class="category">계정관련</option>
+			<option class="category">결제관련</option>
+		</select>
+		<select class="OX">
+			<option class="OX">선택</option>
+			<option class="OX">O</option>
+			<option class="OX">X</option>
+		</select>
+				<table style = "width: 100%; border-collapse: collapse; " id="boardTable">
+						<tr>
+							<th>번호</th>
+							<th>분류</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일자</th>
+							<th>답변여부</th>
+						</tr>
+				
+					
+						<tr style="border-bottom: solid 1px  #60B4A6;">
+							<td class="info" style="text-align: center;">1</td>
+							<td class="info" style="text-align: center;">계정관련</td>
+							<td class="info" style="text-align: center;"><a href="writeboard.jsp" style="text-decoration:none; color:black;">이용했던 곳을 다시 이용하려는데 리스트에 보이지 않아요</a></td>
+							<td class="info" style="text-align: center;">coding12</td>
+							<td class="info" style="text-align: center;">2020-06-26</td>
+							<td class="info" style="text-align: center;">X</td>
+						</tr>
+						<tr> 
+							<td colspan="6">
+								<div style="width:94%; margin-left:auto; margin-right:auto; margin-top:20px;">
+									<label class="aTitle">질문</label>
+									<hr>
+									<textArea style="width:100%; resize:none; border:none; color:gray;" class="question" readonly class="QandA" ;>제가 못 찾는 건지 잘 모르겠습니다만,상호명은 역삼동 혼자사무실이었던 것으로 기억합니다.</textArea>
+								</div>
+							</td>
+						</tr>
+				
+						<tr>	
+							<td colspan="6" >
+								<div style="width:94%; margin-left:auto; margin-right:auto; margin-top:20px;">
+									<p class="aTitle">답변 &nbsp; <label style="font-size : 15px; font-weight:bolder;">답변일자</label></p>
+									<textArea style="width:100%;" class="answer" readonly class="QandA">안녕하세요 coding12님?문의주신 내용에 대해서 답변해드리겠습니다.현재 '역삼동 혼자사무실'의 호스트가 공간 삭제요청을 하여 삭제 처리하였습니다.다른 오피스를 이용 부탁드리겠습니다.</textArea>
+									<div style="float:right;">
+									<button type="button" onclick="startAnswer();" class="startBtn">답변하기</button>
+									<button type="button" onclick="stopAnswer();" class="stopBtn">답변취소</button>
+									</div>
+								</div>
+							</td>
+						</tr>
+				</table>
+	</div>
 	</section>
+	<br><br>
 	<footer><%@ include file="../common/footer.jsp"%></footer>
 	<script>
 	$(function() {
-		  $('#answer').click( function() {
-		    if( $(this).html() == '답변하기' ) {
-		    	 $(".answer").removeAttr("readonly");
-		      $(this).html('수정완료');
-		      
-		    }
-		    else if($(this).html()=== '수정완료'){
-		    	 $(".answer").attr("readonly",true);
-		      $(this).html('답변하기');
-		    }
-		  });
-		});
 		</script>
 		
 	
