@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,11 +69,21 @@
 </head>
 <body>
 	 <header><%@ include file="../common/header.jsp"%></header>
-	<nav><%@ include file="../common/aside.jsp"%></nav> 
+	<nav><%@ include file="../common/aside.jsp"%>
+	<div class="colMenu">
+		<a class="colMenuButton selectedButton" href="/login/views/board/board.jsp">공지사항</a>
+		<a class="colMenuButton" href="/login/views/host/balance/calculate.jsp">자주 묻는 질문</a>
+		<a class="colMenuButton" href="/login/views/board/mtmboard.jsp">1대1문의</a>
+	<br><br>
+	</div>
+	<hr style="margin : 0">
+	 <br>
+	</nav>
+	
 	<section>
     <div id="wrapper">
 		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">공지사항</h2>
-		<a href="writeboard.jsp" class="writeButton">글쓰기</a> 
+		<a href="writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a> 
 		<table id="searchWrap" text-align="center" align="center">
 			<tr>
 			<td><input type=search placeholder="검색어를 입력하세요"></td>
@@ -84,13 +95,16 @@
 		</div>
 		<table style="width: 100%; border-collapse: collapse;"id="boardTable">
 		<tr>
-			<td align="center">
+			<td colspan="1"></td>
+			<td align="center" style=>
 				<select class="category">
+					<option class="category" style="text-align:center">선택</option>
 					<option class="category">계정관련</option>
 					<option class="category">결제관련</option>
+					<option class="category"></option>
 				</select>
 			</td>
-			<td colspan="4"></td>
+			<td colspan="3"></td>
 				<td align="center">
 					<select class="OX" style="">
 						<option class="OX">선택</option>
@@ -112,9 +126,9 @@
 					<td class="info" style="text-align: center;">1</td>
 					<td class="info" style="text-align: center;">계정관련</td>
 					<td class="info" style="text-align: center;">
-						<a href="writeboard.jsp" style="text-decoration: none; color: black;">이용했던 곳을 다시 이용하려는데 리스트에 보이지 않아요</a>
+						<a href="detailboard.jsp" style="text-decoration: none; color: black;">[점검] 시스템 점검 안내입니다.</a>
 					</td>
-					<td class="info" style="text-align: center;">coding12</td>
+					<td class="info" style="text-align: center;">관리자</td>
 					<td class="info" style="text-align: center;">2020-06-26</td>
 					<td class="info" style="text-align: center;">X</td>
 				</tr>
@@ -123,10 +137,20 @@
 		</div>
 	</section>
 	 <%@ include file="../common/footer.jsp"%> 
-	<script>
-	</script>
-				
+	<!-- <script> -->
+	<%-- var userStatus = <%=userStatus%>; --%>
+		<!-- $(function(){
+			switch(userStatus){
+			case 1: 
+			case 2: $('#writeButton').hide(); break;
+
+			case 3:	$('#writeButton').show(); break;
+			default : break;
+			}
 			
+		}); -->
+		
+		<!-- </script> -->
 ​
 ​
 	

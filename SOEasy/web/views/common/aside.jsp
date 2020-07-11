@@ -235,7 +235,7 @@ span.bar {
     	
   </div>
   	<script>
-  	$(function(){
+  /* 	$(function(){
   		switch(userStatus){
 			
 			case 1:
@@ -267,7 +267,7 @@ span.bar {
 			}
   			
   	
-  	});
+  	}); */
   		
   	</script>
 

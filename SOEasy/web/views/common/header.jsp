@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.kh.login.member.model.vo.Member"%>
+	pageEncoding="UTF-8" %>
 <%
-	Member loginUser =(Member)session.getAttribute("loginUser");
+	/* Member loginUser =(Member)session.getAttribute("loginUser");
 	int userStatus=0;
 	if(loginUser!=null){
 		userStatus = loginUser.getStatus();
-	}
+	} */
 	
 %>
 <!DOCTYPE html>
@@ -112,10 +112,8 @@
 
 	</div>
 	<script>
-		var userStatus = <%=userStatus%>;
+		<%-- var userStatus = <%=userStatus%>;
 		$(function(){
-			
-			
 			switch(userStatus){
 			case 1: 
 			case 2: $('#firstHeaderMenu').attr("href","/logoutpage/").text("로그아웃");
@@ -127,9 +125,8 @@
 			default : break;
 			}
 			
-	
 			
-		});
+		}); --%>
 	</script>
 
 
