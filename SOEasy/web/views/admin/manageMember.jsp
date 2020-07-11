@@ -17,6 +17,9 @@
 		margin-left: auto;
 		margin-right : auto;
 	}
+	#wrapper a{
+		text-decoration: none;
+	}
 	#wrapper select{
 		float : right;
 	}
@@ -42,6 +45,18 @@
        .pCompleteInfo td a{
        	text-decoration: underline;
        	color : black;
+       }
+       
+      #adminMemo{
+       
+       	width: 100%;
+       	outline : none;
+       	border: none;
+       	margin: 0px;
+       	height: 30px;
+       	text-align: center;
+      
+       
        }
        #wrapper h1{
        	font-size : 30px;
@@ -84,17 +99,14 @@
   left: 50%;
   transform:translate(-50%,-50%);
   width: 70%;
+  
   max-width: 500px;
   padding: 10px 30px;
   background-color: #fff;
 }
 
-.closeModal {
-  position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  cursor: pointer;
-}
+
+
 
 #openModal {
   position: absolute;
@@ -107,10 +119,40 @@
 	background : #3DB6AE;
 	border-radius: 10px;
 	border: none;
+	width: 100px;
+	height: 40px;
+	font-size: 25px;
+	font-weight: bolder;
 }
 #buttonZone button:focus{
 	outline: none;
 	border: none;
+}
+#searchZone{
+	border: 2px solid gray;
+	border-radius: 10px;
+	padding: 2px;
+	
+	border-collapse: collapse;
+	
+}
+#searchId{
+	
+	width: 200px;
+	border:none;
+	outline:none;
+	background : none;
+
+}
+#searchZone input[name=transfer]{
+	border-radius : 10px;
+	border: none;
+	outline: none;
+	
+	
+	
+	
+	
 }
 </style>
 <title>Insert title here</title>
@@ -119,27 +161,30 @@
 	<header><%@ include file="/views/common/header.jsp" %></header>
 	<nav><%@ include file = "/views/common/aside.jsp" %></nav>
 	<section>
+		
+		<br>
+		<div id="wrapper">
 		<div id="modalArea" class="modalArea">
   <div id="modalBg" class="modalBg"></div>
   <div class="modalWrapper">
     <div class="modalContents">
-      <div style="background: #E4EEFA; text-align: center; width:100%">
+      <div style="background: #E4EEFA; text-align: center; width:100%;">
          <h1 style="margin:0;">경고</h1>
       </div>
-      <p align="center">해당 회원에게 제재를 가하시겠습니까? </p>
+      <br>
+      <p align="center" style="font-size: 30px;">해당 회원을 제재 하시겠습니까? </p>
       <div style="width:50%; margin-left: auto; margin-right: auto; align:center;" id="buttonZone">
-      <button style="margin-right: 10px; width: 100px;" onclick="blockMember();">네</button><button style="width:100px;" onclick ="closeModal();">아니오</button>
+      <button style="margin-right: 10%; " onclick="blockMember();">네</button><button onclick ="closeModal();">아니오</button>
       </div>
     </div>
-    <div id="closeModal" class="closeModal" style="font-size: 25px; ">
-      x
-    </div>
+    
   </div>
 </div>
 		<br>
-		<div id="wrapper">
-		<br>
 		<h1 style="margin : 0;">회원 목록</h1>
+		<br>
+			
+		
 		<select>
 		<option>계정 활성화 여부: 전체</option>
 		<option>계정 활성화 여부: 활성</option>
@@ -154,8 +199,17 @@
 			<option>경고횟수 : 전체</option>
 			<option>경고횟수 : 1회</option>
 			<option>경고횟수 : 2회</option>
-		</select><br><br>
+		</select>
 		
+				<label>아이디 검색</label>
+				<span  id="searchZone">
+				<input type="search" name="userId" id="searchId">
+				<input type="button" name="transfer" value="검색" onclick="searchId();">
+				</span>
+			
+		<br><br>
+		
+			
 		<table align="center"  style="margin:0; width:100%;"  >
 				<tr>
 					<th height="40px">아이디</th>
@@ -183,13 +237,15 @@
 					<td>게스트</td>
 					<td>O </td>
 					<td>0</td>
-					<td><a href="해당회원의 예약내역">이동</a></td>
-					<td>축구선수를 위장한 댄서</td>
+					<td><a href="해당회원의 예약내역">보기</a></td>
+					<td><input type="text" id="adminMemo"></td>
 				</tr>
 				<%
 					}
 				%>
 			</table>
+			<br>
+		
 		</div>
 	</section>
 	<br><br>
@@ -203,13 +259,25 @@
 		alert("해당 회원이 정지 되었습니다");
 		 $('#modalArea').fadeOut();
 	}
+	
+	function searchId(){
+		var userId = $('#searchId').val
+		
+		$.ajax{
+			url : "아이디를 찾는 서블릿",
+			data: {userId, userId},
+			success: function(data){},
+			error: function(data){}
+		}
+		
+	}
 		
 	$(function(){
 		
 		
 		$('.stage').change(function(){
 			var num = $(this).val();
-			$('option:nth(0)').prop("selected")
+			$(this).children('option:nth(0)').prop('selected',"true");
 			if(num >1){
 				 $('#modalArea').fadeIn();
 				 
