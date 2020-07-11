@@ -40,6 +40,26 @@
 	.refund-area input{
 		text-align: center;
 	}
+	select {
+		width: 100px;
+		height: 33px;
+		padding: .5em .5em;
+		border: 1px solid #999;
+		font-family: inherit;
+		background: url('../../images/icon/arrow.jpg') no-repeat 95% 50%;
+		border-radius: 10px;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+	}
+	
+	select::-ms-expand {
+	    display: none;
+	}
+	
+	#optime-table tr td {
+		text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -102,9 +122,471 @@
 					<td></td>
 					<td>&nbsp;</td>
 				</tr>
-				<tr class="refund-area" id="cowork-check">
+				<tr class="space-optime" id="space-optime">
 					<td></td>
-					<td style="vertical-align:top;"><br><br>환불 기준*</td>
+					<td style="vertical-align:top;"><br><br>운영 시간 *</td>
+					<td>
+						<fieldset>
+							<br>
+							<table id="optime-table" align="center" width="100%">
+								<br>
+								<tr>
+									<td width="20%">월</td>
+									<td width="30%">
+										<input type="checkbox" name="mon-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="mon-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+									</td>
+									<td width="60%">
+										<input type="hidden" name="mon-open-check" value="open">
+										<select name="mon-start-time">
+											<option value="00" selected>00:00</option>
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+										</select>
+										&nbsp;~&nbsp;
+										<select name="mon-end-time">
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+											<option value="24" selected>24:00</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td width="10%">화</td>
+									<td width="30%">
+										<input type="checkbox" name="tue-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="tue-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+									</td>
+									<td width="60%">
+										<input type="hidden" name="tue-open-check" value="open">
+										<select name="tue-start-time">
+											<option value="00" selected>00:00</option>
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+										</select>
+										&nbsp;~&nbsp;
+										<select name="tue-end-time">
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+											<option value="24" selected>24:00</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td width="10%">수</td>
+									<td width="30%">
+										<input type="checkbox" name="wed-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="wed-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+									</td>
+									<td width="60%">
+										<input type="hidden" name="wed-open-check" value="open">
+										<select name="wed-start-time">
+											<option value="00" selected>00:00</option>
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+										</select>
+										&nbsp;~&nbsp;
+										<select name="wed-end-time">
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+											<option value="24" selected>24:00</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td width="10%">목</td>
+									<td width="30%">
+										<input type="checkbox" name="thu-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="thu-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+									</td>
+									<td width="60%">
+										<input type="hidden" name="thu-open-check" value="open">
+										<select name="thu-start-time">
+											<option value="00" selected>00:00</option>
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+										</select>
+										&nbsp;~&nbsp;
+										<select name="thu-end-time">
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+											<option value="24" selected>24:00</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td width="10%">금</td>
+									<td width="30%">
+										<input type="checkbox" name="fri-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="fri-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+									</td>
+									<td width="60%">
+										<input type="hidden" name="fri-open-check" value="open">
+										<select name="fri-start-time">
+											<option value="00" selected>00:00</option>
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+										</select>
+										&nbsp;~&nbsp;
+										<select name="fri-end-time">
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+											<option value="24" selected>24:00</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td width="10%">토</td>
+									<td width="30%">
+										<input type="checkbox" name="sat-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="sat-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+									</td>
+									<td width="60%">
+										<input type="hidden" name="sat-open-check" value="open">
+										<select name="sat-start-time">
+											<option value="00" selected>00:00</option>
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+										</select>
+										&nbsp;~&nbsp;
+										<select name="sat-end-time">
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+											<option value="24" selected>24:00</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td width="10%">일</td>
+									<td width="30%">
+										<input type="checkbox" name="sun-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="sun-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+									</td>
+									<td width="60%">
+										<input type="hidden" name="wed-open-check" value="open">
+										<select name="sun-start-time">
+											<option value="00" selected>00:00</option>
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+										</select>
+										&nbsp;~&nbsp;
+										<select name="sun-end-time">
+											<option value="01">01:00</option>
+											<option value="02">02:00</option>
+											<option value="03">03:00</option>
+											<option value="04">04:00</option>
+											<option value="05">05:00</option>
+											<option value="06">06:00</option>
+											<option value="07">07:00</option>
+											<option value="08">08:00</option>
+											<option value="09">09:00</option>
+											<option value="10">10:00</option>
+											<option value="11">11:00</option>
+											<option value="12">12:00</option>
+											<option value="13">13:00</option>
+											<option value="14">14:00</option>
+											<option value="15">15:00</option>
+											<option value="16">16:00</option>
+											<option value="17">17:00</option>
+											<option value="18">18:00</option>
+											<option value="19">19:00</option>
+											<option value="20">20:00</option>
+											<option value="21">21:00</option>
+											<option value="22">22:00</option>
+											<option value="23">23:00</option>
+											<option value="24" selected>24:00</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td>&nbsp;</td>
+								</tr>
+							</table>
+						</fieldset>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr class="refund-area" id="refund-area">
+					<td></td>
+					<td style="vertical-align:top;"><br><br>환불 기준 *</td>
 					<td>
 						<fieldset>
 							<br>
@@ -192,7 +674,7 @@
 			</table>
 			<div class="btnArea" align="center">
 				<br><br><br><br><br><br>
-				<button type="reset">초기화</button>
+				<button type="button" onclick="callBack();">이전으로</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit">다음으로</button>
 				<br><br><br><br><br><br>

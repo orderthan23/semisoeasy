@@ -144,13 +144,24 @@
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
+					<td width="5%"></td>
+					<td width="20%">대표자명 *</td>
+					<td width="40%">
+						<input type="text" maxlength="20" name="bsns-represent-name" id="bsns-represent-name" style="width:61%;">
+					</td>
+					<td width="5%"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
 					<td></td>
 					<td style="vertical-align:top;">사업자등록번호 *</td>
 					<td>
-						<input type="text" name="bsns-license-no" id="bsns-license-no">
+						<input type="text" name="bsns-license-no" id="bsns-license-no" style="width:61%;">
 						<br><br>
 						<div class="box-file-input">
-							<p class="filename" style="width: 65%;">파일을 선택해주세요.</p>
+							<p class="filename" style="width: 60%;">파일을 선택해주세요.</p>
 							<label style="align:right;"><input type="file" class="file-input" name="bsns-license-img" id="bsns-license-img" accept="image/*,.pdf"></label>
 						</div>
 					</td>
@@ -289,7 +300,11 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td>계좌 정보 *</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td style="vertical-align: top;"><br>계좌 정보 *</td>
 					<td>
 						<table width="100%">
 							<tr>
@@ -336,7 +351,7 @@
 			</table>
 			<div class="btnArea" align="center">
 				<br><br><br><br><br><br>
-				<button type="reset">초기화</button>
+				<button type="button" onclick="callBack();">이전으로</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit">저장하기</button>
 				<br><br><br><br><br><br>
