@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 <style>
         .visual{
             position: relative;
@@ -86,7 +86,13 @@
 	<div style="width:75%; margin-left:auto; margin-right:auto;">
 	
 	<!-- 공간명 / 가격 -->
-	<h1 style="color:#40a4b6; font-weight: bolder;">성수동 인생공간 코워킹스페이스</h1>
+	<table>
+		<tr>
+			<td>
+				<p style="color:#40a4b6;  font-weight: bolder; margin-top:0; font-size:30px;">성수동 인생공간 코워킹스페이스</p>
+			</td>
+		</tr>
+	</table>
 	<table>
 		<tr>
 			<td style="color:#c4c4c4; font-size:25px;">300,000원 / 1개월 </td>
@@ -95,6 +101,7 @@
 	<br><br>
 	
 	<!-- 사진 가운데정렬 -->
+	<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<div class="visual">
 			<div 
 				style="background-image: url(../../images/area/area22-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
@@ -402,7 +409,7 @@
 		
 		<!-- 예약 버튼 -->
 		<div align="center">
-			<button onclick="push();" style="color:white; background:#40a4b6; width:120px; height:50px; font-size:20px; border:0; border-radius:10px; cursor:pointer;">예약 신청</button>
+			<button onclick="push();" style="color:white; background:#40a4b6; width:120px; height:50px; font-size:20px; border:0; border-radius:10px; cursor:pointer;">결제하기</button>
 		</div>
 		</div>
 		</section>
@@ -411,7 +418,7 @@
 	
 	<script>
 		function push() {
-			alert('예약신청 버튼');
+			alert('결제버튼 누름 / API로 연결');
 		}
 		
 		//'예약자와 동일' 체크 시 사용자명 텍스트박스에 예약자명에 입력된 값 가져오기
