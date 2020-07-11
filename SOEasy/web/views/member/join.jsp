@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="../../js/validate.js"></script>
- <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 
 
 <link rel="stylesheet" href="../../css/layout.css">
@@ -171,8 +171,19 @@ h1 {
 
 				<tr>
 					<td class="input-group" id="phone-zone" ><label for="phoneNum" class="input">연락처
-					</label> <input type="tel" id="phoneNum" placeholder="연락처" />
-						<button type="button" >본인 인증</button></td>
+					</label> <input type="tel" id="phoneNum" name="phoneNum" placeholder="연락처" />
+						<button type="button" onclick="certified();">본인 인증</button>
+						<input type="hidden" id="cert">
+						</td>
+				</tr>
+				
+				<tr>
+					<td class="input-group" id="inputCert"><label for="certCode" class="input">인증번호</label>
+						<input type="text" id="certCode" placeholder="인증번호를 입력해주세요" onclick="" />
+						<button type="button" onclick="test1();">인증 확인</button>
+						<p></p>
+						</td>
+						
 				</tr>
 
 				<tr>
@@ -223,26 +234,30 @@ h1 {
 	</footer>
 	<script>
 	//본인 인증 코드
-
-//iamport 대신 자신의 "가맹점 식별코드"를 사용하시면 됩니다
- var IMP = window.IMP; // 생략해도 괜찮습니다.
-  IMP.init("imp14313139");  // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
-//IMP.certification(param, callback) 호출
-  $('#phone-zone button').click(function(){IMP.certification({ // param
-    merchant_uid: "ORD20180131-0000011",
-    popup : true
-  }, function (rsp) { // callback
-    if (rsp.success) {
-      alert("성공");
-      // 인증 성공 시 로직,
-     
-    } else {
-     
-      // 인증 실패 시 로직,
-     alert("실패");
-    }
-  });
-  });
+	function certified(){
+		var phoneNum = $('#phoneNum').val();
+		console.log(phoneNum);
+		
+		 $.ajax({
+			
+			url:"/login/certification.me",
+			data:{phoneNum:phoneNum},
+			type:"post",
+			success: function(data){
+				console.log(data);
+				$('#cert').val(data);
+			},
+			error: function(data){
+				console.log("실패!");
+			}
+		})  
+	}
+		function test1(){
+			var code = $('#cert').val();
+			
+			console.log("인증번호 "+code);
+			
+		}
 
 		//디자인  메소드
 		$('input').click(function() {

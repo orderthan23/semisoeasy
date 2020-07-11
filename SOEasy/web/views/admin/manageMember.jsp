@@ -155,7 +155,7 @@
 	
 }
 </style>
-<title>Insert title here</title>
+<title>SO Easy</title>
 </head>
 <body>
 	<header><%@ include file="/views/common/header.jsp" %></header>
