@@ -115,7 +115,7 @@
 			<td><button type="submit" ><img src="/login/images/icon/search2.png" width="25px" height="25px"></button>
 			</tr>
 		</table>
-		<a href="writeboard.jsp" class="writeButton">글쓰기</a> 
+		<a href="board.jsp" class="writeButton">이전으로</a> 
 		<br>
 		
 		<select	class="category">
@@ -134,23 +134,20 @@
 							<th>제목</th>
 							<th>작성자</th>
 							<th>작성일자</th>
-							<th>답변여부</th>
+							<th></th>
 						</tr>
 				
 					
 						<tr style="border-bottom: solid 1px  #60B4A6;">
 							<td class="info" style="text-align: center;">1</td>
 							<td class="info" style="text-align: center;">계정관련</td>
-							<td class="info" style="text-align: center;"><a href="writeboard.jsp" style="text-decoration:none; color:black;">이용했던 곳을 다시 이용하려는데 리스트에 보이지 않아요</a></td>
+							<td class="info" style="text-align: center;"><a href="writeboard.jsp" style="text-decoration:none; color:black;">[점검] 시스템 점검 안내입니다.</a></td>
 							<td class="info" style="text-align: center;">coding12</td>
 							<td class="info" style="text-align: center;">2020-06-26</td>
-							<td class="info" style="text-align: center;">X</td>
 						</tr>
 						<tr> 
 							<td colspan="6">
 								<div style="width:94%; margin-left:auto; margin-right:auto; margin-top:20px;">
-									<label class="aTitle">질문</label>
-									<hr>
 									<textArea style="width:100%; resize:none; border:none; color:gray;" class="question" readonly class="QandA" ;>제가 못 찾는 건지 잘 모르겠습니다만,상호명은 역삼동 혼자사무실이었던 것으로 기억합니다.</textArea>
 								</div>
 							</td>
@@ -158,14 +155,10 @@
 				
 						<tr>	
 							<td colspan="6" >
-								<div style="width:94%; margin-left:auto; margin-right:auto; margin-top:20px;">
-									<p class="aTitle">답변 &nbsp; <label style="font-size : 15px; font-weight:bolder;">답변일자</label></p>
-									<textArea style="width:100%;" class="answer" readonly class="QandA">안녕하세요 coding12님?문의주신 내용에 대해서 답변해드리겠습니다.현재 '역삼동 혼자사무실'의 호스트가 공간 삭제요청을 하여 삭제 처리하였습니다.다른 오피스를 이용 부탁드리겠습니다.</textArea>
 									<div style="float:right;">
 									<button type="button" onclick="startAnswer();" class="startBtn">답변하기</button>
 									<button type="button" onclick="stopAnswer();" class="stopBtn">답변취소</button>
 									</div>
-								</div>
 							</td>
 						</tr>
 				</table>
@@ -173,10 +166,8 @@
 	</section>
 	<br><br>
 	<footer><%@ include file="../common/footer.jsp"%></footer>
-	<script>
-	$(function() {
-		</script>
-		
+	
+	
 	
 </body>
 </html>
