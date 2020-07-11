@@ -235,7 +235,7 @@ span.bar {
     	
   </div>
   	<script>
-  /* 	$(function(){
+   /* 	$(function(){
   		switch(userStatus){
 			
 			case 1:
@@ -259,15 +259,29 @@ span.bar {
 				$('#fourthSubNav').attr("href","#").text("회원 관리");
 				$('#fifthSubNav').attr("href","#").text("회원 복구 요청");
 				$('#sixthSubNav').attr("href","#").text("신고 건 조회");
-				$('#seventhSubNav').attr("href","#").text("Q&A 조회");
+				$('#seventhSubNav').attr("href","#").text("Q&A 관리");
 				$('#eighthSubNav').attr("href","#").text("공지사항 작성");
 				$('#ninthSubNav').attr("href","#").text("관리자 홈");
 				break;
-			default : break;
+			default : 
+				$('#grade').html("<a href='/login/views/member/loginForm.jsp'>로그인이 필요합니다</a>");
+				$('#firstMainNav').hide();
+				$('#secondMainNav').hide();("회원관리");
+				$('#thirdMainNav').hide();("기타메뉴");
+				$('#firstSubNav').hide();
+				$('#secondSubNav').hide();
+				$('#thirdSubNav').hide();
+				$('#fourthSubNav').hide();
+				$('#fifthSubNav').hide();
+				$('#sixthSubNav').hide();
+				$('#seventhSubNav').hide();
+				$('#eighthSubNav').hide();
+				$('#ninthSubNav').hide();
+				break;
 			}
   			
   	
-  	}); */
+  	});  */
   		
   	</script>
 

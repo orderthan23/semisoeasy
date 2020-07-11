@@ -19,6 +19,7 @@
 	}
 	#wrapper select{
 		float : right;
+		height: 24px;
 	}
 	      
      	th{
@@ -27,12 +28,8 @@
      		font-size: 17px;
      		font-weight: bolder; 
      		clear:both;
-     		
      	}
      	
-     
-    
-	       
        .pCompleteInfo td{
        	text-align: center;
        	height : 30px;
@@ -61,7 +58,7 @@
 			font-size: 15px; 
 			text-align: center;
 			width: 100%;
-			 	text-align-last: center;
+			text-align-last: center;
 			      	
         
        }
@@ -72,25 +69,34 @@
        		
        }
 </style>
-<title>Insert title here</title>
+<title>SO Easy</title>
 </head>
 <body>
 	<header><%@ include file="/views/common/header.jsp" %></header>
-	<nav><%@ include file = "/views/common/aside.jsp" %></nav>
+	<nav><%@ include file = "/views/common/aside.jsp" %>
+	<br><br><br>
+	<hr style="margin:0;">
+	
+	</nav>
 	<section>
 		<br>
 		<div id="wrapper">
 		<br>
-		<h1 style="margin : 0;">악성 후기 신고 내역</h1>
+		<h1>악성 후기 신고 내역</h1>
 		<select>
 		<option>신고 처리 결과: 전체</option>
+		<option>신고 처리 결과: 대기중</option>
+		<option>신고 처리 결과: 기각</option>
+		<option>신고 처리 결과: 조치완료</option>
 		</select>
 		<select>
 		<option>공간 종류 : 전체</option>
+		<option>공간 종류 : 코워킹 스페이스</option>
+		<option>공간 종류 : 독립 오피스</option>
 		</select>
-		<select>
-			<option>일자 선택</option>
-		</select><br><br>
+	<input type="date" name=date style="float:right;" id="dateSelect"> 
+		
+		<br><br>
 		
 		<table align="center"  style="margin:0; width:100%; "  >
 				<tr>
@@ -114,7 +120,7 @@
 					<td><a href="이 아이디로 검색된 회원 목록 페이지"><%="pogba"+(i+10)%></a></td>
 					<td>광고</td>
 					<td id="resultBadReview"><select class="stage">
-							<option selected="selected" value=1 style="text-align:center;">접수중</option>
+							<option selected="selected" value=1 style="text-align:center;">대기중</option>
 							<option value=2>기각</option>
 							<option value=3>조치완료</option>
 							
@@ -133,17 +139,18 @@
 	<br><br>
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
 	<script>
+	 document.getElementById('dateSelect').value = new Date().toISOString().substring(0, 10);
 		$(function(){
 		
 			$('.stage').change(function(){
-				var num = $('.stage option:selected').val();
+				var num = $(this).val();
 				if(num ==2 || num==3){
 					window.prompt("신고자에게 한마디!");
-					$('.stage').prop('disabled',true);
+					$(this).prop('disabled',true);
 					if(num==2){
-						$('.stage').css("color","red");
+						$(this).css("color","red");
 					}else{
-						$('.stage').css("color","blue");
+						$(this).css("color","blue");
 					}
 				}
 			});
