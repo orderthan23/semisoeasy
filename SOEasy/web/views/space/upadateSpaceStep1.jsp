@@ -534,10 +534,10 @@
 			$("#add-tag").val("");
 		};
 		
-		/* function clickHash(){
+		function clickHash(){
 			$(".space-tag").hover()
 			
-		} */
+		}
 		
 		//이미지 추가하기
 		$(function(){
