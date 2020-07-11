@@ -47,6 +47,30 @@
        	font-size : 30px;
        	font-weight: bolder;
        }
+   
+       .stage{
+       	
+       		display: block;
+       		appearance:none;
+       		background : transparent;
+       		border: none;
+       		outline: none;
+       		-webkit-appearance:none;
+			margin-right:auto;
+			font-weight: bolder;
+			font-size: 15px; 
+			text-align: center;
+			width: 100%;
+			 	text-align-last: center;
+			      	
+        
+       }
+     
+       #resultBadReview{
+       	
+       		
+       		
+       }
 </style>
 <title>Insert title here</title>
 </head>
@@ -68,7 +92,7 @@
 			<option>일자 선택</option>
 		</select><br><br>
 		
-		<table align="center"  style="margin:0; width:100%;"  >
+		<table align="center"  style="margin:0; width:100%; "  >
 				<tr>
 					<th height="40px">공간명</th>
 					<th height="40px">공간종류</th>
@@ -82,16 +106,24 @@
 				
 
 				<%for(int i=1; i<=pCompleteQTY; i++) {%>
-				<tr class="pCompleteInfo">
-					<td style="font-size:13px;"><%="린가드 "+i+"코워킹 스페이스"%></td>
+				<tr class="pCompleteInfo" >
+					<td style="font-size:13px;"><a href="이 공간의 소개글"><%="린가드 "+i+"코워킹 스페이스"%></a></td>
 					<td>코워킹 스페이스</td>
-					<td><%="lingard"+i %></td>
-					<td class="price"><%="2020.07."+i%> </td>
-					<td class="refundCharge"><%="2020.07."+(i+10)%></td>
-					<td>확인</td>
-					<td>확인</td>
-					<td><a href="#">자세히 보기</a></td>
+					<td><a href="이 아이디로 검색된 회원 목록 페이지"><%="lingard"+i %></a></td>
+					<td><%="2020.07."+i%> </td>
+					<td><a href="이 아이디로 검색된 회원 목록 페이지"><%="pogba"+(i+10)%></a></td>
+					<td>광고</td>
+					<td id="resultBadReview"><select class="stage">
+							<option selected="selected" value=1 style="text-align:center;">접수중</option>
+							<option value=2>기각</option>
+							<option value=3>조치완료</option>
+							
+							
+						</select>
+					</td>
+					<td><a href="자세한 신고 내용">자세히 보기</a></td>
 				</tr>
+			
 				<%
 					}
 				%>
@@ -100,5 +132,27 @@
 	</section>
 	<br><br>
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
+	<script>
+		$(function(){
+		
+			$('.stage').change(function(){
+				var num = $('.stage option:selected').val();
+				if(num ==2 || num==3){
+					window.prompt("신고자에게 한마디!");
+					$('.stage').prop('disabled',true);
+					if(num==2){
+						$('.stage').css("color","red");
+					}else{
+						$('.stage').css("color","blue");
+					}
+				}
+			});
+			
+		});
+	</script>
+		
+			
+	
+	
 </body>
 </html>
