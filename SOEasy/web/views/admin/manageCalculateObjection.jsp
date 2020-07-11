@@ -30,7 +30,7 @@
      	}
      	
      
-
+    
 	       
        .pCompleteInfo td{
        	text-align: center;
@@ -61,17 +61,17 @@
 	<nav>
 		<%@ include file="/views/common/aside.jsp"%>
 		<div class="colMenu">
-		<label class="colMenuTitle">호스트 정산 관리</label>
+		<label class="colMenuTitle">정산 관리</label>
 		<a class="colMenuButton" href="/login/views/admin/manageCalculate.jsp">정산 내역 관리</a>
-		<a class="colMenuButton selectedButton" href="/login/views/admin/manageCalculateObjection.jsp">정산 이의신청 관리</a>
+		<a class="colMenuButton selectedButton" href="/login/views/admin/manageCalculateObjection.jsp">재정산 요청 관리</a>
 	<br><br>
 	</div>
 	<hr style="margin : 0">
-	</nav>
+	</nav>ßç
 	<section>
 		<div id="wrapper">
 		<br>
-		<h1 style="margin : 0;">공간 등록 신청 내역</h1>
+		<h1 style="margin : 0;">정산 내역</h1>
 		<select>
 		<option>== 정산 상태 ==</option>
 		<option>정산 상태: 미확인</optiyon>
@@ -79,41 +79,35 @@
 		<option>정산 상태: 마감</option>
 		</select>
 		<select>
-		<option>== 공간 종류 ==</option>
-		<option>공간 종류 : 코워킹 스페이스</option>
-		<option>공간 종류 : 독립오피스</option>
-		</select>
-		<select>
 			<option>== 일자 선택 ==</option>
 		</select><br><br>
 		
-		<table align="center"  style="margin:0; width:100%;"  >
+		<table id="tableArea" align="center"  style="margin:0; width:100%;">
 				<tr>
-					<th rowspan="2" colspan="1" height="40px">정산 번호</th>
-					<th rowspan="2" height="40px">호스트 아이디</th>
-					<th colspan="2" height="40px">정산 진행 상태</th>
-					<th rowspan="2" height="40px">공간종류</th>
-					<th rowspan="2" height="40px">정산 상태</th>
-					<th rowspan="2" height="40px">비고</th>
+					<th height="40px">의뢰 번호</th>
+					<th height="40px">정산 일자</th>
+					<th height="20px">정산 단위기간</th>
+					<th height="40px">공간명</th>
+					<th height="40px">호스트 아이디</th>
+					<th height="40px">정산 상태</th>
 				</tr>
 				<tr>
-					<th height="20px">정산 단위기간</th>
 					<!-- <th height="20px">정산 단위기간 마감</th> -->
-					<th height="20px">정산 일자</th>
 				</tr>
 
 				<%for(int i=1; i<=pCompleteQTY; i++) {%>
-				<tr class="pCompleteInfo">
+				<tr class="pCompleteInfo" class="tr1" id='<%="tr" + i %>'>
+					
 					<td style="font-size:13px;"><%=(i+257)%></td>
-					<td><%="lingard"+i %></td>
-					<td class="price"><%="2020.07."+(i+10)%> ~ <%="2020.08."+(i+0)%></td>
 					<td><%="2020.07."+(i+11)%></td>
+					<td class="price"><%="2020.07."+(i+10)%> ~ <%="2020.08."+(i+0)%></td>
 					<td>코워킹 스페이스</td>
+					<td><%="wooah"+i %></td>
 					<td id="ok">확인</td>
-					<td><a href="#"class="hide">자세히 보기</a></td>
 				</tr>
-				
-				
+				<tr class="tr2" id='<%="trHide" + i %>'>
+					<td colspan="6" style="font-size:13px;">내용</td>
+				</tr>
 				<%
 					}
 				%>
@@ -123,9 +117,38 @@
 	<br><br>
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
 	<script>
-		$('#ok').click(function(){
-			$('.hide').toggleClass('show');
+   $('.tr2').hide();
+	$(function(){
+		$("#tableArea tr").mouseenter(function(){
+			$(this).parent().css({"background":"white", "cursor":"pointer"});
+		}).mouseout(function(){
+			$(this).parent().css({"background":"lightgray"});
+		}).click(function(){
+		    $('.tr2').show();
+			$('.tr2').slidetoggle("slow");
+			
+			
 		});
-	</script>
+	});
+	$(".tr2").removeClass('.tr2').slideUp();
+    /* $('tr').on('click', function () {
+ 
+        if ($(this).hasClass('on')) {
+            slideUp();
+        } else {
+            slideUp();
+            $(this).next('tr').slidetoggle();
+        }
+        function slideUp() {
+            $('dt').removeClass('on').next().slideUp();
+        };
+   }) */
+   /* $(document).ready(function () {
+         $("#tr1").click(function () {
+               $(this).next(".tr2").slideToggle("slow");
+            }
+         )
+      }); */
+   </script>
 </body>
 </html>

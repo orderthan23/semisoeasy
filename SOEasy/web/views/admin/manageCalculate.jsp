@@ -61,9 +61,9 @@
 	<nav>
 		<%@ include file="/views/common/aside.jsp"%>
 		<div class="colMenu">
-		<label class="colMenuTitle">호스트 정산 관리</label>
+		<label class="colMenuTitle">정산 관리</label>
 		<a class="colMenuButton selectedButton" href="/login/views/admin/manageCalculate.jsp">정산 내역 관리</a>
-		<a class="colMenuButton" href="/login/views/admin/manageCalculateObjection.jsp">정산 이의신청 관리</a>
+		<a class="colMenuButton" href="/login/views/admin/manageCalculateObjection.jsp">재정산 요청 관리</a>
 	<br><br>
 	</div>
 	<hr style="margin : 0">
@@ -71,7 +71,7 @@
 	<section>
 		<div id="wrapper">
 		<br>
-		<h1 style="margin : 0;">공간 등록 신청 내역</h1>
+		<h1 style="margin : 0;">정산 내역</h1>
 		<select>
 		<option>== 정산 상태 ==</option>
 		<option>정산 상태: 미확인</optiyon>
@@ -87,7 +87,7 @@
 			<option>== 일자 선택 ==</option>
 		</select><br><br>
 		
-		<table align="center"  style="margin:0; width:100%;"  >
+		<table align="center"  style="margin:0; width:100%;">
 				<tr>
 					<th rowspan="2" colspan="1" height="40px">정산 번호</th>
 					<th rowspan="2" height="40px">호스트 아이디</th>
@@ -105,12 +105,12 @@
 				<%for(int i=1; i<=pCompleteQTY; i++) {%>
 				<tr class="pCompleteInfo">
 					<td style="font-size:13px;"><%=(i+257)%></td>
-					<td><%="lingard"+i %></td>
+					<td><%="wooah"+i %></td>
 					<td class="price"><%="2020.07."+(i+10)%> ~ <%="2020.08."+(i+0)%></td>
 					<td><%="2020.07."+(i+11)%></td>
 					<td>코워킹 스페이스</td>
 					<td id="ok">확인</td>
-					<td><a href="#"class="hide">자세히 보기</a></td>
+					<td><a href="/views/admin/manageCalculateObjectionDetail.jsp"class="hide">자세히 보기</a></td>
 				</tr>
 				
 				<%
@@ -123,7 +123,7 @@
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
 	<script>
 		$('#ok').click(function(){
-			$('.hide').toggleClass('show');
+			$('.hide').slidetoggle('.show');
 		});
 	</script>
 </body>
