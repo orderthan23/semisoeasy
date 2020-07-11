@@ -102,6 +102,16 @@
   left: 50%;
   transform:translate(-50%,-50%);
 }
+
+#buttonZone button{
+	background : #3DB6AE;
+	border-radius: 10px;
+	border: none;
+}
+#buttonZone button:focus{
+	outline: none;
+	border: none;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -117,8 +127,8 @@
          <h1 style="margin:0;">경고</h1>
       </div>
       <p align="center">해당 회원에게 제재를 가하시겠습니까? </p>
-      <div style="width:50%; margin-left: auto; margin-right: auto; align:center;">
-      <button style="margin-right: 10px; width: 100px;">네</button><button style="width:100px;">아니오</button>
+      <div style="width:50%; margin-left: auto; margin-right: auto; align:center;" id="buttonZone">
+      <button style="margin-right: 10px; width: 100px;" onclick="blockMember();">네</button><button style="width:100px;" onclick ="closeModal();">아니오</button>
       </div>
     </div>
     <div id="closeModal" class="closeModal" style="font-size: 25px; ">
@@ -185,13 +195,21 @@
 	<br><br>
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
 	<script>
-
+	function closeModal(){
+		 $('#modalArea').fadeOut();
+	}
+	
+	function blockMember(){
+		alert("해당 회원이 정지 되었습니다");
+		 $('#modalArea').fadeOut();
+	}
 		
 	$(function(){
 		
 		
 		$('.stage').change(function(){
 			var num = $(this).val();
+			$('option:nth(0)').prop("selected")
 			if(num >1){
 				 $('#modalArea').fadeIn();
 				 
