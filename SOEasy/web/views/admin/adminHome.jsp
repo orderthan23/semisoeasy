@@ -111,15 +111,19 @@
 		line-height: 60px;
 		background : #3DB6AE;
 	}
-	.hide {
-		
+	
+	.hide1,
+	.hide2,
+	.hide3,
+	.hide4
+	 {
 		visibility:hidden;
 		display: none;
 		opactiy : 0;
 		transition: 0.5s;
-	
-	
 	}
+	
+	
 	.show{
 		visibility : visible;
 		display: block;
@@ -130,18 +134,27 @@
 		height: 40px;
 		float: right;
 		clear: both;
+		font-size: 15px;
+		font-weight:bolder;
 		background: #3DB6AE;
 		border: none;
 		border-radius: 10px;
 		
 	}
-	.hide table tr th,
-	.hide table tr td{
-		width: 100px;
+	.adminPreview table tr th,
+	.adminPreview table tr td{
+		width: 150px;
 		text-align: center;
 	}
-	.hide table tr th{
+	.adminPreview table tr th{
 		background: #3DB6AE;
+		height: 30px;
+		color: white;
+		font-size: 15px;
+		font-weight: bolder;
+	}
+	.adminTitles h1{
+		font-weight: bolder;
 	}
 </style>
 <title>SO Easy</title>
@@ -208,18 +221,24 @@
 		 		<div class="adminTitles">
 			 		<h1 align="center" style="margin:0; margin-top:10px;">공간 삭제 요청 건</h1>
 		 		</div>
-		 		<div class="hide">
+		 		<div class="hide1 adminPreview">
 		 			<p>2개의 새로운 삭제 요청 건이 있습니다.</p>
 		 			<table align="center">
 		 				<tr>
-		 					<th>공간명</th>
+		 					<th colspan="2">공간명</th>
 		 					<th>공간종류</th>
 		 					<th>호스트ID</th>
-		 					<th>삭제사유</th>
+		 					<th>요청날짜</th>
+		 					<th>삭제 사유</th>
+		 					<th>삭제 사유</th>
+		 					<th>삭제 처리 결과</th>
 		 					
 		 				</tr>
 		 				<% for(int i=0; i<3; i++){%>
 		 					<tr>
+		 						<td colspan="2">린가드</td>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
 		 						<td>린가드</td>
 		 						<td>린가드</td>
 		 						<td>린가드</td>
@@ -236,18 +255,94 @@
 		 		<div class="adminTitles">
 			 		<h1 align="center" style="margin:0; margin-top:10px;">회원 복구 요청 건</h1>
 		 		</div>
-		 		<div class="hide">
+		 		<div class="hide2 adminPreview">
 		 			<p>2개의 새로운 복구 요청 건이 있습니다.</p>
 		 			<table align="center">
 		 				<tr>
 		 					<th>아이디</th>
 		 					<th>이름</th>
-		 					<th>회원 탈퇴 일</th>
+		 					<th>복구 요청 일</th>
+		 					<th>회원 탈퇴 일 </th>
+		 					<th>복구 처리 여부</th>
 		 					
 		 					
 		 				</tr>
 		 				<% for(int i=0; i<3; i++){%>
 		 					<tr>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
+		 					
+		 					</tr>
+		 				<%} %>
+		 			</table>
+		 			<button class="seeMore">자세히 보기</button>
+		 			<br><br>
+		 		</div>
+			</div>
+			
+			<div id="research2">
+		 		<div class="adminTitles">
+			 		<h1 align="center" style="margin:0; margin-top:10px;">정산 이의 신청 건</h1>
+		 		</div>
+		 		<div class="hide3 adminPreview">
+		 			<p>2개의 새로운 정산 이의 건이 있습니다.</p>
+		 			<table align="center">
+		 				<tr>
+		 					<th>의뢰 번호</th>
+		 					<th>요청일</th>
+		 					<th>단위 정산 기간</th>
+		 					<th>공간 명</th>
+		 					<th>회원 명</th>
+		 					<th>진행 결과</th>
+		 					<th>세부 내용</th>
+		 					
+		 					
+		 				</tr>
+		 				<% for(int i=0; i<3; i++){%>
+		 					<tr>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
+		 						<td><a>자세히 보기</a></td>
+		 					
+		 					</tr>
+		 				<%} %>
+		 			</table>
+		 			<button class="seeMore">자세히 보기</button>
+		 			<br><br>
+		 		</div>
+			</div>
+			
+			<div id="research2">
+		 		<div class="adminTitles">
+			 		<h1 align="center" style="margin:0; margin-top:10px;">악성 신고 건</h1>
+		 		</div>
+		 		<div class="hide4 adminPreview">
+		 			<p>2개의 새로운 악성 신고 건이 있습니다.</p>
+		 			<table align="center">
+		 				<tr>
+		 					<th>공간명</th>
+		 					<th>공간 종류</th>
+		 					<th>요청자 아이디</th>
+		 					<th>요청 날짜</th>
+		 					<th>신고 받은 아이디</th>
+		 					<th>신고 사유</th>
+		 					<th>신고 처리 결과</th>
+		 					
+		 					
+		 				</tr>
+		 				<% for(int i=0; i<3; i++){%>
+		 					<tr>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
+		 						<td>린가드</td>
 		 						<td>린가드</td>
 		 						<td>린가드</td>
 		 						<td>린가드</td>
@@ -268,8 +363,17 @@
 	<footer><%@ include file="../../views/common/footer.jsp" %></footer>
 	<script>
 		
-		$(".adminTitles").click(function(){
-			$(".hide").toggleClass('show');
+		$(".adminTitles:nth(0)").click(function(){
+			$(".hide1").toggleClass('show');
+		});
+		$(".adminTitles:nth(1)").click(function(){
+			$(".hide2").toggleClass('show');
+		});
+		$(".adminTitles:nth(2)").click(function(){
+			$(".hide3").toggleClass('show');
+		});
+		$(".adminTitles:nth(3)").click(function(){
+			$(".hide4").toggleClass('show');
 		});
 	</script>
 </body>
