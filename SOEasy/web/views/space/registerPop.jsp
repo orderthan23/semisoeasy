@@ -10,7 +10,7 @@
 	#outer {
 		border:3px solid #40a4b6;
 		width:500px;
-		height:530px;
+		height:550px;
 	}
 	
 	#regi td {
