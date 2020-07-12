@@ -83,6 +83,11 @@
 		border-color: #ECECEC38;
 		vertical-align: top;
 	}
+	.reserveBtn {
+		background-color:transparent;
+		width:100%;
+		border:0px;		
+	}
 </style>
 </head>
 <body>
@@ -172,7 +177,7 @@
 	                sentence+='<td';
 	                if(spaceInfo == i){
 	                	if(startInfo == j){
-		                	sentence+=' colspan="' + dayInfo + '" style="background:red; color:white; text-align:center;"><label>' + name + '</label>';
+		                	sentence+=' colspan="' + dayInfo + '" style="background:red; color:white; text-align:center;"><button class="reserveBtn">' + name + '</button>';
 		                	j+= dayInfo-1;
 		                } else {
 			                sentence+='>';
@@ -187,6 +192,10 @@
 	        return sentence;
 	    });
 	});
+	
+	$("reserveBtn").onclick(function(){
+		window.open("/views/host/manageReserve/reserveUpdate.jsp", 'Window2', 'width=500, height=550');
+	})
 
 	</script>
 	
