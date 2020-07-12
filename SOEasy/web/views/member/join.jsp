@@ -6,9 +6,6 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="../../js/validate.js"></script>
-
-
-
 <link rel="stylesheet" href="../../css/layout.css">
 
 <title>SO Easy</title>
@@ -179,8 +176,8 @@ h1 {
 				
 				<tr>
 					<td class="input-group" id="inputCert"><label for="certCode" class="input">인증번호</label>
-						<input type="text" id="certCode" placeholder="인증번호를 입력해주세요" onclick="" />
-						<button type="button" onclick="test1();">인증 확인</button>
+						<input type="text" id="userCode" placeholder="인증번호를 입력해주세요" onclick="" />
+						<button type="button" onclick="certifyCorrect();">인증 확인</button>
 						<p></p>
 						</td>
 						
@@ -191,14 +188,15 @@ h1 {
 						<input type="email" id="email" placeholder="이메일" onkeyup="setTimeout(checkingEmail(),200)" />
 						<button type="button" onclick="checkCertifiedEmail();">이메일 인증</button>
 						<p></p>
+						<input type="hidden" id="eCert">
 						</td>
 						
 				</tr>
 				
 				<tr>
-					<td class="input-group" id="email-certificate"><label for="emailCode" class="input">인증번호</label>
-						<input type="text" id="emailCode" placeholder="인증번호를 입력해주세요" onclick="" />
-						<button type="button" onclick="checkCertifiedEmail();">인증 확인</button>
+					<td class="input-group" id="email-certificate"><label for="emailCode" class="input">인증코드</label>
+						<input type="text" id="emailCode" placeholder="인증코드를 입력해주세요" onclick="" />
+						<button type="button" onclick="checkEcert();">인증 확인</button>
 						<p></p>
 						</td>
 						
@@ -232,32 +230,11 @@ h1 {
 	<footer>
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
+
 	<script>
-	//본인 인증 코드
-	function certified(){
-		var phoneNum = $('#phoneNum').val();
-		console.log(phoneNum);
-		
-		 $.ajax({
-			
-			url:"/login/certification.me",
-			data:{phoneNum:phoneNum},
-			type:"post",
-			success: function(data){
-				console.log(data);
-				$('#cert').val(data);
-			},
-			error: function(data){
-				console.log("실패!");
-			}
-		})  
-	}
-		function test1(){
-			var code = $('#cert').val();
-			
-			console.log("인증번호 "+code);
-			
-		}
+	
+	
+	
 
 		//디자인  메소드
 		$('input').click(function() {
