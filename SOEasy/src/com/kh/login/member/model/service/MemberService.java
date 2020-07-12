@@ -40,5 +40,14 @@ public class MemberService {
 		
 		
 	}
+	public int nickCheck(String nickName) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().nickCheck(con, nickName);
+		
+		close(con);
+		
+		return result;
+	}
 
 }

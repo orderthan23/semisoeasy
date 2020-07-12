@@ -149,4 +149,19 @@ public class MemberDao {
 		return result;
 	}
 
+	public int nickCheck(Connection con, String nickName) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result =0;
+		String query = prop.getProperty("nickCheck");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, nickName);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 }

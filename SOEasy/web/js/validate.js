@@ -55,10 +55,7 @@
 						}
 						
 					})
-//				checkId = true;
-//				alert("사용가능한 아이디 입니다!");
-//				nowId = $userId;
-//				$('#id-zone p').text("중복 체크 완료").css("color","green");
+
 				}
 			}
 		
@@ -92,10 +89,31 @@
 				if(canDuplicateNickCheck==false){
 					alert("사용 불가능한 닉네임입니다 조건을 다시 확인하세요");
 				}else{
-				checkNickName = true;
+					var nickName = $('#nickName').val();
+					$.ajax({
+						url : "/login/checkNick.me",
+						data: {nickName: nickName},
+						success :function(data){
+							console.log(data);
+							if(data=="success"){
+								alert("사용 가능한 닉네임입니다!");
+								checkNickName = true;
+								nowNick = $nickName;
+								$('#nickName-zone p').text("중복 체크 완료").css("color","green");
+							}else{
+								alert("중복된 닉네임 입니다");
+								
+							}
+						},
+						error : function(data){
+							console.log(data);
+						}
+						
+					})
+				/*checkNickName = true;
 				alert("사용가능한 닉네임 입니다!");
 				nowNickName = $nickName;
-				$('#nickName-zone p').text("중복 체크 완료").css("color","green");
+				$('#nickName-zone p').text("중복 체크 완료").css("color","green");*/
 				}
 			
 			}
