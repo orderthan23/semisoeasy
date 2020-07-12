@@ -117,10 +117,10 @@
 		$(function(){
 			switch(userStatus){
 			case 1: 
-			case 2: $('#firstHeaderMenu').attr("href","/logoutpage/").text("로그아웃");
+			case 2: $('#firstHeaderMenu').attr("href","<%=request.getContextPath()%>/logout.me").text("로그아웃");
 				    $('#secondHeaderMenu').attr("href","/login/views/member/updateMember.jsp").text("마이페이지"); break;
 					
-			case 3: $('#firstHeaderMenu').attr("href","/logoutpage/").text("로그아웃");
+			case 3: $('#firstHeaderMenu').attr("href","<%=request.getContextPath()%>/logout.me").text("로그아웃");
 					$('#secondHeaderMenu').attr("href","/login/views/member/updateMember.jsp").text("회원관리"); 
 					$('#thirdHeaderMenu').attr("href","/login/views/space/insertSpaceStep1.jsp").text("공간관리"); break; 
 			
