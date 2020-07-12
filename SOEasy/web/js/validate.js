@@ -189,7 +189,7 @@
 							}
 							
 							else{
-							alert("인증번호가 발송 되었습니다").
+							alert("인증번호가 발송 되었습니다");
 							$('#cert').val(data);
 							}
 						},
@@ -329,7 +329,7 @@
 					return;
 				}
 				
-				$(this).attr("action","/login/insert.me").submit();
+				$('#joinForm').submit();
 					
 			}
 		

@@ -32,7 +32,7 @@ public class EncryptFilter implements Filter {
 		
 		System.out.println("비밀번호 암호화 완료");
 		
-		chain.doFilter(request, response);
+		chain.doFilter(lw, response);
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

@@ -120,7 +120,7 @@ h1 {
 
 
 
-		<form action="" method="post" id="joinForm">
+		<form action="<%= request.getContextPath() %>/insert.me" method="post" id="joinForm">
 			<table id="joinTable" align="center">
 				<tr>
 					<td><h1 align="center">회원가입</h1>

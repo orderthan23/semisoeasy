@@ -20,9 +20,9 @@ public class MemberService {
 		
 		if(result >= LoginServlet.LOGIN_GUEST) {
 			loginUser = md.selectOne(con,requestMember);
-			loginUser.setStatus(result);
+			loginUser.setpType(result);
 		}else {
-			loginUser.setStatus(LoginServlet.LOGIN_FAILED);
+			loginUser.setpType(LoginServlet.LOGIN_FAILED);
 		}
 	
 		
@@ -67,6 +67,21 @@ public class MemberService {
 		close(con);
 		
 		return result;
+	}
+	public int insertMember(Member requestMember) {
+		Connection con = getConnection();
+		
+		int insertResult = new MemberDao().insertMember(con, requestMember);
+		
+		if(insertResult > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return insertResult;
 	}
 
 }
