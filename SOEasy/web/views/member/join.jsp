@@ -128,7 +128,7 @@ h1 {
 				</tr>
 				<tr>
 					<td class="input-group" id="id-zone"><label for="id" class="input">아이디</label>
-						<input type="text" id="userId" placeholder="아이디" onkeyup="setTimeout(checkingId(),200);"/>
+						<input type="text" id="userId" placeholder="아이디" name="userId" onkeyup="setTimeout(checkingId(),200);"/>
 						<button type="button" onclick="checkSameId();">아이디 중복 확인</button>
 						<p></p>
 						</td>
@@ -136,7 +136,7 @@ h1 {
 
 				<tr>
 					<td class="input-group" id="nickName-zone"><label for="nickName" class="input">닉네임
-					</label> <input type="text" id="nickName" placeholder="닉네임" onkeyup="setTimeout(checkingNickName(),200)" />
+					</label> <input type="text" id="nickName"  name="nickName" placeholder="닉네임" onkeyup="setTimeout(checkingNickName(),200)" />
 						<button type="button" onclick="checkSameNickName();">닉네임 중복 확인</button>
 						<p></p>
 						</td>
@@ -145,7 +145,7 @@ h1 {
 
 				<tr>
 					<td class="input-group"><label for="name" class="input">이름</label>
-						<input type="text" id="name" placeholder="이름" /></td>
+						<input type="text" id="name" placeholder="이름" name="name" /></td>
 				</tr>
 
 
@@ -153,7 +153,7 @@ h1 {
 					<td class="input-group" id="password-zone">
 						<pre id="validate1">                                               0/16자</pre>
 						<label for="password" class="input" >비밀번호</label>
-						<input type="password" id="password" placeholder="비밀번호" onkeyup="setTimeout(checkPwdLength(),200);" />
+						<input type="password" id="password" placeholder="비밀번호" name="password" onkeyup="setTimeout(checkPwdLength(),200);" />
 						<p></p>
 					</td>
 				</tr>
@@ -185,7 +185,7 @@ h1 {
 
 				<tr>
 					<td class="input-group" id="email-zone"><label for="email" class="input">이메일</label>
-						<input type="email" id="email" placeholder="이메일" onkeyup="setTimeout(checkingEmail(),200)" />
+						<input type="email" id="email"  name="email" placeholder="이메일" onkeyup="setTimeout(checkingEmail(),200)" />
 						<button type="button" onclick="checkCertifiedEmail();">이메일 인증</button>
 						<p></p>
 						<input type="hidden" id="eCert">

@@ -1,6 +1,6 @@
 package com.kh.login.member.model.service;
 
-import static com.kh.login.common.JDBCTemplate.getConnection;
+import static com.kh.login.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
@@ -27,6 +27,18 @@ public class MemberService {
 	
 		
 		return loginUser;
+	}
+	//중복 아이디를 체크하는 메소드
+	public int idCheck(String userId) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().idCheck(con, userId);
+		
+		close(con);
+		
+		return result;
+		
+		
 	}
 
 }

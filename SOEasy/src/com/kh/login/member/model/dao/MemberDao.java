@@ -1,6 +1,6 @@
 package com.kh.login.member.model.dao;
 
-import static com.kh.login.common.JDBCTemplate.*;
+import static com.kh.login.common.JDBCTemplate.close;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -118,6 +118,35 @@ public class MemberDao {
 		}
 
 		return loginUser;
+	}
+
+	//아이디 중복 체크 하는 메소드
+	public int idCheck(Connection con, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("idCheck");
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		
+		return result;
 	}
 
 }

@@ -34,7 +34,27 @@
 				if(canDuplicateIdCheck==false){
 					alert("사용 불가능 한 아이디입니다 조건을 다시 확인하세요");
 				}else{
-					$.ajax({})
+					var userId = $('#userId').val();
+					$.ajax({
+						url : "/login/checkId.me",
+						data: {userId: userId},
+						success :function(data){
+							console.log(data);
+							if(data=="success"){
+								alert("사용 가능한 아이디입니다!");
+								checkId = true;
+								nowId = $userId;
+								$('#id-zone p').text("중복 체크 완료").css("color","green");
+							}else{
+								alert("중복된 아이디 입니다");
+								
+							}
+						},
+						error : function(data){
+							console.log(data);
+						}
+						
+					})
 //				checkId = true;
 //				alert("사용가능한 아이디 입니다!");
 //				nowId = $userId;
@@ -270,7 +290,7 @@
 					return;
 				}
 				
-				$(this).attr("action","#").submit();
+				$(this).attr("action","/login/insert.me").submit();
 					
 			}
 		
