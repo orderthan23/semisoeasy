@@ -106,27 +106,15 @@
 	<section>
 	<div id="wrapper">
        
-		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">1대1문의(관리자)</h2>
+		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">공지사항</h2>
 		
 		<br>
 		<table id="searchWrap" height="25px">
 			<tr>
-			<td colspan="6"><input type=search placeholder="검색어를 입력하세요" >	</td>
-			<td><button type="submit" ><img src="/login/images/icon/search2.png" width="25px" height="25px"></button>
 			</tr>
 		</table>
 		<a href="board.jsp" class="writeButton">이전으로</a> 
 		<br>
-		
-		<select	class="category">
-			<option class="category">계정관련</option>
-			<option class="category">결제관련</option>
-		</select>
-		<select class="OX">
-			<option class="OX">선택</option>
-			<option class="OX">O</option>
-			<option class="OX">X</option>
-		</select>
 				<table style = "width: 100%; border-collapse: collapse; " id="boardTable">
 						<tr>
 							<th>번호</th>
