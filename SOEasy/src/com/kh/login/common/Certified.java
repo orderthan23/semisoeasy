@@ -32,16 +32,16 @@ public class Certified {
 		params.put("type", "SMS");
 		params.put("text", "SO Easy 인증번호는 "+key+" 입니다.");
 		params.put("app_version", "test app 1.2"); // application name and version
-		try
+	/*	try
 
 		{
 			// send() 는 메시지를 보내는 함수
-			JSONObject obj = (JSONObject) coolsms.send(params);
-			System.out.println(obj.toString());
+//			JSONObject obj = (JSONObject) coolsms.send(params);
+//			System.out.println(obj.toString());
 		} catch (CoolsmsException e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCode());
-		}
+		}*/
 		return key;
 	}
 	

@@ -41,27 +41,27 @@ public class MemberDao {
 		String query = prop.getProperty("checkStatus");
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, requestMember.getUserId());
+			pstmt.setString(1, requestMember.getmId());
 			
 			rset = pstmt.executeQuery();
 			
 			String userId ="";
 			String password = "";
-			String power = "";
+			int power = 0;
 			
 			if(rset.next()) {
-				userId = rset.getString("USER_ID");
-				password = rset.getString("USER_PWD");
-				power = rset.getString("POWER_CODE");
+				userId = rset.getString("M_ID");
+				password = rset.getString("M_PASSWORD");
+				power = rset.getInt("P_TYPE");
 			}
 			
 
 			
-			if (requestMember.getUserId().equals(userId) && requestMember.getPassword().equals(password)) {
+			if (requestMember.getmId().equals(userId) && requestMember.getmPassword().equals(password)) {
 
-				if (power.equals("P1")) {
+				if (power==3) {
 					result = LoginServlet.LOGIN_ADMIN;
-				} else if (power.equals("P2")) {
+				} else if (power==2) {
 					result = LoginServlet.LOGIN_HOST;
 				} else {
 					result = LoginServlet.LOGIN_GUEST;
@@ -88,25 +88,22 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, requestMember.getUserId());
-			pstmt.setString(2, requestMember.getPassword());
+			pstmt.setString(1, requestMember.getmId());
+			pstmt.setString(2, requestMember.getmPassword());
 
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
 				loginUser = new Member();
-
-				loginUser.setUserId(rset.getString("USER_ID"));
-				loginUser.setPassword(rset.getString("USER_PWD"));
-				loginUser.setUserName(rset.getString("USER_NAME"));
-				loginUser.setGender(rset.getString("GENDER"));
-				loginUser.setAge(rset.getInt("AGE"));
-				loginUser.setEmail(rset.getString("EMAIL"));
-				loginUser.setPhone(rset.getString("PHONE"));
-				loginUser.setAddress(rset.getString("ADDRESS"));
-				loginUser.setHobby(rset.getString("HOBBY"));
-				loginUser.setPower(rset.getString("POWER_CODE"));
-				loginUser.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				loginUser.setMemberNo(rset.getInt("MEMBER_NO"));
+				loginUser.setpType(rset.getInt("P_TYPE"));
+				loginUser.setmName(rset.getString("M_NAME"));
+				loginUser.setmId(rset.getString("M_ID"));
+				loginUser.setmNick(rset.getString("M_NICK"));
+				loginUser.setmPassword(rset.getString("M_PASSWORD"));
+				loginUser.setmPhone(rset.getString("M_PHONE"));
+				loginUser.setmEmail(rset.getString("M_EMAIL"));
+				loginUser.setEnrollDate(rset.getDate("M_ENROLL_DATE"));
 			}
 
 		} catch (SQLException e) {

@@ -19,6 +19,7 @@ public class MemberService {
 		Member loginUser = new Member();
 		
 		if(result >= LoginServlet.LOGIN_GUEST) {
+			System.out.println("여기까진 됨1");
 			loginUser = md.selectOne(con,requestMember);
 			loginUser.setpType(result);
 		}else {
