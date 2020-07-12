@@ -4,140 +4,103 @@ import java.sql.Date;
 
 public class Member implements java.io.Serializable{
 
-	private String userId;
-	private String password;
-	private String userName;
-	private String gender;
-	private int age;
-	private String email;
-	private String phone;
-	private String address;
-	private String hobby;
-	private String power;
+	private int memberNo;
+	private int pType;
+	private String mName;
+	private String mId;
+	private String mNick;
+	private String mPassword;
+	private String mPhone;
+	private String mEmail;
 	private Date enrollDate;
-	private int status = 99;
-	
 	
 	public Member() {
-
+		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-	
-
-
-
-
-
-	public Member(String userId, String password, String userName, String gender, int age, String email, String phone,
-			String address, String hobby, String power, Date enrollDate, int status) {
+	public Member(int memberNo, int pType, String mName, String mId, String mNick, String mPassword, String mPhone,
+			String mEmail, Date enrollDate) {
 		super();
-		this.userId = userId;
-		this.password = password;
-		this.userName = userName;
-		this.gender = gender;
-		this.age = age;
-		this.email = email;
-		this.phone = phone;
-		this.address = address;
-		this.hobby = hobby;
-		this.power = power;
+		this.memberNo = memberNo;
+		this.pType = pType;
+		this.mName = mName;
+		this.mId = mId;
+		this.mNick = mNick;
+		this.mPassword = mPassword;
+		this.mPhone = mPhone;
+		this.mEmail = mEmail;
 		this.enrollDate = enrollDate;
-		this.status = status;
 	}
-
 
 	@Override
 	public String toString() {
-		return "Member [userId=" + userId + ", password=" + password + ", userName=" + userName + ", gender=" + gender
-				+ ", age=" + age + ", email=" + email + ", phone=" + phone + ", address=" + address + ", hobby=" + hobby
-				+ ", power=" + power + ", enrollDate=" + enrollDate + ", status=" + status + "]";
+		return "Member [memberNo=" + memberNo + ", pType=" + pType + ", mName=" + mName + ", mId=" + mId + ", mNick="
+				+ mNick + ", mPassword=" + mPassword + ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", enrollDate="
+				+ enrollDate + "]";
 	}
 
-
-	public String getUserId() {
-		return userId;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
-	public String getPassword() {
-		return password;
+	public int getpType() {
+		return pType;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setpType(int pType) {
+		this.pType = pType;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getmName() {
+		return mName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setmName(String mName) {
+		this.mName = mName;
 	}
 
-	public String getGender() {
-		return gender;
+	public String getmId() {
+		return mId;
 	}
 
-	public void setGender(String gender) {
-		
-		this.gender = gender;
-	}
-	public String getPower() {
-		return power;
-	}
-	
-	
-	
-	
-	
-	public void setPower(String power) {
-		this.power = power;
+	public void setmId(String mId) {
+		this.mId = mId;
 	}
 
-	public int getAge() {
-		return age;
+	public String getmNick() {
+		return mNick;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setmNick(String mNick) {
+		this.mNick = mNick;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getmPassword() {
+		return mPassword;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setmPassword(String mPassword) {
+		this.mPassword = mPassword;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getmPhone() {
+		return mPhone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setmPhone(String mPhone) {
+		this.mPhone = mPhone;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getmEmail() {
+		return mEmail;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getHobby() {
-		return hobby;
-	}
-
-	public void setHobby(String hobby) {
-		this.hobby = hobby;
+	public void setmEmail(String mEmail) {
+		this.mEmail = mEmail;
 	}
 
 	public Date getEnrollDate() {
@@ -147,16 +110,7 @@ public class Member implements java.io.Serializable{
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
-
-
-	public int getStatus() {
-		return status;
-	}
-
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
+	
 	
 	
 }

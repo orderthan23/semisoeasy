@@ -1,4 +1,11 @@
-//아이디 체크 메소드
+
+			
+
+				
+				
+
+
+//아이디 체크 함수
 			//아이디 유효성 검사 변수
 			var nowId= ""; //중복 체크 후 저장할 아이디	
 			var canDuplicateIdCheck; //중복여부를 실행할 만한 조건이 되는지 체크
@@ -22,15 +29,33 @@
 					}
 				}
 			}
-			//아이디 중복 체크 메소드
+			//아이디 중복 체크 함수
 			function checkSameId(){
 				if(canDuplicateIdCheck==false){
 					alert("사용 불가능 한 아이디입니다 조건을 다시 확인하세요");
 				}else{
-				checkId = true;
-				alert("사용가능한 아이디 입니다!");
-				nowId = $userId;
-				$('#id-zone p').text("중복 체크 완료").css("color","green");
+					var userId = $('#userId').val();
+					$.ajax({
+						url : "/login/checkId.me",
+						data: {userId: userId},
+						success :function(data){
+							console.log(data);
+							if(data=="success"){
+								alert("사용 가능한 아이디입니다!");
+								checkId = true;
+								nowId = $userId;
+								$('#id-zone p').text("중복 체크 완료").css("color","green");
+							}else{
+								alert("중복된 아이디 입니다");
+								
+							}
+						},
+						error : function(data){
+							console.log(data);
+						}
+						
+					})
+
 				}
 			}
 		
@@ -64,10 +89,31 @@
 				if(canDuplicateNickCheck==false){
 					alert("사용 불가능한 닉네임입니다 조건을 다시 확인하세요");
 				}else{
-				checkNickName = true;
+					var nickName = $('#nickName').val();
+					$.ajax({
+						url : "/login/checkNick.me",
+						data: {nickName: nickName},
+						success :function(data){
+							console.log(data);
+							if(data=="success"){
+								alert("사용 가능한 닉네임입니다!");
+								checkNickName = true;
+								nowNick = $nickName;
+								$('#nickName-zone p').text("중복 체크 완료").css("color","green");
+							}else{
+								alert("중복된 닉네임 입니다");
+								
+							}
+						},
+						error : function(data){
+							console.log(data);
+						}
+						
+					})
+				/*checkNickName = true;
 				alert("사용가능한 닉네임 입니다!");
 				nowNickName = $nickName;
-				$('#nickName-zone p').text("중복 체크 완료").css("color","green");
+				$('#nickName-zone p').text("중복 체크 완료").css("color","green");*/
 				}
 			
 			}
@@ -106,7 +152,7 @@
 				console.log(checkpw);
 			}
 		
-//비밀번호 확인과 비밀번호 가 일치한지 확인하는 메소드
+//비밀번호 확인과 비밀번호 가 일치한지 확인하는 함수
 		var checkpw2;
 			function checkPwdSame(){
 				var pw = $('#password').val(); // 기존 입력한 비밀번호
@@ -119,9 +165,64 @@
 					$('#password2-zone p').text("비밀번호가 다릅니다").css("color","red");
 				}
 			}
+//사용자가 입력한 번호로 SMS 를 발송하는 함수		
+			function certified(){
+				var phoneNum = $('#phoneNum').val();
+				var name = $('#name').val();
+				console.log(phoneNum);
+				console.log(name);
+						
+					 $.ajax({
+							
+						url:"/login/certification.me",
+						data:{phoneNum:phoneNum,
+							  name: name
+							 },
+						type:"post",
+						success: function(data){
+							console.log(data);
+							if(data == "fail"){
+								alert("이미 가입된 이름과 전화번호 입니다. 로그인 페이지로 이동합니다.");
+								location.href= "/login/views/member/loginForm.jsp";
+							}else if(data =="fail2"){
+								alert("이름을 입력해 주세요");
+							}
+							
+							else{
+							alert("인증번호가 발송 되었습니다");
+							$('#cert').val(data);
+							}
+						},
+						error: function(data){
+							console.log("실패!");
+						}
+					});
+				}
+	//인증번호와 사용자가 입력한 인증번호가 동일한지 판단하는 함수
+			var checkCert = false;
+			function certifyCorrect(){
+				var userCode = $("#userCode").val();
+				var certCode= $('#cert').val();
+				//console.log(userCode);
+				//console.log(certCode);
+				if(userCode == certCode){
+					alert("본인인증이 완료되었습니다");
+					$('#inputCert p').text("본인인증 완료").css("color","green");
+					$('#userCode').prop("readonly",true);
+					checkCert = true;
+						
+				}else{
+					alert("본인인증 실패 다시 입력해주세요");
+					$('#inputCert p').text("본인인증을 다시 진행해주세요").css("color","red");
+							
+				}
+						
+						
+			}			
+
 		
 //이메일 유효성 검사 변수
-		var nowEmail= ""; //중복 체크 후 저장할 이메일	
+			
 		var canCertifiedEamil; //이메일 인증을 실행할 만한 조건이 되는지 체크
 		var $email; // 유저 이메일
 		var checkEmail = false;//이메일 인증 체크 했는지 여부
@@ -137,7 +238,7 @@
 				}
 					
 				else{
-					if(checkEmail === false || nowEmail !== $email){
+					if(checkEmail === false){
 					
 				 	$('#email-zone p').text("이메일 인증이 필요합니다.").css("color","red");
 				 	canCertifiedEmail = true;
@@ -149,12 +250,51 @@
 				if(canCertifiedEmail==false){
 					alert("이메일 형식에 맞게 입력해주세요.");
 				}else{
-				checkEmail = true;
-				alert("이메일 인증이  완료되었습니다!");
-				nowEmail = $email;
-				$('#email-zone p').text("이메일 인증 완료").css("color","green");
+					var email = $('#email').val();
+					var name = $('#name').val();
+					$.ajax({
+						url: "/login/eCert.me",
+						data: {email : email },
+						type: "post",
+						success: function(data){
+							
+							console.log(data);
+							if(data != "fail"){
+							$('#eCert').val(data);
+							alert("인증 코드가 발송되었습니다.");
+							}else{
+								alert("이미 가입된 적이 있는 이메일 입니다 로그인으로 이동합니다.")
+								location.href="/login/views/member/loginForm.jsp";
+							}
+						},
+						error: function(data){
+							console.log("이메일 인증 에러")
+						}
+						
+					});
+					
+			
 				}
 			
+			}
+			
+			function checkEcert(){
+				var userECode = $("#emailCode").val();
+				var certEcode= $('#eCert').val();
+				//console.log(userCode);
+				//console.log(certCode);
+				if(userECode == certEcode){
+					alert("이메일 인증이 완료되었습니다");
+					$('#email-certificate p').text("이메일 인증 완료").css("color","green");
+					$('#emailCode').prop("readonly",true);
+					$('#email').prop("readonly",true);
+					checkEmail = true;
+						
+				}else{
+					alert("본인인증 실패 다시 입력해주세요");
+					$('#inputCert p').text("본인인증을 다시 진행해주세요").css("color","red");
+							
+				}
 			}
 			
 //전체 한번 체크 여부
@@ -178,19 +318,24 @@
 					alert("이메일을 확인하세요!");
 					return;
 				}
+				
+				if(checkCert === false){
+					alert("본인인증을 진행하세요!");
+					return;
+				}
 				console.log($('#rule1').is(":checked"));
 				if(($('#rule1').is(":checked")===false || $('#rule2').is(":checked")===false)){
 					alert("필수 약관에 동의해주세요!");
 					return;
 				}
 				
-				$(this).attr("action","#").submit();
+				$('#joinForm').submit();
 					
 			}
 		
 		
 		
-//모두 동의  클릭시 모두 동의 되는 메소드
+//모두 동의  클릭시 모두 동의 되는 함수
 		$(function() { //전체선택 체크박스 클릭 
 			$("#rule3").click(function() {
 				//만약 전체 선택 체크박스가 체크된상태일경우

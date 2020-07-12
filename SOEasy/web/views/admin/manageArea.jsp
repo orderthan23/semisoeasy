@@ -19,49 +19,60 @@
 	}
 	#wrapper select{
 		float : right;
+		height: 24px;
 	}
 	      
-     	th{
-     		background: #E4EEFA;
-     		width: 13%;
-     		font-size: 17px;
-     		font-weight: bolder; 
-     		clear:both;
-     		
+    th{
+   		background: #E4EEFA;
+    	width: 13%;
+     	font-size: 17px;
+     	font-weight: bolder; 
+     	clear:both;
      	}
-     	
-     
-    
 	       
-       .pCompleteInfo td{
+    .pCompleteInfo td{
        	text-align: center;
        	height : 30px;
        	background : #fff;
-       }
+    }
    
-       .pCompleteInfo td a{
+    .pCompleteInfo td a{
        	text-decoration: underline;
        	color : black;
-       }
+    }
+    
+    .stage{
+   		display: block;
+   		appearance:none;
+   		background : transparent;
+   		border: none;
+  		outline: none;
+  		-webkit-appearance:none;
+		margin-right:auto;
+		font-weight: bolder;
+		font-size: 15px; 
+		text-align: center;
+		width: 100%;
+		text-align-last: center;
+    }
 </style>
 <title>Insert title here</title>
 </head>
 <body>
-	<header><%@ include file="/views/common/adminHeader.jsp" %></header>
+	<header><%@ include file="/views/common/header.jsp" %></header>
 	<nav><%@ include file = "/views/common/aside.jsp" %></nav>
 	<section>
 		<div id="wrapper">
 		<br>
-		<h1 style="margin : 0;">공간 등록 신청 내역</h1>
+		<h1 style="margin : 0; font-weight: bolder;">공간 등록 신청 내역</h1>
 		<select>
 		<option>검수 결과: 전체</option>
 		</select>
 		<select>
 		<option>공간 종류 : 전체</option>
 		</select>
-		<select>
-			<option>일자 선택</option>
-		</select><br><br>
+		<input type="date" name=date style="float:right;" id="dateSelect"> 
+		<br><br>
 		
 		<table align="center"  style="margin:0; width:100%;"  >
 				<tr>
@@ -80,14 +91,20 @@
 
 				<%for(int i=1; i<=pCompleteQTY; i++) {%>
 				<tr class="pCompleteInfo">
-					<td style="font-size:13px;"><%="린가드 "+i+"코워킹 스페이스"%></td>
+					<td style="font-size:13px;"><a href="해당 공간의 소개글"><%="린가드 "+i+"코워킹 스페이스"%></a></td>
 					<td colspan="2">코워킹 스페이스</td>
-					<td><%="lingard"+i %></td>
-					<td class="price"><%="2020.07."+i%> </td>
-					<td class="refundCharge"><%="2020.07."+(i+10)%></td>
+					<td><a href="해당 회원 아이디로 검색된 회원목록"><%="lingard"+i %></a></td>
+					<td><%="2020.07."+i%> </td>
+					<td><%="2020.07."+(i+10)%></td>
 					<td><%="2020.07."+(i+11)%></td>
-					<td>확인</td>
-					<td><a href="#">자세히 보기</a></td>
+					<td id="result">
+						<select class="stage">
+							<option selected="selected" value=1 style="text-align:center;">검수 대기중</option>
+							<option value=2>검수 거절</option>
+							<option value=3>검수 완료</option>
+						</select>
+					</td>
+					<td><a href="공간 등록서 보기">자세히 보기</a></td>
 				</tr>
 				<%
 					}
@@ -97,5 +114,29 @@
 	</section>
 	<br><br>
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
+	<script>
+	 document.getElementById('dateSelect').value = new Date().toISOString().substring(0, 10);
+		$(function(){
+		
+			$('.stage').change(function(){
+				var num = $(this).val();
+				if(num ==2 || num==3){
+			
+					$(this).prop('disabled',true);
+					if(num==2){
+						window.prompt("반려 이유를 작성해주세요.")
+						$(this).css("color","red");
+						//처리 결과 서블렛으로 전송
+						
+					}else{
+						$(this).css("color","blue");
+						//처리 결과 서블렛으로 전송후 공간 게시물 활성화 처리
+					}
+				
+				}
+			});
+			
+		});	
+	</script>
 </body>
 </html>

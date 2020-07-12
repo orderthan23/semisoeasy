@@ -79,10 +79,11 @@
        
       
        #reportBox{
-       	margin-left: auto;
-       	margin-right: auto;
+       
        	margin-top : 50px;
        	width: 80%;
+       	margin-right: auto;
+       	margin-left: auto;
        	  	background : white;
        	border-radius: 15px;
        	
@@ -119,6 +120,7 @@
        	font-size : 20px;
        	border: none;
        }
+   
        
        #problemRequestList table tr td{
        	text-align: center;
@@ -212,7 +214,7 @@
 				<div id="reportBox">
 				
 				
-				<table align="center">
+				<table align="center" style="width: 80%;">
 					<tr height="20px">
 						<td><h1>판매 총액 :</h1></td>
 						<td><label>1,802,000</label></td>

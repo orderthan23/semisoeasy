@@ -6,9 +6,6 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="../../js/validate.js"></script>
- <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
-
 <link rel="stylesheet" href="../../css/layout.css">
 
 <title>SO Easy</title>
@@ -123,7 +120,7 @@ h1 {
 
 
 
-		<form action="" method="post" id="joinForm">
+		<form action="<%= request.getContextPath() %>/insert.me" method="post" id="joinForm">
 			<table id="joinTable" align="center">
 				<tr>
 					<td><h1 align="center">회원가입</h1>
@@ -131,7 +128,7 @@ h1 {
 				</tr>
 				<tr>
 					<td class="input-group" id="id-zone"><label for="id" class="input">아이디</label>
-						<input type="text" id="userId" placeholder="아이디" onkeyup="setTimeout(checkingId(),200);"/>
+						<input type="text" id="userId" placeholder="아이디" name="userId" onkeyup="setTimeout(checkingId(),200);"/>
 						<button type="button" onclick="checkSameId();">아이디 중복 확인</button>
 						<p></p>
 						</td>
@@ -139,7 +136,7 @@ h1 {
 
 				<tr>
 					<td class="input-group" id="nickName-zone"><label for="nickName" class="input">닉네임
-					</label> <input type="text" id="nickName" placeholder="닉네임" onkeyup="setTimeout(checkingNickName(),200)" />
+					</label> <input type="text" id="nickName"  name="nickName" placeholder="닉네임" onkeyup="setTimeout(checkingNickName(),200)" />
 						<button type="button" onclick="checkSameNickName();">닉네임 중복 확인</button>
 						<p></p>
 						</td>
@@ -148,7 +145,7 @@ h1 {
 
 				<tr>
 					<td class="input-group"><label for="name" class="input">이름</label>
-						<input type="text" id="name" placeholder="이름" /></td>
+						<input type="text" id="name" placeholder="이름" name="name" /></td>
 				</tr>
 
 
@@ -156,7 +153,7 @@ h1 {
 					<td class="input-group" id="password-zone">
 						<pre id="validate1">                                               0/16자</pre>
 						<label for="password" class="input" >비밀번호</label>
-						<input type="password" id="password" placeholder="비밀번호" onkeyup="setTimeout(checkPwdLength(),200);" />
+						<input type="password" id="password" placeholder="비밀번호" name="password" onkeyup="setTimeout(checkPwdLength(),200);" />
 						<p></p>
 					</td>
 				</tr>
@@ -171,23 +168,35 @@ h1 {
 
 				<tr>
 					<td class="input-group" id="phone-zone" ><label for="phoneNum" class="input">연락처
-					</label> <input type="tel" id="phoneNum" placeholder="연락처" />
-						<button type="button" >본인 인증</button></td>
+					</label> <input type="tel" id="phoneNum" name="phoneNum" placeholder="연락처" />
+						<button type="button" onclick="certified();">본인 인증</button>
+						<input type="hidden" id="cert">
+						</td>
+				</tr>
+				
+				<tr>
+					<td class="input-group" id="inputCert"><label for="certCode" class="input">인증번호</label>
+						<input type="text" id="userCode" placeholder="인증번호를 입력해주세요" onclick="" />
+						<button type="button" onclick="certifyCorrect();">인증 확인</button>
+						<p></p>
+						</td>
+						
 				</tr>
 
 				<tr>
 					<td class="input-group" id="email-zone"><label for="email" class="input">이메일</label>
-						<input type="email" id="email" placeholder="이메일" onkeyup="setTimeout(checkingEmail(),200)" />
+						<input type="email" id="email"  name="email" placeholder="이메일" onkeyup="setTimeout(checkingEmail(),200)" />
 						<button type="button" onclick="checkCertifiedEmail();">이메일 인증</button>
 						<p></p>
+						<input type="hidden" id="eCert">
 						</td>
 						
 				</tr>
 				
 				<tr>
-					<td class="input-group" id="email-certificate"><label for="emailCode" class="input">인증번호</label>
-						<input type="text" id="emailCode" placeholder="인증번호를 입력해주세요" onclick="" />
-						<button type="button" onclick="checkCertifiedEmail();">인증 확인</button>
+					<td class="input-group" id="email-certificate"><label for="emailCode" class="input">인증코드</label>
+						<input type="text" id="emailCode" placeholder="인증코드를 입력해주세요" onclick="" />
+						<button type="button" onclick="checkEcert();">인증 확인</button>
 						<p></p>
 						</td>
 						
@@ -221,28 +230,11 @@ h1 {
 	<footer>
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
-	<script>
-	//본인 인증 코드
 
-//iamport 대신 자신의 "가맹점 식별코드"를 사용하시면 됩니다
- var IMP = window.IMP; // 생략해도 괜찮습니다.
-  IMP.init("imp14313139");  // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
-//IMP.certification(param, callback) 호출
-  $('#phone-zone button').click(function(){IMP.certification({ // param
-    merchant_uid: "ORD20180131-0000011",
-    popup : true
-  }, function (rsp) { // callback
-    if (rsp.success) {
-      alert("성공");
-      // 인증 성공 시 로직,
-     
-    } else {
-     
-      // 인증 실패 시 로직,
-     alert("실패");
-    }
-  });
-  });
+	<script>
+	
+	
+	
 
 		//디자인  메소드
 		$('input').click(function() {

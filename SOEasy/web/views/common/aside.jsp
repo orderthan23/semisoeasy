@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- 링크 타고 들어오는 비회원을 막기위한 코드 현재 뷰페이지 단에서 이기능을 작동하면 애들 테스트 몬함
- <% if(userStatus ==0) {
-		request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
-		request.getRequestDispatcher("../common/errorPage.jsp").forward(request, response);
-		
-	} %> --%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -210,7 +205,7 @@ span.bar {
       <h1></h1>
       <ul class='megaMenu'>
       	<li class="infoZone"><div id="profileZone"><img src="/login/images/etc/hazard.png"></div></li>
-      	<li class="infoZone">흑당마라민트초코</li>
+      	<li class="infoZone"><%=loginUser.getmNick() %></li>
       	<li class="infoZone" id="grade">HOST</li>
       	<li><hr id="firstHr"></li>
          
@@ -235,7 +230,8 @@ span.bar {
     	
   </div>
   	<script>
-  /* 	$(function(){
+  	var userStatus = <%=userStatus%>
+    	$(function(){
   		switch(userStatus){
 			
 			case 1:
@@ -259,15 +255,29 @@ span.bar {
 				$('#fourthSubNav').attr("href","#").text("회원 관리");
 				$('#fifthSubNav').attr("href","#").text("회원 복구 요청");
 				$('#sixthSubNav').attr("href","#").text("신고 건 조회");
-				$('#seventhSubNav').attr("href","#").text("Q&A 조회");
+				$('#seventhSubNav').attr("href","#").text("Q&A 관리");
 				$('#eighthSubNav').attr("href","#").text("공지사항 작성");
 				$('#ninthSubNav').attr("href","#").text("관리자 홈");
 				break;
-			default : break;
+			default : 
+				$('#grade').html("<a href='/login/views/member/loginForm.jsp'>로그인이 필요합니다</a>");
+				$('#firstMainNav').hide();
+				$('#secondMainNav').hide();("회원관리");
+				$('#thirdMainNav').hide();("기타메뉴");
+				$('#firstSubNav').hide();
+				$('#secondSubNav').hide();
+				$('#thirdSubNav').hide();
+				$('#fourthSubNav').hide();
+				$('#fifthSubNav').hide();
+				$('#sixthSubNav').hide();
+				$('#seventhSubNav').hide();
+				$('#eighthSubNav').hide();
+				$('#ninthSubNav').hide();
+				break;
 			}
   			
   	
-  	}); */
+  	});  
   		
   	</script>
 

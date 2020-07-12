@@ -120,7 +120,11 @@ table {
 
 </style>
 </head>
-<body>
+<script>
+window.history.forward();
+	function noBack(){window.history.forward();}
+</script>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	
 		<header>
 			<%@ include file="../common/header.jsp"%>
@@ -131,7 +135,7 @@ table {
 			
 			<h1 id="loginTitle">SO Easy</h1>
 			<h2>로그인</h2>
-			<form action="<%=request.getContextPath()%>/login" method="post">
+			<form action="<%=request.getContextPath()%>/login.me" method="post">
 				<table>
 					<tr>
 						<td class="input-group"><label for="id" class="inputInfo">아이디</label>
@@ -150,7 +154,7 @@ table {
 					<tr id="find">
 						<td><a class="findAndJoin">아이디 찾기</a> <pre class="stick">|</pre> <a
 							class="findAndJoin">비밀번호찾기</a> <pre class="stick">|</pre> <a
-							class="findAndJoin" href=join.jsp>회원가입</a></td>
+							class="findAndJoin" href=/login/views/member/join.jsp>회원가입</a></td>
 					</tr>
 
 
@@ -167,6 +171,7 @@ table {
 	
 	
 	<script>
+		
 		$(document).ready(function(){
 			var msg = '<%=msg%>';
 			var errorCode = <%=errorCode%>;

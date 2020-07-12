@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.kh.login.member.model.service.MemberService;
 import com.kh.login.member.model.vo.Member;
 
-@WebServlet("/login")
+@WebServlet("/login.me")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,17 +38,19 @@ public class LoginServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		
+		System.out.println(userId);
+		System.out.println(password);
 		// 3. 비지니스 로직을 처리할 서비스 클래스의 메소드로 전송할 떄 파라미터가 많으면 vo에 담는다
 		Member requestMember = new Member();
-		requestMember.setUserId(userId);
-		requestMember.setPassword(password);
+		requestMember.setmId(userId);
+		requestMember.setmPassword(password);
 
 		// 4. 비지니스 로직을 처리할 서비스 클래스의 메소드 호출
 		Member loginUser = new MemberService().loginCheck(requestMember);
 
 		// 5. 받은 결과에 따라 성공/ 실패 페이지 내보내기
-		String view = "";
-		if (loginUser.getStatus() >= LOGIN_GUEST) {
+		String page = "";
+		if (loginUser.getpType() >= LOGIN_GUEST) {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
@@ -58,13 +60,13 @@ public class LoginServlet extends HttpServlet {
 			
 			
 		} else {
-			view = "views/member/loginForm.jsp";
+			page = "/views/member/loginForm.jsp";
 			String msg = "일치하는 정보가 없습니다 다시 로그인 하세요.";
 			errorCode = 1;
 			
 			request.setAttribute("msg", msg);
 			request.setAttribute("errorCode", errorCode);
-			RequestDispatcher rd = request.getRequestDispatcher(view);
+			RequestDispatcher rd = request.getRequestDispatcher(page);
 			rd.forward(request, response);
 		}
 		

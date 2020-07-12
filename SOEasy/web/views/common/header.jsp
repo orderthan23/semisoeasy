@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" %>
+	pageEncoding="UTF-8" import="com.kh.login.member.model.vo.Member"%>
 <%
-	/* Member loginUser =(Member)session.getAttribute("loginUser");
+	Member loginUser =(Member)session.getAttribute("loginUser");
 	int userStatus=0;
 	if(loginUser!=null){
-		userStatus = loginUser.getStatus();
-	} */
+		userStatus = loginUser.getpType();
+		System.out.println(userStatus);
+	} 
 	
 %>
 <!DOCTYPE html>
@@ -112,21 +113,22 @@
 
 	</div>
 	<script>
-		<%-- var userStatus = <%=userStatus%>;
+		 var userStatus = <%=userStatus%>;
 		$(function(){
 			switch(userStatus){
 			case 1: 
-			case 2: $('#firstHeaderMenu').attr("href","/logoutpage/").text("로그아웃");
+			case 2: $('#firstHeaderMenu').attr("href","<%=request.getContextPath()%>/logout.me").text("로그아웃");
 				    $('#secondHeaderMenu').attr("href","/login/views/member/updateMember.jsp").text("마이페이지"); break;
 					
-			case 3: $('#firstHeaderMenu').attr("href","/logoutpage/").text("로그아웃");
+			case 3: $('#firstHeaderMenu').attr("href","<%=request.getContextPath()%>/logout.me").text("로그아웃");
 					$('#secondHeaderMenu').attr("href","/login/views/member/updateMember.jsp").text("회원관리"); 
 					$('#thirdHeaderMenu').attr("href","/login/views/space/insertSpaceStep1.jsp").text("공간관리"); break; 
-			default : break;
+			
+			default: break;		
 			}
 			
 			
-		}); --%>
+		}); 
 	</script>
 
 
