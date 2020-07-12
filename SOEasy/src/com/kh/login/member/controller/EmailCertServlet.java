@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.login.member.model.service.MemberService;
+
 @WebServlet("/eCert.me")
 public class EmailCertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,71 +29,80 @@ public class EmailCertServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("UTF-8");
-		String toEmail = request.getParameter("email");
+		String email = request.getParameter("email");
 
-		String host = "smtp.naver.com";
-		String user = "hg121500@naver.com";
-		String password = "apsqnddua!123";
-		
-		  Properties props = new Properties();
-          props.put("mail.smtp.host", host);
-          props.put("mail.smtp.port", 465);
-          props.put("mail.smtp.auth", "true");
-          props.put("mail.smtp.ssl.enable", "true");
+		String toEmail = "";
+		int result = 0;
 
-		StringBuffer temp = new StringBuffer();
-		Random rnd = new Random();
-		for (int i = 0; i < 10; i++) {
-			int rIndex = rnd.nextInt(3);
-			switch (rIndex) {
-			case 0:
-				// a-z
-				temp.append((char) ((int) (rnd.nextInt(26)) + 97));
-				break;
-			case 1:
-				// A-Z
-				temp.append((char) ((int) (rnd.nextInt(26)) + 65));
-				break;
-			case 2:
-				// 0-9
-				temp.append((rnd.nextInt(10)));
-				break;
+		result = new MemberService().checkEmail(email);
+		PrintWriter out = response.getWriter();
+		if (result > 0) {
+			out.append("fail");
+		} else {
+			toEmail = email;
+			String host = "smtp.naver.com";
+			String user = "hg121500@naver.com";
+			String password = "apsqnddua!123";
+
+			Properties props = new Properties();
+			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.port", 465);
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.ssl.enable", "true");
+
+			StringBuffer temp = new StringBuffer();
+			Random rnd = new Random();
+			for (int i = 0; i < 10; i++) {
+				int rIndex = rnd.nextInt(3);
+				switch (rIndex) {
+				case 0:
+					// a-z
+					temp.append((char) ((int) (rnd.nextInt(26)) + 97));
+					break;
+				case 1:
+					// A-Z
+					temp.append((char) ((int) (rnd.nextInt(26)) + 65));
+					break;
+				case 2:
+					// 0-9
+					temp.append((rnd.nextInt(10)));
+					break;
+				}
 			}
+			String AuthenticationKey = temp.toString();
+			System.out.println(AuthenticationKey);
+
+			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(user, password);
+				}
+			});
+
+			try {
+				MimeMessage msg = new MimeMessage(session);
+				msg.setFrom(new InternetAddress(user, "SO Easy 관리자"));
+				msg.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+
+				// 메일 제목
+				msg.setSubject("안녕하세요 SO Easy 인증 메일입니다");
+				// 메일 내용
+				msg.setText("인증 번호는 :" + AuthenticationKey);
+
+				Transport.send(msg);
+				System.out.println("이메일 전송");
+
+			
+				out.append(AuthenticationKey);
+				out.flush();
+				out.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();// TODO: handle exception
+			}
+
 		}
-		String AuthenticationKey = temp.toString();
-        System.out.println(AuthenticationKey);
-        
-        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(user,password);
-            }
-        });
-        
-        try {
-            MimeMessage msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(user, "SO Easy 관리자"));
-            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-            
-            //메일 제목
-            msg.setSubject("안녕하세요 SO Easy 인증 메일입니다");
-            //메일 내용
-            msg.setText("인증 번호는 :"+AuthenticationKey);
-            
-            Transport.send(msg);
-            System.out.println("이메일 전송");
-            
-            PrintWriter out = response.getWriter();
-    		out.append(AuthenticationKey);
-    		out.flush();
-    		out.close();
-            
-        }catch (Exception e) {
-            e.printStackTrace();// TODO: handle exception
-        }
-        
-        
 	}
 
 	/**

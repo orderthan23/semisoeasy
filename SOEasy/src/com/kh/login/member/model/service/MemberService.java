@@ -49,5 +49,24 @@ public class MemberService {
 		
 		return result;
 	}
+	//같은 이메일로 가입된 회원이 있는지 확인하는 메소드
+	public int checkEmail(String email) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().checkEmail(con,email);
+		
+		close(con);
+		
+		return result;
+	}
+	public int checkYou(String phoneNum, String name) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().checkYou(con,phoneNum,name);
+		
+		close(con);
+		
+		return result;
+	}
 
 }

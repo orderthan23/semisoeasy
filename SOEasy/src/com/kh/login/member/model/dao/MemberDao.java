@@ -159,6 +159,47 @@ public class MemberDao {
 			pstmt.setString(1, nickName);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int checkEmail(Connection con, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result =0;
+		String query = prop.getProperty("checkEmail");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, email);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	
+	}
+
+	public int checkYou(Connection con, String phoneNum, String name) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result =0;
+		String query = prop.getProperty("checkYou");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, phoneNum);
+			pstmt.setString(2, name);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return result;

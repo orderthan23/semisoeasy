@@ -168,17 +168,30 @@
 //사용자가 입력한 번호로 SMS 를 발송하는 함수		
 			function certified(){
 				var phoneNum = $('#phoneNum').val();
+				var name = $('#name').val();
 				console.log(phoneNum);
+				console.log(name);
 						
 					 $.ajax({
 							
 						url:"/login/certification.me",
-						data:{phoneNum:phoneNum},
+						data:{phoneNum:phoneNum,
+							  name: name
+							 },
 						type:"post",
 						success: function(data){
 							console.log(data);
+							if(data == "fail"){
+								alert("이미 가입된 이름과 전화번호 입니다. 로그인 페이지로 이동합니다.");
+								location.href= "/login/views/member/loginForm.jsp";
+							}else if(data =="fail2"){
+								alert("이름을 입력해 주세요");
+							}
+							
+							else{
 							alert("인증번호가 발송 되었습니다").
 							$('#cert').val(data);
+							}
 						},
 						error: function(data){
 							console.log("실패!");
@@ -238,14 +251,21 @@
 					alert("이메일 형식에 맞게 입력해주세요.");
 				}else{
 					var email = $('#email').val();
+					var name = $('#name').val();
 					$.ajax({
 						url: "/login/eCert.me",
-						data: {email : email},
+						data: {email : email },
 						type: "post",
 						success: function(data){
+							
 							console.log(data);
+							if(data != "fail"){
 							$('#eCert').val(data);
-							alert("인증번호가 발송되었습니다.");
+							alert("인증 코드가 발송되었습니다.");
+							}else{
+								alert("이미 가입된 적이 있는 이메일 입니다 로그인으로 이동합니다.")
+								location.href="/login/views/member/loginForm.jsp";
+							}
 						},
 						error: function(data){
 							console.log("이메일 인증 에러")
@@ -267,6 +287,7 @@
 					alert("이메일 인증이 완료되었습니다");
 					$('#email-certificate p').text("이메일 인증 완료").css("color","green");
 					$('#emailCode').prop("readonly",true);
+					$('#email').prop("readonly",true);
 					checkEmail = true;
 						
 				}else{

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.login.common.Certified;
+import com.kh.login.member.model.service.MemberService;
 
 /**
  * Servlet implementation class CertificationServlet
@@ -27,17 +28,31 @@ public class CertificationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String phoneNum = request.getParameter("phoneNum");
+		String name = request.getParameter("name");
+		System.out.println(phoneNum);
+		System.out.println(name);
+		PrintWriter out = response.getWriter();
+		int result = new MemberService().checkYou(phoneNum, name);
+		
+		if(name == "" || name==null) {
+			out.append("fail2");
+
+		
+		}else if(result > 0) {
+			out.append("fail");
+		}
+		else {
 		
 		String key = new Certified().CertifiedSMS(phoneNum);
 		
 		System.out.println(key);
 		System.out.println(phoneNum);
 		
-		PrintWriter out = response.getWriter();
+		
 		out.append(key);
 		out.flush();
 		out.close();
-	
+		}
 	}
 
 	/**
