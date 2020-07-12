@@ -85,14 +85,31 @@
 		
 		<table align="center">
 			<tr>
-				<td><button class="btn" style="cursor:pointer;">등록</button></td>
-				<td><button class="btn" id="cancel" style="cursor:pointer;">취소</button></td>
+				<td><button onclick="submit();" class="btn" id="submit" style="cursor:pointer;">등록</button></td>
+				<td><button onclick="self.close();" class="btn" id="cancel" style="cursor:pointer;">취소</button></td>
 			</tr>	
 		</table>
 		
 	</div>
 	
+	<script>
+	var textArea = $("#textArea").val();
+	$(document).ready(function(){
+		$("#submit").click(function(){
+			
+			//왜 안돼
+			if(textArea == "") {
+				alert('내용을 작성해주세요.');  
+			} else {
+				alert('리뷰 등록이 완료되었습니다.');
+				self.close();
+			} 
+			
+		});
+	}); 
 	
+	
+	</script>
 	
 	
 </div>
