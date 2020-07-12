@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SO Easy - 공간등록</title>
+<title>SO Easy - 공간 정보 수정</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function goPopup(){
@@ -114,11 +114,11 @@
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<div>
-			<h1 align="center" style="margin:0;">공간 등록</h1>
+			<h1 align="center" style="margin:0;">기본 정보</h1>
 			<br>
 			<br>
 		</div>
-		<form action="<%= request.getContextPath() %>/insertSpaceStep1" method="post">
+		<form action="<%= request.getContextPath() %>/updateSpaceStep1" method="post">
 			<table class="space-insert" align="center" width="70%">
 				<tr>
 					<td width="5%"></td>
@@ -534,10 +534,10 @@
 			$("#add-tag").val("");
 		};
 		
-		function clickHash(){
+		/* function clickHash(){
 			$(".space-tag").hover()
 			
-		}
+		} */
 		
 		//이미지 추가하기
 		$(function(){
