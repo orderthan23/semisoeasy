@@ -120,7 +120,11 @@ table {
 
 </style>
 </head>
-<body>
+<script>
+window.history.forward();
+	function noBack(){window.history.forward();}
+</script>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	
 		<header>
 			<%@ include file="../common/header.jsp"%>
@@ -167,6 +171,7 @@ table {
 	
 	
 	<script>
+		
 		$(document).ready(function(){
 			var msg = '<%=msg%>';
 			var errorCode = <%=errorCode%>;
