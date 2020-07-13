@@ -85,7 +85,7 @@
 				</tr>
 				<tr>
 					<td>
-						<textarea cols="30" rows="10" placeholder="기타 신고사유를 입력하세요" style="border:1.5px solid #40a4b6;"></textarea>
+						<textarea id="textArea" cols="30" rows="10" placeholder="기타 신고사유를 입력하세요" style="border:1.5px solid #40a4b6;"></textarea>
 					</td>
 				</tr>
 			</table>

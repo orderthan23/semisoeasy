@@ -45,6 +45,33 @@
 		border:2px solid #40a4b6;
 		border-radius:10px;
 	}
+	
+	.rating .stars {
+  		margin-right: 15px;
+	}
+	
+	.rating .stars .star {
+	  	float: left;
+	 	padding: 5px 2px;
+	  	cursor: pointer;
+	}
+	
+	.rating .stars .star:before {
+		font-family: 'FontAwesome';
+		content: '\f005';
+		color: #d0e8f0;
+		font-size: 2em;
+	}
+	
+	.rating .stars .star:hover:before,
+	.rating .stars .star.to_rate:before,
+	.rating .stars .star.rated:before {
+		color: #40a4b6;
+	}
+	
+	.rating .stars .star.no_to_rate:before {
+		color: #d0e8f0;
+	}
 
 </style>
 </head>
@@ -63,11 +90,15 @@
 					</button>
 				</td>
 				<td>
-          			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
-          			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
-          			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
-          			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
-          			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
+          			<div class="rating left">
+  						<div class="stars right">
+    						<a class="star rated"></a>
+   						    <a class="star rated"></a>
+    						<a class="star rated"></a>
+    						<a class="star"></a>
+   							 <a class="star"></a>
+  						</div>
+					</div>
           		</td>
 			</tr>
 			<tr>
@@ -93,6 +124,8 @@
 	</div>
 	
 	<script>
+	
+	//빈 내용시 알러트 띄우기
 	var textArea = $("#textArea").val();
 	$(document).ready(function(){
 		$("#submit").click(function(){
@@ -108,6 +141,22 @@
 		});
 	}); 
 	
+	//별점 매기기
+	jQuery(document).ready(function($) {
+		  $('.rating .star').hover(function() {
+		    $(this).addClass('to_rate');
+		    $(this).parent().find('.star:lt(' + $(this).index() + ')').addClass('to_rate');
+		    $(this).parent().find('.star:gt(' + $(this).index() + ')').addClass('no_to_rate');
+		  }).mouseout(function() {
+		    $(this).parent().find('.star').removeClass('to_rate');
+		    $(this).parent().find('.star:gt(' + $(this).index() + ')').removeClass('no_to_rate');
+		  }).click(function() {
+		    $(this).removeClass('to_rate').addClass('rated');
+		    $(this).parent().find('.star:lt(' + $(this).index() + ')').removeClass('to_rate').addClass('rated');
+		    $(this).parent().find('.star:gt(' + $(this).index() + ')').removeClass('no_to_rate').removeClass('rated');
+		  
+		  });
+		});
 	
 	</script>
 	
