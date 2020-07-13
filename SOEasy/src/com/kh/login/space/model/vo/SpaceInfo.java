@@ -26,6 +26,7 @@ public class SpaceInfo implements java.io.Serializable {
 	private int rPoint;						//평점
 	private Date rEnrollDate;				//작성날짜
 	
+	
 	public SpaceInfo() {}
 
 	public SpaceInfo(int spaceNo, String spaceName, String convNo, int hostNo, int spaceKind, String spacdAddress,

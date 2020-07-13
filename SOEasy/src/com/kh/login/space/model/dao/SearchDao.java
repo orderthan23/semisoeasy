@@ -9,6 +9,7 @@ public class SearchDao {
 
 	public ArrayList<SpaceInfo> selectList(Connection con) {
 		
+		
 		return null;
 	}
 

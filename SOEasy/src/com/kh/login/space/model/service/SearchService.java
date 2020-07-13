@@ -15,6 +15,7 @@ public class SearchService {
 		
 		ArrayList<SpaceInfo> list = new SearchDao().selectList(con);
 		
+		
 		return list;
 	}
 

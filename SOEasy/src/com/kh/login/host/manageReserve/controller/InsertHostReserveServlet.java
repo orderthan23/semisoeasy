@@ -1,28 +1,23 @@
-package com.kh.login.space.controller;
+package com.kh.login.host.manageReserve.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.login.space.model.service.SearchService;
-import com.kh.login.space.model.vo.SpaceInfo;
-
 /**
- * Servlet implementation class SearchServlet
+ * Servlet implementation class InsertHostReserveServlet
  */
-@WebServlet("/select.se")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/insertReserve.ho")
+public class InsertHostReserveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchServlet() {
+    public InsertHostReserveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +26,8 @@ public class SearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<SpaceInfo> list = new SearchService().selectList();
-		
-		System.out.println("select space list controller : " + list);
-		
-		String page = "";
-		if(list != null) {
-			page = "views/space/search1.jsp.jsp";
-			request.setAttribute("list", list);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "공간 검색 실패!");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
