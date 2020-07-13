@@ -104,6 +104,7 @@ public class MemberDao {
 				loginUser.setmPhone(rset.getString("M_PHONE"));
 				loginUser.setmEmail(rset.getString("M_EMAIL"));
 				loginUser.setEnrollDate(rset.getDate("M_ENROLL_DATE"));
+				loginUser.setmStatus(rset.getString("M_STATUS"));
 			}
 
 		} catch (SQLException e) {
@@ -354,5 +355,7 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	
 
 }

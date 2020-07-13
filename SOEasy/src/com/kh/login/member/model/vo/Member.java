@@ -13,13 +13,24 @@ public class Member implements java.io.Serializable{
 	private String mPhone;
 	private String mEmail;
 	private Date enrollDate;
+	private String mStatus;
+	private int imgNo;
+	private String originName;
+	private String filePath = "/login/images/etc/";
+	private String changeName="soeasyProf.png";
+	private int imgDiv;
+	private int spaceNo;
+	
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public Member(int memberNo, int pType, String mName, String mId, String mNick, String mPassword, String mPhone,
-			String mEmail, Date enrollDate) {
+			String mEmail, Date enrollDate, String mStatus, int imgNo, String originName, String filePath,
+			String changeName, int imgDiv, int spaceNo) {
 		super();
 		this.memberNo = memberNo;
 		this.pType = pType;
@@ -30,14 +41,25 @@ public class Member implements java.io.Serializable{
 		this.mPhone = mPhone;
 		this.mEmail = mEmail;
 		this.enrollDate = enrollDate;
+		this.mStatus = mStatus;
+		this.imgNo = imgNo;
+		this.originName = originName;
+		this.filePath = filePath;
+		this.changeName = changeName;
+		this.imgDiv = imgDiv;
+		this.spaceNo = spaceNo;
 	}
 
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", pType=" + pType + ", mName=" + mName + ", mId=" + mId + ", mNick="
 				+ mNick + ", mPassword=" + mPassword + ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", enrollDate="
-				+ enrollDate + "]";
+				+ enrollDate + ", mStatus=" + mStatus + ", imgNo=" + imgNo + ", originName=" + originName
+				+ ", filePath=" + filePath + ", changeName=" + changeName + ", imgDiv=" + imgDiv + ", spaceNo="
+				+ spaceNo + "]";
 	}
+
+
 
 	public int getMemberNo() {
 		return memberNo;
@@ -46,7 +68,7 @@ public class Member implements java.io.Serializable{
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
-
+	
 	public int getpType() {
 		return pType;
 	}
@@ -110,8 +132,62 @@ public class Member implements java.io.Serializable{
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
-	
-	
+
+	public String getmStatus() {
+		return mStatus;
+	}
+
+	public void setmStatus(String mStatus) {
+		this.mStatus = mStatus;
+	}
+
+	public int getImgNo() {
+		return imgNo;
+	}
+
+	public void setImgNo(int imgNo) {
+		this.imgNo = imgNo;
+	}
+
+	public String getOriginName() {
+		return originName;
+	}
+
+	public void setOriginName(String originName) {
+		this.originName = originName;
+	}
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+	public int getImgDiv() {
+		return imgDiv;
+	}
+
+	public void setImgDiv(int imgDiv) {
+		this.imgDiv = imgDiv;
+	}
+
+	public int getSpaceNo() {
+		return spaceNo;
+	}
+
+	public void setSpaceNo(int spaceNo) {
+		this.spaceNo = spaceNo;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 	
 }
 

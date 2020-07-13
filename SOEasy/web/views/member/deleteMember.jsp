@@ -75,7 +75,11 @@
 </style>
 <title>SO Easy</title>
 </head>
-<body>
+<script>
+window.history.forward();
+	function noBack(){window.history.forward();}
+</script>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	<header><%@ include file="../common/header.jsp"%></header>
 	<nav>
 	<%@ include file="../common/aside.jsp"%>

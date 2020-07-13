@@ -204,7 +204,7 @@ span.bar {
   <div id="navWrap">
       <h1></h1>
       <ul class='megaMenu'>
-      	<li class="infoZone"><div id="profileZone"><img src="/login/images/etc/hazard.png"></div></li>
+      	<li class="infoZone"><div id="profileZone"><img src="<%=loginUser.getFilePath()+loginUser.getChangeName()%>"></div></li>
       	<li class="infoZone"><%=loginUser.getmNick() %></li>
       	<li class="infoZone" id="grade">HOST</li>
       	<li><hr id="firstHr"></li>
