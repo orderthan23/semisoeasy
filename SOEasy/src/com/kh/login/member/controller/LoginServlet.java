@@ -38,8 +38,8 @@ public class LoginServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		
-		System.out.println(userId);
-		System.out.println(password);
+		//System.out.println(userId);
+		//System.out.println(password);
 		// 3. 비지니스 로직을 처리할 서비스 클래스의 메소드로 전송할 떄 파라미터가 많으면 vo에 담는다
 		Member requestMember = new Member();
 		requestMember.setmId(userId);

@@ -80,7 +80,7 @@
     .modalArea {
   display: none;
   position: fixed;
-  z-index: 10; /*サイトによってここの数値は調整 */
+  z-index: 10; 
   top: 0;
   left: 0;
   width: 100%;
@@ -263,12 +263,12 @@
 	function searchId(){
 		var userId = $('#searchId').val
 		
-		$.ajax{
+		/* $.ajax{
 			url : "아이디를 찾는 서블릿",
 			data: {userId, userId},
 			success: function(data){},
 			error: function(data){}
-		}
+		} */
 		
 	}
 		
