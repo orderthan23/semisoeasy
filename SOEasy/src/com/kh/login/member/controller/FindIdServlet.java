@@ -49,7 +49,7 @@ public class FindIdServlet extends HttpServlet {
 		    String id = name;
 			int result = new MemberService().findPwd(id,email);
 		}
-		
+		//123
 		
 		
 		
