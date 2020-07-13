@@ -69,21 +69,54 @@
 </head>
 <body>
 	 <header><%@ include file="../common/header.jsp"%></header>
-	<nav><%@ include file="../common/aside.jsp"%>
-	<div class="colMenu">
-		<a class="colMenuButton selectedButton" href="/login/views/board/board.jsp">공지사항</a>
-		<a class="colMenuButton" href="/login/views/host/balance/calculate.jsp">자주 묻는 질문</a>
-		<a class="colMenuButton" href="/login/views/board/mtmboard.jsp">1대1문의</a>
-	<br><br>
-	</div>
-	<hr style="margin : 0">
-	 <br>
-	</nav>
+	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
-   
-   <table> <form name=writeform method=post action="write_ok.jsp"> <tr> <td> <table width="100%" cellpadding="0" cellspacing="0" border="0"> <tr style="background:url('img/table_mid.gif') repeat-x; text-align:center;"> <td width="5"><img src="img/table_left.gif" width="5" height="30" /></td> <td>글쓰기</td> <td width="5"><img src="img/table_right.gif" width="5" height="30" /></td> </tr> </table> <table> <tr> <td>&nbsp;</td> <td align="center">제목</td> <td><input name="title" size="50" maxlength="100"></td> <td>&nbsp;</td> </tr> <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr> <tr> <td>&nbsp;</td> <td align="center">이름</td> <td><input name="name" size="50" maxlength="50"></td> <td>&nbsp;</td> </tr> <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr> <tr> <td>&nbsp;</td> <td align="center">비밀번호</td> <td><input type="password" name="password" size="50" maxlength="50"></td> <td>&nbsp;</td> </tr> <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr> <tr> <td>&nbsp;</td> <td align="center">내용</td> <td><textarea name="memo" cols="50" rows="13"></textarea></td> <td>&nbsp;</td> </tr> <tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr> <tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr> <tr align="center"> <td>&nbsp;</td> <td colspan="2"><input type=button value="등록" OnClick="javascript:writeCheck();"> <input type=button value="취소" OnClick="javascript:history.back(-1)"> <td>&nbsp;</td> </tr> </table> </td> </tr> </form> </table>
+	<br>
+	<label><font size="6" color="gray" style=text-align:>공지사항 작성</font></label>
+	
+	<br>
+	
+	<form method="post"  action="<%=request.getContextPath()%>/insert.no" name="boardForm">
+	<input type="hidden" name="board_id" value="${loginUser.id}">
+	<table width:700 border="3" bordercolor="lightgray" align="center">
+			<tr>
+			<td id="title" style="text-align:center; background:#60B4A6">
+				제목
+			</td>
+			<td>
+				<input name="board_subject" type="text" size="70" maxlength="100" value=""/>
+			</td>		
+		</tr>
+		<tr>
+			<td id="categroy" style=text-align:center style="text-align:center; background:#60B4A6">
+			<select class="category" style="text-align:center; background:#60B4A6">
+					<option class="category" style="text-align:center">선택</option>
+					<option class="category">시스템관련</option>
+					<option class="category">계정관련</option>
+					<option class="category">결제관련</option>
+					<option class="category"></option>
+				</select>
+			</td>
+				
+		</tr>
+		<tr>
+			<td id="title" style="text-align:center; background:#60B4A6">
+				내 용
+			</td>
+			<td>
+				<textarea name="board_content" cols="72" rows="20" style="resize:none;"></textarea>			
+			</td>		
+		</tr>
 
-
+		<tr align="center" valign="middle" style="text-align:center; background:#60B4A6">
+			<td colspan="5">
+				<input type="reset" value="작성취소" style="text-align:center; background:#60B4A6" >
+				<input type="submit" value="등록" style="text-align:center; background:#60B4A6">
+				<input type="button" value="목록"  style="text-align:center; background:#60B4A6; color:white">			
+			</td>
+		</tr>
+	</table>	
+	</form>
 	</section>
 	 <%@ include file="../common/footer.jsp"%> 
 	<!-- <script> -->
@@ -100,8 +133,23 @@
 		}); -->
 		
 		<!-- </script> -->
-​
-​
+​	<script>
+		function checkValue(){
+			var form = document.forms[0];
+			var board_subject = form.board_subject.value;
+			var board_content = form.board_content.value;
+			
+			if(!board_subject){
+				alert("제목을 입력해주세요.")
+				return false;
+			}
+			else if(!board_content){
+				alert("내용을 입력해주세요.")
+				return false;
+			}
+		}
+	
+	</script>
 	
 				
 			

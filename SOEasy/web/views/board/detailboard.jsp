@@ -114,7 +114,7 @@
 			</tr>
 		</table>
 		<a href="board.jsp" class="writeButton">이전으로</a> 
-		<br>
+		<br>	
 				<table style = "width: 100%; border-collapse: collapse; " id="boardTable">
 						<tr>
 							<th>번호</th>
@@ -140,12 +140,11 @@
 								</div>
 							</td>
 						</tr>
-				
 						<tr>	
 							<td colspan="6" >
 									<div style="float:right;">
-									<button type="button" onclick="startAnswer();" class="startBtn">답변하기</button>
-									<button type="button" onclick="stopAnswer();" class="stopBtn">답변취소</button>
+									<button type="button" onclick="restart();" class="restartBtn">수정</button>
+									<button type="button" onclick="delete();" class="deleteBtn">삭제</button>
 									</div>
 							</td>
 						</tr>
@@ -154,6 +153,24 @@
 	</section>
 	<br><br>
 	<footer><%@ include file="../common/footer.jsp"%></footer>
+	<script>
+	 var userStatus = <%=userStatus%>;
+		 $(function(){
+			switch(userStatus){
+			case 1: if(userStatus === "admin")
+			case 2: $('.restartBtn').hide()
+					$('.deleteBtn').hide(); break;
+			case 3:	$('.restartBtn').hide();
+					$('.deleteBtn').hide();  break;
+			default : break;
+			}
+		});
+		 
+		 checkNullLogin();
+		 
+		 
+ </script>
+​
 	
 	
 	
