@@ -152,8 +152,8 @@ window.history.forward();
 
 					</tr>
 					<tr id="find">
-						<td><a class="findAndJoin">아이디 찾기</a> <pre class="stick">|</pre> <a
-							class="findAndJoin">비밀번호찾기</a> <pre class="stick">|</pre> <a
+						<td><a class="findAndJoin" href="/login/views/member/findId.jsp">아이디 찾기</a> <pre class="stick">|</pre> <a
+							class="findAndJoin" href="/login/views/member/findId.jsp">비밀번호찾기</a> <pre class="stick">|</pre> <a
 							class="findAndJoin" href=/login/views/member/join.jsp>회원가입</a></td>
 					</tr>
 

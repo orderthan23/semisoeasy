@@ -44,7 +44,9 @@
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	<header><%@ include file="../common/header.jsp"%></header>
 	<section>
-		<br><br><br><br><br>
+		<br><br><br>
+		<h1 style="margin-left:auto; margin-right:auto; margin-top:0; font-size:60px; font-weight:bolder;" align="center">SO EASY</h1>
+		<br>
 		<div id="infoBox">
 		
 		<div style="width:100%; height:60px; background:#3DB6AE; margin:0;">

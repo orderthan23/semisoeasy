@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
 
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -204,8 +206,8 @@ span.bar {
   <div id="navWrap">
       <h1></h1>
       <ul class='megaMenu'>
-      	<li class="infoZone"><div id="profileZone"><img src="<%=loginUser.getFilePath()+loginUser.getChangeName()%>"></div></li>
-      	<li class="infoZone" id="nickNameZone"><%=loginUser.getmNick() %></li>
+      	<li class="infoZone"><div id="profileZone"></div></li>
+      	<li class="infoZone" id="nickNameZone"></li>
       	<li class="infoZone" id="grade">HOST</li>
       	<li><hr id="firstHr"></li>
          
@@ -230,12 +232,14 @@ span.bar {
     	
   </div>
   	<script>
-  	var userStatus = <%=userStatus%>
+  	var userStatus = parseInt("<%=userStatus%>");
     	$(function(){
   		switch(userStatus){
 			
 			case 1:
 				$('#grade').text("GUEST");
+				$('#profileZone').html("<img src='<%=loginUser.getFilePath()+loginUser.getChangeName()%>'>");
+				$('#nickNameZone').html("<%=loginUser.getmNick() %>");
 				$('#secondMainNav').hide();
 				$('#fourthSubNav').hide();
 				$('#fifthSubNav').hide();
@@ -243,9 +247,14 @@ span.bar {
 				$('#secondHr').hide();
 				break;
 			
-			case 2:break;
+			case 2:
+				$('#profileZone').html("<img src='<%=loginUser.getFilePath()+loginUser.getChangeName()%>'>");
+				$('#nickNameZone').html("<%=loginUser.getmNick() %>");
+				break;
 			case 3:
 				$('#grade').text("Adminstrator");
+				$('#profileZone').html("<img src='<%=loginUser.getFilePath()+loginUser.getChangeName()%>'>");
+				$('#nickNameZone').html("<%=loginUser.getmNick() %>");
 				$('#firstMainNav').text("공간관리");
 				$('#secondMainNav').text("회원관리");
 				$('#thirdMainNav').text("기타메뉴");
@@ -263,8 +272,8 @@ span.bar {
 				$('#nickNameZone').text("");
 				$('#grade').html("<a href='/login/views/member/loginForm.jsp'>로그인이 필요합니다</a>");
 				$('#firstMainNav').hide();
-				$('#secondMainNav').hide();("회원관리");
-				$('#thirdMainNav').hide();("기타메뉴");
+				$('#secondMainNav').hide();
+				$('#thirdMainNav').hide();
 				$('#firstSubNav').hide();
 				$('#secondSubNav').hide();
 				$('#thirdSubNav').hide();

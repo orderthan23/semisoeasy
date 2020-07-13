@@ -41,14 +41,23 @@
 		border : none;
 		border-radius : 10px;
 	}
-
    
 </style>
 <title>SO Easy</title>
 </head>
 <body>
+
 	<header><%@ include file="../common/header.jsp"%></header>
+	<%
+		if(userStatus ==0 || loginUser==null){
+			request.setAttribute("msg", "잘못된 경로입니다.");
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request,response);
+		}
+		%>
+
+	
 	<nav><%@ include file="../common/aside.jsp"%>
+		
 	<div class="colMenu">
 		<label class="colMenuTitle">개인 정보 관리</label>
 		<a class="colMenuButton selectedButton" href="/login/views/member/updateMember">개인 정보 수정</a>
@@ -67,13 +76,46 @@
 			<br><br>
 			<form>
 				<label style="font-size : 20px;">비밀번호</label>&nbsp;&nbsp;&nbsp;
-				<input type ="password" name="userPwd" placeholder="비밀번호를 입력하세요.">
-				<br>
-				<button>개인정보 수정하기</button>
+				<input type ="password" name="password" placeholder="비밀번호를 입력하세요.">
+				<br><br>
+				<button type="button" onclick="checkPassword();">개인정보 수정하기</button>
 			</form>
 		</div>
 	
 	</section>
+	
 	<footer> <%@ include file="../common/footer.jsp"%></footer>
+	
+	<script>
+	function checkPassword(){
+		var password = "<%=loginUser.getmPassword()%>";
+			var inputPassword =$("input[name=password]").val();
+			var userId ="<%=loginUser.getmId()%>";
+				
+			$.ajax({
+				url:"/login/isCorrectPassword.me",
+				data:{userId: userId,
+					password: inputPassword	
+				},
+				type: "post",
+				success: function(data){
+					 if(data=="fail" || typeof data =="undefined"){
+						alert("비밀번호가 일치하지 않습니다!");
+						
+					}else{
+						
+						location.href="<%=request.getContextPath()%>/views/member/updateMember2.jsp";
+					} 
+					console.log(data);
+					
+				},
+				error: function(data){
+					console.log("비밀번호 일치여부 확인 실패!");
+				}
+			});
+	}
+	</script>
+	
+		
 </body>
 </html>

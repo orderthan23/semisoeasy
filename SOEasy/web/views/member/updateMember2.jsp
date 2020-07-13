@@ -131,7 +131,12 @@ h1 {
 		<%@ include file="../common/header.jsp"%>
 
 	</header>
-
+	<%
+		if(userStatus ==0 || loginUser==null){
+			request.setAttribute("msg", "잘못된 경로입니다.");
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request,response);
+		}
+		%>
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 
@@ -148,7 +153,7 @@ h1 {
 				<tr>
 					<td align="center" height="200px">
 						<div id="profileZone">
-							<img src="/login/images/etc/lingard.png">
+							<img src="<%=loginUser.getFilePath()+loginUser.getChangeName()%>">
 						</div>
 						<br>
 						<button id="changeProfile">프로필 사진 변경</button>
@@ -157,19 +162,19 @@ h1 {
 				</tr>
 				<tr>
 					<td class="input-group"><label for="id" class="input">아이디</label>
-						<input type="text" id="id"  readonly/></td>
+						<input type="text" id="userId" value="<%=loginUser.getmId()%>" readonly/></td>
 				</tr>
 
 				<tr>
 					<td class="input-group" id="nickName-zone"><label for="nickName" class="input">닉네임
-					</label> <input type="text" id="nickName" name="nickName" onkeyup="setTimeout(checkingNickName(),200)" readonly />
+					</label> <input type="text" id="nickName" name="nickName" value="<%=loginUser.getmNick()%>" onkeyup="setTimeout(checkingNickName(),200)" readonly />
 						<button type="button" onclick="changeNickName();">닉네임 수정</button>
 						<p></p></td>
 				</tr>
 
 				<tr>
 					<td class="input-group"><label for="name" class="input">이름</label>
-						<input type="text" id="name"  name="name" readonly/>
+						<input type="text" id="name"  name="name" value="<%=loginUser.getmName()%>" readonly/>
 						<button type="button" onclick="changeName();">이름 수정</button></td>
 				</tr>
 
@@ -191,13 +196,13 @@ h1 {
 				</tr>
 				<tr>
 					<td class="input-group" ><label for="phoneNum" class="input">연락처
-					</label> <input type="tel" id="phoneNum" name="phoneNum" readonly/>
+					</label> <input type="tel" id="phoneNum" name="phoneNum" value="<%=loginUser.getmPhone()%>" readonly/>
 						<button type="button" onclick="changePhoneNum();">연락처 수정</button></td>
 				</tr>
 
 				<tr>
 					<td class="input-group" id="email-zone"><label for="email" class="input">이메일</label>
-						<input type="email" id="email"  name="email"  onkeyup="setTimeout(checkingEmail(),200)" readonly/>
+						<input type="email" id="email"  name="email" value="<%=loginUser.getmEmail()%>" onkeyup="setTimeout(checkingEmail(),200)" readonly/>
 						<button type="button" onclick="changeEmail();">이메일 수정</button>
 						<p></p>
 						</td>
