@@ -205,6 +205,6 @@ h1 {
 	
 	
 	
-	<footer><%@ include file="../common/footer.jsp"%></footer>
+	<footer><%@ include file="/views/common/footer.jsp"%></footer>
 </body>
 </html>
