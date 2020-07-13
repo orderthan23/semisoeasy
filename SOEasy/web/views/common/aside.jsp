@@ -205,7 +205,7 @@ span.bar {
       <h1></h1>
       <ul class='megaMenu'>
       	<li class="infoZone"><div id="profileZone"><img src="<%=loginUser.getFilePath()+loginUser.getChangeName()%>"></div></li>
-      	<li class="infoZone"><%=loginUser.getmNick() %></li>
+      	<li class="infoZone" id="nickNameZone"><%=loginUser.getmNick() %></li>
       	<li class="infoZone" id="grade">HOST</li>
       	<li><hr id="firstHr"></li>
          
@@ -259,7 +259,8 @@ span.bar {
 				$('#eighthSubNav').attr("href","#").text("공지사항 작성");
 				$('#ninthSubNav').attr("href","#").text("관리자 홈");
 				break;
-			default : 
+			default :
+				$('#nickNameZone').text("");
 				$('#grade').html("<a href='/login/views/member/loginForm.jsp'>로그인이 필요합니다</a>");
 				$('#firstMainNav').hide();
 				$('#secondMainNav').hide();("회원관리");

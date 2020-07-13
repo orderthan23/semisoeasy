@@ -3,7 +3,7 @@
 <%
 	Member loginUser =(Member)session.getAttribute("loginUser");
 	int userStatus=0;
-	if(loginUser!=null){
+	if(loginUser!=null && !loginUser.getmStatus().equals("N")){
 		userStatus = loginUser.getpType();
 		System.out.println(userStatus);
 	} 
