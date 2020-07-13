@@ -94,8 +94,27 @@ public class MemberService {
 		return resultId;
 	}
 	public int findPwd(String id, String email) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = getConnection();
+		int resultPwd = new MemberDao().findPwd(con,id,email);
+		
+		close(con);
+		
+		return resultPwd;
+		
+		
+	}
+	public int updatePwd(String password, int memNo) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().updatePwd(con, password, memNo);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return result;
 	}
 
 }

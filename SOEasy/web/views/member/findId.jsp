@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% String msg ="";
+	if(request.getAttribute("msg")!=null){
+		msg =(String)request.getAttribute("msg");
+	} %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <style>
 section {
 	clear: both;
@@ -121,7 +126,15 @@ section {
 <title>Insert title here</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="/login/css/layout.css">
+<script>
+ $(function(){
+	var msg = "<%=msg%>";
+	if(msg != ""){
+		alert(msg);
+	}
+ });
+</script>
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>

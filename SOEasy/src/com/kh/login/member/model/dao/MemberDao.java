@@ -271,4 +271,48 @@ public class MemberDao {
 		return resultId;
 	}
 
+	public int findPwd(Connection con, String id, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int resultPwd = 0;
+		String query = prop.getProperty("findPwd");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				resultPwd = rset.getInt("MEMBER_NO");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return resultPwd;
+	}
+
+	public int updatePwd(Connection con, String password, int memNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updatePwd");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, password);
+			pstmt.setInt(2, memNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 }
