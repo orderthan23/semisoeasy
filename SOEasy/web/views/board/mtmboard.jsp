@@ -96,13 +96,14 @@
 		</div>
 		<table style="width: 100%; border-collapse: collapse;"id="boardTable">
 		<tr>
+			<td></td>
 			<td align="center">
 				<select class="category">
 					<option class="category">계정관련</option>
 					<option class="category">결제관련</option>
 				</select>
 			</td>
-			<td colspan="4"></td>
+			<td colspan="3"></td>
 				<td align="center">
 					<select class="OX" style="">
 						<option class="OX">선택</option>
@@ -111,7 +112,6 @@
 					</select>
 				</td>	
 		</tr>
-				
 				<tr>
 					<th>번호</th>
 					<th>분류</th>

@@ -1,6 +1,6 @@
 package com.kh.login.member.model.dao;
 
-import static com.kh.login.common.JDBCTemplate.close;
+import static com.kh.login.common.JDBCTemplate.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
