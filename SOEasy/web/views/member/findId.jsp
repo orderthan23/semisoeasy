@@ -234,6 +234,7 @@ section {
 						}
 						
 						else{
+						alert("인증코드가 발송되었습니다!");
 						$('#eCode').val(data);
 					
 						}
@@ -275,19 +276,7 @@ section {
 			if(name != "" && email!=""&& checkEmail==true){
 				
 				$('#findForm').submit();
-		/* 	$.ajax({
-				url: "/login/findId.me",
-				data: {name : name,
-						email: email},
-				type:'post',
-				success: function(data){
-					console.log(data);
-				},
-				error: function(data){
-					console.log("아이디 찾기 실패!");
-				}
-				
-			})*/
+		
 			} else{
 				
 				alert("정보를 모두 입력해주십시오");
@@ -313,10 +302,9 @@ section {
 
 		});
 		
-		
-		
+	</script>		
 
 		
-	</script>
+
 </body>
 </html>

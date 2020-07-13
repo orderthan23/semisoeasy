@@ -6,7 +6,7 @@
 	 resultPwd = (int)request.getAttribute("resultPwd");
 	System.out.println(resultPwd);
 	}else{
-		request.setAttribute("msg", "너 이상하게 접속함");
+		request.setAttribute("msg", "잘못된 접근입니다.");
 		request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request,response);
 	}
 		
@@ -118,8 +118,13 @@ h1 {
 <link rel="stylesheet" href="/login/css/layout.css">
 
 <title>Insert title here</title>
+
 </head>
-<body>
+<script>
+	window.history.forward();
+	function noBack(){window.history.forward();}
+</script>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	<header><%@ include file="../common/header.jsp"%></header>
 	<section>
 			<br><br><br><br>
