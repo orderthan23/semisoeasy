@@ -84,5 +84,18 @@ public class MemberService {
 		
 		return insertResult;
 	}
+	public String findId(String name, String email) {
+		Connection con = getConnection();
+		
+		String resultId = new MemberDao().findId(con,name,email);
+		
+		close(con);
+		
+		return resultId;
+	}
+	public int findPwd(String id, String email) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

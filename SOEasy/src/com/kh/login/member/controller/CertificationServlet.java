@@ -29,8 +29,8 @@ public class CertificationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String phoneNum = request.getParameter("phoneNum");
 		String name = request.getParameter("name");
-		System.out.println(phoneNum);
-		System.out.println(name);
+		//System.out.println(phoneNum);
+		//System.out.println(name);
 		PrintWriter out = response.getWriter();
 		int result = new MemberService().checkYou(phoneNum, name);
 		
@@ -45,8 +45,8 @@ public class CertificationServlet extends HttpServlet {
 		
 		String key = new Certified().CertifiedSMS(phoneNum);
 		
-		System.out.println(key);
-		System.out.println(phoneNum);
+		//System.out.println(key);
+		//System.out.println(phoneNum);
 		
 		
 		out.append(key);

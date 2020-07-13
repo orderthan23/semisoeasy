@@ -67,7 +67,7 @@ section {
 
 
 #findButton{
-	background: #3DB6AE;;
+	background: #3DB6AE;
 	width: 500px;
 	height : 75px;
 	outline: none;
@@ -93,6 +93,30 @@ section {
 	font-size : 20px;
 	font-weight : border;
 }
+
+#certCode{
+	background : #3DB6AE;
+	border-radius : 10px;
+	border: none;
+	height: 35px;
+	font-weight: bolder;
+	width: 80px;
+}
+#certCode:focus{
+	outline : none;
+}
+#correctCert{
+	background : #3DB6AE;
+	border-radius : 10px;
+	border: none;
+	height: 35px;
+	font-weight: bolder;
+	width: 80px;
+}
+
+#correctCert:focus{
+	outline : none;
+}
 </style>
 <title>Insert title here</title>
 <script
@@ -108,7 +132,8 @@ section {
 		<p align=center id="findBrand">SO EASY</p>
 		<div id="findBox">
 	
-			<form action="" method="post" id="findForm">
+			<form action="/login/findId.me" method="post" id="findForm">
+				<input type="hidden" id="kindOf" name="kindOf" value=1>
 				<div align="center">
 					<div class="button">
 						<br>
@@ -123,11 +148,11 @@ section {
 						<table>
 							<tr>
 								<td><label style="margin-right : 20px;" id="text1">이름 </label></td>
-								<td><input type="text" name="userId" class="idfindNeeds"
+								<td><input type="text" name="name" class="idfindNeeds"
 									placeholder="이름을 입력하세요"></td>
 								<td><br>
 								<br>
-								<br>
+								
 								<br></td>
 
 							</tr>
@@ -136,19 +161,27 @@ section {
 							<tr>
 								<td ><label style="margin-right : 20px;" id="text2">이메일 </label></td>
 								<td><input type="email" name="email" class="idfindNeeds"
-									placeholder="이메일을 입력하세요"></td>
+									placeholder="이메일을 입력하세요" id="email"></td>
+								<td><button id="certCode" type="button" onclick="sendCertifiedEmail();">인증코드 전송</button></td>
+								<td><input type="hidden" id="eCode"></td>
 								<td><br>
 								<br>
-								<br>
+								
 								<br></td>
 							</tr>
+							<tr>
+								<td ><label style="margin-right : 20px;" id="text2">인증코드 </label></td>
+								<td><input type="text" name="userEcode" class="idfindNeeds" id="userEcode"
+									placeholder="인증코드를 입력하세요"></td>
+									<td><button type="button" id="correctCert" onclick="checkEcert();">인증확인</button></td>
+									</tr>
 						</table>
 					</div>
 					
 					
 					<br>
 					<!-- 찾기 버튼 -->
-					<button type="submit" id="findButton"><p>찾기<p></button>
+					<button type="button" id="findButton" onclick="findId();"><p>찾기<p></button>
 							
 							
 					</div>
@@ -165,12 +198,96 @@ section {
 	</footer>
 
 	<script>
+	//이메일 유효성 검사 변수
+	
+	var canCertifiedEamil; //이메일 인증을 실행할 만한 조건이 되는지 체크
+	var $email; // 유저 이메일
+	var checkEmail = false;//이메일 인증 체크 했는지 여부
+	var getEmail = RegExp(/^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/); // 유저 이메일 유효성 검사
+
+		//이메일 인증 검사
+		function sendCertifiedEmail(){
+		
+				var email = $('#email').val();
+				var name = $('#name').val();
+				$.ajax({
+					url: "/login/findECert.me",
+					data: {email : email },
+					type: "post",
+					success: function(data){
+						console.log(data);
+						if(data =="fail"){
+							alert("등록되지 않은 이메일 입니다");
+						}
+						
+						else{
+						$('#eCode').val(data);
+					
+						}
+					},
+					error: function(data){
+						console.log("이메일 인증 에러")
+					}
+					
+				});
+		
+		}
+	
+		function checkEcert(){
+			var userEcode = $("#userEcode").val();
+			var certEcode= $('#eCode').val();
+			console.log(userEcode);
+			console.log(certEcode);
+			if(userEcode == certEcode){
+				alert("이메일 인증이 완료되었습니다");
+				$('#email-certificate p').text("이메일 인증 완료").css("color","green");
+				$('#emailCode').prop("readonly",true);
+				$('#email').prop("readonly",true);
+				checkEmail=true;
+				console.log("checkEmail :"+checkEmail);
+					
+			}else{
+				alert("본인인증 실패 다시 입력해주세요");
+				$('#inputCert p').text("본인인증을 다시 진행해주세요").css("color","red");
+						
+			}
+		}
+		
+		function findId(){
+			var name = $('input[name=name]').val();
+			var email = $('input[name=email]').val();
+			var eCode= $('input[name=userEcode]').val();
+			console.log(name);
+			console.log(email);
+			if(name != "" && email!=""&& checkEmail==true){
+				
+				$('#findForm').submit();
+		/* 	$.ajax({
+				url: "/login/findId.me",
+				data: {name : name,
+						email: email},
+				type:'post',
+				success: function(data){
+					console.log(data);
+				},
+				error: function(data){
+					console.log("아이디 찾기 실패!");
+				}
+				
+			})*/
+			} else{
+				
+				alert("정보를 모두 입력해주십시오");
+			}
+		}
+		
 		$('.button:first-child').click(function() {
 			$(this).css("background", "#3DB6AE");
 			$('.button:nth-child(2)').css("background", "lightGray");
 			$('#idBox h1').text("아이디는 가입하신 이름과 이메일로 찾을 수 있습니다.");
 			$('#text1').text('이름');
 			$('input[name=userId]').attr("placeholder","이름을 입력하세요");
+			$('#kindOf').val(1);
 		});
 		
 		$('.button:nth-child(2)').click(function() {
@@ -179,6 +296,7 @@ section {
 			$('#idBox h1').text("비밀번호는 가입하신 아이디와 이메일로 찾을 수 있습니다.");
 			$('#text1').text("아이디");
 			$('input[name=userId]').attr("placeholder","아이디를 입력하세요");
+			$('#kindOf').val(2);
 
 		});
 		

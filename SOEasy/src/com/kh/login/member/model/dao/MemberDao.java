@@ -149,11 +149,15 @@ public class MemberDao {
 	public int nickCheck(Connection con, String nickName) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		int result =0;
+		int result = 0;
 		String query = prop.getProperty("nickCheck");
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, nickName);
+			rset = pstmt.executeQuery();
+			if(rset.next()){
+				result = rset.getInt(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -172,6 +176,11 @@ public class MemberDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, email);
+			rset = pstmt.executeQuery();
+			if(rset.next()){
+				result = rset.getInt(1);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -192,6 +201,10 @@ public class MemberDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, phoneNum);
 			pstmt.setString(2, name);
+			rset = pstmt.executeQuery();
+			if(rset.next()){
+				result = rset.getInt(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -227,6 +240,35 @@ public class MemberDao {
 		return insertResult;
 		
 	
+	}
+
+	public String findId(Connection con, String name, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String resultId = null;
+		
+		String query = prop.getProperty("findId");
+		//아직 쿼리 안썼다.
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				resultId = rset.getString("M_ID");
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			close(rset);
+		}
+		
+		return resultId;
 	}
 
 }
