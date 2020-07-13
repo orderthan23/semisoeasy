@@ -91,23 +91,23 @@
 		<div style="width:75%; margin-left:auto; margin-right:auto;">
 		<!-- <div style="width:90%;"> -->
 		<!-- </div> -->
-		<table>
+		<table id="titleTb">
 			<tr>
 				<td>
-					<p style="color:#40a4b6;  font-weight: bolder; margin-top:0; font-size:30px;">성수동 인생공간 코워킹스페이스</p>
+					<p id="title" style="color:#40a4b6;  font-weight: bolder; margin-top:0; font-size:30px;">성수동 인생공간 코워킹스페이스</p>
 				</td>
 			</tr>
 		</table>
-		<table>
+		<table id="priceTb">
 			<tr>
-				<td style="color:#c4c4c4; font-size:25px; width:250px;">300,000원 / 1개월 </td>
-				<td><button onclick="test1();" style="background:#40b4a6; width:70px; height:30px; font-size: 15px; outline:0; border:0; color:white; cursor:pointer;">예  약</button></td>
+				<td id="price" style="color:#c4c4c4; font-size:25px; width:250px;">300,000원 / 1개월 </td>
+				<td><button id="reserBtn" onclick="test1();" style="background:#40b4a6; width:70px; height:30px; font-size: 15px; outline:0; border:0; color:white; cursor:pointer;">예  약</button></td>
 			</tr>
 		</table>
-		<table>
+		<table id="iconTb">
 			<tr>
-				<td style="padding:10px;"><img src="../../images/icon/share.png" style="width:35px;"></td>
-				<td style="padding:10px;"><img src="../../images/icon/heart.png" style="width:35px;"></td>
+				<td id="share" style="padding:10px;"><img src="../../images/icon/share.png" style="width:35px;"></td>
+				<td id="heart" style="padding:10px;"><img src="../../images/icon/heart.png" style="width:35px;"></td>
 			</tr>
 		</table>
 		<br>
@@ -125,15 +125,15 @@
 		</div>
 		
 		<br><br>
-		<p style="font-size:30px;">
+		<p id="subTitle" style="font-size:30px;">
 			동네에서 만나는 따뜻한 <br>
 			코워킹스페이스
 		</p>
 		<hr>
-		<p style="color:#40a4b6; font-size:20px;"><b>
+		<p id="intro" style="color:#40a4b6; font-size:20px;"><b>
 			소개
 		</b></p>
-		<p>
+		<p id="introInfo">
 			따뜻한 사람들을 위한 코워킹스페이스 성수동 인생공간입니다. <br><br>
 
 			성수동 인생공간은 자신의 인생일(천직)을 찾고, 이를 완성해나가는 사람들이 채워나가는 코<br>
@@ -156,174 +156,221 @@
 			- 월 1회 무료 변호사, 변리사, 세무사 등 서비스 제공!<br><br>
 		</p>
 		<br>
-		<p style="color:#40a4b6; font-size:20px;"><b>
+		<p id="opTime" style="color:#40a4b6; font-size:20px;"><b>
 			운영시간
 		</b></p>
-		<table style="border-spacing:15px;">
+		<table id="opTimeTb" style="border-spacing:15px;">
 			<tr>
-				<td style="padding:20px;"><b>월</b>00:00 ~ 24:00</td>
-				<td style="padding:20px;"><span style="color:blue;"><b>토</b></span>00:00 ~ 24:00</td>
+				<td id="mon" style="padding:20px;"><b>월</b>00:00 ~ 24:00</td>
+				<td id="sat" style="padding:20px;"><span style="color:blue;"><b>토</b></span>00:00 ~ 24:00</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>화</b>00:00 ~ 24:00</td>
-				<td style="padding:20px;"><span style="color:red;"><b>일</b></span>00:00 ~ 24:00</td>
+				<td id="tue" style="padding:20px;"><b>화</b>00:00 ~ 24:00</td>
+				<td id="sun" style="padding:20px;"><span style="color:red;"><b>일</b></span>00:00 ~ 24:00</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>수</b>00:00 ~ 24:00</td>
+				<td id="wed" style="padding:20px;"><b>수</b>00:00 ~ 24:00</td>
 				<td style="padding:20px;"></td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>목</b>00:00 ~ 24:00</td>
+				<td id="thu" style="padding:20px;"><b>목</b>00:00 ~ 24:00</td>
 				<td style="padding:20px;"></td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>금</b>00:00 ~ 24:00</td>
+				<td id="fri" style="padding:20px;"><b>금</b>00:00 ~ 24:00</td>
 				<td style="padding:20px;"></td>
 			</tr>
 		</table>
 		<br><br>
 		
-		<p style="color:#40a4b6; font-size:20px;"><b>
+		<p id="plus" style="color:#40a4b6; font-size:20px;"><b>
 			추가정보
 		</b></p>
-		<table style="border-spacing:15px;">
+		<table id="plusTb" style="border-spacing:15px;">
 			<tr>
-				<td style="padding:20px;"><b>수용인원</b></td>
-				<td style="padding:20px;">1 ~ 5 명</td>
+				<td id="accPer" style="padding:20px;"><b>수용인원</b></td>
+				<td id="accperInfo" style="padding:20px;">1 ~ 5 명</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>좌석유형</b></td>
-				<td style="padding:20px;">고정석</td>
+				<td id="seatType" style="padding:20px;"><b>좌석유형</b></td>
+				<td id="seatTypeInfo" style="padding:20px;">고정석</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>재고</b></td>
-				<td style="padding:20px;">5개</td>
+				<td id="stock" style="padding:20px;"><b>재고</b></td>
+				<td id="stockInfo" style="padding:20px;">5개</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>넓이</b></td>
-				<td style="padding:20px;">15평(49.58m²)</td>
+				<td id="extent" style="padding:20px;"><b>넓이</b></td>
+				<td id="extentInfo" style="padding:20px;">15평(49.58m²)</td>
 			</tr>
 		</table>
 		<br><br>
 		
-		<p style="color:#40a4b6; font-size:20px;"><b>
+		<p id="amenity" style="color:#40a4b6; font-size:20px;"><b>
 			편의시설
 		</b></p>
 		
 		<!-- 편의시설 사진들 넣기 -->
-		<table style="border-spacing:15px;">
+		<table id="amenityTb" style="border-spacing:15px;">
 			<tr>
-				<td style="padding:22px;"><img src="../../images/icon/24h.png" width="100px" style="opacity:0.2;"></td>
-				<td style="padding:22px;"><img src="../../images/icon/365days.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/airCon.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/animal.png" width="100px" style="opacity:0.2;"></td>
-				<td style="padding:22px;"><img src="../../images/icon/beam.png" width="100px" style="opacity:0.2;"></td>
-				<td style="padding:22px;"><img src="../../images/icon/board.png" width="100px"></td>
+				<td id="24h" style="padding:22px;"><img src="../../images/icon/24h.png" width="100px" style="opacity:0.2;"></td>
+				<td id="365days" style="padding:22px;"><img src="../../images/icon/365days.png" width="100px"></td>
+				<td id="airCon" style="padding:22px;"><img src="../../images/icon/airCon.png" width="100px"></td>
+				<td id="animal" style="padding:22px;"><img src="../../images/icon/animal.png" width="100px" style="opacity:0.2;"></td>
+				<td id="beam" style="padding:22px;"><img src="../../images/icon/beam.png" width="100px" style="opacity:0.2;"></td>
+				<td id="board" style="padding:22px;"><img src="../../images/icon/board.png" width="100px"></td>
 			</tr>
 			<tr>
-				<td style="padding:22px;"><img src="../../images/icon/cafe.png" width="100px" style="opacity:0.2;"></td>
-				<td style="padding:22px;"><img src="../../images/icon/copyPrint.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/delivery.png" width="100px" style="opacity:0.2;"></td>
-				<td style="padding:22px;"><img src="../../images/icon/doorLock.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/fax.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/heater.png" width="100px"></td>
+				<td id="cafe" style="padding:22px;"><img src="../../images/icon/cafe.png" width="100px" style="opacity:0.2;"></td>
+				<td id="copyPrint" style="padding:22px;"><img src="../../images/icon/copyPrint.png" width="100px"></td>
+				<td id="delivery" style="padding:22px;"><img src="../../images/icon/delivery.png" width="100px" style="opacity:0.2;"></td>
+				<td id="doorLock" style="padding:22px;"><img src="../../images/icon/doorLock.png" width="100px"></td>
+				<td id="fax" style="padding:22px;"><img src="../../images/icon/fax.png" width="100px"></td>
+				<td id="heater" style="padding:22px;"><img src="../../images/icon/heater.png" width="100px"></td>
 			</tr>
 			<tr>
-				<td style="padding:22px;"><img src="../../images/icon/kitchen.png" width="100px" style="opacity:0.2;"></td>
-				<td style="padding:22px;"><img src="../../images/icon/locker.png" width="100px" style="opacity:0.2;"></td>
-				<td style="padding:22px;"><img src="../../images/icon/mail.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/parking.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/rounge.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/snack.png" width="100px" style="opacity:0.2;"></td>
+				<td id="kitchen" style="padding:22px;"><img src="../../images/icon/kitchen.png" width="100px" style="opacity:0.2;"></td>
+				<td id="locker" style="padding:22px;"><img src="../../images/icon/locker.png" width="100px" style="opacity:0.2;"></td>
+				<td id="mail" style="padding:22px;"><img src="../../images/icon/mail.png" width="100px"></td>
+				<td id="parking" style="padding:22px;"><img src="../../images/icon/parking.png" width="100px"></td>
+				<td id="rounge" style="padding:22px;"><img src="../../images/icon/rounge.png" width="100px"></td>
+				<td id="snack" style="padding:22px;"><img src="../../images/icon/snack.png" width="100px" style="opacity:0.2;"></td>
 			</tr>
 			<tr>
-				<td style="padding:22px;"><img src="../../images/icon/terrace.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/tv.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/wareHouse.png" width="100px" style="opacity:0.2;"></td>
-				<td style="padding:22px;"><img src="../../images/icon/waterMachine.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/wifi.png" width="100px"></td>
-				<td style="padding:22px;"><img src="../../images/icon/plug.png" width="100px"></td>
+				<td id="terrace" style="padding:22px;"><img src="../../images/icon/terrace.png" width="100px"></td>
+				<td id="tv" style="padding:22px;"><img src="../../images/icon/tv.png" width="100px"></td>
+				<td id="wareHouse" style="padding:22px;"><img src="../../images/icon/wareHouse.png" width="100px" style="opacity:0.2;"></td>
+				<td id="waterMachine" style="padding:22px;"><img src="../../images/icon/waterMachine.png" width="100px"></td>
+				<td id="wifi" style="padding:22px;"><img src="../../images/icon/wifi.png" width="100px"></td>
+				<td id="plug" style="padding:22px;"><img src="../../images/icon/plug.png" width="100px"></td>
 			</tr>
 		</table>
 
 		<br><br>	
-		<p style="color:#40a4b6; font-size:20px;"><b>
+		<p id="usePeriod" style="color:#40a4b6; font-size:20px;"><b>
 			이용기간
 		</b></p>
 		
-		<table>
+		<table id="usePeriodTb">
 			<tr>
-				<td style="padding:20px;"><b>이용 8일 전</b></td>
-				<td style="padding:20px;">100% 환불</td>
+				<td id="8ago" style="padding:20px;"><b>이용 8일 전</b></td>
+				<td id="8agoInfo" style="padding:20px;">100% 환불</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>이용 7일 전</b></td>
-				<td style="padding:20px;">90% 환불</td>
+				<td id="7ago" style="padding:20px;"><b>이용 7일 전</b></td>
+				<td id="7agoInfo" style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>이용 6일 전</b></td>
-				<td style="padding:20px;">90% 환불</td>
+				<td id="6ago" style="padding:20px;"><b>이용 6일 전</b></td>
+				<td id="6agoInfo" style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>이용 5일 전</b></td>
-				<td style="padding:20px;">90% 환불</td>
+				<td id="5ago" style="padding:20px;"><b>이용 5일 전</b></td>
+				<td id="5agoInfo" style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>이용 4일 전</b></td>
-				<td style="padding:20px;">90% 환불</td>
+				<td id="4ago" style="padding:20px;"><b>이용 4일 전</b></td>
+				<td id="4agoInfo" style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>이용 3일 전</b></td>
-				<td style="padding:20px;">90% 환불</td>
+				<td id="3ago" style="padding:20px;"><b>이용 3일 전</b></td>
+				<td id="3agoInfo" style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>이용 2일 전</b></td>
-				<td style="padding:20px;">90% 환불</td>
+				<td id="2ago" style="padding:20px;"><b>이용 2일 전</b></td>
+				<td id="2agoInfo" style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>이용 1일 전</b></td>
-				<td style="padding:20px;">90% 환불</td>
+				<td id="1ago" style="padding:20px;"><b>이용 1일 전</b></td>
+				<td id="1agoInfo" style="padding:20px;">90% 환불</td>
 			</tr>
 			<tr>
-				<td style="padding:20px;"><b>이용 당일</b></td>
-				<td style="padding:20px;"><b style="color:red;">환불불가</b></td>
+				<td id="dday" style="padding:20px;"><b>이용 당일</b></td>
+				<td id="ddayInfo" style="padding:20px;"><b style="color:red;">환불불가</b></td>
 			</tr>
 		</table>
 		<br><br>
 		
 		<!-- 카카오맵 api -->
+		<p style="margin-top:-12px">
+    	<em class="link">
+        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+           	 혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
+        </a>
+    	</em>
+		</p>
+		<div id="map" style="width:100%;height:500px;"></div>
 		
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=59332eec12fbfca6cacba94ce22f49d2&libraries=services"></script>
+		<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };  
 		
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+		
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+		
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+		
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new kakao.maps.Marker({
+		            map: map,
+		            position: coords
+		        });
+		
+		        // 인포윈도우로 장소에 대한 설명을 표시합니다
+		        var infowindow = new kakao.maps.InfoWindow({
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+		        });
+		        infowindow.open(map, marker);
+		
+		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+		    } 
+		});    
+		</script>
+		<br>
 		<hr>
 		
 		<p style="font-size:30px;"><b>
-			Q & A&nbsp;&nbsp;&nbsp;<span style="color:#40a4b6;">1개</span>
+			Q & A&nbsp;&nbsp;&nbsp;<span id="qnaCount" style="color:#40a4b6;">1개</span>
 		</b></p>
 		
 		<table>
           	<tr>
-          		<td rowspan="2"><img src="../../images/etc/lingard.png" style="width:50px;"></td>
-          		<td><h3>&nbsp;&nbsp;이호정&nbsp;&nbsp;</h3></td>
+          		<td id="profilePic" rowspan="2"><img src="../../images/etc/lingard.png" style="width:50px;"></td>
+          		<td id="name"><h3>&nbsp;&nbsp;이호정&nbsp;&nbsp;</h3></td>
 
           	</tr>
           	<tr>
-          		<td colspan="3">&nbsp;&nbsp;고정석으로 개인 데스크탑 비치 가능한가요? 와이파이 외에 개별 Lan선이 있는지도 궁금합니다</td>
+          		<td id="userQ" colspan="3">&nbsp;&nbsp;고정석으로 개인 데스크탑 비치 가능한가요? 와이파이 외에 개별 Lan선이 있는지도 궁금합니다</td>
           	</tr>
           	<tr>
           		<td></td>
-          		<td colspan="3"><p style="font-size: 15px; color:#c4c4c4;">&nbsp;&nbsp;2020. 06. 18</p></td>
+          		<td id="userDate" colspan="3"><p style="font-size: 15px; color:#c4c4c4;">&nbsp;&nbsp;2020. 06. 18</p></td>
           	</tr>
           	<tr>
           		<td></td>
-          		<td colspan="3">&nbsp;&nbsp;<b style="color:#40a4b6; font-size:20px;">호스트의 답</b>&nbsp;&nbsp;</td>
+          		<td id="hostAnswer" colspan="3">&nbsp;&nbsp;<b style="color:#40a4b6; font-size:20px;">호스트의 답</b>&nbsp;&nbsp;</td>
           	</tr>
           	<tr>
           		<td></td>
-          		<td colspan="3">&nbsp;&nbsp;안녕하세요! 1개월 이상 이용시 고정석 이용(데스크탑 설치가능, 개별 유선랜 1GB속도)가능합니다.</td>
+          		<td id="hostA" colspan="3">&nbsp;&nbsp;안녕하세요! 1개월 이상 이용시 고정석 이용(데스크탑 설치가능, 개별 유선랜 1GB속도)가능합니다.</td>
           	</tr>
           	<tr>
           		<td></td>
-          		<td colspan="3"><p style="font-size: 15px; color:#c4c4c4;">&nbsp;&nbsp;2020. 06. 18</p></td>
+          		<td id="hostDate" colspan="3"><p style="font-size: 15px; color:#c4c4c4;">&nbsp;&nbsp;2020. 06. 18</p></td>
           	</tr>
         </table>
 		
@@ -332,7 +379,7 @@
           <div class="card-body">
             <form>
               <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+                <textarea class="form-control" rows="3" style="resize:none;"></textarea>
               </div>
               <button type="submit" class="btn btn-primary" style="color:white; background:#40a4b6; border:0; outline:0;">등록</button>
             </form>
@@ -342,14 +389,14 @@
 		
 		<br><br>
 
-		<p style="font-size:30px;"><b>
-			이용후기&nbsp;&nbsp;&nbsp;<span style="color:#40a4b6;">1개</span>
-		</b><span style="font-size:20px;"><b>&nbsp;&nbsp;&nbsp;평균평점</b></span><span style="color:#40a4b6; font-size:20px;">&nbsp;&nbsp;5</span></p>
+		<p id="review" style="font-size:30px;"><b>
+			이용후기&nbsp;&nbsp;&nbsp;<span id="reviewCount" style="color:#40a4b6;">1개</span>
+		</b><span id="avrStar" style="font-size:20px;"><b>&nbsp;&nbsp;&nbsp;평균평점</b></span><span id="avrStarCount" style="color:#40a4b6; font-size:20px;">&nbsp;&nbsp;5</span></p>
 
-		<table>
+		<table id="reviewTb">
           	<tr>
-          		<td rowspan="2"><img src="../../images/etc/soeasyProf.png" style="width:50px;"></td>
-          		<td><h3>&nbsp;&nbsp;이호정&nbsp;&nbsp;</h3></td>
+          		<td id="profilePic" rowspan="2"><img src="../../images/etc/soeasyProf.png" style="width:50px;"></td>
+          		<td id="userName"><h3>&nbsp;&nbsp;이호정&nbsp;&nbsp;</h3></td>
           		<td>
           			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
           			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
@@ -357,14 +404,14 @@
           			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
           			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
           		</td>
-          		<td onclick="register();" style="cursor:pointer;"><h5>&nbsp;&nbsp;&nbsp;신고하기</h5></td>
+          		<td id="registerBtn" onclick="register();" style="cursor:pointer;"><h5>&nbsp;&nbsp;&nbsp;신고하기</h5></td>
           	</tr>
           	<tr>
-          		<td colspan="3">&nbsp;&nbsp;잘썼습니다~~~~</td>
+          		<td id="reviewInfo" colspan="3">&nbsp;&nbsp;잘썼습니다~~~~</td>
           	</tr>
           	<tr>
           		<td></td>
-          		<td colspan="3"><p style="font-size: 15px; color:#c4c4c4;">&nbsp;&nbsp;2020. 06. 18</p></td>
+          		<td id="reviewDate" colspan="3"><p style="font-size: 15px; color:#c4c4c4;">&nbsp;&nbsp;2020. 06. 18</p></td>
           	</tr>
         </table>
 		<br><br><br>
