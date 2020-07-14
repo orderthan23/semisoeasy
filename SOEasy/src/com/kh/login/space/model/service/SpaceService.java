@@ -58,7 +58,8 @@ public class SpaceService {
 				//이미지 파일에 공간번호 부여 및 IMAGE 입력 메소드
 				for(int i = 0; i < fileList.size(); i++) {
 					fileList.get(i).setSpaceNo(sNo);
-					
+//					System.out.println(fileList.size());
+//					System.out.println("service img originname :" + fileList.get(i).getOriginName());
 					imgResult += new SpaceDao().insertSpaceImg(con, fileList.get(i));
 				}
 			}
