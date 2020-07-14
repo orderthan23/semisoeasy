@@ -296,7 +296,7 @@
 							
 				}
 			}
-			
+		
 //전체 한번 체크 여부
 			function checkAll(){
 				if(checkId === false){
@@ -368,6 +368,72 @@
 				}
 				
 			}
+			function certified2(){
+				var phoneNum = $('#phoneNum').val();
+				var name = $('#name').val();
+				console.log(phoneNum);
+				console.log(name);
+						
+					 $.ajax({
+							
+						url:"/login/certification.me",
+						data:{phoneNum:phoneNum,
+							  name: name
+							 },
+						type:"post",
+						success: function(data){
+							console.log(data);
+							if(data == "fail"){
+								alert("등록된 전화번호 입니다 다시 입력해주세요");
+								
+							}else if(data =="fail2"){
+								alert("이름을 입력해 주세요");
+							}
+							
+							else{
+							alert("인증번호가 발송 되었습니다");
+							$('#cert').val(data);
+							}
+						},
+						error: function(data){
+							console.log("실패!");
+						}
+					});
+				}
+			
+			
+			function checkCertifiedEmail2(){
+				if(canCertifiedEmail==false){
+					alert("이메일 형식에 맞게 입력해주세요.");
+				}else{
+					var email = $('#email').val();
+					var name = $('#name').val();
+					$.ajax({
+						url: "/login/eCert.me",
+						data: {email : email },
+						type: "post",
+						success: function(data){
+							
+							console.log(data);
+							if(data != "fail"){
+							$('#eCert').val(data);
+							alert("인증 코드가 발송되었습니다.");
+							}else{
+								alert("등록된 이메일 입니다 다시 입력해주세요.");
+							
+							}
+						},
+						error: function(data){
+							console.log("이메일 인증 에러")
+						}
+						
+					});
+					
+			
+				}
+			
+			}
+			
 		
 		
 		

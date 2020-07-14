@@ -39,7 +39,7 @@ public class FindEmailCertServlet extends HttpServlet {
 			toEmail = email;
 			String host = "smtp.naver.com";
 			String user = "hg121500@naver.com";
-			String password = "apsqnddua!123";
+			String password = "emailtest1!";
 
 			Properties props = new Properties();
 			props.put("mail.smtp.host", host);

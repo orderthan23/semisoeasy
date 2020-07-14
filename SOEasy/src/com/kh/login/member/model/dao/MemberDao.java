@@ -338,7 +338,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public int deleteMember(Connection con, String userId, String password) {
+	public int deleteMember(Connection con, String userId, String password, String reason) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -346,8 +346,9 @@ public class MemberDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, userId);
-			pstmt.setString(2, password);
+			pstmt.setString(1, reason);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, password);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
