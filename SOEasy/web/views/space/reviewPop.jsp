@@ -108,8 +108,7 @@
 					</button>
 				</td>
 				<td>
-					<textarea id="textArea" cols="50" rows="20">
-					</textarea>
+					<textarea id="textArea" cols="50" rows="20"></textarea>
 				</td>
 			</tr>
 		</table>
@@ -126,10 +125,9 @@
 	<script>
 	
 	//빈 내용시 알러트 띄우기
-	var textArea = $("#textArea").val();
 	$(document).ready(function(){
 		$("#submit").click(function(){
-			
+			var textArea = $("#textArea").val();
 			//왜 안돼
 			if(textArea == "") {
 				alert('내용을 작성해주세요.');  
@@ -137,7 +135,6 @@
 				alert('리뷰 등록이 완료되었습니다.');
 				self.close();
 			} 
-			
 		});
 	}); 
 	
