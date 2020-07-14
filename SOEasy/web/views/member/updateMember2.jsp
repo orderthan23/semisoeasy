@@ -153,7 +153,7 @@ h1 {
 
 
 
-		<form action="" method="post" id="joinForm">
+		<form action="/login/updateMember.me" method="post" id="joinForm">
 			<table id="joinTable" align="center">
 			
 				<tr>
@@ -175,7 +175,7 @@ h1 {
 				</tr>
 				<tr>
 					<td class="input-group"><label for="id" class="input">아이디</label>
-						<input type="text" id="userId" value="<%=loginUser.getmId()%>" readonly/>
+						<input type="text" name="userId" id="userId" value="<%=loginUser.getmId()%>" readonly/>
 						
 						</td>
 				</tr>
@@ -184,13 +184,16 @@ h1 {
 					<td class="input-group" id="nickName-zone"><label for="nickName" class="input">닉네임
 					</label> <input type="text" id="nickName" name="nickName" value="<%=loginUser.getmNick()%>" onkeyup="setTimeout(checkingNickName(),200)" readonly />
 						<button type="button" onclick="changeNickName();">닉네임 수정</button>
+						<input type="hidden" value=1 id="swNick">
 						<p></p></td>
 				</tr>
 
 				<tr>
 					<td class="input-group"><label for="name" class="input">이름</label>
 						<input type="text" id="name"  name="name" value="<%=loginUser.getmName()%>" readonly/>
-						<button type="button" onclick="changeName();">이름 수정</button></td>
+						<button type="button" onclick="changeName();">이름 수정</button>
+						<input type="hidden" value=1 id="swName">
+						</td>
 				</tr>
 
 
@@ -198,9 +201,10 @@ h1 {
 					<td class="input-group" id="password-zone"><label for="password" class="input">비밀번호</label>
 					<pre id="validate1">                                               0/16자</pre>
 						<input type="password" id="password" name="password" onkeyup="setTimeout(checkPwdLength(),200);" readonly/>
-						<input type="hidden" id="nowPass" value=<%=loginUser.getmPassword()%>>
+						
 						<button type="button" onclick="changePassword();">비밀번호 수정</button>
 						<p></p>
+						<input type="hidden" id="swPassword" value=1 name="swPassword">
 						</td>
 				</tr>
 				
@@ -214,7 +218,9 @@ h1 {
 					<td class="input-group" id="phone-zone" ><label for="phoneNum" class="input">연락처
 					</label> <input type="tel" id="phoneNum" name="phoneNum" value="<%=loginUser.getmPhone()%>" readonly/>
 						<button type="button" onclick="changePhoneNum();">연락처 수정</button>
-						<input type=hidden id="cert">
+						<input type="hidden" id="cert">
+						<input type="hidden" id="swPhone" value=1> 
+						
 						</td>
 				</tr>
 
@@ -224,6 +230,7 @@ h1 {
 						<button type="button" onclick="changeEmail();">이메일 수정</button>
 						<p></p>
 						<input type="hidden" id=eCert>
+						<input type="hidden" id="swEmail" value=1>
 						</td>
 				</tr>
 
@@ -233,7 +240,7 @@ h1 {
 					<td><button type="button" name="transfer" id="trans"
 							class="submitButton" onclick="checkUpdate();">개인정보 수정  완료</button></td>
 				</tr>
-
+						
 
 			</table>
 		</form>
@@ -243,6 +250,13 @@ h1 {
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
 	<script>
+		$(function(){
+			checkNickName = true;
+			checkpw = true;
+			checkpw2 = true;
+			checkEmail =true;
+			checkCert = true;
+		});
 		function loadImg(value){
 			
 			if(value.files && value.files[0]){
@@ -264,30 +278,72 @@ h1 {
 		function changeNickName(){
 			$('input[name=nickName]').removeAttr("readonly");
 			$('#nickName-zone button').text("닉네임 중복 확인").attr("onclick","checkSameNickName();");
+			checkNick = false;
+			
 			
 		}
 		
 		function changeName(){
 			$('input[name=name]').removeAttr("readonly");
+			
 		}
 		function changePassword(){
 			$('input[name=password]').removeAttr("readonly");
 			$('input[name=password2]').removeAttr("readonly");
+			$('#swPassword').val(2);
+			checkpw=false;
+			checkpw2 = false;
+			
 		}
 		function changePhoneNum(){
 			$('input[name=phoneNum]').removeAttr("readonly");
 			$('#phone-zone button').text("본인 인증").attr("onclick","certified2()");
-			$('#phoneArea').after("<tr><td class='input-group' id='inputCert'><label for='certCode' class='input'>인증번호</label><input type='text' id='userCode' placeholder='인증번호를 입력해주세요' onclick=''/><button type='button' onclick='certifyCorrect();'>인증 확인</button><p></p></td></tr>");		
+			$('#phoneArea').after("<tr><td class='input-group' id='inputCert'><label for='certCode' class='input'>인증번호</label><input type='text' id='userCode' placeholder='인증번호를 입력해주세요' onclick=''/><button type='button' onclick='certifyCorrect();'>인증 확인</button><p></p></td></tr>");
+			checkCert = false;
 		}
 		function changeEmail(){
 			$('input[name=email]').removeAttr("readonly");
 			$('#email-zone button').text("이메일 인증").attr("onclick","checkCertifiedEmail2();");
 			$('#emailArea').after("<tr><td class='input-group' id='email-certificate'><label for='emailCode' class='input'>인증코드</label><input type='text' id='emailCode' placeholder='인증코드를 입력해주세요' onclick=''/><button type='button' onclick='checkEcert();'>인증 확인</button><p></p></td></tr>");
-			
+			checkEmail = false;	
 		}
 		
-		function submitUpdate(){
-	
+		function checkUpdate(){
+			console.log(checkNickName);
+			console.log(checkpw);
+			console.log(checkpw2);
+			console.log(checkEmail);
+			console.log(checkCert);
+			//프로필 사진 검사
+			var $userProfileOriginalFile = $("#profile"); // 유저 프로필 사진명
+			var fileExt = $userProfileOriginalFile.val().substring($userProfileOriginalFile.val().lastIndexOf(".") + 1); // 확장자명 구하기 위함
+			var getUserProfileOriginalFile = RegExp(/jpg|jpeg|png|gif/i); // 유저 프로필 사진 유효성 검사
+			
+			
+			if(!getUserProfileOriginalFile.test(fileExt) && $userProfileOriginalFile.val().length > 0){
+				alert("프로필 사진은 jpg, jpeg, png, gif로 된 이미지만 가능합니다.");
+				return false;
+			}
+			if(checkNickName === false){
+				alert("닉네임을 확인하세요!");
+				return;
+			}
+			
+			if(checkpw=== false || checkpw2 === false){
+				alert("비밀번호를 확인하세요!");
+				return;
+			}
+			
+			if(checkEmail === false){
+				alert("이메일을 확인하세요!");
+				return;
+			}
+			
+			if(checkCert === false){
+				alert("본인인증을 진행하세요!");
+				return;
+			}
+			$('#joinForm').submit();
 		}
 	</script>
 </body>

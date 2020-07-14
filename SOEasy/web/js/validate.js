@@ -296,7 +296,7 @@
 							
 				}
 			}
-			
+		
 //전체 한번 체크 여부
 			function checkAll(){
 				if(checkId === false){
@@ -434,12 +434,7 @@
 			
 			}
 			
-			/*function checkUpdate(){
-				if($('#password').val() ==""){
-					$('#password').val()== 
-				}
-				
-			}*/
+		
 		
 		
 //모두 동의  클릭시 모두 동의 되는 함수
