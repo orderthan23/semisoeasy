@@ -66,6 +66,18 @@
         .slick-list{
         	width: 100%;
         }
+        
+        #reserBtn {
+        	background:#40b4a6;
+        	width:70px;
+        	height:30px;
+        	font-size: 15px;
+        	outline:0;
+        	border:0;
+        	color:white;
+        	border-radius:5px;
+        	cursor:pointer;
+        }
 
     </style>
 <meta charset="UTF-8">
@@ -101,7 +113,7 @@
 		<table id="priceTb">
 			<tr>
 				<td id="price" style="color:#c4c4c4; font-size:25px; width:250px;">300,000원 / 1개월 </td>
-				<td><button id="reserBtn" onclick="test1();" style="background:#40b4a6; width:70px; height:30px; font-size: 15px; outline:0; border:0; color:white; cursor:pointer;">예  약</button></td>
+				<td><button id="reserBtn" onclick="test1();">예  약</button></td>
 			</tr>
 		</table>
 		<table id="iconTb">
