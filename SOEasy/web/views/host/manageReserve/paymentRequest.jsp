@@ -97,8 +97,8 @@
 				</tr>
 				<% for(HostReserve h : list) {%>
 				<tr class="pCompleteInfo">
-					<td><%= h.getGestId() %></td><!-- model.vo에 게스트 정보 조인해서 적어야 함!!!!!! -->
-					<td><%= h.getGestName() %></td>
+					<td><%= h.getGuestId() %></td><!-- model.vo에 게스트 정보 조인해서 적어야 함!!!!!! -->
+					<td><%= h.getGuestName() %></td>
 					<td style="font-size:13px;" class="date"><%= h.getStartDay() + " ~ " + h.getEndDay() %></td>
 					<td style="font-size:13px;"><%= h.getSpaceKind() %></td>
 					<td style="font-size:13px;"><%= h.getSpaceName() %></td>
