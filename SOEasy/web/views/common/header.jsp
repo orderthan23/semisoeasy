@@ -103,10 +103,10 @@
 			class="subMenu"><br>
 		<a href="/login/views/space/insertSpaceStep1.jsp" class="sub" align="center" id="thirdHeaderMenu">공간 등록</a></span> <span class="subMenu"><br>
 		<a href="/login/views/board/board.jsp" class="sub" align="center" id="fourthHeaderMenu">공지 사항</a></span> &nbsp;&nbsp;
-		<form action="/login/views/space/search1.jsp" method="get">
+		<form action="<%=request.getContextPath()%>/select.se" method="get">
 			<input type="search" name="search" id="searchBar" placeholder="검색어를 입력하세요">
-			 <button type="submit" id=searchOn src=""><img src="/login/images/icon/search.png" width="40px" height="40px"></button>	
-
+			 <button type="submit" id="searchOn" src=""><img src="/login/images/icon/search.png" width="40px" height="40px"></button>	
+			
 		</form>
 		<img src="/login/images/logo/logo1.png" alt="로고 사진" id="logo"
 			onclick="location.href='/login/views/main/guestMain.jsp'">
@@ -130,7 +130,27 @@
 			
 			
 		});
-		
+		/* $(function(){
+			$("#searchOn").click(function(){
+				var value = $("#searchBar").val();
+				
+				$.ajax({
+					url: "select.se",
+					type: "get",
+					data: {value: value},
+					success: function(data) {
+						console.log(data);
+						console.log("서버 전송 성공");
+					},
+					error: function(error) {
+						console.log("실패");
+					},
+					complete: function(){
+						console.log("asdfsa");
+					}
+				});
+			});
+		}); */
 	</script>
 
 
