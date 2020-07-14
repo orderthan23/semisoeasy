@@ -13,6 +13,9 @@
 
 	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
 		$("#roadFullAddr").val(roadFullAddr);
+		$("#siNm").val(siNm);
+		$("#sggNm").val(sggNm);
+		$("#emdNm").val(emdNm);
 	}
 </script>
 <link rel="stylesheet" href="../../css/layout.css">
@@ -118,7 +121,7 @@
 			<br>
 			<br>
 		</div>
-		<form action="<%= request.getContextPath() %>/insertSpaceStep1" method="post">
+		<form action="<%= request.getContextPath() %>/insertSpaceStep1" method="post" encType="multipart/form-data">
 			<table class="space-insert" align="center" width="70%">
 				<tr>
 					<td width="5%"></td>
@@ -351,7 +354,11 @@
 					<td></td>
 					<td>공간 주소 *</td>
 					<td><input type="text" placeholder="공간 주소를 입력하세요." id="roadFullAddr"  name="space-address" readonly>&nbsp;&nbsp;<button type="button" onclick="goPopup();">검색</button></td>
-					<td></td>
+					<td>
+						<input type="hidden"  style="width:500px;" id="siNm"  name="siNm" />
+						<input type="hidden"  style="width:500px;" id="sggNm"  name="sggNm" />
+						<input type="hidden"  style="width:500px;" id="emdNm"  name="emdNm" />
+					</td>
 				</tr>
 				<tr>
 					<td></td>
@@ -636,7 +643,7 @@
 		});
 		
 		$("#gonext").click(function(){
-			if($(".warning").is("visible") == true || $(".check-distinct").is("visible") == false || $("#space-intro").val() == "" || $("#roadFullAddr").val() == "" ){
+			if($(".warning").is("visible") == true || $("#space-intro").val() == "" || $("#roadFullAddr").val() == "" ){
 				alert("필수사항을 모두 입력하세요");
 			} else {
 				$("form").submit();
