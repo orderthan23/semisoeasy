@@ -75,15 +75,19 @@
 </style>
 <title>SO Easy</title>
 </head>
-<body>
+<script>
+window.history.forward();
+	function noBack(){window.history.forward();}
+</script>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	<header><%@ include file="../common/header.jsp"%></header>
 	<nav>
 	<%@ include file="../common/aside.jsp"%>
 	<div class="colMenu">
 		<label class="colMenuTitle">개인 정보 관리</label>
-		<a class="colMenuButton" href="/login/views/member/updateMember.jsp">개인 정보 수정</a>
+		<a class="colMenuButton" href="<%=request.getContextPath()%>/views/member/updateMember.jsp">개인 정보 수정</a>
 		<a class="colMenuButton">프로필 정보 수정</a>
-		<a class="colMenuButton selectedButton" href="login/views/member/deleteMember.jsp">회원 탈퇴</a>
+		<a class="colMenuButton selectedButton" href="<%=request.getContextPath()%>/views/member/deleteMember.jsp">회원 탈퇴</a>
 		<br><br>
 	</div>
 	<hr style="margin:0">
@@ -92,7 +96,7 @@
 	</nav>
 	<section>
 	<br>
-		<form action="" method="post" id="deleteForm">
+		<form action="/login/deleteMember.me" method="post" id="deleteForm">
 		<table align="center">
 			<tr>
 				<td colspan = "4"><p id="deleteTitle">회원 탈퇴</p></td>
@@ -124,12 +128,12 @@
 					
 					<h1>비밀번호</h1>
 					
-					<input type="password" name="userPwd" placeholder="비밀번호를 입력하세요">
+					<input type="password" name="password" placeholder="비밀번호를 입력하세요">
+					<input type="hidden"  name="userId" value="<%=loginUser.getmId() %>">
 					<br><br>
-					<button id="deleteButton">탈퇴하기</button>
+					<button id="deleteButton" type="button" onclick="deleteMember();">탈퇴하기</button>
 					<br><br><br>
 				</div>
-
 			</div>
 
 
@@ -139,6 +143,42 @@
 		
 		
 	</section>
+	<script>
+		function deleteMember(){
+		var password = "<%=loginUser.getmPassword()%>";
+			var inputPassword =$("input[name=password]").val();
+			var userId ="<%=loginUser.getmId()%>";
+				
+			$.ajax({
+				url:"/login/isCorrectPassword.me",
+				data:{userId: userId,
+					password: inputPassword	
+				},
+				type: "post",
+				success: function(data){
+					if(data=="fail" || typeof data =="undefined"){
+						alert("비밀번호가 일치하지 않습니다!");
+						
+					}else{
+						alert("회원 탈퇴 되었습니다 회원 복구는 30일 이내에만 가능합니다.");
+						$('#deleteForm').submit();
+					}
+					console.log(data);
+					
+				},
+				error: function(data){
+					console.log("비밀번호 일치여부 확인 실패!");
+				}
+			});
+
+			/* if (password != inputPassword) {
+				alert("비밀번호가 틀립니다");
+
+			} else {
+				$('#deleteForm').submit();
+			} */
+		}
+	</script>
 	
 	<footer><%@ include file="../common/footer.jsp"%></footer>
 </body>

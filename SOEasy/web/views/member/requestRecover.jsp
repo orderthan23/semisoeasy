@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<%
-	String resultId = (String) request.getAttribute("resultId");
-	if(resultId == null){
-		request.setAttribute("msg", "잘못된 접근입니다.");
-		request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
-	}
-%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -51,14 +45,14 @@
 		
 		<div style="width:100%; height:60px; background:#3DB6AE; margin:0;">
 			
-			<h1 align="center" style="line-height:60px; margin:0">아이디 찾기</h1>
+			<h1 align="center" style="line-height:60px; margin:0">삭제된 아이디</h1>
 		</div>
 		<br><br><br>
-		<h1 style="text-align: center">찾으시는 아이디는<label style="font-size:35px; color:#3DB6AE; font-weight:bolder;"><%=resultId %></label> 입니다</h1>
+		<h2 style="text-align: center"><%=loginUser.getmId()%>는 삭제된 계정입니다<br> 복구를 원하신다면 복구요청 버튼을 누르십시오</h2>
 		<br><br><br>
 		<div align="center">
 		<button type="button" class="moveButton" onclick="moveLogin();">로그인으로 이동</button>
-		<button type="button" class="moveButton" onclick="moveMain();">메인메뉴로 이동</button>
+		<button type="button" class="moveButton" onclick="moveMain();">복구 요청</button>
 		</div>
 		</div>
 	</section>
@@ -71,6 +65,5 @@
 			location.href = "<%=request.getContextPath()%>";
 		}
 	</script>
-	
 </body>
 </html>

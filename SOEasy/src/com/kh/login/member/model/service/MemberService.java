@@ -19,7 +19,7 @@ public class MemberService {
 		Member loginUser = new Member();
 		
 		if(result >= LoginServlet.LOGIN_GUEST) {
-			System.out.println("여기까진 됨1");
+			
 			loginUser = md.selectOne(con,requestMember);
 			loginUser.setpType(result);
 		}else {
@@ -94,8 +94,52 @@ public class MemberService {
 		return resultId;
 	}
 	public int findPwd(String id, String email) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = getConnection();
+		int resultPwd = new MemberDao().findPwd(con,id,email);
+		
+		close(con);
+		
+		return resultPwd;
+		
+		
+	}
+	public int updatePwd(String password, int memNo) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().updatePwd(con, password, memNo);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return result;
+	}
+	
+	public int correctPwd(String password, String userId) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().correctPwd(con, password, userId);
+		
+		close(con);
+		
+		return result;
+	}
+	public int deleteMember(String userId, String password) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().deleteMember(con,userId, password);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return result;
+		
+		
 	}
 
 }

@@ -51,13 +51,17 @@ public class LoginServlet extends HttpServlet {
 		// 5. 받은 결과에 따라 성공/ 실패 페이지 내보내기
 		String page = "";
 		if (loginUser.getpType() >= LOGIN_GUEST) {
-
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 			
-			
+			if(loginUser.getmStatus().equals("N")) {
+				
+				response.sendRedirect("/login/views/member/requestRecover.jsp");
+				
+			}else {
+				
 				response.sendRedirect("/login/views/main/guestMain.jsp");
-			
+			}
 			
 		} else {
 			page = "/views/member/loginForm.jsp";

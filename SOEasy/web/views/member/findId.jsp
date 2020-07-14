@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% String msg ="";
+	if(request.getAttribute("msg")!=null){
+		msg =(String)request.getAttribute("msg");
+	} %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <style>
 section {
 	clear: both;
@@ -121,7 +126,15 @@ section {
 <title>Insert title here</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="/login/css/layout.css">
+<script>
+ $(function(){
+	var msg = "<%=msg%>";
+	if(msg != ""){
+		alert(msg);
+	}
+ });
+</script>
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
@@ -221,6 +234,7 @@ section {
 						}
 						
 						else{
+						alert("인증코드가 발송되었습니다!");
 						$('#eCode').val(data);
 					
 						}
@@ -262,19 +276,7 @@ section {
 			if(name != "" && email!=""&& checkEmail==true){
 				
 				$('#findForm').submit();
-		/* 	$.ajax({
-				url: "/login/findId.me",
-				data: {name : name,
-						email: email},
-				type:'post',
-				success: function(data){
-					console.log(data);
-				},
-				error: function(data){
-					console.log("아이디 찾기 실패!");
-				}
-				
-			})*/
+		
 			} else{
 				
 				alert("정보를 모두 입력해주십시오");
@@ -300,10 +302,9 @@ section {
 
 		});
 		
-		
-		
+	</script>		
 
 		
-	</script>
+
 </body>
 </html>

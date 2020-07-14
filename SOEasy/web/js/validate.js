@@ -332,6 +332,42 @@
 				$('#joinForm').submit();
 					
 			}
+			
+			function checkingInput(){
+				console.log(checkpw);
+				if(checkpw === true && checkpw2 === true){
+					var password = $("#password").val();
+					var memNo = $("#memNo").val();
+					$.ajax({
+						url:"/login/updatePwd.me",
+						data: {password : password,
+								memNo, memNo},
+						type:"post",
+						success: function(data){
+							console.log(data);
+							if(data==1){
+								alert("비밀번호 변경에 성공하였습니다! 로그인을 진행해주세요");
+								location.href="/login/views/member/loginForm.jsp";
+							}else{
+								alert("비밀번호 변경에 실패하였습니다 다시 진행해주세요!");
+							}
+						},
+						error: function(data){
+							console.log(data);
+						}
+						
+					});
+				}else if(typeof checkpw1=="undefined" || typeof checkpw2=="undefined"){
+					alert("비밀번호를 입력을 확인하세요!");
+					return;
+				}
+				
+				else{
+					alert("비밀번호 입력을 확인하세요!");
+					return;
+				}
+				
+			}
 		
 		
 		

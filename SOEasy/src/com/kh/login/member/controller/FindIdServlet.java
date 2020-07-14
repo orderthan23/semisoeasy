@@ -37,7 +37,7 @@ public class FindIdServlet extends HttpServlet {
 			if(resultId != null) {
 				page="views/member/foundId.jsp";
 				request.setAttribute("resultId", resultId);
-				request.getRequestDispatcher(page).forward(request, response);
+				
 			}else {
 				page="views/member/findId.jsp";
 				request.setAttribute("msg", "일치하는 정보가 없습니다");
@@ -48,8 +48,18 @@ public class FindIdServlet extends HttpServlet {
 		else {
 		    String id = name;
 			int result = new MemberService().findPwd(id,email);
+			System.out.println(result);
+			if(result !=0) {
+				page="views/member/foundPwd.jsp";
+				request.setAttribute("resultPwd", result);
+			
+			}else {
+				page="views/member/findId.jsp";
+				request.setAttribute("msg", "일치하는 정보가 없습니다");
+			}
 		}
-		//123
+		
+		request.getRequestDispatcher(page).forward(request, response);
 		
 		
 		
