@@ -21,7 +21,6 @@ public class InsertNoticeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		String id = request.getParameter("id");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -41,13 +40,12 @@ public class InsertNoticeServlet extends HttpServlet {
 		board.setnCategory(category);
 		board.setAdminNo(mno);
 		board.setnContent(content);
-		board.setAdminNo(mno);
 		board.setmNick(nickname);
-		
+		board.setnTitle(title);
 		int result = new BoardService().insertBoard(board);
 		
 		if(result>0) {
-			request.getRequestDispatcher("selectList.no").forward(request, response);
+			response.sendRedirect("/login/selectList.no");
 		} else {
 			request.setAttribute("msg", "게시판 작성 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

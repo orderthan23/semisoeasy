@@ -102,8 +102,11 @@
 		<a href="/login/views/member/loginForm.jsp" class="sub" id="secondHeaderMenu">로그인</a></span> <span
 			class="subMenu"><br>
 		<a href="/login/views/space/insertSpaceStep1.jsp" class="sub" align="center" id="thirdHeaderMenu">공간 등록</a></span> <span class="subMenu"><br>
-		<a href="/login/views/board/board.jsp" class="sub" align="center" id="fourthHeaderMenu">공지 사항</a></span> &nbsp;&nbsp;
-		<form action="<%=request.getContextPath()%>/select.se" method="get">
+
+	<!-- 	<a href="/login/selectList.no" class="sub" align="center" id="fourthHeaderMenu">공지 사항</a></span> &nbsp;&nbsp;
+		<form action="/login/views/space/search1.jsp" method="get"> -->
+
+
 			<input type="search" name="search" id="searchBar" placeholder="검색어를 입력하세요">
 			 <button type="submit" id="searchOn" src=""><img src="/login/images/icon/search.png" width="40px" height="40px"></button>	
 			

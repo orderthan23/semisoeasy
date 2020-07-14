@@ -116,7 +116,6 @@
 		<a href="writeboard.jsp" class="writeButton">글쓰기</a> 
 		<br>
 		
-		</select>
 				<table style = "width: 100%; border-collapse: collapse; " id="boardTable">
 						<tr>
 							<th>번호</th>

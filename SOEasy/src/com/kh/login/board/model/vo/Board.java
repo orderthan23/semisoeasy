@@ -10,9 +10,10 @@ public class Board implements java.io.Serializable{
 	private String nContent;
 	private String nStatus;
 	private String mNick;
-	
+	private String nTitle;
 	public Board() {}
-	public Board(int noticeNo, int adminNo, int nCategory, Date nDate, String nContent, String nStatus, String mNick) {
+	public Board(int noticeNo, int adminNo, int nCategory, Date nDate, String nContent, String nStatus, String mNick,
+			String nTitle) {
 		super();
 		this.noticeNo = noticeNo;
 		this.adminNo = adminNo;
@@ -21,6 +22,7 @@ public class Board implements java.io.Serializable{
 		this.nContent = nContent;
 		this.nStatus = nStatus;
 		this.mNick = mNick;
+		this.nTitle = nTitle;
 	}
 	public int getNoticeNo() {
 		return noticeNo;
@@ -64,6 +66,18 @@ public class Board implements java.io.Serializable{
 	public void setmNick(String mNick) {
 		this.mNick = mNick;
 	}
+	public String getnTitle() {
+		return nTitle;
+	}
+	public void setnTitle(String nTitle) {
+		this.nTitle = nTitle;
+	}
+	@Override
+	public String toString() {
+		return "Board [noticeNo=" + noticeNo + ", adminNo=" + adminNo + ", nCategory=" + nCategory + ", nDate=" + nDate
+				+ ", nContent=" + nContent + ", nStatus=" + nStatus + ", mNick=" + mNick + ", nTitle=" + nTitle + "]";
+	}
+	
 	
 	
 	
