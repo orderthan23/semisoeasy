@@ -153,7 +153,7 @@ h1 {
 
 
 
-		<form action="/login/updateMember.me" method="post" id="joinForm">
+		<form action="/login/updateMember.me" method="post" id="joinForm" encType="multipart/form-data">
 			<table id="joinTable" align="center">
 			
 				<tr>
