@@ -14,6 +14,9 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.login.common.SoEasyFileRenamePolicy;
 import com.kh.login.member.model.vo.Member;
+import com.kh.login.space.model.service.SpaceService;
+import com.kh.login.space.model.vo.Image;
+import com.kh.login.space.model.vo.SpaceInfo;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -36,12 +39,17 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println("들어오십니까?");
+		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 			int memberNo = loginUser.getMemberNo();
 			String memberNick = loginUser.getmNick();
 			
+			System.out.println(memberNo);
+			
+			//이미지 파일들 불러오기
 			int maxSize = 1024 * 1024 * 20;
 			
 			String root = request.getSession().getServletContext().getRealPath("/");
@@ -61,29 +69,74 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 				saveFiles.add(multiRequest.getFilesystemName(name));
 				originFiles.add(multiRequest.getOriginalFileName(name));
 			}
+			//이미지 파일리스트
+			ArrayList<Image> fileList = new ArrayList<>();
+			
+			for(int i = originFiles.size() - 1; i >= 0; i--) {
+				Image img = new Image();
+				
+				img.setFilePath(savePath);
+				img.setOriginName(originFiles.get(i));
+				img.setChangeName(saveFiles.get(i));
+				
+				if(i == originFiles.size() -1) {
+					img.setFileLevel(0);
+				} else {
+					img.setFileLevel(1);
+				}
+				
+				fileList.add(img);
+			}
 			
 			String kinds = multiRequest.getParameter("kinds");
+			System.out.println("insertSpaceStep1 kinds : " + kinds);
 			
-			double spaceSize = Double.parseDouble(multiRequest.getParameter("space-size"));
-			int spaceRoomCount = Integer.parseInt(multiRequest.getParameter("space-room-count"));
-			int spaceContainCount = Integer.parseInt(multiRequest.getParameter("space-contain-count"));
-			
-			int unfixSeat = Integer.parseInt(multiRequest.getParameter("unfix-seat"));
-			int fixSeat = Integer.parseInt(multiRequest.getParameter("fix-seat"));
-			int totalSeat = unfixSeat + fixSeat;
-			int maxReserv = Integer.parseInt(multiRequest.getParameter("max-reserv"));
+			//공간정보 vo
+			SpaceInfo si = new SpaceInfo();
+			int kind = -1;
+			if(kinds.equals("office")) {
+				kind = 1;
+				double spaceSize = Double.parseDouble(multiRequest.getParameter("space-size"));
+				int spaceRoomCount = Integer.parseInt(multiRequest.getParameter("space-room-count"));
+				int spaceContainCount = Integer.parseInt(multiRequest.getParameter("space-contain-count"));
+				si.setSpaceSize(spaceSize);
+				si.setSpaceRoomCount(spaceRoomCount);
+				si.setSpaceContainCount(spaceContainCount);
+			} else if(kinds.equals("cowork")) {
+				kind = 2;
+				int unfixSeat = Integer.parseInt(multiRequest.getParameter("unfix-seat"));
+				int fixSeat = Integer.parseInt(multiRequest.getParameter("fix-seat"));
+				int totalSeat = unfixSeat + fixSeat;
+				int maxReserv = Integer.parseInt(multiRequest.getParameter("max-reserv"));
+				si.setUnfixSeat(unfixSeat);
+				si.setFixSeat(fixSeat);
+				si.setTotalSeat(totalSeat);
+				si.setMaxReserv(maxReserv);
+			}
 			
 			String spaceName = multiRequest.getParameter("space-name");
 			String spaceIntro = multiRequest.getParameter("space-intro");
 			String[] spaceTags = multiRequest.getParameterValues("space-tag");
-			String[] convs = multiRequest.getParameterValues("conv");
+			String[] conv = multiRequest.getParameterValues("conv");
 			String spaceAddress = multiRequest.getParameter("space-address");
+			String spaceLocationFilter = multiRequest.getParameter("siNm") + "," + multiRequest.getParameter("sggNm") + "," + multiRequest.getParameter("emdNm");
 			
-			if(kinds == "office") {
-				
-			} else {
-				
-			}
+			
+			si.setHostNo(memberNo);
+			si.setSpaceName(spaceName);
+			si.setSpaceIntro(spaceIntro);
+			si.setSpaceKind(kind);
+			
+			si.setConv(conv);
+			si.setSpaceAddress(spaceAddress);
+			si.setSpaceLocationFilter(spaceLocationFilter);
+			
+			
+			System.out.println("insertSpace1 fileList : " + fileList);
+			System.out.println("insertSpace1 si : " + si);
+			
+			SpaceInfo returnSi = new SpaceService().insertSpaceStep1(fileList, si);
+			
 		}
 	}
 

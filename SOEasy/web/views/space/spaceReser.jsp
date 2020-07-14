@@ -162,23 +162,23 @@
 		
 		<table id="opTimeTb" style="border-spacing:15px;">
 			<tr>
-				<td id="mon" style="padding:10px;"><b>월</b>00:00 ~ 24:00</td>
-				<td id="sat" style="padding:10px;"><span style="color:blue;"><b>토</b></span>00:00 ~ 24:00</td>
+				<td id="mon" style="padding:10px;"><b>월 </b>00:00 ~ 24:00</td>
+				<td id="sat" style="padding:10px;"><span style="color:blue;"><b>토 </b></span>00:00 ~ 24:00</td>
 			</tr>
 			<tr>
-				<td id="tue" style="padding:10px;"><b>화</b>00:00 ~ 24:00</td>
-				<td id="sun" style="padding:10px;"><span style="color:red;"><b>일</b></span>00:00 ~ 24:00</td>
+				<td id="tue" style="padding:10px;"><b>화 </b>00:00 ~ 24:00</td>
+				<td id="sun" style="padding:10px;"><span style="color:red;"><b>일 </b></span>00:00 ~ 24:00</td>
 			</tr>
 			<tr>
-				<td id="wed" style="padding:10px;"><b>수</b>00:00 ~ 24:00</td>
+				<td id="wed" style="padding:10px;"><b>수 </b>00:00 ~ 24:00</td>
 				<td style="padding:10px;"></td>
 			</tr>
 			<tr>
-				<td id="thu" style="padding:10px;"><b>목</b>00:00 ~ 24:00</td>
+				<td id="thu" style="padding:10px;"><b>목 </b>00:00 ~ 24:00</td>
 				<td style="padding:10px;"></td>
 			</tr>
 			<tr>
-				<td id="fri" style="padding:10px;"><b>금</b>00:00 ~ 24:00</td>
+				<td id="fri" style="padding:10px;"><b>금 </b>00:00 ~ 24:00</td>
 				<td style="padding:10px;"></td>
 			</tr>
 		</table>
@@ -213,8 +213,8 @@
 		<!-- 날짜 ~부터 ~까지 -->
 		<table align="center" width="500px">
 			<tr>
-				<td id="date1" colspan="2" align="center"><input style="border: 1.5px solid #40a4b6;" type="date">부터</td>
-				<td id="date2" colsapn="2" align="center"><input style="border: 1.5px solid #40a4b6;" type="date">까지</td>
+				<td colspan="2" align="center"><input id="date1" style="border: 1.5px solid #40a4b6;" type="date"> 부터</td>
+				<td colsapn="2" align="center"><input id="date2" style="border: 1.5px solid #40a4b6;" type="date"> 까지</td>
 			</tr>
 		</table>
 		<br><br><br>
@@ -223,7 +223,7 @@
 		<table align="center" width="800">
 			<tr>
 				<td style="color:#40a4b6; font-size:20px; width:200px;"><b>예약 인원 선택</b></td>
-				<td id="choosePer" style="width:200px;" colspan="2"><input style="border: 1.5px solid #40a4b6;" type="number" value="1"></td>
+				<td id="choosePer" style="width:200px;" colspan="2"><input style="border: 1.5px solid #40a4b6;" type="number" value="1" id="chooseMem"></td>
 				<td style="width:400px;">명</td>
 			</tr>
 		</table>
@@ -233,7 +233,7 @@
 		<table align="center" width="800px">
 			<tr>
 				<td style="color:#40a4b6; font-size:20px; width:200px; height:50px;"><b>예약자 정보</b></td>
-				<td width="150px"><b>예약자명</b></td>
+				<td width="150px"><b >예약자명</b></td>
 				<td id="reserName" width="200px"><input style="border: 1.5px solid #40a4b6;" type="text" id="reserNm"></td>
 				<td width="200px"></td>
 			</tr>
@@ -268,7 +268,7 @@
 		<table align="center" width="800px">
 			<tr>
 				<td style="color:#40a4b6; font-size:20px; width:200px; height:50px;"><b>호스트 정보</b></td>
-				<tdwidth="110px"><b>상호명</b></td>
+				<td width="110px"><b>상호명</b></td>
 				<td id="storeNm">보케이션베케이션 코리아</td>
 			</tr>
 			<tr>
@@ -353,13 +353,13 @@
 					<tr>
 						<td style="color:#40a4b6; font-size:20px; width:150px; height:50px;"><b>예약 결과</b></td>
 						<td><b>예약 날짜</b></td>
-						<td id="firDate" style="text-align:center;">----년 --월 --일 부터</td>
-						<td id="lasDate" style="text-align:center;">----년 --월 --일 까지</td>
+						<td id="stDate" style="text-align:center;">----년 --월 --일 부터</td>
+						<td id="finDate" style="text-align:center;">----년 --월 --일 까지</td>
 					</tr>
 					<tr>
 						<td width="150px" height="50px"></td>
 						<td><b>예약 인원</b></td>
-						<td id="reserPerCount" style="text-align:center;">1</td>
+						<td  style="text-align:center;"><p id="reserPerCount">1</p></td>
 						<td style="text-align:left;">명</td>
 					</tr>
 					<tr>
@@ -402,10 +402,9 @@
 						<td height="50px"></td>
 						<td id="agree4"><label for="agr4"><input type="checkbox" id="agr4">개인정보 수집 및 이용 동의</label></td>
 				</table>
-				
 			</div>
 		</div>
-		<Br><br>
+		<br><br>
 		
 		<!-- 예약 버튼 -->
 		<div align="center">
@@ -414,12 +413,30 @@
 		</div>
 		</section>
 		<br><br><br>
-	<footer><%@ include file="../common/footer.jsp"%></footer>
+	<footer><%@ include file="../common/footer.jsp" %></footer>
 	
 	<script>
-		function push() {
-			alert('결제버튼 누름 / API로 연결');
-		}
+	
+		//인원 선택한거 예약결과에 보여지게 하기
+		$("#chooseMem").change(function(){
+			var chooseMem = $("#chooseMem").val();
+			$('#reserPerCount').text(chooseMem);
+		});
+		
+		
+		//날짜1 예약결과에 보여지게 하기
+		$("#date1").change(function(){
+			var date1 = $("#date1").val() + " 부터";
+			$("#stDate").text(date1);
+		});
+		
+		
+		//날짜2 예약결과에 보여지게 하기
+		$("#date2").change(function(){
+			var date2 = $("#date2").val() + " 까지";
+			$("#finDate").text(date2);
+		});
+		
 		
 		//'예약자와 동일' 체크 시 사용자명 텍스트박스에 예약자명에 입력된 값 가져오기
 		$(document).ready(function(){
@@ -432,6 +449,7 @@
 				}
 			});
 		});
+		
 		
 		//전체동의 버튼 눌렀을 때 밑에 체크항목들도 다 체크되는 것
 		$(document).ready(function(){
@@ -449,7 +467,15 @@
 				}
 			});
 		});
-
+			
+		
+		//결제버튼 눌렀을때	
+		function push() {
+			alert('결제버튼 누름 / API로 연결');
+		}
+		
+		
+		//공간사진 슬라이드
 		$('.visual').slick({
 			  infinite: true,
 			  speed: 500,

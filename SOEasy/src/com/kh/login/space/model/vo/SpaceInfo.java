@@ -1,251 +1,241 @@
 package com.kh.login.space.model.vo;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class SpaceInfo implements java.io.Serializable {
+	
 	private int spaceNo;					//공간번호
-	private String SpaceName;				//공간명
-	private String convNo;					//
 	private int hostNo;						//호스트번호
-	private int spaceKind;					//공간종류
-	private String spacdAddress;			//공간주소
-	private String spaceStatus;				//공개여부
+	private String spaceName;				//공간명
+	private int spaceKind;					//공간종류 독립오피스/코워킹스페이스
+	private String spaceAddress;			//공간주소
+	private String sStatus;					//공간 소개글 공개여부
 	private String spaceIntro;				//공간소개글
 	private String spacePayPolicy;			//가격정책
-	private String didDayReserve;			//일별 예약 여부
-	private int dayPayNumber;				//일당 가격
-	private String didMonthReserve;			//월별 예약 여부
-	private int monthPay;					//월당 가격
-	private int day;						//요일
-	private int startTime;					//시작시간
-	private int endTime;					//종료시간
-	private String OpenCheck;				//휴무여부
-	private int reviewNo;					//리뷰번호
-	private int MemberNo;					//게스트번호
-	private String reviewContent;			//후기내용
-	private int rPoint;						//평점
-	private Date rEnrollDate;				//작성날짜
-	
-	
+	private String didDayReserv;			//일별 예약 가능 여부
+	private int dayPay;						//일당 금액
+	private String didMonthReserv;			//월별 예약 가능 여부
+	private int monthPay;					//월당 금액
+	private String spaceLocationFilter;		//공간 위치 필터
+	private String[] conv;					//편의시설 배열
+	//독립오피스의 경우
+	private double spaceSize;				//공간사이즈
+	private int spaceRoomCount;				//공간재고
+	private int spaceContainCount;			//수용인원
+	//코워킹스페이스의 경우
+	private int unfixSeat;					//자유석 갯수
+	private int fixSeat;					//지정석 갯수
+	private int totalSeat;					//총 좌석 수
+	private int maxReserv;					//예약 가능 인원
+
 	public SpaceInfo() {}
 
-	public SpaceInfo(int spaceNo, String spaceName, String convNo, int hostNo, int spaceKind, String spacdAddress,
-			String spaceStatus, String spaceIntro, String spacePayPolicy, String didDayReserve, int dayPayNumber,
-			String didMonthReserve, int monthPay, int day, int startTime, int endTime, String openCheck, int reviewNo,
-			int memberNo, String reviewContent, int rPoint, Date rEnrollDate) {
+	public SpaceInfo(int spaceNo, int hostNo, String spaceName, int spaceKind, String spaceAddress, String sStatus,
+			String spaceIntro, String spacePayPolicy, String didDayReserv, int dayPay, String didMonthReserv,
+			int monthPay, String spaceLocationFilter, String[] conv, double spaceSize, int spaceRoomCount,
+			int spaceContainCount, int unfixSeat, int fixSeat, int totalSeat, int maxReserv) {
 		super();
 		this.spaceNo = spaceNo;
-		SpaceName = spaceName;
-		this.convNo = convNo;
 		this.hostNo = hostNo;
+		this.spaceName = spaceName;
 		this.spaceKind = spaceKind;
-		this.spacdAddress = spacdAddress;
-		this.spaceStatus = spaceStatus;
+		this.spaceAddress = spaceAddress;
+		this.sStatus = sStatus;
 		this.spaceIntro = spaceIntro;
 		this.spacePayPolicy = spacePayPolicy;
-		this.didDayReserve = didDayReserve;
-		this.dayPayNumber = dayPayNumber;
-		this.didMonthReserve = didMonthReserve;
+		this.didDayReserv = didDayReserv;
+		this.dayPay = dayPay;
+		this.didMonthReserv = didMonthReserv;
 		this.monthPay = monthPay;
-		this.day = day;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		OpenCheck = openCheck;
-		this.reviewNo = reviewNo;
-		MemberNo = memberNo;
-		this.reviewContent = reviewContent;
-		this.rPoint = rPoint;
-		this.rEnrollDate = rEnrollDate;
+		this.spaceLocationFilter = spaceLocationFilter;
+		this.conv = conv;
+		this.spaceSize = spaceSize;
+		this.spaceRoomCount = spaceRoomCount;
+		this.spaceContainCount = spaceContainCount;
+		this.unfixSeat = unfixSeat;
+		this.fixSeat = fixSeat;
+		this.totalSeat = totalSeat;
+		this.maxReserv = maxReserv;
 	}
 
 	public int getSpaceNo() {
 		return spaceNo;
 	}
 
-	public String getSpaceName() {
-		return SpaceName;
-	}
-
-	public String getConvNo() {
-		return convNo;
+	public void setSpaceNo(int spaceNo) {
+		this.spaceNo = spaceNo;
 	}
 
 	public int getHostNo() {
 		return hostNo;
 	}
 
-	public int getSpaceKind() {
-		return spaceKind;
+	public void setHostNo(int hostNo) {
+		this.hostNo = hostNo;
 	}
 
-	public String getSpacdAddress() {
-		return spacdAddress;
-	}
-
-	public String getSpaceStatus() {
-		return spaceStatus;
-	}
-
-	public String getSpaceIntro() {
-		return spaceIntro;
-	}
-
-	public String getSpacePayPolicy() {
-		return spacePayPolicy;
-	}
-
-	public String getDidDayReserve() {
-		return didDayReserve;
-	}
-
-	public int getDayPayNumber() {
-		return dayPayNumber;
-	}
-
-	public String getDidMonthReserve() {
-		return didMonthReserve;
-	}
-
-	public int getMonthPay() {
-		return monthPay;
-	}
-
-	public int getDay() {
-		return day;
-	}
-
-	public int getStartTime() {
-		return startTime;
-	}
-
-	public int getEndTime() {
-		return endTime;
-	}
-
-	public String getOpenCheck() {
-		return OpenCheck;
-	}
-
-	public int getReviewNo() {
-		return reviewNo;
-	}
-
-	public int getMemberNo() {
-		return MemberNo;
-	}
-
-	public String getReviewContent() {
-		return reviewContent;
-	}
-
-	public int getrPoint() {
-		return rPoint;
-	}
-
-	public Date getrEnrollDate() {
-		return rEnrollDate;
-	}
-
-	public void setSpaceNo(int spaceNo) {
-		this.spaceNo = spaceNo;
+	public String getSpaceName() {
+		return spaceName;
 	}
 
 	public void setSpaceName(String spaceName) {
-		SpaceName = spaceName;
+		this.spaceName = spaceName;
 	}
 
-	public void setConvNo(String convNo) {
-		this.convNo = convNo;
-	}
-
-	public void setHostNo(int hostNo) {
-		this.hostNo = hostNo;
+	public int getSpaceKind() {
+		return spaceKind;
 	}
 
 	public void setSpaceKind(int spaceKind) {
 		this.spaceKind = spaceKind;
 	}
 
-	public void setSpacdAddress(String spacdAddress) {
-		this.spacdAddress = spacdAddress;
+	public String getSpaceAddress() {
+		return spaceAddress;
 	}
 
-	public void setSpaceStatus(String spaceStatus) {
-		this.spaceStatus = spaceStatus;
+	public void setSpaceAddress(String spaceAddress) {
+		this.spaceAddress = spaceAddress;
+	}
+
+	public String getsStatus() {
+		return sStatus;
+	}
+
+	public void setsStatus(String sStatus) {
+		this.sStatus = sStatus;
+	}
+
+	public String getSpaceIntro() {
+		return spaceIntro;
 	}
 
 	public void setSpaceIntro(String spaceIntro) {
 		this.spaceIntro = spaceIntro;
 	}
 
+	public String getSpacePayPolicy() {
+		return spacePayPolicy;
+	}
+
 	public void setSpacePayPolicy(String spacePayPolicy) {
 		this.spacePayPolicy = spacePayPolicy;
 	}
 
-	public void setDidDayReserve(String didDayReserve) {
-		this.didDayReserve = didDayReserve;
+	public String getDidDayReserv() {
+		return didDayReserv;
 	}
 
-	public void setDayPayNumber(int dayPayNumber) {
-		this.dayPayNumber = dayPayNumber;
+	public void setDidDayReserv(String didDayReserv) {
+		this.didDayReserv = didDayReserv;
 	}
 
-	public void setDidMonthReserve(String didMonthReserve) {
-		this.didMonthReserve = didMonthReserve;
+	public int getDayPay() {
+		return dayPay;
+	}
+
+	public void setDayPay(int dayPay) {
+		this.dayPay = dayPay;
+	}
+
+	public String getDidMonthReserv() {
+		return didMonthReserv;
+	}
+
+	public void setDidMonthReserv(String didMonthReserv) {
+		this.didMonthReserv = didMonthReserv;
+	}
+
+	public int getMonthPay() {
+		return monthPay;
 	}
 
 	public void setMonthPay(int monthPay) {
 		this.monthPay = monthPay;
 	}
 
-	public void setDay(int day) {
-		this.day = day;
+	public String getSpaceLocationFilter() {
+		return spaceLocationFilter;
 	}
 
-	public void setStartTime(int startTime) {
-		this.startTime = startTime;
+	public void setSpaceLocationFilter(String spaceLocationFilter) {
+		this.spaceLocationFilter = spaceLocationFilter;
 	}
 
-	public void setEndTime(int endTime) {
-		this.endTime = endTime;
+	public String[] getConv() {
+		return conv;
 	}
 
-	public void setOpenCheck(String openCheck) {
-		OpenCheck = openCheck;
+	public void setConv(String[] conv) {
+		this.conv = conv;
 	}
 
-	public void setReviewNo(int reviewNo) {
-		this.reviewNo = reviewNo;
+	public double getSpaceSize() {
+		return spaceSize;
 	}
 
-	public void setMemberNo(int memberNo) {
-		MemberNo = memberNo;
+	public void setSpaceSize(double spaceSize) {
+		this.spaceSize = spaceSize;
 	}
 
-	public void setReviewContent(String reviewContent) {
-		this.reviewContent = reviewContent;
+	public int getSpaceRoomCount() {
+		return spaceRoomCount;
 	}
 
-	public void setrPoint(int rPoint) {
-		this.rPoint = rPoint;
+	public void setSpaceRoomCount(int spaceRoomCount) {
+		this.spaceRoomCount = spaceRoomCount;
 	}
 
-	public void setrEnrollDate(Date rEnrollDate) {
-		this.rEnrollDate = rEnrollDate;
+	public int getSpaceContainCount() {
+		return spaceContainCount;
+	}
+
+	public void setSpaceContainCount(int spaceContainCount) {
+		this.spaceContainCount = spaceContainCount;
+	}
+
+	public int getUnfixSeat() {
+		return unfixSeat;
+	}
+
+	public void setUnfixSeat(int unfixSeat) {
+		this.unfixSeat = unfixSeat;
+	}
+
+	public int getFixSeat() {
+		return fixSeat;
+	}
+
+	public void setFixSeat(int fixSeat) {
+		this.fixSeat = fixSeat;
+	}
+
+	public int getTotalSeat() {
+		return totalSeat;
+	}
+
+	public void setTotalSeat(int totalSeat) {
+		this.totalSeat = totalSeat;
+	}
+
+	public int getMaxReserv() {
+		return maxReserv;
+	}
+
+	public void setMaxReserv(int maxReserv) {
+		this.maxReserv = maxReserv;
 	}
 
 	@Override
 	public String toString() {
-		return "SpaceInfo [spaceNo=" + spaceNo + ", SpaceName=" + SpaceName + ", convNo=" + convNo + ", hostNo="
-				+ hostNo + ", spaceKind=" + spaceKind + ", spacdAddress=" + spacdAddress + ", spaceStatus="
-				+ spaceStatus + ", spaceIntro=" + spaceIntro + ", spacePayPolicy=" + spacePayPolicy + ", didDayReserve="
-				+ didDayReserve + ", dayPayNumber=" + dayPayNumber + ", didMonthReserve=" + didMonthReserve
-				+ ", monthPay=" + monthPay + ", day=" + day + ", startTime=" + startTime + ", endTime=" + endTime
-				+ ", OpenCheck=" + OpenCheck + ", reviewNo=" + reviewNo + ", MemberNo=" + MemberNo + ", reviewContent="
-				+ reviewContent + ", rPoint=" + rPoint + ", rEnrollDate=" + rEnrollDate + "]";
+		return "SpaceInfo [spaceNo=" + spaceNo + ", hostNo=" + hostNo + ", spaceName=" + spaceName + ", spaceKind="
+				+ spaceKind + ", spaceAddress=" + spaceAddress + ", sStatus=" + sStatus + ", spaceIntro=" + spaceIntro
+				+ ", spacePayPolicy=" + spacePayPolicy + ", didDayReserv=" + didDayReserv + ", dayPay=" + dayPay
+				+ ", didMonthReserv=" + didMonthReserv + ", monthPay=" + monthPay + ", spaceLocationFilter="
+				+ spaceLocationFilter + ", conv=" + Arrays.toString(conv) + ", spaceSize=" + spaceSize
+				+ ", spaceRoomCount=" + spaceRoomCount + ", spaceContainCount=" + spaceContainCount + ", unfixSeat="
+				+ unfixSeat + ", fixSeat=" + fixSeat + ", totalSeat=" + totalSeat + ", maxReserv=" + maxReserv + "]";
 	}
-	
-	
-	
-	
+
 }

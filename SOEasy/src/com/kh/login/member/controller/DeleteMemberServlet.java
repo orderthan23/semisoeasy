@@ -21,11 +21,13 @@ public class DeleteMemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
+		String reason = request.getParameter("reason");
 		
 		System.out.println("userId : "+userId);
 		System.out.println("password : "+password);
+		System.out.println("reason :"+reason);
 		
-		int result = new MemberService().deleteMember(userId, password);
+		int result = new MemberService().deleteMember(userId, password,reason);
 	
 		String page = "";
 		if(result>0) {

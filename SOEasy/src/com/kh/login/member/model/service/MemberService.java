@@ -126,10 +126,10 @@ public class MemberService {
 		
 		return result;
 	}
-	public int deleteMember(String userId, String password) {
+	public int deleteMember(String userId, String password, String reason) {
 		Connection con = getConnection();
 		
-		int result = new MemberDao().deleteMember(con,userId, password);
+		int result = new MemberDao().deleteMember(con,userId, password, reason);
 		
 		if(result > 0) {
 			commit(con);

@@ -121,7 +121,7 @@ window.history.forward();
 					<h1>탈퇴사유</h1>
 					<p>사유 남겨주시어 보완하여 더 좋은 서비스가 되도록 하겠습니다.</p>
 					<br>
-					<textarea>탈퇴 사유를 입력하시오.</textarea>
+					<textarea name="reason">탈퇴 사유를 입력하시오.</textarea>
 				</div> &nbsp;&nbsp;
 
 				<div style="display:inline-block;">
