@@ -110,7 +110,6 @@ h1 {
 					<th colspan="4" style="text-align:center" ><p style="font-size:20px; font-weight:bolder;">지역별 검색</p></th>
 				</tr>
 				<tr>
-					
 					<td><button>종로구</button></td>
 					<td><button>강남구</button></td>
 					<td><button>서초구</button></td>
