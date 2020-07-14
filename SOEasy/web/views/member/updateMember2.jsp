@@ -114,15 +114,25 @@ h1 {
 }
 	
 #changeProfile{
-
+	display: block;
 	background: #3DB6AE;
 	border : none;
 	color : white;
-	height : 30px;
+	height : 40px;
 	border-radius: 5px;
+	width: 120px;
+	text-align : center;
+	font-weight: normal;
+	line-height: 40px;
 }
-#changeProfile:focus{
-	outline: none;
+#changeProfile:active{
+	outline: solid 1px black;
+}
+
+#profile{
+ 	display: none;
+	visibility: hidden;
+	opacity: 0; 
 }
 </style>
 </head>
@@ -153,16 +163,21 @@ h1 {
 				<tr>
 					<td align="center" height="200px">
 						<div id="profileZone">
-							<img src="<%=loginUser.getFilePath()+loginUser.getChangeName()%>">
+							<img src="<%=loginUser.getFilePath()+loginUser.getChangeName()%>" id="profilePhoto">
 						</div>
 						<br>
-						<button id="changeProfile">프로필 사진 변경</button>
+						<div style="margin-left:auto; margin-right:auto;">
+						<label id="changeProfile" for="profile">프로필 사진 변경</label>
+						<input type="file" accept="image/*,.pdf" id="profile" name="profile" onchange="loadImg(this);">
+						</div>
 			
 					</td>
 				</tr>
 				<tr>
 					<td class="input-group"><label for="id" class="input">아이디</label>
-						<input type="text" id="userId" value="<%=loginUser.getmId()%>" readonly/></td>
+						<input type="text" id="userId" value="<%=loginUser.getmId()%>" readonly/>
+						
+						</td>
 				</tr>
 
 				<tr>
@@ -183,6 +198,7 @@ h1 {
 					<td class="input-group" id="password-zone"><label for="password" class="input">비밀번호</label>
 					<pre id="validate1">                                               0/16자</pre>
 						<input type="password" id="password" name="password" onkeyup="setTimeout(checkPwdLength(),200);" readonly/>
+						<input type="hidden" id="nowPass" value=<%=loginUser.getmPassword()%>>
 						<button type="button" onclick="changePassword();">비밀번호 수정</button>
 						<p></p>
 						</td>
@@ -194,25 +210,28 @@ h1 {
 						<p></p></td>
 						
 				</tr>
-				<tr>
-					<td class="input-group" ><label for="phoneNum" class="input">연락처
+				<tr id="phoneArea">
+					<td class="input-group" id="phone-zone" ><label for="phoneNum" class="input">연락처
 					</label> <input type="tel" id="phoneNum" name="phoneNum" value="<%=loginUser.getmPhone()%>" readonly/>
-						<button type="button" onclick="changePhoneNum();">연락처 수정</button></td>
+						<button type="button" onclick="changePhoneNum();">연락처 수정</button>
+						<input type=hidden id="cert">
+						</td>
 				</tr>
 
-				<tr>
+				<tr id="emailArea">
 					<td class="input-group" id="email-zone"><label for="email" class="input">이메일</label>
 						<input type="email" id="email"  name="email" value="<%=loginUser.getmEmail()%>" onkeyup="setTimeout(checkingEmail(),200)" readonly/>
 						<button type="button" onclick="changeEmail();">이메일 수정</button>
 						<p></p>
+						<input type="hidden" id=eCert>
 						</td>
 				</tr>
 
 				
 
 				<tr>
-					<td><button type="submit" name="transfer" id="trans"
-							class="submitButton">개인정보 수정  완료</button></td>
+					<td><button type="button" name="transfer" id="trans"
+							class="submitButton" onclick="checkUpdate();">개인정보 수정  완료</button></td>
 				</tr>
 
 
@@ -224,6 +243,19 @@ h1 {
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
 	<script>
+		function loadImg(value){
+			
+			if(value.files && value.files[0]){
+				var reader= new FileReader
+				reader.onload = function(e){
+					
+				$('#profilePhoto').attr("src",e.target.result); 
+			}
+			reader.readAsDataURL(value.files[0]);
+			
+			}
+		}
+	
 		$('input').click(function() {
 			$(this).attr('placeholder', '');
 			$(this).parent().find('label').addClass('label-top');
@@ -244,10 +276,18 @@ h1 {
 		}
 		function changePhoneNum(){
 			$('input[name=phoneNum]').removeAttr("readonly");
+			$('#phone-zone button').text("본인 인증").attr("onclick","certified2()");
+			$('#phoneArea').after("<tr><td class='input-group' id='inputCert'><label for='certCode' class='input'>인증번호</label><input type='text' id='userCode' placeholder='인증번호를 입력해주세요' onclick=''/><button type='button' onclick='certifyCorrect();'>인증 확인</button><p></p></td></tr>");		
 		}
 		function changeEmail(){
 			$('input[name=email]').removeAttr("readonly");
-			$('#email-zone button').text("이메일 인증").attr("onclick","checkCertifiedEmail();");
+			$('#email-zone button').text("이메일 인증").attr("onclick","checkCertifiedEmail2();");
+			$('#emailArea').after("<tr><td class='input-group' id='email-certificate'><label for='emailCode' class='input'>인증코드</label><input type='text' id='emailCode' placeholder='인증코드를 입력해주세요' onclick=''/><button type='button' onclick='checkEcert();'>인증 확인</button><p></p></td></tr>");
+			
+		}
+		
+		function submitUpdate(){
+	
 		}
 	</script>
 </body>
