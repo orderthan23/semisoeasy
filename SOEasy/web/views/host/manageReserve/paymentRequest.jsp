@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.kh.login.host.manageReserve.model.vo.*"%>
 <%
 	int placeQTY = 10;
 	int pCompleteQTY = 10;
 	int statement = 0;
+	
+	ArrayList<HostReserve> list = (ArrayList<HostReserve>) request.getAttribute("list");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -64,7 +72,7 @@
 		<div id="wrapper">
 		<br>
 		<h1 style="margin : 0;">결제 요청</h1>
-		<h3>플랫폼을 통해 예약 대기중인 건이 <%=3 %> 건 있습니다</h3>
+		<h3>플랫폼을 통해 예약 대기중인 건이 <%= listCount %> 건 있습니다</h3>
 		
 		<!-- <select>
 		<option>==센터 선택==</option>
@@ -86,25 +94,20 @@
 					<th height="40px">공간명</th>
 					<th height="40px">옵션(완료 미표시)</th>
 					<th height="40px">진행도</th>
-					
 				</tr>
-				
-​
-				<%for(int i=1; i<=pCompleteQTY; i++) {%>
+				<% for(HostReserve h : list) {%>
 				<tr class="pCompleteInfo">
-					
-					<td><%="wooah"+i %></td>
-					<td><%="최우아"+i %></td>
-					<td style="font-size:13px;" class="date"><%="2020.07."+(i+10)%>~<%="2020.08."+(i+9)%></td>
-					<td style="font-size:13px;"><%="센터 "+i+"코워킹 스페이스"%></td>
-					<td style="font-size:13px;"><%="공간 "+i+"호"%></td>
+					<td><%= h.getGestId() %></td><!-- model.vo에 게스트 정보 조인해서 적어야 함!!!!!! -->
+					<td><%= h.getGestName() %></td>
+					<td style="font-size:13px;" class="date"><%= h.getStartDay() + " ~ " + h.getEndDay() %></td>
+					<td style="font-size:13px;"><%= h.getSpaceKind() %></td>
+					<td style="font-size:13px;"><%= h.getSpaceName() %></td>
 					<td style="font-size:13px;" id="option">
 					<button style="border:1px solid red;background:white;color:red">승인</button>
 					<button style="border:1px solid blue;background:white;color:blue">거절</button>
 					</td>
-					
-					<% if(statement == 0) {%>
-					<td style="font-size:12px;"><%="예약 요청" %></td>
+					<% if(statement == 0) { %>
+					<td style="font-size:12px;"><%= "예약 요청" %></td>
 					<% } %>
 				</tr>
 				<%
@@ -112,8 +115,38 @@
 				%>
 			</table>
 		</div>
+		
+		<!-- 페이징처리 버튼 -->
+		<div class = "pagingArea" align="center">
+      	<button onclick="location.href='<%=request.getContextPath()%>/select.pr?currentPage=1'"><<</button>
+      	
+      	<% if(currentPage <= 1) { %>
+      	<button disabled><</button>
+      	<% } else { %>
+      	<button onclick="location.href='<%=request.getContextPath()%>/select.pr?currentPage=<%=currentPage - 1%>'"><</button>
+      	<% } %>
+      	
+      	<% for(int p = startPage; p <= endPage; p++) {
+      			if(p == currentPage) {		
+      	%>
+      				<button disabled><%= p %></button>	
+      	<% 		} else {	%>
+      				<button onclick="location.href='<%=request.getContextPath()%>/select.pr?currentPage=<%= p %>'"><%= p %></button>
+      	<% 		} %>
+      	
+      	<% } %>
+      	
+      	
+      	<% if(currentPage >= maxPage) { %>
+      	<button disabled>></button>
+      	<% } else { %>
+      	<button onclick="location.href='<%=request.getContextPath()%>/select.pr?currentPage=<%=currentPage + 1%>'">></button>
+      	<% } %>
+      	
+      	<button onclick="location.href='<%=request.getContextPath()%>/select.pr?currentPage=<%=maxPage%>'">>></button>
+      	
+		
 	</section>
-	
 	<br><br>
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
 </body>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%  %>
+	pageEncoding="UTF-8" import="java.util.*, com.kh.login.space.model.vo.*"%>
+<% String search = (String)request.getAttribute("search"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +81,7 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
-	<nav><%@ include file="../common/aside.jsp"%></nav>
+	<%-- <nav><%@ include file="../common/aside.jsp"%></nav> --%>
 
 	<section>
 
@@ -95,7 +95,7 @@
 			</div>
 			<div id="searchResult">
 				<p style="text-shadow: 1px 2px 2px #ffffff;">
-					<b style="color: #40a4b6;"><%="코워킹 스페이스" %></b> (으)로 검색한 결과입니다.<br>
+					<b style="color: #40a4b6;"><%= search %></b> (으)로 검색한 결과입니다.<br>
 				</p>
 			</div>
 		</div>
