@@ -155,14 +155,6 @@
 			}
 		});
 
-
-/* 		var num = $(".categoryinfo").text(0);
-		console.log(num);
-		if(num=1){
-			$(".categoryinfo").val() == "시스템관련";
-		}
- */		
-		
 	</script>
 
 
