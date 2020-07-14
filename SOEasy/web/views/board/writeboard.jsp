@@ -77,34 +77,34 @@
 	<br>
 	
 	<form method="post"  action="<%=request.getContextPath()%>/insert.no" name="boardForm">
-	<input type="hidden" name="board_id" value="${loginUser.id}">
+	<input type="hidden" name="id" value="<%=loginUser.getmId()%>>">
 	<table width:700 border="3" bordercolor="lightgray" align="center">
 			<tr>
-			<td id="title" style="text-align:center; background:#60B4A6">
+			<td style="text-align:center; background:#60B4A6">
 				제목
 			</td>
 			<td>
-				<input name="board_subject" type="text" size="70" maxlength="100" value=""/>
+				<input name="title" type="text" size="70" maxlength="100" value=""/>
 			</td>		
 		</tr>
 		<tr>
-			<td id="categroy" style=text-align:center style="text-align:center; background:#60B4A6">
-			<select class="category" style="text-align:center; background:#60B4A6">
+			<td  style=text-align:center style="text-align:center; background:#60B4A6">
+			<select class="category" name="category" style="text-align:center; background:#60B4A6">
 					<option class="category" style="text-align:center">선택</option>
-					<option class="category">시스템관련</option>
-					<option class="category">계정관련</option>
-					<option class="category">결제관련</option>
+					<option class="category" value="1">시스템관련</option>
+					<option class="category" value="2">계정관련</option>
+					<option class="category" value="3">결제관련</option>
 					<option class="category"></option>
 				</select>
 			</td>
 				
 		</tr>
 		<tr>
-			<td id="title" style="text-align:center; background:#60B4A6">
+			<td style="text-align:center; background:#60B4A6">
 				내 용
 			</td>
 			<td>
-				<textarea name="board_content" cols="72" rows="20" style="resize:none;"></textarea>			
+				<textarea name="content" cols="72" rows="20" style="resize:none;"></textarea>			
 			</td>		
 		</tr>
 
