@@ -137,6 +137,13 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			
 			SpaceInfo returnSi = new SpaceService().insertSpaceStep1(fileList, si);
 			
+			if(returnSi != null) {
+				request.setAttribute("spaceInfo", returnSi);
+				//response.sendRedirect();
+			} else {
+				
+			}
+			
 		}
 	}
 

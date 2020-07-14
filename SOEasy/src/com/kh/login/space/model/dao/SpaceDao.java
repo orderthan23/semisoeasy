@@ -168,23 +168,92 @@ public class SpaceDao {
 	}
 	
 	//SPACE_CONV 입력용 메소드
-	public int insertSpaceConv(int spaceNo, String convNo) {
+	public int insertSpaceConv(Connection con, int spaceNo, String convNo) {
 		
+		PreparedStatement pstmt = null;
+		int convResult = 0;
 		
+		String query = prop.getProperty("insertSpaceConv");
 		
-		return 0;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			pstmt.setString(2, convNo);
+			
+			convResult = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return convResult;
 	}
 
 	//IMAGE 입력용 메소드
-	public int insertSpaceImg(Connection con, ArrayList<Image> fileList) {
+	public int insertSpaceImg(Connection con, Image image) {
 		
-		return 0;
+		PreparedStatement pstmt = null;
+		int imgResult = 0;
+		
+		String query = prop.getProperty("insertSpaceImg");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, image.getOriginName());
+			pstmt.setString(2, image.getFilePath());
+			pstmt.setString(3, image.getChangeName());
+			pstmt.setInt(4, image.getImgDiv());
+			pstmt.setInt(5, image.getSpaceNo());
+			pstmt.setInt(6, image.getFileLevel());
+			
+			imgResult = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return imgResult;
 	}
 	
 	//SPACE_NO와 일치하는 공간정보 조회용 메소드
 	public SpaceInfo selectCurrentSpaceInfo(Connection con, int sNo) {
 		
-		return null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		SpaceInfo si = null;
+		
+		String query = prop.getProperty("selectCurrentSpaceInfo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				si = new SpaceInfo();
+				
+				si.setSpaceNo(rset.getInt("SPACE_NO"));
+				si.setHostNo(rset.getInt("HOST_NO"));
+				si.setSpaceName(rset.getString("SPACE_NAME"));
+				si.setSpaceKind(rset.getInt("SPACE_KIND"));
+				si.setSpaceAddress(rset.getString("SPACE_ADDRESS"));
+				si.setsStatus(rset.getString("S_STATUS"));
+				si.setSpaceIntro(rset.getString("SPACE_INTRO"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return si;
 	}
 
 }
