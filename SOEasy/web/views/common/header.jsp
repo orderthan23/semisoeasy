@@ -7,6 +7,7 @@
 		userStatus = loginUser.getpType();
 		System.out.println(userStatus);
 	} 
+
 	
 %>
 <!DOCTYPE html>

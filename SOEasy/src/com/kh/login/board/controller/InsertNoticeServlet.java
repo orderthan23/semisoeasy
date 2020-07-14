@@ -1,14 +1,17 @@
 package com.kh.login.board.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.kh.login.board.model.service.BoardService;
+import com.kh.login.board.model.vo.Board;
 import com.kh.login.member.model.vo.Member;
-import com.kh.login.board.model.vo.board;
 @WebServlet("/insert.no")
 public class InsertNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -18,17 +21,38 @@ public class InsertNoticeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String id = request.getParameter("id");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		int category = Integer.parseInt(request.getParameter("category"));
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		int mno = loginUser.getMemberNo();
-	
-		System.out.println("category : " + title );
-		System.out.println("content : " + content );
-		System.out.println("category : " + mno );
+		String nickname = loginUser.getmNick();
+		
+		System.out.println("title : " + title );
+		System.out.println("content : " + content);
 		System.out.println("category : " + category );
+		System.out.println("mno : " + mno);
+		System.out.println("nickname : " + nickname);
+		
+		Board board = new Board();
+		board.setnCategory(category);
+		board.setAdminNo(mno);
+		board.setnContent(content);
+		board.setAdminNo(mno);
+		board.setmNick(nickname);
+		
+		int result = new BoardService().insertBoard(board);
+		
+		if(result>0) {
+			request.getRequestDispatcher("selectList.no").forward(request, response);
+		} else {
+			request.setAttribute("msg", "게시판 작성 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+	
 		
 	}
 

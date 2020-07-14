@@ -2,16 +2,17 @@ package com.kh.login.board.model.vo;
 
 import java.util.Date;
 
-public class board implements java.io.Serializable{
+public class Board implements java.io.Serializable{
 	private int noticeNo;
 	private int adminNo;
 	private int nCategory;
 	private Date nDate;
 	private String nContent;
 	private String nStatus;
+	private String mNick;
 	
-	public board() {}
-	public board(int noticeNo, int adminNo, int nCategory, Date nDate, String nContent, String nStatus) {
+	public Board() {}
+	public Board(int noticeNo, int adminNo, int nCategory, Date nDate, String nContent, String nStatus, String mNick) {
 		super();
 		this.noticeNo = noticeNo;
 		this.adminNo = adminNo;
@@ -19,6 +20,7 @@ public class board implements java.io.Serializable{
 		this.nDate = nDate;
 		this.nContent = nContent;
 		this.nStatus = nStatus;
+		this.mNick = mNick;
 	}
 	public int getNoticeNo() {
 		return noticeNo;
@@ -56,11 +58,11 @@ public class board implements java.io.Serializable{
 	public void setnStatus(String nStatus) {
 		this.nStatus = nStatus;
 	}
-	
-	@Override
-	public String toString() {
-		return "board [noticeNo=" + noticeNo + ", adminNo=" + adminNo + ", nCategory=" + nCategory + ", nDate=" + nDate
-				+ ", nContent=" + nContent + ", nStatus=" + nStatus + "]";
+	public String getmNick() {
+		return mNick;
+	}
+	public void setmNick(String mNick) {
+		this.mNick = mNick;
 	}
 	
 	
