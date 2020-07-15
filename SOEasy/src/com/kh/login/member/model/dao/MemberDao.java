@@ -566,6 +566,148 @@ public class MemberDao {
 		return result;
 	}
 
+	public int getListCount(Connection con, String isActive, String power) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("listCount2")+" "+isActive+" "+power;
+		
+		System.out.println(query);
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return listCount;
+		
+	}
+
+	public ArrayList<Member> selectAllList(Connection con, PageInfo pi, String isActive, String power) {
+
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Member> memberList = null;
+		int startRow =(pi.getCurrentPage()-1)*pi.getLimit()+1;
+		int endRow = startRow + pi.getLimit()-1;
+		String query2=" "+isActive+" "+power+" AND RNUM BETWEEN "+startRow+" AND "+endRow;
+		String query = prop.getProperty("selectAllList2")+" "+query2;
+		System.out.println(query);
+		
+		try {
+			stmt=con.createStatement();
+			rset=stmt.executeQuery(query);
+			
+			memberList = new ArrayList<>();
+			
+			while(rset.next()) {
+				Member m = new Member();
+				
+				m.setMemberNo(rset.getInt("MEMBER_NO"));
+				m.setpType(rset.getInt("P_TYPE"));
+				m.setmName(rset.getString("M_NAME"));
+				m.setmId(rset.getString("M_ID"));
+				m.setmNick(rset.getString("M_NICK"));
+				m.setmPhone(rset.getString("M_PHONE"));
+				m.setmEmail(rset.getString("M_EMAIL"));
+				m.setEnrollDate(rset.getDate("M_ENROLL_DATE"));
+				m.setmStatus(rset.getString("M_STATUS"));
+				
+				memberList.add(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return memberList;
+	}
+
+	public int getListCount(Connection con, String keyword) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("listCount3");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, keyword);
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+				
+		
+		return listCount;
+	}
+
+	public ArrayList<Member> selectAllList(Connection con, PageInfo pi, String keyword) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Member> memberList = null;
+		int startRow =(pi.getCurrentPage()-1)*pi.getLimit()+1;
+		int endRow = startRow + pi.getLimit()-1;
+		
+		String query = prop.getProperty("selectAllList3");
+		System.out.println(query);
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rset = pstmt.executeQuery();
+			memberList = new ArrayList<>();
+			while(rset.next()) {
+				Member m = new Member();
+				
+				m.setMemberNo(rset.getInt("MEMBER_NO"));
+				m.setpType(rset.getInt("P_TYPE"));
+				m.setmName(rset.getString("M_NAME"));
+				m.setmId(rset.getString("M_ID"));
+				m.setmNick(rset.getString("M_NICK"));
+				m.setmPhone(rset.getString("M_PHONE"));
+				m.setmEmail(rset.getString("M_EMAIL"));
+				m.setEnrollDate(rset.getDate("M_ENROLL_DATE"));
+				m.setmStatus(rset.getString("M_STATUS"));
+				
+				memberList.add(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return memberList;
+	}
+
 
 
 	

@@ -270,5 +270,37 @@ public class MemberService {
 		
 		return result;
 	}
+	public int getListCount(String isActive, String power) {
+		Connection con = getConnection();
+		int listCount = new MemberDao().getListCount(con,isActive,power);
+		
+		close(con);
+		
+		return listCount;
+	}
+	public ArrayList<Member> selectAllList(PageInfo pi, String isActive, String power) {
+		Connection con = getConnection();
+		ArrayList<Member> memberList = new MemberDao().selectAllList(con,pi,isActive,power);
+		
+		close(con);
+		
+		return memberList;
+	
+	}
+	public int getListCount(String keyword) {
+		Connection con = getConnection();
+		int listCount = new MemberDao().getListCount(con,keyword);
+		close(con);
+		
+		return listCount;
+	}
+	public ArrayList<Member> selectAllList(PageInfo pi, String keyword) {
+		Connection con = getConnection();
+		ArrayList<Member> memberList = new MemberDao().selectAllList(con,pi,keyword);
+		
+		close(con);
+		
+		return memberList;
+	}
 
 }

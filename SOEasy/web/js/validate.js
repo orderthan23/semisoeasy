@@ -288,6 +288,7 @@
 					$('#email-certificate p').text("이메일 인증 완료").css("color","green");
 					$('#emailCode').prop("readonly",true);
 					$('#email').prop("readonly",true);
+					$('#email-zone p').text("이메일 인증 완료").css("color","green");
 					checkEmail = true;
 						
 				}else{

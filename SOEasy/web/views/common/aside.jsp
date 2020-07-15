@@ -74,11 +74,11 @@ span.bar {
   -o-transform: translateX(-270px);
   -webkit-transform: translateX(-270px);
   -moz-transform: translateX(-270px);
-          transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-     -moz-transition: all 0.3s ease-in-out;
-      -ms-transition: all 0.3s ease-in-out;
-       -o-transition: all 0.3s ease-in-out;
+          transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+     -moz-transition: all 0.5s ease-in-out;
+      -ms-transition: all 0.5s ease-in-out;
+       -o-transition: all 0.5s ease-in-out;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -154,7 +154,7 @@ span.bar {
   	background: #3DB6AE;
 
   	width: 90%;
-    transition: all 0.3s ease-in-out;
+    transition: all 1.0s ease-in-out;
   	-webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;

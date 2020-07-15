@@ -227,28 +227,28 @@
 		<h1 style="margin : 0;">회원 목록</h1>
 		<br>
 			
+		<form action="searchOption.me">
+		<button style="float:right; height:20px; line-height:20px;"type="submit" id="searchOption">조회</button>
+		<select name="isActive">
+		<option value="M_STATUS IN('N','X','Y')">계정 활성화 여부: 전체</option>
+		<option value="M_STATUS='Y'">계정 활성화 여부: 활성</option>
+		<option value="M_STATUS IN('N','X')">계정 활성화 여부: 비활성</option>
+		</select>
+		<select name="power">
+		<option value="AND P_TYPE IN(1,2)">권한 : 전체</option>
+		<option value="AND P_TYPE=1">권한 : 게스트</option>
+		<option value="AND P_TYPE=2">권한 : 호스트</option>
+		</select>
+	
+		</form>
 		
-		<select>
-		<option>계정 활성화 여부: 전체</option>
-		<option>계정 활성화 여부: 활성</option>
-		<option>계정 활성화 여부: 비활성</option>
-		</select>
-		<select>
-		<option>권한 : 전체</option>
-		<option>권한 : 게스트</option>
-		<option>권한 : 호스트</option>
-		</select>
-		<select>
-			<option>경고횟수 : 전체</option>
-			<option>경고횟수 : 1회</option>
-			<option>경고횟수 : 2회</option>
-		</select>
-		
+				<form action="searchId.me" method="post" id="searchForm">
 				<label>아이디 검색</label>
 				<span  id="searchZone">
-				<input type="search" name="userId" id="searchId">
-				<input type="button" name="transfer" value="검색" onclick="searchId();">
+				<input type="search" name="keyword" id="searchId">
+				<input type="button" name="transfer" value="검색" onclick="searchMembers();">
 				</span>
+				</form>
 			
 		<br><br>
 		
@@ -355,16 +355,16 @@
 		 
 	}
 	
-	function searchId(){
+	function searchMembers(){
 		var userId = $('#searchId').val
 		
-		/* $.ajax{
-			url : "아이디를 찾는 서블릿",
-			data: {userId, userId},
-			success: function(data){},
-			error: function(data){}
-		} */
+		if(userId==""){
+			location.reload(true);
+		}else{
+			$('#searchForm').submit();
+		}
 		
+	
 	}
 		
 	$(function(){
