@@ -244,7 +244,12 @@ public class SpaceDao {
 				si.setSpaceAddress(rset.getString("SPACE_ADDRESS"));
 				si.setsStatus(rset.getString("S_STATUS"));
 				si.setSpaceIntro(rset.getString("SPACE_INTRO"));
-				
+				si.setSpacePayPolicy(rset.getString("SPACE_PAY_POLICY"));
+				si.setDidDayReserv(rset.getString("DID_DAY_RESERV"));
+				si.setDayPay(rset.getInt("DAY_PAY"));
+				si.setDidMonthReserv(rset.getString("DID_MONTH_RESERV"));
+				si.setMonthPay(rset.getInt("MONTH_PAY"));
+				si.setSpaceLocationFilter(rset.getString("SPACE_LOCATION_FILTER"));
 			}
 			
 		} catch (SQLException e) {
@@ -256,22 +261,84 @@ public class SpaceDao {
 		return si;
 	}
 
-
+	//SPACE_INF SPACE_POLICY, DID_DAY_RESERV, DAY_PAY, DID_MONTH_RESERV, MONTH_PAY 입력용 메소드.
+	//기존에 있는 공간번호에 작성하기 때문에 UPDATE문을 사용한다.
 	public int insertSpaceInfOp(Connection con, SpaceInfo si) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		PreparedStatement pstmt = null;
+		int spaceInfOpResult = 0;
+		
+		String query = prop.getProperty("insertSpaceInfOp");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, si.getSpacePayPolicy());
+			pstmt.setString(2, si.getDidDayReserv());
+			pstmt.setInt(3, si.getDayPay());
+			pstmt.setString(4, si.getDidMonthReserv());
+			pstmt.setInt(5, si.getMonthPay());
+			pstmt.setInt(6, si.getSpaceNo());
+			
+			spaceInfOpResult = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return spaceInfOpResult;
 	}
 
-
+	//SPACE_OPTIME SPACE_NO, DAY, START_TIME, END_TIME, OPEN_CHECK 입력용 메소드
 	public int insertSpaceOptime(Connection con, int sNo, int day, int startTime, int endTime, String openCheck) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		PreparedStatement pstmt = null;
+		int optimeResult = 0;
+		
+		String query = prop.getProperty("insertSpaceOptime");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sNo);
+			pstmt.setInt(2, day);
+			pstmt.setInt(3, startTime);
+			pstmt.setInt(4, endTime);
+			pstmt.setString(5, openCheck);
+			
+			optimeResult = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return optimeResult;
 	}
 
-
+	//REFUND_POLICY SPACE_NO, DATE_REFUND_RATE, REFUND_DATE 입력용 메소드
 	public int insertRefundPolicy(Connection con, int sNo, double rate, int date) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		PreparedStatement pstmt = null;
+		int refundResult = 0;
+		
+		String query = prop.getProperty("insertRefundPolicy");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sNo);
+			pstmt.setDouble(2, rate);
+			pstmt.setInt(3, date);
+			
+			refundResult = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return refundResult;
 	}
 
 }
