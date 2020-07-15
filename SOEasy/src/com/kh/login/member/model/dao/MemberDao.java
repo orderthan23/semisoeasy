@@ -504,7 +504,6 @@ public class MemberDao {
 				m.setmName(rset.getString("M_NAME"));
 				m.setmId(rset.getString("M_ID"));
 				m.setmNick(rset.getString("M_NICK"));
-				m.setmPassword(rset.getString("M_PASSWORD"));
 				m.setmPhone(rset.getString("M_PHONE"));
 				m.setmEmail(rset.getString("M_EMAIL"));
 				m.setEnrollDate(rset.getDate("M_ENROLL_DATE"));
