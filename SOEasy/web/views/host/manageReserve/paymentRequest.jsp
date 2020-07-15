@@ -98,8 +98,9 @@
 					<th height="40px">옵션(완료 미표시)</th>
 					<th height="40px">진행도</th>
 				</tr>
-				<% for(PaymentRequest h : list) {%>
-				<tr class="pCompleteInfo">
+				<% if(list != null) {
+					for(PaymentRequest h : list) {%>
+					<tr class="pCompleteInfo">
 					<td><%= h.getReserveNo() %></td><!-- model.vo에 게스트 정보 조인해서 적어야 함!!!!!! -->
 					<td><%= h.getGuestId() %></td><!-- model.vo에 게스트 정보 조인해서 적어야 함!!!!!! -->
 					<td><%= h.getGuestName() %></td>
@@ -107,7 +108,7 @@
 					<td style="font-size:13px;"><%= h.getReservePersonCount() %></td>
 					<td style="font-size:13px;"><%= h.getSpaceKind() %></td>
 					<td style="font-size:13px;"><%= h.getSpaceName() %></td>
-					<td style="font-size:13px;"><%= h.getPayAmount() %></td>
+					<td style="font-size:13px;"><%= h.getExpectPay() %></td>
 					<td style="font-size:13px;" id="option">
 					<button style="border:1px solid red;background:white;color:red">승인</button>
 					<button style="border:1px solid blue;background:white;color:blue">거절</button>
@@ -116,9 +117,10 @@
 					<td style="font-size:12px;"><%= "예약 요청" %></td>
 					<% } %>
 				</tr>
-				<%
-					}
-				%>
+				<% }
+				} else { %>
+					<td colspan="10">결제 요청건이 없습니다.</td>
+				<% } %>
 			</table>
 		</div>
 		
@@ -150,6 +152,7 @@
       	<% } %>
       	
       	<button onclick="location.href='<%=request.getContextPath()%>/select.pr?currentPage=<%=maxPage%>'">>></button>
+      	</div>
       	
 		
 	</section>

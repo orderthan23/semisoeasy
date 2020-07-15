@@ -64,12 +64,12 @@ public class SelectPaymentRequest extends HttpServlet {
 		
 		String page = "";
 		if(list != null) {
-			page = "/views/host/manageReserve/paymentRequest.jsp";
+			page = "/login/views/host/manageReserve/paymentRequest.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "결제요청 조회 실패!");
+			page = "/login/views/host/manageReserve/paymentRequest.jsp";
+			request.setAttribute("list", null);
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
