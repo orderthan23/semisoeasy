@@ -5,7 +5,7 @@
 	int pCompleteQTY = 10;
 	int statement = 0;
 	
-	ArrayList<HostReserve> list = (ArrayList<HostReserve>) request.getAttribute("list");
+	ArrayList<PaymentRequest> list = (ArrayList<PaymentRequest>) request.getAttribute("list");
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -87,21 +87,27 @@
 		
 		<table align="center"  style="margin:0; width:100%;"  >
 				<tr>
+					<th height="40px">예약번호</th>
 					<th height="40px">아이디</th>
 					<th height="40px">이름</th>
 					<th height="40px">사용 일자</th>
+					<th height="40px">예약 인원</th>
 					<th height="40px">센터명</th>
 					<th height="40px">공간명</th>
+					<th height="40px">결제예상금액</th>
 					<th height="40px">옵션(완료 미표시)</th>
 					<th height="40px">진행도</th>
 				</tr>
-				<% for(HostReserve h : list) {%>
+				<% for(PaymentRequest h : list) {%>
 				<tr class="pCompleteInfo">
+					<td><%= h.getReserveNo() %></td><!-- model.vo에 게스트 정보 조인해서 적어야 함!!!!!! -->
 					<td><%= h.getGuestId() %></td><!-- model.vo에 게스트 정보 조인해서 적어야 함!!!!!! -->
 					<td><%= h.getGuestName() %></td>
 					<td style="font-size:13px;" class="date"><%= h.getStartDay() + " ~ " + h.getEndDay() %></td>
+					<td style="font-size:13px;"><%= h.getReservePersonCount() %></td>
 					<td style="font-size:13px;"><%= h.getSpaceKind() %></td>
 					<td style="font-size:13px;"><%= h.getSpaceName() %></td>
+					<td style="font-size:13px;"><%= h.getPayAmount() %></td>
 					<td style="font-size:13px;" id="option">
 					<button style="border:1px solid red;background:white;color:red">승인</button>
 					<button style="border:1px solid blue;background:white;color:blue">거절</button>

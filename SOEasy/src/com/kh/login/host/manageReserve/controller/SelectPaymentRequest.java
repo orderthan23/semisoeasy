@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.login.host.manageReserve.model.service.HostReserveService;
-import com.kh.login.host.manageReserve.model.vo.HostReserve;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
+import com.kh.login.host.manageReserve.model.vo.PaymentRequest;
 
 /**
  * Servlet implementation class SelectPaymentRequest
@@ -60,7 +60,7 @@ public class SelectPaymentRequest extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<HostReserve> list = new HostReserveService().selectList(pi);
+		ArrayList<PaymentRequest> list = new HostReserveService().selectList(pi);
 		
 		String page = "";
 		if(list != null) {
