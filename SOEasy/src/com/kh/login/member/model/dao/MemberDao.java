@@ -2,6 +2,7 @@ package com.kh.login.member.model.dao;
 
 import static com.kh.login.common.JDBCTemplate.*;
 
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,8 +10,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.member.controller.LoginServlet;
 import com.kh.login.member.model.vo.Member;
 
@@ -105,6 +109,12 @@ public class MemberDao {
 				loginUser.setmEmail(rset.getString("M_EMAIL"));
 				loginUser.setEnrollDate(rset.getDate("M_ENROLL_DATE"));
 				loginUser.setmStatus(rset.getString("M_STATUS"));
+				loginUser.setImgNo(rset.getInt("IMG_NO"));
+				loginUser.setOriginName(rset.getString("ORIGIN_NAME"));
+				loginUser.setFilePath(rset.getString("FILE_PATH"));
+				loginUser.setChangeName(rset.getString("CHANGE_NAME"));
+				loginUser.setImgDiv(rset.getInt("IMG_DIV"));
+				loginUser.setSpaceNo(rset.getInt("SPACE_NO"));
 			}
 
 		} catch (SQLException e) {
@@ -239,17 +249,37 @@ public class MemberDao {
 		}
 		
 		return insertResult;
-		
-	
 	}
 
+	public int insertDefaultProfile(Connection con, Member requestMember) {
+		PreparedStatement pstmt = null;
+		int insertResult = 0;
+		String query = prop.getProperty("insertDefaultProfile");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, requestMember.getOriginName());
+			pstmt.setString(2, requestMember.getFilePath());
+			pstmt.setString(3, requestMember.getChangeName());
+		
+			insertResult = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		return insertResult;
+	}
+	
 	public String findId(Connection con, String name, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String resultId = null;
 		
 		String query = prop.getProperty("findId");
-		//아직 쿼리 안썼다.
+		
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -356,6 +386,149 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public int updateMember1(Connection con, Member updateMember) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateMember1");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,updateMember.getmNick());
+			pstmt.setString(2,updateMember.getmName());
+			pstmt.setString(3,updateMember.getmPhone());
+			pstmt.setString(4, updateMember.getmEmail());
+			pstmt.setString(5, updateMember.getmId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateMember2(Connection con, Member updateMember) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateMember3");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,updateMember.getmNick());
+			pstmt.setString(2,updateMember.getmName());
+			pstmt.setString(3,updateMember.getmPassword());
+			pstmt.setString(4,updateMember.getmPhone());
+			pstmt.setString(5, updateMember.getmEmail());
+			pstmt.setString(6, updateMember.getmId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateProfile(Connection con, Member updateMember) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateProfile");
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, updateMember.getOriginName());
+			pstmt.setString(2, updateMember.getFilePath());
+			pstmt.setString(3, updateMember.getChangeName());
+			pstmt.setInt(4, updateMember.getMemberNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("listCount1");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Member> selectAllList(Connection con, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Member> memberList = null;
+		String query = prop.getProperty("selectAllList");
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			int startRow =(pi.getCurrentPage()-1)*pi.getLimit()+1;
+			int endRow = startRow + pi.getLimit()-1;
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2,endRow);
+			
+			rset = pstmt.executeQuery();
+			memberList = new ArrayList<>();
+			
+			while(rset.next()) {
+				Member m = new Member();
+				
+				m.setMemberNo(rset.getInt("MEMBER_NO"));
+				m.setpType(rset.getInt("P_TYPE"));
+				m.setmName(rset.getString("M_NAME"));
+				m.setmId(rset.getString("M_ID"));
+				m.setmNick(rset.getString("M_NICK"));
+				m.setmPassword(rset.getString("M_PASSWORD"));
+				m.setmPhone(rset.getString("M_PHONE"));
+				m.setmEmail(rset.getString("M_EMAIL"));
+				m.setEnrollDate(rset.getDate("M_ENROLL_DATE"));
+				m.setmStatus(rset.getString("M_STATUS"));
+				
+				memberList.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return memberList;
+	}
+
+
+
+	
+
+	
 
 	
 

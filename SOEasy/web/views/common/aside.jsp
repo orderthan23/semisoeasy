@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-
+	String path ="";
+	String[] array =loginUser.getFilePath().split("\\\\");
+	path=array[array.length-1];
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -238,7 +240,7 @@ span.bar {
 			
 			case 1:
 				$('#grade').text("GUEST");
-				$('#profileZone').html("<img src='<%=loginUser.getFilePath()+loginUser.getChangeName()%>'>");
+				$('#profileZone').html("<img src='<%=request.getContextPath()+path+loginUser.getChangeName()%>'>");
 				$('#nickNameZone').html("<%=loginUser.getmNick() %>");
 				$('#secondMainNav').hide();
 				$('#fourthSubNav').hide();
@@ -248,12 +250,12 @@ span.bar {
 				break;
 			
 			case 2:
-				$('#profileZone').html("<img src='<%=loginUser.getFilePath()+loginUser.getChangeName()%>'>");
+				$('#profileZone').html("<img src='<%=request.getContextPath()+path+loginUser.getChangeName()%>'>");
 				$('#nickNameZone').html("<%=loginUser.getmNick() %>");
 				break;
 			case 3:
 				$('#grade').text("Adminstrator");
-				$('#profileZone').html("<img src='<%=loginUser.getFilePath()+loginUser.getChangeName()%>'>");
+				$('#profileZone').html("<img src='<%=request.getContextPath()+path+loginUser.getChangeName()%>'>");
 				$('#nickNameZone').html("<%=loginUser.getmNick() %>");
 				$('#firstMainNav').text("공간관리");
 				$('#secondMainNav').text("회원관리");
@@ -261,7 +263,7 @@ span.bar {
 				$('#firstSubNav').attr("href","#").text("공간 검수 요청 조회");
 				$('#secondSubNav').attr("href","#").text("공간 삭제 요청 조회");
 				$('#thirdSubNav').attr("href","#").text("정산 관리");
-				$('#fourthSubNav').attr("href","#").text("회원 관리");
+				$('#fourthSubNav').attr("href","<%=request.getContextPath()%>/selectAll.me").text("회원 관리");
 				$('#fifthSubNav').attr("href","#").text("회원 복구 요청");
 				$('#sixthSubNav').attr("href","#").text("신고 건 조회");
 				$('#seventhSubNav').attr("href","#").text("Q&A 관리");

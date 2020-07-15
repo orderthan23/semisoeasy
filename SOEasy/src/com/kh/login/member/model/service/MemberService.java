@@ -3,7 +3,11 @@ package com.kh.login.member.model.service;
 import static com.kh.login.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
+import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.member.controller.LoginServlet;
 import com.kh.login.member.model.dao.MemberDao;
 import com.kh.login.member.model.vo.Member;
@@ -72,11 +76,16 @@ public class MemberService {
 	public int insertMember(Member requestMember) {
 		Connection con = getConnection();
 		
-		int insertResult = new MemberDao().insertMember(con, requestMember);
-		
+		int insertResult=0;
+		int insertResult2=0;
+		insertResult=new MemberDao().insertMember(con, requestMember);
 		if(insertResult > 0) {
+			insertResult2= new MemberDao().insertDefaultProfile(con,requestMember);
+		}
+		
+		if(insertResult>0 && insertResult2>0) {
 			commit(con);
-		} else {
+		}else {
 			rollback(con);
 		}
 		
@@ -138,6 +147,106 @@ public class MemberService {
 		}
 		close(con);
 		return result;
+		
+		
+	}
+	//비밀번호 프로필 사진 변경을 하지 않은 개인정보 수정 메소드
+	public Member updateMember1(Member updateMember) {
+		Connection con = getConnection();
+		
+		int result = 0;
+		Member updatingMember = null;
+		result = new MemberDao().updateMember1(con,updateMember);
+		
+		if(result > 0) {
+			commit(con);
+			updatingMember = new MemberDao().selectOne(con, updateMember);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return updatingMember;
+	}
+	//비밀번호는 변경하지 않고 프로필 사진은 변경한 개인정보 수정 메소드
+	public Member updateMember2(Member updateMember) {
+		Connection con = getConnection();
+		
+		int result1 = 0;
+		int result2 = 0;
+		Member updatingMember = null;
+		
+		result1 = new MemberDao().updateMember1(con, updateMember);
+		if(result1>0) {
+			
+			result2 = new MemberDao().updateProfile(con,updateMember);
+		}
+		
+		if(result1>0 && result2>0) {
+			commit(con);
+			updatingMember = new MemberDao().selectOne(con, updateMember);
+		}else {
+			rollback(con);
+		}
+		
+		
+		return updatingMember;
+	}
+	//비밀번호는 변경하고 프로필 사진은 변경하지 않은 개인정보 수정 메소드
+	public Member updateMember3(Member updateMember) {
+		Connection con = getConnection();
+		Member updatingMember = null;
+		int result = 0;
+		result = new MemberDao().updateMember2(con, updateMember);
+		if(result > 0) {
+			commit(con);
+			updatingMember = new MemberDao().selectOne(con, updateMember);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return updatingMember;
+	}
+	//비밀번호도 변경하고 프로필 사진도 변경한 개인정보 수정 메소드
+	public Member updateMember4(Member updateMember) {
+		Connection con = getConnection();
+		Member updatingMember = null;
+		int result1 = 0;
+		int result2 = 0;
+		
+		
+		result1 = new MemberDao().updateMember2(con, updateMember);
+		if(result1>0) {
+			
+			result2 = new MemberDao().updateProfile(con,updateMember);
+		}
+		
+		if(result1>0 && result2>0) {
+			commit(con);
+			updatingMember = new MemberDao().selectOne(con, updateMember);
+		}else {
+			rollback(con);
+		}
+		
+		
+		return updatingMember;
+	}
+	public int getListCount() {
+		Connection con = getConnection();
+		int listCount = new MemberDao().getListCount(con);
+		
+		close(con);
+		
+		return listCount;
+		
+		
+	}
+	public ArrayList<Member> selectAllList(PageInfo pi) {
+		Connection con = getConnection();
+		ArrayList<Member> memberList = new MemberDao().selectAllList(con,pi);
+		
+		close(con);
+		
+		return memberList;
 		
 		
 	}
