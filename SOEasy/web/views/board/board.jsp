@@ -160,7 +160,7 @@
 				$(this).parent().css({"background" : "white"});
 			}).click(function() {
 				var num = $(this).parent().children().eq(1).text();
-				location.href="<%= request.getContextPath() %>/detailOne.no?num=" + num;
+				location.href="<%= request.getContextPath() %>/detail.no?num=" + num;
 			})
 		});
 	</script>
