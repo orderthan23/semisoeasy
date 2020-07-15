@@ -84,7 +84,7 @@
 				제목
 			</td>
 			<td>
-				<input name="title" type="text" size="70" maxlength="100" value="title"/>
+				<input name="title" type="text" size="70" maxlength="100" />
 			</td>		
 		</tr>
 		<tr>
@@ -150,7 +150,9 @@
 				return false;
 			}
 		}
+		
 	
+		
 	</script>
 	
 				
