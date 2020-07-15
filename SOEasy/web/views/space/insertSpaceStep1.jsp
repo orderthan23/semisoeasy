@@ -184,13 +184,13 @@
 								<tr>
 									<td width="30%">자유석</td>
 									<td width="60%">
-										<input type="text" name="unfix-seat" id="unfix-seat" size="30%" value="0" onkeyup="count();" onclick="this.select();">
+										<input type="text" name="unfix-seat" id="unfix-seat" size="30%" value="0" onkeyup="countSeat();" onclick="this.select();">
 									</td>
 									<td width="10%">석</td>
 								</tr>
 								<tr>
 									<td>지정석</td>
-									<td><input type="text" name="fix-seat" id="fix-seat" size="30%" value="0" onkeyup="count();" onclick="this.select();"></td>
+									<td><input type="text" name="fix-seat" id="fix-seat" size="30%" value="0" onkeyup="countSeat();" onclick="this.select();"></td>
 									<td>석</td>
 								</tr>
 								<tr>
@@ -404,7 +404,19 @@
 	<footer>
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
-	<script>
+	<script>	
+	
+		// 좌석 수 = 자유석 + 지정석
+		function countSeat(){
+			console.log("되는건맞니?")
+			var unfixSeat = Number($("#unfix-seat").val());
+			var fixSeat = Number($("#fix-seat").val());
+			var totalSeat = unfixSeat + fixSeat;
+			
+			$("#total-seat").val(totalSeat);
+			$("#max-reserv").val(totalSeat);
+		};
+		
 		$(function(){
 			initSet();
 			initEvent();
@@ -484,7 +496,6 @@
 					$(this).val("");
 				}
 			});
-			$("#total-seat").click(function(){count();});
 			
 			//공간 소개 입력시 글자 수 표시
 			$("#space-intro").on("keyup", function(){
@@ -514,15 +525,6 @@
 			}
 		});
 		
-		// 좌석 수 = 자유석 + 지정석
-		function count(){
-			var unfixSeat = Number($("#unfix-seat").val());
-			var fixSeat = Number($("#fix-seat").val());
-			var totalSeat = unfixSeat + fixSeat;
-			
-			$("#total-seat").val(totalSeat);
-			$("#max-reserv").val(totalSeat);
-		};
 		
 		//태그 추가하기
 		function addTag(){
@@ -541,10 +543,6 @@
 			$("#add-tag").val("");
 		};
 		
-		/* function clickHash(){
-			$(".space-tag").hover()
-			
-		} */
 		
 		//이미지 추가하기
 		$(function(){

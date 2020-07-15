@@ -1,5 +1,6 @@
 package com.kh.login.space.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -32,11 +33,22 @@ public class InsertSpaceStep2Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Member loginUser = (Member) request.getAttribute("loginUser");
-		SpaceInfo si = (SpaceInfo) request.getAttribute("spaceInfo");
+		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		SpaceInfo si = (SpaceInfo) request.getSession().getAttribute("spaceInfo");
 		
-		int monthPay = Integer.parseInt(request.getParameter("month-pay"));
-		int dayPay = Integer.parseInt(request.getParameter("day-pay"));
+		//입력받은 값들 null값 처리
+		int monthPay = 0;
+		int dayPay = 0;
+		
+		if(request.getParameter("month-pay") == null || request.getParameter("month-pay") == "") {
+		} else {
+			monthPay = Integer.parseInt(request.getParameter("month-pay"));
+		}
+		if(request.getParameter("day-pay") == null || request.getParameter("day-pay") == "") {
+		} else {
+			dayPay = Integer.parseInt(request.getParameter("day-pay"));
+		}
+		
 		String didDayReserv = "N";
 		String didMonthReserv = "N";
 		if(monthPay > 0) {
@@ -45,66 +57,90 @@ public class InsertSpaceStep2Servlet extends HttpServlet {
 		if (dayPay > 0) {
 			didDayReserv = "Y";
 		}
+		
 		String spacePayPolicy = request.getParameter("policy-intro");
 		
 		//공간 운영시간
 		//월
-		String monOpenCheck = request.getParameter("mon-open-check");
+		String monOpenCheck = request.getParameter("mon-open-check").toUpperCase();
 		int monStartTime = Integer.parseInt(request.getParameter("mon-start-time"));
 		int monEndTime = Integer.parseInt(request.getParameter("mon-end-time"));
 		//화
-		String tueOpenCheck = request.getParameter("tue-open-check");
+		String tueOpenCheck = request.getParameter("tue-open-check").toUpperCase();
 		int tueStartTime = Integer.parseInt(request.getParameter("tue-start-time"));
 		int tueEndTime = Integer.parseInt(request.getParameter("tue-end-time"));
 		//수
-		String wedOpenCheck = request.getParameter("wed-open-check");
+		String wedOpenCheck = request.getParameter("wed-open-check").toUpperCase();
 		int wedStartTime = Integer.parseInt(request.getParameter("wed-start-time"));
 		int wedEndTime = Integer.parseInt(request.getParameter("wed-end-time"));
 		//목
-		String thuOpenCheck = request.getParameter("thu-open-check");
+		String thuOpenCheck = request.getParameter("thu-open-check").toUpperCase();
 		int thuStartTime = Integer.parseInt(request.getParameter("thu-start-time"));
 		int thuEndTime = Integer.parseInt(request.getParameter("thu-end-time"));
 		//금
-		String friOpenCheck = request.getParameter("fri-open-check");
+		String friOpenCheck = request.getParameter("fri-open-check").toUpperCase();
 		int friStartTime = Integer.parseInt(request.getParameter("fri-start-time"));
 		int friEndTime = Integer.parseInt(request.getParameter("fri-end-time"));
 		//토
-		String satOpenCheck = request.getParameter("sat-open-check");
+		String satOpenCheck = request.getParameter("sat-open-check").toUpperCase();
 		int satStartTime = Integer.parseInt(request.getParameter("sat-start-time"));
 		int satEndTime = Integer.parseInt(request.getParameter("sat-end-time"));
 		//일
-		String sunOpenCheck = request.getParameter("sun-open-check");
+		String sunOpenCheck = request.getParameter("sun-open-check").toUpperCase();
 		int sunStartTime = Integer.parseInt(request.getParameter("sun-start-time"));
 		int sunEndTime = Integer.parseInt(request.getParameter("sun-end-time"));
-		
-		//일자별 환불율
-		//8일전부터 받기
-		double day8 = Double.parseDouble(request.getParameter("day8-rate"));
-		double day7 = Double.parseDouble(request.getParameter("day7-rate"));
-		double day6 = Double.parseDouble(request.getParameter("day6-rate"));
-		double day5 = Double.parseDouble(request.getParameter("day5-rate"));
-		double day4 = Double.parseDouble(request.getParameter("day4-rate"));
-		double day3 = Double.parseDouble(request.getParameter("day3-rate"));
-		double day2 = Double.parseDouble(request.getParameter("day2-rate"));
-		double day1 = Double.parseDouble(request.getParameter("day1-rate"));
-		double day0 = Double.parseDouble(request.getParameter("day0-rate"));
 		
 		String[] openChecks = new String[] {monOpenCheck, tueOpenCheck, wedOpenCheck, thuOpenCheck, friOpenCheck, satOpenCheck, sunOpenCheck};
 		int[] startTimes = new int[] {monStartTime, tueStartTime, wedStartTime, thuStartTime, friStartTime, satStartTime, sunStartTime};
 		int[] endTimes = new int[] {monEndTime, tueEndTime, wedEndTime, thuEndTime, friEndTime, satEndTime, sunEndTime};
+
+		//일자별 환불율
+		//8일전부터 받기
+		
+		double day8 = 0;
+		double day7 = 0;
+		double day6 = 0;
+		double day5 = 0;
+		double day4 = 0;
+		double day3 = 0;
+		double day2 = 0;
+		double day1 = 0;
+		double day0 = 0;
+		
 		double[] spaceRefundPolicy = new double[] {day0, day1, day2, day3, day4, day5, day6, day7, day8};
 		
-		//가져온 spaceInfo에 값 집어넣기.
+		for(int i = 8; i >= 0; i --) {
+			if(request.getParameter("day" + i + "-rate") == null || request.getParameter("day" + i + "-rate") == "") {
+				
+			} else {
+				if(i == 0) {
+					spaceRefundPolicy[i] = 0;
+				} else {
+					spaceRefundPolicy[i] = Double.parseDouble(request.getParameter("day" + i + "-rate"));
+				}
+			}
+		}
+		
+		// spaceInfo에 값 집어넣기.
 		si.setDidDayReserv(didDayReserv);
 		si.setDidMonthReserv(didMonthReserv);
 		si.setDayPay(dayPay);
 		si.setMonthPay(monthPay);
 		si.setSpacePayPolicy(spacePayPolicy);
+		si.setOpenChecks(openChecks);
 		si.setStartTimes(startTimes);
 		si.setEndTimes(endTimes);
 		si.setSpaceRefundPolicy(spaceRefundPolicy);
 		
 		SpaceInfo returnSi = new SpaceService().insertSpaceStep2(si);
+		
+		if(returnSi != null) {
+			request.getSession().setAttribute("spaceInfo", returnSi);
+			request.getRequestDispatcher("views/space/insertSpaceStep3.jsp").forward(request, response);;
+		} else {
+			request.setAttribute("msg", "공간등록 실패!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
 	}
 
 	/**

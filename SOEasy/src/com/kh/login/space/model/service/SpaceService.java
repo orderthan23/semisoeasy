@@ -86,28 +86,38 @@ public class SpaceService {
 		int optimeResult = 0;
 		int refundResult = 0;
 		
+		//SPACE_INF SPACE_POLICY, DID_DAY_RESERV, DAY_PAY, DID_MONTH_RESERV, MONTH_PAY 입력
 		spaceInfOpResult = new SpaceDao().insertSpaceInfOp(con, si);
 
 		int sNo = si.getSpaceNo();
 		
+		//SPACE_OPTIME 입력
 		for(int i = 0; i < 7; i++) {
 			int day = i;
 			int startTime = si.getStartTimes()[i];
 			int endTime = si.getEndTimes()[i];
 			String openCheck = si.getOpenChecks()[i];
 			
-			optimeResult = new SpaceDao().insertSpaceOptime(con, sNo, day, startTime, endTime, openCheck);
+			optimeResult += new SpaceDao().insertSpaceOptime(con, sNo, day, startTime, endTime, openCheck);
 		}
 		
+		//REFUND_POLICY 입력
 		for(int i = 8; i >= 0; i--) {
 			double rate = si.getSpaceRefundPolicy()[i];
 			int date = i;
 			
-			refundResult = new SpaceDao().insertRefundPolicy(con, sNo, rate, date);
+			refundResult += new SpaceDao().insertRefundPolicy(con, sNo, rate, date);
 		}
 		
+		if(spaceInfOpResult > 0 && optimeResult == si.getOpenChecks().length && refundResult == si.getSpaceRefundPolicy().length) {
+			commit(con);
+			returnSi = new SpaceDao().selectCurrentSpaceInfo(con, sNo);
+		} else {
+			rollback(con);
+		}
+		close(con);
 		
-		return null;
+		return returnSi;
 	}
 
 }

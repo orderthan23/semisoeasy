@@ -144,8 +144,10 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			
 			SpaceInfo returnSi = new SpaceService().insertSpaceStep1(fileList, si);
 			
+			System.out.println(returnSi);
+			
 			if(returnSi != null) {
-				request.setAttribute("spaceInfo", returnSi);
+				request.getSession().setAttribute("spaceInfo", returnSi);
 				response.sendRedirect(request.getContextPath() + "/views/space/insertSpaceStep2.jsp");
 			} else {
 				for(int i = 0; i < fileList.size(); i++) {

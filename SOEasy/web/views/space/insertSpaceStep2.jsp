@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.login.space.model.vo.*" %>
-<%
-	SpaceInfo si = (SpaceInfo) request.getAttribute("spaceInfo");
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,7 +96,6 @@
 									<td width="30%">일 단위</td>
 									<td width="60%">
 										<input type="text" name="day-pay" size="30%" onclick="this.select();" style="text-align:center;">
-										<!-- <input type="hidden" name="kinds" value="office"> -->
 									</td>
 									<td>원</td>
 								</tr>
@@ -122,7 +119,9 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td></td>
+					<td>
+						
+					</td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr class="space-optime" id="space-optime">
@@ -518,7 +517,7 @@
 										<input type="checkbox" name="sun-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
 									</td>
 									<td width="60%">
-										<input type="hidden" name="wed-open-check" value="open">
+										<input type="hidden" name="sun-open-check" value="open">
 										<select name="sun-start-time">
 											<option value="00" selected>00:00</option>
 											<option value="01">01:00</option>
@@ -723,6 +722,8 @@
 				$("#day1-rate").val(80).prop("readonly", true);
 			}
 		});
+		
+		
 		$("#personal").click(function() {
 			$(".refund-input").prop("readonly", false);
 			if($("#personal").is("checked") == true){
