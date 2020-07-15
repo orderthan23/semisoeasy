@@ -18,14 +18,15 @@ public class Member implements java.io.Serializable{
 	private String mDropReason;
 	private int imgNo;
 	private String originName;
-	private String filePath = "/login/images/etc/";
-	private String changeName="soeasyProf.png";
+	private String filePath; 
+	private String changeName;
 	private int imgDiv;
 	private int spaceNo;
 	
 	
 	public Member() {
-		// TODO Auto-generated constructor stub
+
+	
 	}
 
 	public Member(int memberNo, int pType, String mName, String mId, String mNick, String mPassword, String mPhone,

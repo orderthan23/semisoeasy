@@ -36,7 +36,9 @@ public class InsertMemberServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String phoneNum= request.getParameter("phoneNum");
 		String email = request.getParameter("email");
-		
+		String root = request.getSession().getServletContext().getRealPath("/");
+		String filePath = root+"/images/etc/";
+		String defaultProfile = "soeasyProf.png";
 		Member requestMember = new Member();
 		requestMember.setmId(userId);
 		requestMember.setmNick(nickName);
@@ -44,6 +46,9 @@ public class InsertMemberServlet extends HttpServlet {
 		requestMember.setmPassword(password);
 		requestMember.setmPhone(phoneNum);
 		requestMember.setmEmail(email);
+		requestMember.setFilePath(filePath);
+		requestMember.setOriginName(defaultProfile);
+		requestMember.setChangeName(defaultProfile);
 		
 		//System.out.println(requestMember);
 		

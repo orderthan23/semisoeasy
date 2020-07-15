@@ -163,7 +163,7 @@ h1 {
 				<tr>
 					<td align="center" height="200px">
 						<div id="profileZone">
-							<img src="<%=loginUser.getFilePath()+loginUser.getChangeName()%>" id="profilePhoto">
+							<img src="<%=request.getContextPath()+path+loginUser.getChangeName()%>" id="profilePhoto">
 						</div>
 						<br>
 						<div style="margin-left:auto; margin-right:auto;">
