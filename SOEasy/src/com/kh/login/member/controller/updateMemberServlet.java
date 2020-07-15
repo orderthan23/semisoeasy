@@ -21,7 +21,7 @@ import com.oreilly.servlet.MultipartRequest;
 @WebServlet("/updateMember.me")
 public class updateMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	//프로필 사진을 업데이트 해주는 서블렛
 	public updateMemberServlet() {
 		super();
 	}
@@ -39,11 +39,11 @@ public class updateMemberServlet extends HttpServlet {
 			// 웹 서버 컨테이너 경로 추출
 			String root = request.getSession().getServletContext().getRealPath("/");
 			System.out.println(root);
-
+			String savePath ="/uploadFiles/profile/";
+			String realPath = root+savePath;
 			// 파일 저장 경로 설청
-			String savePath = root + "/uploadFiles/profile/";
 
-			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
+			MultipartRequest multiRequest = new MultipartRequest(request, realPath, maxSize, "UTF-8",
 					new SoEasyFileRenamePolicy(userId));
 			String saveFile = "";
 			String originFile = "";
@@ -77,7 +77,7 @@ public class updateMemberServlet extends HttpServlet {
 			System.out.println("password : " + password);
 			System.out.println("phoneNum : " + phoneNum);
 			System.out.println("email : " + email);
-
+			String deleteFileName = "";
 			// 비밀번호 수정을 진행하지 않았을때
 			if (kind == 1) {
 				//프로필 사진을 업데이트 하지않았을때
@@ -102,6 +102,13 @@ public class updateMemberServlet extends HttpServlet {
 					updateMember.setOriginName(originFile);
 					updateMember.setChangeName(saveFile);
 					updateMember.setFilePath(savePath);
+					deleteFileName = new MemberService().findImg(updateMember);
+					if(!deleteFileName.equals("soeasyProf.png") && !deleteFileName.equals("")) {
+						File deleteFile = new File(realPath + deleteFileName);
+						
+						deleteFile.delete();
+					}
+					
 					updatingMember = new MemberService().updateMember2(updateMember);
 				}
 				
@@ -132,6 +139,12 @@ public class updateMemberServlet extends HttpServlet {
 					updateMember.setOriginName(originFile);
 					updateMember.setChangeName(saveFile);
 					updateMember.setFilePath(savePath);
+					deleteFileName = new MemberService().findImg(updateMember);
+					if(!deleteFileName.equals("soeasyProf.png") && !deleteFileName.equals("")) {
+						File deleteFile = new File(realPath + deleteFileName);
+						
+						deleteFile.delete();
+					}
 					updatingMember = new MemberService().updateMember4(updateMember);
 				}
 			

@@ -250,5 +250,12 @@ public class MemberService {
 		
 		
 	}
+	public String findImg(Member updateMember) {
+		Connection con = getConnection();
+		String deleteFileName = new MemberDao().findImg(con, updateMember);
+		
+		close(con);
+		return deleteFileName;
+	}
 
 }

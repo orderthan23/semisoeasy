@@ -37,7 +37,7 @@ public class InsertMemberServlet extends HttpServlet {
 		String phoneNum= request.getParameter("phoneNum");
 		String email = request.getParameter("email");
 		String root = request.getSession().getServletContext().getRealPath("/");
-		String filePath = root+"/images/etc/";
+		String filePath = "/images/etc/";
 		String defaultProfile = "soeasyProf.png";
 		Member requestMember = new Member();
 		requestMember.setmId(userId);
