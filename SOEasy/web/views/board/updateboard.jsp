@@ -81,24 +81,26 @@
 	
 	<section>
 	<br>
-	<label><font size="6" color="gray" style=text-align:>공지사항</font></label>
+	<label><font size="6" color="gray" style=text-align:>공지사항 수정</font></label>
 	
 	<br>
 	
-	<input type="hidden" name="id" value="<%=loginUser.getmId()%>">
+	<form method="post"  id="updateForm"  name="updateForm">
+	<% if(loginUser !=null && loginUser.getmId().equals("admin")) { %>
 	<table width:700 border="3" bordercolor="lightgray" align="center">
 			<tr>
 			<td style="text-align:center; background:#60B4A6">
 				제목
 			</td>
 			<td>
-				<input name="title" type="text" size="70" maxlength="100" value="<%=board.getnTitle()%>" readonly>
+				<input name="title" type="text" size="70" maxlength="100" value="<%= board.getnTitle() %>" readonly>
+				<input type="hidden" name="nno" value="<%= board.getNoticeNo() %>">
 			</td>		
 		</tr>
 		<tr>
 			<td style=text-align:center style="text-align:center; background:#60B4A6">
 			<select class="category" name="category" id="category" style="text-align:center; background:#60B4A6 ">
-					<option class="category" style="text-align:center"><%=board.getnCategory() %></option>
+					<option class="category" style="text-align:center"><%= board.getnCategory() %></option>
 					<option class="category" value="1">시스템관련</option>
 					<option class="category" value="2">계정관련</option>
 					<option class="category" value="3">결제관련</option>
@@ -112,51 +114,33 @@
 				내 용
 			</td>
 			<td>
-				<textarea name="content" cols="72" rows="20" style="resize:none;" readonly><%= board.getnContent() %></textarea>			
+				<textarea name="content" cols="72" rows="20" style="resize:none;" ><%= board.getnContent() %></textarea>			
 			</td>		
 		</tr>
 
 		<tr align="center" valign="middle" style="text-align:center; background:#60B4A6">
 			<td colspan="5">
-				<button onclick="location.href='<%= request.getContextPath()%>/selectList.no'">메뉴로 돌아가기</button>
-				<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
-				<button onclick="location.href='<%= request.getContextPath()%>/selectBoard.no?num=<%= board.getNoticeNo()%>'">수정하기</button>
-				<% } %>
+				<input type="reset" value="삭제" style="text-align:center; background:#60B4A6" >
+				<button style="text-align:center; background:#60B4A6" onclick="complete();">수정완료</button>
+				<input type="button" value="목록으로"  style="text-align:center; background:#60B4A6; color:white">			
 			</td>
 		</tr>
 	</table>	
+	</form>
 	</section>
 	 <%@ include file="../common/footer.jsp"%> 
-	<!-- <script> -->
-	<%-- var userStatus = <%=userStatus%>; --%>
-		<!-- $(function(){
-			switch(userStatus){
-			case 1: 
-			case 2: $('#writeButton').hide(); break;
 
-			case 3:	$('#writeButton').show(); break;
-			default : break;
-			}
+	<script>
+		function complete(){
+			$("#updateForm").attr("action", <%=request.getContextPath()%>/updateBoard.no);
 			
-		}); -->
-		
-		<!-- </script> -->
-​
-	<!-- <script>
-		function checkValue() {
-			var form = document.forms[0];
-			var board_subject = form.board_subject.value;
-			var board_content = form.board_content.value;
-
-			if (!board_subject) {
-				alert("제목을 입력해주세요.")
-				return false;
-			} else if (!board_content) {
-				alert("내용을 입력해주세요.")
-				return false;
-			}
 		}
-	</script> -->
+	
+		<% } else { 
+			request.setAttribute("msg", "잘못된 경로로 접근");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		} %>
+	</script>
 
 
 

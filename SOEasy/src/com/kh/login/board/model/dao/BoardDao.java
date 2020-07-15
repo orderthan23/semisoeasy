@@ -90,5 +90,43 @@ public class BoardDao {
 
 	}
 
+	public Board detailBoard(Connection con, int nno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Board board = null;
+		
+		String query = prop.getProperty("detailBoard");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, nno);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				board = new Board();
+				
+				board.setNoticeNo(rset.getInt("NOTICE_NO"));
+				board.setnCategory(rset.getInt("N_CATEGORY"));
+				board.setnTitle(rset.getString("N_TITLE"));
+				board.setmNick(rset.getString("M_NICK"));
+				board.setnDate(rset.getDate("N_ENROLL_DATE"));
+				board.setnContent(rset.getString("N_CONTENT"));
+				board.setnStatus(rset.getString("N_STATUS"));
+				System.out.println("읽어온 공지글 정보 : " + board);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return board;
+		
+		
+	}
+
 
 }
+ 
