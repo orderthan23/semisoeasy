@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import com.google.gson.Gson;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.member.model.service.MemberService;
 import com.kh.login.member.model.vo.Member;
@@ -35,7 +35,7 @@ public class SelectAllMemberServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		limit = 20;
+		limit = 10;
 		
 		
 		int listCount = new MemberService().getListCount();
@@ -44,7 +44,7 @@ public class SelectAllMemberServlet extends HttpServlet {
 		//예를 들면 목록 갯수가 123개 이면 
 		//총 필요한 페이지 수는 13개임
 		maxPage = (int)((double) listCount / limit +0.9);
-		
+		System.out.println("맥스페이지"+maxPage);
 		//현재 페이지에 보여줄 시작 페이지 수(10개씩 보여지게 할 경우)
 		//아래 쪽 페이지 수가 10개씩 보여진다면
 		//1,11,21,31 ....
@@ -59,7 +59,11 @@ public class SelectAllMemberServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		ArrayList<Member> memberList = new MemberService().selectAllList(pi);
-		
+	
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		request.setAttribute("pi", pi);
+	
 		String page ="";
 		
 		if(memberList !=null) {
@@ -68,7 +72,7 @@ public class SelectAllMemberServlet extends HttpServlet {
 			request.setAttribute("pi", pi);
 		}else {
 			page="views/common/errorpage.jsp";
-			request.setAttribute("msg", "게시판 조회 실패 !");
+			request.setAttribute("msg", "회원목록  조회 실패 !");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

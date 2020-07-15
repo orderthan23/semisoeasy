@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String path ="";
+	 /* String path ="";
 	String[] array =loginUser.getFilePath().split("\\\\");
-	path=array[array.length-1];
+	path=array[array.length-1]; */ 
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -240,7 +240,7 @@ span.bar {
 			
 			case 1:
 				$('#grade').text("GUEST");
-				$('#profileZone').html("<img src='<%=request.getContextPath()+path+loginUser.getChangeName()%>'>");
+				$('#profileZone').html("<img src='<%=request.getContextPath()+loginUser.getFilePath()+loginUser.getChangeName()%>'>");
 				$('#nickNameZone').html("<%=loginUser.getmNick() %>");
 				$('#secondMainNav').hide();
 				$('#fourthSubNav').hide();
@@ -250,12 +250,12 @@ span.bar {
 				break;
 			
 			case 2:
-				$('#profileZone').html("<img src='<%=request.getContextPath()+path+loginUser.getChangeName()%>'>");
+				$('#profileZone').html("<img src='<%=request.getContextPath()+loginUser.getFilePath()+loginUser.getChangeName()%>'>");
 				$('#nickNameZone').html("<%=loginUser.getmNick() %>");
 				break;
 			case 3:
 				$('#grade').text("Adminstrator");
-				$('#profileZone').html("<img src='<%=request.getContextPath()+path+loginUser.getChangeName()%>'>");
+				$('#profileZone').html("<img src='<%=request.getContextPath()+loginUser.getFilePath()+loginUser.getChangeName()%>'>");
 				$('#nickNameZone').html("<%=loginUser.getmNick() %>");
 				$('#firstMainNav').text("공간관리");
 				$('#secondMainNav').text("회원관리");
