@@ -159,8 +159,8 @@
 			}).mouseout(function() {
 				$(this).parent().css({"background" : "white"});
 			}).click(function() {
-				var num = $(this).parent().children().eq(1).text();
-				location.href="<%= request.getContextPath() %>/detail.no?num=" + num;
+				var num = $(this).parent().children().eq(0).text();
+				location.href="<%=request.getContextPath()%>/detail.no?num=" + num;
 			})
 		});
 	</script>
