@@ -256,4 +256,22 @@ public class SpaceDao {
 		return si;
 	}
 
+
+	public int insertSpaceInfOp(Connection con, SpaceInfo si) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	public int insertSpaceOptime(Connection con, int sNo, int day, int startTime, int endTime, String openCheck) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	public int insertRefundPolicy(Connection con, int sNo, double rate, int date) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
