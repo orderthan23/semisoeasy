@@ -257,5 +257,18 @@ public class MemberService {
 		close(con);
 		return deleteFileName;
 	}
+	public int blockMember(String userId) {
+		Connection con = getConnection();
+		int result = new MemberDao().blockMember(con,userId);
+		
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
 
 }

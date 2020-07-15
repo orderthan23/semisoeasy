@@ -1,39 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.kh.login.host.manageReserve.model.vo.PageInfo" %>
-<%
-	
-	 ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("memberList");
-	 PageInfo pi = (PageInfo) request.getAttribute("pi");
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	ArrayList<String> idArr = new ArrayList<>();
-	ArrayList<String> nameArr= new ArrayList<>();
-	ArrayList<String> typeArr = new ArrayList<>();
-	ArrayList<String> isActiveArr = new ArrayList<>();
-	ArrayList<String> phoneArr = new ArrayList<>();
-	ArrayList<String> emailArr = new ArrayList<>();
-	for(Member m : list){
-		idArr.add(m.getmId());
-		nameArr.add(m.getmName());
-		switch(m.getpType()){
-		case 1: typeArr.add("게스트"); break; 
-		case 2: typeArr.add("호스트"); break;
-		case 3: typeArr.add("관리자"); break;
-		}
-		if(m.getmStatus().equals("Y")){
-			isActiveArr.add("O");
-		}else{
-			isActiveArr.add("X");
-		}
-		phoneArr.add(m.getmPhone());
-		emailArr.add(m.getmEmail());
-	}
-	System.out.println("startpage: "+startPage);
-	System.out.println("endPage : "+endPage);
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,7 +155,53 @@
 
 </head>
 <body>
+	
 	<header><%@ include file="/views/common/header.jsp" %></header>
+ 	<%
+		if (userStatus < 3 || loginUser==null || loginUser.getmStatus().equals("N")) {
+			request.setAttribute("msg", "잘못된 경로입니다.");
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
+		}else{
+
+			ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("memberList");
+			PageInfo pi = (PageInfo) request.getAttribute("pi");
+			int listCount = pi.getListCount();
+			int currentPage = pi.getCurrentPage();
+			int maxPage = pi.getMaxPage();
+			int startPage = pi.getStartPage();
+			int endPage = pi.getEndPage();
+			ArrayList<String> idArr = new ArrayList<>();
+			ArrayList<String> nameArr = new ArrayList<>();
+			ArrayList<String> typeArr = new ArrayList<>();
+			ArrayList<String> isActiveArr = new ArrayList<>();
+			ArrayList<String> phoneArr = new ArrayList<>();
+			ArrayList<String> emailArr = new ArrayList<>();
+			for (Member m : list) {
+				idArr.add(m.getmId());
+				nameArr.add(m.getmName());
+				switch (m.getpType()) {
+				case 1:
+					typeArr.add("게스트");
+					break;
+				case 2:
+					typeArr.add("호스트");
+					break;
+				case 3:
+					typeArr.add("관리자");
+					break;
+				}
+				if (m.getmStatus().equals("Y")) {
+					isActiveArr.add("O");
+				} else {
+					isActiveArr.add("X");
+				}
+				phoneArr.add(m.getmPhone());
+				emailArr.add(m.getmEmail());
+			}
+			System.out.println("startpage: " + startPage);
+			System.out.println("endPage : " + endPage);
+			
+		%>
 	<nav><%@ include file = "/views/common/aside.jsp" %></nav>
 	<section>
 		
@@ -202,7 +215,7 @@
          <h1 style="margin:0;">경고</h1>
       </div>
       <br>
-      <p align="center" style="font-size: 30px;">해당 회원을 제재 하시겠습니까? </p>
+      <p align="center" style="font-size: 30px;" id="blockMan"></p>
       <div style="width:50%; margin-left: auto; margin-right: auto; align:center;" id="buttonZone">
       <button style="margin-right: 10%; " onclick="blockMember();">네</button><button onclick ="closeModal();">아니오</button>
       </div>
@@ -255,12 +268,10 @@
 				<%for(int i=0; i<list.size(); i++) {%>
 				<tr class="pCompleteInfo">
 					<td>
-						<select class="stage">
+						<select class="stage" name="block">
 							<option value=1><%=idArr.get(i)%></option>
-							<option value=2>경고 부여</option>
-							<option value=3>7일 활동 정지</option>
-							<option value=4>30일 활동 정지</option>
-							<option value=5>영구 정지</option>
+							
+							<option value=2>영구 정지</option>
 						</select>
 					</td>
 					<td><%=nameArr.get(i)%></td>
@@ -304,18 +315,44 @@
 			<button onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=maxPage%>'">>></button>
 		</div>
 		</div>
+		<%} %>
 	</section>
 	<br><br>
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
 	<script>
-
+	var blockDays; //정지 일자
+	var blockUser; //정지당할 사람
 	function closeModal(){
 		 $('#modalArea').fadeOut();
 	}
 	
 	function blockMember(){
-		alert("해당 회원이 정지 되었습니다");
-		 $('#modalArea').fadeOut();
+		
+		
+		  $.ajax({
+			 url:"/login/blockMember.me",
+			 data:{
+				 	blockUser:blockUser
+			 	  },
+			 success: function(data){
+				 console.log(data);
+				 if(data=="ok"){
+				
+				 alert("해당 회원이 정지 되었습니다");
+				 $('#modalArea').fadeOut();
+				 location.reload(true); //새로고침
+				 }else{
+					 alert("알수없는 오류로 정지에 실패하였습니다.");
+					 $('#modalArea').fadeOut();
+				 }
+			 },
+			 error: function(data){
+				 console.log("실패");
+			 }
+		  	 
+		 }) 
+		
+		 
 	}
 	
 	function searchId(){
@@ -334,9 +371,13 @@
 		
 		
 		$('.stage').change(function(){
+			
 			var num = $(this).val();
+			blockDays = num;
+			blockUser = $(this).children('option:nth(0)').text();
 			$(this).children('option:nth(0)').prop('selected',"true");
 			if(num >1){
+				$('#blockMan').html(blockUser+"님을 정말 영구 정지 <br>하시겠습니까?");
 				 $('#modalArea').fadeIn();
 				 
 				 $('#closeModal , #modalBg').click(function(){

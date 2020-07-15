@@ -548,6 +548,24 @@ public class MemberDao {
 		return deleteFileName;
 	}
 
+	public int blockMember(Connection con, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("blockMember");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 
 
 	
