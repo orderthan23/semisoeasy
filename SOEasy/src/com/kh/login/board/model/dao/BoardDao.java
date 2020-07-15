@@ -72,14 +72,14 @@ public class BoardDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			System.out.println(query);
 			pstmt.setInt(1, board.getAdminNo());
 			pstmt.setString(2, board.getnTitle());
-			pstmt.setInt(3, board.getnCategory());
+			pstmt.setInt(3, board.getnCategory());			
 			pstmt.setString(4, board.getnContent());
 			System.out.println(board.getnContent());
 			System.out.println(board.getnTitle());
 			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -103,8 +103,8 @@
 			class="subMenu"><br>
 		<a href="/login/views/space/insertSpaceStep1.jsp" class="sub" align="center" id="thirdHeaderMenu">공간 등록</a></span> <span class="subMenu"><br>
 
-	<!-- 	<a href="/login/selectList.no" class="sub" align="center" id="fourthHeaderMenu">공지 사항</a></span> &nbsp;&nbsp;
-		<form action="/login/views/space/search1.jsp" method="get"> -->
+		<a href="/login/selectList.no" class="sub" align="center" id="fourthHeaderMenu">공지 사항</a></span> &nbsp;&nbsp;
+		<form action="/login/views/space/search1.jsp" method="get"> 
 
 
 			<input type="search" name="search" id="searchBar" placeholder="검색어를 입력하세요">

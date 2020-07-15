@@ -90,7 +90,7 @@
 		<div id="wrapper">
 			<h2 class="logo"
 				style="margin: 0; font-size: 30px; font-weight: bolder">공지사항</h2>
-			<a href="writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a>
+			<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a>
 			<table id="searchWrap" text-align="center" align="center">
 				<tr>
 					<td><input type=search placeholder="검색어를 입력하세요"></td>
@@ -129,7 +129,7 @@
 				<% for(Board b : list) { %>
 				<tr>
 					<td class="info" style="text-align: center;"><%= b.getNoticeNo() %></td>
-					<td class="info" style="text-align: center;" id="categoryArea"><p><%= b.getnCategory() %></p></td>
+					<td class="info" style="text-align: center;"><%= b.getnCategory() %></td>
 					<td class="info" style="text-align: center;"><%= b.getnTitle() %></td>
 					<td class="info" style="text-align: center;"><%= b.getmNick() %></td>
 					<td class="info" style="text-align: center;"><%= b.getnDate() %></td>
@@ -146,6 +146,7 @@
 	
 	
 		 var userStatus = <%=userStatus%>;
+		 console.log(category);
 		$(function(){
 			switch(userStatus){
 			case 1: break;
@@ -153,8 +154,15 @@
 			case 3: $('.writeButton').show(); break;
 			default: $('#writeButton').hide(); break;
 			}
+			$("#boardTable td").mouseenter(function() {
+				$(this).parent().css({"background" : "#60B4A6", "cursor" : "pointer"});
+			}).mouseout(function() {
+				$(this).parent().css({"background" : "white"});
+			}).click(function() {
+				var num = $(this).parent().children().eq(1).text();
+				location.href="<%= request.getContextPath() %>/detailOne.no?num=" + num;
+			})
 		});
-
 	</script>
 
 
