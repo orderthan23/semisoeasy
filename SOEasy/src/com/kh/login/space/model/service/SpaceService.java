@@ -58,7 +58,8 @@ public class SpaceService {
 				//이미지 파일에 공간번호 부여 및 IMAGE 입력 메소드
 				for(int i = 0; i < fileList.size(); i++) {
 					fileList.get(i).setSpaceNo(sNo);
-					
+//					System.out.println(fileList.size());
+//					System.out.println("service img originname :" + fileList.get(i).getOriginName());
 					imgResult += new SpaceDao().insertSpaceImg(con, fileList.get(i));
 				}
 			}
@@ -74,6 +75,39 @@ public class SpaceService {
 		close(con);
 		
 		return returnSi;
+	}
+	
+	public SpaceInfo insertSpaceStep2(SpaceInfo si) {
+		
+		Connection con = getConnection();
+		SpaceInfo returnSi = null;
+		
+		int spaceInfOpResult = 0;
+		int optimeResult = 0;
+		int refundResult = 0;
+		
+		spaceInfOpResult = new SpaceDao().insertSpaceInfOp(con, si);
+
+		int sNo = si.getSpaceNo();
+		
+		for(int i = 0; i < 7; i++) {
+			int day = i;
+			int startTime = si.getStartTimes()[i];
+			int endTime = si.getEndTimes()[i];
+			String openCheck = si.getOpenChecks()[i];
+			
+			optimeResult = new SpaceDao().insertSpaceOptime(con, sNo, day, startTime, endTime, openCheck);
+		}
+		
+		for(int i = 8; i >= 0; i--) {
+			double rate = si.getSpaceRefundPolicy()[i];
+			int date = i;
+			
+			refundResult = new SpaceDao().insertRefundPolicy(con, sNo, rate, date);
+		}
+		
+		
+		return null;
 	}
 
 }

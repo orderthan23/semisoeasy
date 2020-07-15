@@ -1,5 +1,6 @@
 package com.kh.login.space.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -65,9 +66,15 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
-				
-				saveFiles.add(multiRequest.getFilesystemName(name));
-				originFiles.add(multiRequest.getOriginalFileName(name));
+				System.out.println("servlet sysname : " + multiRequest.getFilesystemName(name));
+				System.out.println("servlet originname : " + multiRequest.getOriginalFileName(name));
+				//가져온 파일 이름이 null인 경우 add하지 않도록 처리
+				if(multiRequest.getFilesystemName(name) == null) {
+					
+				} else {
+					saveFiles.add(multiRequest.getFilesystemName(name));
+					originFiles.add(multiRequest.getOriginalFileName(name));
+				}
 			}
 			//이미지 파일리스트
 			ArrayList<Image> fileList = new ArrayList<>();
@@ -139,11 +146,16 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			
 			if(returnSi != null) {
 				request.setAttribute("spaceInfo", returnSi);
-				//response.sendRedirect();
+				response.sendRedirect(request.getContextPath() + "/views/space/insertSpaceStep2.jsp");
 			} else {
-				
+				for(int i = 0; i < fileList.size(); i++) {
+					File failedFile = new File(savePath + saveFiles.get(i));
+					
+					failedFile.delete();
+				}
+				request.setAttribute("msg", "공간등록 실패!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
-			
 		}
 	}
 
