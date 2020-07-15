@@ -1,9 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.kh.login.host.manageReserve.model.vo.PageInfo" %>
 <%
-	String name = "린가드";
-	int placeQTY = 10;
-	int pCompleteQTY = 10;
+	
+	 ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("memberList");
+	 PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	ArrayList<String> idArr = new ArrayList<>();
+	ArrayList<String> nameArr= new ArrayList<>();
+	ArrayList<String> typeArr = new ArrayList<>();
+	ArrayList<String> isActiveArr = new ArrayList<>();
+	ArrayList<String> phoneArr = new ArrayList<>();
+	ArrayList<String> emailArr = new ArrayList<>();
+	for(Member m : list){
+		idArr.add(m.getmId());
+		nameArr.add(m.getmName());
+		switch(m.getpType()){
+		case 1: typeArr.add("게스트"); break; 
+		case 2: typeArr.add("호스트"); break;
+		case 3: typeArr.add("관리자"); break;
+		}
+		if(m.getmStatus().equals("Y")){
+			isActiveArr.add("O");
+		}else{
+			isActiveArr.add("X");
+		}
+		phoneArr.add(m.getmPhone());
+		emailArr.add(m.getmEmail());
+	}
+	System.out.println("startpage: "+startPage);
+	System.out.println("endPage : "+endPage);
 %>
 <!DOCTYPE html>
 <html>
@@ -156,6 +185,7 @@
 }
 </style>
 <title>SO Easy</title>
+
 </head>
 <body>
 	<header><%@ include file="/views/common/header.jsp" %></header>
@@ -216,41 +246,69 @@
 					<th height="40px">이름</th>
 					<th height="40px">권한</th>
 					<th height="40px">계정 활성화 여부</th>
-					<th height="40px">경고 횟수</th>
+					<th height="40px">연락처</th>
+					<th height="40px">이메일</th>
 					<th height="40px">예약 내역 보기</th>
-					<th height="40px">관리자 메모</th>
 				</tr>
 				
 
-				<%for(int i=1; i<=pCompleteQTY; i++) {%>
+				<%for(int i=0; i<list.size(); i++) {%>
 				<tr class="pCompleteInfo">
 					<td>
 						<select class="stage">
-							<option value=1><%="lingard"+i%></option>
+							<option value=1><%=idArr.get(i)%></option>
 							<option value=2>경고 부여</option>
 							<option value=3>7일 활동 정지</option>
 							<option value=4>30일 활동 정지</option>
 							<option value=5>영구 정지</option>
 						</select>
 					</td>
-					<td>코워킹 스페이스</td>
-					<td>게스트</td>
-					<td>O </td>
-					<td>0</td>
+					<td><%=nameArr.get(i)%></td>
+					<td><%=typeArr.get(i) %></td>
+					<td><%=isActiveArr.get(i)%> </td>
+					<td><%=phoneArr.get(i) %></td>
+					<td><%=emailArr.get(i) %>
 					<td><a href="해당회원의 예약내역">보기</a></td>
-					<td><input type="text" id="adminMemo"></td>
 				</tr>
 				<%
 					}
 				%>
 			</table>
 			<br>
-		
+			
+			<div class = "pagingArea" align="center">
+			<button onclick="location.href='<%= request.getContextPath() %>/selectAll.me?currentPage=1'"> << </button>
+			<% if(currentPage <= 1) { %>
+			<button disabled><</button>
+			<% } else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=currentPage -1 %>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p<= endPage; p++){ 
+				if(p == currentPage){
+			%>	
+					<button disabled><%= p %></button>
+			<% 	} else { %>
+					<button onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=p%>'"><%=p %></button>
+			<% 	  }
+			   }	
+				%>
+			
+			<% if(currentPage >= maxPage) { %>
+			<button disabled>></button>
+			<% } else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=currentPage +1 %>'">></button>
+			<% } %>
+			
+			
+			<button onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=maxPage%>'">>></button>
+		</div>
 		</div>
 	</section>
 	<br><br>
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
 	<script>
+
 	function closeModal(){
 		 $('#modalArea').fadeOut();
 	}

@@ -2,7 +2,7 @@ package com.kh.login.host.manageReserve.model.vo;
 
 import java.sql.Date;
 
-public class PaymentRequest implements java.io.Serializable{
+public class PaymentRequest{
 
 	private int reserveNo;					//예약번호
 	private String guestNo;					//게스트번호
@@ -28,7 +28,7 @@ public class PaymentRequest implements java.io.Serializable{
 	private Date reserveDate;				//예약날짜
 	private String guestId;					//게스트아이디
 	private String guestName;				//게스트이름
-	private int payAmount;					//결제예정금액
+	private int expectPay;					//결제예정금액
 	
 	public PaymentRequest() {}
 
@@ -36,7 +36,7 @@ public class PaymentRequest implements java.io.Serializable{
 			int spaceKind, String spacdAddress, String didDayReserve, int dayPayNumber, String didMonthReserve,
 			int monthPay, String didHostOk, int day, int startTime, int endTime, int memberNo, int reservePersonCount,
 			int reserveStatus, Date startDay, Date endDay, Date reserveDate, String guestId, String guestName,
-			int payAmount) {
+			int expectPay) {
 		super();
 		this.reserveNo = reserveNo;
 		this.guestNo = guestNo;
@@ -62,7 +62,7 @@ public class PaymentRequest implements java.io.Serializable{
 		this.reserveDate = reserveDate;
 		this.guestId = guestId;
 		this.guestName = guestName;
-		this.payAmount = payAmount;
+		this.expectPay = expectPay;
 	}
 
 	public int getReserveNo() {
@@ -161,8 +161,8 @@ public class PaymentRequest implements java.io.Serializable{
 		return guestName;
 	}
 
-	public int getPayAmount() {
-		return payAmount;
+	public int getExpectPay() {
+		return expectPay;
 	}
 
 	public void setReserveNo(int reserveNo) {
@@ -261,8 +261,8 @@ public class PaymentRequest implements java.io.Serializable{
 		this.guestName = guestName;
 	}
 
-	public void setPayAmount(int payAmount) {
-		this.payAmount = payAmount;
+	public void setExpectPay(int expectPay) {
+		this.expectPay = expectPay;
 	}
 
 	@Override
@@ -274,7 +274,7 @@ public class PaymentRequest implements java.io.Serializable{
 				+ didHostOk + ", day=" + day + ", startTime=" + startTime + ", endTime=" + endTime + ", MemberNo="
 				+ MemberNo + ", reservePersonCount=" + reservePersonCount + ", reserveStatus=" + reserveStatus
 				+ ", startDay=" + startDay + ", endDay=" + endDay + ", reserveDate=" + reserveDate + ", guestId="
-				+ guestId + ", guestName=" + guestName + ", payAmount=" + payAmount + "]";
+				+ guestId + ", guestName=" + guestName + ", expectPay=" + expectPay + "]";
 	}
 	
 	

@@ -30,6 +30,4 @@ public class HostReserveService {
 		
 		return list;
 	}
-
-	
 }

@@ -16,6 +16,7 @@ public class SpaceReservation implements java.io.Serializable {
 	private int reservStatus;		//예약상태	      	1
 	private String didReview;		//리뷰작성여부		wait
 	private String reservDate;		//예약날짜
+	private int expectPay;
 	
 	public SpaceReservation() {
 		
@@ -23,7 +24,7 @@ public class SpaceReservation implements java.io.Serializable {
 
 	public SpaceReservation(int reservNo, int guestNo, int spaceNo, String fixUnfix, int officeNo, String startDate,
 			String endDate, int reservPersonCount, String didHostOk, int reservStatus, String didReview,
-			String reservDate) {
+			String reservDate, int expectPay) {
 		super();
 		this.reservNo = reservNo;
 		this.guestNo = guestNo;
@@ -37,6 +38,7 @@ public class SpaceReservation implements java.io.Serializable {
 		this.reservStatus = reservStatus;
 		this.didReview = didReview;
 		this.reservDate = reservDate;
+		this.expectPay = expectPay;
 	}
 
 	public int getReservNo() {
@@ -134,13 +136,22 @@ public class SpaceReservation implements java.io.Serializable {
 	public void setReservDate(String reservDate) {
 		this.reservDate = reservDate;
 	}
+	
+	public int getExpectPay() {
+		return expectPay;
+	}
+	
+	public void setExpectPay(int expectPay) {
+		this.expectPay = expectPay;
+	}
 
 	@Override
 	public String toString() {
 		return "SpaceReservation [reservNo=" + reservNo + ", guestNo=" + guestNo + ", spaceNo=" + spaceNo
 				+ ", fixUnfix=" + fixUnfix + ", officeNo=" + officeNo + ", startDate=" + startDate + ", endDate="
 				+ endDate + ", reservPersonCount=" + reservPersonCount + ", didHostOk=" + didHostOk + ", reservStatus="
-				+ reservStatus + ", didReview=" + didReview + ", reservDate=" + reservDate + "]";
+				+ reservStatus + ", didReview=" + didReview + ", reservDate=" + reservDate + ", expectPay=" + expectPay
+				+ "]";
 	}
 
 }

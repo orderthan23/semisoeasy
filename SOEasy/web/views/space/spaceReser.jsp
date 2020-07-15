@@ -80,16 +80,16 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
-	<nav><%@ include file="../common/aside.jsp"%></nav>
 	
 	<section>
 	<div style="width:75%; margin-left:auto; margin-right:auto;">
-	
+	<form id="insertReservation" action="<%= request.getContextPath()%>/insertReservationInfo" method="post">
 	<!-- 공간명 / 가격 -->
 	<table>
 		<tr>
 			<td id="title">
 				<p style="color:#40a4b6;  font-weight: bolder; margin-top:0; font-size:30px;">성수동 인생공간 코워킹스페이스</p>
+				<input type="hidden" value=5 name="officeNo">
 			</td>
 		</tr>
 	</table>
@@ -115,7 +115,7 @@
 		</div>
 	<br><br>
 	
-	<!-- 공간 소개 창 -->
+	<!-- 공간 소개 창 --> 
 	<div align="center">
 		<div id="spaceIntroInfo" style="border-radius:10px; width:700px; height:500px; background:white; border:3px solid lightgray; text-align:left; padding:20px;">
 			따뜻한 사람들을 위한 코워킹스페이스 성수동 인생공간입니다.<br><br>
@@ -410,6 +410,7 @@
 		<div align="center">
 			<button id="reserBtn" onclick="push();" style="color:white; background:#40a4b6; width:120px; height:50px; font-size:20px; border:0; border-radius:10px; cursor:pointer;">결제하기</button>
 		</div>
+		</form>
 		</div>
 		</section>
 		<br><br><br>
@@ -472,6 +473,7 @@
 		//결제버튼 눌렀을때	
 		function push() {
 			alert('결제버튼 누름 / API로 연결');
+			$("#").submit();
 		}
 		
 		

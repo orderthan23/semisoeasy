@@ -1,7 +1,6 @@
 package com.kh.login.space.controller;
 
 import java.io.IOException;
-import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.login.member.model.vo.Member;
 import com.kh.login.space.model.service.SpaceReservationService;
 import com.kh.login.space.model.vo.SpaceReservation;
 
@@ -33,9 +33,9 @@ public class InsertReservationInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//vo에서 int형으로 선언해준것들은 파싱해줌
-		int reservNo = Integer.parseInt(request.getParameter("reservNo"));
-		int guestNo = Integer.parseInt(request.getParameter("guestNo"));
-		int spaceNo = Integer.parseInt(request.getParameter("spaceNo"));
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		int guestNo = loginUser.getMemberNo();
+		int spaceNo = 100;
 		String fixUnfix = request.getParameter("fixUnfix");
 		int officeNo = Integer.parseInt(request.getParameter("officeNo"));
 		String startDate = request.getParameter("startDate");
@@ -44,12 +44,12 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		String didHostOk = request.getParameter("didHostOk");
 		int reservStatus = Integer.parseInt(request.getParameter("reservStatus"));
 		String didReview = request.getParameter("didReview");
-		String reservDate = request.getParameter("reservDate"); //sysdate
+		String reservDate = request.getParameter("reservDate"); 	//SYSDATE
+		int expectPay = Integer.parseInt(request.getParameter("expectPay"));
 
 		SpaceReservation requestMember = new SpaceReservation();
-		requestMember.setReservNo(reservNo);
 		requestMember.setGuestNo(guestNo);
-		requestMember.setSpaceNo(spaceNo);
+		requestMember.setSpaceNo(officeNo);
 		requestMember.setFixUnfix(fixUnfix);
 		requestMember.setOfficeNo(officeNo);
 		requestMember.setStartDate(startDate);
@@ -59,6 +59,7 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		requestMember.setReservStatus(reservStatus);
 		requestMember.setDidReview(didReview);
 		//reservDate는 쿼리문에서 SYSDATE로 넣을거기 때문에 여기서 전달 X
+		requestMember.setExpectPay(expectPay);
 		
 		int result = new SpaceReservationService().insertReservation(requestMember);
 		

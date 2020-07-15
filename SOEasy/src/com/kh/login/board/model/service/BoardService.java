@@ -38,6 +38,23 @@ public class BoardService {
 			return result;
 		}
 
+		public Board detailBoard(int nno) {
+
+			Connection con = getConnection();
+			
+			
+			Board board = new BoardDao().detailBoard(con, nno);
+			
+			if(board != null) {
+					commit(con);
+			} else {
+					rollback(con);
+			} 
+			close(con);
+			
+			return board;
+		}
+
 	
 
 		

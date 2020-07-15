@@ -10,40 +10,38 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.login.board.model.service.BoardService;
 import com.kh.login.board.model.vo.Board;
 
-@WebServlet("/detail.no")
-public class DetailNoticeServlet extends HttpServlet {
+@WebServlet("/selectBoard.no")
+public class SelectNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public DetailNoticeServlet() {
+    public SelectNoticeServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String num = request.getParameter("num");
-			System.out.println("num : " + num);
+		
 		int nno = 0;
 		if(num != "" && num != null) {
 			nno = Integer.parseInt(num);
-			System.out.println("nno : " + nno);
 		}
-	
+		
 		Board board = new BoardService().detailBoard(nno);
 		
-		String page ="";
-		System.out.println(board);
-		if(board != null ) {
-			page = "views/board/detailboard.jsp";
+		
+		String page = "";
+		if(board != null) {
+			page = "views/board/updateboard.jsp";
 			request.setAttribute("board", board);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 상세 핵실패");
+			request.setAttribute("msg", "게시글 수정용 상세 보기 실패");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		doGet(request, response);
 	}
 

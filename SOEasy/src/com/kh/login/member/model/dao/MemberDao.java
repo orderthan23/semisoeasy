@@ -504,7 +504,6 @@ public class MemberDao {
 				m.setmName(rset.getString("M_NAME"));
 				m.setmId(rset.getString("M_ID"));
 				m.setmNick(rset.getString("M_NICK"));
-				m.setmPassword(rset.getString("M_PASSWORD"));
 				m.setmPhone(rset.getString("M_PHONE"));
 				m.setmEmail(rset.getString("M_EMAIL"));
 				m.setEnrollDate(rset.getDate("M_ENROLL_DATE"));
@@ -522,6 +521,31 @@ public class MemberDao {
 		}
 		
 		return memberList;
+	}
+
+	public String findImg(Connection con, Member updateMember) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("findImg");
+		String deleteFileName="";
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setInt(1, updateMember.getMemberNo());
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				deleteFileName=rset.getString("CHANGE_NAME");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return deleteFileName;
 	}
 
 
