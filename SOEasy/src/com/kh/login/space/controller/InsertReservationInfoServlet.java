@@ -44,7 +44,7 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		String didHostOk = request.getParameter("didHostOk");
 		int reservStatus = Integer.parseInt(request.getParameter("reservStatus"));
 		String didReview = request.getParameter("didReview");
-		String reservDate = request.getParameter("reservDate"); 	//SYSDATE
+		String reservDate = request.getParameter("reservDate"); //SYSDATE
 		int expectPay = Integer.parseInt(request.getParameter("expectPay"));
 
 		SpaceReservation requestMember = new SpaceReservation();

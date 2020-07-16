@@ -75,6 +75,10 @@
         .slick-list{
         	width: 100%;
         }
+        
+        #choosePer {
+        	border: 1.5px solid #40a4b6;
+        }
 
     </style>
 </head>
@@ -213,8 +217,8 @@
 		<!-- 날짜 ~부터 ~까지 -->
 		<table align="center" width="500px">
 			<tr>
-				<td colspan="2" align="center"><input id="date1" style="border: 1.5px solid #40a4b6;" type="date"> 부터</td>
-				<td colsapn="2" align="center"><input id="date2" style="border: 1.5px solid #40a4b6;" type="date"> 까지</td>
+				<td colspan="2" align="center"><input id="date1" name="startDate" style="border: 1.5px solid #40a4b6;" type="date"> 부터</td>
+				<td colsapn="2" align="center"><input id="date2" name="endDate" style="border: 1.5px solid #40a4b6;" type="date"> 까지</td>
 			</tr>
 		</table>
 		<br><br><br>
@@ -223,7 +227,7 @@
 		<table align="center" width="800">
 			<tr>
 				<td style="color:#40a4b6; font-size:20px; width:200px;"><b>예약 인원 선택</b></td>
-				<td id="choosePer" style="width:200px;" colspan="2"><input style="border: 1.5px solid #40a4b6;" type="number" value="1" id="chooseMem"></td>
+				<td style="width:200px;" colspan="2"><input type="number" id="choosePer" value="1" name="reservPersonCount"></td>
 				<td style="width:400px;">명</td>
 			</tr>
 		</table>
@@ -234,31 +238,31 @@
 			<tr>
 				<td style="color:#40a4b6; font-size:20px; width:200px; height:50px;"><b>예약자 정보</b></td>
 				<td width="150px"><b >예약자명</b></td>
-				<td id="reserName" width="200px"><input style="border: 1.5px solid #40a4b6;" type="text" id="reserNm"></td>
+				<td id="reserName" width="200px"><input style="border: 1.5px solid #40a4b6;" type="text" id="reserNm" name="reservName"></td>
 				<td width="200px"></td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="150px"><b>사용자명</b></td>
-				<td id="userName"><input style="border: 1.5px solid #40a4b6;" type="text" placeholder="사용자명을 입력하세요" id="userNm"></td>
+				<td id="userName"><input style="border: 1.5px solid #40a4b6;" type="text" placeholder="사용자명을 입력하세요" id="userNm" name="userName"></td>
 				<td><label for="reserSame"><input type="checkbox" id="reserSame">예약자와 동일</label></td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="150px"><b>연락처</b></td>
-				<td id="tel"><input  style="border: 1.5px solid #40a4b6;"type="tel"></td>
+				<td id="tel"><input  style="border: 1.5px solid #40a4b6;"type="tel" name="tel"></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="150px"><b>이메일</b></td>
-				<td id="email"><input  style="border: 1.5px solid #40a4b6;"type="email"></td>
+				<td id="email"><input  style="border: 1.5px solid #40a4b6;"type="email" name="email"></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="150px"><b>요청사항</b></td>
-				<td id="request"><textarea cols="30" rows="10" style="resize:none; border: 1.5px solid #40a4b6;" placeholder="요청사항을 입력하세요"></textarea></td>
+				<td id="request"><textarea cols="30" rows="10" style="resize:none; border: 1.5px solid #40a4b6;" placeholder="요청사항을 입력하세요" name="reqTxt"></textarea></td>
 				<td></td>
 			</tr>
 		</table>
@@ -419,8 +423,8 @@
 	<script>
 	
 		//인원 선택한거 예약결과에 보여지게 하기
-		$("#chooseMem").change(function(){
-			var chooseMem = $("#chooseMem").val();
+		$("#choosePer").change(function(){
+			var chooseMem = $("#choosePer").val();
 			$('#reserPerCount').text(chooseMem);
 		});
 		

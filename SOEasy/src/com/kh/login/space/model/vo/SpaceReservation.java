@@ -1,7 +1,5 @@
 package com.kh.login.space.model.vo;
 
-import java.sql.Date;
-
 public class SpaceReservation implements java.io.Serializable {
 
 	private int reservNo;			//예약번호
@@ -12,9 +10,9 @@ public class SpaceReservation implements java.io.Serializable {
 	private String startDate;		//사용시작날짜
 	private String endDate;			//사용종료날짜
 	private int reservPersonCount;	//예약인원
-	private String didHostOk;		//호스트 승인 여부 	wait
-	private int reservStatus;		//예약상태	      	1
-	private String didReview;		//리뷰작성여부		wait
+	private String didHostOk;		//호스트 승인 여부 	wait (디폴트 값)
+	private int reservStatus;		//예약상태	      	1	 (디폴트 값)
+	private String didReview;		//리뷰작성여부		wait (디폴트 값)
 	private String reservDate;		//예약날짜
 	private int expectPay;
 	
