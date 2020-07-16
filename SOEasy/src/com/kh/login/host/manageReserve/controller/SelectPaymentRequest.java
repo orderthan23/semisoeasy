@@ -47,6 +47,8 @@ public class SelectPaymentRequest extends HttpServlet {
 		limit = 10;
 		
 		int listCount = new HostReserveService().getListCount();
+		int requestCount = new HostReserveService().getRequestCount();
+		
 		
 		maxPage = (int) ((double) listCount / limit + 0.9);
 		
@@ -54,22 +56,30 @@ public class SelectPaymentRequest extends HttpServlet {
 		
 		endPage = startPage + 10 - 1;
 		
+		
+		System.out.println("listCount : " + listCount);
+		System.out.println("currentPage : " + currentPage);
+		System.out.println("limit : " + limit);
+		System.out.println("maxPage : " + maxPage);
+		System.out.println("startPage : " + startPage);
+		System.out.println("endPage : " + endPage);
+		
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage, requestCount);
 		
 		ArrayList<PaymentRequest> list = new HostReserveService().selectList(pi);
 		
 		String page = "";
 		if(list != null) {
-			page = "/login/views/host/manageReserve/paymentRequest.jsp";
+			page = "/views/host/manageReserve/paymentRequest.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		} else {
-			page = "/login/views/host/manageReserve/paymentRequest.jsp";
-			request.setAttribute("list", null);
+			page = "/views/host/manageReserve/paymentRequest.jsp";
+			request.setAttribute("list", list);
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

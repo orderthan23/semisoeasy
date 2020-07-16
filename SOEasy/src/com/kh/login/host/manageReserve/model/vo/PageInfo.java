@@ -7,10 +7,14 @@ public class PageInfo {
 	private int maxPage;
 	private int startPage;
 	private int endPage;
+	private int requestCount;
 	
 	public PageInfo() {}
 
-	public PageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage) {
+	
+
+	public PageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage,
+			int requestCount) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;
@@ -18,7 +22,10 @@ public class PageInfo {
 		this.maxPage = maxPage;
 		this.startPage = startPage;
 		this.endPage = endPage;
+		this.requestCount = requestCount;
 	}
+
+
 
 	public int getCurrentPage() {
 		return currentPage;
@@ -68,11 +75,29 @@ public class PageInfo {
 		this.endPage = endPage;
 	}
 
+	
+	
+	public int getRequestCount() {
+		return requestCount;
+	}
+
+
+
+	public void setRequestCount(int requestCount) {
+		this.requestCount = requestCount;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "PageInfo [currentPage=" + currentPage + ", listCount=" + listCount + ", limit=" + limit + ", maxPage="
-				+ maxPage + ", startPage=" + startPage + ", endPage=" + endPage + "]";
+				+ maxPage + ", startPage=" + startPage + ", endPage=" + endPage + ", requestCount=" + requestCount
+				+ "]";
 	}
+
+
+
 	
 	
 

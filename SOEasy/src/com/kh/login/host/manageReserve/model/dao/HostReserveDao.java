@@ -17,10 +17,10 @@ import static com.kh.login.common.JDBCTemplate.*;
 
 public class HostReserveDao {
 	private Properties prop = new Properties();
-	
+
 	public HostReserveDao() {
 		String fileName = HostReserveDao.class.getResource("/sql/host/host-query.properties").getPath();
-		
+
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -29,31 +29,92 @@ public class HostReserveDao {
 			e.printStackTrace();
 		}
 	}
-	
+
+	//예약 승인 리스트 번호 조회
+	public int getListCount(Connection con) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("listCount");
+		System.out.println(query);
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, 17);
+
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			System.out.println("Dao ListCount : " + listCount);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+
+		return listCount;
+	}
+
+	//예약대기 리스트 카운트
+	public int getRequestCount(Connection con) {
+		PreparedStatement pstmt = null;
+		int requestCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("requestCount");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, 1);
+			pstmt.setString(2, "WAIT");
+
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				requestCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		System.out.println("Dao requestCount : " + requestCount);
+
+		return requestCount;
+	}
+
+
+
 	//예약 승인 요청 관리 목록 조회
 	public ArrayList<PaymentRequest> selectList(Connection con, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<PaymentRequest> list = null;
-		
+
 		String query = prop.getProperty("selectList");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
-			
+
 			int startRow = (pi.getCurrentPage() -1) * pi.getLimit() + 1;
 			int endRow = startRow + pi.getLimit() -1;
-			
+
 			pstmt.setString(1, "WAIT");
 			pstmt.setString(2, "2");
 			pstmt.setInt(3, 17);
 			pstmt.setInt(4, startRow);
 			pstmt.setInt(5, endRow);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<>();
-			
+
 			while(rset.next()) {
 				PaymentRequest pr = new PaymentRequest();
 				pr.setReserveNo(rset.getInt("RESERV_NO"));
@@ -65,51 +126,23 @@ public class HostReserveDao {
 				pr.setSpaceName(rset.getString("SPACE_NAME"));
 				pr.setOfficeNo(rset.getInt("OFFICE_NO"));
 				pr.setExpectPay(rset.getInt("EXPECT_PAY"));
-				
+
 				list.add(pr);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		for(Object o : list) {
-			System.out.println(o);
-		}
-		
+
+		//		for(PaymentRequest o : list) {
+		//			System.out.println(o);
+		//		}
+
 		return list;
 	}
 
-	//예약 승인 리스트 번호 조회
-	public int getListCount(Connection con) {
-		PreparedStatement pstmt = null;
-		int listCount = 0;
-		ResultSet rset = null;
-		
-		String query = prop.getProperty("listCount");
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, 17);
-			
-			rset = pstmt.executeQuery(query);
-			
-			if(rset.next()) {
-				listCount = rset.getInt(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-			close(rset);
-		}
-		
-		
-		return listCount;
-	}
-	
 
 }
