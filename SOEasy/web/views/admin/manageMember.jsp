@@ -190,11 +190,12 @@
 					typeArr.add("관리자");
 					break;
 				}
-				if (m.getmStatus().equals("Y")) {
-					isActiveArr.add("O");
-				} else {
-					isActiveArr.add("X");
-				}
+				switch (m.getmStatus()) {
+				case "Y" : isActiveArr.add("활성화"); break;
+				case "X" : isActiveArr.add("정지"); break;
+				case "N" : isActiveArr.add("탈퇴"); break;
+				} 
+				
 				phoneArr.add(m.getmPhone());
 				emailArr.add(m.getmEmail());
 			}
@@ -230,14 +231,14 @@
 		<form action="searchOption.me">
 		<button style="float:right; height:20px; line-height:20px;"type="submit" id="searchOption">조회</button>
 		<select name="isActive">
-		<option value="M_STATUS IN('N','X','Y')">계정 활성화 여부: 전체</option>
-		<option value="M_STATUS='Y'">계정 활성화 여부: 활성</option>
-		<option value="M_STATUS IN('N','X')">계정 활성화 여부: 비활성</option>
+		<option value=1>계정 활성화 여부: 전체</option>
+		<option value=2>계정 활성화 여부: 활성</option>
+		<option value=3>계정 활성화 여부: 비활성</option>
 		</select>
 		<select name="power">
-		<option value="AND P_TYPE IN(1,2)">권한 : 전체</option>
-		<option value="AND P_TYPE=1">권한 : 게스트</option>
-		<option value="AND P_TYPE=2">권한 : 호스트</option>
+		<option value=1>권한 : 전체</option>
+		<option value=2>권한 : 게스트</option>
+		<option value=3>권한 : 호스트</option>
 		</select>
 	
 		</form>
