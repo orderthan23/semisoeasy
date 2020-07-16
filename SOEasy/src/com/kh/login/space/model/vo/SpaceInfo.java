@@ -34,7 +34,21 @@ public class SpaceInfo implements java.io.Serializable {
 	private int[] startTimes;				//공간 운영 시작 시간
 	private int[] endTimes;					//공간 운영 종료 시간
 	private double[] spaceRefundPolicy;		//일자별 환불율 8일부터 당일까지
-	
+	//공간등록 2 종료---
+	//공간등록 3---
+	private String bsnsName;				//상호명
+	private String representName;			//대표자명
+	private String bsnsLicenseNo;			//사업자등록번호
+	private int bsnsType;				//사업자유형
+	private String bsnsCondition;			//주업태
+	private String bsnsEvent;				//주종목
+	private String bsnsAddress;				//사업장 주소
+	private String calEmail;				//정산용 이메일
+	private String calPhone;				//정산용 전화번호
+	private String calBank;					//정산 은행명
+	private String calAcctHolder;			//정산 예금주
+	private String calAcctNo;				//정산 계좌번호
+	//공간등록 3--	
 	//공개여부 !important
 	private String sStatus;					//공간 소개글 공개여부
 
@@ -44,7 +58,9 @@ public class SpaceInfo implements java.io.Serializable {
 			String spaceLocationFilter, String[] conv, double spaceSize, int spaceRoomCount, int spaceContainCount,
 			int unfixSeat, int fixSeat, int totalSeat, int maxReserv, String didDayReserv, String didMonthReserv,
 			int dayPay, int monthPay, String spacePayPolicy, String[] openChecks, int[] startTimes, int[] endTimes,
-			double[] spaceRefundPolicy, String sStatus) {
+			double[] spaceRefundPolicy, String bsnsName, String representName, String bsnsLicenseNo, int bsnsType,
+			String bsnsCondition, String bsnsEvent, String bsnsAddress, String calEmail, String calPhone,
+			String calBank, String calAcctHolder, String calAcctNo, String sStatus) {
 		super();
 		this.spaceNo = spaceNo;
 		this.hostNo = hostNo;
@@ -70,6 +86,18 @@ public class SpaceInfo implements java.io.Serializable {
 		this.startTimes = startTimes;
 		this.endTimes = endTimes;
 		this.spaceRefundPolicy = spaceRefundPolicy;
+		this.bsnsName = bsnsName;
+		this.representName = representName;
+		this.bsnsLicenseNo = bsnsLicenseNo;
+		this.bsnsType = bsnsType;
+		this.bsnsCondition = bsnsCondition;
+		this.bsnsEvent = bsnsEvent;
+		this.bsnsAddress = bsnsAddress;
+		this.calEmail = calEmail;
+		this.calPhone = calPhone;
+		this.calBank = calBank;
+		this.calAcctHolder = calAcctHolder;
+		this.calAcctNo = calAcctNo;
 		this.sStatus = sStatus;
 	}
 
@@ -265,6 +293,102 @@ public class SpaceInfo implements java.io.Serializable {
 		this.spaceRefundPolicy = spaceRefundPolicy;
 	}
 
+	public String getBsnsName() {
+		return bsnsName;
+	}
+
+	public void setBsnsName(String bsnsName) {
+		this.bsnsName = bsnsName;
+	}
+
+	public String getRepresentName() {
+		return representName;
+	}
+
+	public void setRepresentName(String representName) {
+		this.representName = representName;
+	}
+
+	public String getBsnsLicenseNo() {
+		return bsnsLicenseNo;
+	}
+
+	public void setBsnsLicenseNo(String bsnsLicenseNo) {
+		this.bsnsLicenseNo = bsnsLicenseNo;
+	}
+
+	public int getBsnsType() {
+		return bsnsType;
+	}
+
+	public void setBsnsType(int bsnsType) {
+		this.bsnsType = bsnsType;
+	}
+
+	public String getBsnsCondition() {
+		return bsnsCondition;
+	}
+
+	public void setBsnsCondition(String bsnsCondition) {
+		this.bsnsCondition = bsnsCondition;
+	}
+
+	public String getBsnsEvent() {
+		return bsnsEvent;
+	}
+
+	public void setBsnsEvent(String bsnsEvent) {
+		this.bsnsEvent = bsnsEvent;
+	}
+
+	public String getBsnsAddress() {
+		return bsnsAddress;
+	}
+
+	public void setBsnsAddress(String bsnsAddress) {
+		this.bsnsAddress = bsnsAddress;
+	}
+
+	public String getCalEmail() {
+		return calEmail;
+	}
+
+	public void setCalEmail(String calEmail) {
+		this.calEmail = calEmail;
+	}
+
+	public String getCalPhone() {
+		return calPhone;
+	}
+
+	public void setCalPhone(String calPhone) {
+		this.calPhone = calPhone;
+	}
+
+	public String getCalBank() {
+		return calBank;
+	}
+
+	public void setCalBank(String calBank) {
+		this.calBank = calBank;
+	}
+
+	public String getCalAcctHolder() {
+		return calAcctHolder;
+	}
+
+	public void setCalAcctHolder(String calAcctHolder) {
+		this.calAcctHolder = calAcctHolder;
+	}
+
+	public String getCalAcctNo() {
+		return calAcctNo;
+	}
+
+	public void setCalAcctNo(String calAcctNo) {
+		this.calAcctNo = calAcctNo;
+	}
+
 	public String getsStatus() {
 		return sStatus;
 	}
@@ -283,8 +407,13 @@ public class SpaceInfo implements java.io.Serializable {
 				+ ", didDayReserv=" + didDayReserv + ", didMonthReserv=" + didMonthReserv + ", dayPay=" + dayPay
 				+ ", monthPay=" + monthPay + ", spacePayPolicy=" + spacePayPolicy + ", openChecks="
 				+ Arrays.toString(openChecks) + ", startTimes=" + Arrays.toString(startTimes) + ", endTimes="
-				+ Arrays.toString(endTimes) + ", spaceRefundPolicy=" + Arrays.toString(spaceRefundPolicy) + ", sStatus="
-				+ sStatus + "]";
+				+ Arrays.toString(endTimes) + ", spaceRefundPolicy=" + Arrays.toString(spaceRefundPolicy)
+				+ ", bsnsName=" + bsnsName + ", representName=" + representName + ", bsnsLicenseNo=" + bsnsLicenseNo
+				+ ", bsnsType=" + bsnsType + ", bsnsCondition=" + bsnsCondition + ", bsnsEvent=" + bsnsEvent
+				+ ", bsnsAddress=" + bsnsAddress + ", calEmail=" + calEmail + ", calPhone=" + calPhone + ", calBank="
+				+ calBank + ", calAcctHolder=" + calAcctHolder + ", calAcctNo=" + calAcctNo + ", sStatus=" + sStatus
+				+ "]";
 	}
+
 
 }

@@ -341,4 +341,67 @@ public class SpaceDao {
 		return refundResult;
 	}
 
+	//HOST_INF BSNS_NAME, BSNS_LICENSE_NO, BSNS_TYPE, BSNS_CONDITION, BSNS_EVENT, BSNS_ADDRESS, CAL_EMAIL,
+	//CAL_PHONE, CAL_BANK, CAL_ACCT_HOLDER, CAL_ACCT_NO, BSNS_REPRESENT_NAME 입력
+	public int insertHostInf(Connection con, SpaceInfo si) {
+		
+		PreparedStatement pstmt = null;
+		int hostInfResult = 0;
+		
+		String query = prop.getProperty("insertHostInf");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, si.getHostNo());
+			pstmt.setString(2, si.getBsnsName());
+			pstmt.setString(3, si.getBsnsLicenseNo());
+			pstmt.setInt(4, si.getBsnsType());
+			pstmt.setString(5, si.getBsnsCondition());
+			pstmt.setString(6, si.getBsnsEvent());
+			pstmt.setString(7, si.getBsnsAddress());
+			pstmt.setString(8, si.getCalEmail());
+			pstmt.setString(9, si.getCalPhone());
+			pstmt.setString(10, si.getCalBank());
+			pstmt.setString(11, si.getCalAcctHolder());
+			pstmt.setString(12, si.getCalAcctNo());
+			pstmt.setString(13, si.getRepresentName());
+			
+			hostInfResult = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return hostInfResult;
+	}
+
+
+	public int insertBusinessImg(Connection con, Image licenseImage) {
+		
+		PreparedStatement pstmt = null;
+		int imgResult = 0;
+		
+		String query = prop.getProperty("insertBusinessImg");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, licenseImage.getOriginName());
+			pstmt.setString(2, licenseImage.getFilePath());
+			pstmt.setString(3, licenseImage.getChangeName());
+			pstmt.setInt(4, licenseImage.getImgDiv());
+			pstmt.setInt(5, licenseImage.getSpaceNo());
+			
+			imgResult = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return imgResult;
+	}
+
 }

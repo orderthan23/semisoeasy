@@ -120,7 +120,7 @@ public class InsertSpaceStep2Servlet extends HttpServlet {
 				}
 			}
 		}
-		
+		System.out.println("step2 : " + si);
 		// spaceInfo에 값 집어넣기.
 		si.setDidDayReserv(didDayReserv);
 		si.setDidMonthReserv(didMonthReserv);
@@ -133,6 +133,7 @@ public class InsertSpaceStep2Servlet extends HttpServlet {
 		si.setSpaceRefundPolicy(spaceRefundPolicy);
 		
 		SpaceInfo returnSi = new SpaceService().insertSpaceStep2(si);
+		System.out.println("step2 returnSi : " + returnSi);
 		
 		if(returnSi != null) {
 			request.getSession().setAttribute("spaceInfo", returnSi);

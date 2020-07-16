@@ -55,9 +55,10 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			
 			String root = request.getSession().getServletContext().getRealPath("/");
 			
-			String savePath = root + "uploadFiles/space";
+			String savePath = "/uploadFiles/space";
+			String realPath = root + savePath;
 			
-			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new SoEasyFileRenamePolicy(memberNick));
+			MultipartRequest multiRequest = new MultipartRequest(request, realPath, maxSize, "UTF-8", new SoEasyFileRenamePolicy(memberNick));
 			
 			ArrayList<String> saveFiles = new ArrayList<>();
 			ArrayList<String> originFiles = new ArrayList<>();
