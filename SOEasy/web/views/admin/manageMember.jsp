@@ -177,6 +177,7 @@
 			ArrayList<String> phoneArr = new ArrayList<>();
 			ArrayList<String> emailArr = new ArrayList<>();
 			for (Member m : list) {
+				System.out.println(m);
 				idArr.add(m.getmId());
 				nameArr.add(m.getmName());
 				switch (m.getpType()) {
@@ -243,7 +244,7 @@
 	
 		</form>
 		
-				<form action="searchId.me" method="post" id="searchForm">
+				<form action="searchId.me"  id="searchForm">
 				<label>아이디 검색</label>
 				<span  id="searchZone">
 				<input type="search" name="keyword" id="searchId">
