@@ -34,22 +34,28 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		
 		//vo에서 int형으로 선언해준것들은 파싱해줌
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
+		//reservNo는 시퀀스로
 		int guestNo = loginUser.getMemberNo();
-		int spaceNo = 100;
-		String fixUnfix = request.getParameter("fixUnfix");
-		int officeNo = Integer.parseInt(request.getParameter("officeNo"));
+		int spaceNo = 100; //나중에 이미 등록된 공간정보에서 공간번호 빼와야할듯
+		String fixUnfix = "F";
+		int officeNo = 101;
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
 		int reservPersonCount = Integer.parseInt(request.getParameter("reservPersonCount"));
-		String didHostOk = request.getParameter("didHostOk");
-		int reservStatus = Integer.parseInt(request.getParameter("reservStatus"));
-		String didReview = request.getParameter("didReview");
-		String reservDate = request.getParameter("reservDate"); //SYSDATE
+		int didHostOk = 1;
+		int reservStatus = 1;
+		String didReview = "WAIT";
+		String reservDate = "SYSDATE"; //SYSDATE
 		int expectPay = Integer.parseInt(request.getParameter("expectPay"));
-
+		String userName = request.getParameter("userName");
+		String userPhone = request.getParameter("userPhone");
+		String userEmail = request.getParameter("userEmail");
+		String requestContent =request.getParameter("requestContent");
+		
 		SpaceReservation requestMember = new SpaceReservation();
 		requestMember.setGuestNo(guestNo);
-		requestMember.setSpaceNo(officeNo);
+		requestMember.setSpaceNo(spaceNo);
 		requestMember.setFixUnfix(fixUnfix);
 		requestMember.setOfficeNo(officeNo);
 		requestMember.setStartDate(startDate);
@@ -60,6 +66,10 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		requestMember.setDidReview(didReview);
 		//reservDate는 쿼리문에서 SYSDATE로 넣을거기 때문에 여기서 전달 X
 		requestMember.setExpectPay(expectPay);
+		requestMember.setUserName(userName);
+		requestMember.setUserPhone(userPhone);
+		requestMember.setUserEmail(userEmail);
+		requestMember.setRequestContent(requestContent);
 		
 		int result = new SpaceReservationService().insertReservation(requestMember);
 		
