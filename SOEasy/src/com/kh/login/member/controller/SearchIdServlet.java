@@ -51,7 +51,7 @@ public class SearchIdServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage,0);
 		ArrayList<Member> memberList = new MemberService().selectAllList(pi,keyword);
 	
 	
