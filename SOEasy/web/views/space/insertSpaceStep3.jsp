@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.login.space.model.vo.*" %>
+<%
+	SpaceInfo si = (SpaceInfo) session.getAttribute("spaceInfo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,7 +127,7 @@
 			<h1 align="center" style="margin: 0px;">정산 정보</h1>
 			<br><br>
 		</div>
-		<form action="<%= request.getContextPath() %>/insertSpaceStep3" method="post">
+		<form action="<%= request.getContextPath() %>/insertSpaceStep3" method="post" encType="multipart/form-data">
 			<table class="space-insert" align="center" width="70%">
 				<tr>
 					<td></td>

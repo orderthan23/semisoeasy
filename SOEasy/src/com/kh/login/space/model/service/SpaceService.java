@@ -119,5 +119,36 @@ public class SpaceService {
 		
 		return returnSi;
 	}
+	
+	//정산정보 입력하기
+	public int insertSpaceStep3(SpaceInfo si, Image licenseImage) {
+		
+		Connection con = getConnection();
+		
+		int hostInfResult = 0;
+		int imgResult = 0;
+		int result = 0;
+		
+		//HOST_INF 정산정보 입력
+		hostInfResult = new SpaceDao().insertHostInf(con, si);
+		
+		//IMAGE 사업자등록증 이미지 입력
+		//null처리
+		if(licenseImage.getOriginName() == null || licenseImage.getOriginName() == "") {
+			imgResult = 1;
+		} else {
+			imgResult = new SpaceDao().insertBusinessImg(con, licenseImage);
+		}
+		
+		if(hostInfResult > 0 && imgResult > 0) {
+			commit(con);
+			result = 1;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
 
 }
