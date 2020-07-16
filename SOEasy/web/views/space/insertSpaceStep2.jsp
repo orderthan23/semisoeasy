@@ -65,6 +65,12 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
+	<%
+		if(userStatus == 0 || loginUser==null){
+			request.setAttribute("msg", "잘못된 경로입니다.");
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request,response);
+		}
+	%>
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<div>
@@ -135,8 +141,8 @@
 								<tr>
 									<td width="20%">월</td>
 									<td width="30%">
-										<input type="checkbox" name="mon-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="mon-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="mon-open-check" id="mon24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="mon-open-check" id="monclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="mon-open-check" value="open">
@@ -198,8 +204,8 @@
 								<tr>
 									<td width="10%">화</td>
 									<td width="30%">
-										<input type="checkbox" name="tue-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="tue-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="tue-open-check" id="tue24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="tue-open-check" id="tueclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="tue-open-check" value="open">
@@ -261,8 +267,8 @@
 								<tr>
 									<td width="10%">수</td>
 									<td width="30%">
-										<input type="checkbox" name="wed-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="wed-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="wed-open-check" id="wed24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="wed-open-check" id="wedclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="wed-open-check" value="open">
@@ -324,8 +330,8 @@
 								<tr>
 									<td width="10%">목</td>
 									<td width="30%">
-										<input type="checkbox" name="thu-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="thu-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="thu-open-check" id="thu24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="thu-open-check" id="thuclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="thu-open-check" value="open">
@@ -387,8 +393,8 @@
 								<tr>
 									<td width="10%">금</td>
 									<td width="30%">
-										<input type="checkbox" name="fri-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="fri-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="fri-open-check" id="fri24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="fri-open-check" id="friclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="fri-open-check" value="open">
@@ -450,8 +456,8 @@
 								<tr>
 									<td width="10%">토</td>
 									<td width="30%">
-										<input type="checkbox" name="sat-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="sat-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="sat-open-check" id="sat24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="sat-open-check" id="satclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="sat-open-check" value="open">
@@ -513,8 +519,8 @@
 								<tr>
 									<td width="10%">일</td>
 									<td width="30%">
-										<input type="checkbox" name="sun-open-check" id="24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="sun-open-check" id="closed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="sun-open-check" id="sun24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
+										<input type="checkbox" name="sun-open-check" id="sunclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="sun-open-check" value="open">
@@ -743,6 +749,10 @@
 				$(this).val("");
 			}
 		});
+		
+		if($("#mon24hr").is("checked") == true){
+			$("select[name=mon-start-time] > option[val='00']").attr("selected", "selected");
+		}
 	</script>
 </body>
 </html>

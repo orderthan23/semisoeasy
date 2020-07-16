@@ -114,6 +114,12 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
+	<%
+		if(userStatus == 0 || loginUser==null){
+			request.setAttribute("msg", "잘못된 경로입니다.");
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request,response);
+		}
+	%>
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<div>
@@ -641,7 +647,7 @@
 		});
 		
 		$("#gonext").click(function(){
-			if($(".warning").is("visible") == true || $("#space-intro").val() == "" || $("#roadFullAddr").val() == "" ){
+			if($(".warning").is("visible") == true || $("#space-intro").val() == "" || $("#roadFullAddr").val() == "" || $("#rule4").is(":checked") == false){
 				alert("필수사항을 모두 입력하세요");
 			} else {
 				$("form").submit();

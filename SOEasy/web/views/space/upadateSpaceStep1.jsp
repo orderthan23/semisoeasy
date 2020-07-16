@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.login.space.model.vo.*" %>
+<%
+	SpaceInfo si = (SpaceInfo) session.getAttribute("spaceInfo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -406,6 +409,32 @@
 		
 		function initSet(){
 			$(".warning").show();
+			
+			if(<%=si%> != null){
+				if(<%=si.getSpaceKind()%> == 1){
+					$("#kinds").val("office");
+					$("#office-check").show();
+					$("input[name=space-size]").val("<%=si.getSpaceSize()%>");
+					$("input[name=space-room-count]").val("<%=si.getSpaceRoomCount()%>");
+					$("input[name=space-contain-count]").val("<%=si.getSpaceContainCount()%>");
+				} else {
+					$("#kinds").val("cowork");
+					$("#cowork-check").show();
+					$("#unfix-seat").val("<%=si.getUnfixSeat()%>");
+					$("#fix-seat").val("<%=si.getFixSeat()%>");
+					$("#max-reserv").val("<%=si.getMaxReserv()%>");
+				}
+				$("#space-name").val("<%=si.getSpaceName()%>");
+				$("#space-intro").val("<%=si.getSpaceIntro()%>");
+				
+				var conv = $("#input[name=conv]");
+				var siConv = <%=si.getConv()%>;
+				
+				for(var i = 0; i < conv.length; i++){
+					
+				}
+				
+			}
 		}
 	
 		function initEvent(){
@@ -477,7 +506,8 @@
 					$(this).val("");
 				}
 			});
-			$("#total-seat").click(function(){count();});
+			$("#fix-seat").on("change", function(){count();});
+			$("#unfix-seat").on("change", function(){count();});
 			
 			//공간 소개 입력시 글자 수 표시
 			$("#space-intro").on("keyup", function(){
@@ -636,12 +666,14 @@
 		});
 		
 		$("#gonext").click(function(){
-			if($(".warning").is("visible") == true || $(".check-distinct").is("visible") == false || $("#space-intro").val() == "" || $("#roadFullAddr").val() == "" ){
+			if($(".warning").is("visible") == true || $(".check-distinct").is("visible") == false || $("#space-intro").val() == "" || $("#roadFullAddr").val() == "" || $("#rule4").is("checked") == false){
 				alert("필수사항을 모두 입력하세요");
 			} else {
 				$("form").submit();
 			}
 		});
+		
+		
 	</script>
 </body>
 </html>

@@ -121,6 +121,12 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
+	<%
+		if(userStatus == 0 || loginUser==null){
+			request.setAttribute("msg", "잘못된 경로입니다.");
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request,response);
+		}
+	%>
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<div>
