@@ -16,7 +16,7 @@ public class PaymentRequest{
 	private int dayPayNumber;				//일당 가격
 	private String didMonthReserve;			//월별 예약 여부
 	private int monthPay;					//월당 가격
-	private String didHostOk;				//호스트 승인 여부
+	private int didHostOk;				//호스트 승인 여부
 	private int day;						//요일
 	private int startTime;					//시작시간
 	private int endTime;					//종료시간
@@ -34,7 +34,7 @@ public class PaymentRequest{
 
 	public PaymentRequest(int reserveNo, String guestNo, int spaceNo, int officeNo, int hostNo, String spaceName,
 			int spaceKind, String spacdAddress, String didDayReserve, int dayPayNumber, String didMonthReserve,
-			int monthPay, String didHostOk, int day, int startTime, int endTime, int memberNo, int reservePersonCount,
+			int monthPay, int didHostOk, int day, int startTime, int endTime, int memberNo, int reservePersonCount,
 			int reserveStatus, Date startDay, Date endDay, Date reserveDate, String guestId, String guestName,
 			int expectPay) {
 		super();
@@ -113,7 +113,7 @@ public class PaymentRequest{
 		return monthPay;
 	}
 
-	public String getDidHostOk() {
+	public int getDidHostOk() {
 		return didHostOk;
 	}
 
@@ -213,7 +213,7 @@ public class PaymentRequest{
 		this.monthPay = monthPay;
 	}
 
-	public void setDidHostOk(String didHostOk) {
+	public void setDidHostOk(int didHostOk) {
 		this.didHostOk = didHostOk;
 	}
 
@@ -276,7 +276,6 @@ public class PaymentRequest{
 				+ ", startDay=" + startDay + ", endDay=" + endDay + ", reserveDate=" + reserveDate + ", guestId="
 				+ guestId + ", guestName=" + guestName + ", expectPay=" + expectPay + "]";
 	}
-	
-	
+
 	
 }

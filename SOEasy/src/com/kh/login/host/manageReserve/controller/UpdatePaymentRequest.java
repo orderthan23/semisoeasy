@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.login.host.manageReserve.model.service.HostReserveService;
 import com.kh.login.host.manageReserve.model.vo.HostReserve;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
+import com.kh.login.host.manageReserve.model.vo.PaymentRequest;
 
 /**
  * Servlet implementation class UpdatePaymentRequest
@@ -32,7 +33,77 @@ public class UpdatePaymentRequest extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String num = request.getParameter("num");
+		String reserveNo = request.getParameter("reserveNo");
+		int result = 0;
 		
+		
+		int rno = 0;
+		if(reserveNo != "" && reserveNo != null) {
+			rno = Integer.parseInt(reserveNo);
+			System.out.println("update rno : " + reserveNo);
+			System.out.println("update rno : " + rno);
+		}
+		int nno = 0;
+		if(num != "" && num != null) {
+			nno = Integer.parseInt(num);
+			System.out.println("update num : " + num);
+			System.out.println("update nno : " + nno);
+		}
+		
+		
+		
+		int currentPage;
+		int limit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		limit = 10;
+		
+		int listCount = new HostReserveService().getListCount();
+		int requestCount = new HostReserveService().getRequestCount();
+		
+		
+		maxPage = (int) ((double) listCount / limit + 0.9);
+		
+		startPage = (((int) ((double) currentPage / 10 + 0.9)) -1) * 10 + 1;
+		
+		endPage = startPage + 10 - 1;
+		
+		
+		System.out.println("listCount : " + listCount);
+		System.out.println("currentPage : " + currentPage);
+		System.out.println("limit : " + limit);
+		System.out.println("maxPage : " + maxPage);
+		System.out.println("startPage : " + startPage);
+		System.out.println("endPage : " + endPage);
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage, requestCount);
+		
+		ArrayList<PaymentRequest> list = new HostReserveService().updateReserveRequest(pi, nno, rno);
+		
+		String page = "";
+		if(list != null) {
+			page = "/views/host/manageReserve/paymentRequest.jsp";
+			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
+		} else {
+			page = "/views/host/manageReserve/paymentRequest.jsp";
+			request.setAttribute("list", list);
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

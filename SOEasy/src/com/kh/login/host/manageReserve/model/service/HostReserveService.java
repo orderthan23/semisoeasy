@@ -44,4 +44,72 @@ public class HostReserveService {
 		
 		return list;
 	}
+	
+	
+	
+	
+	public ArrayList<PaymentRequest> updateReserveRequest(PageInfo pi, int nno, int rno) {
+		Connection con = getConnection();
+		
+		int result = new HostReserveDao().updateReserveRequest(con, nno, rno);
+		
+		ArrayList<PaymentRequest> updateList = null;
+		
+		
+		
+		if(result > 0) {
+			commit(con);
+			updateList = new HostReserveDao().selectList(con, pi);
+		} else {
+			rollback(con);
+		}
+		
+		
+		close(con);
+		
+		return updateList;
+	}
+	
+//	public int updateReserveRequest(int nno, int rno) {
+//		Connection con = getConnection();
+//		
+//		int result = new HostReserveDao().updateReserveRequest(con, nno, rno);
+//		
+//		int pr = 0;
+//		
+//		PageInfo pi = new PageInfo();
+//		
+//		if(result > 0) {
+//			commit(con);
+//			pr = new HostReserveDao().selectList(con, nno);
+//		} else {
+//			rollback(con);
+//		}
+//		
+//		System.out.println("upadate service : " + pr);
+//		
+//		close(con);
+//		
+//		return pr;
+//	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
