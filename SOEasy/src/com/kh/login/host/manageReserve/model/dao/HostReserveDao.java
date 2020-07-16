@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -71,7 +72,7 @@ public class HostReserveDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, 1);
-			pstmt.setString(2, "WAIT");
+			pstmt.setInt(2, 1);
 
 			rset = pstmt.executeQuery();
 
@@ -105,8 +106,8 @@ public class HostReserveDao {
 			int startRow = (pi.getCurrentPage() -1) * pi.getLimit() + 1;
 			int endRow = startRow + pi.getLimit() -1;
 
-			pstmt.setString(1, "WAIT");
-			pstmt.setString(2, "2");
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, 2);
 			pstmt.setInt(3, 17);
 			pstmt.setInt(4, startRow);
 			pstmt.setInt(5, endRow);
@@ -126,6 +127,7 @@ public class HostReserveDao {
 				pr.setSpaceName(rset.getString("SPACE_NAME"));
 				pr.setOfficeNo(rset.getInt("OFFICE_NO"));
 				pr.setExpectPay(rset.getInt("EXPECT_PAY"));
+				pr.setDidHostOk(rset.getInt("DID_HOST_OK"));
 
 				list.add(pr);
 			}
@@ -137,12 +139,53 @@ public class HostReserveDao {
 			close(pstmt);
 		}
 
-		//		for(PaymentRequest o : list) {
-		//			System.out.println(o);
-		//		}
 
 		return list;
 	}
 
+	//호스트 예약승인 여부 업데이트
+	public int updateReserveRequest(Connection con, int nno, int rno) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateReserveRequest");
+		System.out.println("dao nno : " + nno);
+		System.out.println("dao rno : " + rno);
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, nno);
+			pstmt.setInt(2, rno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		System.out.println("update dao : " + result);
+		
+		
+		return result;
+	}
+
+	//호스트 예약 승인 버튼 눌렀을 때 결과 불러오기
+	
+	
+	
+	
+
 
 }
+
+
+
+
+
+
+
+
+
+
+

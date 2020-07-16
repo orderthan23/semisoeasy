@@ -6,6 +6,9 @@
 	int statement = 0;
 	
 	ArrayList<PaymentRequest> list = (ArrayList<PaymentRequest>) request.getAttribute("list");
+	for(PaymentRequest pr : list){
+		System.out.println(pr);
+	}
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -71,8 +74,8 @@
 		<br>
 		<div id="wrapper">
 		<br>
-		<h1 style="margin : 0;">결제 요청</h1>
-		<h3>플랫폼을 통해 예약 대기중인 건이 <%= requestCount %> 건 있습니다</h3>
+		<h1 style="margin : 0;">예약 승인 요청</h1>
+		<h3>플랫폼을 통해 예약 승인 대기중인 건이 <%= requestCount %> 건 있습니다</h3>
 		
 		<!-- <select>
 		<option>==센터 선택==</option>
@@ -110,17 +113,31 @@
 					<td style="font-size:13px;"><%= h.getOfficeNo() %></td>
 					<td style="font-size:13px;"><%= h.getExpectPay() %></td>
 					<td style="font-size:13px;" id="option">
-					<button style="border:1px solid red;background:white;color:red">승인</button>
-					<button style="border:1px solid blue;background:white;color:blue">거절</button>
+					<% int rs = h.getDidHostOk(); %>
+					<% if(rs == 1) { %>
+						<button style="border:1px solid red;background:white;color:red" onclick="location.href='<%=request.getContextPath()%>/update.pr?num=<%=2%>&reserveNo=<%=28%>'">승인</button>
+						<button style="border:1px solid blue;background:white;color:blue" onclick="location.href='<%=request.getContextPath()%>/update.pr?num=<%=4%>&reserveNo=<%=28%>'">거절</button>
+					<% } else if(rs == 2) { %>
+						승인 완료
+					<% } else if(rs == 3) { %>
+						바로 예약
+					<% } else if(rs == 4) {  %>
+						예약 거절
+					<% } else { %>
+						에러
+					<% } %>
 					</td>
 					<% if(statement == 0) { %>
 					<td style="font-size:12px;"><%= "예약 요청" %></td>
 					<% } %>
+					
+				 <% } %>
 				</tr>
-				<% }
-				} else { %>
+				
+				<% } %>
+				<% if(listCount == 0){ %>
 					<tr>
-						<td colspan="10">결제 요청건이 없습니다.</td>
+						<td colspan="10" align="center" style="background:white; height:100px;">예약 승인 요청건이 없습니다.</td>
 					</tr>
 				<% } %>
 			</table>
