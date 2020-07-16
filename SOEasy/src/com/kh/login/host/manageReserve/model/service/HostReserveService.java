@@ -18,7 +18,21 @@ public class HostReserveService {
 		
 		close(con);
 		
+		System.out.println(listCount);
+		
 		return listCount;
+	}
+	
+	public int getRequestCount() {
+		Connection con = getConnection();
+		
+		int requestCount = new HostReserveDao().getRequestCount(con);
+		
+		close(con);
+		
+		System.out.println(requestCount);
+		
+		return requestCount;
 	}
 
 	public ArrayList<PaymentRequest> selectList(PageInfo pi) {

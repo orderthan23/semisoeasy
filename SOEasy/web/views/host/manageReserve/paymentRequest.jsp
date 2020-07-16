@@ -12,6 +12,7 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	int requestCount = pi.getRequestCount();
 %>
 <!DOCTYPE html>
 <html>
@@ -31,7 +32,6 @@
 	      
    	th{
    		background: #E4EEFA;
-   		width: 13%;
    		font-size: 17px;
    		font-weight: bolder; 
    		clear:both;
@@ -62,7 +62,7 @@
 		<label class="colMenuTitle">공간 일정 관리</label>
 		<a class="colMenuButton" href="/login/views/host/manageReserve/reserveStep1.jsp">예약 일정 관리</a>
 		<a class="colMenuButton" href="/login/views/host/manageReserve/rounge1.jsp">라운지 회원 관리</a>
-		<a class="colMenuButton selectedButton" href="/login/views/host/manageReserve/paymentRequest.jsp">결제 요청</a>
+		<a class="colMenuButton selectedButton" href="/login/views/host/manageReserve/paymentRequest.jsp">예약 승인 요청</a>
 	<br><br>
 	</div>
 	<hr style="margin : 0">
@@ -72,7 +72,7 @@
 		<div id="wrapper">
 		<br>
 		<h1 style="margin : 0;">결제 요청</h1>
-		<h3>플랫폼을 통해 예약 대기중인 건이 <%= listCount %> 건 있습니다</h3>
+		<h3>플랫폼을 통해 예약 대기중인 건이 <%= requestCount %> 건 있습니다</h3>
 		
 		<!-- <select>
 		<option>==센터 선택==</option>
@@ -87,7 +87,7 @@
 		
 		<table align="center"  style="margin:0; width:100%;"  >
 				<tr>
-					<th height="40px">예약번호</th>
+					<th width="6%" height="40px">예약번호</th>
 					<th height="40px">아이디</th>
 					<th height="40px">이름</th>
 					<th height="40px">사용 일자</th>
@@ -101,13 +101,13 @@
 				<% if(list != null) {
 					for(PaymentRequest h : list) {%>
 					<tr class="pCompleteInfo">
-					<td><%= h.getReserveNo() %></td><!-- model.vo에 게스트 정보 조인해서 적어야 함!!!!!! -->
-					<td><%= h.getGuestId() %></td><!-- model.vo에 게스트 정보 조인해서 적어야 함!!!!!! -->
+					<td><%= h.getReserveNo() %></td>
+					<td><%= h.getGuestId() %></td>
 					<td><%= h.getGuestName() %></td>
 					<td style="font-size:13px;" class="date"><%= h.getStartDay() + " ~ " + h.getEndDay() %></td>
 					<td style="font-size:13px;"><%= h.getReservePersonCount() %></td>
-					<td style="font-size:13px;"><%= h.getSpaceKind() %></td>
 					<td style="font-size:13px;"><%= h.getSpaceName() %></td>
+					<td style="font-size:13px;"><%= h.getOfficeNo() %></td>
 					<td style="font-size:13px;"><%= h.getExpectPay() %></td>
 					<td style="font-size:13px;" id="option">
 					<button style="border:1px solid red;background:white;color:red">승인</button>
@@ -119,7 +119,9 @@
 				</tr>
 				<% }
 				} else { %>
-					<td colspan="10">결제 요청건이 없습니다.</td>
+					<tr>
+						<td colspan="10">결제 요청건이 없습니다.</td>
+					</tr>
 				<% } %>
 			</table>
 		</div>
