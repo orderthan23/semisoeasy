@@ -79,7 +79,7 @@
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
 	<div class="colMenu" style="margin-top: 20px;">
-		<a class="colMenuButton selectedButton"	href="/login/views/board/board.jsp">공지사항</a>
+		<a class="colMenuButton selectedButton"	href="/login/selectList.no">공지사항</a>
 		<a class="colMenuButton" href="/login/views/board/faqboard.jsp">자주 묻는 질문</a> 
 		<a class="colMenuButton" href="/login/views/board/mtmboard.jsp">1대1문의</a>
 	</div>
@@ -90,7 +90,9 @@
 		<div id="wrapper">
 			<h2 class="logo"
 				style="margin: 0; font-size: 30px; font-weight: bolder">공지사항</h2>
+			<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
 			<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a>
+				<% } %>				
 			<table id="searchWrap" text-align="center" align="center">
 				<tr>
 					<td><input type=search placeholder="검색어를 입력하세요"></td>
@@ -135,8 +137,8 @@
 					<td class="info" style="text-align: center;"><%= b.getnDate() %></td>
 					<td class="info" style="text-align: center;"></td>
 				</tr>
-				
 				<% } %>
+				
 			</table>
 			​
 		</div>

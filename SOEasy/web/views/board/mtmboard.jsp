@@ -65,7 +65,7 @@
 	color:#60B4A6
 }
 </style>
-<title>공지사항</title>
+<title>1대1문의</title>
 </head>
 <body>
 	 <header><%@ include file="../common/header.jsp"%></header>
@@ -82,7 +82,7 @@
 	<section>
     <div id="wrapper">
 		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">1대1문의</h2>
-		<a href="writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a> 
+		<a href="writemtm.jsp" id="writeButton" class="writeButton">글쓰기</a> 
 		<table id="searchWrap" text-align="center" align="center">
 			<tr>
 			<td><input type=search placeholder="검색어를 입력하세요"></td>
