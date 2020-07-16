@@ -10,19 +10,24 @@ public class SpaceReservation implements java.io.Serializable {
 	private String startDate;		//사용시작날짜
 	private String endDate;			//사용종료날짜
 	private int reservPersonCount;	//예약인원
-	private String didHostOk;		//호스트 승인 여부 	wait (디폴트 값)
-	private int reservStatus;		//예약상태	      	1	 (디폴트 값)
-	private String didReview;		//리뷰작성여부		wait (디폴트 값)
+	private int didHostOk;			//호스트 승인 여부 	
+	private int reservStatus;		//예약상태	      	
+	private String didReview;		//리뷰작성여부	
 	private String reservDate;		//예약날짜
-	private int expectPay;
+	private int expectPay;			//에상결제금액
+	private String userName;		//사용자 이름
+	private String userPhone;		//사용자 연락처
+	private String userEmail;		//사용자 이메일
+	private String requestContent;	//요청사항
 	
 	public SpaceReservation() {
 		
 	}
 
 	public SpaceReservation(int reservNo, int guestNo, int spaceNo, String fixUnfix, int officeNo, String startDate,
-			String endDate, int reservPersonCount, String didHostOk, int reservStatus, String didReview,
-			String reservDate, int expectPay) {
+			String endDate, int reservPersonCount, int didHostOk, int reservStatus, String didReview,
+			String reservDate, int expectPay, String userName, String userPhone, String userEmail,
+			String requestContent) {
 		super();
 		this.reservNo = reservNo;
 		this.guestNo = guestNo;
@@ -37,6 +42,10 @@ public class SpaceReservation implements java.io.Serializable {
 		this.didReview = didReview;
 		this.reservDate = reservDate;
 		this.expectPay = expectPay;
+		this.userName = userName;
+		this.userPhone = userPhone;
+		this.userEmail = userEmail;
+		this.requestContent = requestContent;
 	}
 
 	public int getReservNo() {
@@ -103,11 +112,11 @@ public class SpaceReservation implements java.io.Serializable {
 		this.reservPersonCount = reservPersonCount;
 	}
 
-	public String getDidHostOk() {
+	public int getDidHostOk() {
 		return didHostOk;
 	}
 
-	public void setDidHostOk(String didHostOk) {
+	public void setDidHostOk(int didHostOk) {
 		this.didHostOk = didHostOk;
 	}
 
@@ -134,13 +143,45 @@ public class SpaceReservation implements java.io.Serializable {
 	public void setReservDate(String reservDate) {
 		this.reservDate = reservDate;
 	}
-	
+
 	public int getExpectPay() {
 		return expectPay;
 	}
-	
+
 	public void setExpectPay(int expectPay) {
 		this.expectPay = expectPay;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public String getRequestContent() {
+		return requestContent;
+	}
+
+	public void setRequestContent(String requestContent) {
+		this.requestContent = requestContent;
 	}
 
 	@Override
@@ -149,9 +190,10 @@ public class SpaceReservation implements java.io.Serializable {
 				+ ", fixUnfix=" + fixUnfix + ", officeNo=" + officeNo + ", startDate=" + startDate + ", endDate="
 				+ endDate + ", reservPersonCount=" + reservPersonCount + ", didHostOk=" + didHostOk + ", reservStatus="
 				+ reservStatus + ", didReview=" + didReview + ", reservDate=" + reservDate + ", expectPay=" + expectPay
-				+ "]";
+				+ ", userName=" + userName + ", userPhone=" + userPhone + ", userEmail=" + userEmail
+				+ ", requestContent=" + requestContent + "]";
 	}
-
+	
 }
 
 

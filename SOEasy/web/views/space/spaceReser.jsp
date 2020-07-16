@@ -79,6 +79,15 @@
         #choosePer {
         	border: 1.5px solid #40a4b6;
         }
+        
+        #lastPrice {
+        	text-align:right; 
+        	float:right;
+        	font-size:30px; 
+        	color:#40a4b6;
+        	border: 0px;
+        	outline: 0px;
+        }
 
     </style>
 </head>
@@ -196,7 +205,7 @@
 			</tr>
 			<tr>
 				<td id="spaceType" width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>공간 유형</b></td>
-				<td id="spaceTypeInfo">코워킹스페이스</td>
+				<td id="spaceTypeInfo">코워킹스페이스 / 지정석</td>
 			</tr>
 			<tr>
 				<td id="accPer" width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>예약 가능 인원</b></td>
@@ -250,19 +259,19 @@
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="150px"><b>연락처</b></td>
-				<td id="tel"><input  style="border: 1.5px solid #40a4b6;"type="tel" name="tel"></td>
+				<td id="tel"><input  style="border: 1.5px solid #40a4b6;"type="tel" name="userPhone"></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="150px"><b>이메일</b></td>
-				<td id="email"><input  style="border: 1.5px solid #40a4b6;"type="email" name="email"></td>
+				<td id="email"><input  style="border: 1.5px solid #40a4b6;"type="email" name="userEmail"></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="150px"><b>요청사항</b></td>
-				<td id="request"><textarea cols="30" rows="10" style="resize:none; border: 1.5px solid #40a4b6;" placeholder="요청사항을 입력하세요" name="reqTxt"></textarea></td>
+				<td id="request"><textarea cols="30" rows="10" style="resize:none; border: 1.5px solid #40a4b6;" placeholder="요청사항을 입력하세요" name="requestContent"></textarea></td>
 				<td></td>
 			</tr>
 		</table>
@@ -374,7 +383,7 @@
 					<tr>
 						<td width="150px" height="50px"></td>
 						<td></td>
-						<td id="lastPrice" colspan="2" style="text-align:right; font-size:30px; color:#40a4b6;">300,000원</td>
+						<td colspan="2"><input type="text" id="lastPrice" name="expectPay" value=300000 readonly></td>
 					</tr>
 					<tr>
 						<td width="150px" height="50px"></td>

@@ -44,6 +44,10 @@ public class SpaceReservationDao {
 			pstmt.setString(6, requestMember.getEndDate());
 			pstmt.setInt(7, requestMember.getReservPersonCount());
 			pstmt.setInt(8, requestMember.getExpectPay());
+			pstmt.setString(9, requestMember.getUserName());
+			pstmt.setString(10, requestMember.getUserPhone());
+			pstmt.setString(11, requestMember.getUserEmail());
+			pstmt.setString(12, requestMember.getRequestContent());
 			
 			result = pstmt.executeUpdate();
 			
