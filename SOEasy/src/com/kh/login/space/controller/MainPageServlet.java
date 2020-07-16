@@ -1,4 +1,4 @@
-package com.kh.login.member.controller;
+package com.kh.login.space.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,50 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.member.model.service.MemberService;
 import com.kh.login.member.model.vo.Member;
+import com.kh.login.space.model.service.MainService;
+import com.kh.login.space.model.vo.SpaceInfo;
 
-@WebServlet("/searchOption.me")
-public class SearchOptionServlet extends HttpServlet {
+@WebServlet("/main.sp")
+public class MainPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public SearchOptionServlet() {
+    public MainPageServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//String isActive = request.getParameter("isActive");
-		int activeCode = Integer.parseInt(request.getParameter("isActive"));
-		String isActive="";
-		switch(activeCode) {
-		case 1: isActive="M_STATUS IN('N','X','Y')"; break;
-		case 2: isActive="M_STATUS='Y'"; break;
-		case 3: isActive="M_STATUS IN('N','X')"; break;
-		}
-		
-		String root = request.getRequestURI();
-		
-		String power = "";
-		int powerCode = Integer.parseInt(request.getParameter("power"));
-		switch(powerCode) {
-		case 1: power="AND P_TYPE IN(1,2)"; break;
-		case 2: power="AND P_TYPE=1"; break;
-		case 3: power="AND P_TYPE=2"; break;
-		}
-
-		String url = "?"+request.getQueryString()+"&";
-		int count=0;
-		for(int i=0; i<url.length();i++) {
-			if(url.charAt(i)=='&') {
-				count++;
-				if(count==2) {
-					url=url.substring(0, i+1);
-				}
-			}
-		}
-		System.out.println("잘린url :"+ url);
-				System.out.println(url);
-		System.out.println("isActive : "+isActive);
-		System.out.println("power : "+ power);
 		
 		int currentPage; //현재 페이지를 표시할 변수
 		int limit; //한 페이지에 게시글이 몇 개 보여질 것인지 표시
@@ -64,21 +32,24 @@ public class SearchOptionServlet extends HttpServlet {
 		int endPage; // 한번에 표시
 		
 		currentPage = 1;
+		String url = "?";
+		System.out.println(url);
+		String root = request.getRequestURI();
+		System.out.println(root);
+			
 		
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
 		limit = 10;
-		
-		
-		int listCount = new MemberService().getListCount(isActive,power);
+		int listCount = new MainService().getListCount();
 		System.out.println("list count : "+ listCount);
 		//총 페이지 수 계산
 		//예를 들면 목록 갯수가 123개 이면 
 		//총 필요한 페이지 수는 13개임
 		maxPage = (int)((double) listCount / limit +0.9);
-		
+		System.out.println("맥스페이지"+maxPage);
 		//현재 페이지에 보여줄 시작 페이지 수(10개씩 보여지게 할 경우)
 		//아래 쪽 페이지 수가 10개씩 보여진다면
 		//1,11,21,31 ....
@@ -92,27 +63,15 @@ public class SearchOptionServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage,0);
-		ArrayList<Member> memberList = new MemberService().selectAllList(pi,isActive,power);
-	
-	
-		String page ="";
 		
-		if(memberList !=null) {
-			page = "views/admin/manageMember.jsp";
-			request.setAttribute("memberList", memberList);
-			request.setAttribute("pi", pi);
-			request.setAttribute("url", url);
-			request.setAttribute("root", root);
-		}else {
-			page="views/common/errorpage.jsp";
-			request.setAttribute("msg", "회원목록  조회 실패 !");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
-	
+		ArrayList<SpaceInfo> spaceList = new MainService().selectAll(pi);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

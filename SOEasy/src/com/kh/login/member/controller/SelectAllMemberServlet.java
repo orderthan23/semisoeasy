@@ -30,6 +30,11 @@ public class SelectAllMemberServlet extends HttpServlet {
 		int endPage; // 한번에 표시
 		
 		currentPage = 1;
+		String url = "?";
+		System.out.println(url);
+		String root = request.getRequestURI();
+		System.out.println(root);
+			
 		
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -60,9 +65,8 @@ public class SelectAllMemberServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage,0);
 		ArrayList<Member> memberList = new MemberService().selectAllList(pi);
 	
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		request.setAttribute("pi", pi);
+		
+		
 	
 		String page ="";
 		
@@ -70,6 +74,8 @@ public class SelectAllMemberServlet extends HttpServlet {
 			page = "views/admin/manageMember.jsp";
 			request.setAttribute("memberList", memberList);
 			request.setAttribute("pi", pi);
+			request.setAttribute("url", url);
+			request.setAttribute("root", root);
 		}else {
 			page="views/common/errorpage.jsp";
 			request.setAttribute("msg", "회원목록  조회 실패 !");

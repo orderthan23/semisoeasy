@@ -165,6 +165,9 @@
 
 			ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("memberList");
 			PageInfo pi = (PageInfo) request.getAttribute("pi");
+			 String url = (String)request.getAttribute("url");
+			String root = (String)request.getAttribute("root"); 
+			
 			int listCount = pi.getListCount();
 			int currentPage = pi.getCurrentPage();
 			int maxPage = pi.getMaxPage();
@@ -290,11 +293,11 @@
 			<br>
 			
 			<div class = "pagingArea" align="center">
-			<button onclick="location.href='<%= request.getContextPath() %>/selectAll.me?currentPage=1'"> << </button>
+			<button onclick="location.href='<%=root+url%>currentPage=currentPage=1'"> << </button>
 			<% if(currentPage <= 1) { %>
 			<button disabled><</button>
 			<% } else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=currentPage -1 %>'"><</button>
+			<button onclick="location.href='<%=root+url%>currentPage=currentPage=<%=currentPage -1 %>'"><</button>
 			<% } %>
 			
 			<% for(int p = startPage; p<= endPage; p++){ 
@@ -302,7 +305,7 @@
 			%>	
 					<button disabled><%= p %></button>
 			<% 	} else { %>
-					<button onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=p%>'"><%=p %></button>
+					<button onclick="location.href='<%=root+url%>currentPage=<%=p%>'"><%=p %></button>
 			<% 	  }
 			   }	
 				%>
@@ -310,11 +313,11 @@
 			<% if(currentPage >= maxPage) { %>
 			<button disabled>></button>
 			<% } else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=currentPage +1 %>'">></button>
+			<button onclick="location.href='<%=root+url%>currentPage=<%=currentPage +1 %>'">></button>
 			<% } %>
 			
 			
-			<button onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=maxPage%>'">>></button>
+			<button onclick="location.href='<%=root+url%>currentPage=<%=maxPage%>'">>></button>
 		</div>
 		</div>
 		<%} %>
