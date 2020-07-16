@@ -72,7 +72,7 @@
 <body>
 	 <header><%@ include file="../common/header.jsp"%></header>
 	 <div class="colMenu" style="margin-top: 20px;">
-		<a class="colMenuButton selectedButton"	href="/login/views/board/board.jsp">공지사항</a>
+		<a class="colMenuButton selectedButton"	href="/login/selectList.no">공지사항</a>
 		<a class="colMenuButton" href="/login/views/board/faqboard.jsp">자주 묻는 질문</a> 
 		<a class="colMenuButton" href="/login/views/board/mtmboard.jsp">1대1문의</a>
 	</div>
@@ -88,39 +88,29 @@
 	<input type="hidden" name="id" value="<%=loginUser.getmId()%>">
 	<table width:700 border="3" bordercolor="lightgray" align="center">
 			<tr>
-			<td style="text-align:center; background:#60B4A6">
-				제목
-			</td>
-			<td>
-				<input name="title" type="text" size="70" maxlength="100" value="<%=board.getnTitle()%>" readonly>
-			</td>		
-		</tr>
-		<tr>
-			<td style=text-align:center style="text-align:center; background:#60B4A6">
-			<select class="category" name="category" id="category" style="text-align:center; background:#60B4A6 ">
-					<option class="category" style="text-align:center"><%=board.getnCategory() %></option>
-					<option class="category" value="1">시스템관련</option>
-					<option class="category" value="2">계정관련</option>
-					<option class="category" value="3">결제관련</option>
-					<option class="category"></option>
-				</select>
-			</td>
-				
-		</tr>
-		<tr>
-			<td style="text-align:center; background:#60B4A6">
-				내 용
-			</td>
-			<td>
-				<textarea name="content" cols="72" rows="20" style="resize:none;" readonly><%= board.getnContent() %></textarea>			
-			</td>		
-		</tr>
-
-		<tr align="center" valign="middle" style="text-align:center; background:#60B4A6">
-			<td colspan="5">
-				<button onclick="location.href='<%= request.getContextPath()%>/selectList.no'">메뉴로 돌아가기</button>
+				<td style="text-align:center; background:#60B4A6">제목</td>
+				<td><input name="title" type="text" size="70" maxlength="100" value="<%=board.getnTitle()%>" readonly></td>
+			</tr>
+			<tr>
+				<td style=text-align:center style="text-align:center; background:#60B4A6">
+					<select class="category" name="category" id="category" style="text-align:center; background:#60B4A6 ">
+						<option class="category" style="text-align:center"><%=board.getnCategory() %></option>
+						<option class="category" value="1">시스템관련</option>
+						<option class="category" value="2">계정관련</option>
+						<option class="category" value="3">결제관련</option>
+						<option class="category"></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+			<td style="text-align:center; background:#60B4A6">내 용</td>
+			<td><textarea name="content" cols="72" rows="20" style="resize:none;" readonly><%= board.getnContent() %></textarea></td>		
+			</tr>
+			<tr align="center" valign="middle" style="text-align:center; background:#60B4A6">
+				<td colspan="5">
+				<button style="text-align:center; background:#60B4A6; color:white" onclick="location.href='<%= request.getContextPath()%>/selectList.no'">메뉴로 돌아가기</button>
 				<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
-				<button onclick="location.href='<%= request.getContextPath()%>/selectBoard.no?num=<%= board.getNoticeNo()%>'">수정하기</button>
+				<button   style="text-align:center; background:#60B4A6; color:white" onclick="location.href='<%= request.getContextPath()%>/selectBoard.no?num=<%= board.getNoticeNo()%>'" >수정하기 </button>
 				<% } %>
 			</td>
 		</tr>

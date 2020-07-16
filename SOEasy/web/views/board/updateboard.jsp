@@ -93,7 +93,7 @@
 				제목
 			</td>
 			<td>
-				<input name="title" type="text" size="70" maxlength="100" value="<%= board.getnTitle() %>" readonly>
+				<input name="title" type="text" size="70" maxlength="100" value="<%= board.getnTitle() %>" >
 				<input type="hidden" name="nno" value="<%= board.getNoticeNo() %>">
 			</td>		
 		</tr>
@@ -120,7 +120,7 @@
 
 		<tr align="center" valign="middle" style="text-align:center; background:#60B4A6">
 			<td colspan="5">
-				<input type="reset" value="삭제" style="text-align:center; background:#60B4A6" >
+				<button style="text-align:center; background:#60B4A6" onclick="deleteboard();">삭제</button>
 				<button style="text-align:center; background:#60B4A6" onclick="complete();">수정완료</button>
 				<input type="button" value="목록으로"  style="text-align:center; background:#60B4A6; color:white">			
 			</td>
@@ -132,10 +132,15 @@
 
 	<script>
 		function complete(){
-			$("#updateForm").attr("action", <%=request.getContextPath()%>/updateBoard.no);
-			
+			$("#updateForm").attr("action", "<%=request.getContextPath()%>/updateBoard.no");
+
 		}
 	
+		function deleteboard(){
+		
+			$("#updateForm").attr("action", "<%=request.getContextPath()%>/delete.no");
+		
+		}
 		<% } else { 
 			request.setAttribute("msg", "잘못된 경로로 접근");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

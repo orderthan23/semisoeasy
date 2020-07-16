@@ -43,7 +43,7 @@ public class InsertNoticeServlet extends HttpServlet {
 		board.setmNick(nickname);
 		board.setnTitle(title);
 		int result = new BoardService().insertBoard(board);
-		
+		System.out.println("board : " + board);
 		if(result>0) {
 			response.sendRedirect("/login/selectList.no");
 		} else {
