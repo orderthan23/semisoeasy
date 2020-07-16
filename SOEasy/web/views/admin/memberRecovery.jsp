@@ -51,7 +51,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<header><%@ include file="/views/common/adminHeader.jsp" %></header>
+	<header><%@ include file="/views/common/header.jsp" %></header>
 	<nav><%@ include file = "/views/common/aside.jsp" %></nav>
 	<section>
 		<br>

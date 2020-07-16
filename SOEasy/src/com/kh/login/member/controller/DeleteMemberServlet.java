@@ -28,6 +28,8 @@ public class DeleteMemberServlet extends HttpServlet {
 		System.out.println("reason :"+reason);
 		
 		int result = new MemberService().deleteMember(userId, password,reason);
+		
+		
 	
 		String page = "";
 		if(result>0) {

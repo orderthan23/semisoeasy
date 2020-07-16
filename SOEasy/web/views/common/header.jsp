@@ -3,7 +3,7 @@
 <%
 	Member loginUser =(Member)session.getAttribute("loginUser");
 	int userStatus=0;
-	if(loginUser!=null && !loginUser.getmStatus().equals("N")){
+	if(loginUser!=null && !loginUser.getmStatus().equals("N") && !loginUser.getmStatus().equals("X")){
 		userStatus = loginUser.getpType();
 		System.out.println(userStatus);
 	} 
@@ -122,11 +122,11 @@
 			switch(userStatus){
 			case 1: 
 			case 2: $('#firstHeaderMenu').attr("href","<%=request.getContextPath()%>/logout.me").text("로그아웃");
-				    $('#secondHeaderMenu').attr("href","/login/views/member/updateMember.jsp").text("마이페이지"); break;
+				    $('#secondHeaderMenu').attr("href","/login/views/host/manageReserve/reserveStep1.jsp").text("마이페이지"); break;
 					
 			case 3: $('#firstHeaderMenu').attr("href","<%=request.getContextPath()%>/logout.me").text("로그아웃");
-					$('#secondHeaderMenu').attr("href","/login/views/member/updateMember.jsp").text("회원관리"); 
-					$('#thirdHeaderMenu').attr("href","/login/views/space/insertSpaceStep1.jsp").text("공간관리"); break; 
+					$('#secondHeaderMenu').attr("href","<%=request.getContextPath()%>/selectAll.me").text("회원관리"); 
+					$('#thirdHeaderMenu').attr("href","/login/views/admin/adminHome.jsp").text("관리자홈"); break; 
 			
 			default: break;		
 			}

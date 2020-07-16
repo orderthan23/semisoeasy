@@ -1,39 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.kh.login.host.manageReserve.model.vo.PageInfo" %>
-<%
-	
-	 ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("memberList");
-	 PageInfo pi = (PageInfo) request.getAttribute("pi");
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	ArrayList<String> idArr = new ArrayList<>();
-	ArrayList<String> nameArr= new ArrayList<>();
-	ArrayList<String> typeArr = new ArrayList<>();
-	ArrayList<String> isActiveArr = new ArrayList<>();
-	ArrayList<String> phoneArr = new ArrayList<>();
-	ArrayList<String> emailArr = new ArrayList<>();
-	for(Member m : list){
-		idArr.add(m.getmId());
-		nameArr.add(m.getmName());
-		switch(m.getpType()){
-		case 1: typeArr.add("게스트"); break; 
-		case 2: typeArr.add("호스트"); break;
-		case 3: typeArr.add("관리자"); break;
-		}
-		if(m.getmStatus().equals("Y")){
-			isActiveArr.add("O");
-		}else{
-			isActiveArr.add("X");
-		}
-		phoneArr.add(m.getmPhone());
-		emailArr.add(m.getmEmail());
-	}
-	System.out.println("startpage: "+startPage);
-	System.out.println("endPage : "+endPage);
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,7 +155,54 @@
 
 </head>
 <body>
+	
 	<header><%@ include file="/views/common/header.jsp" %></header>
+ 	<%
+		if (userStatus < 3 || loginUser==null || loginUser.getmStatus().equals("N")) {
+			request.setAttribute("msg", "잘못된 경로입니다.");
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
+		}else{
+
+			ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("memberList");
+			PageInfo pi = (PageInfo) request.getAttribute("pi");
+			int listCount = pi.getListCount();
+			int currentPage = pi.getCurrentPage();
+			int maxPage = pi.getMaxPage();
+			int startPage = pi.getStartPage();
+			int endPage = pi.getEndPage();
+			ArrayList<String> idArr = new ArrayList<>();
+			ArrayList<String> nameArr = new ArrayList<>();
+			ArrayList<String> typeArr = new ArrayList<>();
+			ArrayList<String> isActiveArr = new ArrayList<>();
+			ArrayList<String> phoneArr = new ArrayList<>();
+			ArrayList<String> emailArr = new ArrayList<>();
+			for (Member m : list) {
+				idArr.add(m.getmId());
+				nameArr.add(m.getmName());
+				switch (m.getpType()) {
+				case 1:
+					typeArr.add("게스트");
+					break;
+				case 2:
+					typeArr.add("호스트");
+					break;
+				case 3:
+					typeArr.add("관리자");
+					break;
+				}
+				switch (m.getmStatus()) {
+				case "Y" : isActiveArr.add("활성화"); break;
+				case "X" : isActiveArr.add("정지"); break;
+				case "N" : isActiveArr.add("탈퇴"); break;
+				} 
+				
+				phoneArr.add(m.getmPhone());
+				emailArr.add(m.getmEmail());
+			}
+			System.out.println("startpage: " + startPage);
+			System.out.println("endPage : " + endPage);
+			
+		%>
 	<nav><%@ include file = "/views/common/aside.jsp" %></nav>
 	<section>
 		
@@ -202,7 +216,7 @@
          <h1 style="margin:0;">경고</h1>
       </div>
       <br>
-      <p align="center" style="font-size: 30px;">해당 회원을 제재 하시겠습니까? </p>
+      <p align="center" style="font-size: 30px;" id="blockMan"></p>
       <div style="width:50%; margin-left: auto; margin-right: auto; align:center;" id="buttonZone">
       <button style="margin-right: 10%; " onclick="blockMember();">네</button><button onclick ="closeModal();">아니오</button>
       </div>
@@ -214,28 +228,28 @@
 		<h1 style="margin : 0;">회원 목록</h1>
 		<br>
 			
+		<form action="searchOption.me">
+		<button style="float:right; height:20px; line-height:20px;"type="submit" id="searchOption">조회</button>
+		<select name="isActive">
+		<option value=1>계정 활성화 여부: 전체</option>
+		<option value=2>계정 활성화 여부: 활성</option>
+		<option value=3>계정 활성화 여부: 비활성</option>
+		</select>
+		<select name="power">
+		<option value=1>권한 : 전체</option>
+		<option value=2>권한 : 게스트</option>
+		<option value=3>권한 : 호스트</option>
+		</select>
+	
+		</form>
 		
-		<select>
-		<option>계정 활성화 여부: 전체</option>
-		<option>계정 활성화 여부: 활성</option>
-		<option>계정 활성화 여부: 비활성</option>
-		</select>
-		<select>
-		<option>권한 : 전체</option>
-		<option>권한 : 게스트</option>
-		<option>권한 : 호스트</option>
-		</select>
-		<select>
-			<option>경고횟수 : 전체</option>
-			<option>경고횟수 : 1회</option>
-			<option>경고횟수 : 2회</option>
-		</select>
-		
+				<form action="searchId.me" method="post" id="searchForm">
 				<label>아이디 검색</label>
 				<span  id="searchZone">
-				<input type="search" name="userId" id="searchId">
-				<input type="button" name="transfer" value="검색" onclick="searchId();">
+				<input type="search" name="keyword" id="searchId">
+				<input type="button" name="transfer" value="검색" onclick="searchMembers();">
 				</span>
+				</form>
 			
 		<br><br>
 		
@@ -255,12 +269,10 @@
 				<%for(int i=0; i<list.size(); i++) {%>
 				<tr class="pCompleteInfo">
 					<td>
-						<select class="stage">
+						<select class="stage" name="block">
 							<option value=1><%=idArr.get(i)%></option>
-							<option value=2>경고 부여</option>
-							<option value=3>7일 활동 정지</option>
-							<option value=4>30일 활동 정지</option>
-							<option value=5>영구 정지</option>
+							
+							<option value=2>영구 정지</option>
 						</select>
 					</td>
 					<td><%=nameArr.get(i)%></td>
@@ -304,39 +316,69 @@
 			<button onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=maxPage%>'">>></button>
 		</div>
 		</div>
+		<%} %>
 	</section>
 	<br><br>
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
 	<script>
-
+	var blockDays; //정지 일자
+	var blockUser; //정지당할 사람
 	function closeModal(){
 		 $('#modalArea').fadeOut();
 	}
 	
 	function blockMember(){
-		alert("해당 회원이 정지 되었습니다");
-		 $('#modalArea').fadeOut();
+		
+		
+		  $.ajax({
+			 url:"/login/blockMember.me",
+			 data:{
+				 	blockUser:blockUser
+			 	  },
+			 success: function(data){
+				 console.log(data);
+				 if(data=="ok"){
+				
+				 alert("해당 회원이 정지 되었습니다");
+				 $('#modalArea').fadeOut();
+				 location.reload(true); //새로고침
+				 }else{
+					 alert("알수없는 오류로 정지에 실패하였습니다.");
+					 $('#modalArea').fadeOut();
+				 }
+			 },
+			 error: function(data){
+				 console.log("실패");
+			 }
+		  	 
+		 }) 
+		
+		 
 	}
 	
-	function searchId(){
+	function searchMembers(){
 		var userId = $('#searchId').val
 		
-		/* $.ajax{
-			url : "아이디를 찾는 서블릿",
-			data: {userId, userId},
-			success: function(data){},
-			error: function(data){}
-		} */
+		if(userId==""){
+			location.reload(true);
+		}else{
+			$('#searchForm').submit();
+		}
 		
+	
 	}
 		
 	$(function(){
 		
 		
 		$('.stage').change(function(){
+			
 			var num = $(this).val();
+			blockDays = num;
+			blockUser = $(this).children('option:nth(0)').text();
 			$(this).children('option:nth(0)').prop('selected',"true");
 			if(num >1){
+				$('#blockMan').html(blockUser+"님을 정말 영구 정지 <br>하시겠습니까?");
 				 $('#modalArea').fadeIn();
 				 
 				 $('#closeModal , #modalBg').click(function(){

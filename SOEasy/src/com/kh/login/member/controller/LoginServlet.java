@@ -58,7 +58,12 @@ public class LoginServlet extends HttpServlet {
 				
 				response.sendRedirect("/login/views/member/requestRecover.jsp");
 				
-			}else {
+			}
+			else if(loginUser.getmStatus().equals("X")){
+				response.sendRedirect("/login/views/member/youAreBlock.jsp");
+				
+			}
+			else {
 				
 				response.sendRedirect("/login/views/main/guestMain.jsp");
 			}
