@@ -141,8 +141,8 @@
 								<tr>
 									<td width="20%">월</td>
 									<td width="30%">
-										<input type="checkbox" name="mon-open-check" id="mon24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="mon-open-check" id="monclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="mon-open-check" id="mon24hr" value="open" style="height:15px;"><label for="mon24hr"> 24시간</label>
+										<input type="checkbox" name="mon-open-check" id="monclosed" value="closed" style="height:15px;"><label for="monclosed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="mon-open-check" value="open">
@@ -204,8 +204,8 @@
 								<tr>
 									<td width="10%">화</td>
 									<td width="30%">
-										<input type="checkbox" name="tue-open-check" id="tue24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="tue-open-check" id="tueclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="tue-open-check" id="tue24hr" value="open" style="height:15px;"><label for="tue24hr"> 24시간</label>
+										<input type="checkbox" name="tue-open-check" id="tueclosed" value="closed" style="height:15px;"><label for="tueclosed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="tue-open-check" value="open">
@@ -267,8 +267,8 @@
 								<tr>
 									<td width="10%">수</td>
 									<td width="30%">
-										<input type="checkbox" name="wed-open-check" id="wed24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="wed-open-check" id="wedclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="wed-open-check" id="wed24hr" value="open" style="height:15px;"><label for="wed24hr"> 24시간</label>
+										<input type="checkbox" name="wed-open-check" id="wedclosed" value="closed" style="height:15px;"><label for="wedclosed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="wed-open-check" value="open">
@@ -330,8 +330,8 @@
 								<tr>
 									<td width="10%">목</td>
 									<td width="30%">
-										<input type="checkbox" name="thu-open-check" id="thu24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="thu-open-check" id="thuclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="thu-open-check" id="thu24hr" value="open" style="height:15px;"><label for="thu24hr"> 24시간</label>
+										<input type="checkbox" name="thu-open-check" id="thuclosed" value="closed" style="height:15px;"><label for="thuclosed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="thu-open-check" value="open">
@@ -393,8 +393,8 @@
 								<tr>
 									<td width="10%">금</td>
 									<td width="30%">
-										<input type="checkbox" name="fri-open-check" id="fri24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="fri-open-check" id="friclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="fri-open-check" id="fri24hr" value="open" style="height:15px;"><label for="fri24hr"> 24시간</label>
+										<input type="checkbox" name="fri-open-check" id="friclosed" value="closed" style="height:15px;"><label for="friclosed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="fri-open-check" value="open">
@@ -456,8 +456,8 @@
 								<tr>
 									<td width="10%">토</td>
 									<td width="30%">
-										<input type="checkbox" name="sat-open-check" id="sat24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="sat-open-check" id="satclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="sat-open-check" id="sat24hr" value="open" style="height:15px;"><label for="sat24hr"> 24시간</label>
+										<input type="checkbox" name="sat-open-check" id="satclosed" value="closed" style="height:15px;"><label for="satclosed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="sat-open-check" value="open">
@@ -519,8 +519,8 @@
 								<tr>
 									<td width="10%">일</td>
 									<td width="30%">
-										<input type="checkbox" name="sun-open-check" id="sun24hr" value="open" style="height:15px;"><label for="24hr"> 24시간</label>
-										<input type="checkbox" name="sun-open-check" id="sunclosed" value="closed" style="height:15px;"><label for="closed"> 휴무</label>
+										<input type="checkbox" name="sun-open-check" id="sun24hr" value="open" style="height:15px;"><label for="sun24hr"> 24시간</label>
+										<input type="checkbox" name="sun-open-check" id="sunclosed" value="closed" style="height:15px;"><label for="sunclosed"> 휴무</label>
 									</td>
 									<td width="60%">
 										<input type="hidden" name="sun-open-check" value="open">
@@ -602,56 +602,56 @@
 								<tr>
 									<td width="30%">8일 전</td>
 									<td width="60%">
-										<input type="text" class="refund-input" name="day8-rate" id="day8-rate" size="30%" value="100" onclick="this.select();" readonly>
+										<input type="text" class="refund-input" name="day8-rate" id="day8-rate" size="30%" value="100" readonly>
 									</td>
 									<td width="10%">%</td>
 								</tr>
 								<tr>
 									<td width="30%">7일 전</td>
 									<td width="60%">
-										<input type="text" class="refund-input" name="day7-rate" id="day7-rate" size="30%" value="100" onclick="this.select();" readonly>
+										<input type="text" class="refund-input" name="day7-rate" id="day7-rate" size="30%" value="100" readonly>
 									</td>
 									<td width="10%">%</td>
 								</tr>
 								<tr>
 									<td width="30%">6일 전</td>
 									<td width="60%">
-										<input type="text" class="refund-input" name="day8-rate" id="day6-rate" size="30%" value="90" onclick="this.select();" readonly>
+										<input type="text" class="refund-input" name="day8-rate" id="day6-rate" size="30%" value="90" readonly>
 									</td>
 									<td width="10%">%</td>
 								</tr>
 								<tr>
 									<td width="30%">5일 전</td>
 									<td width="60%">
-										<input type="text" class="refund-input" name="day5-rate" id="day5-rate" size="30%" value="90" onclick="this.select();" readonly>
+										<input type="text" class="refund-input" name="day5-rate" id="day5-rate" size="30%" value="90" readonly>
 									</td>
 									<td width="10%">%</td>
 								</tr>
 								<tr>
 									<td width="30%">4일 전</td>
 									<td width="60%">
-										<input type="text" class="refund-input" name="day4-rate" id="day4-rate" size="30%" value="90" onclick="this.select();" readonly>
+										<input type="text" class="refund-input" name="day4-rate" id="day4-rate" size="30%" value="90" readonly>
 									</td>
 									<td width="10%">%</td>
 								</tr>
 								<tr>
 									<td width="30%">3일 전</td>
 									<td width="60%">
-										<input type="text" class="refund-input" name="day3-rate" id="day3-rate" size="30%" value="80" onclick="this.select();" readonly>
+										<input type="text" class="refund-input" name="day3-rate" id="day3-rate" size="30%" value="80" readonly>
 									</td>
 									<td width="10%">%</td>
 								</tr>
 								<tr>
 									<td width="30%">2일 전</td>
 									<td width="60%">
-										<input type="text" class="refund-input" name="day2-rate" id="day2-rate" size="30%" value="80" onclick="this.select();" readonly>
+										<input type="text" class="refund-input" name="day2-rate" id="day2-rate" size="30%" value="80" readonly>
 									</td>
 									<td width="10%">%</td>
 								</tr>
 								<tr>
 									<td width="30%">예약 전일</td>
 									<td width="60%">
-										<input type="text" class="refund-input" name="day1-rate" id="day1-rate" size="30%" value="80" onclick="this.select();" readonly>
+										<input type="text" class="refund-input" name="day1-rate" id="day1-rate" size="30%" value="80" readonly>
 									</td>
 									<td width="10%">%</td>
 								</tr>
@@ -742,7 +742,7 @@
 		});
 		
 		$(".refund-input").on("keyup", function(){
-			var test = RegExp(/[0-9]/);
+			var test = RegExp(/[0-9]$/);
 			var rate = $(this).val();
 			if(!test.test(rate) || rate < 0 || rate > 100){
 				alert("0부터 100사이 값만 입력하실 수 있습니다.");
@@ -750,9 +750,9 @@
 			}
 		});
 		
-		if($("#mon24hr").is("checked") == true){
-			$("select[name=mon-start-time] > option[val='00']").attr("selected", "selected");
-		}
+		$("#mon24hr").is(":checked", function(){
+			$("select[name=mon-start-time] option[value=00]").prop("selected", "selected").change();
+		});
 	</script>
 </body>
 </html>
