@@ -1,6 +1,6 @@
 package com.kh.login.space.model.vo;
 
-public class Review {
+public class Review implements java.io.Serializable {
 
 	private int reviewNo;
 	private int spaceNo;
@@ -8,6 +8,10 @@ public class Review {
 	private String reviewContent;
 	private int rPoint;
 	private String enrollDate;
+	
+	public Review() {
+		
+	}
 	
 	public Review(int reviewNo, int spaceNo, int memberNo, String reviewContent, int rPoint, String enrollDate) {
 		super();

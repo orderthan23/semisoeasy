@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.login.space.model.vo.*" %>
+    
+<%
+	SpaceInfo si = (SpaceInfo) request.getAttribute("spaceInfo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,6 +101,7 @@
 	<section>
 	<div style="width:75%; margin-left:auto; margin-right:auto;">
 	<form id="insertReservation" action="<%= request.getContextPath()%>/insertReservationInfo" method="post">
+	<input type="hidden" name="spaceNo" value="<%= si.getSpaceNo()%>">
 	<!-- 공간명 / 가격 -->
 	<table>
 		<tr>
@@ -486,7 +491,7 @@
 		//결제버튼 눌렀을때	
 		function push() {
 			alert('결제버튼 누름 / API로 연결');
-			$("#").submit();
+			$("#insertReservation").submit();
 		}
 		
 		

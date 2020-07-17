@@ -80,6 +80,7 @@
 <section>
 <div style="width:75%; margin-left:auto; margin-right:auto;">
 
+	<form id="insertReview" action="<%= request.getContextPath()%>/insertReview" method="post">
 	<div id="outer">
 		<h1 align="center" style="color:#40a4b6;">리뷰 작성</h1>
 		<table style="margin-right:auto; margin-left:auto;">
@@ -92,11 +93,12 @@
 				<td>
           			<div class="rating left">
   						<div class="stars right">
-    						<a class="star rated"></a>
-   						    <a class="star rated"></a>
-    						<a class="star rated"></a>
-    						<a class="star"></a>
-   							 <a class="star"></a>
+    						<a class="star rated" id="star1" onclick="star1();"></a>
+   						    <a class="star rated" id="star2" onclick="star2();"></a>
+    						<a class="star rated" id="star3" onclick="star3();"></a>
+    						<a class="star" id="star4" onclick="star4();"></a>
+   							<a class="star" id="star5" onclick="star5();"></a>
+   							<input type="hidden" name="rPoint" value="3" id="rpoint">
   						</div>
 					</div>
           		</td>
@@ -108,7 +110,7 @@
 					</button>
 				</td>
 				<td>
-					<textarea id="textArea" cols="50" rows="20"></textarea>
+					<textarea name="reviewContent" id="textArea" cols="50" rows="20"></textarea>
 				</td>
 			</tr>
 		</table>
@@ -121,8 +123,14 @@
 		</table>
 		
 	</div>
+	</form>
 	
 	<script>
+	
+	function submit() {
+		alert('등록버튼');
+		$("#insertReview").submit();
+	}
 	
 	//빈 내용시 알러트 띄우기
 	$(document).ready(function(){
@@ -154,6 +162,26 @@
 		  
 		  });
 		});
+	
+	function star1() {
+		$('#rpoint').val(1);
+	}
+	
+	function star2() {
+		$('#rpoint').val(2);
+	}
+	
+	function star3() {
+		$('#rpoint').val(3);
+	}
+	
+	function star4() {
+		$('#rpoint').val(4);
+	}
+	
+	function star5() {
+		$('#rpoint').val(5);
+	}
 	
 	</script>
 	
