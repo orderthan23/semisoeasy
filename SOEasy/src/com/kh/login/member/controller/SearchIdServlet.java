@@ -34,16 +34,9 @@ public class SearchIdServlet extends HttpServlet {
 		keyword = "%"+keyword+"%";
 		currentPage = 1;
 	
-		String url = "?"+request.getQueryString()+"&";
-		int count=0;
-		for(int i=0; i<url.length();i++) {
-			if(url.charAt(i)=='&') {
-				count++;
-				if(count==2) {
-					url=url.substring(0, i+1);
-				}
-			}
-		}
+
+		String url = PageInfo.customQString(request.getQueryString(), 2);
+		
 		String root = request.getRequestURI();
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));

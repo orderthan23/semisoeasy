@@ -97,7 +97,21 @@ public class PageInfo {
 	}
 
 
-
+	public static String customQString(String url, int length) {
+		url = "?"+url+"&";
+		int count = 0;
+		for(int i=0; i<url.length();i++) {
+			if(url.charAt(i)=='&') {
+				count++;
+				if(count==length) {
+					url=url.substring(0, i+1);
+					break;
+				}
+			}
+		}
+		
+		return url;
+	}
 	
 	
 

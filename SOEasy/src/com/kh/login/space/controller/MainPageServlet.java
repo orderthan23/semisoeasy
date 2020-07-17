@@ -2,6 +2,7 @@ package com.kh.login.space.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
-import com.kh.login.member.model.service.MemberService;
-import com.kh.login.member.model.vo.Member;
 import com.kh.login.space.model.service.MainService;
-import com.kh.login.space.model.vo.SpaceInfo;
 
 @WebServlet("/main.sp")
 public class MainPageServlet extends HttpServlet {
@@ -64,7 +62,7 @@ public class MainPageServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage,0);
 		
-		ArrayList<SpaceInfo> spaceList = new MainService().selectAll(pi);
+		ArrayList<HashMap<String,Object>> spaceList = new MainService().selectAll(pi);
 	}
 
 	/**

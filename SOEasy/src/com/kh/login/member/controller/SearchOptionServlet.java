@@ -42,20 +42,8 @@ public class SearchOptionServlet extends HttpServlet {
 		case 3: power="AND P_TYPE=2"; break;
 		}
 
-		String url = "?"+request.getQueryString()+"&";
-		int count=0;
-		for(int i=0; i<url.length();i++) {
-			if(url.charAt(i)=='&') {
-				count++;
-				if(count==2) {
-					url=url.substring(0, i+1);
-				}
-			}
-		}
-		System.out.println("잘린url :"+ url);
-				System.out.println(url);
-		System.out.println("isActive : "+isActive);
-		System.out.println("power : "+ power);
+		
+		String url = PageInfo.customQString(request.getQueryString(), 2);
 		
 		int currentPage; //현재 페이지를 표시할 변수
 		int limit; //한 페이지에 게시글이 몇 개 보여질 것인지 표시
