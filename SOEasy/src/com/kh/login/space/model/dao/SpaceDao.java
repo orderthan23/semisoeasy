@@ -45,7 +45,8 @@ public class SpaceDao {
 			pstmt.setInt(3, si.getSpaceKind());
 			pstmt.setString(4, si.getSpaceAddress());
 			pstmt.setString(5, si.getSpaceIntro());
-			pstmt.setString(6, si.getSpaceLocationFilter());
+			pstmt.setString(6, si.getSpaceShortIntro());
+			pstmt.setString(7, si.getSpaceLocationFilter());
 			
 			spaceInfResult = pstmt.executeUpdate();
 			
@@ -244,7 +245,7 @@ public class SpaceDao {
 				si.setSpaceAddress(rset.getString("SPACE_ADDRESS"));
 				si.setsStatus(rset.getString("S_STATUS"));
 				si.setSpaceIntro(rset.getString("SPACE_INTRO"));
-				si.setSpacePayPolicy(rset.getString("SPACE_PAY_POLICY"));
+				si.setSpaceShortIntro(rset.getString("SPACE_SHORT_INTRO"));
 				si.setDidDayReserv(rset.getString("DID_DAY_RESERV"));
 				si.setDayPay(rset.getInt("DAY_PAY"));
 				si.setDidMonthReserv(rset.getString("DID_MONTH_RESERV"));
@@ -261,7 +262,7 @@ public class SpaceDao {
 		return si;
 	}
 
-	//SPACE_INF SPACE_POLICY, DID_DAY_RESERV, DAY_PAY, DID_MONTH_RESERV, MONTH_PAY 입력용 메소드.
+	//SPACE_INF DID_DAY_RESERV, DAY_PAY, DID_MONTH_RESERV, MONTH_PAY 입력용 메소드.
 	//기존에 있는 공간번호에 작성하기 때문에 UPDATE문을 사용한다.
 	public int insertSpaceInfOp(Connection con, SpaceInfo si) {
 		
@@ -271,12 +272,11 @@ public class SpaceDao {
 		String query = prop.getProperty("insertSpaceInfOp");
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, si.getSpacePayPolicy());
-			pstmt.setString(2, si.getDidDayReserv());
-			pstmt.setInt(3, si.getDayPay());
-			pstmt.setString(4, si.getDidMonthReserv());
-			pstmt.setInt(5, si.getMonthPay());
-			pstmt.setInt(6, si.getSpaceNo());
+			pstmt.setString(1, si.getDidDayReserv());
+			pstmt.setInt(2, si.getDayPay());
+			pstmt.setString(3, si.getDidMonthReserv());
+			pstmt.setInt(4, si.getMonthPay());
+			pstmt.setInt(5, si.getSpaceNo());
 			
 			spaceInfOpResult = pstmt.executeUpdate();
 			
@@ -404,4 +404,159 @@ public class SpaceDao {
 		return imgResult;
 	}
 
+	//공간 종류 조회용 메소드
+	public int selectKind(Connection con, int sNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int kind = 0;
+		
+		String query = prop.getProperty("selectKind");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				kind = rset.getInt("SPACE_KIND");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return kind;
+	}
+
+	
+	//OFFICE 인 경우 spaceInfo 조회용 메소드
+	public SpaceInfo selectOfficeSpaceIntro(Connection con, SpaceInfo si) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		SpaceInfo returnSi = null;
+		
+		String query = prop.getProperty("selectOfficeSpaceIntro");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, si.getSpaceNo());
+			
+			rset = pstmt.executeQuery();
+			
+			returnSi = new SpaceInfo();
+			returnSi.setSpaceNo(si.getSpaceNo());
+			returnSi.setSpaceKind(si.getSpaceKind());
+			String[] officeNo;
+			String temp = "";
+			while(rset.next()) {
+				returnSi.setHostNo(rset.getInt("HOST_NO"));
+				returnSi.setSpaceName(rset.getString("SPACE_NAME"));
+				returnSi.setSpaceAddress(rset.getString("SPACE_ADDRESS"));
+				returnSi.setSpaceIntro(rset.getString("SPACE_INTRO"));
+				returnSi.setSpaceShortIntro(rset.getString("SPACE_SHORT_INTRO"));
+				returnSi.setDidDayReserv(rset.getString("DID_DAY_RESERV"));
+				returnSi.setDayPay(rset.getInt("DAY_PAY"));
+				returnSi.setDidMonthReserv(rset.getString("DID_MONTH_RESERV"));
+				returnSi.setMonthPay(rset.getInt("MONTH_PAY"));
+				temp += rset.getString("OFFICE_NO") + "$";
+				returnSi.setSpaceSize(rset.getInt("OFFICE_SIZE"));
+				returnSi.setSpaceContainCount(rset.getInt("OFFICE_CAPACITY"));
+			}
+			officeNo = temp.split("\\$");
+			returnSi.setSpaceRoomCount(officeNo.length);
+			returnSi.setOfficeNo(officeNo);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return returnSi;
+	}
+
+	
+	//COWORK 인 경우 spaceInfo 조회용 메소드
+	public SpaceInfo selectCoworkSpaceIntro(Connection con, SpaceInfo si) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		SpaceInfo returnSi = null;
+		
+		String query = prop.getProperty("selectCoworkSpaceIntro");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, si.getSpaceNo());
+			
+			rset = pstmt.executeQuery();
+			
+			returnSi = new SpaceInfo();
+			returnSi.setSpaceNo(si.getSpaceNo());
+			returnSi.setSpaceKind(si.getSpaceKind());
+			
+			while(rset.next()) {
+				returnSi.setHostNo(rset.getInt("HOST_NO"));
+				returnSi.setSpaceName(rset.getString("SPACE_NAME"));
+				returnSi.setSpaceAddress(rset.getString("SPACE_ADDRESS"));
+				returnSi.setSpaceIntro(rset.getString("SPACE_INTRO"));
+				returnSi.setSpaceShortIntro(rset.getString("SPACE_SHORT_INTRO"));
+				returnSi.setDidDayReserv(rset.getString("DID_DAY_RESERV"));
+				returnSi.setDayPay(rset.getInt("DAY_PAY"));
+				returnSi.setDidMonthReserv(rset.getString("DID_MONTH_RESERV"));
+				returnSi.setMonthPay(rset.getInt("MONTH_PAY"));
+				returnSi.setTotalSeat(rset.getInt("NUMBER_SEATS"));
+				returnSi.setMaxReserv(rset.getInt("MAX_CAPACITY"));
+				returnSi.setFixSeat(rset.getInt("FIX_SEATS"));
+				returnSi.setUnfixSeat(rset.getInt("UNFIX_SEATS"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return returnSi;
+	}
+
+
+	//공간의 편의시설명을 조회용 메소드
+	public String[] selectSpaceConv(Connection con, int sNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String[] conv = null;
+		
+		String query = "selectSpaceConv";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sNo);
+			
+			rset = pstmt.executeQuery();
+			String returns = "";
+			while(rset.next()) {
+				returns += rset.getString(1) + "$";
+			}
+			
+			conv = returns.split("\\$");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return conv;
+	}
 }

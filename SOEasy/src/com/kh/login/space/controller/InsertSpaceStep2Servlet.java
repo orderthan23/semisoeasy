@@ -126,7 +126,6 @@ public class InsertSpaceStep2Servlet extends HttpServlet {
 		si.setDidMonthReserv(didMonthReserv);
 		si.setDayPay(dayPay);
 		si.setMonthPay(monthPay);
-		si.setSpacePayPolicy(spacePayPolicy);
 		si.setOpenChecks(openChecks);
 		si.setStartTimes(startTimes);
 		si.setEndTimes(endTimes);
