@@ -2,6 +2,7 @@ package com.kh.login.space.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,12 +36,12 @@ public class SearchServlet extends HttpServlet {
 		
 		System.out.println("search : " + search);
 		
-		ArrayList<SpaceInfo> list = new SearchService().selectList();
+		ArrayList<HashMap<String, Object>> list = new SearchService().selectList();
 		
 		String page = "";
 		if(search != null) {
 			page = "views/space/search1.jsp";
-//			request.setAttribute("list", list);
+			request.setAttribute("list", list);
 			request.setAttribute("search", search);
 		} else {
 			page = "views/common/errorPage.jsp";
