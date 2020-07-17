@@ -1,11 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*, com.kh.login.space.model.vo.*"%>
-<% String search = (String)request.getAttribute("search"); %>
+	pageEncoding="UTF-8" import="java.util.*, com.kh.login.host.manageReserve.model.vo.*"%>
+<% 
+	String search = (String)request.getAttribute("search");
+	ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) request.getAttribute("list");
+	
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int requestCount = pi.getRequestCount();
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <style>
+section {
+	min-height: 90%;
+	font-family: 'NanumSquare', sans-serif;
+	background: #ECECEC38;
+	font-weight: bolder;
+	width: 100%;
+}
 .photobox {
 	padding: 20px;
 	padding-bottom: 10px;
@@ -72,10 +90,31 @@
 	height: 30px;
 	border: 1px solid lightgray;
 }
+	.spaceBoardArea {
+		width:90%;
+		margin:0 auto;
+	}
+
+   .spaceBoard {
+   		border:1px solid white;
+   		display:inline-block;
+   		margin: 10px;
+   		align:center;
+   		
+   }
+   .spaceBoard:hover {
+   		cursor:pointer;
+   		opacity:0.8;
+   		transient:2s;
+   }
+   .text {
+   		background: white;
+   }
+
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="/web/css/layout.css">
 <title>SO Easy</title>
 
 </head>
@@ -84,10 +123,6 @@
 	<%-- <nav><%@ include file="../common/aside.jsp"%></nav> --%>
 
 	<section>
-
-
-		<% int col = 30;
-			int row = 3; %>
 
 		<div class="visual">
 			<div
@@ -161,6 +196,7 @@
 				</tr>
 			</table>
 		</div>
+		
 			<br>
 			<br>
 			<div class="typeBox">
@@ -169,54 +205,80 @@
 				<input class="sType" type="button" value="독립오피스"
 					style="background-color: transparent; border: 0px transparent solid;">
 			</div>
-			<table align="center" position="relative" id="spaceBoard">
-			</table>
+			<p style="margin-left:7%;">검색 결과 총 <%= listCount %>개</p>
+			<!-- Space Board Area -->
+			<div class="spaceBoardArea">
+			<% if(list != null) {
+			for (int i = 0; i < list.size(); i++) {
+				HashMap<String, Object> hmap = list.get(i);
+				%>
+				<div class="spaceBoard" align="center">
+					<input type="hidden" value="<%=hmap.get("spaceNo") %>">
+					<%-- <% System.out.println("spaceNo"); %> --%>
+					<div class="text">
+						<img src="<%=request.getContextPath() %>/images/area/<%=hmap.get("changeName") %>" width="400" height="265">
+					<p><%= hmap.get("spaceName") %></p>
+					<p><%= hmap.get("spacePayPolicy") %>
+					<p>가격 : <%= hmap.get("monthPay") %> / 개월 지역 : <%= hmap.get("spaceLocationFilter") %>
+					<br>
+					</div>
+					
+				</div>
+				<% } %>
+			<% } %>
+			<% if(listCount == 0){ %>
+					<div>
+						<div align="center" style="background:white; height:100px;">검색 결과가 없습니다.</div>
+					</div>
+				<% } %>
+			</div>
 		</div>
 	</section>
 	<br>
+	<!-- 페이징처리 버튼 -->
+		<div class = "pagingArea" align="center">
+      	<button onclick="location.href='<%=request.getContextPath()%>/select.se?currentPage=1'"><<</button>
+      	
+      	<% if(currentPage <= 1) { %>
+      	<button disabled><</button>
+      	<% } else { %>
+      	<button onclick="location.href='<%=request.getContextPath()%>/select.se?currentPage=<%=currentPage - 1%>'"><</button>
+      	<% } %>
+      	
+      	<% for(int p = startPage; p <= endPage; p++) {
+      			if(p == currentPage) {		
+      	%>
+      				<button disabled><%= p %></button>	
+      	<% 		} else {	%>
+      				<button onclick="location.href='<%=request.getContextPath()%>/select.se?currentPage=<%= p %>'"><%= p %></button>
+      	<% 		} %>
+      	
+      	<% } %>
+      	
+      	
+      	<% if(currentPage >= maxPage) { %>
+      	<button disabled>></button>
+      	<% } else { %>
+      	<button onclick="location.href='<%=request.getContextPath()%>/select.se?currentPage=<%=currentPage + 1%>'">></button>
+      	<% } %>
+      	
+      	<button onclick="location.href='<%=request.getContextPath()%>/select.se?currentPage=<%=maxPage%>'">>></button>
+      	</div>
 
 	<script>
-		$(this).ready(function() {
-			var col =<%=col%>;
-			var row =<%=row%>;
-			$('#spaceBoard').append(function() {
-				var sentence = "";
-				for (var i = 1; i <= col;) {
-				sentence += "<tr>";
-				for (var j = 1; j <= row; i++, j++) {
-				if (i > col) {
-				break;
-				}
-				sentence += ' <td class="photobox">'
-				+ '<article>'
-				+ '<img class="space-title-photo"'+ 'src="../../images/area/area'+i+'-1.png"> '
-				+ '<p> 코워킹 스페이스'+i+'번째 공간<br><br>'
-				+ '가격 '
-				+ (i* 10000) + '원 /개월'+ '</p>'
-				+ '</article>'
-				+ '</td>'
-			}
-			sentence += "</tr>"
-				}
-		return sentence;
-			});
-		});
-		
-		<%-- $(function(){
-	           $("#spaceBoard td").click(function() {
+	
+		$(function(){
+	           $(".spaceBoard").click(function() {
 	               //var num = $(this).children().children().eq(0).val();
 	               var num = $(this).find("input").val();
 	               console.log(num);
 	               
 				location.href="<%=request.getContextPath()%>/select.se?num=" + num;
 			});
-		}); --%>
+		});
 
 	</script>
-
-
-
-
+	<br><br>
 	<footer><%@ include file="/views/common/footer.jsp"%></footer>
 </body>
 </html>
