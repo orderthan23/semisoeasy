@@ -80,7 +80,7 @@
 	input[type=checkbox]{
 		cursor: pointer;
 	}
-	#add-tag{
+	/* #add-tag{
 		width: 60%;
 	}
 	#space-tag{
@@ -88,7 +88,7 @@
 		height: 200px;
 		border: 1px solid black;
 		border-radius: 10px;
-	}
+	} */
 	.thumbnail-in, #capital-img{
 		max-width: 100%;
 		max-height: 100%;
@@ -230,15 +230,25 @@
 				</tr>
 				<tr>
 					<td></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
 					<td></td>
-					<td align="right"><p class="text-limit" id="intro-limit">0 / 200</p></td>
+					<td>공간 한줄 소개 *</td>
+					<td><input type="text" maxlength="20" name="space-short-intro" id="space-short-intro"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td align="right"><p class="text-limit" id="intro-limit">0 / 400</p></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td>공간 소개 *</td>
 					<td>
-						<textarea rows="5" maxlength="200" name="space-intro" id="space-intro"></textarea>
+						<textarea rows="8" maxlength="400" name="space-intro" id="space-intro"></textarea>
 					</td>
 					<td></td>
 				</tr>
@@ -246,18 +256,18 @@
 					<td></td>
 					<td>&nbsp;</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td></td>
 					<td>공간 태그</td>
 					<td><input type="text" id="add-tag" onclick="this.select();">&nbsp;&nbsp;<button type="button" onclick="addTag();">추가하기</button></td>
 					<td></td>
-				</tr>
-				<tr>
+				</tr> -->
+				<!-- <tr>
 					<td></td>
 					<td></td>
 					<td><div id="space-tag"></div></td>
 					<td></td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td></td>
 					<td style="vertical-align: top;"><br>편의시설 *</td>
@@ -507,12 +517,12 @@
 			$("#space-intro").on("keyup", function(){
 				var si = $("#space-intro").val();
 				var len = si.length;
-				var maxlen = 200;
+				var maxlen = 400;
 				$("#intro-limit").text(len + " / " + maxlen);
 			}).on("keypress", function(){
 				var si = $("#space-intro").val();
 				var len = si.length;
-				var maxlen = 200;
+				var maxlen = 400;
 				$("#intro-limit").text(len + " / " + maxlen)
 			});
 			
@@ -533,7 +543,7 @@
 		
 		
 		//태그 추가하기
-		function addTag(){
+		/* function addTag(){
 			var tag = $("#add-tag").val();
 			var tags = $("#space-tag");
 			
@@ -547,7 +557,7 @@
 			
 			tags.append(tag_input);
 			$("#add-tag").val("");
-		};
+		}; */
 		
 		
 		//이미지 추가하기

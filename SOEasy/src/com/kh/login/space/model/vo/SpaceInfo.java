@@ -11,12 +11,14 @@ public class SpaceInfo implements java.io.Serializable {
 	private String spaceName;				//공간명
 	private int spaceKind;					//공간종류 독립오피스/코워킹스페이스
 	private String spaceAddress;			//공간주소
+	private String spaceShortIntro;			//공간 한줄 소개
 	private String spaceIntro;				//공간소개글
 	private String spaceLocationFilter;		//공간 위치 필터
 	private String[] conv;					//편의시설 배열
 	//독립오피스의 경우
 	private double spaceSize;				//공간사이즈
 	private int spaceRoomCount;				//공간재고
+	private String[] officeNo;				//호실번호
 	private int spaceContainCount;			//수용인원
 	//코워킹스페이스의 경우
 	private int unfixSeat;					//자유석 갯수
@@ -29,7 +31,6 @@ public class SpaceInfo implements java.io.Serializable {
 	private String didMonthReserv;			//월별 예약 가능 여부
 	private int dayPay;						//일당 금액
 	private int monthPay;					//월당 금액
-	private String spacePayPolicy;			//가격정책
 	private String[] openChecks;			//공간 휴무 여부
 	private int[] startTimes;				//공간 운영 시작 시간
 	private int[] endTimes;					//공간 운영 종료 시간
@@ -54,24 +55,26 @@ public class SpaceInfo implements java.io.Serializable {
 
 	public SpaceInfo() {}
 
-	public SpaceInfo(int spaceNo, int hostNo, String spaceName, int spaceKind, String spaceAddress, String spaceIntro,
-			String spaceLocationFilter, String[] conv, double spaceSize, int spaceRoomCount, int spaceContainCount,
-			int unfixSeat, int fixSeat, int totalSeat, int maxReserv, String didDayReserv, String didMonthReserv,
-			int dayPay, int monthPay, String spacePayPolicy, String[] openChecks, int[] startTimes, int[] endTimes,
-			double[] spaceRefundPolicy, String bsnsName, String representName, String bsnsLicenseNo, int bsnsType,
-			String bsnsCondition, String bsnsEvent, String bsnsAddress, String calEmail, String calPhone,
-			String calBank, String calAcctHolder, String calAcctNo, String sStatus) {
+	public SpaceInfo(int spaceNo, int hostNo, String spaceName, int spaceKind, String spaceAddress,
+			String spaceShortIntro, String spaceIntro, String spaceLocationFilter, String[] conv, double spaceSize,
+			int spaceRoomCount, String[] officeNo, int spaceContainCount, int unfixSeat, int fixSeat, int totalSeat,
+			int maxReserv, String didDayReserv, String didMonthReserv, int dayPay, int monthPay, String[] openChecks,
+			int[] startTimes, int[] endTimes, double[] spaceRefundPolicy, String bsnsName, String representName,
+			String bsnsLicenseNo, int bsnsType, String bsnsCondition, String bsnsEvent, String bsnsAddress,
+			String calEmail, String calPhone, String calBank, String calAcctHolder, String calAcctNo, String sStatus) {
 		super();
 		this.spaceNo = spaceNo;
 		this.hostNo = hostNo;
 		this.spaceName = spaceName;
 		this.spaceKind = spaceKind;
 		this.spaceAddress = spaceAddress;
+		this.spaceShortIntro = spaceShortIntro;
 		this.spaceIntro = spaceIntro;
 		this.spaceLocationFilter = spaceLocationFilter;
 		this.conv = conv;
 		this.spaceSize = spaceSize;
 		this.spaceRoomCount = spaceRoomCount;
+		this.officeNo = officeNo;
 		this.spaceContainCount = spaceContainCount;
 		this.unfixSeat = unfixSeat;
 		this.fixSeat = fixSeat;
@@ -81,7 +84,6 @@ public class SpaceInfo implements java.io.Serializable {
 		this.didMonthReserv = didMonthReserv;
 		this.dayPay = dayPay;
 		this.monthPay = monthPay;
-		this.spacePayPolicy = spacePayPolicy;
 		this.openChecks = openChecks;
 		this.startTimes = startTimes;
 		this.endTimes = endTimes;
@@ -141,6 +143,14 @@ public class SpaceInfo implements java.io.Serializable {
 		this.spaceAddress = spaceAddress;
 	}
 
+	public String getSpaceShortIntro() {
+		return spaceShortIntro;
+	}
+
+	public void setSpaceShortIntro(String spaceShortIntro) {
+		this.spaceShortIntro = spaceShortIntro;
+	}
+
 	public String getSpaceIntro() {
 		return spaceIntro;
 	}
@@ -179,6 +189,14 @@ public class SpaceInfo implements java.io.Serializable {
 
 	public void setSpaceRoomCount(int spaceRoomCount) {
 		this.spaceRoomCount = spaceRoomCount;
+	}
+
+	public String[] getOfficeNo() {
+		return officeNo;
+	}
+
+	public void setOfficeNo(String[] officeNo) {
+		this.officeNo = officeNo;
 	}
 
 	public int getSpaceContainCount() {
@@ -251,14 +269,6 @@ public class SpaceInfo implements java.io.Serializable {
 
 	public void setMonthPay(int monthPay) {
 		this.monthPay = monthPay;
-	}
-
-	public String getSpacePayPolicy() {
-		return spacePayPolicy;
-	}
-
-	public void setSpacePayPolicy(String spacePayPolicy) {
-		this.spacePayPolicy = spacePayPolicy;
 	}
 
 	public String[] getOpenChecks() {
@@ -400,20 +410,19 @@ public class SpaceInfo implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "SpaceInfo [spaceNo=" + spaceNo + ", hostNo=" + hostNo + ", spaceName=" + spaceName + ", spaceKind="
-				+ spaceKind + ", spaceAddress=" + spaceAddress + ", spaceIntro=" + spaceIntro + ", spaceLocationFilter="
-				+ spaceLocationFilter + ", conv=" + Arrays.toString(conv) + ", spaceSize=" + spaceSize
-				+ ", spaceRoomCount=" + spaceRoomCount + ", spaceContainCount=" + spaceContainCount + ", unfixSeat="
-				+ unfixSeat + ", fixSeat=" + fixSeat + ", totalSeat=" + totalSeat + ", maxReserv=" + maxReserv
-				+ ", didDayReserv=" + didDayReserv + ", didMonthReserv=" + didMonthReserv + ", dayPay=" + dayPay
-				+ ", monthPay=" + monthPay + ", spacePayPolicy=" + spacePayPolicy + ", openChecks="
-				+ Arrays.toString(openChecks) + ", startTimes=" + Arrays.toString(startTimes) + ", endTimes="
-				+ Arrays.toString(endTimes) + ", spaceRefundPolicy=" + Arrays.toString(spaceRefundPolicy)
-				+ ", bsnsName=" + bsnsName + ", representName=" + representName + ", bsnsLicenseNo=" + bsnsLicenseNo
-				+ ", bsnsType=" + bsnsType + ", bsnsCondition=" + bsnsCondition + ", bsnsEvent=" + bsnsEvent
-				+ ", bsnsAddress=" + bsnsAddress + ", calEmail=" + calEmail + ", calPhone=" + calPhone + ", calBank="
-				+ calBank + ", calAcctHolder=" + calAcctHolder + ", calAcctNo=" + calAcctNo + ", sStatus=" + sStatus
-				+ "]";
+				+ spaceKind + ", spaceAddress=" + spaceAddress + ", spaceShortIntro=" + spaceShortIntro
+				+ ", spaceIntro=" + spaceIntro + ", spaceLocationFilter=" + spaceLocationFilter + ", conv="
+				+ Arrays.toString(conv) + ", spaceSize=" + spaceSize + ", spaceRoomCount=" + spaceRoomCount
+				+ ", officeNo=" + Arrays.toString(officeNo) + ", spaceContainCount=" + spaceContainCount
+				+ ", unfixSeat=" + unfixSeat + ", fixSeat=" + fixSeat + ", totalSeat=" + totalSeat + ", maxReserv="
+				+ maxReserv + ", didDayReserv=" + didDayReserv + ", didMonthReserv=" + didMonthReserv + ", dayPay="
+				+ dayPay + ", monthPay=" + monthPay + ", openChecks=" + Arrays.toString(openChecks) + ", startTimes="
+				+ Arrays.toString(startTimes) + ", endTimes=" + Arrays.toString(endTimes) + ", spaceRefundPolicy="
+				+ Arrays.toString(spaceRefundPolicy) + ", bsnsName=" + bsnsName + ", representName=" + representName
+				+ ", bsnsLicenseNo=" + bsnsLicenseNo + ", bsnsType=" + bsnsType + ", bsnsCondition=" + bsnsCondition
+				+ ", bsnsEvent=" + bsnsEvent + ", bsnsAddress=" + bsnsAddress + ", calEmail=" + calEmail + ", calPhone="
+				+ calPhone + ", calBank=" + calBank + ", calAcctHolder=" + calAcctHolder + ", calAcctNo=" + calAcctNo
+				+ ", sStatus=" + sStatus + "]";
 	}
-
 
 }

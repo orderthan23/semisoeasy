@@ -1,12 +1,17 @@
 package com.kh.login.space.model.service;
 
-import static com.kh.login.common.JDBCTemplate.*;
+import static com.kh.login.common.JDBCTemplate.close;
+import static com.kh.login.common.JDBCTemplate.commit;
+import static com.kh.login.common.JDBCTemplate.getConnection;
+import static com.kh.login.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.login.space.model.dao.SpaceDao;
 import com.kh.login.space.model.vo.Image;
+import com.kh.login.space.model.vo.Review;
 import com.kh.login.space.model.vo.SpaceInfo;
 
 public class SpaceService {
@@ -149,6 +154,64 @@ public class SpaceService {
 		close(con);
 		
 		return result;
+	}
+	
+	//spaceIntro 내용 조회용 메소드
+	public ArrayList<HashMap<String, Object>> selectOneSpaceInfo(int sNo) {
+		
+		Connection con = getConnection();
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap<String, Object> hmap = null;
+		
+		SpaceInfo si = new SpaceInfo();
+		si.setSpaceNo(sNo);
+		ArrayList<Image> imgList = new ArrayList<>();
+		ArrayList<Review> reviewList = new ArrayList<>();
+		//ArrayList<QnA> qnaList = new ArrayList<>();
+		//QnA vo가 만들어지면 넣을 것. -- 반드시!
+		
+		//공간 종류를 조회
+		int kind = new SpaceDao().selectKind(con, sNo);
+		si.setSpaceKind(kind);
+		//공간 종류에 따라 office 와 cowork 에 대한 정보를 조회
+		if(kind == 1) {
+			si = new SpaceDao().selectOfficeSpaceIntro(con, si);
+		} else if(kind == 2) {
+			si = new SpaceDao().selectCoworkSpaceIntro(con, si);
+		}
+		//공간 편의시설 조회
+		String[] conv = new SpaceDao().selectSpaceConv(con, sNo);
+		//공간 운영시간 조회
+		si = new SpaceDao().selectSpaceOptime(con, si);
+		//공간 환불정책 조회
+		si = new SpaceDao().selectRefundPolicy(con, si);
+		
+		si.setConv(conv);
+		
+		//img 조회
+		imgList = new SpaceDao().selectSpaceImgList(con, sNo);
+		//review 조회
+		reviewList = new SpaceDao().selectSpaceReviewList(con, sNo);
+		//QnA 조회 -- 나중에 추가할 것 반드시!!
+		//qnaList = new SpaceDao().selectSpaceQnaList(con,sNo);
+		
+		
+		
+		hmap.put("spaceInfo", si);
+		hmap.put("imgList", imgList);
+		hmap.put("reviewList", reviewList);
+		//hmap.put("QnAList", qnaList);
+		//나중에 추가할 것 -- 반드시!
+		list.add(hmap);
+		
+		if(si != null && imgList != null && reviewList != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		
+		return list;
 	}
 
 }

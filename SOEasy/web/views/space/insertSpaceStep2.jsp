@@ -110,7 +110,7 @@
 					</td>
 					<td width="5%"></td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td></td>
 					<td></td>
 					<td align="right"><p class="text-limit" id="policy-limit">0 / 300</p></td>
@@ -123,7 +123,7 @@
 						<textarea rows="5" maxlength="300" name="policy-intro" id="policy-intro"></textarea>
 					</td>
 					<td></td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td>
 						
@@ -146,7 +146,7 @@
 									</td>
 									<td width="60%">
 										<input type="hidden" name="mon-open-check" value="open">
-										<select name="mon-start-time">
+										<select name="mon-start-time" id="mon-start-time">
 											<option value="00" selected>00:00</option>
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
@@ -173,7 +173,7 @@
 											<option value="23">23:00</option>
 										</select>
 										&nbsp;~&nbsp;
-										<select name="mon-end-time">
+										<select name="mon-end-time" id="mon-end-time">
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
 											<option value="03">03:00</option>
@@ -209,7 +209,7 @@
 									</td>
 									<td width="60%">
 										<input type="hidden" name="tue-open-check" value="open">
-										<select name="tue-start-time">
+										<select name="tue-start-time" id="tue-start-time">
 											<option value="00" selected>00:00</option>
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
@@ -236,7 +236,7 @@
 											<option value="23">23:00</option>
 										</select>
 										&nbsp;~&nbsp;
-										<select name="tue-end-time">
+										<select name="tue-end-time" id="tue-end-time">
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
 											<option value="03">03:00</option>
@@ -272,7 +272,7 @@
 									</td>
 									<td width="60%">
 										<input type="hidden" name="wed-open-check" value="open">
-										<select name="wed-start-time">
+										<select name="wed-start-time" id="wed-start-time">
 											<option value="00" selected>00:00</option>
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
@@ -299,7 +299,7 @@
 											<option value="23">23:00</option>
 										</select>
 										&nbsp;~&nbsp;
-										<select name="wed-end-time">
+										<select name="wed-end-time" id="wed-end-time">
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
 											<option value="03">03:00</option>
@@ -335,7 +335,7 @@
 									</td>
 									<td width="60%">
 										<input type="hidden" name="thu-open-check" value="open">
-										<select name="thu-start-time">
+										<select name="thu-start-time" id="thu-start-time">
 											<option value="00" selected>00:00</option>
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
@@ -362,7 +362,7 @@
 											<option value="23">23:00</option>
 										</select>
 										&nbsp;~&nbsp;
-										<select name="thu-end-time">
+										<select name="thu-end-time" id="thu-end-time">
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
 											<option value="03">03:00</option>
@@ -398,7 +398,7 @@
 									</td>
 									<td width="60%">
 										<input type="hidden" name="fri-open-check" value="open">
-										<select name="fri-start-time">
+										<select name="fri-start-time" id="fri-start-time">
 											<option value="00" selected>00:00</option>
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
@@ -425,7 +425,7 @@
 											<option value="23">23:00</option>
 										</select>
 										&nbsp;~&nbsp;
-										<select name="fri-end-time">
+										<select name="fri-end-time" id="fri-end-time">
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
 											<option value="03">03:00</option>
@@ -461,7 +461,7 @@
 									</td>
 									<td width="60%">
 										<input type="hidden" name="sat-open-check" value="open">
-										<select name="sat-start-time">
+										<select name="sat-start-time" id="sat-start-time">
 											<option value="00" selected>00:00</option>
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
@@ -488,7 +488,7 @@
 											<option value="23">23:00</option>
 										</select>
 										&nbsp;~&nbsp;
-										<select name="sat-end-time">
+										<select name="sat-end-time" id="sat-end-time">
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
 											<option value="03">03:00</option>
@@ -524,7 +524,7 @@
 									</td>
 									<td width="60%">
 										<input type="hidden" name="sun-open-check" value="open">
-										<select name="sun-start-time">
+										<select name="sun-start-time" id="sun-start-time">
 											<option value="00" selected>00:00</option>
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
@@ -551,7 +551,7 @@
 											<option value="23">23:00</option>
 										</select>
 										&nbsp;~&nbsp;
-										<select name="sun-end-time">
+										<select name="sun-end-time" id="sun-end-time">
 											<option value="01">01:00</option>
 											<option value="02">02:00</option>
 											<option value="03">03:00</option>
@@ -698,7 +698,7 @@
 		});
 		
 		//가격 정책 입력시 글자 수 표시
-		$("#policy-intro").on("keyup", function(){
+		/* $("#policy-intro").on("keyup", function(){
 			var si = $("#policy-intro").val();
 			var len = si.length;
 			var maxlen = 300;
@@ -708,7 +708,7 @@
 			var len = si.length;
 			var maxlen = 300;
 			$("#policy-limit").text(len + " / " + maxlen)
-		});
+		}); */
 		
 		//환불정책 선택
 		$("#soeasy").click(function() {
@@ -751,7 +751,7 @@
 		});
 		
 		$("#mon24hr").is(":checked", function(){
-			$("select[name=mon-start-time] option[value=00]").prop("selected", "selected").change();
+			$("#mon-start-time option[value=00]").prop("selected", true);
 		});
 	</script>
 </body>

@@ -124,7 +124,7 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			
 			String spaceName = multiRequest.getParameter("space-name");
 			String spaceIntro = multiRequest.getParameter("space-intro");
-			String[] spaceTags = multiRequest.getParameterValues("space-tag");
+			String spaceShortIntro = multiRequest.getParameter("space-short-intro");
 			String[] conv = multiRequest.getParameterValues("conv");
 			String spaceAddress = multiRequest.getParameter("space-address");
 			String spaceLocationFilter = multiRequest.getParameter("siNm") + "," + multiRequest.getParameter("sggNm") + "," + multiRequest.getParameter("emdNm");
@@ -133,6 +133,7 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			si.setHostNo(memberNo);
 			si.setSpaceName(spaceName);
 			si.setSpaceIntro(spaceIntro);
+			si.setSpaceShortIntro(spaceShortIntro);
 			si.setSpaceKind(kind);
 			
 			si.setConv(conv);
