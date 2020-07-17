@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.space.model.service.SearchService;
 import com.kh.login.space.model.vo.SpaceInfo;
 
@@ -36,15 +37,54 @@ public class SearchServlet extends HttpServlet {
 		
 		System.out.println("search : " + search);
 		
-		ArrayList<HashMap<String, Object>> list = new SearchService().selectList();
+		
+		int currentPage;
+		int limit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		limit = 12;
+		
+		int listCount = new SearchService().getListCount();
+		
+		maxPage = (int) ((double) listCount / limit + 0.9);
+		
+		startPage = (((int) ((double) currentPage / 10 + 0.9)) -1) * 10 + 1;
+		
+		endPage = startPage + 10 - 1;
+		
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
+		System.out.println("listCount : " + listCount);
+		System.out.println("currentPage : " + currentPage);
+		System.out.println("limit : " + limit);
+		System.out.println("maxPage : " + maxPage);
+		System.out.println("startPage : " + startPage);
+		System.out.println("endPage : " + endPage);
+
+		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage, 0);
+		
+		
+		ArrayList<HashMap<String, Object>> list = new SearchService().selectList(pi);
 		
 		String page = "";
 		if(search != null) {
-			page = "views/space/search1.jsp";
+			page = "/views/space/search1.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("search", search);
+			request.setAttribute("pi", pi);
 		} else {
-			page = "views/common/errorPage.jsp";
+			page = "/views/common/errorPage.jsp";
 			request.setAttribute("msg", "공간 검색 실패!");
 		}
 		

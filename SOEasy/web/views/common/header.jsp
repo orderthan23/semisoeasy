@@ -104,7 +104,7 @@
 		<a href="/login/views/space/insertSpaceStep1.jsp" class="sub" align="center" id="thirdHeaderMenu">공간 등록</a></span> <span class="subMenu"><br>
 
 		<a href="/login/selectList.no" class="sub" align="center" id="fourthHeaderMenu">공지 사항</a></span> &nbsp;&nbsp;
-		<form action="select.se" method="get"> 
+		<form action="/login/select.se" method="get"> 
 
 
 			<input type="search" name="search" id="searchBar" placeholder="검색어를 입력하세요">
@@ -128,7 +128,8 @@
 					$('#secondHeaderMenu').attr("href","<%=request.getContextPath()%>/selectAll.me").text("회원관리"); 
 					$('#thirdHeaderMenu').attr("href","/login/views/admin/adminHome.jsp").text("관리자홈"); break; 
 			
-			default: break;		
+			default: break;
+				
 			}
 			
 			
