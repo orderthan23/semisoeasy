@@ -1,19 +1,21 @@
 package com.kh.login.member.model.service;
 
-import static com.kh.login.common.JDBCTemplate.*;
+import static com.kh.login.common.JDBCTemplate.close;
+import static com.kh.login.common.JDBCTemplate.commit;
+import static com.kh.login.common.JDBCTemplate.getConnection;
+import static com.kh.login.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.member.controller.LoginServlet;
 import com.kh.login.member.model.dao.MemberDao;
 import com.kh.login.member.model.vo.Member;
+import com.kh.login.member.model.vo.RecoverMember;
 
 public class MemberService {
-
+	//권한 을 조회 하는 서비스
 	public Member loginCheck(Member requestMember) {
 		Connection con = getConnection();
 		
@@ -45,6 +47,7 @@ public class MemberService {
 		
 		
 	}
+	//중복 닉네임을 체크하는 메소드
 	public int nickCheck(String nickName) {
 		Connection con = getConnection();
 		
@@ -64,6 +67,7 @@ public class MemberService {
 		
 		return result;
 	}
+	//같은 이름과 연락처로 가입된 회원이 있는지 확인하는 메소드
 	public int checkYou(String phoneNum, String name) {
 		Connection con = getConnection();
 		
@@ -73,6 +77,7 @@ public class MemberService {
 		
 		return result;
 	}
+	//회원가입 메소드
 	public int insertMember(Member requestMember) {
 		Connection con = getConnection();
 		
@@ -93,6 +98,7 @@ public class MemberService {
 		
 		return insertResult;
 	}
+	//아이디 찾기 메소드
 	public String findId(String name, String email) {
 		Connection con = getConnection();
 		
@@ -102,6 +108,7 @@ public class MemberService {
 		
 		return resultId;
 	}
+	//비밀번호 찾기 메소드
 	public int findPwd(String id, String email) {
 		Connection con = getConnection();
 		int resultPwd = new MemberDao().findPwd(con,id,email);
@@ -112,6 +119,8 @@ public class MemberService {
 		
 		
 	}
+	
+	//비밀번호 찾기 후 비밀번호를 변경하는 메소드
 	public int updatePwd(String password, int memNo) {
 		Connection con = getConnection();
 		
@@ -126,6 +135,7 @@ public class MemberService {
 		return result;
 	}
 	
+	//비밀번호가 일치하는지 확인하는 메소드
 	public int correctPwd(String password, String userId) {
 		Connection con = getConnection();
 		
@@ -135,6 +145,7 @@ public class MemberService {
 		
 		return result;
 	}
+	//회원 탈퇴 메소드
 	public int deleteMember(String userId, String password, String reason) {
 		Connection con = getConnection();
 		
@@ -230,6 +241,8 @@ public class MemberService {
 		
 		return updatingMember;
 	}
+	
+	//전체 회원수를 조회하는 메소드
 	public int getListCount() {
 		Connection con = getConnection();
 		int listCount = new MemberDao().getListCount(con);
@@ -240,6 +253,7 @@ public class MemberService {
 		
 		
 	}
+	//전체 회원정보를 조회하는 메소드
 	public ArrayList<Member> selectAllList(PageInfo pi) {
 		Connection con = getConnection();
 		ArrayList<Member> memberList = new MemberDao().selectAllList(con,pi);
@@ -250,6 +264,7 @@ public class MemberService {
 		
 		
 	}
+	//삭제할 프로필 사진의 주소를 조회하는 메소드
 	public String findImg(Member updateMember) {
 		Connection con = getConnection();
 		String deleteFileName = new MemberDao().findImg(con, updateMember);
@@ -257,6 +272,8 @@ public class MemberService {
 		close(con);
 		return deleteFileName;
 	}
+	
+	//회원을 영구정지 시키는 메소드
 	public int blockMember(String userId) {
 		Connection con = getConnection();
 		int result = new MemberDao().blockMember(con,userId);
@@ -270,6 +287,8 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	//검색 조건에 맞는 전체 결과갯수를 조회하는 메소드
 	public int getListCount(String isActive, String power) {
 		Connection con = getConnection();
 		int listCount = new MemberDao().getListCount(con,isActive,power);
@@ -278,6 +297,9 @@ public class MemberService {
 		
 		return listCount;
 	}
+	
+	
+	//검색 조건에 맞는 전체 결과를 조회하는 메소드
 	public ArrayList<Member> selectAllList(PageInfo pi, String isActive, String power) {
 		Connection con = getConnection();
 		ArrayList<Member> memberList = new MemberDao().selectAllList(con,pi,isActive,power);
@@ -287,6 +309,7 @@ public class MemberService {
 		return memberList;
 	
 	}
+	//키워드 검색에 해당하는 갯수를 조회하는 메소드
 	public int getListCount(String keyword) {
 		Connection con = getConnection();
 		int listCount = new MemberDao().getListCount(con,keyword);
@@ -294,6 +317,8 @@ public class MemberService {
 		
 		return listCount;
 	}
+	
+	//키워드 검색에 해당하는 정보를 조회하는 메소드
 	public ArrayList<Member> selectAllList(PageInfo pi, String keyword) {
 		Connection con = getConnection();
 		ArrayList<Member> memberList = new MemberDao().selectAllList(con,pi,keyword);
@@ -301,6 +326,69 @@ public class MemberService {
 		close(con);
 		
 		return memberList;
+	}
+	
+	//복구 요청이 온 모든 회원의 갯수를 조회하는 메소드
+	public int getListRecoverCount() {
+		Connection con = getConnection();
+		int listCount = new MemberDao().getListRecoverCount(con);
+		close(con);
+		return listCount;
+	}
+	
+	//복구 요청이 온 모든 회원의 정보를 조회하는 메소드
+	public ArrayList<RecoverMember> selectRecover(PageInfo pi) {
+		Connection con = getConnection();
+		ArrayList<RecoverMember> recoverList = new MemberDao().selectRecover(con,pi);
+		
+		close(con);
+		
+		return recoverList;
+	}
+	//회원 복구 요청을 할 수 있는지 알아보는 메소드
+	public int canRecover(String userId, int userNo) {
+		Connection con = getConnection();
+		int result = -1;
+		int howLongAgo = new MemberDao().canRecover(con, userId);
+		//탈퇴한지 30일이 지났는가?
+		System.out.println("howLongAgo : " +howLongAgo);
+		if (howLongAgo < 30) {
+
+			int isFirstTime = new MemberDao().isFirstTime(con, userNo);
+			System.out.println("firstTime : " +isFirstTime);
+			if (isFirstTime > 0) { //회원복구를 이미 신청했는가?
+				
+				result = 2;
+			} else {
+				result = 1;
+			}
+
+		} else {
+			result = 0;
+		}
+
+		close(con);
+
+		return result;
+	}
+	//회원 복구 요청을 인서트하고 회원 정보에서 상태를 w로 바꿈
+	public int requestRecover(int memberNo, String email) {
+		Connection con = getConnection();
+		int result = 0;
+		int result1 = new MemberDao().requestRecover(con,memberNo,email);
+		
+		int result2 = new MemberDao().updateRecoverStatus(con,memberNo);
+		
+		if(result1>0 && result2>0) {
+			
+			commit(con);
+			result = 1;
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		return result;
 	}
 
 }

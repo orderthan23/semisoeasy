@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 			
-			if(loginUser.getmStatus().equals("N")) {
+			if(loginUser.getmStatus().equals("N")|| loginUser.getmStatus().equals("W")) {
 				
 				response.sendRedirect("/login/views/member/requestRecover.jsp");
 				

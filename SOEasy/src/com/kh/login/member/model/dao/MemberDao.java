@@ -1,7 +1,6 @@
 package com.kh.login.member.model.dao;
 
-import static com.kh.login.common.JDBCTemplate.*;
-
+import static com.kh.login.common.JDBCTemplate.close;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -17,6 +16,7 @@ import java.util.Properties;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.member.controller.LoginServlet;
 import com.kh.login.member.model.vo.Member;
+import com.kh.login.member.model.vo.RecoverMember;
 
 public class MemberDao {
 
@@ -706,6 +706,162 @@ public class MemberDao {
 		}
 		
 		return memberList;
+	}
+
+	public int getListRecoverCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("listCount4");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return listCount;
+		
+	
+	}
+	//모든 회원 복구 요청 내역을 조회
+	public ArrayList<RecoverMember> selectRecover(Connection con, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<RecoverMember> recoverList = null;
+		String query = prop.getProperty("selectAllRecoverList");
+		int startRow =(pi.getCurrentPage()-1)*pi.getLimit()+1;
+		int endRow = startRow + pi.getLimit()-1;
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2,endRow);
+			
+			rset = pstmt.executeQuery();
+			recoverList = new ArrayList<>();
+			
+			while(rset.next()) {
+				RecoverMember rm = new RecoverMember();
+				rm.setrNum(rset.getInt("RESTORE_NO"));
+				rm.setUserId(rset.getString("M_ID"));
+				rm.setDropReason(rset.getString("M_DROP_REASON"));
+				rm.setEmail(rset.getString("RESTORE_EMAIL"));
+				rm.setRequestDate(rset.getDate("RESTORE_REQUEST_DATE"));
+				rm.setrStatus(rset.getInt("RESTORE_STATUS"));
+				recoverList.add(rm);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return recoverList;
+	}
+
+	public int canRecover(Connection con, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int howLongAgo = -1;//에러가나면 0일이라 합격되기때문
+		String query = prop.getProperty("canRecover");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				howLongAgo = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return howLongAgo;
+	}
+
+	//복구 요청한 사람의 정보를 복구 요청 테이블에 인서트
+	public int requestRecover(Connection con, int memberNo, String email) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("requestRecover");
+		
+		try {
+			pstmt= con.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			pstmt.setString(2,email);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} close(pstmt);
+		
+		
+		
+		return result;
+	}
+
+	public int updateRecoverStatus(Connection con, int memberNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateRecoverStatus");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	//복구 요청을 이미한 적이 있는지 조회
+	public int isFirstTime(Connection con, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = prop.getProperty("isFirstTime");
+		try {
+			pstmt =con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
 	}
 
 
