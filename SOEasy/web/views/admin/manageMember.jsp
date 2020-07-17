@@ -212,23 +212,26 @@
 		
 		<br>
 		<div id="wrapper">
-		<div id="modalArea" class="modalArea">
-  <div id="modalBg" class="modalBg"></div>
-  <div class="modalWrapper">
-    <div class="modalContents">
-      <div style="background: #E4EEFA; text-align: center; width:100%;">
-         <h1 style="margin:0;">경고</h1>
-      </div>
-      <br>
-      <p align="center" style="font-size: 30px;" id="blockMan"></p>
-      <div style="width:50%; margin-left: auto; margin-right: auto; align:center;" id="buttonZone">
-      <button style="margin-right: 10%; " onclick="blockMember();">네</button><button onclick ="closeModal();">아니오</button>
-      </div>
-    </div>
-    
-  </div>
-</div>
-		<br>
+			<div id="modalArea" class="modalArea">
+				<div id="modalBg" class="modalBg"></div>
+				<div class="modalWrapper">
+					<div class="modalContents">
+						<div style="background: #E4EEFA; text-align: center; width: 100%;">
+							<h1 style="margin: 0;">경고</h1>
+						</div>
+						<br>
+						<p align="center" style="font-size: 30px;" id="blockMan"></p>
+						<div
+							style="width: 50%; margin-left: auto; margin-right: auto; align: center;"
+							id="buttonZone">
+							<button style="margin-right: 10%;" onclick="blockMember();">네</button>
+							<button onclick="closeModal();">아니오</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<br>
 		<h1 style="margin : 0;">회원 목록</h1>
 		<br>
 			

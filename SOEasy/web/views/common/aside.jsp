@@ -264,7 +264,7 @@ span.bar {
 				$('#secondSubNav').attr("href","#").text("공간 삭제 요청 조회");
 				$('#thirdSubNav').attr("href","#").text("정산 관리");
 				$('#fourthSubNav').attr("href","<%=request.getContextPath()%>/selectAll.me").text("회원 관리");
-				$('#fifthSubNav').attr("href","#").text("회원 복구 요청");
+				$('#fifthSubNav').attr("href","<%=request.getContextPath()%>/selectRecover.me").text("회원 복구 요청");
 				$('#sixthSubNav').attr("href","#").text("신고 건 조회");
 				$('#seventhSubNav').attr("href","#").text("Q&A 관리");
 				$('#eighthSubNav').attr("href","#").text("공지사항 작성");
