@@ -37,7 +37,8 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		
 		//reservNo는 시퀀스로
 		int guestNo = loginUser.getMemberNo();
-		int spaceNo = 100; //나중에 이미 등록된 공간정보에서 공간번호 빼와야할듯
+		//int spaceNo = Integer.parseInt(request.getParameter("spaceNo")); //나중에 이미 등록된 공간정보에서 공간번호 빼와야할듯
+		int spaceNo = 100;
 		String fixUnfix = "F";
 		int officeNo = 101;
 		String startDate = request.getParameter("startDate");
