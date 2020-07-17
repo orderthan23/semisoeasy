@@ -32,6 +32,8 @@ public class SearchOptionServlet extends HttpServlet {
 		case 3: isActive="M_STATUS IN('N','X')"; break;
 		}
 		
+		String root = request.getRequestURI();
+		
 		String power = "";
 		int powerCode = Integer.parseInt(request.getParameter("power"));
 		switch(powerCode) {
@@ -39,9 +41,9 @@ public class SearchOptionServlet extends HttpServlet {
 		case 2: power="AND P_TYPE=1"; break;
 		case 3: power="AND P_TYPE=2"; break;
 		}
+
 		
-		System.out.println("isActive : "+isActive);
-		System.out.println("power : "+ power);
+		String url = PageInfo.customQString(request.getQueryString(), 2);
 		
 		int currentPage; //현재 페이지를 표시할 변수
 		int limit; //한 페이지에 게시글이 몇 개 보여질 것인지 표시
@@ -87,6 +89,8 @@ public class SearchOptionServlet extends HttpServlet {
 			page = "views/admin/manageMember.jsp";
 			request.setAttribute("memberList", memberList);
 			request.setAttribute("pi", pi);
+			request.setAttribute("url", url);
+			request.setAttribute("root", root);
 		}else {
 			page="views/common/errorpage.jsp";
 			request.setAttribute("msg", "회원목록  조회 실패 !");

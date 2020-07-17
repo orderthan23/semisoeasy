@@ -1,7 +1,8 @@
-package com.kh.login.member.controller;
+package com.kh.login.space.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
-import com.kh.login.member.model.service.MemberService;
-import com.kh.login.member.model.vo.Member;
+import com.kh.login.space.model.service.MainService;
 
-@WebServlet("/selectAll.me")
-public class SelectAllMemberServlet extends HttpServlet {
+@WebServlet("/main.sp")
+public class MainPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public SelectAllMemberServlet() {
+    public MainPageServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int currentPage; //현재 페이지를 표시할 변수
 		int limit; //한 페이지에 게시글이 몇 개 보여질 것인지 표시
 		int maxPage; //전체 페이지에서 가장 마지막 페이지
@@ -41,9 +41,7 @@ public class SelectAllMemberServlet extends HttpServlet {
 		}
 		
 		limit = 10;
-		
-		
-		int listCount = new MemberService().getListCount();
+		int listCount = new MainService().getListCount();
 		System.out.println("list count : "+ listCount);
 		//총 페이지 수 계산
 		//예를 들면 목록 갯수가 123개 이면 
@@ -63,27 +61,8 @@ public class SelectAllMemberServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage,0);
-		ArrayList<Member> memberList = new MemberService().selectAllList(pi);
-	
 		
-		
-	
-		String page ="";
-		
-		if(memberList !=null) {
-			page = "views/admin/manageMember.jsp";
-			request.setAttribute("memberList", memberList);
-			request.setAttribute("pi", pi);
-			request.setAttribute("url", url);
-			request.setAttribute("root", root);
-		}else {
-			page="views/common/errorpage.jsp";
-			request.setAttribute("msg", "회원목록  조회 실패 !");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
-		
-	
+		ArrayList<HashMap<String,Object>> spaceList = new MainService().selectAll(pi);
 	}
 
 	/**

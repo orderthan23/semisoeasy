@@ -601,7 +601,7 @@ public class MemberDao {
 		ArrayList<Member> memberList = null;
 		int startRow =(pi.getCurrentPage()-1)*pi.getLimit()+1;
 		int endRow = startRow + pi.getLimit()-1;
-		String query2=" "+isActive+" "+power+" AND RNUM BETWEEN "+startRow+" AND "+endRow;
+		String query2=" "+isActive+" "+power+"ORDER BY MEMBER_NO DESC )) WHERE RNUM BETWEEN "+startRow+" AND "+endRow;
 		String query = prop.getProperty("selectAllList2")+" "+query2;
 		System.out.println(query);
 		

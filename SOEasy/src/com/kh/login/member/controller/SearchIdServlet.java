@@ -33,7 +33,11 @@ public class SearchIdServlet extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 		keyword = "%"+keyword+"%";
 		currentPage = 1;
+	
+
+		String url = PageInfo.customQString(request.getQueryString(), 2);
 		
+		String root = request.getRequestURI();
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
@@ -61,6 +65,8 @@ public class SearchIdServlet extends HttpServlet {
 			page = "views/admin/manageMember.jsp";
 			request.setAttribute("memberList", memberList);
 			request.setAttribute("pi", pi);
+			request.setAttribute("url", url);
+			request.setAttribute("root", root);
 		}else {
 			page="views/common/errorpage.jsp";
 			request.setAttribute("msg", "회원목록  조회 실패 !");
