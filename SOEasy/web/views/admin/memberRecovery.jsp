@@ -244,7 +244,7 @@
 			
 		<br>
 		<h1 style="margin : 0;">회원 복구 신청 내역</h1>
-		<form action="/login/searchRstatus.me" id="searchForm">
+		<form action="/login/searchRstatus.me" id="searchRstatusForm">
 		<select name="rStatus" id="statusSearch">
 		<option value=4>복구 처리 여부 : 전체</option>
 		<option value=1>복구 처리 여부 : 대기</option>
@@ -354,7 +354,7 @@
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
 	<script>
 	$('#statusSearch').change(function(){
-		$('#searchForm').submit();
+		$('#searchRstatusForm').submit();
 	})
 	
 	var userId;
