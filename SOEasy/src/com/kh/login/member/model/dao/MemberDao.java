@@ -35,7 +35,7 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 	}
-
+	//사용자가 입력한 정보가 어떤 권한을 가지고 있는지 조회
 	public int checkStatus(Connection con, Member requestMember) {
 		PreparedStatement pstmt = null;
 		int result = LoginServlet.LOGIN_FAILED;
@@ -82,7 +82,7 @@ public class MemberDao {
 
 		return result;
 	}
-
+	//사용자가 입력한 로그인값과 일치하는 값이  존재하는지 조회
 	public Member selectOne(Connection con, Member requestMember) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -156,7 +156,7 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	//동일한 닉네임이 존재하는지 확인
 	public int nickCheck(Connection con, String nickName) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -178,7 +178,7 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	//동일한 이메일로 가입이 되어있는지 확인
 	public int checkEmail(Connection con, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -202,7 +202,7 @@ public class MemberDao {
 		return result;
 	
 	}
-
+	//동일한 이름과 연락처로 가입된 적이 있는지 확인
 	public int checkYou(Connection con, String phoneNum, String name) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -225,7 +225,7 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	//회원 정보를 데이터 베이스에 삽입하는 메소드
 	public int insertMember(Connection con, Member requestMember) {
 		PreparedStatement pstmt = null;
 		int insertResult = 0;
@@ -250,7 +250,7 @@ public class MemberDao {
 		
 		return insertResult;
 	}
-
+ //회원 생성시 기본 프로필 이미지를 생성해주는 메소드
 	public int insertDefaultProfile(Connection con, Member requestMember) {
 		PreparedStatement pstmt = null;
 		int insertResult = 0;
@@ -272,7 +272,7 @@ public class MemberDao {
 		
 		return insertResult;
 	}
-	
+	//사용자의 아이디를 찾는 메소드
 	public String findId(Connection con, String name, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -301,7 +301,7 @@ public class MemberDao {
 		
 		return resultId;
 	}
-
+	//사용자의 비밀번호를 찾는 메소드
 	public int findPwd(Connection con, String id, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -324,7 +324,7 @@ public class MemberDao {
 		
 		return resultPwd;
 	}
-
+	//사용자의 비밀번호를 변경하는 메소드
 	public int updatePwd(Connection con, String password, int memNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -345,7 +345,7 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	//비밀번호가 일치한지 확인
 	public int correctPwd(Connection con, String password, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -367,7 +367,7 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	//회원 탈퇴를 진행한 회원의 비활성화 메소드
 	public int deleteMember(Connection con, String userId, String password, String reason) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -386,7 +386,7 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	//비밀번호 변경을 진행하지 않은 회원의 개인정보 수정 메소드
 	public int updateMember1(Connection con, Member updateMember) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -409,7 +409,7 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	//비밀번호 변경을 같이 진행한 회원의 개인정보 수정
 	public int updateMember2(Connection con, Member updateMember) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -432,7 +432,7 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	//프로필 사진을 업데이트 하는 메소드
 	public int updateProfile(Connection con, Member updateMember) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -453,7 +453,7 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	//모든 회원 목록의 갯수를 조회하는 메소드
 	public int getListCount(Connection con) {
 		Statement stmt = null;
 		int listCount = 0;
@@ -478,7 +478,7 @@ public class MemberDao {
 		
 		return listCount;
 	}
-
+	//모든 회원 목록을 조회하는 메소드
 	public ArrayList<Member> selectAllList(Connection con, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -522,7 +522,7 @@ public class MemberDao {
 		
 		return memberList;
 	}
-
+	//변경되기전 프로필 이미지의 주소값을 구해오는 메소드
 	public String findImg(Connection con, Member updateMember) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -547,7 +547,7 @@ public class MemberDao {
 		
 		return deleteFileName;
 	}
-
+	//선택된 회원을 정지하는 메소드
 	public int blockMember(Connection con, String userId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -565,7 +565,7 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	//필터 값에 부합하는 회원 목록 검색 결과 수를 찾는 메소드
 	public int getListCount(Connection con, String isActive, String power) {
 		Statement stmt = null;
 		int listCount = 0;
@@ -593,7 +593,7 @@ public class MemberDao {
 		return listCount;
 		
 	}
-
+	//필터 옵션 값에 부합하는 회원 목록을 조회하는 메소드
 	public ArrayList<Member> selectAllList(Connection con, PageInfo pi, String isActive, String power) {
 
 		Statement stmt = null;
@@ -636,7 +636,7 @@ public class MemberDao {
 		
 		return memberList;
 	}
-
+	//키워드에 따른 검색결과의 결과 수를 파악하는 메소드
 	public int getListCount(Connection con, String keyword) {
 		PreparedStatement pstmt = null;
 		int listCount = 0;
@@ -663,7 +663,7 @@ public class MemberDao {
 		
 		return listCount;
 	}
-
+	//키워드에 따른 회원목록 검색결과를 조회하는 메소드
 	public ArrayList<Member> selectAllList(Connection con, PageInfo pi, String keyword) {
 		
 		PreparedStatement pstmt = null;
@@ -707,7 +707,7 @@ public class MemberDao {
 		
 		return memberList;
 	}
-
+	//복구 요청 목록의 갯수가 몇개인지 파악하는 메소드
 	public int getListRecoverCount(Connection con) {
 		Statement stmt = null;
 		int listCount = 0;
@@ -754,6 +754,7 @@ public class MemberDao {
 			
 			while(rset.next()) {
 				RecoverMember rm = new RecoverMember();
+				rm.setMemberNo(rset.getInt("MEMBER_NO"));
 				rm.setrNum(rset.getInt("RESTORE_NO"));
 				rm.setUserId(rset.getString("M_ID"));
 				rm.setDropReason(rset.getString("M_DROP_REASON"));
@@ -774,7 +775,7 @@ public class MemberDao {
 		
 		return recoverList;
 	}
-
+	//회원 복구가 가능한 계정인지 파악하는 메소드
 	public int canRecover(Connection con, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -822,7 +823,7 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	//복구 요청중으로 멤버의 상태를 변경하는 메소드
 	public int updateRecoverStatus(Connection con, int memberNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -863,13 +864,109 @@ public class MemberDao {
 		
 		return result;
 	}
+	//복구요청 기록에서 처리 여부를 업데이트 하는 메소드
+	public int updateRecover(Connection con, RecoverMember recoverMem) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateRecover");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, recoverMem.getrStatus());
+			pstmt.setInt(2, recoverMem.getMemberNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	//복구승인 누른 녀석의 회원 활성화 여부를 Y로 변경하는 메소드
+	public int recoverStatus(Connection con, RecoverMember recoverMem) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("recoverStatus");
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, recoverMem.getMemberNo());
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			return result;
+	}
+	//또 리스트 카운트를 구하고 있음;
+	public int getListOptionCount(Connection con, int status) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		
+		String query = prop.getProperty("getListOptionCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, status);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		return listCount;
+	}
+	//셀렉트바 옵션에 맞춘 정보를 가진 복구요청 회원 명단을 가져오는 메소드
+	public ArrayList<RecoverMember> searchRecoverOption(Connection con, PageInfo pi, int status) {
 
-
-
-	
-
-	
-
-	
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<RecoverMember> recoverList = null;
+		String query = prop.getProperty("searchRecoverOption");
+		int startRow =(pi.getCurrentPage()-1)*pi.getLimit()+1;
+		int endRow = startRow + pi.getLimit()-1;
+		
+		System.out.println("status : "+status);
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, status);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3,endRow);
+			
+			rset = pstmt.executeQuery();
+			recoverList = new ArrayList<>();
+			
+			while(rset.next()) {
+				RecoverMember rm = new RecoverMember();
+				rm.setMemberNo(rset.getInt("MEMBER_NO"));
+				rm.setrNum(rset.getInt("RESTORE_NO"));
+				rm.setUserId(rset.getString("M_ID"));
+				rm.setDropReason(rset.getString("M_DROP_REASON"));
+				rm.setEmail(rset.getString("RESTORE_EMAIL"));
+				rm.setRequestDate(rset.getDate("RESTORE_REQUEST_DATE"));
+				rm.setrStatus(rset.getInt("RESTORE_STATUS"));
+				recoverList.add(rm);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return recoverList;
+		
+	}
 
 }

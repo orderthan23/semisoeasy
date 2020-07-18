@@ -36,32 +36,61 @@ public class MainDao {
 	}
 
 	public ArrayList<HashMap<String, Object>> selectAllList(Connection con, PageInfo pi) {
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ArrayList<HashMap<String, Object>> spaceList = null;
+		HashMap<String, Object> hmap = null;
 		ResultSet rset = null;
-		ArrayList<HashMap<String,Object>> spaceList=null;
-		HashMap<String, Object>hmap=null;
+		
+		
 		String query = prop.getProperty("selectAllList");
+		
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			System.out.println(pi.getCurrentPage());
+			int startRow = (pi.getCurrentPage() -1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() -1;
 			
-			spaceList = new ArrayList<>();
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			spaceList = new ArrayList<> ();
 			
 			while(rset.next()) {
 				hmap = new HashMap<>();
 				hmap.put("spaceNo", rset.getInt("SPACE_NO"));
 				hmap.put("hostNo", rset.getInt("HOST_NO"));
 				hmap.put("spaceName", rset.getString("SPACE_NAME"));
-				//String
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+				hmap.put("spaceKind", rset.getInt("SPACE_KIND"));
+				hmap.put("spaceAddress", rset.getString("SPACE_ADDRESS"));
+				hmap.put("sStatus", rset.getString("S_STATUS"));
+				hmap.put("spaceIntro", rset.getString("SPACE_INTRO"));
+				hmap.put("spaceShortIntro", rset.getString("SPACE_SHORT_INTRO"));
+				hmap.put("didPayReserve", rset.getString("DID_DAY_RESERV"));
+				hmap.put("dayPay", rset.getInt("DAY_PAY"));
+				hmap.put("didMonthReserve", rset.getString("DID_MONTH_RESERV"));
+				hmap.put("monthPay", rset.getInt("MONTH_PAY"));
+				hmap.put("spaceLocationFilter", rset.getString("SPACE_LOCATION_FILTER"));
+				hmap.put("imgNo", rset.getInt("IMG_NO"));
+				hmap.put("originName", rset.getString("ORIGIN_NAME"));
+				hmap.put("filePath", rset.getString("FILE_PATH"));
+				hmap.put("changeName", rset.getString("CHANGE_NAME"));
+				hmap.put("imgDiv", rset.getInt("IMG_DIV"));
+				hmap.put("memberNo", rset.getInt("MEMBER_NO"));
+				hmap.put("fileLevel", rset.getInt("FILE_LEVEL"));
 				
+				spaceList.add(hmap);
+			}
 			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
 		
 		return spaceList;
 	}
@@ -71,7 +100,7 @@ public class MainDao {
 		int listCount = 0;
 		ResultSet rset = null;
 		
-		String query = prop.getProperty("listCount1");
+		String query = prop.getProperty("listCount");
 		
 		try {
 			stmt = con.createStatement();

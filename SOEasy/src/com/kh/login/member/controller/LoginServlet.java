@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			else {
 				
-				response.sendRedirect("/login/views/main/guestMain.jsp");
+				response.sendRedirect(request.getContextPath());
 			}
 			
 		} else {

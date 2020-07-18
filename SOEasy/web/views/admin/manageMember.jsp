@@ -62,10 +62,10 @@
         .stage{
    		display: block;
    		appearance:none;
+  		-webkit-appearance:none;
    		background : transparent;
    		border: none;
   		outline: none;
-  		-webkit-appearance:none;
 		margin-right:auto;
 		
 		font-size: 15px; 
@@ -95,7 +95,6 @@
   left: 50%;
   transform:translate(-50%,-50%);
   width: 70%;
-  
   max-width: 500px;
   padding: 10px 30px;
   background-color: #fff;
@@ -296,7 +295,11 @@
 			<br>
 			
 			<div class = "pagingArea" align="center">
-			<button onclick="location.href='<%=root+url%>currentPage=currentPage=1'"> << </button>
+			<% if(currentPage <= 1) { %>
+				<button disabled><</button>
+			<% } else { %>
+			<button onclick="location.href='<%=root+url%>currentPage=1'"> << </button>
+				<% } %>
 			<% if(currentPage <= 1) { %>
 			<button disabled><</button>
 			<% } else { %>
@@ -319,8 +322,11 @@
 			<button onclick="location.href='<%=root+url%>currentPage=<%=currentPage +1 %>'">></button>
 			<% } %>
 			
-			
+				<% if(currentPage >= maxPage) { %>
+				<button disabled>></button>
+				<% } else { %>
 			<button onclick="location.href='<%=root+url%>currentPage=<%=maxPage%>'">>></button>
+				<% } %>
 		</div>
 		</div>
 		<%} %>
