@@ -38,7 +38,6 @@ public class ReviewDao {
 			pstmt.setInt(2, requestMember.getMemberNo());
 			pstmt.setString(3, requestMember.getReviewContent());
 			pstmt.setInt(4, requestMember.getrPoint());
-			pstmt.setString(5, requestMember.getEnrollDate());
 			
 			result = pstmt.executeUpdate();
 			

@@ -10,11 +10,15 @@ public class Review implements java.io.Serializable {
 	private String reviewContent;
 	private int rPoint;
 	private String enrollDate;
-	
-	public Review() {}
+	private int reservNo;
 
-	public Review(int reviewNo, int spaceNo, String spaceName, int memberNo, String memberNick, String reviewContent,
-			int rPoint, String enrollDate) {
+	public Review() {
+		
+	}
+
+	public Review(int reviewNo, int spaceNo, int memberNo, String reviewContent, int rPoint, String enrollDate,
+			int reservNo) {
+
 		super();
 		this.reviewNo = reviewNo;
 		this.spaceNo = spaceNo;
@@ -24,6 +28,7 @@ public class Review implements java.io.Serializable {
 		this.reviewContent = reviewContent;
 		this.rPoint = rPoint;
 		this.enrollDate = enrollDate;
+		this.reservNo = reservNo;
 	}
 
 	public int getReviewNo() {
@@ -90,11 +95,19 @@ public class Review implements java.io.Serializable {
 		this.enrollDate = enrollDate;
 	}
 
+	public int getReservNo() {
+		return reservNo;
+	}
+
+	public void setReservNo(int reservNo) {
+		this.reservNo = reservNo;
+	}
+
 	@Override
 	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", spaceNo=" + spaceNo + ", spaceName=" + spaceName + ", memberNo="
-				+ memberNo + ", memberNick=" + memberNick + ", reviewContent=" + reviewContent + ", rPoint=" + rPoint
-				+ ", enrollDate=" + enrollDate + "]";
+		return "Review [reviewNo=" + reviewNo + ", spaceNo=" + spaceNo + ", memberNo=" + memberNo + ", reviewContent="
+				+ reviewContent + ", rPoint=" + rPoint + ", enrollDate=" + enrollDate + ", reservNo=" + reservNo + "]";
+
 	}
 		
 }
