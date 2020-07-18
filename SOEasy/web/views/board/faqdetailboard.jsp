@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,21 +125,19 @@
 							<th>작성일자</th>
 							<th></th>
 						</tr>
-				
-					
-						<tr style="border-bottom: solid 1px  #60B4A6;">
+					<tr style="border-bottom: solid 1px  #60B4A6;">
 							<td class="info" style="text-align: center;">1</td>
-							<td class="info" style="text-align: center;">이용문의</td>
+							<td class="info" style="text-align: center;">계정관련</td>
 							<td class="info" style="text-align: center;"><a href="writeboard.jsp" style="text-decoration:none; color:black;">이용했던 곳을 다시 이용하려는데 리스트에 보이지 않아요</a></td>
-							<td class="info" style="text-align: center;">관리자</td>
+							<td class="info" style="text-align: center;"><%=loginUser.getmId() %></td>
 							<td class="info" style="text-align: center;">2020-06-26</td>
-							<td class="info" style="text-align: center;"></td>
+							<td class="info" style="text-align: center;">X</td>
 						</tr>
 						<tr> 
 							<td colspan="6">
 								<div style="width:94%; margin-left:auto; margin-right:auto; margin-top:20px;">
 									<label class="aTitle">질문</label>
-									<textArea style="width:100%; resize:none; border:none; color:gray; paddin/1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111g:10px" class="question" readonly class="QandA" ;>제가 못 찾는 건지 잘 모르겠습니다만,상호명은 역삼동 혼자사무실이었던 것으로 기억합니다.</textArea>
+									<textArea style="width:100%; resize:none; border:none; color:gray; padding:10px" class="question" class="QandA" readonly ;></textArea>
 								</div>
 							</td>
 						</tr>
