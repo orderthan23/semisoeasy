@@ -160,8 +160,8 @@ public class SpaceService {
 	public ArrayList<HashMap<String, Object>> selectOneSpaceInfo(int sNo) {
 		
 		Connection con = getConnection();
-		ArrayList<HashMap<String, Object>> list = null;
-		HashMap<String, Object> hmap = null;
+		ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+		HashMap<String, Object> hmap = new HashMap<>();
 		
 		SpaceInfo si = new SpaceInfo();
 		si.setSpaceNo(sNo);
@@ -203,6 +203,7 @@ public class SpaceService {
 		//hmap.put("QnAList", qnaList);
 		//나중에 추가할 것 -- 반드시!
 		list.add(hmap);
+		System.out.println(hmap);
 		
 		if(si != null && imgList != null && reviewList != null) {
 			commit(con);

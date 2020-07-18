@@ -7,10 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.login.space.model.vo.Image;
+import com.kh.login.space.model.vo.Review;
 import com.kh.login.space.model.vo.SpaceInfo;
 
 import static com.kh.login.common.JDBCTemplate.*;
@@ -536,7 +538,7 @@ public class SpaceDao {
 		ResultSet rset = null;
 		String[] conv = null;
 		
-		String query = "selectSpaceConv";
+		String query = prop.getProperty("selectSpaceConv");
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -558,5 +560,204 @@ public class SpaceDao {
 		}
 		
 		return conv;
+	}
+
+	//공간 운영시간 조회용 메소드
+	public SpaceInfo selectSpaceOptime(Connection con, SpaceInfo si) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		SpaceInfo returnSi = null;
+		
+		String query = prop.getProperty("selectSpaceOptime");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, si.getSpaceNo());
+			
+			rset = pstmt.executeQuery();
+			returnSi = new SpaceInfo();
+			
+			int i = 0;
+			int[] startTimes = new int[7];
+			int[] endTimes = new int[7];
+			String[] openChecks = new String[7];
+			
+			while(rset.next()) {
+				startTimes[i] = rset.getInt("START_TIME");
+				endTimes[i] = rset.getInt("END_TIME");
+				openChecks[i] = rset.getString("OPEN_CHECK");
+				i++;
+			}
+			
+			returnSi.setStartTimes(startTimes);
+			returnSi.setEndTimes(endTimes);
+			returnSi.setOpenChecks(openChecks);
+			returnSi.setSpaceNo(si.getSpaceNo());
+			returnSi.setSpaceKind(si.getSpaceKind());
+			returnSi.setHostNo(si.getHostNo());
+			returnSi.setSpaceName(si.getSpaceName());
+			returnSi.setSpaceAddress(si.getSpaceAddress());
+			returnSi.setSpaceIntro(si.getSpaceIntro());
+			returnSi.setSpaceShortIntro(si.getSpaceShortIntro());
+			returnSi.setDidDayReserv(si.getDidDayReserv());
+			returnSi.setDayPay(si.getDayPay());
+			returnSi.setDidMonthReserv(si.getDidMonthReserv());
+			returnSi.setMonthPay(si.getMonthPay());
+			returnSi.setOfficeNo(si.getOfficeNo());
+			returnSi.setSpaceSize(si.getSpaceSize());
+			returnSi.setSpaceRoomCount(si.getSpaceRoomCount());
+			returnSi.setSpaceContainCount(si.getSpaceContainCount());
+			returnSi.setTotalSeat(si.getTotalSeat());
+			returnSi.setMaxReserv(si.getMaxReserv());
+			returnSi.setFixSeat(si.getFixSeat());
+			returnSi.setUnfixSeat(si.getUnfixSeat());
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return returnSi;
+	}
+
+	//환불정책 조회용 메소드
+	public SpaceInfo selectRefundPolicy(Connection con, SpaceInfo si) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		SpaceInfo returnSi = null;
+		
+		String query = prop.getProperty("selectRefundPolicy");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, si.getSpaceNo());
+			
+			rset = pstmt.executeQuery();
+			returnSi = new SpaceInfo();
+			double[] spaceRefundPolicy = new double[9];
+			int i = 0;
+			
+			while(rset.next()) {
+				spaceRefundPolicy[i] = rset.getInt("DATE_REFUND_RATE");
+				i++;
+			}
+			returnSi.setSpaceNo(si.getSpaceNo());
+			returnSi.setSpaceKind(si.getSpaceKind());
+			returnSi.setHostNo(si.getHostNo());
+			returnSi.setSpaceName(si.getSpaceName());
+			returnSi.setSpaceAddress(si.getSpaceAddress());
+			returnSi.setSpaceIntro(si.getSpaceIntro());
+			returnSi.setSpaceShortIntro(si.getSpaceShortIntro());
+			returnSi.setDidDayReserv(si.getDidDayReserv());
+			returnSi.setDayPay(si.getDayPay());
+			returnSi.setDidMonthReserv(si.getDidMonthReserv());
+			returnSi.setMonthPay(si.getMonthPay());
+			returnSi.setOfficeNo(si.getOfficeNo());
+			returnSi.setSpaceSize(si.getSpaceSize());
+			returnSi.setSpaceRoomCount(si.getSpaceRoomCount());
+			returnSi.setSpaceContainCount(si.getSpaceContainCount());
+			returnSi.setTotalSeat(si.getTotalSeat());
+			returnSi.setMaxReserv(si.getMaxReserv());
+			returnSi.setFixSeat(si.getFixSeat());
+			returnSi.setUnfixSeat(si.getUnfixSeat());
+			returnSi.setStartTimes(si.getStartTimes());
+			returnSi.setEndTimes(si.getEndTimes());
+			returnSi.setOpenChecks(si.getOpenChecks());
+			returnSi.setSpaceRefundPolicy(spaceRefundPolicy);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return returnSi;
+	}
+
+	// review list 조회용 메소드
+	public ArrayList<Review> selectSpaceReviewList(Connection con, int sNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Review> list = null;
+		
+		String query = prop.getProperty("selectSpaceReviewList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sNo);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				Review r = new Review();
+				
+				r.setReviewNo(rset.getInt("REVIEW_NO"));
+				r.setSpaceNo(rset.getInt("SPACE_NO"));
+				r.setSpaceName(rset.getString("SPACE_NAME"));
+				r.setMemberNo(rset.getInt("MEMBER_NO"));
+				r.setMemberNick(rset.getString("M_NICK"));
+				r.setReviewContent(rset.getString("REVIEW_CONTENT"));
+				r.setrPoint(rset.getInt("R_POINT"));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String enrollDate = sdf.format(rset.getTimestamp("R_ENROLL_DATE"));
+				r.setEnrollDate(enrollDate);
+				
+				list.add(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+
+
+	public ArrayList<Image> selectSpaceImgList(Connection con, int sNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Image> list = null;
+		
+		String query = prop.getProperty("selectSpaceImgList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sNo);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				Image i = new Image();
+				i.setImgNo(rset.getInt("IMG_NO"));
+				i.setOriginName(rset.getString("ORIGIN_NAME"));
+				i.setFilePath(rset.getString("FILE_PATH"));
+				i.setChangeName(rset.getString("CHANGE_NAME"));
+				i.setImgDiv(rset.getInt("IMG_DIV"));
+				i.setSpaceNo(rset.getInt("SPACE_NO"));
+				i.setFileLevel(rset.getInt("FILE_LEVEL"));
+				
+				list.add(i);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
 	}
 }
