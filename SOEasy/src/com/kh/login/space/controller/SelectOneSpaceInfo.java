@@ -15,7 +15,7 @@ import com.kh.login.space.model.service.SpaceService;
 /**
  * Servlet implementation class SelectOneSpaceInfo
  */
-@WebServlet("/selectOnSpaceInfo")
+@WebServlet("/selectOneSpaceInfo")
 public class SelectOneSpaceInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,6 +36,16 @@ public class SelectOneSpaceInfo extends HttpServlet {
 		
 		ArrayList<HashMap<String,Object>> list = new SpaceService().selectOneSpaceInfo(sNo);
 		
+		String page = "";
+		if(list != null) {
+			page = "/views/space/spaceIntro.jsp";
+			request.setAttribute("introList", list);
+			request.getRequestDispatcher(page).forward(request, response);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "상세보기 실패");
+			request.getRequestDispatcher(page).forward(request, response);
+		}
 	}
 
 	/**
