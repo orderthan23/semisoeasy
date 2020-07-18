@@ -36,7 +36,8 @@ public class SearchServlet extends HttpServlet {
 		String search = request.getParameter("search");
 		
 		System.out.println("search : " + search);
-		
+		String root = request.getRequestURI();
+		String url = PageInfo.customQString(request.getQueryString(), 2);
 		
 		int currentPage;
 		int limit;
@@ -83,6 +84,8 @@ public class SearchServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("search", search);
 			request.setAttribute("pi", pi);
+			request.setAttribute("root", root);
+			request.setAttribute("url", url);
 		} else {
 			page = "/views/common/errorPage.jsp";
 			request.setAttribute("msg", "공간 검색 실패!");
