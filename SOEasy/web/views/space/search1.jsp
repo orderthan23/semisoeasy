@@ -5,6 +5,8 @@
 	ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) request.getAttribute("list");
 	
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	String url = (String)request.getAttribute("url");
+	String root = (String)request.getAttribute("root"); 
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -219,7 +221,15 @@ section {
 						<img src="<%=request.getContextPath() %>/images/area/<%=hmap.get("changeName") %>" width="400" height="265">
 					<p><%= hmap.get("spaceName") %></p>
 					<p><%= hmap.get("spacePayPolicy") %>
-					<p>가격 : <%= hmap.get("monthPay") %> / 개월 지역 : <%= hmap.get("spaceLocationFilter") %>
+					<!-- 가 -->
+					<p><% if(hmap.get("monthPay") != null && !hmap.get("monthPay").equals(0)) { %>
+					가격 : <%= hmap.get("monthPay") %> / 개월 
+					<% } %>
+					<% if(hmap.get("dayPay") != null && !hmap.get("dayPay").equals(0)) { %>
+					가격 : <%= hmap.get("dayPay") %> / 일
+					<% } %>
+					</p>
+					<p>지역 : <%= hmap.get("spaceLocationFilter") %></p>
 					<br>
 					</div>
 					
@@ -237,12 +247,12 @@ section {
 	<br>
 	<!-- 페이징처리 버튼 -->
 		<div class = "pagingArea" align="center">
-      	<button onclick="location.href='<%=request.getContextPath()%>/select.se?currentPage=1'"><<</button>
+      	<button onclick="location.href='<%=root+url%>currentPage=1'"><<</button>
       	
       	<% if(currentPage <= 1) { %>
       	<button disabled><</button>
       	<% } else { %>
-      	<button onclick="location.href='<%=request.getContextPath()%>/select.se?currentPage=<%=currentPage - 1%>'"><</button>
+      	<button onclick="location.href='<%=root+url%>currentPage=<%=currentPage - 1%>'"><</button>
       	<% } %>
       	
       	<% for(int p = startPage; p <= endPage; p++) {
@@ -250,7 +260,7 @@ section {
       	%>
       				<button disabled><%= p %></button>	
       	<% 		} else {	%>
-      				<button onclick="location.href='<%=request.getContextPath()%>/select.se?currentPage=<%= p %>'"><%= p %></button>
+      				<button onclick="location.href='<%=root+url%>currentPage=<%= p %>'"><%= p %></button>
       	<% 		} %>
       	
       	<% } %>
@@ -259,10 +269,10 @@ section {
       	<% if(currentPage >= maxPage) { %>
       	<button disabled>></button>
       	<% } else { %>
-      	<button onclick="location.href='<%=request.getContextPath()%>/select.se?currentPage=<%=currentPage + 1%>'">></button>
+      	<button onclick="location.href='<%=root+url%>currentPage=<%=currentPage + 1%>'">></button>
       	<% } %>
       	
-      	<button onclick="location.href='<%=request.getContextPath()%>/select.se?currentPage=<%=maxPage%>'">>></button>
+      	<button onclick="location.href='<%=root+url%>currentPage=<%=maxPage%>'">>></button>
       	</div>
 
 	<script>

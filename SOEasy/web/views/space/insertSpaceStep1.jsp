@@ -16,6 +16,7 @@
 		$("#siNm").val(siNm);
 		$("#sggNm").val(sggNm);
 		$("#emdNm").val(emdNm);
+		$("#roadAddrPart1").val(roadAddrPart1);
 	}
 </script>
 <link rel="stylesheet" href="../../css/layout.css">
@@ -274,38 +275,38 @@
 					<td>
 						<table style="border-spacing:15px; text-align:center;">
 							<tr>
-								<td><label for="24h"><img src="../../images/icon/24h.png" width="100px"><br><input type="checkbox" name="conv" id="24h" value="24h"></label></td>
-								<td><label for="365days"><img src="../../images/icon/365days.png" width="100px"><br><input type="checkbox" name="conv" id="365days" value="365days"></label></td>
-								<td><label for="airCon"><img src="../../images/icon/airCon.png" width="100px"><br><input type="checkbox" name="conv" id="airCon" value="airCon"></label></td>
-								<td><label for="animal"><img src="../../images/icon/animal.png" width="100px"><br><input type="checkbox" name="conv" id="animal" value="animal"></label></td>
+								<td><label for="24h"><img src="<%=request.getContextPath()%>/images/icon/24h.png" width="100px"><br><input type="checkbox" name="conv" id="24h" value="24h"></label></td>
+								<td><label for="365days"><img src="<%=request.getContextPath()%>/images/icon/365days.png" width="100px"><br><input type="checkbox" name="conv" id="365days" value="365days"></label></td>
+								<td><label for="airCon"><img src="<%=request.getContextPath()%>/images/icon/airCon.png" width="100px"><br><input type="checkbox" name="conv" id="airCon" value="airCon"></label></td>
+								<td><label for="animal"><img src="<%=request.getContextPath()%>/images/icon/animal.png" width="100px"><br><input type="checkbox" name="conv" id="animal" value="animal"></label></td>
 							</tr>
 							<tr>
-								<td><label for="beam"><img src="../../images/icon/beam.png" width="100px"><br><input type="checkbox" name="conv" id="beam" value="beam"></label></td>
-								<td><label for="board"><img src="../../images/icon/board.png" width="100px"><br><input type="checkbox" name="conv" id="board" value="board"></label></td>
-								<td><label for="cafe"><img src="../../images/icon/cafe.png" width="100px"><br><input type="checkbox" name="conv" id="cafe" value="cafe"></label></td>
-								<td><label for="copyPrint"><img src="../../images/icon/copyPrint.png" width="100px"><br><input type="checkbox" name="conv" id="copyPrint" value="copyPrint"></label></td>
+								<td><label for="beam"><img src="<%=request.getContextPath()%>/images/icon/beam.png" width="100px"><br><input type="checkbox" name="conv" id="beam" value="beam"></label></td>
+								<td><label for="board"><img src="<%=request.getContextPath()%>/images/icon/board.png" width="100px"><br><input type="checkbox" name="conv" id="board" value="board"></label></td>
+								<td><label for="cafe"><img src="<%=request.getContextPath()%>/images/icon/cafe.png" width="100px"><br><input type="checkbox" name="conv" id="cafe" value="cafe"></label></td>
+								<td><label for="copyPrint"><img src="<%=request.getContextPath()%>/images/icon/copyPrint.png" width="100px"><br><input type="checkbox" name="conv" id="copyPrint" value="copyPrint"></label></td>
 							</tr>
 							<tr>
-								<td><label for="delivery"><img src="../../images/icon/delivery.png" width="100px"><br><input type="checkbox" name="conv" id="delivery" value="delivery"></label></td>
-								<td><label for="doorLock"><img src="../../images/icon/doorLock.png" width="100px"><br><input type="checkbox" name="conv" id="doorLock" value="doorLock"></label></td>
-								<td><label for="fax"><img src="../../images/icon/fax.png" width="100px"><br><input type="checkbox" name="conv" id="fax" value="fax"></label></td>
-								<td><label for="heater"><img src="../../images/icon/heater.png" width="100px"><br><input type="checkbox" name="conv" id="heater" value="heater"></label></td>
+								<td><label for="delivery"><img src="<%=request.getContextPath()%>/images/icon/delivery.png" width="100px"><br><input type="checkbox" name="conv" id="delivery" value="delivery"></label></td>
+								<td><label for="doorLock"><img src="<%=request.getContextPath()%>/images/icon/doorLock.png" width="100px"><br><input type="checkbox" name="conv" id="doorLock" value="doorLock"></label></td>
+								<td><label for="fax"><img src="<%=request.getContextPath()%>/images/icon/fax.png" width="100px"><br><input type="checkbox" name="conv" id="fax" value="fax"></label></td>
+								<td><label for="heater"><img src="<%=request.getContextPath()%>/images/icon/heater.png" width="100px"><br><input type="checkbox" name="conv" id="heater" value="heater"></label></td>
 							</tr>
 							<tr>
-								<td><label for="kitchen"><img src="../../images/icon/kitchen.png" width="100px"><br><input type="checkbox" name="conv" id="kitchen" value="kitchen"></label></td>
-								<td><label for="locker"><img src="../../images/icon/locker.png" width="100px"><br><input type="checkbox" name="conv" id="locker" value="locker"></label></td>
-								<td><label for="mail"><img src="../../images/icon/mail.png" width="100px"><br><input type="checkbox" name="conv" id="mail" value="mail"></label></td>
-								<td><label for="parking"><img src="../../images/icon/parking.png" width="100px"><br><input type="checkbox" name="conv" id="parking" value="parking"></label></td>
+								<td><label for="kitchen"><img src="<%=request.getContextPath()%>/images/icon/kitchen.png" width="100px"><br><input type="checkbox" name="conv" id="kitchen" value="kitchen"></label></td>
+								<td><label for="locker"><img src="<%=request.getContextPath()%>/images/icon/locker.png" width="100px"><br><input type="checkbox" name="conv" id="locker" value="locker"></label></td>
+								<td><label for="mail"><img src="<%=request.getContextPath()%>/images/icon/mail.png" width="100px"><br><input type="checkbox" name="conv" id="mail" value="mail"></label></td>
+								<td><label for="parking"><img src="<%=request.getContextPath()%>/images/icon/parking.png" width="100px"><br><input type="checkbox" name="conv" id="parking" value="parking"></label></td>
 							</tr>
 							<tr>
-								<td><label for="rounge"><img src="../../images/icon/rounge.png" width="100px"><br><input type="checkbox" name="conv" id="rounge" value="rounge"></label></td>
-								<td><label for="snack"><img src="../../images/icon/snack.png" width="100px"><br><input type="checkbox" name="conv" id="snack" value="snack"></label></td>
-								<td><label for="terrace"><img src="../../images/icon/terrace.png" width="100px"><br><input type="checkbox" name="conv" id="terrace" value="terrace"></label></td>
-								<td><label for="tv"><img src="../../images/icon/tv.png" width="100px"><br><input type="checkbox" name="conv" id="tv" value="tv"></label></td>
+								<td><label for="rounge"><img src="<%=request.getContextPath()%>/images/icon/rounge.png" width="100px"><br><input type="checkbox" name="conv" id="rounge" value="rounge"></label></td>
+								<td><label for="snack"><img src="<%=request.getContextPath()%>/images/icon/snack.png" width="100px"><br><input type="checkbox" name="conv" id="snack" value="snack"></label></td>
+								<td><label for="terrace"><img src="<%=request.getContextPath()%>/images/icon/terrace.png" width="100px"><br><input type="checkbox" name="conv" id="terrace" value="terrace"></label></td>
+								<td><label for="tv"><img src="<%=request.getContextPath()%>/images/icon/tv.png" width="100px"><br><input type="checkbox" name="conv" id="tv" value="tv"></label></td>
 							</tr>
 							<tr>
-								<td><label for="wareHouse"><img src="../../images/icon/wareHouse.png" width="100px"><br><input type="checkbox" name="conv" id="wareHouse" value="wareHouse"></label></td>
-								<td><label for="waterMachine"><img src="../../images/icon/waterMachine.png" width="100px"><br><input type="checkbox" name="conv" id="waterMachine" value="waterMachine"></label></td>
+								<td><label for="wareHouse"><img src="<%=request.getContextPath()%>/images/icon/wareHouse.png" width="100px"><br><input type="checkbox" name="conv" id="wareHouse" value="wareHouse"></label></td>
+								<td><label for="waterMachine"><img src="<%=request.getContextPath()%>/images/icon/waterMachine.png" width="100px"><br><input type="checkbox" name="conv" id="waterMachine" value="waterMachine"></label></td>
 								<td style="display:none;"><input type="checkbox" name="conv" value="wifi" checked></td>
 								<td style="display:none;"><input type="checkbox" name="conv" value="plug" checked></td>
 							</tr>
@@ -371,9 +372,10 @@
 					<td>공간 주소 *</td>
 					<td><input type="text" placeholder="공간 주소를 입력하세요." id="roadFullAddr"  name="space-address" readonly>&nbsp;&nbsp;<button type="button" onclick="goPopup();">검색</button></td>
 					<td>
-						<input type="hidden"  style="width:500px;" id="siNm"  name="siNm" />
-						<input type="hidden"  style="width:500px;" id="sggNm"  name="sggNm" />
-						<input type="hidden"  style="width:500px;" id="emdNm"  name="emdNm" />
+						<input type="hidden" id="siNm"  name="siNm" />
+						<input type="hidden" id="sggNm"  name="sggNm" />
+						<input type="hidden" id="emdNm"  name="emdNm" />
+						<input type="hidden" id="roadAddrPart1"  name="roadAddrPart1" />
 					</td>
 				</tr>
 				<tr>
@@ -424,7 +426,7 @@
 	
 		// 좌석 수 = 자유석 + 지정석
 		function countSeat(){
-			console.log("되는건맞니?")
+			/* console.log("되는건맞니?") */
 			var unfixSeat = Number($("#unfix-seat").val());
 			var fixSeat = Number($("#fix-seat").val());
 			var totalSeat = unfixSeat + fixSeat;
@@ -433,10 +435,34 @@
 			$("#max-reserv").val(totalSeat);
 		};
 		
+		var count = 0;
+		$(".thumb").on("change", function(){
+			for(var i = 1; i <= 6; i++){
+				if($("#thumbnailImg" + i).val() != "<%=request.getContextPath()%>/images/icon/addImg.png"){
+					count ++;
+					console.log(count);
+					break;
+				}
+			}
+			if(count >= 4){
+				$("#thumbnail-img-not").hide();
+			}
+		});
+		
+		
 		$(function(){
 			initSet();
 			initEvent();
-			
+			for(var i = 1; i <= 6; i++){
+				if($("#thumbnailImg" + i).val() != "<%=request.getContextPath()%>/images/icon/addImg.png"){
+					count ++;
+					console.log(count);
+					break;
+				}
+			}
+			if(count >= 4){
+				$("#thumbnail-img-not").hide();
+			}
 		});
 		
 		function initSet(){
@@ -594,7 +620,7 @@
 				
 				reader.onload = function(e) {
 					$("#capital-img").attr("src", e.target.result);
-					if(e.target.result !== "../../images/icon/addImg.png"){
+					if(e.target.result !== "<%=request.getContextPath()%>/images/icon/addImg.png"){
 						$("#capital-img-not").hide();
 					}
 				}
@@ -633,20 +659,6 @@
 				reader.readAsDataURL(value.files[0]);
 			}
 		};
-		
-		var count = 0;
-		$(".thumb").on("change", function(){
-			for(var i = 1; i <= 6; i++){
-				if($("#thumbnailImg" + i).val() != "../../images/icon/addImg.png"){
-					count ++;
-					console.log(count);
-					break;
-				}
-			}
-			if(count >= 3){
-				$("#thumbnail-img-not").hide();
-			}
-		});
 		
 		$(".rule").on("change", function(){
 			if($("#rule1").is(":checked") == true && $("#rule2").is(":checked") == true && $("#rule3").is(":checked") == true){

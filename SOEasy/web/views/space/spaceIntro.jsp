@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8" import="java.util.*, com.kh.login.space.model.vo.*" %>
+<%
+	ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) request.getAttribute("introList");
+	HashMap<String, Object> hmap = list.get(0);
+	
+	SpaceInfo si = (SpaceInfo) hmap.get("spaceInfo");
+	ArrayList<Image> imgList = (ArrayList<Image>) hmap.get("imgList");
+	ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
+	
+	String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -328,7 +337,7 @@
 		var geocoder = new kakao.maps.services.Geocoder();
 		
 		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+		geocoder.addressSearch('<%=roadAddrPart1%>', function(result, status) {
 		
 		    // 정상적으로 검색이 완료됐으면 
 		     if (status === kakao.maps.services.Status.OK) {

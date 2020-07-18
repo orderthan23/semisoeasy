@@ -390,5 +390,44 @@ public class MemberService {
 		close(con);
 		return result;
 	}
+	public int updateRecover(RecoverMember recoverMem) {
+		Connection con = getConnection();
+		int result =0;
+		int result1 = 0;
+		int result2 = 0;
+		result1 = new MemberDao().updateRecover(con,recoverMem);
+		
+		if(recoverMem.getrStatus()==2 && result1>0){//복구승인을 했다면
+			result2 = new MemberDao().recoverStatus(con,recoverMem);
+		}
+		else {//복구 승인 거절이라면
+			result2 = 1;
+		}
+		if(result1>0 && result2>0) {
+			commit(con);
+			result = 1;
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+	
+	public int getListOptionCount(int status) {
+		Connection con = getConnection();
+		int listCount = new MemberDao().getListOptionCount(con,status);
+		close(con);
+		
+		return listCount;
+	}
+	public ArrayList<RecoverMember> searchRecoverOption(PageInfo pi, int status) {
+
+		Connection con = getConnection();
+		ArrayList<RecoverMember> recoverList = new MemberDao().searchRecoverOption(con,pi,status);
+		
+		close(con);
+		return recoverList;
+	}
 
 }

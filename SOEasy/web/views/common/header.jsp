@@ -104,15 +104,15 @@
 		<a href="/login/views/space/insertSpaceStep1.jsp" class="sub" align="center" id="thirdHeaderMenu">공간 등록</a></span> <span class="subMenu"><br>
 
 		<a href="/login/selectList.no" class="sub" align="center" id="fourthHeaderMenu">공지 사항</a></span> &nbsp;&nbsp;
-		<form action="/login/select.se" method="get"> 
+		<form action="/login/select.se" method="get" id="searchForm"> 
 
 
 			<input type="search" name="search" id="searchBar" placeholder="검색어를 입력하세요">
-			 <button type="submit" id="searchOn" src=""><img src="/login/images/icon/search.png" width="40px" height="40px"></button>	
+			 <button type="submit" id="searchOn"><img src="/login/images/icon/search.png" width="40px" height="40px"></button>	
 			
 		</form>
 		<img src="/login/images/logo/logo1.png" alt="로고 사진" id="logo"
-			onclick="location.href='/login/views/main/guestMain.jsp'">
+			onclick="location.href='<%=request.getContextPath()%>'">
 
 
 	</div>
