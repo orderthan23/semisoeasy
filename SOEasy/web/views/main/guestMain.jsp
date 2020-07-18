@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" %>
+	pageEncoding="UTF-8" import="java.util.*, com.kh.login.host.manageReserve.model.vo.*" %>
 <%
-	int col = 30;
-	int row = 3;
+
 %>
 <!DOCTYPE html>
 <html>
@@ -74,7 +73,7 @@ h1 {
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="/login/css/layout.css">
 
 
 
@@ -86,7 +85,7 @@ h1 {
 	<header>
 		<%@ include file="../common/header.jsp"%>
 	</header>
-
+		
 	<section>
 
 		  
@@ -97,85 +96,190 @@ h1 {
 		<div style="width:90%; margin-left:auto; margin-right:auto;">
 		<h1>테마전!</h1>
 		<div style="display:inline-block; width:60%;" id="themeList" >
-			<button>외근이 잦아요!<br> 코워킹 스페이스</button>
-			<button>직원이 많아요!<br> 임대사무실</button>
-			<button>하루만 이용!<br> 코워킹라운지</button>
+			<button type="button" class="themeButton" value="코워킹스페이스">외근이 잦아요!<br> 코워킹 스페이스</button>
+			<button type="button" class="themeButton" value="임대사무실">직원이 많아요!<br>임대사무실</button>
+			<button type="button" class="themeButton" value="코워킹라운지">하루만 이용!<br> 코워킹라운지</button>
 			<br><br>
 		</div>
 		
 		<div style="display: inline-block; width: 30%; background : #EBEBEB; border-radius:5px;" id="localList">
 			
 			<table align="center" style=" width:90%; ">
+			
 				<tr>
 					<th colspan="4" style="text-align:center" ><p style="font-size:20px; font-weight:bolder;">지역별 검색</p></th>
 				</tr>
 				<tr>
-					<td><button>종로구</button></td>
-					<td><button>강남구</button></td>
-					<td><button>서초구</button></td>
-					<td><button>관악구</button></td>
+					<td><button type="button" value="종로구" class="localButton">종로구</button></td>
+					<td><button type="button" value="강남구" class="localButton">강남구</button></td>
+					<td><button type="button" value="서초구" class="localButton">서초구</button></td>
+					<td><button type="button" value="관악구" class="localButton">관악구</button></td>
 				</tr>
 				<tr>
-					<td><button>동작구</button></td>
-					<td><button>송파구</button></td>
-					<td><button>마포구</button></td>
-					<td><button>구로구</button></td>
+					<td><button type="button" value="동작구" class="localButton">동작구</button></td>
+					<td><button type="button" value="송파구" class="localButton">송파구</button></td>
+					<td><button type="button" value="마포구" class="localButton">마포구</button></td>
+					<td><button type="button" value="구로구" class="localButton">구로구</button></td>
 				</tr>
 				<tr>
-					<td><button>용산구</button></td>
-					<td><button>은평구</button></td>
-					<td><button>강북구</button></td>
-					<td><button>중구</button></td>
+					<td><button type="button" value="용산구" class="localButton">용산구</button></td>
+					<td><button type="button" value="은평구" class="localButton">은평구</button></td>
+					<td><button type="button" value="강북구" class="localButton">강북구</button></td>
+					<td><button type="button" value="중구" class="localButton">중구</button></td>
 				</tr>
 				<tr>
-					<td><button>인천시</button></td>
-					<td><button>성남시</button></td>
-					<td><button>수도권</button></td>
-					<td><button>기타지역</button></td>
+					<td><button type="button" value="인천시" class="localButton">인천시</button></td>
+					<td><button type="button" value="성남시" class="localButton">성남시</button></td>
+					<td><button type="button" value="수도권" class="localButton">수도권</button></td>
+					<td><button type="button" value="기타지역" class="localButton">기타지역</button></td>
 				</tr>
 			
 			</table>
 		</div>
 		<br><br>
+		
 		<h1>NOW 인기 공간</h1>
+		<%
+		String search = (String)request.getAttribute("search");
+		ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) request.getAttribute("list");
+		
+		PageInfo pi = (PageInfo) request.getAttribute("pi");
+		int listCount = pi.getListCount();
+		int currentPage = pi.getCurrentPage();
+		int maxPage = pi.getMaxPage();
+		int startPage = pi.getStartPage();
+		int endPage = pi.getEndPage();
+		int requestCount = pi.getRequestCount();
+		int limit = pi.getLimit();
+	    String url = (String)request.getAttribute("url");
+		String root = (String)request.getAttribute("root"); 
+		ArrayList <Integer> spaceNoArr = new ArrayList<>();
+		ArrayList <String> filePathArr = new ArrayList<>();
+		ArrayList <String> changeNameArr = new ArrayList<>();
+		ArrayList <String> spaceNameArr = new ArrayList<>();
+		ArrayList <String> spaceShortIntroArr = new ArrayList<>();
+		ArrayList <String> spacePriceArr = new ArrayList<>();
+		ArrayList <String> location = new ArrayList<>();
+		
+		for(HashMap<String,Object>hmap : list){
+			
+			spaceNoArr.add((int)hmap.get("spaceNo"));
+			filePathArr.add((String)hmap.get("filePath"));
+			changeNameArr.add((String)hmap.get("changeName"));
+			spaceNameArr.add((String)hmap.get("spaceName"));
+			spaceShortIntroArr.add((String)hmap.get("spaceShortIntro"));
+			
+			int price = (int)hmap.get("monthPay");
+			String unit = "/ 개월";	
+			if(price == 0){
+				price = (int)hmap.get("dayPay");
+				unit = "/ 일";
+			}
+			spacePriceArr.add(price+unit);
+			location.add((String)hmap.get("spaceLocationFilter"));
+			
+		}
+		
+		
+		
+		%>
 		<table align="center"  id="spaceBoard">
+		
+			<tr>
+			<%int col = 4;
+		  for( int i = 0; i<list.size(); i++){
+			  
+		
+			  %>
+			  <%if(i%3==0){ %>
+			  </tr><tr>
+			  <% } %>
+					<td class="photobox">
+						<article>
+							<form>
+								<input type="hidden" name="spaceNo"
+									value=<%=spaceNoArr.get(i)%>>
+							</form>
+							<img class="space-title-photo"
+								src="<%=request.getContextPath() + filePathArr.get(i) + changeNameArr.get(i)%>"
+								width="400" height="265">
+							<p><%=spaceNameArr.get(i)%></p>
+							<p><%=spaceShortIntroArr.get(i)%></p>
+							<p>
+								가격 :
+								<%=spacePriceArr.get(i)%>
+								지역 :
+								<%= location.get(i) %></p>
+						</article>
+					</td>
 
+					<% } %>	
+		 	
+			</tr>
 		</table>
+			
+			<div class = "pagingArea" align="center">
+			<% if(currentPage == 1) { %>
+			<button disabled><</button>
+			<% } else { %>
+			<button onclick="location.href='<%=root+url%>currentPage=1'"> << </button>
+			<% } %>
+			<% if(currentPage == 1) { %>
+			<button disabled><</button>
+			<% } else { %>
+			<button onclick="location.href='<%=root+url%>currentPage=<%=currentPage -1 %>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p<= endPage; p++){ 
+				if(p == currentPage){
+			%>	
+					<button disabled><%= p %></button>
+			<% 	} else { %>
+					<button onclick="location.href='<%=root+url%>currentPage=<%=p%>'"><%=p %></button>
+			<% 	  }
+			   }	
+				%>
+			
+			<% if(currentPage >= maxPage) { %>
+			<button disabled>></button>
+			<% } else { %>
+			<button onclick="location.href='<%=root+url%>currentPage=<%=currentPage +1 %>'">></button>
+			<% } %>
+			
+			<% if(currentPage >= maxPage) { %>
+			<button disabled>></button>
+			<% } else { %>
+			<button onclick="location.href='<%=root+url%>currentPage=<%=maxPage%>'">>></button>
+			<% } %>
+		</div>
 		</div>
 	</section>
-
+	<br><br><br>
 	<footer><%@ include file="../common/footer.jsp"%></footer>
-
 	<script>
-$(this).ready(function() {
-	var col =<%=col%>;
-	var row =<%=row%>;
-	$('#spaceBoard').append(function() {
-		var sentence = "";
-		for (var i = 1; i <= col;) {
-		sentence += "<tr>";
-		for (var j = 1; j <= row; i++, j++) {
-		if (i > col) {
-		break;
-		}
-		sentence += ' <td class="photobox">'
-		+ '<article>'
-		+ '<img class="space-title-photo"'+ 'src="../../images/area/area'+i+'-1.png"> '
-		+ '<p> 코워킹 스페이스'+i+'번째 공간<br><br>'
-		+ '가격 '
-		+ (i* 10000) + '원 /개월'+ '</p>'
-		+ '</article>'
-		+ '</td>'
-			}
-			sentence += "</tr>"
-				}
-		return sentence;
-			});
+		// 게시물이 클릭하면  게시물 쿼리스트링이 붙은 소개글 페이지로 이동
+		$('article').click(function(){
+			var spaceNo = $(this).children('form').children('input').val();
+			console.log(spaceNo);
+			location.href = "/login/selectOnSpaceInfo?spaceNo="+spaceNo;
+		})
+		
+		//
+		$('.localButton').click(function(){
+			var value = $(this).val();
+			console.log(value);
+			$('#searchBar').val(value);
+			$('#searchForm').submit();
 		});
-    
-    
-   
-</script>
+		
+		$('.themeButton').click(function(){
+			var value = $(this).val();
+			console.log(value);
+			$('#searchBar').val(value);
+			$('#searchForm').submit();
+		});
+	</script>
+
 
 </body>
 </html>

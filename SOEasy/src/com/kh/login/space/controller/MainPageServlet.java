@@ -40,7 +40,7 @@ public class MainPageServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		limit = 10;
+		limit = 12;
 		int listCount = new MainService().getListCount();
 		System.out.println("list count : "+ listCount);
 		//총 페이지 수 계산
@@ -63,6 +63,19 @@ public class MainPageServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage,0);
 		
 		ArrayList<HashMap<String,Object>> spaceList = new MainService().selectAll(pi);
+		String page = "";
+		if(spaceList != null) {
+			page = "/views/main/guestMain.jsp";
+			request.setAttribute("list", spaceList);
+			request.setAttribute("pi", pi);
+			request.setAttribute("root", root);
+			request.setAttribute("url", url);
+		} else {
+			page = "/views/common/errorPage.jsp";
+			request.setAttribute("msg", "메인 로드 실패!");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**
