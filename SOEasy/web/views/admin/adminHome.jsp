@@ -1,11 +1,12 @@
+<%@page import="com.kh.login.member.model.vo.RecoverMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.kh.login.admin.model.vo.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="/login/css/layout.css">
 <style>
 	#wrapper{
 		width: 90%;
@@ -161,7 +162,16 @@
 </head>
 <body>
 	<header><%@ include file="../../views/common/header.jsp" %></header>
+	<%
+	
+	%>
 	<nav><%@ include file="../../views/common/aside.jsp" %>
+	<%
+		HashMap<String,Object> hmap = (HashMap<String,Object>)request.getAttribute("adminInfo");
+		ArrayList<RecoverMember> recoverList =(ArrayList<RecoverMember>)hmap.get("recoverList");
+		Synthesis synth = (Synthesis)hmap.get("synth");
+
+	%>
 	<br><br><br>
 	<hr style="margin:0px;">
 	</nav>
@@ -185,9 +195,9 @@
 							<td><p class="recentTitle">오늘의  수익</p></td>
 						</tr>
 						<tr id="result">
-							<td align="center"><div><p>10</p></div></td>
-							<td><div><p>5</p></div></td>
-							<td><div><p>80000</p></div></td>
+							<td align="center"><div><p><%=synth.getTodayAcceptSpace() %></p></div></td>
+							<td><div><p><%=synth.getTodayJoinMembers() %></p></div></td>
+							<td><div><p><%=synth.getTodaysBenefit() %></p></div></td>
 						</tr>
 					</table>
 				</div><!-- 
@@ -198,19 +208,19 @@
 						</tr>
 						<tr>
 							<td><p>회원</p></td>
-							<td colspan="4"><p class="synValue">1523124명</p></td>
+							<td colspan="4"><p class="synValue"><%=synth.getMemberQTY() %>명</p></td>
 						</tr>
 						<tr>
 							<td><p>공간 </p></td>
-							<td colspan="4"><p class="synValue">1523124명</p></td>
+							<td colspan="4"><p class="synValue"><%=synth.getSpaceQTY()%>개</p></td>
 						</tr>
 						<tr>
 							<td><p>호스트</p></td>
-							<td colspan="4"><p class="synValue">1523124명</p></td>
+							<td colspan="4"><p class="synValue"><%=synth.getHostQTY()%>명</p></td>
 						</tr>
 						<tr>
 							<td><p>첨부 파일</p></td>
-							<td colspan="4"><p class="synValue">1523124명</p></td>
+							<td colspan="4"><p class="synValue"><%=synth.getImagesQty()%>개</p></td>
 						</tr>
 						
 					</table>
