@@ -12,7 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-
+<!-- 커밋용 주석 -->
 <style>
         .visual{
             position: relative;
@@ -92,6 +92,7 @@
         	border: 0px;
         	outline: 0px;
         }
+        
 
     </style>
 </head>
