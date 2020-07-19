@@ -397,7 +397,7 @@
 
 		
 	
-	<footer><%@ include file="../../common/footer.jsp" %></footer>
+	<footer><%@ include file="/views/common/footer.jsp" %></footer>
 	<script>
 		let datas =[<%for(int a : arr){%> <%=a%>,<%	} %>];
 			myData=	{

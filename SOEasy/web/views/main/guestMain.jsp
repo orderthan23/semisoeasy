@@ -196,7 +196,7 @@ h1 {
 			  <% } %>
 					<td class="photobox">
 						<article>
-							<form>
+							<form  action=/login//selectOneSpaceInfo>
 								<input type="hidden" name="spaceNo"
 									value=<%=spaceNoArr.get(i)%>>
 							</form>
@@ -261,7 +261,7 @@ h1 {
 		$('article').click(function(){
 			var spaceNo = $(this).children('form').children('input').val();
 			console.log(spaceNo);
-			location.href = "/login/selectOnSpaceInfo?spaceNo="+spaceNo;
+			$(this).children('form').submit();
 		})
 		
 		//

@@ -33,6 +33,7 @@ public class SelectOneSpaceInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int sNo = Integer.parseInt(request.getParameter("spaceNo"));
+		System.out.println("너 값넘어왔냐?"+sNo);
 		
 		ArrayList<HashMap<String,Object>> list = new SpaceService().selectOneSpaceInfo(sNo);
 		
