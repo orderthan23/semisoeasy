@@ -25,10 +25,10 @@ public class SearchService {
 	}
 
 
-	public ArrayList<HashMap<String, Object>> selectList(PageInfo pi) {
+	public ArrayList<HashMap<String, Object>> selectList(PageInfo pi, String search) {
 		Connection con = getConnection();
 		
-		ArrayList<HashMap<String, Object>> list = new SearchDao().selectList(con, pi);
+		ArrayList<HashMap<String, Object>> list = new SearchDao().selectList(con, pi, search);
 		
 		close(con);
 		
