@@ -34,20 +34,10 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("search");
-		String spaceKind= request.getParameter("spaceKind");
-		String location= request.getParameter("location");
-		String term = request.getParameter("term");
-		String sort = request.getParameter("sort");
 		
-//		int cut = spaceLoactionFilter.indexOf(",");
-//		realFilter = spaceLocationFilter.substring(int cut);
 		
 		
 		System.out.println("search : " + search);
-		System.out.println("spaceKind : " + spaceKind);
-		System.out.println("location : " + location);
-		System.out.println("sort : " + sort);
-		System.out.println("term : " + term);
 		
 		
 		

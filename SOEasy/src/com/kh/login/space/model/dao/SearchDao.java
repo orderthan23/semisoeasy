@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
+import com.kh.login.space.model.vo.SearchFilter;
 import com.kh.login.space.model.vo.SpaceInfo;
 
 import static com.kh.login.common.JDBCTemplate.*;
@@ -79,6 +80,68 @@ public class SearchDao {
 			pstmt.setString(1, search);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<> ();
+			
+			while(rset.next()) {
+				hmap = new HashMap<>();
+				hmap.put("spaceNo", rset.getInt("SPACE_NO"));
+				hmap.put("hostNo", rset.getInt("HOST_NO"));
+				hmap.put("spaceName", rset.getString("SPACE_NAME"));
+				hmap.put("spaceKind", rset.getInt("SPACE_KIND"));
+				hmap.put("spaceAddress", rset.getString("SPACE_ADDRESS"));
+				hmap.put("sStatus", rset.getString("S_STATUS"));
+				hmap.put("spaceIntro", rset.getString("SPACE_INTRO"));
+				hmap.put("spacePayPolicy", rset.getString("SPACE_PAY_POLICY"));
+				hmap.put("didPayReserve", rset.getString("DID_DAY_RESERV"));
+				hmap.put("dayPay", rset.getInt("DAY_PAY"));
+				hmap.put("didMonthReserve", rset.getString("DID_MONTH_RESERV"));
+				hmap.put("monthPay", rset.getInt("MONTH_PAY"));
+				hmap.put("spaceLocationFilter", rset.getString("SPACE_LOCATION_FILTER"));
+				hmap.put("imgNo", rset.getInt("IMG_NO"));
+				hmap.put("originName", rset.getString("ORIGIN_NAME"));
+				hmap.put("filePath", rset.getString("FILE_PATH"));
+				hmap.put("changeName", rset.getString("CHANGE_NAME"));
+				hmap.put("imgDiv", rset.getInt("IMG_DIV"));
+				hmap.put("memberNo", rset.getInt("MEMBER_NO"));
+				hmap.put("fileLevel", rset.getInt("FILE_LEVEL"));
+				
+				list.add(hmap);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+
+
+	public ArrayList<HashMap<String, Object>> filterSelectList(Connection con, PageInfo pi, SearchFilter sf) {
+		PreparedStatement pstmt = null;
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap<String, Object> hmap = null;
+		ResultSet rset = null;
+		
+		
+		String query = prop.getProperty("filterSelectSpace");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			System.out.println(pi.getCurrentPage());
+			int startRow = (pi.getCurrentPage() -1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() -1;
+			
+			pstmt.setString(1, sf.getSearch());
+			pstmt.setInt(8, startRow);
+			pstmt.setInt(9, endRow);
 			
 			
 			rset = pstmt.executeQuery();

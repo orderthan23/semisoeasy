@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.space.model.dao.SearchDao;
+import com.kh.login.space.model.vo.SearchFilter;
 import com.kh.login.space.model.vo.SpaceInfo;
 
 import static com.kh.login.common.JDBCTemplate.*;
@@ -29,6 +30,17 @@ public class SearchService {
 		Connection con = getConnection();
 		
 		ArrayList<HashMap<String, Object>> list = new SearchDao().selectList(con, pi, search);
+		
+		close(con);
+		
+		return list;
+	}
+
+
+	public ArrayList<HashMap<String, Object>> filterSelectList(PageInfo pi, String search, SearchFilter sf) {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new SearchDao().filterSelectList(con, pi, sf);
 		
 		close(con);
 		
