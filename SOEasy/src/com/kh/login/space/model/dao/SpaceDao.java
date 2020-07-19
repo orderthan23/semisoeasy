@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.login.space.model.vo.Image;
+import com.kh.login.space.model.vo.QnA;
 import com.kh.login.space.model.vo.Review;
 import com.kh.login.space.model.vo.SpaceInfo;
 
@@ -749,6 +750,51 @@ public class SpaceDao {
 				i.setFileLevel(rset.getInt("FILE_LEVEL"));
 				
 				list.add(i);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+
+	//공간 QnA 조회용 메소드
+	public ArrayList<QnA> selectSpaceQnaList(Connection con, int sNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<QnA> list = null;
+		
+		String query = prop.getProperty("selectSpaceQnaList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sNo);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				QnA q = new QnA();
+				
+				q.setqNo(rset.getInt("Q_NO"));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String qEnrollDate = sdf.format(rset.getTimestamp("Q_ENROLL_DATE"));
+				q.setqEnrollDate(qEnrollDate);
+				q.setqMemNo(rset.getInt("Q_MEM_NO"));
+				q.setqMemNick(rset.getString("Q_MEM_NICK"));
+				String rEnrollDate = sdf.format(rset.getTimestamp("R_ENROLL_DATE"));
+				q.setrMemNo(rset.getInt("R_MEM_NO"));
+				q.setrMemNick(rset.getString("R_MEM_NICK"));
+				q.setqContent(rset.getString("Q_CONTENT"));
+				q.setqKind(rset.getInt("Q_KIND"));
+				q.setSpaceNo(rset.getInt("SPACE_NO"));
+				
+				list.add(q);
 			}
 			
 		} catch (SQLException e) {

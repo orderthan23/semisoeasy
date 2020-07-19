@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import com.kh.login.space.model.dao.SpaceDao;
 import com.kh.login.space.model.vo.Image;
+import com.kh.login.space.model.vo.QnA;
 import com.kh.login.space.model.vo.Review;
 import com.kh.login.space.model.vo.SpaceInfo;
 
@@ -167,7 +168,7 @@ public class SpaceService {
 		si.setSpaceNo(sNo);
 		ArrayList<Image> imgList = new ArrayList<>();
 		ArrayList<Review> reviewList = new ArrayList<>();
-		//ArrayList<QnA> qnaList = new ArrayList<>();
+		ArrayList<QnA> qnaList = new ArrayList<>();
 		//QnA vo가 만들어지면 넣을 것. -- 반드시!
 		
 		//공간 종류를 조회
@@ -193,22 +194,22 @@ public class SpaceService {
 		//review 조회
 		reviewList = new SpaceDao().selectSpaceReviewList(con, sNo);
 		//QnA 조회 -- 나중에 추가할 것 반드시!!
-		//qnaList = new SpaceDao().selectSpaceQnaList(con,sNo);
+		qnaList = new SpaceDao().selectSpaceQnaList(con,sNo);
 		
 		
 		
 		hmap.put("spaceInfo", si);
 		hmap.put("imgList", imgList);
 		hmap.put("reviewList", reviewList);
-		//hmap.put("QnAList", qnaList);
+		hmap.put("qnaList", qnaList);
 		//나중에 추가할 것 -- 반드시!
 		list.add(hmap);
 		System.out.println(hmap);
 		
 		if(si != null && imgList != null && reviewList != null) {
-			commit(con);
+			
 		} else {
-			rollback(con);
+			list = null;
 		}
 		close(con);
 		

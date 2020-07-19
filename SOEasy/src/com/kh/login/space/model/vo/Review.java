@@ -105,9 +105,9 @@ public class Review implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", spaceNo=" + spaceNo + ", memberNo=" + memberNo + ", reviewContent="
-				+ reviewContent + ", rPoint=" + rPoint + ", enrollDate=" + enrollDate + ", reservNo=" + reservNo + "]";
-
+		return "Review [reviewNo=" + reviewNo + ", spaceNo=" + spaceNo + ", spaceName=" + spaceName + ", memberNo="
+				+ memberNo + ", memberNick=" + memberNick + ", reviewContent=" + reviewContent + ", rPoint=" + rPoint
+				+ ", enrollDate=" + enrollDate + ", reservNo=" + reservNo + "]";
 	}
 		
 }
