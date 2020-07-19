@@ -18,7 +18,7 @@ public class SpaceReservationDao {
 	
 	public SpaceReservationDao() {
 		
-		String propName = SpaceDao.class.getResource("/sql/space/space-query.properties").getPath();
+		String propName = SpaceDao.class.getResource("/sql/space/spaceReserv-query.properties").getPath();
 		
 		try {
 			prop.load(new FileReader(propName));
@@ -32,10 +32,11 @@ public class SpaceReservationDao {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = prop.getProperty("insertReser");
+		String query = prop.getProperty("insertReserv");
 		
 		try {
 			pstmt = con.prepareStatement(query);
+			
 			pstmt.setInt(1, requestMember.getGuestNo());
 			pstmt.setInt(2, requestMember.getSpaceNo());
 			pstmt.setString(3, requestMember.getFixUnfix());

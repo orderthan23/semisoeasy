@@ -16,7 +16,7 @@
 <style>
         .visual{
             position: relative;
-            width: 90%;
+            width: 100%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -98,7 +98,7 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
-	
+	<br><br>
 	<section>
 	<div style="width:75%; margin-left:auto; margin-right:auto;">
 	<form id="insertReservation" action="<%= request.getContextPath()%>/insertReservationInfo" method="post">
