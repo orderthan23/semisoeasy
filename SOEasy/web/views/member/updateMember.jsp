@@ -62,7 +62,7 @@
 		<label class="colMenuTitle">개인 정보 관리</label>
 		<a class="colMenuButton selectedButton" href="/login/views/member/updateMember.jsp">개인 정보 수정</a>
 		<a class="colMenuButton" href="/login/views/member/deleteMember.jsp">회원 탈퇴</a>
-		<a class="colMenuButton" href="/login/views/guest/savetemporaryArea.jsp">임시 공간 저장</a>
+		<a class="colMenuButton" id="selectTempSpace">임시 공간 저장</a>
 		<br><br>
 	</div>
 	<hr style="margin:0">
@@ -91,7 +91,6 @@
 		var password = "<%=loginUser.getmPassword()%>";
 			var inputPassword =$("input[name=password]").val();
 			var userId ="<%=loginUser.getmId()%>";
-				
 			$.ajax({
 				url:"/login/isCorrectPassword.me",
 				data:{userId: userId,
@@ -103,7 +102,6 @@
 						alert("비밀번호가 일치하지 않습니다!");
 						
 					}else{
-						
 						location.href="<%=request.getContextPath()%>/views/member/updateMember2.jsp";
 					} 
 					console.log(data);
@@ -112,8 +110,29 @@
 				error: function(data){
 					console.log("비밀번호 일치여부 확인 실패!");
 				}
+				
 			});
+			
+			
 	}
+	$("#selectTempSpace").click(function(){
+		var userNo ="<%=loginUser.getMemberNo()%>";
+		$.ajax({
+			url:"/login/haveTempSpaceInfo",
+			data:{userNo:userNo},
+			type:"post",
+			success: function(data){
+				if(data == "fail"){
+					alert("등록된 공간 정보가 없습니다!");
+				} else {
+					location.href="<%=request.getContextPath()%>/selectTempSpace?memberNo="+userNo;
+				}
+			},
+			error: function(data){
+				console.log("공간 관리 진입 실패!");
+			}
+		});
+	});
 	</script>
 	
 		

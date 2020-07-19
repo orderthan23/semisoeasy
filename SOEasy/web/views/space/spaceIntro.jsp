@@ -7,6 +7,7 @@
 	SpaceInfo si = (SpaceInfo) hmap.get("spaceInfo");
 	ArrayList<Image> imgList = (ArrayList<Image>) hmap.get("imgList");
 	ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
+	ArrayList<QnA> qnaList = (ArrayList<QnA>) hmap.get("qnaList");
 	
 	String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 %>

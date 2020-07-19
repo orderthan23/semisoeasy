@@ -806,4 +806,70 @@ public class SpaceDao {
 		
 		return list;
 	}
+
+	//해당 회원의 공간정보 갯수 조회용 메소드
+	public int haveTempSpaceInfo(Connection con, int memberNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("haveTempSpaceInfo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return result;
+	}
+
+	//회원번호를 가진 공간정보 전체를 조회
+	public ArrayList<SpaceInfo> selectTempSpaceOfOneMember(Connection con, int memberNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<SpaceInfo> list = null;
+		
+		String query = prop.getProperty("selectTempSpaceOfOneMember");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				SpaceInfo s = new SpaceInfo();
+				s.setSpaceNo(rset.getInt("SPACE_NO"));
+				s.setSpaceName(rset.getString("SPACE_NAME"));
+				s.setsStatus(rset.getString("S_STATUS"));
+				s.setSpaceKind(rset.getInt("SPACE_KIND"));
+				s.setSpaceShortIntro(rset.getString("SPACE_SHORT_INTRO"));
+				
+				list.add(s);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
 }

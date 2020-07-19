@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.login.space.model.vo.*" %>
+    pageEncoding="UTF-8"%>
 <%
-	SpaceInfo si = (SpaceInfo) session.getAttribute("spaceInfo");
+	// session 정보 가져올것
 %>
 <!DOCTYPE html>
 <html>
@@ -16,6 +16,10 @@
 
 	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
 		$("#roadFullAddr").val(roadFullAddr);
+		$("#siNm").val(siNm);
+		$("#sggNm").val(sggNm);
+		$("#emdNm").val(emdNm);
+		$("#roadAddrPart1").val(roadAddrPart1);
 	}
 </script>
 <link rel="stylesheet" href="../../css/layout.css">
@@ -80,7 +84,7 @@
 	input[type=checkbox]{
 		cursor: pointer;
 	}
-	#add-tag{
+	/* #add-tag{
 		width: 60%;
 	}
 	#space-tag{
@@ -88,7 +92,7 @@
 		height: 200px;
 		border: 1px solid black;
 		border-radius: 10px;
-	}
+	} */
 	.thumbnail-in, #capital-img{
 		max-width: 100%;
 		max-height: 100%;
@@ -114,14 +118,20 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
+	<%
+		if(userStatus == 0 || loginUser==null){
+			request.setAttribute("msg", "잘못된 경로입니다.");
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request,response);
+		}
+	%>
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<div>
-			<h1 align="center" style="margin:0;">기본 정보</h1>
+			<h1 align="center" style="margin:0;">공간 등록</h1>
 			<br>
 			<br>
 		</div>
-		<form action="<%= request.getContextPath() %>/updateSpaceStep1" method="post">
+		<form action="<%= request.getContextPath() %>/updateSpaceStep1" method="post" encType="multipart/form-data">
 			<table class="space-insert" align="center" width="70%">
 				<tr>
 					<td width="5%"></td>
@@ -184,13 +194,13 @@
 								<tr>
 									<td width="30%">자유석</td>
 									<td width="60%">
-										<input type="text" name="unfix-seat" id="unfix-seat" size="30%" value="0" onkeyup="count();" onclick="this.select();">
+										<input type="text" name="unfix-seat" id="unfix-seat" size="30%" value="0" onkeyup="countSeat();" onclick="this.select();">
 									</td>
 									<td width="10%">석</td>
 								</tr>
 								<tr>
 									<td>지정석</td>
-									<td><input type="text" name="fix-seat" id="fix-seat" size="30%" value="0" onkeyup="count();" onclick="this.select();"></td>
+									<td><input type="text" name="fix-seat" id="fix-seat" size="30%" value="0" onkeyup="countSeat();" onclick="this.select();"></td>
 									<td>석</td>
 								</tr>
 								<tr>
@@ -224,15 +234,25 @@
 				</tr>
 				<tr>
 					<td></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
 					<td></td>
-					<td align="right"><p class="text-limit" id="intro-limit">0 / 200</p></td>
+					<td>공간 한줄 소개 *</td>
+					<td><input type="text" maxlength="20" name="space-short-intro" id="space-short-intro"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td align="right"><p class="text-limit" id="intro-limit">0 / 400</p></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td>공간 소개 *</td>
 					<td>
-						<textarea rows="5" maxlength="200" name="space-intro" id="space-intro"></textarea>
+						<textarea rows="8" maxlength="400" name="space-intro" id="space-intro"></textarea>
 					</td>
 					<td></td>
 				</tr>
@@ -240,56 +260,56 @@
 					<td></td>
 					<td>&nbsp;</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td></td>
 					<td>공간 태그</td>
 					<td><input type="text" id="add-tag" onclick="this.select();">&nbsp;&nbsp;<button type="button" onclick="addTag();">추가하기</button></td>
 					<td></td>
-				</tr>
-				<tr>
+				</tr> -->
+				<!-- <tr>
 					<td></td>
 					<td></td>
 					<td><div id="space-tag"></div></td>
 					<td></td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td></td>
 					<td style="vertical-align: top;"><br>편의시설 *</td>
 					<td>
 						<table style="border-spacing:15px; text-align:center;">
 							<tr>
-								<td><label for="24h"><img src="../../images/icon/24h.png" width="100px"><br><input type="checkbox" name="conv" id="24h" value="24h"></label></td>
-								<td><label for="365days"><img src="../../images/icon/365days.png" width="100px"><br><input type="checkbox" name="conv" id="365days" value="365days"></label></td>
-								<td><label for="airCon"><img src="../../images/icon/airCon.png" width="100px"><br><input type="checkbox" name="conv" id="airCon" value="airCon"></label></td>
-								<td><label for="animal"><img src="../../images/icon/animal.png" width="100px"><br><input type="checkbox" name="conv" id="animal" value="animal"></label></td>
+								<td><label for="24h"><img src="<%=request.getContextPath()%>/images/icon/24h.png" width="100px"><br><input type="checkbox" name="conv" id="24h" value="24h"></label></td>
+								<td><label for="365days"><img src="<%=request.getContextPath()%>/images/icon/365days.png" width="100px"><br><input type="checkbox" name="conv" id="365days" value="365days"></label></td>
+								<td><label for="airCon"><img src="<%=request.getContextPath()%>/images/icon/airCon.png" width="100px"><br><input type="checkbox" name="conv" id="airCon" value="airCon"></label></td>
+								<td><label for="animal"><img src="<%=request.getContextPath()%>/images/icon/animal.png" width="100px"><br><input type="checkbox" name="conv" id="animal" value="animal"></label></td>
 							</tr>
 							<tr>
-								<td><label for="beam"><img src="../../images/icon/beam.png" width="100px"><br><input type="checkbox" name="conv" id="beam" value="beam"></label></td>
-								<td><label for="board"><img src="../../images/icon/board.png" width="100px"><br><input type="checkbox" name="conv" id="board" value="board"></label></td>
-								<td><label for="cafe"><img src="../../images/icon/cafe.png" width="100px"><br><input type="checkbox" name="conv" id="cafe" value="cafe"></label></td>
-								<td><label for="copyPrint"><img src="../../images/icon/copyPrint.png" width="100px"><br><input type="checkbox" name="conv" id="copyPrint" value="copyPrint"></label></td>
+								<td><label for="beam"><img src="<%=request.getContextPath()%>/images/icon/beam.png" width="100px"><br><input type="checkbox" name="conv" id="beam" value="beam"></label></td>
+								<td><label for="board"><img src="<%=request.getContextPath()%>/images/icon/board.png" width="100px"><br><input type="checkbox" name="conv" id="board" value="board"></label></td>
+								<td><label for="cafe"><img src="<%=request.getContextPath()%>/images/icon/cafe.png" width="100px"><br><input type="checkbox" name="conv" id="cafe" value="cafe"></label></td>
+								<td><label for="copyPrint"><img src="<%=request.getContextPath()%>/images/icon/copyPrint.png" width="100px"><br><input type="checkbox" name="conv" id="copyPrint" value="copyPrint"></label></td>
 							</tr>
 							<tr>
-								<td><label for="delivery"><img src="../../images/icon/delivery.png" width="100px"><br><input type="checkbox" name="conv" id="delivery" value="delivery"></label></td>
-								<td><label for="doorLock"><img src="../../images/icon/doorLock.png" width="100px"><br><input type="checkbox" name="conv" id="doorLock" value="doorLock"></label></td>
-								<td><label for="fax"><img src="../../images/icon/fax.png" width="100px"><br><input type="checkbox" name="conv" id="fax" value="fax"></label></td>
-								<td><label for="heater"><img src="../../images/icon/heater.png" width="100px"><br><input type="checkbox" name="conv" id="heater" value="heater"></label></td>
+								<td><label for="delivery"><img src="<%=request.getContextPath()%>/images/icon/delivery.png" width="100px"><br><input type="checkbox" name="conv" id="delivery" value="delivery"></label></td>
+								<td><label for="doorLock"><img src="<%=request.getContextPath()%>/images/icon/doorLock.png" width="100px"><br><input type="checkbox" name="conv" id="doorLock" value="doorLock"></label></td>
+								<td><label for="fax"><img src="<%=request.getContextPath()%>/images/icon/fax.png" width="100px"><br><input type="checkbox" name="conv" id="fax" value="fax"></label></td>
+								<td><label for="heater"><img src="<%=request.getContextPath()%>/images/icon/heater.png" width="100px"><br><input type="checkbox" name="conv" id="heater" value="heater"></label></td>
 							</tr>
 							<tr>
-								<td><label for="kitchen"><img src="../../images/icon/kitchen.png" width="100px"><br><input type="checkbox" name="conv" id="kitchen" value="kitchen"></label></td>
-								<td><label for="locker"><img src="../../images/icon/locker.png" width="100px"><br><input type="checkbox" name="conv" id="locker" value="locker"></label></td>
-								<td><label for="mail"><img src="../../images/icon/mail.png" width="100px"><br><input type="checkbox" name="conv" id="mail" value="mail"></label></td>
-								<td><label for="parking"><img src="../../images/icon/parking.png" width="100px"><br><input type="checkbox" name="conv" id="parking" value="parking"></label></td>
+								<td><label for="kitchen"><img src="<%=request.getContextPath()%>/images/icon/kitchen.png" width="100px"><br><input type="checkbox" name="conv" id="kitchen" value="kitchen"></label></td>
+								<td><label for="locker"><img src="<%=request.getContextPath()%>/images/icon/locker.png" width="100px"><br><input type="checkbox" name="conv" id="locker" value="locker"></label></td>
+								<td><label for="mail"><img src="<%=request.getContextPath()%>/images/icon/mail.png" width="100px"><br><input type="checkbox" name="conv" id="mail" value="mail"></label></td>
+								<td><label for="parking"><img src="<%=request.getContextPath()%>/images/icon/parking.png" width="100px"><br><input type="checkbox" name="conv" id="parking" value="parking"></label></td>
 							</tr>
 							<tr>
-								<td><label for="rounge"><img src="../../images/icon/rounge.png" width="100px"><br><input type="checkbox" name="conv" id="rounge" value="rounge"></label></td>
-								<td><label for="snack"><img src="../../images/icon/snack.png" width="100px"><br><input type="checkbox" name="conv" id="snack" value="snack"></label></td>
-								<td><label for="terrace"><img src="../../images/icon/terrace.png" width="100px"><br><input type="checkbox" name="conv" id="terrace" value="terrace"></label></td>
-								<td><label for="tv"><img src="../../images/icon/tv.png" width="100px"><br><input type="checkbox" name="conv" id="tv" value="tv"></label></td>
+								<td><label for="rounge"><img src="<%=request.getContextPath()%>/images/icon/rounge.png" width="100px"><br><input type="checkbox" name="conv" id="rounge" value="rounge"></label></td>
+								<td><label for="snack"><img src="<%=request.getContextPath()%>/images/icon/snack.png" width="100px"><br><input type="checkbox" name="conv" id="snack" value="snack"></label></td>
+								<td><label for="terrace"><img src="<%=request.getContextPath()%>/images/icon/terrace.png" width="100px"><br><input type="checkbox" name="conv" id="terrace" value="terrace"></label></td>
+								<td><label for="tv"><img src="<%=request.getContextPath()%>/images/icon/tv.png" width="100px"><br><input type="checkbox" name="conv" id="tv" value="tv"></label></td>
 							</tr>
 							<tr>
-								<td><label for="wareHouse"><img src="../../images/icon/wareHouse.png" width="100px"><br><input type="checkbox" name="conv" id="wareHouse" value="wareHouse"></label></td>
-								<td><label for="waterMachine"><img src="../../images/icon/waterMachine.png" width="100px"><br><input type="checkbox" name="conv" id="waterMachine" value="waterMachine"></label></td>
+								<td><label for="wareHouse"><img src="<%=request.getContextPath()%>/images/icon/wareHouse.png" width="100px"><br><input type="checkbox" name="conv" id="wareHouse" value="wareHouse"></label></td>
+								<td><label for="waterMachine"><img src="<%=request.getContextPath()%>/images/icon/waterMachine.png" width="100px"><br><input type="checkbox" name="conv" id="waterMachine" value="waterMachine"></label></td>
 								<td style="display:none;"><input type="checkbox" name="conv" value="wifi" checked></td>
 								<td style="display:none;"><input type="checkbox" name="conv" value="plug" checked></td>
 							</tr>
@@ -354,7 +374,12 @@
 					<td></td>
 					<td>공간 주소 *</td>
 					<td><input type="text" placeholder="공간 주소를 입력하세요." id="roadFullAddr"  name="space-address" readonly>&nbsp;&nbsp;<button type="button" onclick="goPopup();">검색</button></td>
-					<td></td>
+					<td>
+						<input type="hidden" id="siNm"  name="siNm" />
+						<input type="hidden" id="sggNm"  name="sggNm" />
+						<input type="hidden" id="emdNm"  name="emdNm" />
+						<input type="hidden" id="roadAddrPart1"  name="roadAddrPart1" />
+					</td>
 				</tr>
 				<tr>
 					<td></td>
@@ -400,41 +425,51 @@
 	<footer>
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
-	<script>
+	<script>	
+	
+		// 좌석 수 = 자유석 + 지정석
+		function countSeat(){
+			/* console.log("되는건맞니?") */
+			var unfixSeat = Number($("#unfix-seat").val());
+			var fixSeat = Number($("#fix-seat").val());
+			var totalSeat = unfixSeat + fixSeat;
+			
+			$("#total-seat").val(totalSeat);
+			$("#max-reserv").val(totalSeat);
+		};
+		
+		var count = 0;
+		$(".thumb").on("change", function(){
+			for(var i = 1; i <= 6; i++){
+				if($("#thumbnailImg" + i).val() != "<%=request.getContextPath()%>/images/icon/addImg.png"){
+					count ++;
+					console.log(count);
+					break;
+				}
+			}
+			if(count >= 4){
+				$("#thumbnail-img-not").hide();
+			}
+		});
+		
+		
 		$(function(){
 			initSet();
 			initEvent();
-			
+			for(var i = 1; i <= 6; i++){
+				if($("#thumbnailImg" + i).val() != "<%=request.getContextPath()%>/images/icon/addImg.png"){
+					count ++;
+					console.log(count);
+					break;
+				}
+			}
+			if(count >= 4){
+				$("#thumbnail-img-not").hide();
+			}
 		});
 		
 		function initSet(){
 			$(".warning").show();
-			
-			if(<%=si%> != null){
-				if(<%=si.getSpaceKind()%> == 1){
-					$("#kinds").val("office");
-					$("#office-check").show();
-					$("input[name=space-size]").val("<%=si.getSpaceSize()%>");
-					$("input[name=space-room-count]").val("<%=si.getSpaceRoomCount()%>");
-					$("input[name=space-contain-count]").val("<%=si.getSpaceContainCount()%>");
-				} else {
-					$("#kinds").val("cowork");
-					$("#cowork-check").show();
-					$("#unfix-seat").val("<%=si.getUnfixSeat()%>");
-					$("#fix-seat").val("<%=si.getFixSeat()%>");
-					$("#max-reserv").val("<%=si.getMaxReserv()%>");
-				}
-				$("#space-name").val("<%=si.getSpaceName()%>");
-				$("#space-intro").val("<%=si.getSpaceIntro()%>");
-				
-				var conv = $("#input[name=conv]");
-				var siConv = <%=si.getConv()%>;
-				
-				for(var i = 0; i < conv.length; i++){
-					
-				}
-				
-			}
 		}
 	
 		function initEvent(){
@@ -506,19 +541,17 @@
 					$(this).val("");
 				}
 			});
-			$("#fix-seat").on("change", function(){count();});
-			$("#unfix-seat").on("change", function(){count();});
 			
 			//공간 소개 입력시 글자 수 표시
 			$("#space-intro").on("keyup", function(){
 				var si = $("#space-intro").val();
 				var len = si.length;
-				var maxlen = 200;
+				var maxlen = 400;
 				$("#intro-limit").text(len + " / " + maxlen);
 			}).on("keypress", function(){
 				var si = $("#space-intro").val();
 				var len = si.length;
-				var maxlen = 200;
+				var maxlen = 400;
 				$("#intro-limit").text(len + " / " + maxlen)
 			});
 			
@@ -537,18 +570,9 @@
 			}
 		});
 		
-		// 좌석 수 = 자유석 + 지정석
-		function count(){
-			var unfixSeat = Number($("#unfix-seat").val());
-			var fixSeat = Number($("#fix-seat").val());
-			var totalSeat = unfixSeat + fixSeat;
-			
-			$("#total-seat").val(totalSeat);
-			$("#max-reserv").val(totalSeat);
-		};
 		
 		//태그 추가하기
-		function addTag(){
+		/* function addTag(){
 			var tag = $("#add-tag").val();
 			var tags = $("#space-tag");
 			
@@ -562,12 +586,8 @@
 			
 			tags.append(tag_input);
 			$("#add-tag").val("");
-		};
+		}; */
 		
-		/* function clickHash(){
-			$(".space-tag").hover()
-			
-		} */
 		
 		//이미지 추가하기
 		$(function(){
@@ -603,7 +623,7 @@
 				
 				reader.onload = function(e) {
 					$("#capital-img").attr("src", e.target.result);
-					if(e.target.result !== "../../images/icon/addImg.png"){
+					if(e.target.result !== "<%=request.getContextPath()%>/images/icon/addImg.png"){
 						$("#capital-img-not").hide();
 					}
 				}
@@ -643,20 +663,6 @@
 			}
 		};
 		
-		var count = 0;
-		$(".thumb").on("change", function(){
-			for(var i = 1; i <= 6; i++){
-				if($("#thumbnailImg" + i).val() != "../../images/icon/addImg.png"){
-					count ++;
-					console.log(count);
-					break;
-				}
-			}
-			if(count >= 3){
-				$("#thumbnail-img-not").hide();
-			}
-		});
-		
 		$(".rule").on("change", function(){
 			if($("#rule1").is(":checked") == true && $("#rule2").is(":checked") == true && $("#rule3").is(":checked") == true){
 				$("#rule4").prop("checked", true);
@@ -666,14 +672,12 @@
 		});
 		
 		$("#gonext").click(function(){
-			if($(".warning").is("visible") == true || $(".check-distinct").is("visible") == false || $("#space-intro").val() == "" || $("#roadFullAddr").val() == "" || $("#rule4").is("checked") == false){
+			if($(".warning").is("visible") == true || $("#space-intro").val() == "" || $("#roadFullAddr").val() == "" || $("#rule4").is(":checked") == false){
 				alert("필수사항을 모두 입력하세요");
 			} else {
 				$("form").submit();
 			}
 		});
-		
-		
 	</script>
 </body>
 </html>

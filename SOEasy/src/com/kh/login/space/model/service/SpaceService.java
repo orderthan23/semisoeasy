@@ -215,5 +215,29 @@ public class SpaceService {
 		
 		return list;
 	}
+	
+	//해당 회원의 공간정보 갯수 조회용 메소드
+	public int haveTempSpaceInfo(int memberNo) {
+		
+		Connection con = getConnection();
+		
+		int result = new SpaceDao().haveTempSpaceInfo(con, memberNo);
+		
+		close(con);
+		
+		return result;
+	}
+
+	//해당 회원의
+	public ArrayList<SpaceInfo> selectTempSpaceOfOneMember(int memberNo) {
+		
+		Connection con = getConnection();
+		
+		ArrayList<SpaceInfo> list = new SpaceDao().selectTempSpaceOfOneMember(con, memberNo);
+		
+		close(con);
+		
+		return list;
+	}
 
 }

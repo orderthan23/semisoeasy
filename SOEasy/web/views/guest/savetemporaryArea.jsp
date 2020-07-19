@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.kh.login.space.model.vo.*" %>
+<%
+	ArrayList<SpaceInfo> siList = (ArrayList<SpaceInfo>) request.getAttribute("siList"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +68,7 @@
 		<label class="colMenuTitle">개인 정보 관리</label>
 		<a class="colMenuButton" href="/login/views/member/updateMember.jsp">개인 정보 수정</a>
 		<a class="colMenuButton" href="/login/views/member/deleteMember.jsp">회원 탈퇴</a>
-		<a class="colMenuButton selectedButton" href="/login/views/guest/savetemporaryArea.jsp">나의 공간</a>
+		<a class="colMenuButton selectedButton" href="/login/views/guest/savetemporaryArea.jsp">내 공간 관리</a>
 		<br><br>
 	</div>
 	<hr style="margin:0">
@@ -74,7 +77,7 @@
 
 <section>
 	<div id ="wrapper">
-	<h1>등록 진행 중인 공간</h1>
+	<h1>내 공간 관리</h1>
 	<p>현재 등록 대기 중인 공간이 <label>1</label>개 있습니다.</p>
 	<select>
 		<option>검수 상태</option>
@@ -93,13 +96,13 @@
 	<br><br>
 	<table	id="areaListTable">
 		<tr id = tableHeader>
-			<th>공간 명</th>
-			<th>작성 일</th>
+			<th>공간명</th>
+			<th>공간종류</th>
 			<th>작성 상태</th>
 			<th>검수 진행도 </th>
 		</tr>
 		<%
-			//  가제 : 1,검수 요청 전, 2.검수 대기중, 3. 검수 진행중, 4. 검수 완료, 5. 검수 탈락
+			/* //  가제 : 1,검수 요청 전, 2.검수 대기중, 3. 검수 진행중, 4. 검수 완료, 5. 검수 탈락
 			int 검수상황 = 3;
 			// 가제 : 1.1단계 공간정보 입력완료 , 2.2단계 가격정보 입력완료  3.검수 신청 완료
 			int 작성단계변수 = 1;
@@ -113,12 +116,18 @@
 			String 공간날짜 = "20.09.18";
 			
 			int length  = 6; // 정보의 갯수 
-			for(int i = 0; i<length; i++){
+			for(int i = 0; i<length; i++){ */
+			
+			for(SpaceInfo si : siList) {
 		%>
-		
+		<!-- 공간수정버튼 추가 필요 !_____!!!! -->
 		<tr id = tableResource>
-			<td><p><%=공간이름 %></p> </td>
-			<td><p><%=공간날짜 %></p> </td><!--서버에서 불러온 날자 가 들어올 자리 -->
+			<td><p>"<%=si.getSpaceName()%>"</p> </td>
+			<% 	if(si.getSpaceKind() == 1){ %>
+			<td><p>독립 오피스</p> </td>
+			<% } else { %>
+			<td><p>코워킹 스페이스</p> </td>
+			<% } %>
 			<td><select class="howToStep">
 					<option selected disabled><%=작성단계 %></option>
 					<option></option>
