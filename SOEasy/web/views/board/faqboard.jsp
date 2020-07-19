@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" %>
-
+	pageEncoding="UTF-8"  import="java.util.*, com.kh.login.board.model.vo.*" %>
+<% ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,13 +100,13 @@
 					<option class="category">시스템관련</option>
 					<option class="category">계정관련</option>
 					<option class="category">결제관련</option>
-					<option class="category"></option>
+					<option class="category" value=4>이용관련</option>
+					<option class="category" value=5>자주묻는게시판</option>
 				</select>
 			</td>
 			<td colspan="3"></td>
 				<td align="center">
 				</td>	
-		</tr>
 				<tr>
 					<th>번호</th>
 					<th>분류</th>
@@ -115,6 +115,16 @@
 					<th>작성일자</th>
 					<th></th>
 				</tr>
+				<% for(Board b : list) { %>
+				<tr>
+					<td class="info" style="text-align: center;"><%= b.getNoticeNo() %></td>
+					<td class="info" style="text-align: center;"><%= b.getnCategory() %></td>
+					<td class="info" style="text-align: center;"><%= b.getnTitle() %></td>
+					<td class="info" style="text-align: center;"><%= b.getmNick() %></td>
+					<td class="info" style="text-align: center;"><%= b.getnDate() %></td>
+					<td class="info" style="text-align: center;"></td>
+				</tr>
+				<% } %>
 				<tr>
 					<td class="info" style="text-align: center;">1</td>
 					<td class="info" style="text-align: center;">결제관련</td>
@@ -129,21 +139,28 @@
 		</div>
 	</section>
 	 <%@ include file="../common/footer.jsp"%> 
-	<!-- <script> -->
-	<%-- var userStatus = <%=userStatus%>; --%>
-		<!-- $(function(){
-			switch(userStatus){
-			case 1: 
-			case 2: $('#writeButton').hide(); break;
 
-			case 3:	$('#writeButton').show(); break;
-			default : break;
-			}
-			
-		}); -->
-		
-		<!-- </script> -->
-​
+	<script>
+	
+	var userStatus = <%=userStatus%>;
+	 console.log(category);
+	$(function(){
+		switch(userStatus){
+		case 1: break;
+		case 2: break;
+		case 3: $('.writeButton').show(); break;
+		default: $('#writeButton').hide(); break;
+		}
+		$("#boardTable td").mouseenter(function() {
+			$(this).parent().css({"background" : "#60B4A6", "cursor" : "pointer"});
+		}).mouseout(function() {
+			$(this).parent().css({"background" : "white"});
+		}).click(function() {
+			var num = $(this).parent().children().eq(0).text();
+			location.href="<%=request.getContextPath()%>/detail.no?num=" + num;
+		})
+	});
+	</script>​
 ​
 	
 				

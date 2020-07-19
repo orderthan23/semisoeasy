@@ -80,7 +80,7 @@
 	<header><%@ include file="../common/header.jsp"%></header>
 	<div class="colMenu" style="margin-top: 20px;">
 		<a class="colMenuButton selectedButton"	href="/login/selectList.no">공지사항</a>
-		<a class="colMenuButton" href="/login/views/board/faqboard.jsp">자주 묻는 질문</a> 
+		<a class="colMenuButton" href="/login/selectList.faq">자주 묻는 질문</a> 
 		<a class="colMenuButton" href="/login/views/board/mtmboard.jsp">1대1문의</a>
 	</div>
 	<hr style="margin: 0">

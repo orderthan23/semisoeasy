@@ -44,9 +44,14 @@ public class InsertNoticeServlet extends HttpServlet {
 		board.setnTitle(title);
 		int result = new BoardService().insertBoard(board);
 		System.out.println("board : " + board);
-		if(result>0) {
+		if(result>0 && category < 5) {
 			response.sendRedirect("/login/selectList.no");
-		} else {
+		}
+		// result>0이고, category의 value가 5이면 selectLIst.faq로 보내줘라
+		else if (result>0 && category == 5){
+			response.sendRedirect("/login/selectList.faq");
+		}
+		 else {
 			request.setAttribute("msg", "게시판 작성 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
