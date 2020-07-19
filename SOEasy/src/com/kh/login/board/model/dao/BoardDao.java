@@ -64,6 +64,44 @@ public class BoardDao {
 
 	}
 
+	public ArrayList<Board> selectFAQList(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+
+		String query = prop.getProperty("selectFAQList");
+
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+
+			list = new ArrayList<Board>();
+
+			while (rset.next()) {
+				Board b = new Board();
+				b.setNoticeNo(rset.getInt("NOTICE_NO"));
+				b.setnCategory(rset.getInt("N_CATEGORY"));
+				b.setnTitle(rset.getString("N_TITLE"));
+				b.setmNick(rset.getString("M_NICK"));
+				b.setnDate(rset.getDate("N_ENROLL_DATE"));
+				b.setnContent(rset.getString("N_CONTENT"));
+				b.setnStatus(rset.getString("N_STATUS"));
+				
+				list.add(b);
+				System.out.println(b);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+
+		return list;
+
+	}
+	
 	public int insertBoard(Connection con, Board board) {
 		PreparedStatement pstmt = null;
 		int result = 0;

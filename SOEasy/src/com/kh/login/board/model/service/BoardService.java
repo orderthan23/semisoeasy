@@ -22,6 +22,16 @@ public class BoardService {
 			
 		return list;
 }
+		public ArrayList<Board> selectFAQList(){
+			
+			Connection con = getConnection();
+			
+			ArrayList<Board> list = new BoardDao().selectFAQList(con);
+			
+			close(con);
+			
+		return list;
+		}
 		
 		public int insertBoard(Board board) {
 
@@ -37,7 +47,8 @@ public class BoardService {
 			close(con);
 			return result;
 		}
-
+		
+		
 		public Board detailBoard(int nno) {
 
 			Connection con = getConnection();

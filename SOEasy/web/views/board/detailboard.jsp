@@ -98,7 +98,8 @@
 						<option class="category" value="1">시스템관련</option>
 						<option class="category" value="2">계정관련</option>
 						<option class="category" value="3">결제관련</option>
-						<option class="category"></option>
+						<option class="category" value="4">이용관련</option>
+						<option class="category" value="5">자주묻는게시판</option>
 					</select>
 				</td>
 			</tr>

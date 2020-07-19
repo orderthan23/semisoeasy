@@ -80,7 +80,7 @@
 	<header><%@ include file="../common/header.jsp"%></header>
 	<div class="colMenu" style="margin-top: 20px;">
 		<a class="colMenuButton selectedButton"	href="/login/selectList.no">공지사항</a>
-		<a class="colMenuButton" href="/login/views/board/faqboard.jsp">자주 묻는 질문</a> 
+		<a class="colMenuButton" href="/login/selectList.faq">자주 묻는 질문</a> 
 		<a class="colMenuButton" href="/login/views/board/mtmboard.jsp">1대1문의</a>
 	</div>
 	<hr style="margin: 0">
@@ -113,8 +113,10 @@
 							<option class="category" style="text-align: center">선택</option>
 							<option class="category" value=1>시스템관련</option>
 							<option class="category" value=2>계정관련</option>
-							<option class="category">결제관련</option>
-							<option class="category"></option>
+							<option class="category" value=3>결제관련</option>
+							<option class="category" value=4>이용관련</option>
+							<option class="category" value=5>자주묻는게시판</option>
+							
 					</select></td>
 					<td colspan="3"></td>
 					<td align="center"></td>
