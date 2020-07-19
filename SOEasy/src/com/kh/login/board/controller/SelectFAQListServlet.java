@@ -7,17 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class SelectFAQServlet
- */
-@WebServlet(name = "SelectFAQListServlet", urlPatterns = { "/selectList.faq" })
-public class SelectFAQServlet extends HttpServlet {
+@WebServlet("/selectList.faq")
+public class SelectFAQListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectFAQServlet() {
+    public SelectFAQListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
