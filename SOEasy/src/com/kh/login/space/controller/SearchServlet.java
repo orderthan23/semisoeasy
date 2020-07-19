@@ -44,7 +44,6 @@ public class SearchServlet extends HttpServlet {
 		String root = request.getRequestURI();
 		String url = PageInfo.customQString(request.getQueryString(), 2);
 		
-		
 		int currentPage;
 		int limit;
 		int maxPage;
