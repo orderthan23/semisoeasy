@@ -65,7 +65,7 @@
 		<label class="colMenuTitle">개인 정보 관리</label>
 		<a class="colMenuButton" href="/login/views/member/updateMember.jsp">개인 정보 수정</a>
 		<a class="colMenuButton" href="/login/views/member/deleteMember.jsp">회원 탈퇴</a>
-		<a class="colMenuButton selectedButton" href="/login/views/guest/savetemporaryArea.jsp">나의 공간</a>
+		<a class="colMenuButton selectedButton" href="/login/views/guest/savetemporaryArea.jsp">내 공간 관리</a>
 		<br><br>
 	</div>
 	<hr style="margin:0">
@@ -74,7 +74,7 @@
 
 <section>
 	<div id ="wrapper">
-	<h1>등록 진행 중인 공간</h1>
+	<h1>내 공간 관리</h1>
 	<p>현재 등록 대기 중인 공간이 <label>1</label>개 있습니다.</p>
 	<select>
 		<option>검수 상태</option>
@@ -115,7 +115,7 @@
 			int length  = 6; // 정보의 갯수 
 			for(int i = 0; i<length; i++){
 		%>
-		
+		<!-- 공간수정버튼 추가 필요 !_____!!!! -->
 		<tr id = tableResource>
 			<td><p><%=공간이름 %></p> </td>
 			<td><p><%=공간날짜 %></p> </td><!--서버에서 불러온 날자 가 들어올 자리 -->

@@ -1,7 +1,7 @@
 package com.kh.login.space.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.login.space.model.service.SpaceService;
-import com.kh.login.space.model.vo.SpaceInfo;
 
 /**
- * Servlet implementation class SelectTempAreaServlet
+ * Servlet implementation class HaveTempSpaceInfoServlet
  */
-@WebServlet("/selectTempSpace")
-public class SelectTempAreaServlet extends HttpServlet {
+@WebServlet("/haveTempSpaceInfo")
+public class HaveTempSpaceInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectTempAreaServlet() {
+    public HaveTempSpaceInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +31,19 @@ public class SelectTempAreaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		//SpaceInfo에 SPACE_NO, SPACE_NAME, S_STATUS, SPACE_KIND, SPACE_SHORT_INTRO 가져오기
-		ArrayList<SpaceInfo> siList = new SpaceService().selectTempSpaceOfOneMember(memberNo);
-		//널인 경우가 생기지 않게 메인페이지에서 ajax처리 완료
-		if(siList != null) {
-			request.setAttribute("siList", siList);
-			request.getRequestDispatcher(request.getContextPath() + "/views/guest/savetemporaryArea.jsp").forward(request, response);;
+		int memberNo = Integer.parseInt(request.getParameter("userNo"));
+		
+		int result = new SpaceService().haveTempSpaceInfo(memberNo);
+		
+		PrintWriter out = response.getWriter();
+		
+		if(result > 0) {
+			out.append("success");
 		} else {
-			request.setAttribute("msg", "내 공간 관리 접근 실패!");
-			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);;
+			out.append("fail");
 		}
+		out.flush();
+		out.close();
 		
 	}
 
