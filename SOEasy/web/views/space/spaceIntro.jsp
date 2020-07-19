@@ -8,8 +8,9 @@
 	ArrayList<Image> imgList = (ArrayList<Image>) hmap.get("imgList");
 	ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
 	
-	String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
+	String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0]; 
 %>
+<!-- intro페이지도 500번에러 4~11번째 줄 추가한게 에러로 잡힘 -->
 <!DOCTYPE html>
 <html>
 <head>

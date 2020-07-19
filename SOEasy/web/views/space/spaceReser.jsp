@@ -101,7 +101,7 @@
 	<section>
 	<div style="width:75%; margin-left:auto; margin-right:auto;">
 	<form id="insertReservation" action="<%= request.getContextPath()%>/insertReservationInfo" method="post">
-	<input type="hidden" name="spaceNo" value="<%= si.getSpaceNo()%>">
+	<%-- <input type="hidden" name="spaceNo" value="<%= si.getSpaceNo()%>"> --%> <!-- 얘 주석하면 에러 사라짐 원인파악중 -->
 	<!-- 공간명 / 가격 -->
 	<table>
 		<tr>
