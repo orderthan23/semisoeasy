@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-
+import static com.kh.login.common.JDBCTemplate.*;
 
 public class AdminDao {
 	 private Properties prop = new Properties();
@@ -46,6 +46,9 @@ public class AdminDao {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
 		}
 		
 		return imageCount;
@@ -70,6 +73,9 @@ public class AdminDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
 		}
 		
 		return hostCount;
@@ -82,6 +88,27 @@ public class AdminDao {
 
 	public int getNewSpaceCount(Connection con) {
 		int newSpaceCount = -1;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("getNewSpaceCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				newSpaceCount = rset.getInt(1);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
 		
 		return newSpaceCount;
 	}
@@ -93,8 +120,28 @@ public class AdminDao {
 
 	public int getNewMembersCount(Connection con) {
 		int newMembersCount = -1;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("getNewMembersCount");
 		
-		return 0;
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				newMembersCount = rset.getInt(1);
+			}
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return newMembersCount;
 	}
 
 
