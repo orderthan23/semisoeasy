@@ -61,7 +61,7 @@ public class SearchDao {
 	}
 
 
-	public ArrayList<HashMap<String, Object>> selectList(Connection con, PageInfo pi) {
+	public ArrayList<HashMap<String, Object>> selectList(Connection con, PageInfo pi, String search) {
 		PreparedStatement pstmt = null;
 		ArrayList<HashMap<String, Object>> list = null;
 		HashMap<String, Object> hmap = null;
@@ -76,8 +76,9 @@ public class SearchDao {
 			int startRow = (pi.getCurrentPage() -1) * pi.getLimit() + 1;
 			int endRow = startRow + pi.getLimit() -1;
 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setString(1, search);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			
 			rset = pstmt.executeQuery();

@@ -146,16 +146,17 @@ section {
 		<div class="filter-box">
 		<div class="filter-bg">
 			<br>
+			<form>
 			<table align="center" class="filter">
 				<tr>
 					<td rowspan="2">필터</td>
-					<td><select>
+					<td><select name="spaceKind">
 							<option>==공간유형==</option>
-							<option>코워킹스페이스</option>
-							<option>독립오피스</option>
-							<option>공간유형3</option>
+							<option value="코워킹스페이스">코워킹스페이스</option>
+							<option value="">독립오피스</option>
+							<option value="">공간유형3</option>
 					</select></td>
-					<td><select>
+					<td><select name="location">
 							<option value="전체보기">==전체보기==</option>
 							<option value="서울">서울</option>
 							<option value="경기">경기</option>
@@ -170,14 +171,14 @@ section {
 							<option value="대전/충남">대전/충남</option>
 							<option value="제주">제주</option>
 					</select></td>
-					<td><select>
+					<td><select name="term">
 							<option>==이용유형==</option>
-							<option>1일권</option>
-							<option>1개월권</option>
-							<option>1주일권</option>
+							<option value="day">1일권</option>
+							<option value="month">1개월권</option>
+							<option value="week">1주일권</option>
 					</select></td>
-					<td rowspan="2"><button
-							style="background: #40a4b6; color: white; border: 0px; border-radius: 10px; width: 90px; height: 40px;">검색</button></td>
+					<td rowspan="2"><button type="submit"
+							style="background: #40a4b6; color: white; border: 0px; border-radius: 10px; width: 90px; height: 40px;" class="filterSearch">검색</button></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -188,15 +189,16 @@ section {
 						</div>
 
 					</td>
-					<td><select>
-							<option>추천순</option>
-							<option>가격 낮은순</option>
-							<option>가격 높은순</option>
-							<option>인기순</option>
+					<td><select name="sort">
+							<option  value="recommend">추천순</option>
+							<option  value="lowPrice">가격 낮은순</option>
+							<option  value="highPrice">가격 높은순</option>
+							<option  value="popularity">인기순</option>
 					</select></td>
 					<td></td>
 				</tr>
 			</table>
+			</form>
 		</div>
 		
 			<br>
@@ -286,6 +288,12 @@ section {
 				location.href="<%=request.getContextPath()%>/select.se?num=" + num;
 			});
 		});
+		
+		$(function(){
+			$(".filterSearch").click(funciton(){
+				var num = $(this).find("").val();
+			})
+		})
 
 	</script>
 	<br><br>

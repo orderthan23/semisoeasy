@@ -34,10 +34,16 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("search");
+		String spaceKind= request.getParameter("spaceKintd");
+		String location= request.getParameter("location");
+		String term = request.getParameter("term");
+		String sort = request.getParameter("sort");
+		
 		
 		System.out.println("search : " + search);
 		String root = request.getRequestURI();
 		String url = PageInfo.customQString(request.getQueryString(), 2);
+		
 		
 		int currentPage;
 		int limit;
@@ -76,7 +82,7 @@ public class SearchServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage, 0);
 		
 		
-		ArrayList<HashMap<String, Object>> list = new SearchService().selectList(pi);
+		ArrayList<HashMap<String, Object>> list = new SearchService().selectList(pi, search);
 		
 		String page = "";
 		if(search != null) {
