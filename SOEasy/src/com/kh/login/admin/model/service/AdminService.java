@@ -17,11 +17,17 @@ public class AdminService {
 		Synthesis synth = null;
 		
 		int memberQty = new MemberDao().getListCount(con); 
+		System.out.println("memberQty : "+memberQty );
 		int spaceQty = new MainDao().getListCount(con);
+		System.out.println("spaceQty : "+spaceQty);
 		int imagesQty = new AdminDao().getImageCount(con);
+		System.out.println("imagesQty :"+imagesQty);
 		int hostQty = new AdminDao().getHostCount(con);
+		System.out.println("hostQty : "+hostQty);
 		int todayAcceptSpace = new AdminDao().getNewSpaceCount(con);
-		int todayJoinMembers = new AdminDao().getNewMembersCount(con);  
+		System.out.println("todayAcceptSpace : "+todayAcceptSpace);
+		int todayJoinMembers = new AdminDao().getNewMembersCount(con);
+		System.out.println("todayJoinMembers : "+todayJoinMembers);
 		String stringBenefits = new AdminDao().getTodaysBenefit(con);
 		int todaysBenefit = 1;
 		if(stringBenefits != null) {
