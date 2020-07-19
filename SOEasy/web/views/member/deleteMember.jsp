@@ -171,12 +171,7 @@ window.history.forward();
 				}
 			});
 
-			/* if (password != inputPassword) {
-				alert("비밀번호가 틀립니다");
-
-			} else {
-				$('#deleteForm').submit();
-			} */
+			
 		}
 	</script>
 	
