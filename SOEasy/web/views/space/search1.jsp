@@ -69,12 +69,31 @@ section {
 	vartical-align: middle;
 }
 
-.filter select {
+/* .filter select {
+	width: 90%;
+	height: 30px;
+	border: 1px solid lightgray;
+} */
+.spaceKind {
+	width: 60%;
+	height: 30px;
+	border: 1px solid lightgray;
+}
+.location {
 	width: 90%;
 	height: 30px;
 	border: 1px solid lightgray;
 }
-
+.term {
+	width: 90%;
+	height: 30px;
+	border: 1px solid lightgray;
+}
+.sort {
+	width: 90%;
+	height: 30px;
+	border: 1px solid lightgray;
+}
 .typeBox {
 	margin-left: 5%;
 }
@@ -150,14 +169,15 @@ section {
 			<table align="center" class="filter">
 				<tr>
 					<td rowspan="2">필터</td>
-					<td><select name="spaceKind">
+					<td><select class="spaceKind" name="spaceKind">
 							<option>==공간유형==</option>
-							<option value="코워킹스페이스">코워킹스페이스</option>
-							<option value="">독립오피스</option>
-							<option value="">공간유형3</option>
-					</select></td>
-					<td><select name="location">
-							<option value="전체보기">==전체보기==</option>
+							<option value="1">독립오피스</option>
+							<option value="2">코워킹스페이스</option>
+					</select>
+					 바로예약 여부 <input type="checkBox" name="didHostOk" value="3"> <!-- DID_HOST_OK 3번 바로예약 -->
+					</td>
+					<td><select class="location" name="location">
+							<option value="전체보기">==지역유형==</option>
 							<option value="서울">서울</option>
 							<option value="경기">경기</option>
 							<option value="인천/부천">인천/부천</option>
@@ -171,7 +191,7 @@ section {
 							<option value="대전/충남">대전/충남</option>
 							<option value="제주">제주</option>
 					</select></td>
-					<td><select name="term">
+					<td><select class="term" name="term">
 							<option>==이용유형==</option>
 							<option value="day">1일권</option>
 							<option value="month">1개월권</option>
@@ -185,18 +205,20 @@ section {
 						<div class="price-box">
 							가격
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input class="price">~<input class="price">
+							<input name="rowPrice" class="price">~<input name="highPrice" class="price">
 						</div>
 
 					</td>
-					<td><select name="sort">
-							<option  value="recommend">추천순</option>
-							<option  value="lowPrice">가격 낮은순</option>
-							<option  value="highPrice">가격 높은순</option>
-							<option  value="popularity">인기순</option>
+					<td><select class="sort" name="sort">
+							<option>==정렬==</option>
+							<option value="recommend">추천순</option>
+							<option value="lowPrice">가격 낮은순</option>
+							<option value="highPrice">가격 높은순</option>
+							<option value="popularity">리뷰 많은순</option>
 					</select></td>
 					<td></td>
 				</tr>
+				
 			</table>
 			</form>
 		</div>
@@ -231,6 +253,10 @@ section {
 					가격 : <%= hmap.get("dayPay") %> / 일
 					<% } %>
 					</p>
+					<%-- <% 
+					int cut = hmap.get("spaceLocationFilter").indexOf(",");
+					String realFilter = hmap.get("spaceLocationFilter").substring(cut);
+					%> --%>
 					<p>지역 : <%= hmap.get("spaceLocationFilter") %></p>
 					<br>
 					</div>
@@ -291,7 +317,7 @@ section {
 		
 		$(function(){
 			$(".filterSearch").click(funciton(){
-				var num = $(this).find("").val();
+				var num = $(this).find("input").val();
 			})
 		})
 
