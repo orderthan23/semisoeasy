@@ -32,15 +32,17 @@ public class InsertReservationInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//★젤 복잡함★
+		
 		//vo에서 int형으로 선언해준것들은 파싱해줌
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		//reservNo는 시퀀스로
 		int guestNo = loginUser.getMemberNo();
-		//int spaceNo = Integer.parseInt(request.getParameter("spaceNo")); //나중에 이미 등록된 공간정보에서 공간번호 빼와야할듯
-		int spaceNo = 100;
-		String fixUnfix = "F";
-		int officeNo = 101;
+		//int spaceNo = //나중에 이미 등록된 공간정보에서 공간번호 빼와야할듯 ..?
+		int spaceNo = 100; //얘는 임시;
+		String fixUnfix = "F"; //
+		int officeNo = 101;		//
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
 		int reservPersonCount = Integer.parseInt(request.getParameter("reservPersonCount"));

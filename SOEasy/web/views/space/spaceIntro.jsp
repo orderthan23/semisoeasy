@@ -9,15 +9,16 @@
 	ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
 	ArrayList<QnA> qnaList = (ArrayList<QnA>) hmap.get("qnaList");
 	
-	String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
+	String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0]; 
 %>
+<!-- intro페이지도 500번에러 4~11번째 줄 추가한게 에러로 잡힘 -->
 <!DOCTYPE html>
 <html>
 <head>
     <style>
         .visual{
             position: relative;
-            width: 90%;
+            width: 10%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -108,7 +109,7 @@
 <body>
 		<header><%@ include file="../common/header.jsp" %></header>
 		<nav><%@ include file="../common/aside.jsp" %></nav>
-		
+		<br><br><!--  -->
 		<section>
 		<div style="width:75%; margin-left:auto; margin-right:auto;">
 		<!-- <div style="width:90%;"> -->

@@ -16,7 +16,7 @@
 <style>
         .visual{
             position: relative;
-            width: 90%;
+            width: 100%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -92,16 +92,18 @@
         	border: 0px;
         	outline: 0px;
         }
+        
 
     </style>
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
-	
+	<br><br>
 	<section>
 	<div style="width:75%; margin-left:auto; margin-right:auto;">
 	<form id="insertReservation" action="<%= request.getContextPath()%>/insertReservationInfo" method="post">
-	<input type="hidden" name="spaceNo" value="<%= si.getSpaceNo()%>">
+	<%-- <input type="hidden" name="spaceNo" value="<%= si.getSpaceNo()%>"> --%>
+	
 	<!-- 공간명 / 가격 -->
 	<table>
 		<tr>
