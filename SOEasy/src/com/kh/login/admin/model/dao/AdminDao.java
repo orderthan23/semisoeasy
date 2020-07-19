@@ -7,7 +7,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
+
+import com.kh.login.member.model.vo.RecoverMember;
+
 import static com.kh.login.common.JDBCTemplate.*;
 
 public class AdminDao {
@@ -153,9 +157,47 @@ public class AdminDao {
 		//환불건만 가득 있으면 수익이 음수가 나올 수 있기 떄문에 문자열 형으로 받아서 null처리하여 에러를 구분후
 		//나중에 파싱한 결과값을 집어넣는다.
 		
-		String getTodaysBenefit = null;
+		String getTodaysBenefit = "10000";
 		
 		return getTodaysBenefit;
+	}
+
+
+
+
+
+
+	public ArrayList<RecoverMember> getLatestRecoverList(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<RecoverMember> recoverList = null;
+		
+		String query = prop.getProperty("getLatestRecoverList");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			recoverList = new ArrayList<RecoverMember>();
+			while(rset.next()) {
+				RecoverMember m = new RecoverMember();
+				m.setrNum(rset.getInt("RESTORE_NO"));
+				m.setMemberNo(rset.getInt("MEMBER_NO"));
+				m.setUserId(rset.getString("M_NICK"));
+				m.setDropReason(rset.getString("M_DROP_REASON"));
+				m.setEmail(rset.getString("RESTORE_EMAIL"));
+				m.setRequestDate(rset.getDate("RESTORE_REQUEST_DATE"));
+				m.setrStatus(rset.getInt("RESTORE_STATUS"));
+				recoverList.add(m);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		return recoverList;
 	}
 
 }

@@ -4,11 +4,13 @@ import static com.kh.login.common.JDBCTemplate.close;
 import static com.kh.login.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.login.admin.model.dao.AdminDao;
 import com.kh.login.admin.model.vo.SoEasyPaymentException;
 import com.kh.login.admin.model.vo.Synthesis;
 import com.kh.login.member.model.dao.MemberDao;
+import com.kh.login.member.model.vo.RecoverMember;
 import com.kh.login.space.model.dao.MainDao;
 public class AdminService {
 
@@ -57,6 +59,19 @@ public class AdminService {
 		close(con);
 		
 		return synth;
+	}
+
+	public ArrayList<RecoverMember> getLatestRecoverList() {
+		Connection con = getConnection();
+		
+		ArrayList<RecoverMember> recoverList = null;
+	
+		recoverList = new AdminDao().getLatestRecoverList(con);
+		
+		
+		close(con);
+		
+		return recoverList;
 	}
 
 }
