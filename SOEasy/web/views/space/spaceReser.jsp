@@ -12,7 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<!-- 커밋용 주석 -->
+
 <style>
         .visual{
             position: relative;
@@ -102,7 +102,8 @@
 	<section>
 	<div style="width:75%; margin-left:auto; margin-right:auto;">
 	<form id="insertReservation" action="<%= request.getContextPath()%>/insertReservationInfo" method="post">
-	<%-- <input type="hidden" name="spaceNo" value="<%= si.getSpaceNo()%>"> --%> <!-- 얘 주석하면 에러 사라짐 원인파악중 -->
+	<%-- <input type="hidden" name="spaceNo" value="<%= si.getSpaceNo()%>"> --%>
+	
 	<!-- 공간명 / 가격 -->
 	<table>
 		<tr>

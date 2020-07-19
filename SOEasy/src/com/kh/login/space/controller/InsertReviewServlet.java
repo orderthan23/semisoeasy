@@ -35,8 +35,8 @@ public class InsertReviewServlet extends HttpServlet {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		//reviewNo는 시퀀스로 주기
-		int spaceNo = 1; //getParameter로 가져오기
-		int memberNo = loginUser.getMemberNo();
+		int spaceNo = 1; //getParameter로 다른데서 가져오기 (임시로 1넣어놓음)
+		int memberNo = loginUser.getMemberNo(); //로그인 안되있음 에러
 		String reviewContent = request.getParameter("reviewContent");
 		int rPoint = Integer.parseInt(request.getParameter("rPoint"));
 		String enrollDate = "SYSDATE";
@@ -47,7 +47,7 @@ public class InsertReviewServlet extends HttpServlet {
 		requestMember.setSpaceNo(spaceNo);
 		requestMember.setMemberNo(memberNo);
 		requestMember.setReviewContent(reviewContent);
-		requestMember.setrPoint(rPoint); //별점 어케 가져옴
+		requestMember.setrPoint(rPoint);
 		requestMember.setEnrollDate(enrollDate);
 		
 		int result = new ReviewService().insertReview(requestMember);
