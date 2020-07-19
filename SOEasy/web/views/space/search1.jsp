@@ -157,7 +157,7 @@ section {
 							<option value="">공간유형3</option>
 					</select></td>
 					<td><select name="location">
-							<option value="전체보기">==전체보기==</option>
+							<option value="전체보기">==지역유형==</option>
 							<option value="서울">서울</option>
 							<option value="경기">경기</option>
 							<option value="인천/부천">인천/부천</option>
@@ -190,10 +190,11 @@ section {
 
 					</td>
 					<td><select name="sort">
-							<option  value="recommend">추천순</option>
-							<option  value="lowPrice">가격 낮은순</option>
-							<option  value="highPrice">가격 높은순</option>
-							<option  value="popularity">인기순</option>
+							<option>==정렬==</option>
+							<option value="recommend">추천순</option>
+							<option value="lowPrice">가격 낮은순</option>
+							<option value="highPrice">가격 높은순</option>
+							<option value="popularity">리뷰 많은순</option>
 					</select></td>
 					<td></td>
 				</tr>
@@ -231,6 +232,10 @@ section {
 					가격 : <%= hmap.get("dayPay") %> / 일
 					<% } %>
 					</p>
+					<%-- <% 
+					int cut = hmap.get("spaceLocationFilter").indexOf(",");
+					String realFilter = hmap.get("spaceLocationFilter").substring(cut);
+					%> --%>
 					<p>지역 : <%= hmap.get("spaceLocationFilter") %></p>
 					<br>
 					</div>
