@@ -39,7 +39,7 @@ public class SelectOneSpaceInfo extends HttpServlet {
 		
 		String page = "";
 		if(list != null) {
-			page = "/views/space/spaceIntro.jsp";
+			page ="/views/space/spaceIntro.jsp";
 			request.setAttribute("introList", list);
 			request.getRequestDispatcher(page).forward(request, response);
 		} else {

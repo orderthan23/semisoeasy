@@ -38,7 +38,7 @@ public class SelectTempAreaServlet extends HttpServlet {
 		//널인 경우가 생기지 않게 메인페이지에서 ajax처리 완료
 		if(siList != null) {
 			request.setAttribute("siList", siList);
-			request.getRequestDispatcher(request.getContextPath() + "/views/guest/savetemporaryArea.jsp").forward(request, response);;
+			request.getRequestDispatcher("/views/guest/savetemporaryArea.jsp").forward(request, response);;
 		} else {
 			request.setAttribute("msg", "내 공간 관리 접근 실패!");
 			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);;
