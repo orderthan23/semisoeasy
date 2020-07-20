@@ -488,12 +488,19 @@
 				}
 			});
 		});
-			
+		
+		
+		//동의사항 네개 체크안하면 다음으로 못넘어가게 하기
+		//입력 안한 칸 있으면 못넘어가게 하기
 		
 		//결제버튼 눌렀을때	
 		function push() {
-			alert('결제버튼 누름 / API로 연결');
-			$("#insertReservation").submit();
+			if() {
+				
+			} else {	
+				alert('결제버튼 누름 / API로 연결');
+				$("#insertReservation").submit();
+			}
 		}
 		
 		
