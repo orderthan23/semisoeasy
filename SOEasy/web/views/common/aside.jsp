@@ -212,9 +212,9 @@ span.bar {
       	<li class="infoZone" id="nickNameZone"></li>
       	<li class="infoZone" id="grade">HOST</li>
       	<li><hr id="firstHr"></li>
-         
+        
         <li class="mainTitle"><a href='#' class="mainNav" id="firstMainNav">예약목록</a></li>
-        <li class="subTitle"><a href='#' class="subNav" id="firstSubNav">이용 내역 </a> </li>
+        <li class="subTitle"><a href= "/login/SelectUserReservHistory" class="subNav" id="firstSubNav">이용 내역 </a> </li>
         <li class="subTitle"><a href='#' class="subNav" id="secondSubNav">찜 리스트 </a> </li>
         <li class="subTitle"><a href='#' class="subNav" id="thirdSubNav">리뷰 목록 </a></li>
  		<li><hr id="secondHr"></li>
