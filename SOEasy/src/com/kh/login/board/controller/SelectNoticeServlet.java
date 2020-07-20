@@ -31,7 +31,6 @@ public class SelectNoticeServlet extends HttpServlet {
 		
 		String page = "";
 		if(board != null) {
-			
 			//page = "views/board/updateboard.jsp";
 			//request.setAttribute("board", board);
 			page = "views/board/updateboard.jsp";
@@ -42,6 +41,8 @@ public class SelectNoticeServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

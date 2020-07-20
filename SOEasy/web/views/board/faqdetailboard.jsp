@@ -115,7 +115,6 @@
 		</table>
 		<a href="faqboard.jsp" class="writeButton">이전으로</a> 
 		<br>
-		
 				<table style = "width: 100%; border-collapse: collapse; " id="boardTable">
 						<tr>
 							<th>번호</th>

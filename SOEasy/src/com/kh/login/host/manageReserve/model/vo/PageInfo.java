@@ -12,7 +12,14 @@ public class PageInfo {
 	public PageInfo() {}
 
 	
-
+	public PageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage,  int endPage) {
+		this.currentPage = currentPage;
+		this.listCount = listCount;
+		this.limit = limit;
+		this.maxPage = maxPage;
+		this.startPage = startPage;
+		this.endPage = endPage;
+	}
 	public PageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage,
 			int requestCount) {
 		super();

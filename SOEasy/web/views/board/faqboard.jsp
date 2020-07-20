@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"  import="java.util.*, com.kh.login.board.model.vo.*" %>
-<% ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list"); %>
+	pageEncoding="UTF-8"  import="java.util.*, com.kh.login.board.model.vo.*,
+	com.kh.login.host.manageReserve.model.vo.*"	%>
+	
+<% ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list"); 
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,14 +34,14 @@
   border-radius: 10px;
   padding : 10px;
 }
-#boardTable tr th{
+#faqTable tr th{
 
   background:#60B4A6;
   color: white;
   text-align: center;
 ​
 }
-#boardTable tr{
+#faqTable tr{
 	height : 50px;
 }
 #searchWrap{
@@ -71,7 +81,7 @@
 	 <header><%@ include file="../common/header.jsp"%></header>
 	<div class="colMenu" style=margin-top:20px;>
 		<a class="colMenuButton" href="/login/selectList.no">공지사항</a>
-		<a class="colMenuButton selectedButton" href="/login/views/board/faqboard.jsp">자주 묻는 질문</a>
+		<a class="colMenuButton selectedButton" href="/login/selectList.faq">자주 묻는 질문</a>
 		<a class="colMenuButton" href="/login/views/board/mtmboard.jsp">1대1문의</a>
 	<br><br>
 	</div>
@@ -81,7 +91,7 @@
 	<section>
     <div id="wrapper">
 		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">자주 묻는 질문</h2>
-		<a href="writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a> 
+		<a href="login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a> 
 		<table id="searchWrap" text-align="center" align="center">
 			<tr>
 			<td><input type=search placeholder="검색어를 입력하세요"></td>
@@ -91,7 +101,7 @@
 		<br>
 		<div style="width:90%; margin-left:auto; margin-right:auto;">
 		</div>
-		<table style="width: 100%; border-collapse: collapse;"id="boardTable">
+		<table style="width: 100%; border-collapse: collapse" id="faqTable" >
 		<tr>
 			<td colspan="1"></td>
 			<td align="center" style=>
@@ -125,42 +135,60 @@
 					<td class="info" style="text-align: center;"></td>
 				</tr>
 				<% } %>
-				<tr>
-					<td class="info" style="text-align: center;">1</td>
-					<td class="info" style="text-align: center;">결제관련</td>
-					<td class="info" style="text-align: center;">
-						<a href="faqdetailboard.jsp" style="text-decoration: none; color: black;">게스트로 가입을 했는데 호스트가 되고 싶습니다</a>
-					</td>
-					<td class="info" style="text-align: center;">관리자</td>
-					<td class="info" style="text-align: center;">2020-06-26</td>
-					<td class="info" style="text-align: center;">	</td>
-				</tr>
 			</table>
 		</div>
+		<div class="pagingArea" align="center">
+         <button onclick="location.href='<%=request.getContextPath()%>/selectList.faq?currentPage=1'"><<</button>
+         
+         <% if(currentPage <= 1) { %>
+         <button disabled><</button>
+         <% } else { %>
+         <button onclick="location.href='<%=request.getContextPath()%>/selectList.faq?currentPage=<%=currentPage - 1%>'"><</button>
+         <% } %>
+         
+         <% for(int p = startPage; p <= endPage; p++) { 
+               if(p == currentPage) {
+         %>
+                  <button disabled><%= p %></button>
+         <%      } else { %>
+                  <button onclick="location.href='<%=request.getContextPath()%>/selectList.faq?currentPage=<%=p%>'"><%= p %></button>
+         <%  
+                 }
+            }
+         %>
+         <% if(currentPage >= maxPage) { %>
+         <button disabled>></button>
+         <% } else { %>
+         <button onclick="location.href='<%=request.getContextPath()%>/selectList.faq?currentPage=<%=currentPage + 1%>'">></button>
+         <% } %>
+         <button onclick="location.href='<%=request.getContextPath()%>/selectList.faq?currentPage=<%=maxPage%>'">>></button>
+      </div>
 	</section>
 	 <%@ include file="../common/footer.jsp"%> 
 
 	<script>
+		 var userStatus = <%=userStatus%>;
+		 console.log(category);
+		$(function(){
+			switch(userStatus){
+			case 1: break;
+			case 2: break;
+			case 3: $('.writeButton').show(); break;
+			default: $('#writeButton').hide(); break;
+			}
+			$("#faqTable td").mouseenter(function() {
+				$(this).parent().css({"background" : "#60B4A6", "cursor" : "pointer"});
+			}).mouseout(function() {
+				$(this).parent().css({"background" : "white"});
+			}).click(function() {
+				var num = $(this).parent().children().eq(0).text();
+				location.href="<%=request.getContextPath()%>/detail.no?num=" + num;
+			})
+		});
+	</script>
 	
-	var userStatus = <%=userStatus%>;
-	 console.log(category);
-	$(function(){
-		switch(userStatus){
-		case 1: break;
-		case 2: break;
-		case 3: $('.writeButton').show(); break;
-		default: $('#writeButton').hide(); break;
-		}
-		$("#boardTable td").mouseenter(function() {
-			$(this).parent().css({"background" : "#60B4A6", "cursor" : "pointer"});
-		}).mouseout(function() {
-			$(this).parent().css({"background" : "white"});
-		}).click(function() {
-			var num = $(this).parent().children().eq(0).text();
-			location.href="<%=request.getContextPath()%>/detail.no?num=" + num;
-		})
-	});
-	</script>​
+	
+	​
 ​
 	
 				

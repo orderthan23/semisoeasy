@@ -1,13 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*, com.kh.login.board.model.vo.*" %>
-<% ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list"); %>
+	pageEncoding="UTF-8" import="java.util.*, com.kh.login.board.model.vo.*,
+	com.kh.login.host.manageReserve.model.vo.*"	%>
+<% ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list"); 
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="/login/css/layout.css">
 ​
 <style>
@@ -140,15 +148,43 @@
 					<td class="info" style="text-align: center;"></td>
 				</tr>
 				<% } %>
-				
 			</table>
-			​
 		</div>
+		<!-- 페이징 처리 버튼 -->
+      <div class="pagingArea" align="center">
+         <button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=1'"><<</button>
+         
+         <% if(currentPage <= 1) { %>
+         <button disabled><</button>
+         <% } else { %>
+         <button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%=currentPage - 1%>'"><</button>
+         <% } %>
+         
+         <% for(int p = startPage; p <= endPage; p++) { 
+               if(p == currentPage) {
+         %>
+                  <button disabled><%= p %></button>
+         <%      } else { %>
+                  <button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%=p%>'"><%= p %></button>
+         <%  
+                 }
+            }
+         %>
+         
+         <% if(currentPage >= maxPage) { %>
+         <button disabled>></button>
+         <% } else { %>
+         <button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%=currentPage + 1%>'">></button>
+         <% } %>
+      	
+         <button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%=maxPage%>'">>></button>
+      </div>
+		
+		
 	</section>
 	<%@ include file="../common/footer.jsp"%>
+	
 	<script>
-	
-	
 		 var userStatus = <%=userStatus%>;
 		 console.log(category);
 		$(function(){
