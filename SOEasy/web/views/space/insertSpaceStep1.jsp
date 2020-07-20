@@ -422,8 +422,8 @@
 	<footer>
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
-	<script>	
-	
+	<script>
+		
 		// 좌석 수 = 자유석 + 지정석
 		function countSeat(){
 			/* console.log("되는건맞니?") */

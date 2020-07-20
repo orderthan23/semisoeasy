@@ -683,6 +683,70 @@ public class SpaceDao {
 		
 		return returnSi;
 	}
+	
+	//호스트 정보 조회
+	public SpaceInfo selectHostInf(Connection con, SpaceInfo si) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		SpaceInfo returnSi = null;
+		
+		String query = prop.getProperty("selectHostInf");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, si.getSpaceNo());
+			
+			rset = pstmt.executeQuery();
+			returnSi = new SpaceInfo();
+			while(rset.next()) {
+				returnSi.setBsnsName(rset.getString("BSNS_NAME"));
+				returnSi.setBsnsLicenseNo(rset.getString("BSNS_LICENSE_NO"));
+				returnSi.setBsnsType(rset.getInt("BSNS_TYPE"));
+				returnSi.setBsnsCondition(rset.getString("BSNS_CONDITION"));
+				returnSi.setBsnsEvent(rset.getString("BSNS_EVENT"));
+				returnSi.setBsnsAddress(rset.getString("BSNS_ADDRESS"));
+				returnSi.setCalEmail(rset.getString("CAL_EMAIL"));
+				returnSi.setCalPhone(rset.getString("CAL_PHONE"));
+				returnSi.setCalBank(rset.getString("CAL_BANK"));
+				returnSi.setCalAcctHolder(rset.getString("CAL_ACCT_HOLDER"));
+				returnSi.setCalAcctNo(rset.getString("CAL_ACCT_NO"));
+				returnSi.setRepresentName(rset.getString("BSNS_REPRESENT_NAME"));
+				returnSi.setSpaceNo(si.getSpaceNo());
+				returnSi.setSpaceKind(si.getSpaceKind());
+				returnSi.setHostNo(si.getHostNo());
+				returnSi.setSpaceName(si.getSpaceName());
+				returnSi.setSpaceAddress(si.getSpaceAddress());
+				returnSi.setSpaceIntro(si.getSpaceIntro());
+				returnSi.setSpaceShortIntro(si.getSpaceShortIntro());
+				returnSi.setDidDayReserv(si.getDidDayReserv());
+				returnSi.setDayPay(si.getDayPay());
+				returnSi.setDidMonthReserv(si.getDidMonthReserv());
+				returnSi.setMonthPay(si.getMonthPay());
+				returnSi.setSpaceLocationFilter(si.getSpaceLocationFilter());
+				returnSi.setOfficeNo(si.getOfficeNo());
+				returnSi.setSpaceSize(si.getSpaceSize());
+				returnSi.setSpaceRoomCount(si.getSpaceRoomCount());
+				returnSi.setSpaceContainCount(si.getSpaceContainCount());
+				returnSi.setTotalSeat(si.getTotalSeat());
+				returnSi.setMaxReserv(si.getMaxReserv());
+				returnSi.setFixSeat(si.getFixSeat());
+				returnSi.setUnfixSeat(si.getUnfixSeat());
+				returnSi.setStartTimes(si.getStartTimes());
+				returnSi.setEndTimes(si.getEndTimes());
+				returnSi.setOpenChecks(si.getOpenChecks());
+				returnSi.setSpaceRefundPolicy(si.getSpaceRefundPolicy());
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return returnSi;
+	}
 
 	// review list 조회용 메소드
 	public ArrayList<Review> selectSpaceReviewList(Connection con, int sNo) {

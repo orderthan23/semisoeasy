@@ -186,6 +186,8 @@ public class SpaceService {
 		si = new SpaceDao().selectSpaceOptime(con, si);
 		//공간 환불정책 조회
 		si = new SpaceDao().selectRefundPolicy(con, si);
+		//호스트 정보 조회
+		si = new SpaceDao().selectHostInf(con,si);
 		
 		si.setConv(conv);
 		
