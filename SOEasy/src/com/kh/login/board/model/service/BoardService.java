@@ -6,33 +6,35 @@ import java.util.Properties;
 
 import com.kh.login.board.model.dao.BoardDao;
 import com.kh.login.board.model.vo.Board;
+import com.kh.login.host.manageReserve.model.vo.PageInfo;
+
 import static com.kh.login.common.JDBCTemplate.*;
 
 
 public class BoardService {
 	
-		public ArrayList<Board> selectList() {
-			
-			Connection con = getConnection();
-			
-			ArrayList<Board> list = new BoardDao().selectList(con);
-			
-			close(con);
-			
-			
-		return list;
-}
-		public ArrayList<Board> selectFAQList(){
-			
-			Connection con = getConnection();
-			
-			ArrayList<Board> list = new BoardDao().selectFAQList(con);
-			
-			close(con);
-			
-		return list;
-		}
-		
+//		public ArrayList<Board> selectList() {
+//			
+//			Connection con = getConnection();
+//			
+//			ArrayList<Board> list = new BoardDao().selectList(con);
+//			
+//			close(con);
+//			
+//			
+//		return list;
+//}
+//		public ArrayList<Board> selectFAQList(){
+//			
+//			Connection con = getConnection();
+//			
+//			ArrayList<Board> list = new BoardDao().selectFAQList(con);
+//			
+//			close(con);
+//			
+//		return list;
+//		}
+//		
 		public int insertBoard(Board board) {
 
 			Connection con = getConnection();
@@ -93,9 +95,42 @@ public class BoardService {
 			
 			return result;
 		}
+		
+		public ArrayList<Board> selectList(PageInfo pi) {
+			
+		     Connection con = getConnection();
+		      
+		      ArrayList<Board> list = new BoardDao().selectList(con,pi);
+		      
+		      close(con);
+		      
+		      return list;
+		   }
+		
+		public int getListCount() {
+			Connection con = getConnection();
+			int listCount = new BoardDao().getListCount(con);
+			
+			close(con);
+			
+			return listCount;
+		}
+
+		public ArrayList<Board> selectFAQList(PageInfo pi) {
+			
+			Connection con = getConnection();
+		      
+		      ArrayList<Board> list = new BoardDao().selectFAQList(con,pi);
+		      
+		      close(con);
+		      
+		      return list;
+			
+		}
+		
+}
 
 	
 
 		
 
-}

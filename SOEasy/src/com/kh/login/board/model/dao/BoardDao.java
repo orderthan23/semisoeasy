@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.login.board.model.vo.Board;
+import com.kh.login.host.manageReserve.model.vo.PageInfo;
+
 import static com.kh.login.common.JDBCTemplate.*;
 
 public class BoardDao {
@@ -27,42 +29,42 @@ public class BoardDao {
 		}
 	}
 	
-	public ArrayList<Board> selectList(Connection con) {
-		Statement stmt = null;
-		ResultSet rset = null;
-		ArrayList<Board> list = null;
-
-		String query = prop.getProperty("selectList");
-
-		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
-
-			list = new ArrayList<Board>();
-
-			while (rset.next()) {
-				Board b = new Board();
-				b.setNoticeNo(rset.getInt("NOTICE_NO"));
-				b.setnCategory(rset.getInt("N_CATEGORY"));
-				b.setnTitle(rset.getString("N_TITLE"));
-				b.setmNick(rset.getString("M_NICK"));
-				b.setnDate(rset.getDate("N_ENROLL_DATE"));
-				b.setnContent(rset.getString("N_CONTENT"));
-				b.setnStatus(rset.getString("N_STATUS"));
-				
-				list.add(b);
-				System.out.println(b);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(stmt);
-			close(rset);
-		}
-
-		return list;
-
-	}
+//	public ArrayList<Board> selectList(Connection con) {
+//		Statement stmt = null;
+//		ResultSet rset = null;
+//		ArrayList<Board> list = null;
+//
+//		String query = prop.getProperty("selectList");
+//
+//		try {
+//			stmt = con.createStatement();
+//			rset = stmt.executeQuery(query);
+//
+//			list = new ArrayList<Board>();
+//
+//			while (rset.next()) {
+//				Board b = new Board();
+//				b.setNoticeNo(rset.getInt("NOTICE_NO"));
+//				b.setnCategory(rset.getInt("N_CATEGORY"));
+//				b.setnTitle(rset.getString("N_TITLE"));
+//				b.setmNick(rset.getString("M_NICK"));
+//				b.setnDate(rset.getDate("N_ENROLL_DATE"));
+//				b.setnContent(rset.getString("N_CONTENT"));
+//				b.setnStatus(rset.getString("N_STATUS"));
+//				
+//				list.add(b);
+//				System.out.println(b);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(stmt);
+//			close(rset);
+//		}
+//
+//		return list;
+//
+//	}
 
 	public ArrayList<Board> selectFAQList(Connection con) {
 		Statement stmt = null;
@@ -206,7 +208,131 @@ public class BoardDao {
 		
 		return result;
 	}
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("listCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				// 첫번째로 조회된 값 가져오기
+				
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		return listCount;
+	}
 
+
+	public ArrayList<Board> selectList(Connection con, PageInfo pi) {
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      ArrayList<Board> list = null;
+	      
+	      String query = prop.getProperty("selectList");
+	      
+	      try {
+	         pstmt = con.prepareStatement(query);
+
+	         int startRow = (pi.getCurrentPage() - 1) * pi.getCurrentPage() + 1;
+	         int endRow = startRow + pi.getLimit() -1;
+	         
+	         pstmt.setInt(1, startRow);
+	         pstmt.setInt(2, endRow);
+	         
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         list = new ArrayList<>(); 
+	         
+	         while(rset.next()) {
+	    		Board b = new Board();
+				b.setNoticeNo(rset.getInt("NOTICE_NO"));
+				b.setnCategory(rset.getInt("N_CATEGORY"));
+				b.setnTitle(rset.getString("N_TITLE"));
+				b.setmNick(rset.getString("M_NICK"));
+				b.setnDate(rset.getDate("N_ENROLL_DATE"));
+				b.setnContent(rset.getString("N_CONTENT"));
+				b.setnStatus(rset.getString("N_STATUS"));
+				
+				list.add(b);
+	         }
+	         
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      
+	      
+	      return list;
+	      
+	   }
+
+	public ArrayList<Board> selectFAQList(Connection con, PageInfo pi) {
+
+		 PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      ArrayList<Board> list = null;
+	      
+	      String query = prop.getProperty("selectFAQList");
+	      
+	      try {
+	         pstmt = con.prepareStatement(query);
+
+	         int startRow = (pi.getCurrentPage() - 1) * pi.getCurrentPage() + 1;
+	         int endRow = startRow + pi.getLimit() -1;
+	         
+	         pstmt.setInt(1, startRow);
+	         pstmt.setInt(2, endRow);
+	         
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         list = new ArrayList<>(); 
+	         
+	         while(rset.next()) {
+	    		Board b = new Board();
+				b.setNoticeNo(rset.getInt("NOTICE_NO"));
+				b.setnCategory(rset.getInt("N_CATEGORY"));
+				b.setnTitle(rset.getString("N_TITLE"));
+				b.setmNick(rset.getString("M_NICK"));
+				b.setnDate(rset.getDate("N_ENROLL_DATE"));
+				b.setnContent(rset.getString("N_CONTENT"));
+				b.setnStatus(rset.getString("N_STATUS"));
+				
+				list.add(b);
+	         }
+	         
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      
+	      
+	      return list;
+		
+	}
+
+	
 
 }
  
