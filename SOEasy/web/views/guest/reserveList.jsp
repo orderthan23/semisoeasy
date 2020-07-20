@@ -14,6 +14,7 @@ int rvNum =3; // 나의 후기
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../../css/layout.css">
+
 <meta charset="UTF-8">
 <style>
 #wrapper {
@@ -78,7 +79,9 @@ th {
 </head>
 <body>
 	<header><%@ include file="../../views/common/header.jsp" %></header>
+
 	<nav><%@ include file="../../views/common/aside.jsp" %>
+
 		<div class="colMenu">
 			<label class="colMenuTitle">예약 목록</label>
 			 <a class="colMenuButton selectedButton" href="/login/views/guest/reserveList.jsp">예약 내역 리스트</a>
@@ -121,7 +124,7 @@ th {
 					<td><label class="agreeProgress"></label></td>
 					<td><label class="reserveStatus"></label></td>
 					<td><a href="#" class="reviewExistance"></a></td>
-					<td class="cancleZone"><button type="button" class="cancle">취소</button></td>
+					<td class="cancleZone"><button type="button" class="cancle" onclick="letsPay();">취소</button></td>
 				</tr>
 				<%
 					}
@@ -130,8 +133,10 @@ th {
 		</div>
 	</section>
 	<footer><%@ include file="../../views/common/footer.jsp" %></footer>
+	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 	<script>
 		$(document).ready(function(){
+		
 			var pNum = <%=pNum%>
 			switch(pNum){
 			case 1: $('.payProgress').text("완료").css({bordercolor:"blue", color:"blue"}); break;
@@ -167,6 +172,37 @@ th {
 				$('.cancle').css({visibility:"visible",display:"inline"});				
 			}
 		});
+		
+		function letsPay(){
+			IMP.init('imp14313139'); // 아임포트 관리자 페이지의 "시스템 설정" > "내 정보" 에서 확인 가능
+			IMP.request_pay({
+			   
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '주문명:결제테스트',
+			    amount : 14000,
+			    buyer_email : 'iamport@siot.do',
+			    buyer_name : '구매자이름',
+			    buyer_tel : '010-1234-5678',
+			    buyer_addr : '서울특별시 강남구 삼성동',
+			    buyer_postcode : '123-456'
+			}, function(rsp) {
+				IMP.init('imp14313139'); // 아임포트 관리자 페이지의 "시스템 설정" > "내 정보" 에서 확인 가능
+			    if ( rsp.success ) {
+			        var msg = '결제가 완료되었습니다.';
+			        msg += '고유ID : ' + rsp.imp_uid;
+			        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+
+			    alert(msg);
+			});
+		}
+		
 	</script>
 </body>
 </html>

@@ -182,7 +182,7 @@ public class AdminDao {
 				RecoverMember m = new RecoverMember();
 				m.setrNum(rset.getInt("RESTORE_NO"));
 				m.setMemberNo(rset.getInt("MEMBER_NO"));
-				m.setUserId(rset.getString("M_NICK"));
+				m.setUserId(rset.getString("M_ID"));
 				m.setDropReason(rset.getString("M_DROP_REASON"));
 				m.setEmail(rset.getString("RESTORE_EMAIL"));
 				m.setRequestDate(rset.getDate("RESTORE_REQUEST_DATE"));

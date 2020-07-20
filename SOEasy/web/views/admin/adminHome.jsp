@@ -266,24 +266,30 @@
 			 		<h1 align="center" style="margin:0; margin-top:10px;">회원 복구 요청 건</h1>
 		 		</div>
 		 		<div class="hide2 adminPreview">
-		 			<p>2개의 새로운 복구 요청 건이 있습니다.</p>
+		 			<p><%=recoverList.size() %>개의 새로운 복구 요청 건이 있습니다.</p>
 		 			<table align="center">
 		 				<tr>
-		 					<th>아이디</th>
-		 					<th>이름</th>
+		 					<th>처리 번호</th>
+		 					<th>아이디 </th>
+		 					<th>탈퇴 사유</th>
+		 					<th>복구 안내 이메일 </th>
 		 					<th>복구 요청 일</th>
-		 					<th>회원 탈퇴 일 </th>
-		 					<th>복구 처리 여부</th>
 		 					
 		 					
 		 				</tr>
-		 				<% for(int i=0; i<3; i++){%>
+		 				<% int maximum;  
+		 				if(recoverList.size()>5){
+		 					maximum = 5;
+		 				}else{
+		 					maximum = recoverList.size();
+		 				}
+		 					for(int i=0; i<maximum; i++){%>
 		 					<tr>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
+		 						<td><%=recoverList.get(i).getrNum() %></td>
+		 						<td><%=recoverList.get(i).getUserId() %></td>
+		 						<td><%=recoverList.get(i).getDropReason() %></td>
+		 						<td><%=recoverList.get(i).getEmail() %></td>
+		 						<td><%=recoverList.get(i).getRequestDate().toString() %></td>
 		 					
 		 					</tr>
 		 				<%} %>
