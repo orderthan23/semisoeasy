@@ -41,8 +41,8 @@ public class SelectFAQListServlet extends HttpServlet {
 	      limit = 10;
 
 	      //전체 목록 갯수를 조회 -> 총 페이지 수를 계산하려고 필요하다
-	      int listCount = new BoardService().getListCount();
-	      System.out.println("list Count : " + listCount);
+	      int listCount = new BoardService().getFAQListCount();
+	      System.out.println("FAQ 게시글 수: " + listCount);
 	      //총 페이지 수 계산
 	      //예를 들면 목록 갯수가 123개이면,
 	      //총 필요한 페이지수는 13개 임
@@ -54,9 +54,7 @@ public class SelectFAQListServlet extends HttpServlet {
 	      //아래 쪽 페이지 수가 10개씩 보여진다면
 	      //1, 11, 21, 31, .....
 	      startPage = (((int) ((double) currentPage / 10 + 0.9)) -1) * 10 + 1;
-	      
 	      //목록 아래 쪽에 보여질 마지막 페이지 수 (10,20,30, ....)
-	                           //보여지는 버튼의 수 
 	      endPage = startPage       +       10       - 1;
 	      
 	      if(maxPage < endPage) {

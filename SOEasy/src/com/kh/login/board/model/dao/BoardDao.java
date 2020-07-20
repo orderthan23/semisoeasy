@@ -213,7 +213,7 @@ public class BoardDao {
 		int listCount = 0;
 		ResultSet rset = null;
 		
-		String query = prop.getProperty("listCount");
+		String query = prop.getProperty("listBoardCount");
 		
 		try {
 			stmt = con.createStatement();
@@ -236,6 +236,33 @@ public class BoardDao {
 		return listCount;
 	}
 
+	public int getFAQListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("listFAQCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				// 첫번째로 조회된 값 가져오기
+				
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		return listCount;
+	}
 
 	public ArrayList<Board> selectList(Connection con, PageInfo pi) {
 	      PreparedStatement pstmt = null;
@@ -330,6 +357,46 @@ public class BoardDao {
 	      
 	      return list;
 		
+	}
+
+	public int postBoard(Connection con, int nno) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updatePost");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, nno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+		
+	}
+
+	public int postDownBoard(Connection con, int nno) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateDownPost");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, nno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	

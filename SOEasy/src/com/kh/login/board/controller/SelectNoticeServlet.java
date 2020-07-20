@@ -19,6 +19,7 @@ public class SelectNoticeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		String num = request.getParameter("num");
 		
 		int nno = 0;

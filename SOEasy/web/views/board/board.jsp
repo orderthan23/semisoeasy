@@ -138,6 +138,7 @@
 					<th>작성일자</th>
 					<th></th>
 				</tr>
+				
 				<% for(Board b : list) { %>
 				<tr>
 					<td class="info" style="text-align: center;"><%= b.getNoticeNo() %></td>
@@ -153,7 +154,6 @@
 		<!-- 페이징 처리 버튼 -->
       <div class="pagingArea" align="center">
          <button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=1'"><<</button>
-         
          <% if(currentPage <= 1) { %>
          <button disabled><</button>
          <% } else { %>

@@ -123,7 +123,9 @@
 			<td colspan="5">
 				<button style="text-align:center; background:#60B4A6" onclick="deleteboard();">삭제</button>
 				<button style="text-align:center; background:#60B4A6" onclick="complete();">수정완료</button>
-				<input type="button" value="목록으로"  style="text-align:center; background:#60B4A6; color:white">			
+				<button style="text-align:center; color:white; background:#60B4A6" type="button" id="post" onclick="posting();" >최종게시</button>
+				<button style="text-align:center; color:white; background:#60B4A6" id="downPost" type="button" onclick="downPosting();" >내리기</button>
+
 			</td>
 		</tr>
 	</table>	
@@ -132,14 +134,30 @@
 	 <%@ include file="../common/footer.jsp"%> 
 
 	<script>
+	 $(function(){
+		var status = '<%=board.getnStatus()%>';
+			if(status == 'Y'){
+				$("#post").hide();
+				$("#downPost").show();
+			} else {
+				$("#post").show();
+				$("#downPost").hide();
+			}
+		});
+		
 		function complete(){
 			$("#updateForm").attr("action", "<%=request.getContextPath()%>/updateBoard.no");
 		}
-	
 		function deleteboard(){
 			$("#updateForm").attr("action", "<%=request.getContextPath()%>/delete.no");
-		
 		}
+		
+		function posting(){
+			$("#updateForm").attr("action", "<%=request.getContextPath()%>/post.no").submit();
+		}
+		function downPosting(){
+			$("#updateForm").attr("action", "<%=request.getContextPath()%>/downpost.no").submit();
+			}
 		<% } else { 
 			request.setAttribute("msg", "잘못된 경로로 접근");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

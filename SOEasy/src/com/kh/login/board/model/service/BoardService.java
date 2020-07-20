@@ -96,6 +96,16 @@ public class BoardService {
 			return result;
 		}
 		
+		
+		
+		public int getListCount() {
+			Connection con = getConnection();
+			int listCount = new BoardDao().getListCount(con);
+			
+			close(con);
+			
+			return listCount;
+		}
 		public ArrayList<Board> selectList(PageInfo pi) {
 			
 		     Connection con = getConnection();
@@ -106,15 +116,6 @@ public class BoardService {
 		      
 		      return list;
 		   }
-		
-		public int getListCount() {
-			Connection con = getConnection();
-			int listCount = new BoardDao().getListCount(con);
-			
-			close(con);
-			
-			return listCount;
-		}
 
 		public ArrayList<Board> selectFAQList(PageInfo pi) {
 			
@@ -127,6 +128,50 @@ public class BoardService {
 		      return list;
 			
 		}
+
+
+		public int getFAQListCount() {
+			
+			Connection con = getConnection();
+			int listCount = new BoardDao().getFAQListCount(con);
+			
+			close(con);
+			
+			return listCount;
+		}
+
+
+		public int postBoard(int nno) {
+			Connection con = getConnection();
+			int result = new BoardDao().postBoard(con,nno);
+			
+			if(result >0 ) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+			
+			return result;
+			
+		}
+
+
+		public int postDownBoard(int nno) {
+			Connection con = getConnection();
+			int result = new BoardDao().postDownBoard(con,nno);
+			
+			if(result >0 ) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+			
+			return result;
+			
+		}
+
+
+	
 		
 }
 
