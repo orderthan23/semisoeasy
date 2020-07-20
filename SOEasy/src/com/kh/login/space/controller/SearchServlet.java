@@ -34,16 +34,10 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("search");
-		
-		
-		
 		System.out.println("search : " + search);
-		
-		
 		
 		String root = request.getRequestURI();
 		String url = PageInfo.customQString(request.getQueryString(), 2);
-		
 		
 		int currentPage;
 		int limit;

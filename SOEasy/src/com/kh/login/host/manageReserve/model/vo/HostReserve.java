@@ -26,7 +26,7 @@ public class HostReserve {
 	private Date endDay;					//사용종료날짜
 	private Date reserveDate;				//예약날짜
 	private String userName;				//예약자 이름
-	private int reserveTerm;
+	private int reserveTerm;				//예약기간
 	
 	
 	
@@ -34,11 +34,10 @@ public class HostReserve {
 
 
 
-
 	public HostReserve(int reserveNo, String guestNo, int spaceNo, String officeNo, int hostNo, String spaceName,
 			int spaceKind, String spacdAddress, String didDayReserve, int dayPayNumber, String didMonthReserve,
 			int monthPay, int didHostOk, int day, int startTime, int endTime, int memberNo, int reservePersonCount,
-			int reserveStatus, Date startDay, Date endDay, Date reserveDate, String userName) {
+			int reserveStatus, Date startDay, Date endDay, Date reserveDate, String userName, int reserveTerm) {
 		super();
 		this.reserveNo = reserveNo;
 		this.guestNo = guestNo;
@@ -63,8 +62,8 @@ public class HostReserve {
 		this.endDay = endDay;
 		this.reserveDate = reserveDate;
 		this.userName = userName;
+		this.reserveTerm = reserveTerm;
 	}
-
 
 
 
@@ -74,11 +73,9 @@ public class HostReserve {
 
 
 
-
 	public String getGuestNo() {
 		return guestNo;
 	}
-
 
 
 
@@ -88,11 +85,9 @@ public class HostReserve {
 
 
 
-
 	public String getOfficeNo() {
 		return officeNo;
 	}
-
 
 
 
@@ -102,11 +97,9 @@ public class HostReserve {
 
 
 
-
 	public String getSpaceName() {
 		return SpaceName;
 	}
-
 
 
 
@@ -116,11 +109,9 @@ public class HostReserve {
 
 
 
-
 	public String getSpacdAddress() {
 		return spacdAddress;
 	}
-
 
 
 
@@ -130,11 +121,9 @@ public class HostReserve {
 
 
 
-
 	public int getDayPayNumber() {
 		return dayPayNumber;
 	}
-
 
 
 
@@ -144,11 +133,9 @@ public class HostReserve {
 
 
 
-
 	public int getMonthPay() {
 		return monthPay;
 	}
-
 
 
 
@@ -158,11 +145,9 @@ public class HostReserve {
 
 
 
-
 	public int getDay() {
 		return day;
 	}
-
 
 
 
@@ -172,11 +157,9 @@ public class HostReserve {
 
 
 
-
 	public int getEndTime() {
 		return endTime;
 	}
-
 
 
 
@@ -186,11 +169,9 @@ public class HostReserve {
 
 
 
-
 	public int getReservePersonCount() {
 		return reservePersonCount;
 	}
-
 
 
 
@@ -200,11 +181,9 @@ public class HostReserve {
 
 
 
-
 	public Date getStartDay() {
 		return startDay;
 	}
-
 
 
 
@@ -214,11 +193,9 @@ public class HostReserve {
 
 
 
-
 	public Date getReserveDate() {
 		return reserveDate;
 	}
-
 
 
 
@@ -228,11 +205,15 @@ public class HostReserve {
 
 
 
+	public int getReserveTerm() {
+		return reserveTerm;
+	}
+
+
 
 	public void setReserveNo(int reserveNo) {
 		this.reserveNo = reserveNo;
 	}
-
 
 
 
@@ -242,11 +223,9 @@ public class HostReserve {
 
 
 
-
 	public void setSpaceNo(int spaceNo) {
 		this.spaceNo = spaceNo;
 	}
-
 
 
 
@@ -256,11 +235,9 @@ public class HostReserve {
 
 
 
-
 	public void setHostNo(int hostNo) {
 		this.hostNo = hostNo;
 	}
-
 
 
 
@@ -270,11 +247,9 @@ public class HostReserve {
 
 
 
-
 	public void setSpaceKind(int spaceKind) {
 		this.spaceKind = spaceKind;
 	}
-
 
 
 
@@ -284,11 +259,9 @@ public class HostReserve {
 
 
 
-
 	public void setDidDayReserve(String didDayReserve) {
 		this.didDayReserve = didDayReserve;
 	}
-
 
 
 
@@ -298,11 +271,9 @@ public class HostReserve {
 
 
 
-
 	public void setDidMonthReserve(String didMonthReserve) {
 		this.didMonthReserve = didMonthReserve;
 	}
-
 
 
 
@@ -312,11 +283,9 @@ public class HostReserve {
 
 
 
-
 	public void setDidHostOk(int didHostOk) {
 		this.didHostOk = didHostOk;
 	}
-
 
 
 
@@ -326,11 +295,9 @@ public class HostReserve {
 
 
 
-
 	public void setStartTime(int startTime) {
 		this.startTime = startTime;
 	}
-
 
 
 
@@ -340,11 +307,9 @@ public class HostReserve {
 
 
 
-
 	public void setMemberNo(int memberNo) {
 		MemberNo = memberNo;
 	}
-
 
 
 
@@ -354,11 +319,9 @@ public class HostReserve {
 
 
 
-
 	public void setReserveStatus(int reserveStatus) {
 		this.reserveStatus = reserveStatus;
 	}
-
 
 
 
@@ -368,11 +331,9 @@ public class HostReserve {
 
 
 
-
 	public void setEndDay(Date endDay) {
 		this.endDay = endDay;
 	}
-
 
 
 
@@ -382,11 +343,15 @@ public class HostReserve {
 
 
 
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
+
+
+	public void setReserveTerm(int reserveTerm) {
+		this.reserveTerm = reserveTerm;
+	}
 
 
 
@@ -399,11 +364,8 @@ public class HostReserve {
 				+ didHostOk + ", day=" + day + ", startTime=" + startTime + ", endTime=" + endTime + ", MemberNo="
 				+ MemberNo + ", reservePersonCount=" + reservePersonCount + ", reserveStatus=" + reserveStatus
 				+ ", startDay=" + startDay + ", endDay=" + endDay + ", reserveDate=" + reserveDate + ", userName="
-				+ userName + "]";
+				+ userName + ", reserveTerm=" + reserveTerm + "]";
 	}
-
-	
-	
 	
 	
 }

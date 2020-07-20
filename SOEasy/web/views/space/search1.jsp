@@ -151,7 +151,7 @@ section {
 			</div>
 			<div id="searchResult">
 				<p style="text-shadow: 1px 2px 2px #ffffff;">
-					<b style="color: #40a4b6;"><%= search %></b> (으)로 검색한 결과입니다.<br>
+					<b id="searchKeyword" style="color: #40a4b6;"><%= search %></b> (으)로 검색한 결과입니다.<br>
 				</p>
 			</div>
 		</div>
@@ -165,7 +165,7 @@ section {
 		<div class="filter-box">
 		<div class="filter-bg">
 			<br>
-			<form>
+			<form hidden="">
 			<table align="center" class="filter">
 				<tr>
 					<td rowspan="2">필터</td>
@@ -193,9 +193,9 @@ section {
 					</select></td>
 					<td><select class="term" name="term">
 							<option>==이용유형==</option>
-							<option value="day">1일권</option>
-							<option value="month">1개월권</option>
-							<option value="week">1주일권</option>
+							<option value="DAY_PAY">1일권</option>
+							<option value="MONTH_PAY">1개월권</option>
+							<!-- <option value="week">1주일권</option> -->
 					</select></td>
 					<td rowspan="2"><button type="submit"
 							style="background: #40a4b6; color: white; border: 0px; border-radius: 10px; width: 90px; height: 40px;" class="filterSearch">검색</button></td>
@@ -317,9 +317,9 @@ section {
 		
 		$(function(){
 			$(".filterSearch").click(funciton(){
-				var num = $(this).find("input").val();
-			})
-		})
+				var searchKeyword = $(this).find("#searchKeyword").val();
+			});
+		});
 
 	</script>
 	<br><br>

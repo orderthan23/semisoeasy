@@ -204,6 +204,7 @@ public class HostReserveDao {
 				hostReserve.setReserveDate(rset.getDate("RESERV_DATE"));
 				hostReserve.setUserName(rset.getString("USER_NAME"));
 				
+				
 			}
 			
 		} catch (SQLException e) {

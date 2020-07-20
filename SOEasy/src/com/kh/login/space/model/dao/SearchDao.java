@@ -78,8 +78,11 @@ public class SearchDao {
 			int endRow = startRow + pi.getLimit() -1;
 			
 			pstmt.setString(1, search);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setString(2, search);
+			pstmt.setString(3, search);
+			pstmt.setString(4, search);
+			pstmt.setInt(5, startRow);
+			pstmt.setInt(6, endRow);
 			
 			
 			rset = pstmt.executeQuery();
@@ -95,7 +98,7 @@ public class SearchDao {
 				hmap.put("spaceAddress", rset.getString("SPACE_ADDRESS"));
 				hmap.put("sStatus", rset.getString("S_STATUS"));
 				hmap.put("spaceIntro", rset.getString("SPACE_INTRO"));
-				hmap.put("spacePayPolicy", rset.getString("SPACE_PAY_POLICY"));
+				hmap.put("spacePayPolicy", rset.getString("SPACE_SHORT_INTRO"));
 				hmap.put("didPayReserve", rset.getString("DID_DAY_RESERV"));
 				hmap.put("dayPay", rset.getInt("DAY_PAY"));
 				hmap.put("didMonthReserve", rset.getString("DID_MONTH_RESERV"));
@@ -140,8 +143,15 @@ public class SearchDao {
 			int endRow = startRow + pi.getLimit() -1;
 			
 			pstmt.setString(1, sf.getSearch());
-			pstmt.setInt(8, startRow);
-			pstmt.setInt(9, endRow);
+			pstmt.setInt(2, sf.getSpaceKind());
+			pstmt.setString(3, sf.getSpaceLocationFilter());
+			pstmt.setString(4, sf.getTerm());
+			pstmt.setInt(5, sf.getLowPrice());
+			pstmt.setInt(6, sf.getHighPrice());
+			pstmt.setInt(7, sf.getLowPrice());
+			pstmt.setInt(8, sf.getHighPrice());
+			pstmt.setInt(9, startRow);
+			pstmt.setInt(10, endRow);
 			
 			
 			rset = pstmt.executeQuery();
