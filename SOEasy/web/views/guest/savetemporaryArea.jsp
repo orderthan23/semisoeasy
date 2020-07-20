@@ -26,7 +26,7 @@
 	
 	}
 	#tableHeader th{
-		width : 25%;
+		width : 20%;
 		height : 60px;
 	}
 	
@@ -47,9 +47,10 @@
 		border : none;
 		text-align-last : center;
 	}
-	.inspectionStatus{
+	.inspectionStatus, button{
 		border-radius : 10px;
 		border: 1px solid black;
+		height: 30px;
 		color : black;
 		font-size: 16px;
 		font-weight : bolder;
@@ -78,7 +79,7 @@
 <section>
 	<div id ="wrapper">
 	<h1>내 공간 관리</h1>
-	<p>현재 등록 대기 중인 공간이 <label>1</label>개 있습니다.</p>
+	<p>현재 등록 대기 중인 공간이 <label id="undone"></label> 개 있습니다.</p>
 	<select>
 		<option>검수 상태</option>
 		<option>검수 요청 전</option>
@@ -100,32 +101,37 @@
 			<th>공간종류</th>
 			<th>공간상태</th>
 			<th>공간정보수정</th>
+			<th>공간정보삭제</th>
 		</tr>
 		<%
-			for(SpaceInfo si : siList) {
+			for(int i = 0; i < siList.size(); i++) {
 		%>
-		<!-- 공간수정버튼 추가 필요 !_____!!!! -->
+		
 		<tr id = tableResource>
-			<td><p>"<%=si.getSpaceName()%>"</p> </td>
+			<td><p>"<%=siList.get(i).getSpaceName()%>"</p> <input type="hidden" id="space<%=i%>" value=<%= siList.get(i).getSpaceNo() %>></td>
 			
-			<% 	if(si.getSpaceKind() == 1){ %>
+			<% 	if(siList.get(i).getSpaceKind() == 1){ %>
 			<td><p>독립 오피스</p> </td>
 			<% } else { %>
 			<td><p>코워킹 스페이스</p> </td>
 			<% } %>
 			
-			<% if(si.getsStatus().equals("Y")) { %>
-			<td><p>운영 중</p></td>
-			<td><button class=inspectionStatus>공간 정보 수정</button> <button class=inspectionStatus>공간 정보 삭제 요청</button></td>
-			<% } else if(si.getsStatus().equals("N")) { %>
-			<td><p>작성 중</p></td>
-			<td><button class=inspectionStatus>공간 정보 수정</button> <button class=inspectionStatus>공간 정보 삭제</button></td>
-			<% } else if(si.getsStatus().equals("IW")) { %>
-			<td><p>검수 대기 중</p></td>
-			<td><button class=inspectionStatus disabled="disabled">공간 정보 수정</button> </td>
+			<% if(siList.get(i).getsStatus().equals("Y")) { %>
+			<td><button class=inspectionStatus style="color:green; borderColor:green;">운영 중</button></td>
+			<td><button class="updateSpaceInfo" onclick="updateSpaceInfo(<%=siList.get(i).getSpaceNo()%>);">공간 정보 수정</button></td>
+			<td><button class="deleteRequset" onclick="deleteRequest(<%=siList.get(i).getSpaceNo()%>);">공간 정보 삭제 요청</button></td>
+			<% } else if(siList.get(i).getsStatus().equals("N")) { %>
+			<td><button class=inspectionStatus style="color:gray; borderColor:gray;">작성 중</button></td>
+			<td><button class="updateSpaceInfo" onclick="updateSpaceInfo(<%=siList.get(i).getSpaceNo()%>);">공간 정보 수정</button></td>
+			<td><button class="deleteSpace" onclick="deleteSpace(<%=siList.get(i).getSpaceNo()%>);">미완성 공간 정보 삭제</button></td>
+			<% } else if(siList.get(i).getsStatus().equals("IW")) { %>
+			<td><button class=inspectionStatus style="color:purple; borderColor:purple;">공간 검수 대기 중</button></td>
+			<td><button disabled="disabled">공간 정보 수정</button> </td>
+			<td><button disabled="disabled">공간 정보 삭제 요청</button></td>
 			<% } else { %>
-			<td><p>삭제 대기 중</p></td>
-			<td><button class=inspectionStatus disabled="disabled">공간 정보 수정</button> </td>
+			<td><button class=inspectionStatus style="color:red; borderColor:red;">공간 삭제 대기 중</button></td>
+			<td><button disabled="disabled">공간 정보 수정</button> </td>
+			<td><button class="cancleDeleteRequset" onclick="cancleDeleteRequest(<%=siList.get(i).getSpaceNo()%>);">공간 정보 삭제 취소</button></td>
 			<% } %>
 		</tr>
 		<% } %>
@@ -137,27 +143,25 @@
 
 <footer><%@ include file="/views/common/footer.jsp" %></footer>
 <script>
-	<%-- $(function(){
-			var status = <%=siList.get(index)%>
-			switch(status){
-			case 1 :  $('.inspectionStatus').text("검수 요청 전").css({color: "red" , borderColor: "red"}); break;
-			case 2 : $('.inspectionStatus').text("검수 대기 중").css({color: "orange" , borderColor: "orange"}); break;
-			case 3 : $('.inspectionStatus').text("검수 진행 중").css({color: "purple" , borderColor: "purple"}); break;
-			case 4 : $('.inspectionStatus').text("검수 완료").css({color: "green" , borderColor: "green"}); break;
-			case 5 : $('.inspectionStatus').text("검수 탈락").css({color: "gray", borderColor : "gray"}); break; 
-			}
-			
-			var write = parseInt("<%=작성단계변수%>");
-			switch(write){
-			case 1:	$('.howToStep option:nth(1)').text("이어서 작성하기");
-					$('.howToStep option:nth(2)').text("현재 공간 삭제하기"); break;
-			case 2:	$('.howToStep option:nth(1)').text("검수 요청 하기");
-					$('.howToStep option:nth(2)').text("현재 공간 삭제하기");
-					$('.howToStep option:nth(3)').text("현재 공간 수정하기");break;
-			
-			}
-	}); --%>
 	
+	
+	$(function(){
+		<% 
+		int cnt = 0;
+		for(SpaceInfo s : siList) { 
+			if(s.getsStatus().equals("N")) {
+				cnt ++;%>
+			<% } %>
+		<% } %>
+		$("#undone").html(<%=cnt%>);
+	});
+	
+	function updateSpaceInfo(spaceNo){
+		location.href="<%=request.getContextPath()%>/updateSpaceStep1?spaceNo=" + spaceNo;
+	};
+	function deleteRequset(spaceNo){};
+	function deleteSpace(spaceNo){};
+	function cancleDeleteRequset(spaceNo){};
 
 </script>
 </body>
