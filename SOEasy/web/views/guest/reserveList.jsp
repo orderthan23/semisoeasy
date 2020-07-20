@@ -1,19 +1,12 @@
+<%@page import="com.kh.login.host.manageReserve.model.vo.PaymentRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.* ,com.kh.login.guest.model.vo.*, com.kh.login.host.manageReserve.model.vo.PageInfo"%>
 <!DOCTYPE html>
-<%
-String name = "린가드";
-int placeQTY = 10;
-int pCompleteQTY = 10;
-int pNum = 2; // 결제 여부 번호
-int aNum = 2; // 승인 처리 여부 번호
-int rNum = 1; // 예약 상태
-int rvNum =3; // 나의 후기
-%>
+
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="/login/css/layout.css">
 
 <meta charset="UTF-8">
 <style>
@@ -61,8 +54,7 @@ th {
 }
 
 .cancle {
-	visibility: hidden;
-	display: none;
+
 	background: orangered;
 	border-radius: 10px;
 	color: white;
@@ -81,7 +73,74 @@ th {
 	<header><%@ include file="../../views/common/header.jsp" %></header>
 
 	<nav><%@ include file="../../views/common/aside.jsp" %>
-
+	<%
+		ArrayList<ReserveHistory> reserveList = (ArrayList<ReserveHistory>)request.getAttribute("reserveList");
+		String msg = (String)request.getAttribute("msg");
+		PageInfo pi = (PageInfo)request.getAttribute("pi");
+		String url = (String)request.getAttribute("url");
+		String root = (String)request.getAttribute("root"); 
+		
+		int listCount = pi.getListCount();
+		int currentPage = pi.getCurrentPage();
+		int maxPage = pi.getMaxPage();
+		int startPage = pi.getStartPage();
+		int endPage = pi.getEndPage();
+		ArrayList<String> acceptTypeArr = new ArrayList<String>();
+		ArrayList<String> reserveStatusArr = new ArrayList<String>();
+		ArrayList<String> payStatusArr = new ArrayList<>();
+		ArrayList<String> seatTypeArr = new ArrayList<>();
+		ArrayList<String> startUseArr = new ArrayList<>();
+		ArrayList<String> endUseArr = new ArrayList<>();
+		ArrayList<String> hasReviewArr = new ArrayList<>();
+		ArrayList<String> reserveDate = new ArrayList<>();
+		ArrayList<String> spaceTypeArr = new ArrayList<>(); 
+		
+		for(ReserveHistory rh : reserveList){
+			switch(rh.getAcceptStatus()){
+			case 1: acceptTypeArr.add("승인필요"); break;
+			case 2: acceptTypeArr.add("승인완료"); break;
+			case 3: acceptTypeArr.add("바로예약"); break;
+			case 4: acceptTypeArr.add("예약거절"); break;
+			}
+			switch(rh.getReserveStatus()){
+			case 1: reserveStatusArr.add("사용전"); break;
+			case 2: reserveStatusArr.add("예약취소"); break;
+			case 3: reserveStatusArr.add("사용중"); break;
+			case 4: reserveStatusArr.add("사용완료"); break;
+			case 5: reserveStatusArr.add("사용전"); break;
+			}
+			
+			switch(rh.getPayStatus()){
+			case -1 : payStatusArr.add("결제대기"); break;
+			case 1: payStatusArr.add("결제완료"); break;
+			case 2: payStatusArr.add("호스트취소"); break;
+			case 3: payStatusArr.add("본인취소"); break;
+			}
+			
+			switch(rh.getSeatType()){
+			case "U" : seatTypeArr.add("자유석"); break;
+			case "F" : seatTypeArr.add("지정석"); break;
+			}
+			
+			switch(rh.getSpaceType()){
+			case 1 : spaceTypeArr.add("독립오피스"); break; 
+			case 2 : spaceTypeArr.add("코워킹스페이스"); break;
+			}
+			
+			startUseArr.add(rh.getStartUse().toString());
+			endUseArr.add(rh.getEndUse().toString());
+			reserveDate.add(rh.getReserveDate().toString());
+			
+			switch(rh.getHasReview()){
+			case "WAIT": hasReviewArr.add("작성대기");
+			case "ABLE": hasReviewArr.add("작성가능");
+			case "COMP": hasReviewArr.add("작성완료");
+			}
+			
+		
+		}
+	%>
+	
 		<div class="colMenu">
 			<label class="colMenuTitle">예약 목록</label>
 			 <a class="colMenuButton selectedButton" href="/login/views/guest/reserveList.jsp">예약 내역 리스트</a>
@@ -95,7 +154,7 @@ th {
 		<br>
 		<div id="wrapper">
 		<br>
-		<h1 style="margin : 0;"><%=name %> 님의  예약  내역입니다.</h1>
+		<h1 style="margin : 0;"><%=msg %></h1>
 		<br><br>
 		<table align="center"  style="margin:0; width:100%;"  >
 				<tr>
@@ -111,21 +170,64 @@ th {
 					<th height="40px">예약 상태</th>
 					<th height="40px">나의 후기</th>
 				</tr>
-				<%for(int i=1; i<=pCompleteQTY; i++) {%>
+				<%for(int i=0; i<reserveList.size(); i++) {%>
 				<tr class="pCompleteInfo">
-					<td style="font-size:13px;"><%="린가드 "+i+"코워킹 스페이스"%></td>
-					<td>코워킹 스페이스</td>
-					<td><%="2020.07."+i%></td>
-					<td><%="2020.07."+(i+10)%> </td>
-					<td><%=i%></td>
-					<td><%=i*i%></td>
-					<td>확인</td>
+					<td style="font-size:13px;"><%=reserveList.get(i).getSpaceName() %></td>
+					<td><%=spaceTypeArr.get(i) %></td>
+					<td><%=startUseArr.get(i)%></td>
+					<td><%=endUseArr.get(i)%> </td>
+					<td><%=reserveList.get(i).getPersonCount()%></td>
+					<td><%=reserveList.get(i).getCharge()%></td>
+					<td><%=reserveList.get(i).getPayMethod() %></td>
 					<td><label class="payProgress"></label></td>
 					<td><label class="agreeProgress"></label></td>
 					<td><label class="reserveStatus"></label></td>
 					<td><a href="#" class="reviewExistance"></a></td>
-					<td class="cancleZone"><button type="button" class="cancle" onclick="letsPay();">취소</button></td>
+					<td class="cancleZone"><button type="button" class="cancle" >취소</button></td>
 				</tr>
+		<script>
+		$(document).ready(function(){
+		
+			var pNum = "<%=payStatusArr.get(i)%>"
+			switch(pNum){
+			case "결제대기": $('.payProgress:nth(<%=i%>)').text(pNum).css({bordercolor:"blue", color:"blue"}); break;
+			case "결제완료": $('.payProgress:nth(<%=i%>)').text(pNum).css({bordercolor:"red", color:"red"}); break;
+			case "호스트취소": $('.payProgress:nth(<%=i%>)').text(pNum).css({bordercolor:"purple", color:"purple"}); break;
+			case "본인취소": $('.payProgress:nth(<%=i%>)').text(pNum).css({bordercolor:"gray", color:"gray"}); break;
+			}
+			var aNum = "<%=acceptTypeArr.get(i)%>"
+			switch(aNum){
+			case "승인필요": $('.agreeProgress:nth(<%=i%>)').text(aNum).css({bordercolor:"blue", color:"blue"}); break;
+			case "승인완료": $('.agreeProgress:nth(<%=i%>)').text(aNum).css({bordercolor:"green", color:"green"}); break;
+			case "바로예약": $('.agreeProgress:nth(<%=i%>)').text(aNum).css({bordercolor:"gray", color:"gray"}); break;
+			case "예약거절": $('.agreeProgress:nth(<%=i%>)').text(aNum).css({bordercolor:"red", color:"red"}); break;
+			
+			}
+			var rNum = "<%=reserveStatusArr.get(i)%>"
+			switch(rNum){
+			case "사용전": $('.reserveStatus:nth(<%=i%>)').text("사용전").css({bordercolor:"blue", color:"blue"}); break;
+			case "예약취소": $('.reserveStatus:nth(<%=i%>)').text(rNum).css({bordercolor:"red", color:"red"}); break;
+			case "사용중": $('.reserveStatus:nth(<%=i%>)').text(rNum).css({bordercolor:"gray", color:"gray"}); break;
+			case "사용완료": $('.reserveStatus:nth(<%=i%>)').text(rNum).css({bordercolor:"purple", color:"purple"}); break;
+			
+			}
+			
+			var rvNum = "<%=hasReviewArr.get(i)%>"
+			switch(rvNum){
+			case "작성대기": $('.reviewExistance').text("-"); break;
+			case "작성가능": $('.reviewExistance').text("작성하기"); break;
+			case "작성완료": $('.reviewExistance').text("보러가기").css({color:"#3DB6AE"}); break;
+			
+			}
+			if(aNum=="결제완료" && rNum=="사용전"){
+				$('.cancle:nth(<%=i%>)').show();				
+			}else if(aNum="승인완료" && pNum=="결제대기" ){
+				$('.cancle:nth(<%=i%>)').show().text("결제").attr("onclick","letsPay();");
+			}else{
+				$('.cancle:nth(<%=i%>)').hide();
+			}
+		});
+		</script>
 				<%
 					}
 				%>
@@ -135,43 +237,6 @@ th {
 	<footer><%@ include file="../../views/common/footer.jsp" %></footer>
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 	<script>
-		$(document).ready(function(){
-		
-			var pNum = <%=pNum%>
-			switch(pNum){
-			case 1: $('.payProgress').text("완료").css({bordercolor:"blue", color:"blue"}); break;
-			case 2: $('.payProgress').text("취소").css({bordercolor:"red", color:"red"}); break;
-			case 3: $('.payProgress').text("결제 대기").css({bordercolor:"purple", color:"purple"}); break;
-			case 4: $('.payProgress').text("대기").css({bordercolor:"gray", color:"gray"}); break;
-			}
-			var aNum = <%=aNum%>
-			switch(aNum){
-			case 1: $('.agreeProgress').text("승인").css({bordercolor:"blue", color:"blue"}); break;
-			case 2: $('.agreeProgress').text("거절").css({bordercolor:"red", color:"red"}); break;
-			case 3: $('.agreeProgress').text("대기").css({bordercolor:"gray", color:"gray"}); break;
-			
-			}
-			var rNum = <%=rNum%>
-			switch(rNum){
-			case 1: $('.reserveStatus').text("예정").css({bordercolor:"blue", color:"blue"}); break;
-			case 2: $('.reserveStatus').text("취소").css({bordercolor:"red", color:"red"}); break;
-			case 3: $('.reserveStatus').text("대기").css({bordercolor:"gray", color:"gray"}); break;
-			case 4: $('.reserveStatus').text("이용 중").css({bordercolor:"purple", color:"purple"}); break;
-			case 5: $('.reserveStatus').text("이용 완료").css({bordercolor:"#3DB6AE", color:"#3DB6AE"}); break;
-			
-			}
-			
-			var rvNum = <%=rvNum%>
-			switch(rvNum){
-			case 1: $('.reviewExistance').text("-"); break;
-			case 2: $('.reviewExistance').text("작성하기"); break;
-			case 3: $('.reviewExistance').text("보러가기").css({color:"#3DB6AE"}); break;
-			
-			}
-			if(aNum==3 || rNum==1){
-				$('.cancle').css({visibility:"visible",display:"inline"});				
-			}
-		});
 		
 		function letsPay(){
 			IMP.init('imp14313139'); // 아임포트 관리자 페이지의 "시스템 설정" > "내 정보" 에서 확인 가능
@@ -184,8 +249,6 @@ th {
 			    buyer_email : 'iamport@siot.do',
 			    buyer_name : '구매자이름',
 			    buyer_tel : '010-1234-5678',
-			    buyer_addr : '서울특별시 강남구 삼성동',
-			    buyer_postcode : '123-456'
 			}, function(rsp) {
 				IMP.init('imp14313139'); // 아임포트 관리자 페이지의 "시스템 설정" > "내 정보" 에서 확인 가능
 			    if ( rsp.success ) {
