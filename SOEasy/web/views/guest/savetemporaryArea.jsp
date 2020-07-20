@@ -98,43 +98,35 @@
 		<tr id = tableHeader>
 			<th>공간명</th>
 			<th>공간종류</th>
-			<th>작성 상태</th>
-			<th>검수 진행도 </th>
+			<th>공간상태</th>
+			<th>공간정보수정</th>
 		</tr>
 		<%
-			/* //  가제 : 1,검수 요청 전, 2.검수 대기중, 3. 검수 진행중, 4. 검수 완료, 5. 검수 탈락
-			int 검수상황 = 3;
-			// 가제 : 1.1단계 공간정보 입력완료 , 2.2단계 가격정보 입력완료  3.검수 신청 완료
-			int 작성단계변수 = 1;
-		 	String 작성단계;
-			if(작성단계변수 ==1){
-				작성단계 = "작성 진행 중";
-			}else{
-				작성단계 = "작성 완료";
-			}
-			String 공간이름 = "린가드 코워킹 스페이스";
-			String 공간날짜 = "20.09.18";
-			
-			int length  = 6; // 정보의 갯수 
-			for(int i = 0; i<length; i++){ */
-			
 			for(SpaceInfo si : siList) {
 		%>
 		<!-- 공간수정버튼 추가 필요 !_____!!!! -->
 		<tr id = tableResource>
 			<td><p>"<%=si.getSpaceName()%>"</p> </td>
+			
 			<% 	if(si.getSpaceKind() == 1){ %>
 			<td><p>독립 오피스</p> </td>
 			<% } else { %>
 			<td><p>코워킹 스페이스</p> </td>
 			<% } %>
-			<td><select class="howToStep">
-					<option selected disabled><%=작성단계 %></option>
-					<option></option>
-					<option></option>
-					<option></option>
-				</select> </td>
-			<td><button class=inspectionStatus>검수 요청 전</button> </td>
+			
+			<% if(si.getsStatus().equals("Y")) { %>
+			<td><p>운영 중</p></td>
+			<td><button class=inspectionStatus>공간 정보 수정</button> <button class=inspectionStatus>공간 정보 삭제 요청</button></td>
+			<% } else if(si.getsStatus().equals("N")) { %>
+			<td><p>작성 중</p></td>
+			<td><button class=inspectionStatus>공간 정보 수정</button> <button class=inspectionStatus>공간 정보 삭제</button></td>
+			<% } else if(si.getsStatus().equals("IW")) { %>
+			<td><p>검수 대기 중</p></td>
+			<td><button class=inspectionStatus disabled="disabled">공간 정보 수정</button> </td>
+			<% } else { %>
+			<td><p>삭제 대기 중</p></td>
+			<td><button class=inspectionStatus disabled="disabled">공간 정보 수정</button> </td>
+			<% } %>
 		</tr>
 		<% } %>
 	</table>
@@ -145,8 +137,8 @@
 
 <footer><%@ include file="/views/common/footer.jsp" %></footer>
 <script>
-	$(function(){
-			var status = parseInt("<%=검수상황%>");
+	<%-- $(function(){
+			var status = <%=siList.get(index)%>
 			switch(status){
 			case 1 :  $('.inspectionStatus').text("검수 요청 전").css({color: "red" , borderColor: "red"}); break;
 			case 2 : $('.inspectionStatus').text("검수 대기 중").css({color: "orange" , borderColor: "orange"}); break;
@@ -164,7 +156,7 @@
 					$('.howToStep option:nth(3)').text("현재 공간 수정하기");break;
 			
 			}
-	});
+	}); --%>
 	
 
 </script>

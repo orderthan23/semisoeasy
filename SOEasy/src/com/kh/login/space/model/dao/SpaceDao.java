@@ -467,6 +467,7 @@ public class SpaceDao {
 				returnSi.setDayPay(rset.getInt("DAY_PAY"));
 				returnSi.setDidMonthReserv(rset.getString("DID_MONTH_RESERV"));
 				returnSi.setMonthPay(rset.getInt("MONTH_PAY"));
+				returnSi.setSpaceLocationFilter(rset.getString("SPACE_LOCATION_FILTER"));
 				temp += rset.getString("OFFICE_NO") + "$";
 				returnSi.setSpaceSize(rset.getInt("OFFICE_SIZE"));
 				returnSi.setSpaceContainCount(rset.getInt("OFFICE_CAPACITY"));
@@ -515,6 +516,7 @@ public class SpaceDao {
 				returnSi.setDayPay(rset.getInt("DAY_PAY"));
 				returnSi.setDidMonthReserv(rset.getString("DID_MONTH_RESERV"));
 				returnSi.setMonthPay(rset.getInt("MONTH_PAY"));
+				returnSi.setSpaceLocationFilter(rset.getString("SPACE_LOCATION_FILTER"));
 				returnSi.setTotalSeat(rset.getInt("NUMBER_SEATS"));
 				returnSi.setMaxReserv(rset.getInt("MAX_CAPACITY"));
 				returnSi.setFixSeat(rset.getInt("FIX_SEATS"));
@@ -605,6 +607,7 @@ public class SpaceDao {
 			returnSi.setDayPay(si.getDayPay());
 			returnSi.setDidMonthReserv(si.getDidMonthReserv());
 			returnSi.setMonthPay(si.getMonthPay());
+			returnSi.setSpaceLocationFilter(si.getSpaceLocationFilter());
 			returnSi.setOfficeNo(si.getOfficeNo());
 			returnSi.setSpaceSize(si.getSpaceSize());
 			returnSi.setSpaceRoomCount(si.getSpaceRoomCount());
@@ -657,6 +660,7 @@ public class SpaceDao {
 			returnSi.setDayPay(si.getDayPay());
 			returnSi.setDidMonthReserv(si.getDidMonthReserv());
 			returnSi.setMonthPay(si.getMonthPay());
+			returnSi.setSpaceLocationFilter(si.getSpaceLocationFilter());
 			returnSi.setOfficeNo(si.getOfficeNo());
 			returnSi.setSpaceSize(si.getSpaceSize());
 			returnSi.setSpaceRoomCount(si.getSpaceRoomCount());
@@ -791,12 +795,13 @@ public class SpaceDao {
 				q.setrMemNo(rset.getInt("R_MEM_NO"));
 				q.setrMemNick(rset.getString("R_MEM_NICK"));
 				q.setqContent(rset.getString("Q_CONTENT"));
+				q.setrContent(rset.getString("R_CONTENT"));
 				q.setqKind(rset.getInt("Q_KIND"));
 				q.setSpaceNo(rset.getInt("SPACE_NO"));
 				
 				list.add(q);
 			}
-			
+			System.out.println(list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

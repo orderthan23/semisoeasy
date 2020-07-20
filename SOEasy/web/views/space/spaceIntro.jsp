@@ -108,7 +108,7 @@
 </head>
 <body>
 		<header><%@ include file="../common/header.jsp" %></header>
-		<nav><%@ include file="../common/aside.jsp" %></nav>
+		<%-- <nav><%@ include file="../common/aside.jsp" %></nav> --%>
 		<br><br><!--  -->
 		<section>
 		<div style="width:75%; margin-left:auto; margin-right:auto;">
