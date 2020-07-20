@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.login.host.manageReserve.model.dao.HostReserveDao;
+import com.kh.login.host.manageReserve.model.vo.HostReserve;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.host.manageReserve.model.vo.PaymentRequest;
 
@@ -68,6 +69,25 @@ public class HostReserveService {
 		close(con);
 		
 		return updateList;
+	}
+
+	public ArrayList<HostReserve> selectReserveInfo(int hostNo, int spaceNo) {
+		Connection con = getConnection();
+		
+		ArrayList<HostReserve> selectHostReserve = new HostReserveDao().selectHostReserve(con, hostNo, spaceNo);
+		
+		
+		
+//		if(result > 0) {
+//			commit(con);
+//			updateList = new HostReserveDao().selectList(con);
+//		} else {
+//			rollback(con);
+//		}
+		
+		close(con);
+		
+		return selectHostReserve;
 	}
 	
 //	public int updateReserveRequest(int nno, int rno) {
