@@ -57,11 +57,6 @@ public class FilterSearchServlet extends HttpServlet {
 		int maxPage;
 		int startPage;
 		int endPage;
-		
-		
-		
-		
-		
 
 //		int cut = spaceLoactionFilter.indexOf(",");
 //		realFilter = spaceLocationFilter.substring(int cut);
@@ -71,11 +66,6 @@ public class FilterSearchServlet extends HttpServlet {
 		System.out.println("location : " + spaceLocationFilter);
 		System.out.println("sort : " + sort);
 		System.out.println("term : " + term);
-		
-		
-		
-		
-		
 		
 		
 		if(request.getParameter("currentPage") != null) {
