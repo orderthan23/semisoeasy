@@ -9,9 +9,9 @@
 	ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
 	ArrayList<QnA> qnaList = (ArrayList<QnA>) hmap.get("qnaList");
 	
-	String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0]; 
+	String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];  
 %>
-<!-- intro페이지도 500번에러 4~11번째 줄 추가한게 에러로 잡힘 -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,21 +129,21 @@
 		</table>
 		<table id="iconTb">
 			<tr>
-				<td id="share" style="padding:10px;"><img src="../../images/icon/share.png" style="width:35px;"></td>
-				<td id="heart" style="padding:10px;"><img src="../../images/icon/heart.png" style="width:35px;"></td>
+				<td id="share" style="padding:10px;"><img src="<%=request.getContextPath() %>/images/icon/share.png" style="width:35px;"></td>
+				<td id="heart" style="padding:10px;"><img src="<%=request.getContextPath() %>/images/icon/heart.png" style="width:35px;"></td>
 			</tr>
 		</table>
 		<br>
 		  <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 		<div class="visual">
 			<div 
-				style="background-image: url(../../images/area/area22-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
+				style="background-image: url(<%=request.getContextPath() %>/images/area/area22-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
 			</div>
 			<div 
-				style="background-image: url(../../images/area/area23-2.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
+				style="background-image: url(<%=request.getContextPath() %>/images/area/area23-2.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
 			</div>
 			<div 
-				style="background-image: url(../../images/area/area23-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
+				style="background-image: url(<%=request.getContextPath() %>/images/area/area23-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
 			</div>
 		</div>
 		
@@ -236,20 +236,20 @@
 		<!-- 편의시설 사진들 넣기 -->
 		<table id="amenityTb" style="border-spacing:15px;">
 			<tr>
-				<td id="24h" style="padding:22px;"><img src="../../images/icon/24h.png" width="100px" style="opacity:0.2;"></td>
-				<td id="365days" style="padding:22px;"><img src="../../images/icon/365days.png" width="100px"></td>
-				<td id="airCon" style="padding:22px;"><img src="../../images/icon/airCon.png" width="100px"></td>
-				<td id="animal" style="padding:22px;"><img src="../../images/icon/animal.png" width="100px" style="opacity:0.2;"></td>
-				<td id="beam" style="padding:22px;"><img src="../../images/icon/beam.png" width="100px" style="opacity:0.2;"></td>
-				<td id="board" style="padding:22px;"><img src="../../images/icon/board.png" width="100px"></td>
+				<td id="24h" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/24h.png" width="100px" style="opacity:0.2;"></td>
+				<td id="365days" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/365days.png" width="100px"></td>
+				<td id="airCon" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/airCon.png" width="100px"></td>
+				<td id="animal" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/animal.png" width="100px" style="opacity:0.2;"></td>
+				<td id="beam" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/beam.png" width="100px" style="opacity:0.2;"></td>
+				<td id="board" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/board.png" width="100px"></td>
 			</tr>
 			<tr>
-				<td id="cafe" style="padding:22px;"><img src="../../images/icon/cafe.png" width="100px" style="opacity:0.2;"></td>
-				<td id="copyPrint" style="padding:22px;"><img src="../../images/icon/copyPrint.png" width="100px"></td>
-				<td id="delivery" style="padding:22px;"><img src="../../images/icon/delivery.png" width="100px" style="opacity:0.2;"></td>
-				<td id="doorLock" style="padding:22px;"><img src="../../images/icon/doorLock.png" width="100px"></td>
-				<td id="fax" style="padding:22px;"><img src="../../images/icon/fax.png" width="100px"></td>
-				<td id="heater" style="padding:22px;"><img src="../../images/icon/heater.png" width="100px"></td>
+				<td id="cafe" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/cafe.png" width="100px" style="opacity:0.2;"></td>
+				<td id="copyPrint" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/copyPrint.png" width="100px"></td>
+				<td id="delivery" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/delivery.png" width="100px" style="opacity:0.2;"></td>
+				<td id="doorLock" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/doorLock.png" width="100px"></td>
+				<td id="fax" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/fax.png" width="100px"></td>
+				<td id="heater" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/heater.png" width="100px"></td>
 			</tr>
 			<tr>
 				<td id="kitchen" style="padding:22px;"><img src="../../images/icon/kitchen.png" width="100px" style="opacity:0.2;"></td>
@@ -361,7 +361,7 @@
 		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 		        map.setCenter(coords);
 		    } 
-		});    
+		});  
 		</script>
 		<br>
 		<hr>
