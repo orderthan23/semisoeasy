@@ -5,6 +5,7 @@
 	HashMap<String, Object> hmap = list.get(0);
 	
 	SpaceInfo si = (SpaceInfo) hmap.get("spaceInfo");
+	
 	ArrayList<Image> imgList = (ArrayList<Image>) hmap.get("imgList");
 	ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
 	ArrayList<QnA> qnaList = (ArrayList<QnA>) hmap.get("qnaList");
@@ -18,7 +19,7 @@
     <style>
         .visual{
             position: relative;
-            width: 10%;
+            width: 100%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -93,7 +94,6 @@
     </style>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
   
@@ -117,7 +117,7 @@
 		<table id="titleTb">
 			<tr>
 				<td>
-					<p id="title" style="color:#40a4b6;  font-weight: bolder; margin-top:0; font-size:30px;">성수동 인생공간 코워킹스페이스</p>
+					<p id="title" style="color:#40a4b6;  font-weight: bolder; margin-top:0; font-size:30px;"><%= si.getSpaceName() %></p>
 				</td>
 			</tr>
 		</table>
@@ -149,34 +149,14 @@
 		
 		<br><br>
 		<p id="subTitle" style="font-size:30px;">
-			동네에서 만나는 따뜻한 <br>
-			코워킹스페이스
+			<%= si.getSpaceShortIntro() %>
 		</p>
 		<hr>
 		<p id="intro" style="color:#40a4b6; font-size:20px;"><b>
 			소개
 		</b></p>
 		<p id="introInfo">
-			따뜻한 사람들을 위한 코워킹스페이스 성수동 인생공간입니다. <br><br>
-
-			성수동 인생공간은 자신의 인생일(천직)을 찾고, 이를 완성해나가는 사람들이 채워나가는 코<br>
-			워킹스페이스입니다.<br>
-			다른 코워킹스페이스와는 달리 인생공간은 성수동의 느낌을 살린 빈티지스러운 인테리어가<br>
-			특징적인 공간입니다.<br><br>
-
-			스타트업, 프리랜서, 프로젝트 팀 등 뜨거운 열정을 가지고 자신의 인생일을 찾아나서는 분들 <br>
-			모두 환영합니다.<br>
-			모든 것이 준비되어 있습니다. 열정과 재능만 가지고 오세요. 최적의 업무공간을 경험하실 수 <br>
-			있습니다.<br><br>
-
-			OFFICE 정보<br>
-			- 4~5인 기준의 독립된 PRIVATE OFFICE (3층 위치)<br><br>
-
-			1~2인의 경우 SHARE OFFICE로 이용가능<br>
-			- 공동현관 도어락, 개별 오피스 열쇠 제공<br>
-			- 24시간 첨단경호시스템<br>
-			- 복사기, 프린트, Wifi, 개별 냉난방 서비스 제공!<br>
-			- 월 1회 무료 변호사, 변리사, 세무사 등 서비스 제공!<br><br>
+			<%= si.getSpaceIntro() %>
 		</p>
 		<br>
 		<p id="opTime" style="color:#40a4b6; font-size:20px;"><b>
@@ -184,23 +164,23 @@
 		</b></p>
 		<table id="opTimeTb" style="border-spacing:15px;">
 			<tr>
-				<td id="mon" style="padding:20px;"><b>월</b>00:00 ~ 24:00</td>
-				<td id="sat" style="padding:20px;"><span style="color:blue;"><b>토</b></span>00:00 ~ 24:00</td>
+				<td id="mon" style="padding:20px;"><b>월 </b><%= si.getStartTimes()[0] %> ~ <%= si.getEndTimes()[0] %></td>
+				<td id="sat" style="padding:20px;"><span style="color:blue;"><b>토 </b></span><%= si.getStartTimes()[5] %> ~ <%= si.getEndTimes()[5] %></td>
 			</tr>
 			<tr>
-				<td id="tue" style="padding:20px;"><b>화</b>00:00 ~ 24:00</td>
-				<td id="sun" style="padding:20px;"><span style="color:red;"><b>일</b></span>00:00 ~ 24:00</td>
+				<td id="tue" style="padding:20px;"><b>화 </b><%= si.getStartTimes()[1] %> ~ <%= si.getEndTimes()[1] %></td>
+				<td id="sun" style="padding:20px;"><span style="color:red;"><b>일 </b></span><%= si.getStartTimes()[6] %> ~ <%= si.getEndTimes()[6] %></td>
 			</tr>
 			<tr>
-				<td id="wed" style="padding:20px;"><b>수</b>00:00 ~ 24:00</td>
+				<td id="wed" style="padding:20px;"><b>수 </b><%= si.getStartTimes()[2] %> ~ <%= si.getEndTimes()[2] %></td>
 				<td style="padding:20px;"></td>
 			</tr>
 			<tr>
-				<td id="thu" style="padding:20px;"><b>목</b>00:00 ~ 24:00</td>
+				<td id="thu" style="padding:20px;"><b>목 </b><%= si.getStartTimes()[3] %> ~ <%= si.getEndTimes()[3] %></td>
 				<td style="padding:20px;"></td>
 			</tr>
 			<tr>
-				<td id="fri" style="padding:20px;"><b>금</b>00:00 ~ 24:00</td>
+				<td id="fri" style="padding:20px;"><b>금 </b><%= si.getStartTimes()[4] %> ~ <%= si.getEndTimes()[4] %></td>
 				<td style="padding:20px;"></td>
 			</tr>
 		</table>
@@ -212,7 +192,7 @@
 		<table id="plusTb" style="border-spacing:15px;">
 			<tr>
 				<td id="accPer" style="padding:20px;"><b>수용인원</b></td>
-				<td id="accperInfo" style="padding:20px;">1 ~ 5 명</td>
+				<td id="accperInfo" style="padding:20px;"><%= si.getSpaceContainCount() %></td>
 			</tr>
 			<tr>
 				<td id="seatType" style="padding:20px;"><b>좌석유형</b></td>
@@ -220,11 +200,11 @@
 			</tr>
 			<tr>
 				<td id="stock" style="padding:20px;"><b>재고</b></td>
-				<td id="stockInfo" style="padding:20px;">5개</td>
+				<td id="stockInfo" style="padding:20px;"><%= si.getSpaceRoomCount() %></td>
 			</tr>
 			<tr>
 				<td id="extent" style="padding:20px;"><b>넓이</b></td>
-				<td id="extentInfo" style="padding:20px;">15평(49.58m²)</td>
+				<td id="extentInfo" style="padding:20px;"><%= si.getSpaceSize() %></td>
 			</tr>
 		</table>
 		<br><br>
@@ -252,68 +232,68 @@
 				<td id="heater" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/heater.png" width="100px"></td>
 			</tr>
 			<tr>
-				<td id="kitchen" style="padding:22px;"><img src="../../images/icon/kitchen.png" width="100px" style="opacity:0.2;"></td>
-				<td id="locker" style="padding:22px;"><img src="../../images/icon/locker.png" width="100px" style="opacity:0.2;"></td>
-				<td id="mail" style="padding:22px;"><img src="../../images/icon/mail.png" width="100px"></td>
-				<td id="parking" style="padding:22px;"><img src="../../images/icon/parking.png" width="100px"></td>
-				<td id="rounge" style="padding:22px;"><img src="../../images/icon/rounge.png" width="100px"></td>
-				<td id="snack" style="padding:22px;"><img src="../../images/icon/snack.png" width="100px" style="opacity:0.2;"></td>
+				<td id="kitchen" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/kitchen.png" width="100px" style="opacity:0.2;"></td>
+				<td id="locker" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/locker.png" width="100px" style="opacity:0.2;"></td>
+				<td id="mail" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/mail.png" width="100px"></td>
+				<td id="parking" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/parking.png" width="100px"></td>
+				<td id="rounge" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/rounge.png" width="100px"></td>
+				<td id="snack" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/snack.png" width="100px" style="opacity:0.2;"></td>
 			</tr>
 			<tr>
-				<td id="terrace" style="padding:22px;"><img src="../../images/icon/terrace.png" width="100px"></td>
-				<td id="tv" style="padding:22px;"><img src="../../images/icon/tv.png" width="100px"></td>
-				<td id="wareHouse" style="padding:22px;"><img src="../../images/icon/wareHouse.png" width="100px" style="opacity:0.2;"></td>
-				<td id="waterMachine" style="padding:22px;"><img src="../../images/icon/waterMachine.png" width="100px"></td>
-				<td id="wifi" style="padding:22px;"><img src="../../images/icon/wifi.png" width="100px"></td>
-				<td id="plug" style="padding:22px;"><img src="../../images/icon/plug.png" width="100px"></td>
+				<td id="terrace" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/terrace.png" width="100px"></td>
+				<td id="tv" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/tv.png" width="100px"></td>
+				<td id="wareHouse" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/wareHouse.png" width="100px" style="opacity:0.2;"></td>
+				<td id="waterMachine" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/waterMachine.png" width="100px"></td>
+				<td id="wifi" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/wifi.png" width="100px"></td>
+				<td id="plug" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/plug.png" width="100px"></td>
 			</tr>
 		</table>
 
 		<br><br>	
 		<p id="usePeriod" style="color:#40a4b6; font-size:20px;"><b>
-			이용기간
+			환불 정책
 		</b></p>
 		
 		<table id="usePeriodTb">
 			<tr>
 				<td id="8ago" style="padding:20px;"><b>이용 8일 전</b></td>
-				<td id="8agoInfo" style="padding:20px;">100% 환불</td>
+				<td id="8agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[8] %></td>
 			</tr>
 			<tr>
 				<td id="7ago" style="padding:20px;"><b>이용 7일 전</b></td>
-				<td id="7agoInfo" style="padding:20px;">90% 환불</td>
+				<td id="7agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[7] %></td>
 			</tr>
 			<tr>
 				<td id="6ago" style="padding:20px;"><b>이용 6일 전</b></td>
-				<td id="6agoInfo" style="padding:20px;">90% 환불</td>
+				<td id="6agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[6] %></td>
 			</tr>
 			<tr>
 				<td id="5ago" style="padding:20px;"><b>이용 5일 전</b></td>
-				<td id="5agoInfo" style="padding:20px;">90% 환불</td>
+				<td id="5agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[5] %></td>
 			</tr>
 			<tr>
 				<td id="4ago" style="padding:20px;"><b>이용 4일 전</b></td>
-				<td id="4agoInfo" style="padding:20px;">90% 환불</td>
+				<td id="4agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[4] %></td>
 			</tr>
 			<tr>
 				<td id="3ago" style="padding:20px;"><b>이용 3일 전</b></td>
-				<td id="3agoInfo" style="padding:20px;">90% 환불</td>
+				<td id="3agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[3] %></td>
 			</tr>
 			<tr>
 				<td id="2ago" style="padding:20px;"><b>이용 2일 전</b></td>
-				<td id="2agoInfo" style="padding:20px;">90% 환불</td>
+				<td id="2agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[2] %></td>
 			</tr>
 			<tr>
 				<td id="1ago" style="padding:20px;"><b>이용 1일 전</b></td>
-				<td id="1agoInfo" style="padding:20px;">90% 환불</td>
+				<td id="1agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[1] %></td>
 			</tr>
 			<tr>
 				<td id="dday" style="padding:20px;"><b>이용 당일</b></td>
-				<td id="ddayInfo" style="padding:20px;"><b style="color:red;">환불불가</b></td>
+				<td id="ddayInfo" style="padding:20px;"><b style="color:red;"><%= si.getSpaceRefundPolicy()[0] %></b></td> <!-- 순서 잘못됐나?? -->
 			</tr>
 		</table>
 		<br><br>
-		
+		            
 		<!-- 카카오맵 api -->
 		<p style="margin-top:-12px">
     	<em class="link">
@@ -354,7 +334,7 @@
 		
 		        // 인포윈도우로 장소에 대한 설명을 표시합니다
 		        var infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;"><%= si.getSpaceName()%></div>'
 		        });
 		        infowindow.open(map, marker);
 		
@@ -372,9 +352,8 @@
 		
 		<table>
           	<tr>
-          		<td id="profilePic" rowspan="2"><img src="../../images/etc/lingard.png" style="width:50px;"></td>
+          		<td id="profilePic" rowspan="2"><img src="<%=request.getContextPath() %>/images/etc/lingard.png" style="width:50px;"></td>
           		<td id="name"><h3>&nbsp;&nbsp;이호정&nbsp;&nbsp;</h3></td>
-
           	</tr>
           	<tr>
           		<td id="userQ" colspan="3">&nbsp;&nbsp;고정석으로 개인 데스크탑 비치 가능한가요? 와이파이 외에 개별 Lan선이 있는지도 궁금합니다</td>
@@ -397,6 +376,7 @@
           	</tr>
         </table>
 		
+		<!-- qKind 1 -->
 		<div class="card my-4" style="width:820px; height:230px;">
           <h5 class="card-header">큐앤에이 작성</h5>
           <div class="card-body">
@@ -418,7 +398,7 @@
 
 		<table id="reviewTb">
           	<tr>
-          		<td id="profilePic" rowspan="2"><img src="../../images/etc/soeasyProf.png" style="width:50px;"></td>
+          		<td id="profilePic" rowspan="2"><img src="<%=request.getContextPath() %>/images/etc/soeasyProf.png" style="width:50px;"></td>
           		<td id="userName"><h3>&nbsp;&nbsp;이호정&nbsp;&nbsp;</h3></td>
           		<td>
           			<i class="fa fa-star-o reviews" aria-hidden="true"></i>
