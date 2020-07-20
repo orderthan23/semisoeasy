@@ -40,7 +40,7 @@ public class SpaceInfo implements java.io.Serializable {
 	private String bsnsName;				//상호명
 	private String representName;			//대표자명
 	private String bsnsLicenseNo;			//사업자등록번호
-	private int bsnsType;				//사업자유형
+	private int bsnsType;					//사업자유형
 	private String bsnsCondition;			//주업태
 	private String bsnsEvent;				//주종목
 	private String bsnsAddress;				//사업장 주소

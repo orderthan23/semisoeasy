@@ -124,13 +124,13 @@
 	<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<div class="visual">
 			<div 
-				style="background-image: url(../../images/area/area22-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
+				style="background-image: url(<%=request.getContextPath() %>/images/area/area22-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
 			</div>
 			<div 
-				style="background-image: url(../../images/area/area23-2.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
+				style="background-image: url(<%=request.getContextPath() %>/images/area/area23-2.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
 			</div>
 			<div 
-				style="background-image: url(../../images/area/area23-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
+				style="background-image: url(<%=request.getContextPath() %>/images/area/area23-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
 			</div>
 		</div>
 	<br><br>
@@ -243,7 +243,7 @@
 		<table align="center" width="800">
 			<tr>
 				<td style="color:#40a4b6; font-size:20px; width:200px;"><b>예약 인원 선택</b></td>
-				<td style="width:200px;" colspan="2"><input type="number" id="choosePer" value="1" name="reservPersonCount"></td>
+				<td style="width:200px;" colspan="2"><input type="number" id="choosePer" value="1" min="1" name="reservPersonCount"></td>
 				<td style="width:400px;">명</td>
 			</tr>
 		</table>
@@ -435,7 +435,7 @@
 		</section>
 		<br><br><br>
 	<footer><%@ include file="../common/footer.jsp" %></footer>
-	
+
 	<script>
 	
 		//인원 선택한거 예약결과에 보여지게 하기
@@ -494,14 +494,14 @@
 		//입력 안한 칸 있으면 못넘어가게 하기
 		
 		//결제버튼 눌렀을때	
-		function push() {
+		/* function push() {
 			if() {
 				
-			} else {	
+			} else {
 				alert('결제버튼 누름 / API로 연결');
 				$("#insertReservation").submit();
 			}
-		}
+		}; */
 		
 		
 		//공간사진 슬라이드
