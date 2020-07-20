@@ -11,9 +11,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.jsp.notice.model.vo.Notice;
+import com.kh.login.host.manageReserve.model.vo.HostReserve;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.host.manageReserve.model.vo.PaymentRequest;
 
+import static com.kh.jsp.common.JDBCTemplate.close;
 import static com.kh.login.common.JDBCTemplate.*;
 
 public class HostReserveDao {
@@ -169,6 +172,49 @@ public class HostReserveDao {
 		
 		return result;
 	}
+
+	public ArrayList<HostReserve> selectHostReserve(Connection con, int hostNo, int spaceNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HostReserve  hostReserve = null;
+		
+		String query = prop.getProperty("selectHostReserve");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, hostNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				hostReserve = new HostReserve();
+				
+				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));
+				hostReserve.setReserveNo(rset.getInt("RESERV_NO"));
+				hostReserve.setOfficeNo(rset.getString("OFFICE_NO"));
+				hostReserve.setSpaceName(rset.getString("SPACE_NO"));
+				hostReserve.setSpaceKind(rset.getInt("SPACE_KIND"));
+//				hostReserve.setDidDayReserve(rset.getString("DID_DAY_RESERV"));
+//				hostReserve.setDidMonthReserve(rset.getString("DID_MONTH_RESERV"));
+				hostReserve.setDidHostOk(rset.getInt("DID_HOST_OK"));
+				hostReserve.setReservePersonCount(rset.getInt("RESERV_PERSON_COUNT"));
+				hostReserve.setReserveStatus(rset.getInt("RESERV_STATUS"));
+				hostReserve.setStartDay(rset.getDate("START_DATE"));
+				hostReserve.setEndDay(rset.getDate("END_DATE"));
+				hostReserve.setReserveDate(rset.getDate("RESERV_DATE"));
+				hostReserve.setUserName(rset.getString("USER_NAME"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return hostReserve;
+	}
+
 
 	//호스트 예약 승인 버튼 눌렀을 때 결과 불러오기
 	
