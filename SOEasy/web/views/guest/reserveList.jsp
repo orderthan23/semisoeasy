@@ -185,6 +185,8 @@ th {
 					<td><a href="#" class="reviewExistance"></a></td>
 					<td class="cancleZone"><button type="button" class="cancle" >취소</button></td>
 				</tr>
+				
+			
 		<script>
 		$(document).ready(function(){
 		
@@ -232,6 +234,13 @@ th {
 					}
 				%>
 			</table>
+			<form id="payInfo">
+				<input type="hidden" id="amount">
+				<input type="hidden" id="payNo">
+				<input type="hidden" id="reservNo">
+				<input type="hidden" id="methodCode">
+	
+			</form>
 		</div>
 	</section>
 	<footer><%@ include file="../../views/common/footer.jsp" %></footer>
@@ -246,41 +255,53 @@ th {
 				console.log(spaceName);
 				
 				IMP.request_pay({
-				   
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
 				    name : spaceName,
-				    amount : charge,
+				    amount : /*charge*/ 1000,
 				    buyer_email : "<%=loginUser.getmEmail()%>",
 				    buyer_name : "<%=loginUser.getmName()%>",
 				    buyer_tel : "<%=loginUser.getmPhone()%>",
 				}, function(rsp) {
-					IMP.init('imp14313139'); // 아임포트 관리자 페이지의 "시스템 설정" > "내 정보" 에서 확인 가능
+					
 				    if ( rsp.success ) {
 				        var msg = '결제가 완료되었습니다.';
 				        msg += '고유ID : ' + rsp.imp_uid;
 				        msg += '상점 거래ID : ' + rsp.merchant_uid;
 				        msg += '결제 금액 : ' + rsp.paid_amount;
 				        msg += '카드 승인번호 : ' + rsp.apply_num;
-				        $.ajax({
+				       /*  $.ajax({
 				        	url:"login/insertPayHistory",
 				        	data: {payId : rsp.merchant_uid,
 				        			payCharge : rsp.paid_amount,
 				        			cardApplyNum : rsp.apply_num
 				        	}
-				        });
-				    } else {
-				        var msg = '결제에 실패하였습니다.';
-				        msg += '에러내용 : ' + rsp.error_msg;
-				    }
-
-				    alert(msg);
-				    
+				        }); */
+				        console.log(rsp.imp_uid);
+				        IMP.init('imp14313139');	
+				        jQuery.ajax({
+				            url: "<%=request.getContextPath()%>/payments/complete", // 가맹점 서버
+				            method: "POST",
+				            headers: { "Content-Type": "application/json;" },
+				           
+				            data: {
+		        				  merchant_uid : rsp.merchant_uid
+				            }
+				        }).done(function (data) {
+				         	console.log(data);
+				        })
+				      } else {
+				        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+				      }
+				    });
+				        
 				   
 				});
+			
 			});
 			
-		});
+			
+		
 	
 		
 	
