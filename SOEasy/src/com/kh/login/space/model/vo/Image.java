@@ -1,6 +1,6 @@
 package com.kh.login.space.model.vo;
 
-public class Image {
+public class Image implements java.io.Serializable {
 
 	private int imgNo;
 	private String originName;

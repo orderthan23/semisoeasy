@@ -117,7 +117,7 @@ public class InsertSpaceStep3Servlet extends HttpServlet {
 			request.getSession().removeAttribute("spaceInfo");
 			
 			if(result > 0) {
-				response.sendRedirect("/login/index.jsp");
+				response.sendRedirect(request.getContextPath() + "/selectTempSpace?memberNo=" + loginUser.getMemberNo());
 			} else {
 				File failedFile = new File(savePath + saveFile);
 				failedFile.delete();

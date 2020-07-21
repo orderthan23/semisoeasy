@@ -362,7 +362,7 @@
 				<br><br><br><br><br><br>
 				<button type="button" onclick="callBack();">이전으로</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit">저장하기</button>
+				<button type="button" id="gonext">저장하기</button>
 				<br><br><br><br><br><br>
 			</div>
 		</form>
@@ -421,7 +421,7 @@
 		
 	    var checkUnload = true;
 	    $(window).on("beforeunload", function(){
-	        if(checkUnload) <%session.removeAttribute("spaceInfo");%> return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+	        if(checkUnload) return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
 	    });
 	    
 	    $("#gonext").click(function(){

@@ -323,7 +323,7 @@
 					<td style="vertical-align: top;"><br>대표 이미지 *</td>
 					<td>
 						<div id="cap" style="width: 450px; height: 250px; overflow: hidden;">
-							<img id="capital-img" src="../../images/icon/addImg.png">
+							<img id="capital-img" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>
 					</td>
 					<td></td>
@@ -339,24 +339,24 @@
 					<td style="vertical-align: top;"><br>상세 이미지 *</td>
 					<td class="thumbnail-area">
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-1" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-1" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>&nbsp;
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-2" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-2" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>
 						<br><br>
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-3" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-3" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>&nbsp;
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-4" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-4" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>
 						<br><br>
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-5" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-5" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>&nbsp;
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-6" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-6" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>
 					</td>
 					<td></td>

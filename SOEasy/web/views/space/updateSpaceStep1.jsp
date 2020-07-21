@@ -34,7 +34,7 @@
 		$("#roadAddrPart1").val(roadAddrPart1);
 	}
 </script>
-<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/layout.css">
 <style>
 
 	.space-insert tr td input[type=text]{
@@ -228,7 +228,7 @@
 								</tr>
 							</table>
 						</fieldset>
-						<input type="hidden" name="kinds" id="kinds" value="office">
+						<input type="hidden" name="kinds" id="kinds">
 					</td>
 					<td></td>
 				</tr>
@@ -340,7 +340,7 @@
 					<td style="vertical-align: top;"><br>대표 이미지 *</td>
 					<td>
 						<div id="cap" style="width: 450px; height: 250px; overflow: hidden;">
-							<img id="capital-img" src="../../images/icon/addImg.png">
+							<img id="capital-img" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>
 					</td>
 					<td></td>
@@ -356,24 +356,24 @@
 					<td style="vertical-align: top;"><br>상세 이미지 *</td>
 					<td class="thumbnail-area">
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-1" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-1" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>&nbsp;
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-2" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-2" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>
 						<br><br>
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-3" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-3" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>&nbsp;
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-4" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-4" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>
 						<br><br>
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-5" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-5" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>&nbsp;
 						<div class="thumbnail" style="width: 220px; height: 150px; overflow: hidden;">
-							<img class="thumbnail-in" id="thumnail-6" src="../../images/icon/addImg.png">
+							<img class="thumbnail-in" id="thumnail-6" src="<%=request.getContextPath()%>/images/icon/addImg.png">
 						</div>
 					</td>
 					<td></td>
@@ -458,8 +458,10 @@
 				$("#thumbnail-img-not").hide();
 			}
 			
-			if(<%=si.getSpaceKind()%> == 1){
-				$("#office-check").is(":visible");
+			var spaceKindCheck = <%=si.getSpaceKind()%>;
+			console.log(spaceKindCheck);
+			if(spaceKindCheck == 1){
+				$("#office-check").show();
 				$("#kinds").val("office");
 				$("#cowork").css("background", "white");
 				$("#office").css("background", "#3DB6AE");
@@ -469,8 +471,8 @@
 				$("#space-size").val(<%=si.getSpaceSize()%>);
 				$("#space-room-count").val(<%=si.getSpaceRoomCount()%>);
 				$("#space-contain-count").val(<%=si.getSpaceContainCount()%>);
-			} else if(<%=si.getSpaceKind()%> == 2){
-				$("#cowork-check").is(":visible");
+			} else if(spaceKindCheck == 2){
+				$("#cowork-check").show();
 				$("#kinds").val("cowork");
 				$("#office").css("background", "white");
 				$("#cowork").css("background", "#3DB6AE");
@@ -482,11 +484,24 @@
 				$("#max-reserv").val(<%=si.getMaxReserv()%>);
 			}
 			
-			for(var i = 0; i < <%=si.getConv().length%>; i ++){
-				if($("input[name=conv]").val() == <%=si.getConv()%>[i]){
-					$(this).attr("checked", "checked");
-				}
+			var si = $("#space-intro").val();
+			var len = si.length;
+			var maxlen = 400;
+			$("#intro-limit").text(len + " / " + maxlen);
+			
+			var str = $("#space-name").val();
+			var len = str.length;
+			if(len > 0){
+				$("#warning-space-name").hide();
+			}else{
+				$("#warning-space-name").show();
 			}
+			
+			<%-- for(var i = 0; i < <%=si.getConv().length%>; i ++){
+				if($("input[name=conv]").val() == <%=si.getConv()%>[i]){
+					$("input[name=conv]").prop("checked");
+				}
+			} --%>
 		}
 	
 		function initEvent(){
