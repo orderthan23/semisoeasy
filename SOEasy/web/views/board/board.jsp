@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*, com.kh.login.board.model.vo.*,
-	com.kh.login.host.manageReserve.model.vo.*"	%>
+	com.kh.login.host.manageReserve.model.vo.*, com.kh.login.space.model.vo.*"	%>
 <% ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list"); 
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
@@ -8,7 +8,6 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
-
 %>
 
 <!DOCTYPE html>

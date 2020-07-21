@@ -1,7 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.kh.login.space.model.vo.*" %>
 <%
-	// session 정보 가져올것
+	ArrayList<HashMap<String,Object>> siList = (ArrayList<HashMap<String,Object>>) session.getAttribute("siList");
+	HashMap<String, Object> hmap = siList.get(0);
+	
+	SpaceInfo si = (SpaceInfo) hmap.get("spaceInfo");
+	
+	ArrayList<Image> imgList = (ArrayList<Image>) hmap.get("imgList");
+	ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
+	ArrayList<QnA> qnaList = (ArrayList<QnA>) hmap.get("qnaList");
+	
+	String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
+	String siNm = si.getSpaceLocationFilter().split(",")[1];
+	String sggNm = si.getSpaceLocationFilter().split(",")[2];
+	String emdNm = si.getSpaceLocationFilter().split(",")[3];
 %>
 <!DOCTYPE html>
 <html>
@@ -119,7 +131,7 @@
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
 	<%
-		if(userStatus == 0 || loginUser==null){
+		if(userStatus == 0 || loginUser == null || loginUser.getMemberNo() != si.getHostNo()){
 			request.setAttribute("msg", "잘못된 경로입니다.");
 			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request,response);
 		}
@@ -162,21 +174,21 @@
 								<tr>
 									<td width="30%">공간 사이즈*</td>
 									<td width="60%">
-										<input type="text" name="space-size" size="30%" onclick="this.select();">
+										<input type="text" name="space-size" id="space-size" size="30%" onclick="this.select();">
 										<p></p>
 									</td>
 									<td style="vertical-align: top;"><p style="margin-top: 6px;">m<sup>2</sup></p></td>
 								</tr>
 								<tr>
 									<td>공간 재고*</td>
-									<td><input type="text" name="space-room-count" size="30%" onclick="this.select();">
+									<td><input type="text" name="space-room-count" id="space-room-count" size="30%" onclick="this.select();">
 									<p class="detail-descrip">서비스 가능한 방의 갯수를 의미합니다.</p>
 									</td>
 									<td style="vertical-align: top;"><p style="margin-top: 6px;">실</p></td>						
 								</tr>
 								<tr>
 									<td>수용인원*</td>
-									<td><input type="text" name="space-contain-count" size="30%" onclick="this.select();">
+									<td><input type="text" name="space-contain-count" id="space-contain-count" size="30%" onclick="this.select();">
 									<p class="detail-descrip">제공된 공간을 기준으로 합니다.</p></td>
 									<td style="vertical-align: top;"><p style="margin-top: 6px;">명</p></td>	
 								</tr>
@@ -229,7 +241,7 @@
 				<tr>
 					<td></td>
 					<td>공간명 *</td>
-					<td><input type="text" maxlength="20" name="space-name" id="space-name"></td>
+					<td><input type="text" maxlength="20" name="space-name" id="space-name" value="<%=si.getSpaceName()%>"></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -239,7 +251,7 @@
 				<tr>
 					<td></td>
 					<td>공간 한줄 소개 *</td>
-					<td><input type="text" maxlength="20" name="space-short-intro" id="space-short-intro"></td>
+					<td><input type="text" maxlength="20" name="space-short-intro" id="space-short-intro" value="<%=si.getSpaceShortIntro()%>"></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -252,7 +264,7 @@
 					<td></td>
 					<td>공간 소개 *</td>
 					<td>
-						<textarea rows="8" maxlength="400" name="space-intro" id="space-intro"></textarea>
+						<textarea rows="8" maxlength="400" name="space-intro" id="space-intro"><%=si.getSpaceIntro()%></textarea>
 					</td>
 					<td></td>
 				</tr>
@@ -427,49 +439,54 @@
 	</footer>
 	<script>	
 	
-		// 좌석 수 = 자유석 + 지정석
-		function countSeat(){
-			/* console.log("되는건맞니?") */
-			var unfixSeat = Number($("#unfix-seat").val());
-			var fixSeat = Number($("#fix-seat").val());
-			var totalSeat = unfixSeat + fixSeat;
-			
-			$("#total-seat").val(totalSeat);
-			$("#max-reserv").val(totalSeat);
-		};
-		
-		var count = 0;
-		$(".thumb").on("change", function(){
-			for(var i = 1; i <= 6; i++){
-				if($("#thumbnailImg" + i).val() != "<%=request.getContextPath()%>/images/icon/addImg.png"){
-					count ++;
-					console.log(count);
-					break;
-				}
-			}
-			if(count >= 4){
-				$("#thumbnail-img-not").hide();
-			}
-		});
-		
-		
 		$(function(){
 			initSet();
 			initEvent();
-			for(var i = 1; i <= 6; i++){
-				if($("#thumbnailImg" + i).val() != "<%=request.getContextPath()%>/images/icon/addImg.png"){
-					count ++;
-					console.log(count);
-					break;
-				}
-			}
-			if(count >= 4){
-				$("#thumbnail-img-not").hide();
-			}
 		});
 		
 		function initSet(){
 			$(".warning").show();
+			
+			for(var i = 1; i <= 6; i++){
+				if($("#thumbnailImg" + i).val() != "<%=request.getContextPath()%>/images/icon/addImg.png"){
+					count ++;
+					console.log(count);
+					break;
+				}
+			}
+			if(count >= 4){
+				$("#thumbnail-img-not").hide();
+			}
+			
+			if(<%=si.getSpaceKind()%> == 1){
+				$("#office-check").is(":visible");
+				$("#kinds").val("office");
+				$("#cowork").css("background", "white");
+				$("#office").css("background", "#3DB6AE");
+				$("#office-check").show();
+				$("#space-descrip").show();
+				$("#space-descrip").css({"width":"auto", "height":"50px", "margin":"10px"}).html("개인 또는 한 팀이 프라이빗하게 이용할 수 있는 입주형 사무공간.");
+				$("#space-size").val(<%=si.getSpaceSize()%>);
+				$("#space-room-count").val(<%=si.getSpaceRoomCount()%>);
+				$("#space-contain-count").val(<%=si.getSpaceContainCount()%>);
+			} else if(<%=si.getSpaceKind()%> == 2){
+				$("#cowork-check").is(":visible");
+				$("#kinds").val("cowork");
+				$("#office").css("background", "white");
+				$("#cowork").css("background", "#3DB6AE");
+				$("#cowork-check").show();
+				$("#space-descrip").show();
+				$("#space-descrip").css({"width":"auto", "height":"50px", "margin":"10px"}).html("개방된 공간에 개인 또는 여러 팀이 함께 이용할 수 있는 형태의 사무공간"+ '<br><br>' + "공간 운영방식에 따라 자유석또는 지정석으로 이용 가능");
+				$("#unfix-seat").val(<%=si.getUnfixSeat()%>);
+				$("#fix-seat").val(<%=si.getFixSeat()%>);
+				$("#max-reserv").val(<%=si.getMaxReserv()%>);
+			}
+			
+			for(var i = 0; i < <%=si.getConv().length%>; i ++){
+				if($("input[name=conv]").val() == <%=si.getConv()%>[i]){
+					$(this).attr("checked", "checked");
+				}
+			}
 		}
 	
 		function initEvent(){
@@ -567,6 +584,32 @@
 			} else {
 				//해당화면에 모든 checkbox들의 체크를해제시킨다.
 				$(".rule").prop("checked", false);
+			}
+		});
+		
+
+		// 좌석 수 = 자유석 + 지정석
+		function countSeat(){
+			/* console.log("되는건맞니?") */
+			var unfixSeat = Number($("#unfix-seat").val());
+			var fixSeat = Number($("#fix-seat").val());
+			var totalSeat = unfixSeat + fixSeat;
+			
+			$("#total-seat").val(totalSeat);
+			$("#max-reserv").val(totalSeat);
+		};
+		
+		var count = 0;
+		$(".thumb").on("change", function(){
+			for(var i = 1; i <= 6; i++){
+				if($("#thumbnailImg" + i).val() != "<%=request.getContextPath()%>/images/icon/addImg.png"){
+					count ++;
+					console.log(count);
+					break;
+				}
+			}
+			if(count >= 4){
+				$("#thumbnail-img-not").hide();
 			}
 		});
 		

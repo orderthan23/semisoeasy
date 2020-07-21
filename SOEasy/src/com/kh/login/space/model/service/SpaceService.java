@@ -206,7 +206,7 @@ public class SpaceService {
 		hmap.put("qnaList", qnaList);
 		//나중에 추가할 것 -- 반드시!
 		list.add(hmap);
-		System.out.println(hmap);
+		System.out.println("spaceServiceHmap : "+hmap);
 		
 		if(si != null && imgList != null && reviewList != null) {
 			

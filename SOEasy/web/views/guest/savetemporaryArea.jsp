@@ -108,7 +108,7 @@
 		%>
 		
 		<tr id = tableResource>
-			<td><p>"<%=siList.get(i).getSpaceName()%>"</p> <input type="hidden" id="space<%=i%>" value=<%= siList.get(i).getSpaceNo() %>></td>
+			<td class="spaceNameZone"><p>"<%=siList.get(i).getSpaceName()%>"</p> <input type="hidden" class="hiddenSpaceNo" value=<%= siList.get(i).getSpaceNo() %>></td>
 			
 			<% 	if(siList.get(i).getSpaceKind() == 1){ %>
 			<td><p>독립 오피스</p> </td>
@@ -118,7 +118,7 @@
 			
 			<% if(siList.get(i).getsStatus().equals("Y")) { %>
 			<td><button class=inspectionStatus style="color:green; borderColor:green;">운영 중</button></td>
-			<td><button class="updateSpaceInfo" onclick="updateSpaceInfo(<%=siList.get(i).getSpaceNo()%>);">공간 정보 수정</button></td>
+			<td><button class="updateSpaceInfo">공간 정보 수정</button></td>
 			<td><button class="deleteRequset" onclick="deleteRequest(<%=siList.get(i).getSpaceNo()%>);">공간 정보 삭제 요청</button></td>
 			<% } else if(siList.get(i).getsStatus().equals("N")) { %>
 			<td><button class=inspectionStatus style="color:gray; borderColor:gray;">작성 중</button></td>
@@ -143,7 +143,11 @@
 
 <footer><%@ include file="/views/common/footer.jsp" %></footer>
 <script>
-	
+	$(".updateSpaceInfo").click(function(){
+		var spaceNo = $(this).parent().siblings(".spaceNameZone").find(".hiddenSpaceNo").val();
+		/* console.log(spaceNo); */
+		location.href = "<%=request.getContextPath()%>/intoUpdateSpace?sNo="+spaceNo;
+	});
 	
 	$(function(){
 		<% 
@@ -156,13 +160,6 @@
 		$("#undone").html(<%=cnt%>);
 	});
 	
-	function updateSpaceInfo(spaceNo){
-		location.href="<%=request.getContextPath()%>/updateSpaceStep1?spaceNo=" + spaceNo;
-	};
-	function deleteRequset(spaceNo){};
-	function deleteSpace(spaceNo){};
-	function cancleDeleteRequset(spaceNo){};
-
 </script>
 </body>
 </html>

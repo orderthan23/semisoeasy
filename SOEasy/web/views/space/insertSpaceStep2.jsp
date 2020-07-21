@@ -686,7 +686,7 @@
 				<br><br><br><br><br><br>
 				<button type="button" onclick="callBack();">이전으로</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit">다음으로</button>
+				<button type="button" onclick="gonext();">다음으로</button>
 				<br><br><br><br><br><br>
 			</div>
 		</form>
@@ -695,11 +695,15 @@
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
 	<script>
+	
+		var checkUnload = true;
+	    $(window).on("beforeunload", function(){
+	        if(checkUnload) <%session.removeAttribute("spaceInfo");%> return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+	    });
 		
 		$(function(){
 			$(".warning").show();
 		});
-		
 		//가격 정책 입력시 글자 수 표시
 		/* $("#policy-intro").on("keyup", function(){
 			var si = $("#policy-intro").val();
@@ -755,6 +759,11 @@
 		
 		$("#mon24hr").is(":checked", function(){
 			$("#mon-start-time option[value=00]").prop("selected", true);
+		});
+		
+		$("#gonext").click(function(){
+			checkUnload = false;
+			$("form").submit();
 		});
 	</script>
 </body>
