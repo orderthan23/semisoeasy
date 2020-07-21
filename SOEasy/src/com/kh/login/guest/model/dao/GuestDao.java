@@ -67,6 +67,8 @@ public class GuestDao {
 				rh.setPayStatus(rset.getInt("PAYSTATUS"));
 				rh.setPayMethod(rset.getString("PAYMETHOD"));
 				rh.setSpaceType(rset.getInt("SPACE_KIND"));
+				rh.setGuestEmail(rset.getString("M_EMAIL"));
+				rh.setGuestName(rset.getString("M_NAME"));
 			
 				reserveList.add(rh);
 				
