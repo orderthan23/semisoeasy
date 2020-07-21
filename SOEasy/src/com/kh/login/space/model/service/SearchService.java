@@ -14,10 +14,10 @@ import static com.kh.login.common.JDBCTemplate.*;
 public class SearchService {
 
 
-	public int getListCount() {
+	public int getListCount(String search) {
 		Connection con = getConnection();
 		
-		int listCount = new SearchDao().getListCount(con);
+		int listCount = new SearchDao().getListCount(con, search);
 		
 		close(con);
 		
@@ -45,6 +45,18 @@ public class SearchService {
 		close(con);
 		
 		return list;
+	}
+
+
+	public int getFilterListCount(SearchFilter sf) {
+		Connection con = getConnection();
+		
+		int listCount = new SearchDao().getFilterListCount(con, sf);
+		
+		close(con);
+		
+		
+		return listCount;
 	}
 	
 }

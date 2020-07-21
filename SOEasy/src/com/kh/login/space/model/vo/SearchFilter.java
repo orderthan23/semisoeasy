@@ -3,8 +3,8 @@ package com.kh.login.space.model.vo;
 public class SearchFilter implements java.io.Serializable{
 	private String search;					//검색어
 //	공간유형
-	private int spaceKind;					//공간종류
-	private int didHostOk;					//호스트 승인 여부 	
+	private String spaceKind;				//공간종류
+	private String didHostOk;				//호스트 승인 여부 	
 //	지역유형
 	private String spaceLocationFilter;		//지역
 //	이용유형
@@ -19,7 +19,7 @@ public class SearchFilter implements java.io.Serializable{
 	
 	public SearchFilter() {}
 
-	public SearchFilter(String search, int spaceKind, int didHostOk, String spaceLocationFilter, String term,
+	public SearchFilter(String search, String spaceKind, String didHostOk, String spaceLocationFilter, String term,
 			int lowPrice, int highPrice, String lowPriceSort, String highPriceSort, int reviewCount) {
 		super();
 		this.search = search;
@@ -38,11 +38,11 @@ public class SearchFilter implements java.io.Serializable{
 		return search;
 	}
 
-	public int getSpaceKind() {
+	public String getSpaceKind() {
 		return spaceKind;
 	}
 
-	public int getDidHostOk() {
+	public String getDidHostOk() {
 		return didHostOk;
 	}
 
@@ -78,11 +78,11 @@ public class SearchFilter implements java.io.Serializable{
 		this.search = search;
 	}
 
-	public void setSpaceKind(int spaceKind) {
+	public void setSpaceKind(String spaceKind) {
 		this.spaceKind = spaceKind;
 	}
 
-	public void setDidHostOk(int didHostOk) {
+	public void setDidHostOk(String didHostOk) {
 		this.didHostOk = didHostOk;
 	}
 
@@ -121,6 +121,8 @@ public class SearchFilter implements java.io.Serializable{
 				+ ", highPrice=" + highPrice + ", lowPriceSort=" + lowPriceSort + ", highPriceSort=" + highPriceSort
 				+ ", reviewCount=" + reviewCount + "]";
 	}
+
+	
 
 	
 }
