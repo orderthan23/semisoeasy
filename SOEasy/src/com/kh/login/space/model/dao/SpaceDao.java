@@ -712,31 +712,34 @@ public class SpaceDao {
 				returnSi.setCalAcctHolder(rset.getString("CAL_ACCT_HOLDER"));
 				returnSi.setCalAcctNo(rset.getString("CAL_ACCT_NO"));
 				returnSi.setRepresentName(rset.getString("BSNS_REPRESENT_NAME"));
-				returnSi.setSpaceNo(si.getSpaceNo());
-				returnSi.setSpaceKind(si.getSpaceKind());
-				returnSi.setHostNo(si.getHostNo());
-				returnSi.setSpaceName(si.getSpaceName());
-				returnSi.setSpaceAddress(si.getSpaceAddress());
-				returnSi.setSpaceIntro(si.getSpaceIntro());
-				returnSi.setSpaceShortIntro(si.getSpaceShortIntro());
-				returnSi.setDidDayReserv(si.getDidDayReserv());
-				returnSi.setDayPay(si.getDayPay());
-				returnSi.setDidMonthReserv(si.getDidMonthReserv());
-				returnSi.setMonthPay(si.getMonthPay());
-				returnSi.setSpaceLocationFilter(si.getSpaceLocationFilter());
-				returnSi.setOfficeNo(si.getOfficeNo());
-				returnSi.setSpaceSize(si.getSpaceSize());
-				returnSi.setSpaceRoomCount(si.getSpaceRoomCount());
-				returnSi.setSpaceContainCount(si.getSpaceContainCount());
-				returnSi.setTotalSeat(si.getTotalSeat());
-				returnSi.setMaxReserv(si.getMaxReserv());
-				returnSi.setFixSeat(si.getFixSeat());
-				returnSi.setUnfixSeat(si.getUnfixSeat());
-				returnSi.setStartTimes(si.getStartTimes());
-				returnSi.setEndTimes(si.getEndTimes());
-				returnSi.setOpenChecks(si.getOpenChecks());
-				returnSi.setSpaceRefundPolicy(si.getSpaceRefundPolicy());
 			}
+			returnSi.setSpaceNo(si.getSpaceNo());
+			returnSi.setSpaceKind(si.getSpaceKind());
+			returnSi.setHostNo(si.getHostNo());
+			returnSi.setSpaceName(si.getSpaceName());
+			returnSi.setSpaceAddress(si.getSpaceAddress());
+			returnSi.setSpaceIntro(si.getSpaceIntro());
+			returnSi.setSpaceShortIntro(si.getSpaceShortIntro());
+			returnSi.setDidDayReserv(si.getDidDayReserv());
+			returnSi.setDayPay(si.getDayPay());
+			returnSi.setDidMonthReserv(si.getDidMonthReserv());
+			returnSi.setMonthPay(si.getMonthPay());
+			returnSi.setSpaceLocationFilter(si.getSpaceLocationFilter());
+			returnSi.setOfficeNo(si.getOfficeNo());
+			returnSi.setSpaceSize(si.getSpaceSize());
+			returnSi.setSpaceRoomCount(si.getSpaceRoomCount());
+			returnSi.setSpaceContainCount(si.getSpaceContainCount());
+			returnSi.setTotalSeat(si.getTotalSeat());
+			returnSi.setMaxReserv(si.getMaxReserv());
+			returnSi.setFixSeat(si.getFixSeat());
+			returnSi.setUnfixSeat(si.getUnfixSeat());
+			returnSi.setStartTimes(si.getStartTimes());
+			returnSi.setEndTimes(si.getEndTimes());
+			returnSi.setOpenChecks(si.getOpenChecks());
+			returnSi.setSpaceRefundPolicy(si.getSpaceRefundPolicy());
+			
+
+			System.out.println("selectHostSi : "+returnSi);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -856,6 +859,7 @@ public class SpaceDao {
 				q.setqMemNo(rset.getInt("Q_MEM_NO"));
 				q.setqMemNick(rset.getString("Q_MEM_NICK"));
 				String rEnrollDate = sdf.format(rset.getTimestamp("R_ENROLL_DATE"));
+				q.setrEnrollDate(rEnrollDate);
 				q.setrMemNo(rset.getInt("R_MEM_NO"));
 				q.setrMemNick(rset.getString("R_MEM_NICK"));
 				q.setqContent(rset.getString("Q_CONTENT"));
@@ -865,7 +869,6 @@ public class SpaceDao {
 				
 				list.add(q);
 			}
-			System.out.println(list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

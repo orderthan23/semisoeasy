@@ -115,11 +115,9 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
-	<%
-		if(userStatus == 0 || loginUser==null){
-			request.setAttribute("msg", "잘못된 경로입니다.");
-			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request,response);
-		}
+	<%	if(userStatus == 0){
+			response.sendRedirect(request.getContextPath() + "/views/member/loginForm.jsp");
+		}else{
 	%>
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
@@ -419,11 +417,18 @@
 			</div>
 		</form>
 	</section>
+	<%} %>
 	<footer>
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
 	<script>
 		
+		var checkUnload = true;
+	    $(window).on("beforeunload", function(){
+	        if(checkUnload) return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+	    });
+
+
 		// 좌석 수 = 자유석 + 지정석
 		function countSeat(){
 			/* console.log("되는건맞니?") */
@@ -669,9 +674,10 @@
 		});
 		
 		$("#gonext").click(function(){
-			if($(".warning").is("visible") == true || $("#space-intro").val() == "" || $("#roadFullAddr").val() == "" || $("#rule4").is(":checked") == false){
+			if($(".warning").is("visible") == true || $("#space-short-intro").val() == "" || $("#space-intro").val() == "" || $("#roadFullAddr").val() == "" || $("#rule4").is(":checked") == false){
 				alert("필수사항을 모두 입력하세요");
 			} else {
+				checkUnload = false;
 				$("form").submit();
 			}
 		});
