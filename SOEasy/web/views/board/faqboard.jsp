@@ -107,9 +107,9 @@
 			<td align="center" style=>
 				<select class="category">
 					<option class="category" style="text-align:center">선택</option>
-					<option class="category">시스템관련</option>
-					<option class="category">계정관련</option>
-					<option class="category">결제관련</option>
+					<option class="category" value=1>시스템관련</option>
+					<option class="category" value=2>계정관련</option>
+					<option class="category" value=3>결제관련</option>
 					<option class="category" value=4>이용관련</option>
 					<option class="category" value=5>자주묻는게시판</option>
 				</select>
@@ -168,7 +168,6 @@
 
 	<script>
 		 var userStatus = <%=userStatus%>;
-		 console.log(category);
 		$(function(){
 			switch(userStatus){
 			case 1: break;

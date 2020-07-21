@@ -43,7 +43,7 @@ public class SelectNoticeListServlet extends HttpServlet {
 
 	      //전체 목록 갯수를 조회 -> 총 페이지 수를 계산하려고 필요하다
 	      int listCount = new BoardService().getListCount();
-	      System.out.println("list Count : " + listCount);
+	      System.out.println("공지사항 게시글 수 : " + listCount);
 	      //총 페이지 수 계산
 	      //예를 들면 목록 갯수가 123개이면,
 	      //총 필요한 페이지수는 13개 임
