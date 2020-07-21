@@ -137,7 +137,6 @@
 					<th>작성일자</th>
 					<th></th>
 				</tr>
-				
 				<% for(Board b : list) { %>
 				<tr>
 					<td class="info" style="text-align: center;"><%= b.getNoticeNo() %></td>
@@ -145,7 +144,9 @@
 					<td class="info" style="text-align: center;"><%= b.getnTitle() %></td>
 					<td class="info" style="text-align: center;"><%= b.getmNick() %></td>
 					<td class="info" style="text-align: center;"><%= b.getnDate() %></td>
-					<td class="info" style="text-align: center;"></td>
+				<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
+					<td class="info" style="text-align: center; color:green"><%=b.getnStatus() %></td>
+						<% } %>
 				</tr>
 				<% } %>
 			</table>
@@ -183,6 +184,7 @@
 	</section>
 	<%@ include file="../common/footer.jsp"%>
 	<script>
+	
 		 var userStatus = <%=userStatus%>;
 		 console.log(category);
 		$(function(){

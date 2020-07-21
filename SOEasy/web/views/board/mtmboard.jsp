@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" %>
+	pageEncoding="UTF-8" import="java.util.*, com.kh.login.board.model.vo.*,
+	com.kh.login.host.manageReserve.model.vo.*"%>
 
 <!DOCTYPE html>
 <html>
