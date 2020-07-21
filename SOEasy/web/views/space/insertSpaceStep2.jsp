@@ -698,8 +698,13 @@
 	
 		var checkUnload = true;
 	    $(window).on("beforeunload", function(){
-	        if(checkUnload) <%session.removeAttribute("spaceInfo");%> return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+	        if(checkUnload) return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다."
 	    });
+
+		$("#gonext").click(function(){
+			checkUnload = false;
+			$("form").submit();
+		});
 		
 		$(function(){
 			$(".warning").show();
@@ -761,10 +766,6 @@
 			$("#mon-start-time option[value=00]").prop("selected", true);
 		});
 		
-		$("#gonext").click(function(){
-			checkUnload = false;
-			$("form").submit();
-		});
 	</script>
 </body>
 </html>

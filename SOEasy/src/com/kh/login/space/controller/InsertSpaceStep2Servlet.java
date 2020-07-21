@@ -58,8 +58,6 @@ public class InsertSpaceStep2Servlet extends HttpServlet {
 			didDayReserv = "Y";
 		}
 		
-		String spacePayPolicy = request.getParameter("policy-intro");
-		
 		//공간 운영시간
 		//월
 		String monOpenCheck = request.getParameter("mon-open-check").toUpperCase();
