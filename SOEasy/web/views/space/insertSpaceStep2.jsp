@@ -686,7 +686,7 @@
 				<br><br><br><br><br><br>
 				<button type="button" onclick="callBack();">이전으로</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" onclick="gonext();">다음으로</button>
+				<button type="button" id="gonext">다음으로</button>
 				<br><br><br><br><br><br>
 			</div>
 		</form>
