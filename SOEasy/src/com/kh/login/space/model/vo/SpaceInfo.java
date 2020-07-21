@@ -34,7 +34,7 @@ public class SpaceInfo implements java.io.Serializable {
 	private String[] openChecks;			//공간 휴무 여부
 	private int[] startTimes;				//공간 운영 시작 시간
 	private int[] endTimes;					//공간 운영 종료 시간
-	private double[] spaceRefundPolicy;		//일자별 환불율 8일부터 당일까지
+	private double[] spaceRefundPolicy;		//일자별 환불율 [0]->당일, ..., [8]->이용7일전
 	//공간등록 2 종료----
 	//공간등록 3---
 	private String bsnsName;				//상호명

@@ -17,13 +17,13 @@
 <html>
 <head>
     <style>
-        .visual{
+        .visual {
             position: relative;
             width: 100%;
             margin-left: auto;
             margin-right: auto;
         }
-        .visual button{
+        .visual button {
             position : absolute;
             z-index: 10;
             top: 50%;
@@ -34,7 +34,7 @@
             border-radius: 100%;
             background: rgba(0,0,0,.5);
         }
-        .visual button:before{
+        .visual button:before {
             font-family: 'xeicon';
             color: #fff;
             font-size : 45px;
@@ -44,18 +44,18 @@
             font-size : 0;
             color : transparent;
         }
-        .visual button.slick-prev::before{
+        .visual button.slick-prev::before {
             content:"\e93d";
             font-family: 'xeicon';
         }
 
-        .visual button.slick-next{
+        .visual button.slick-next {
             right: 50px;
             font-size : 0;
             color : transparent;
         }
 
-        .visual button.slick-next::before{
+        .visual button.slick-next::before {
             content:"\e940";
             font-family: 'xeicon';
         }
@@ -75,7 +75,7 @@
 			font-size : 30px;
         }
         
-        .slick-list{
+        .slick-list {
         	width: 100%;
         }
         
@@ -89,6 +89,18 @@
         	color:white;
         	border-radius:5px;
         	cursor:pointer;
+        }
+        
+        #qndBtn {
+        	color:white; 
+        	background:#40a4b6; 
+        	border:0; 
+        	outline:0; 
+        	border-radius:5px; 
+        	font-size:15px; 
+        	width:60px; 
+        	height:30px; 
+        	float:right;
         }
 
     </style>
@@ -123,14 +135,16 @@
 		</table>
 		<table id="priceTb">
 			<tr>
-				<td id="price" style="color:#c4c4c4; font-size:25px; width:200px;">
+				<td id="price" style="color:#c4c4c4; font-size:25px;">
 					<% if (si.getDayPay() == 0) { %>
 						월 / <%= si.getMonthPay() %>원
 					<% } else if (si.getMonthPay() == 0) { %>
 						일 / <%= si.getDayPay() %>원
+					<% } else if (si.getDayPay() != 0 && si.getMonthPay() != 0) { %>
+						일 <%= si.getDayPay() %>원 / 월 <%= si.getMonthPay() %>원
 					<% } %>
 				</td>
-				<td><button id="reserBtn" onclick="test1();">예  약</button></td>
+				<td width="100px;"><button id="reserBtn" onclick="test1();" style="float:right;">예  약</button></td>
 			</tr>
 		</table>
 		<table id="iconTb">
@@ -142,7 +156,7 @@
 		<br>
 		  <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 		<div class="visual">
-			<div 
+<%-- 			<div 
 				style="background-image: url(<%=request.getContextPath() %>/images/area/area22-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
 			</div>
 			<div 
@@ -150,7 +164,12 @@
 			</div>
 			<div 
 				style="background-image: url(<%=request.getContextPath() %>/images/area/area23-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
-			</div>
+			</div> --%>
+			
+			<% for (Image i : imgList) { %>
+				<div style="background-image: url(<%= request.getContextPath() %>파일패쓰랑 체인지네임 들고오기); display: block; width: 500px; height: 700px; background-repeat : no-repeat; background-size: cover;"></div>
+			<%} %>
+			
 		</div>
 		
 		<br><br>
@@ -388,17 +407,12 @@
         </table>
 		
 		<!-- qKind 1 -->
-		<div class="card my-4" style="width:820px; height:230px;">
-          <h5 class="card-header">큐앤에이 작성</h5>
-          <div class="card-body">
-            <form>
-              <div class="form-group">
-                <textarea class="form-control" rows="3" style="resize:none;"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary" style="color:white; background:#40a4b6; border:0; outline:0;">등록</button>
-            </form>
+		<div style="width:580px;">
+          <h3 style="color:#40a4b6;">큐앤에이 작성</h3>
+          <div>
+             <textarea rows="4" cols="80" style="resize:none;"></textarea>
+	         <button type="submit" id="qndBtn">등록</button>
           </div>
-		
 		</div>
 		
 		<br><br>
