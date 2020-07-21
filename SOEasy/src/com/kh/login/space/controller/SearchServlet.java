@@ -53,7 +53,7 @@ public class SearchServlet extends HttpServlet {
 		
 		limit = 12;
 		
-		int listCount = new SearchService().getListCount();
+		int listCount = new SearchService().getListCount(search);
 		
 		maxPage = (int) ((double) listCount / limit + 0.9);
 		
@@ -66,6 +66,7 @@ public class SearchServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
+		System.out.println("search servlet 이 자꾸 왜 뜨냐고!!!!");
 		System.out.println("listCount : " + listCount);
 		System.out.println("currentPage : " + currentPage);
 		System.out.println("limit : " + limit);
@@ -74,7 +75,6 @@ public class SearchServlet extends HttpServlet {
 		System.out.println("endPage : " + endPage);
 
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage, 0);
-		
 		
 		ArrayList<HashMap<String, Object>> list = new SearchService().selectList(pi, search);
 		

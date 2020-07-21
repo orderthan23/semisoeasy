@@ -32,18 +32,23 @@ public class SearchDao {
 	}
 	
 
-	public int getListCount(Connection con) {
-		Statement stmt = null;
+	public int getListCount(Connection con, String search) {
+		PreparedStatement pstmt = null;
 		int listCount = 0;
 		ResultSet rset = null;
 		
-		String query = prop.getProperty("listCount");
+		String query = prop.getProperty("searchListCount");
+		System.out.println("search dao list count : " + search);
 		
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, search);
+			pstmt.setString(2, search);
+			pstmt.setString(3, search);
+			pstmt.setString(4, search);
 			
 			
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				listCount = rset.getInt(1);
@@ -52,7 +57,7 @@ public class SearchDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(stmt);
+			close(pstmt);
 			close(rset);
 		}
 		
@@ -127,11 +132,61 @@ public class SearchDao {
 	}
 
 
+	public int getFilterListCount(Connection con, SearchFilter sf) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("searchFilterListCount");
+		System.out.println("search dao list count : " + sf.getSearch());
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			System.out.println("filter dao 값 들어오나? ========= ");
+			System.out.println(sf.getSearch());
+			System.out.println(sf.getSpaceKind());
+			System.out.println(sf.getSpaceLocationFilter());
+			System.out.println(sf.getTerm());
+			System.out.println(sf.getLowPrice());
+			System.out.println(sf.getHighPrice());
+			
+			
+			pstmt.setString(1, sf.getSearch());
+			pstmt.setString(2, sf.getSpaceKind());
+			pstmt.setString(3, sf.getSpaceLocationFilter());
+			pstmt.setString(4, sf.getTerm());
+			pstmt.setInt(5, sf.getLowPrice());
+			pstmt.setInt(6, sf.getHighPrice());
+			pstmt.setInt(7, sf.getLowPrice());
+			pstmt.setInt(8, sf.getHighPrice());
+			
+			
+			rset = pstmt.executeQuery();
+			
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+				System.out.println("search filter list count : " + listCount);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		
+		return listCount;
+	}
+
 	public ArrayList<HashMap<String, Object>> filterSelectList(Connection con, PageInfo pi, SearchFilter sf) {
 		PreparedStatement pstmt = null;
 		ArrayList<HashMap<String, Object>> list = null;
 		HashMap<String, Object> hmap = null;
 		ResultSet rset = null;
+		
 		
 		
 		String query = prop.getProperty("filterSelectSpace");
@@ -142,8 +197,17 @@ public class SearchDao {
 			int startRow = (pi.getCurrentPage() -1) * pi.getLimit() + 1;
 			int endRow = startRow + pi.getLimit() -1;
 			
+			System.out.println("filter dao 값 들어오나? ========= ");
+			System.out.println(sf.getSearch());
+			System.out.println(sf.getSpaceKind());
+			System.out.println(sf.getSpaceLocationFilter());
+			System.out.println(sf.getTerm());
+			System.out.println(sf.getLowPrice());
+			System.out.println(sf.getHighPrice());
+			
+			
 			pstmt.setString(1, sf.getSearch());
-			pstmt.setInt(2, sf.getSpaceKind());
+			pstmt.setString(2, sf.getSpaceKind());
 			pstmt.setString(3, sf.getSpaceLocationFilter());
 			pstmt.setString(4, sf.getTerm());
 			pstmt.setInt(5, sf.getLowPrice());

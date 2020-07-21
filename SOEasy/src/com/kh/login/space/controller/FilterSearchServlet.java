@@ -34,17 +34,17 @@ public class FilterSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String search = request.getParameter("search");
-		int spaceKind= 0;		//int
-		int didHostOk = 0;		//int
+		String search = request.getParameter("filterSearchKeyword");
+		String spaceKind= request.getParameter("spaceKind");		//int
+		String didHostOk = null;		//int
 		String spaceLocationFilter= request.getParameter("location");
-		int term = 0;
+		String term = request.getParameter("term");
 		String sort = request.getParameter("sort");
-		int rowPrice = 0;			//int
-		int highPrice = 0;		//int
+		int lowPrice = 0;			//int
+		int highPrice = 0;			//int
 		
-		String rowPriceSort = "S.SPACE_MONTH_PAY DESC, S.SPACE_DAY_PAY DESC"; //이렇게 말고 month_pay랑 day_pay 조인해서 한꺼번에 가격순위 매길 수 없나?
-		String highPriceSort = "S.SPACE_MONTH_PAY DESC, S.SPACE_DAY_PAY DESC"; //이렇게 말고 month_pay랑 day_pay 조인해서 한꺼번에 가격순위 매길 수 없나?
+		String lowPriceSort = "S.SPACE_MONTH_PAY DESC, S.SPACE_DAY_PAY DESC"; //이렇게 말고 month_pay랑 day_pay 조인해서 한꺼번에 가격순위 매길 수 없나?
+		String highPriceSort = "S.SPACE_MONTH_PAY DESC, S.SPACE_DAY_PAY ASC"; //이렇게 말고 month_pay랑 day_pay 조인해서 한꺼번에 가격순위 매길 수 없나?
 		int reviewCount = 0;
 		String reviewQuery = "S.SPACE_MONTH_PAY DESC, S.SPACE_DAY_PAY DESC"; //이렇게 말고 month_pay랑 day_pay 조인해서 한꺼번에 가격순위 매길 수 없나?
 		
@@ -61,8 +61,7 @@ public class FilterSearchServlet extends HttpServlet {
 //		int cut = spaceLoactionFilter.indexOf(",");
 //		realFilter = spaceLocationFilter.substring(int cut);
 		
-		System.out.println("search : " + search);
-		System.out.println("spaceKind : " + spaceKind);
+		System.out.println("searchKeyword : " + search);
 		System.out.println("location : " + spaceLocationFilter);
 		System.out.println("sort : " + sort);
 		System.out.println("term : " + term);
@@ -72,34 +71,34 @@ public class FilterSearchServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		if(request.getParameter("spaceKind") != null) {
-			spaceKind= Integer.parseInt(request.getParameter("spaceKind"));
-		}
-		
 		if(request.getParameter("didHostOk") != null) {
-			didHostOk = Integer.parseInt(request.getParameter("didHostOk"));
+			didHostOk = request.getParameter("didHostOk");
 		}
 		
-		if(request.getParameter("rowPrice") != null) {
-			rowPrice = Integer.parseInt(request.getParameter("rowPrice"));
+		if(request.getParameter("lowPrice") != null) {
+			lowPrice = Integer.parseInt(request.getParameter("lowPrice"));
 		}
 		
 		if(request.getParameter("highPrice") != null) {
 			highPrice = Integer.parseInt(request.getParameter("highPrice"));
 		}
 		
-		if(request.getParameter("term") != null) {
-			term = Integer.parseInt(request.getParameter("term"));
-		}
-		
 		if(request.getParameter("reviewCount") != null) {
 			reviewCount = Integer.parseInt(request.getParameter("reviewCount"));
 		}
 		
+		System.out.println("currentPage : " + currentPage);
+		System.out.println("spaceKind : " + spaceKind);
+		System.out.println("didHostOk : " + didHostOk);
+		System.out.println("lowPrice : " + lowPrice);
+		System.out.println("highPrice : " + highPrice);
+		System.out.println("reviewCount : " + reviewCount);
+		
+		SearchFilter sf = new SearchFilter(search, spaceKind, didHostOk, spaceLocationFilter, term, lowPrice, highPrice, lowPriceSort, highPriceSort, reviewCount);
 		
 		limit = 12;
 		
-		int listCount = new SearchService().getListCount();
+		int listCount = new SearchService().getFilterListCount(sf);
 		
 		maxPage = (int) ((double) listCount / limit + 0.9);
 		
@@ -114,7 +113,7 @@ public class FilterSearchServlet extends HttpServlet {
 
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage, 0);
 		
-		SearchFilter sf = new SearchFilter(search, spaceKind, didHostOk, spaceLocationFilter, term, rowPrice, highPrice, rowPriceSort, highPriceSort, reviewCount);
+		
 		
 		ArrayList<HashMap<String, Object>> list = new SearchService().filterSelectList(pi, search, sf);
 		

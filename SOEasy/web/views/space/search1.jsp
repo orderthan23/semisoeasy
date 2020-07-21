@@ -165,52 +165,61 @@ section {
 		<div class="filter-box">
 		<div class="filter-bg">
 			<br>
-			<form hidden="">
+			<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+			<form action="/login/select.fi" method="get" id="filterForm">
 			<table align="center" class="filter">
 				<tr>
 					<td rowspan="2">필터</td>
 					<td><select class="spaceKind" name="spaceKind">
-							<option>==공간유형==</option>
+							<option value=null>==공간유형==</option>
 							<option value="1">독립오피스</option>
 							<option value="2">코워킹스페이스</option>
 					</select>
 					 바로예약 여부 <input type="checkBox" name="didHostOk" value="3"> <!-- DID_HOST_OK 3번 바로예약 -->
 					</td>
 					<td><select class="location" name="location">
-							<option value="전체보기">==지역유형==</option>
+							<option value=null>==지역유형==</option>
 							<option value="서울">서울</option>
 							<option value="경기">경기</option>
-							<option value="인천/부천">인천/부천</option>
-							<option value="춘천/강원">춘천/강원</option>
-							<option value="부산/울산/경남">부산/울산/경남</option>
-							<option value="대구/경북">대구/경북</option>
-							<option value="전주/전북">전주/전북</option>
-							<option value="광주/전남">광주/전남</option>
-							<option value="청주/충북">청주/충북</option>
-							<option value="청주/충북">청주/충북</option>
-							<option value="대전/충남">대전/충남</option>
+							<option value="인천">인천</option>
+							<option value="부천">부천</option>
+							<option value="춘천">춘천</option>
+							<option value="강원">강원</option>
+							<option value="부산">부산</option>
+							<option value="울산">울산</option>
+							<option value="경남">경남</option>
+							<option value="대구">대구</option>
+							<option value="경북">경북</option>
+							<option value="전주">전주</option>
+							<option value="전북">전북</option>
+							<option value="광주">광주</option>
+							<option value="전남">전남</option>
+							<option value="청주">청주</option>
+							<option value="충북">충북</option>
+							<option value="대전">대전</option>
+							<option value="충남">충남</option>
 							<option value="제주">제주</option>
 					</select></td>
 					<td><select class="term" name="term">
-							<option>==이용유형==</option>
+							<option value=null>==이용유형==</option>
 							<option value="DAY_PAY">1일권</option>
 							<option value="MONTH_PAY">1개월권</option>
 							<!-- <option value="week">1주일권</option> -->
 					</select></td>
-					<td rowspan="2"><button type="submit"
-							style="background: #40a4b6; color: white; border: 0px; border-radius: 10px; width: 90px; height: 40px;" class="filterSearch">검색</button></td>
+					<td rowspan="2"><input type="text" name="filterSearchKeyword" hidden="<%=search%>" value="<%=search%>"><button type="button"
+							style="background: #40a4b6; color: white; border: 0px; border-radius: 10px; width: 90px; height: 40px;" id="filterSearch" onclick="letsFilter();">검색</button></td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<div class="price-box">
 							가격
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input name="rowPrice" class="price">~<input name="highPrice" class="price">
+							<input name="rowPrice" value=0 class="price">~<input name="highPrice" value=100000000 class="price">
 						</div>
 						
 					</td>
 					<td><select class="sort" name="sort">
-							<option>==정렬==</option>
+							<option value=null>==정렬==</option>
 							<option value="recommend">추천순</option>
 							<option value="lowPrice">가격 낮은순</option>
 							<option value="highPrice">가격 높은순</option>
@@ -305,24 +314,32 @@ section {
 
 	<script>
 	
+		function letsFilter(){
+			$('#filterForm').submit();
+		}
+	
 		$(function(){
 	           $(".spaceBoard").click(function() {
 	               //var num = $(this).children().children().eq(0).val();
-	               var num = $(this).find("input").val();
+	               var num = $(this).find("").val();
 	               console.log(num);
 	               
-				location.href="<%=request.getContextPath()%>/select.se?num=" + num;
+				location.href="<%=request.getContextPath()%>/selectOne.se?num=" + num;
 			});
 		});
 		
-		$(function(){
-			$(".filterSearch").click(funciton(){
+		<%-- $(function(){
+			$("#filterSearch").click(funciton() {
 				var searchKeyword = $(this).find("#searchKeyword").val();
-			});
-		});
-
+				console.log(num);
+				
+				location.href="<%=request.getContextPath()%>/select.fi?searchKeyword=" + searchKeyword;
+				
+			})
+		}); --%>
+	
 	</script>
 	<br><br>
-	<footer><%@ include file="/views/common/footer.jsp"%></footer>
+	<footer><%@ include file="/views/common/footer.jsp" %></footer>
 </body>
 </html>
