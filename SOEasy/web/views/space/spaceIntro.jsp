@@ -123,7 +123,13 @@
 		</table>
 		<table id="priceTb">
 			<tr>
-				<td id="price" style="color:#c4c4c4; font-size:25px; width:250px;">300,000원 / 1개월 </td>
+				<td id="price" style="color:#c4c4c4; font-size:25px; width:200px;">
+					<% if (si.getDayPay() == 0) { %>
+						월 / <%= si.getMonthPay() %>원
+					<% } else if (si.getMonthPay() == 0) { %>
+						일 / <%= si.getDayPay() %>원
+					<% } %>
+				</td>
 				<td><button id="reserBtn" onclick="test1();">예  약</button></td>
 			</tr>
 		</table>
@@ -195,8 +201,13 @@
 				<td id="accperInfo" style="padding:20px;"><%= si.getSpaceContainCount() %></td>
 			</tr>
 			<tr>
+			<% if (si.getSpaceKind() == 2) { %>
 				<td id="seatType" style="padding:20px;"><b>좌석유형</b></td>
-				<td id="seatTypeInfo" style="padding:20px;">고정석</td>
+				<td id="seatTypeInfo" style="padding:20px;">총 좌석수 <%= si.getTotalSeat() %> / 자유석 <%= si.getUnfixSeat() %> / 고정석 <%= si.getFixSeat() %></td>
+			<%} else { %>
+				<td style="padding:20px;"><b>좌석유형</b></td>
+				<td style="padding:20px;"> -</td>
+			<%} %>
 			</tr>
 			<tr>
 				<td id="stock" style="padding:20px;"><b>재고</b></td>
@@ -257,39 +268,39 @@
 		<table id="usePeriodTb">
 			<tr>
 				<td id="8ago" style="padding:20px;"><b>이용 8일 전</b></td>
-				<td id="8agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[8] %></td>
+				<td id="8agoInfo" style="padding:20px;"><%= (int)si.getSpaceRefundPolicy()[8] %> %</td>
 			</tr>
 			<tr>
 				<td id="7ago" style="padding:20px;"><b>이용 7일 전</b></td>
-				<td id="7agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[7] %></td>
+				<td id="7agoInfo" style="padding:20px;"><%= (int)si.getSpaceRefundPolicy()[7] %> %</td>
 			</tr>
 			<tr>
 				<td id="6ago" style="padding:20px;"><b>이용 6일 전</b></td>
-				<td id="6agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[6] %></td>
+				<td id="6agoInfo" style="padding:20px;"><%= (int)si.getSpaceRefundPolicy()[6] %> %</td>
 			</tr>
 			<tr>
 				<td id="5ago" style="padding:20px;"><b>이용 5일 전</b></td>
-				<td id="5agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[5] %></td>
+				<td id="5agoInfo" style="padding:20px;"><%= (int)si.getSpaceRefundPolicy()[5] %> %</td>
 			</tr>
 			<tr>
 				<td id="4ago" style="padding:20px;"><b>이용 4일 전</b></td>
-				<td id="4agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[4] %></td>
+				<td id="4agoInfo" style="padding:20px;"><%= (int)si.getSpaceRefundPolicy()[4] %> %</td>
 			</tr>
 			<tr>
 				<td id="3ago" style="padding:20px;"><b>이용 3일 전</b></td>
-				<td id="3agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[3] %></td>
+				<td id="3agoInfo" style="padding:20px;"><%= (int)si.getSpaceRefundPolicy()[3] %> %</td>
 			</tr>
 			<tr>
 				<td id="2ago" style="padding:20px;"><b>이용 2일 전</b></td>
-				<td id="2agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[2] %></td>
+				<td id="2agoInfo" style="padding:20px;"><%= (int)si.getSpaceRefundPolicy()[2] %> %</td>
 			</tr>
 			<tr>
 				<td id="1ago" style="padding:20px;"><b>이용 1일 전</b></td>
-				<td id="1agoInfo" style="padding:20px;"><%= si.getSpaceRefundPolicy()[1] %></td>
+				<td id="1agoInfo" style="padding:20px;"><%= (int)si.getSpaceRefundPolicy()[1] %> %</td>
 			</tr>
 			<tr>
 				<td id="dday" style="padding:20px;"><b>이용 당일</b></td>
-				<td id="ddayInfo" style="padding:20px;"><b style="color:red;"><%= si.getSpaceRefundPolicy()[0] %></b></td> <!-- 순서 잘못됐나?? -->
+				<td id="ddayInfo" style="padding:20px;"><b style="color:red;"><%= (int)si.getSpaceRefundPolicy()[0] %> %</b></td>
 			</tr>
 		</table>
 		<br><br>

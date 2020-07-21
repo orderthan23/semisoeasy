@@ -25,8 +25,8 @@ public class SpaceInfo implements java.io.Serializable {
 	private int fixSeat;					//지정석 갯수
 	private int totalSeat;					//총 좌석 수
 	private int maxReserv;					//예약 가능 인원
-	//공간등록 1 종료--- 
-	//공간등록 2---
+	//공간등록 1 종료--- 	
+	//공간등록 2---		
 	private String didDayReserv;			//일별 예약 가능 여부
 	private String didMonthReserv;			//월별 예약 가능 여부
 	private int dayPay;						//일당 금액
@@ -35,7 +35,7 @@ public class SpaceInfo implements java.io.Serializable {
 	private int[] startTimes;				//공간 운영 시작 시간
 	private int[] endTimes;					//공간 운영 종료 시간
 	private double[] spaceRefundPolicy;		//일자별 환불율 8일부터 당일까지
-	//공간등록 2 종료---
+	//공간등록 2 종료----
 	//공간등록 3---
 	private String bsnsName;				//상호명
 	private String representName;			//대표자명
@@ -49,7 +49,7 @@ public class SpaceInfo implements java.io.Serializable {
 	private String calBank;					//정산 은행명
 	private String calAcctHolder;			//정산 예금주
 	private String calAcctNo;				//정산 계좌번호
-	//공간등록 3--	
+	//공간등록 3--
 	//공개여부 !important
 	private String sStatus;					//공간 소개글 공개여부
 
