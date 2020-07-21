@@ -175,7 +175,7 @@ section {
 							<option value="1">독립오피스</option>
 							<option value="2">코워킹스페이스</option>
 					</select>
-					 바로예약 여부 <input type="checkBox" name="didHostOk" value="3"> <!-- DID_HOST_OK 3번 바로예약 -->
+					 바로예약 여부 <input type="checkBox" name="didHostOk" value=3> <!-- DID_HOST_OK 3번 바로예약 -->
 					</td>
 					<td><select class="location" name="location">
 							<option value=null>==지역유형==</option>
@@ -214,16 +214,16 @@ section {
 						<div class="price-box">
 							가격
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input name="rowPrice" value=0 class="price">~<input name="highPrice" value=100000000 class="price">
+							<input type="text" name="lowPrice" class="price" value="">~<input type="text" name="highPrice" class="price" value="">
 						</div>
 						
 					</td>
 					<td><select class="sort" name="sort">
 							<option value=null>==정렬==</option>
-							<option value="recommend">추천순</option>
-							<option value="lowPrice">가격 낮은순</option>
-							<option value="highPrice">가격 높은순</option>
-							<option value="popularity">리뷰 많은순</option>
+							<option value="recommendSort">평점 높은순</option>
+							<option value="lowPriceSort">가격 낮은순</option>
+							<option value="highPriceSort">가격 높은순</option>
+							<option value="popularitySort">리뷰 많은순</option>
 					</select></td>
 					<td></td>
 				</tr>
@@ -253,7 +253,7 @@ section {
 					<div class="text">
 						<img src="<%=request.getContextPath() %>/images/area/<%=hmap.get("changeName") %>" width="400" height="265">
 					<p><%= hmap.get("spaceName") %></p>
-					<p><%= hmap.get("spacePayPolicy") %>
+					<p><%= hmap.get("spaceShortIntro") %>
 					<!-- 가 -->
 					<p><% if(hmap.get("monthPay") != null && !hmap.get("monthPay").equals(0)) { %>
 					가격 : <%= hmap.get("monthPay") %> / 개월 

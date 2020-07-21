@@ -66,7 +66,6 @@ public class SearchServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		System.out.println("search servlet 이 자꾸 왜 뜨냐고!!!!");
 		System.out.println("listCount : " + listCount);
 		System.out.println("currentPage : " + currentPage);
 		System.out.println("limit : " + limit);

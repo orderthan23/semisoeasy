@@ -13,14 +13,12 @@ public class SearchFilter implements java.io.Serializable{
 	private int lowPrice;					//최소가격
 	private int highPrice;					//최대가격
 //	정렬
-	private String lowPriceSort;			//가격 낮은순
-	private String highPriceSort;			//가격 높은순
-	private int reviewCount;				//리뷰 많은순
+	private String sort;					//정렬
 	
 	public SearchFilter() {}
 
 	public SearchFilter(String search, String spaceKind, String didHostOk, String spaceLocationFilter, String term,
-			int lowPrice, int highPrice, String lowPriceSort, String highPriceSort, int reviewCount) {
+			int lowPrice, int highPrice, String sort) {
 		super();
 		this.search = search;
 		this.spaceKind = spaceKind;
@@ -29,9 +27,7 @@ public class SearchFilter implements java.io.Serializable{
 		this.term = term;
 		this.lowPrice = lowPrice;
 		this.highPrice = highPrice;
-		this.lowPriceSort = lowPriceSort;
-		this.highPriceSort = highPriceSort;
-		this.reviewCount = reviewCount;
+		this.sort = sort;
 	}
 
 	public String getSearch() {
@@ -62,16 +58,8 @@ public class SearchFilter implements java.io.Serializable{
 		return highPrice;
 	}
 
-	public String getLowPriceSort() {
-		return lowPriceSort;
-	}
-
-	public String getHighPriceSort() {
-		return highPriceSort;
-	}
-
-	public int getReviewCount() {
-		return reviewCount;
+	public String getSort() {
+		return sort;
 	}
 
 	public void setSearch(String search) {
@@ -102,24 +90,15 @@ public class SearchFilter implements java.io.Serializable{
 		this.highPrice = highPrice;
 	}
 
-	public void setLowPriceSort(String lowPriceSort) {
-		this.lowPriceSort = lowPriceSort;
-	}
-
-	public void setHighPriceSort(String highPriceSort) {
-		this.highPriceSort = highPriceSort;
-	}
-
-	public void setReviewCount(int reviewCount) {
-		this.reviewCount = reviewCount;
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
 
 	@Override
 	public String toString() {
 		return "SearchFilter [search=" + search + ", spaceKind=" + spaceKind + ", didHostOk=" + didHostOk
 				+ ", spaceLocationFilter=" + spaceLocationFilter + ", term=" + term + ", lowPrice=" + lowPrice
-				+ ", highPrice=" + highPrice + ", lowPriceSort=" + lowPriceSort + ", highPriceSort=" + highPriceSort
-				+ ", reviewCount=" + reviewCount + "]";
+				+ ", highPrice=" + highPrice + ", sort=" + sort + "]";
 	}
 
 	
