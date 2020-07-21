@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"  import="java.util.*, com.kh.login.board.model.vo.*,
 	com.kh.login.host.manageReserve.model.vo.*"	%>
-	
 <% ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list"); 
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
@@ -132,7 +131,9 @@
 					<td class="info" style="text-align: center;"><%= b.getnTitle() %></td>
 					<td class="info" style="text-align: center;"><%= b.getmNick() %></td>
 					<td class="info" style="text-align: center;"><%= b.getnDate() %></td>
-					<td class="info" style="text-align: center;"></td>
+					<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
+					<td class="info" style="text-align: center; color:green"><%=b.getnStatus() %></td>
+						<% } %>
 				</tr>
 				<% } %>
 			</table>

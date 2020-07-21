@@ -134,7 +134,8 @@
 	 <%@ include file="../common/footer.jsp"%> 
 
 	<script>
-	 $(function(){
+
+	$(function(){
 		var status = '<%=board.getnStatus()%>';
 			if(status == 'Y'){
 				$("#post").hide();

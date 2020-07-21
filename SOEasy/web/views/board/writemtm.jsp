@@ -18,7 +18,7 @@
 
 .writeButton{
   text-decoration: none;
-  color : black;
+  color : black	;
   float: right;
   background : #60B4A6;
   border-radius: 10px;
