@@ -154,7 +154,7 @@ th {
 		<br>
 		<div id="wrapper">
 		<br>
-		<h1 style="margin : 0;"><%=msg %></h1>
+		<h1 style="margin : 0;"><%=loginUser.getmName()+"님의 " +msg %></h1>
 		<br><br>
 		<table align="center"  style="margin:0; width:100%;"  >
 				<tr>
@@ -172,12 +172,12 @@ th {
 				</tr>
 				<%for(int i=0; i<reserveList.size(); i++) {%>
 				<tr class="pCompleteInfo">
-					<td style="font-size:13px;"><%=reserveList.get(i).getSpaceName() %></td>
+					<td style="font-size:13px;" class="spaceNames"><%=reserveList.get(i).getSpaceName() %></td>
 					<td><%=spaceTypeArr.get(i) %></td>
 					<td><%=startUseArr.get(i)%></td>
 					<td><%=endUseArr.get(i)%> </td>
 					<td><%=reserveList.get(i).getPersonCount()%></td>
-					<td><%=reserveList.get(i).getCharge()%></td>
+					<td class="spaceCharge"><%=reserveList.get(i).getCharge()%></td>
 					<td><%=reserveList.get(i).getPayMethod() %></td>
 					<td><label class="payProgress"></label></td>
 					<td><label class="agreeProgress"></label></td>
@@ -222,7 +222,7 @@ th {
 			if(aNum=="결제완료" && rNum=="사용전"){
 				$('.cancle:nth(<%=i%>)').show();				
 			}else if(aNum="승인완료" && pNum=="결제대기" ){
-				$('.cancle:nth(<%=i%>)').show().text("결제").attr("onclick","letsPay();");
+				$('.cancle:nth(<%=i%>)').show().text("결제").addClass('letsPay');
 			}else{
 				$('.cancle:nth(<%=i%>)').hide();
 			}
@@ -237,34 +237,53 @@ th {
 	<footer><%@ include file="../../views/common/footer.jsp" %></footer>
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 	<script>
-		
-		function letsPay(){
+		$(function(){
 			IMP.init('imp14313139'); // 아임포트 관리자 페이지의 "시스템 설정" > "내 정보" 에서 확인 가능
-			IMP.request_pay({
-			   
-			    pay_method : 'card',
-			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : '주문명:결제테스트',
-			    amount : 14000,
-			    buyer_email : 'iamport@siot.do',
-			    buyer_name : '구매자이름',
-			    buyer_tel : '010-1234-5678',
-			}, function(rsp) {
-				IMP.init('imp14313139'); // 아임포트 관리자 페이지의 "시스템 설정" > "내 정보" 에서 확인 가능
-			    if ( rsp.success ) {
-			        var msg = '결제가 완료되었습니다.';
-			        msg += '고유ID : ' + rsp.imp_uid;
-			        msg += '상점 거래ID : ' + rsp.merchant_uid;
-			        msg += '결제 금액 : ' + rsp.paid_amount;
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
-			    } else {
-			        var msg = '결제에 실패하였습니다.';
-			        msg += '에러내용 : ' + rsp.error_msg;
-			    }
+			$('.letsPay').click(function(){
+				var spaceName = $(this).parent().siblings('.spaceNames').text();
+				var charge = $(this).parent().siblings('.spaceCharge').text();
+				
+				console.log(spaceName);
+				
+				IMP.request_pay({
+				   
+				    pay_method : 'card',
+				    merchant_uid : 'merchant_' + new Date().getTime(),
+				    name : spaceName,
+				    amount : charge,
+				    buyer_email : "<%=loginUser.getmEmail()%>",
+				    buyer_name : "<%=loginUser.getmName()%>",
+				    buyer_tel : "<%=loginUser.getmPhone()%>",
+				}, function(rsp) {
+					IMP.init('imp14313139'); // 아임포트 관리자 페이지의 "시스템 설정" > "내 정보" 에서 확인 가능
+				    if ( rsp.success ) {
+				        var msg = '결제가 완료되었습니다.';
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + rsp.paid_amount;
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				        $.ajax({
+				        	url:"login/insertPayHistory",
+				        	data: {payId : rsp.merchant_uid,
+				        			payCharge : rsp.paid_amount,
+				        			cardApplyNum : rsp.apply_num
+				        	}
+				        });
+				    } else {
+				        var msg = '결제에 실패하였습니다.';
+				        msg += '에러내용 : ' + rsp.error_msg;
+				    }
 
-			    alert(msg);
+				    alert(msg);
+				    
+				   
+				});
 			});
-		}
+			
+		});
+	
+		
+	
 		
 	</script>
 </body>

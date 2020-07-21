@@ -7,7 +7,9 @@ public class ReserveHistory implements java.io.Serializable {
 	//예약 내역을 저장하는 객체
 	private int reserveNo; //예약 번호
 	private int guestNo; //예약자 회원 번호
-	private String userId;
+	private String userId; //예약자 회원 아이디
+	private String guestName; //결제자 이름
+	private String guestEmail; //결제자 이메일
 	private int spaceNo; //예약된 공간 번호
 	private String seatType; //자유석 지정석 여부 (fix_unfix)
 	private int seatNo; //호실 번호
@@ -33,14 +35,18 @@ public class ReserveHistory implements java.io.Serializable {
 	}
 
 
-	public ReserveHistory(int reserveNo, int guestNo, String userId, int spaceNo, String seatType, int seatNo,
-			String spaceName, int spaceType, Date startUse, Date endUse, Date reserveDate, int personCount, int charge,
-			String payMethod, int payStatus, int acceptStatus, int reserveStatus, String hasReview, String userName,
-			String userPhone, String userEmail) {
+	
+
+	public ReserveHistory(int reserveNo, int guestNo, String userId, String guestName, String guestEmail, int spaceNo,
+			String seatType, int seatNo, String spaceName, int spaceType, Date startUse, Date endUse, Date reserveDate,
+			int personCount, int charge, String payMethod, int payStatus, int acceptStatus, int reserveStatus,
+			String hasReview, String userName, String userPhone, String userEmail) {
 		super();
 		this.reserveNo = reserveNo;
 		this.guestNo = guestNo;
 		this.userId = userId;
+		this.guestName = guestName;
+		this.guestEmail = guestEmail;
 		this.spaceNo = spaceNo;
 		this.seatType = seatType;
 		this.seatNo = seatNo;
@@ -64,14 +70,16 @@ public class ReserveHistory implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "ReserveHistory [reserveNo=" + reserveNo + ", guestNo=" + guestNo + ", userId=" + userId + ", spaceNo="
-				+ spaceNo + ", seatType=" + seatType + ", seatNo=" + seatNo + ", spaceName=" + spaceName
-				+ ", spaceType=" + spaceType + ", startUse=" + startUse + ", endUse=" + endUse + ", reserveDate="
-				+ reserveDate + ", personCount=" + personCount + ", charge=" + charge + ", payMethod=" + payMethod
-				+ ", payStatus=" + payStatus + ", acceptStatus=" + acceptStatus + ", reserveStatus=" + reserveStatus
-				+ ", hasReview=" + hasReview + ", userName=" + userName + ", userPhone=" + userPhone + ", userEmail="
-				+ userEmail + "]";
+		return "ReserveHistory [reserveNo=" + reserveNo + ", guestNo=" + guestNo + ", userId=" + userId + ", guestName="
+				+ guestName + ", guestEmail=" + guestEmail + ", spaceNo=" + spaceNo + ", seatType=" + seatType
+				+ ", seatNo=" + seatNo + ", spaceName=" + spaceName + ", spaceType=" + spaceType + ", startUse="
+				+ startUse + ", endUse=" + endUse + ", reserveDate=" + reserveDate + ", personCount=" + personCount
+				+ ", charge=" + charge + ", payMethod=" + payMethod + ", payStatus=" + payStatus + ", acceptStatus="
+				+ acceptStatus + ", reserveStatus=" + reserveStatus + ", hasReview=" + hasReview + ", userName="
+				+ userName + ", userPhone=" + userPhone + ", userEmail=" + userEmail + "]";
 	}
+
+
 
 
 	public int getReserveNo() {
@@ -284,6 +292,34 @@ public class ReserveHistory implements java.io.Serializable {
 	}
 
 
+
+
+	public String getGuestName() {
+		return guestName;
+	}
+
+
+
+
+	public void setGuestName(String guestName) {
+		this.guestName = guestName;
+	}
+
+
+
+
+	public String getGuestEmail() {
+		return guestEmail;
+	}
+
+
+
+
+	public void setGuestEmail(String guestEmail) {
+		this.guestEmail = guestEmail;
+	}
+
+	
 	
 	
 }
