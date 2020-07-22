@@ -77,7 +77,7 @@
 	border: 1px solid #60B4A6;
 }
 
-.logo {
+.noticeLogo {
 	color: #60B4A6
 }
 </style>
@@ -85,17 +85,19 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
+	<BR>
 	<div class="colMenu" style="margin-top: 20px;">
 		<a class="colMenuButton selectedButton"	href="/login/selectList.no">공지사항</a>
 		<a class="colMenuButton" href="/login/selectList.faq">자주 묻는 질문</a> 
-		<a class="colMenuButton" href="/login/views/board/mtmboard.jsp">1대1문의</a>
+		<a class="colMenuButton" href="/login/select.mtm">1대1문의</a>
 	</div>
+	<BR>
 	<hr style="margin: 0">
 	<br>
 
 	<section>
 		<div id="wrapper">
-			<h2 class="logo"
+			<h2 class="noticelogo"
 				style="margin: 0; font-size: 30px; font-weight: bolder">공지사항</h2>
 			<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
 			<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a>
@@ -110,8 +112,7 @@
 				</tr>
 			</table>
 			<br>
-			<div style="width: 90%; margin-left: auto; margin-right: auto;">
-			</div>
+		
 			<table style="width: 100%; border-collapse: collapse;" id="boardTable">
 				<tr>
 					<td colspan="1"></td>
@@ -150,9 +151,8 @@
 				</tr>
 				<% } %>
 			</table>
-		</div>
-		<!-- 페이징 처리 버튼 -->
-      <div class="pagingArea" align="center">
+			<BR>
+			 <div class="pagingArea" align="center">
          <button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=1'"><<</button>
          <% if(currentPage <= 1) { %>
          <button disabled><</button>
@@ -179,9 +179,13 @@
       	
          <button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%=maxPage%>'">>></button>
       </div>
+		</div>
+		<!-- 페이징 처리 버튼 -->
+     
 		
 		
 	</section>
+	<br><br><br>
 	<%@ include file="../common/footer.jsp"%>
 	<script>
 	

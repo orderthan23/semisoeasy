@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.login.board.model.vo.Board;
+import com.kh.login.board.model.vo.Qna;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 
 import static com.kh.login.common.JDBCTemplate.*;
@@ -397,6 +398,108 @@ public class BoardDao {
 		}
 		
 		return result;
+	}
+
+	public int insertM(Connection con, Qna qna) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertM");
+		
+		try {
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, qna.getQmember());
+			pstmt.setString(2, qna.getQcontent());
+			pstmt.setInt(3, qna.getQkind());
+			pstmt.setString(4, qna.getQtitle());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		
+		return result ;
+	}
+
+	public int getMtoMListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("listMtoMCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				// 첫번째로 조회된 값 가져오기
+				
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		return listCount;
+	}
+
+	public ArrayList<Qna> selectMtoMList(Connection con, PageInfo pi) {
+		PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      ArrayList<Qna> list = null;
+	      
+	      String query = prop.getProperty("selectMtoMList");
+	      
+	      try {
+	         pstmt = con.prepareStatement(query);
+
+	         int startRow = (pi.getCurrentPage() - 1) * pi.getCurrentPage() + 1;
+	         int endRow = startRow + pi.getLimit() -1;
+	         
+	         pstmt.setInt(1, startRow);
+	         pstmt.setInt(2, endRow);
+	         
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         list = new ArrayList<>(); 
+	         
+	         while(rset.next()) {
+	    		Qna qna = new Qna();
+	    		qna.setQno(rset.getInt("Q_NO"));
+	    		qna.setQmember(rset.getInt("Q_MEM_NO"));
+	    		qna.setRmember(rset.getInt("R_MEM_NO"));
+	    		qna.setQdate(rset.getDate("Q_ENROLL_DATE"));
+	    		qna.setQcontent(rset.getString("Q_CONTENT"));
+	    		qna.setRcontent(rset.getString("R_CONTENT"));
+	    		qna.setRdate(rset.getDate("R_ENROLL_DATE"));
+	    		qna.setQkind(rset.getInt("Q_KIND"));
+	    		qna.setQtitle(rset.getString("Q_TITLE"));
+				
+	    		list.add(qna);
+	         }
+	         
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      
+	      
+	      return list;
 	}
 
 	

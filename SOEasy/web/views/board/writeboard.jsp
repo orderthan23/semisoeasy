@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="/login/css/layout.css">
 ​
 <style>
 ​
@@ -72,7 +72,7 @@
 	 	<div class="colMenu" style="margin-top: 20px;">
 		<a class="colMenuButton selectedButton"	href="/login/selectList.no">공지사항</a>
 		<a class="colMenuButton" href="/login/views/board/faqboard.jsp">자주 묻는 질문</a> 
-		<a class="colMenuButton" href="/login/views/board/mtmboard.jsp">1대1문의</a>
+		<a class="colMenuButton" href="/login/select.mtm">1대1문의</a>
 	</div>
 	<hr style="margin: 0">
 	<br>
