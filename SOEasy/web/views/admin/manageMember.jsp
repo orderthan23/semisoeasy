@@ -249,7 +249,7 @@
 	
 		</form>
 		
-				<form action="searchId.me"  id="searchForm">
+				<form action="searchId.me"  id="searchFormes">
 				<label>아이디 검색</label>
 				<span  id="searchZone">
 				<input type="search" name="keyword" id="searchId">
@@ -375,7 +375,7 @@
 		if(userId==""){
 			location.reload(true);
 		}else{
-			$('#searchForm').submit();
+			$('#searchFormes').submit();
 		}
 		
 	
