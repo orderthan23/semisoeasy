@@ -207,8 +207,9 @@ h1 {
 							<p><%=spaceShortIntroArr.get(i)%></p>
 							<p>
 								가격 :
-								<%=spacePriceArr.get(i)%>
-								지역 :
+								<%=spacePriceArr.get(i)%></p>
+								
+								<p style="font-size:10px">지역 :
 								<%= location.get(i) %></p>
 						</article>
 					</td>

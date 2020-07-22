@@ -332,7 +332,8 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td class="warning" id="capital-img-not" style="text-align:right;">대표 이미지를 추가하셔야 합니다.</td>
+					<td>&nbsp;</td>
+					<!-- <td class="warning" id="capital-img-not" style="text-align:right;">대표 이미지를 추가하셔야 합니다.</td> -->
 					<td></td>
 				</tr>
 				<tr>
@@ -348,7 +349,8 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td class="warning" id="thumbnail-img-not" style="text-align:right;">상세 이미지를 추가하셔야 합니다.</td>
+					<td>&nbsp;</td>
+					<!-- <td class="warning" id="thumbnail-img-not" style="text-align:right;">상세 이미지를 추가하셔야 합니다.</td> -->
 					<td></td>
 				</tr>
 				<tr>
@@ -442,6 +444,7 @@
 		$(function(){
 			initSet();
 			initEvent();
+			
 		});
 		
 		function initSet(){
@@ -497,12 +500,48 @@
 				$("#warning-space-name").show();
 			}
 			
-			<%-- for(var i = 0; i < <%=si.getConv().length%>; i ++){
-				if($("input[name=conv]").val() == <%=si.getConv()%>[i]){
-					$("input[name=conv]").prop("checked");
-				}
-			} --%>
+
+			<% for (int i = 0; i < si.getConv().length; i++) {%>
+			
+			var conv = "<%=si.getConv()[i]%>";
+			
+			switch(conv) {
+			case '24h' : $("#24h").prop("checked",true); break;
+			case '365days' : $("#365days").prop("check",true); break;
+			case 'airCon' : $("#airCon").prop("checked",true); break;
+			case 'animal' : $("#animal").prop("checked",true); break;
+			case 'beam' : $("#beam").prop("checked",true); break;
+			case 'board' : $("#board").prop("checked",true); break;
+			case 'cafe' : $("#cafe").prop("checked",true); break;
+			case 'copyPrint' : $("#copyPrint").prop("checked",true); break;
+			case 'delivery' : $("#delivery").prop("checked",true); break;
+			case 'doorLock' : $("#doorLock").prop("checked",true); break;
+			case 'fax' : $("#fax").prop("checked",true); break;
+			case 'heater' : $("#heater").prop(":checked",true); break;
+			case 'kitchen' : $("#kitchen").prop("checked",true); break;
+			case 'locker' : $("#locker").prop("checked",true); break;
+			case 'mail' : $("#mail").prop("checked",true); break;
+			case 'parcking' : $("#parcking").prop("checked",true); break;
+			case 'rounge' : $("#rounge").prop("checked",true); break;
+			case 'snack' : $("#snack").prop("checked",true); break;
+			case 'terrace' : $("#terrace").prop("checked",true); break;
+			case 'tv' : $("#tv").prop("checked",true); break;
+			case 'wareHouse' : $("#wareHouse").prop("checked",true); break;
+			case 'waterMachine' : $("#waterMachine").prop("checked",true); break;
+			case 'wifi' : $("#wifi").prop("checked",true); break;
+			case 'plug' : $("#plug").prop("checked",true); break;
+			}
+			<% } %>
+			
+			$("#capital-img").attr("src", "<%=request.getContextPath() + imgList.get(0).getFilePath() + "/" + imgList.get(0).getChangeName()%>");
+			<% for(int i = 1; i < imgList.size(); i++) { %>
+				$("#thumnail-<%=i%>").attr("src", "<%=request.getContextPath() + imgList.get(i).getFilePath() + "/" + imgList.get(i).getChangeName()%>");
+			<% } %>
 		}
+			
+			
+			
+		
 	
 		function initEvent(){
 			//경고메세지 출력 | 가리기

@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.login.member.model.vo.Member;
 import com.kh.login.space.model.service.SpaceReservationService;
+
 import com.kh.login.space.model.vo.Image;
 import com.kh.login.space.model.vo.QnA;
 import com.kh.login.space.model.vo.Review;
+
 import com.kh.login.space.model.vo.SpaceInfo;
 import com.kh.login.space.model.vo.SpaceReservation;
 
@@ -44,6 +46,7 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];  
 		
 //		System.out.println(si);
+		
 		
 		//reservNo는 시퀀스로
 		int guestNo = loginUser.getMemberNo();

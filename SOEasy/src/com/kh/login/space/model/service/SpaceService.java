@@ -230,7 +230,7 @@ public class SpaceService {
 		return result;
 	}
 
-	//해당 회원의
+	//해당 회원의 공간정보 리스트 조회용 메소드
 	public ArrayList<SpaceInfo> selectTempSpaceOfOneMember(int memberNo) {
 		
 		Connection con = getConnection();
@@ -240,6 +240,24 @@ public class SpaceService {
 		close(con);
 		
 		return list;
+	}
+	
+	//삭제 요청 처리용 메소드
+	public int deleteRequest(int sNo) {
+		
+		Connection con = getConnection();
+		
+		int result = new SpaceDao().deleteRequest(con, sNo);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
 	}
 
 }

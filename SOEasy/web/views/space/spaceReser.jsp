@@ -2,7 +2,9 @@
     pageEncoding="UTF-8" import="com.kh.login.space.model.vo.*, java.util.*" %>
     
 <%
+
 ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) session.getAttribute("introList");
+
 HashMap<String, Object> hmap = list.get(0);
 
 SpaceInfo si = (SpaceInfo) hmap.get("spaceInfo");
@@ -12,7 +14,9 @@ ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
 ArrayList<QnA> qnaList = (ArrayList<QnA>) hmap.get("qnaList");
 
 String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];  
+
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,7 +106,6 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
         	outline: 0px;
         }
         
-
     </style>
 </head>
 <body>
@@ -110,6 +113,7 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 	<br><br>
 	<section>
 	<div style="width:75%; margin-left:auto; margin-right:auto;">
+
 	<%-- <input type="hidden" name="spaceNo" value="<%= si.getSpaceNo()%>"> --%>
 	
 	<!-- 공간명 / 가격 -->
@@ -139,9 +143,11 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 	<!-- 사진 가운데정렬 -->
 	<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<div class="visual">
+
 			<% for (Image i : imgList) { 
 				String url = request.getContextPath()+i.getFilePath() + i.getChangeName();
 				System.out.println(url);
+
 			%>
 				<div style="background-image: url(<%=url%>); display:block; width:500px; height:700px; background-repeat:no-repeat; background-size:cover;"></div>
 			<% } %>
@@ -155,6 +161,7 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 		</div>
 	</div>
 	<Br><br>
+
 	
 	<!-- 운영시간 -->
 	<p id="opTime" style="color:#40a4b6; font-size:20px;"><b>
@@ -211,6 +218,10 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 			</tr>
 		</table>
 
+
+
+		
+		
 		<form id="insertReservation" action="<%= request.getContextPath()%>/insertReservationInfo" method="post">
 		<!-- 날짜 ~부터 ~까지 -->
 		<table align="center" width="500px">
@@ -406,6 +417,8 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 				</table>
 			</div>
 		</div>
+		</form>
+		</section>
 		<br><br>
 		
 		<!-- 예약 버튼 -->
@@ -414,7 +427,7 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 		</div>
 		</form>
 		</div>
-		</section>
+		
 		<br><br><br>
 	<footer><%@ include file="../common/footer.jsp" %></footer>
 
