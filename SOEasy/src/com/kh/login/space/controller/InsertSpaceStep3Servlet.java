@@ -50,7 +50,7 @@ public class InsertSpaceStep3Servlet extends HttpServlet {
 			String savePath = "/uploadFiles/businessRegist";
 			String realPath = root + savePath;
 			
-			MultipartRequest multiRequest = new MultipartRequest(request, realPath, maxSize, "UTF-8", new SoEasyFileRenamePolicy(loginUser.getmId()));
+			MultipartRequest multiRequest = new MultipartRequest(request, realPath, maxSize, "UTF-8", new SoEasyFileRenamePolicy("license" + loginUser.getmId()));
 			
 			String saveFile = "";
 			String originFile = "";

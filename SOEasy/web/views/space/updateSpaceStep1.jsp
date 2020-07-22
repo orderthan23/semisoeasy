@@ -442,6 +442,7 @@
 		$(function(){
 			initSet();
 			initEvent();
+			
 		});
 		
 		function initSet(){
@@ -497,12 +498,45 @@
 				$("#warning-space-name").show();
 			}
 			
-			<%-- for(var i = 0; i < <%=si.getConv().length%>; i ++){
-				if($("input[name=conv]").val() == <%=si.getConv()%>[i]){
-					$("input[name=conv]").prop("checked");
-				}
-			} --%>
+
+			<% for (int i = 0; i < si.getConv().length; i++) {%>
+			
+			var conv = "<%=si.getConv()[i]%>";
+			
+			switch(conv) {
+			case '24h' : $("#24h").prop("checked",true); break;
+			case '365days' : $("#365days").prop("check",true); break;
+			case 'airCon' : $("#airCon").prop("checked",true); break;
+			case 'animal' : $("#animal").prop("checked",true); break;
+			case 'beam' : $("#beam").prop("checked",true); break;
+			case 'board' : $("#board").prop("checked",true); break;
+			case 'cafe' : $("#cafe").prop("checked",true); break;
+			case 'copyPrint' : $("#copyPrint").prop("checked",true); break;
+			case 'delivery' : $("#delivery").prop("checked",true); break;
+			case 'doorLock' : $("#doorLock").prop("checked",true); break;
+			case 'fax' : $("#fax").prop("checked",true); break;
+			case 'heater' : $("#heater").prop(":checked",true); break;
+			case 'kitchen' : $("#kitchen").prop("checked",true); break;
+			case 'locker' : $("#locker").prop("checked",true); break;
+			case 'mail' : $("#mail").prop("checked",true); break;
+			case 'parcking' : $("#parcking").prop("checked",true); break;
+			case 'rounge' : $("#rounge").prop("checked",true); break;
+			case 'snack' : $("#snack").prop("checked",true); break;
+			case 'terrace' : $("#terrace").prop("checked",true); break;
+			case 'tv' : $("#tv").prop("checked",true); break;
+			case 'wareHouse' : $("#wareHouse").prop("checked",true); break;
+			case 'waterMachine' : $("#waterMachine").prop("checked",true); break;
+			case 'wifi' : $("#wifi").prop("checked",true); break;
+			case 'plug' : $("#plug").prop("checked",true); break;
+			}
+			<% } %>
+			
+			$("#cap-img").val("<%=request.getContextPath() + imgList.get(0).%>");
 		}
+			
+			
+			
+		
 	
 		function initEvent(){
 			//경고메세지 출력 | 가리기
