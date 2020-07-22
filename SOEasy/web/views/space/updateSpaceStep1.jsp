@@ -332,7 +332,8 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td class="warning" id="capital-img-not" style="text-align:right;">대표 이미지를 추가하셔야 합니다.</td>
+					<td>&nbsp;</td>
+					<!-- <td class="warning" id="capital-img-not" style="text-align:right;">대표 이미지를 추가하셔야 합니다.</td> -->
 					<td></td>
 				</tr>
 				<tr>
@@ -348,7 +349,8 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td class="warning" id="thumbnail-img-not" style="text-align:right;">상세 이미지를 추가하셔야 합니다.</td>
+					<td>&nbsp;</td>
+					<!-- <td class="warning" id="thumbnail-img-not" style="text-align:right;">상세 이미지를 추가하셔야 합니다.</td> -->
 					<td></td>
 				</tr>
 				<tr>
@@ -531,7 +533,10 @@
 			}
 			<% } %>
 			
-			$("#cap-img").val("<%=request.getContextPath() + imgList.get(0).%>");
+			$("#capital-img").attr("src", "<%=request.getContextPath() + imgList.get(0).getFilePath() + "/" + imgList.get(0).getChangeName()%>");
+			<% for(int i = 1; i < imgList.size(); i++) { %>
+				$("#thumnail-<%=i%>").attr("src", "<%=request.getContextPath() + imgList.get(i).getFilePath() + "/" + imgList.get(i).getChangeName()%>");
+			<% } %>
 		}
 			
 			

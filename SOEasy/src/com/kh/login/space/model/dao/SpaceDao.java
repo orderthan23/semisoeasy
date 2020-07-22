@@ -944,4 +944,27 @@ public class SpaceDao {
 		
 		return list;
 	}
+
+	//삭제 요청 처리용 메소드
+	public int deleteRequest(Connection con, int sNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteRequest");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

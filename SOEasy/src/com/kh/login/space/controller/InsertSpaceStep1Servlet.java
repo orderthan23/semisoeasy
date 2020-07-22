@@ -67,6 +67,7 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
+				System.out.println("insertTagName : " + name);
 				System.out.println("servlet sysname : " + multiRequest.getFilesystemName(name));
 				System.out.println("servlet originname : " + multiRequest.getOriginalFileName(name));
 				//가져온 파일 이름이 null인 경우 add하지 않도록 처리
