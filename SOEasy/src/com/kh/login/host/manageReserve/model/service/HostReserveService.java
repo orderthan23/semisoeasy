@@ -7,6 +7,7 @@ import com.kh.login.host.manageReserve.model.dao.HostReserveDao;
 import com.kh.login.host.manageReserve.model.vo.HostReserve;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.host.manageReserve.model.vo.PaymentRequest;
+import com.kh.login.space.model.vo.SpaceReservation;
 
 import static com.kh.login.common.JDBCTemplate.*;
 
@@ -78,16 +79,24 @@ public class HostReserveService {
 		
 		
 		
-//		if(result > 0) {
-//			commit(con);
-//			updateList = new HostReserveDao().selectList(con);
-//		} else {
-//			rollback(con);
-//		}
-		
 		close(con);
 		
 		return selectHostReserve;
+	}
+
+	public int insertHostReserve(SpaceReservation requestMember) {
+		Connection con = getConnection();
+		int result = new HostReserveDao().insertHostReserve(con, requestMember);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
 	}
 	
 //	public int updateReserveRequest(int nno, int rno) {

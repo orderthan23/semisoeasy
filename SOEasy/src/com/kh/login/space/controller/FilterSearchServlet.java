@@ -43,8 +43,7 @@ public class FilterSearchServlet extends HttpServlet {
 		int lowPrice = 0;			//int
 		int highPrice = 10000000;			//int
 		
-		String lowPriceSort = "S.SPACE_MONTH_PAY DESC, S.SPACE_DAY_PAY DESC"; //이렇게 말고 month_pay랑 day_pay 조인해서 한꺼번에 가격순위 매길 수 없나?
-		String highPriceSort = "S.SPACE_MONTH_PAY DESC, S.SPACE_DAY_PAY ASC"; //이렇게 말고 month_pay랑 day_pay 조인해서 한꺼번에 가격순위 매길 수 없나?
+		
 		int reviewCount = 0;
 		String reviewQuery = "S.SPACE_MONTH_PAY DESC, S.SPACE_DAY_PAY DESC"; //이렇게 말고 month_pay랑 day_pay 조인해서 한꺼번에 가격순위 매길 수 없나?
 		
@@ -52,14 +51,12 @@ public class FilterSearchServlet extends HttpServlet {
 		String url = PageInfo.customQString(request.getQueryString(), 2);
 		
 		
-		int currentPage = 0;
+		int currentPage = 1;
 		int limit;
 		int maxPage;
 		int startPage;
 		int endPage;
 
-//		int cut = spaceLoactionFilter.indexOf(",");
-//		realFilter = spaceLocationFilter.substring(int cut);
 		
 		System.out.println("searchKeyword : " + search);
 		System.out.println("location : " + spaceLocationFilter);
@@ -71,7 +68,7 @@ public class FilterSearchServlet extends HttpServlet {
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		System.out.println("currentPage : " + currentPage);
+		System.out.println("filter currentPage check : " + currentPage);
 		if(request.getParameter("didHostOk") != null) {
 			didHostOk = request.getParameter("didHostOk");
 		}
@@ -80,16 +77,13 @@ public class FilterSearchServlet extends HttpServlet {
 		if(request.getParameter("lowPrice") != null || request.getParameter("lowPrice") != "") {
 			lowPrice = Integer.parseInt(request.getParameter("lowPrice"));
 		}
-		
+		System.out.println(request.getParameter("highPrice"));
 		if(request.getParameter("highPrice") != null || request.getParameter("highPrice") != "") {
 			highPrice = Integer.parseInt(request.getParameter("highPrice"));
 		} else if(request.getParameter("highPrice") == null || request.getParameter("highPrice") == "") {
 			highPrice = 0;
 		}
 		
-		if(request.getParameter("reviewCount") != null) {
-			reviewCount = Integer.parseInt(request.getParameter("reviewCount"));
-		}
 		
 		System.out.println("currentPage : " + currentPage);
 		System.out.println("spaceKind : " + spaceKind);
