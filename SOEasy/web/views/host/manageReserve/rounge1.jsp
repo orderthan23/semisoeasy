@@ -112,10 +112,9 @@
 <body>
 	<header><%@ include file="../../common/header.jsp"%></header>
 	<nav>
-		<%@ include file="../../common/aside.jsp"%>
 		<div class="colMenu">
 		<label class="colMenuTitle">공간 일정 관리</label>
-		<a class="colMenuButton" href="/login/views/host/manageReserve/reserveStep1.jsp">예약 일정 관리</a>
+		<a class="colMenuButton" href="<%=request.getContextPath()%>/selectReserve.ho">예약 일정 관리</a>
 		<a class="colMenuButton selectedButton" href="/login/views/host/manageReserve/rounge1.jsp">라운지 회원 관리</a>
 		<a class="colMenuButton" href="/login/views/host/manageReserve/paymentRequest.jsp">결제 요청</a>
 	<br><br>

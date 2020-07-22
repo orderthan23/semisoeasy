@@ -98,6 +98,18 @@ public class HostReserveService {
 		
 		return result;
 	}
+
+	public int selectOfficeCount(int spaceNo) {
+		Connection con = getConnection();
+		
+		int officeCount = new HostReserveDao().getOfficeCount(con, spaceNo);
+		
+		close(con);
+		
+		System.out.println(officeCount);
+		
+		return officeCount;
+	}
 	
 //	public int updateReserveRequest(int nno, int rno) {
 //		Connection con = getConnection();

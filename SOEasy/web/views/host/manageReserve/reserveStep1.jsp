@@ -4,18 +4,18 @@
 	int placeQTY = 10;
 	int pCompleteQTY = 10;
 	int statement = 0;
-	
-	ArrayList<PaymentRequest> list = (ArrayList<PaymentRequest>) request.getAttribute("list");
-	for(PaymentRequest pr : list){
-		System.out.println(pr);
+	int sOC = (int)request.getAttribute("officeCount");
+	int officeCount = 0;
+	if(sOC != 0){
+		officeCount = sOC;
 	}
-	PageInfo pi = (PageInfo) request.getAttribute("pi");
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int requestCount = pi.getRequestCount();
+	ArrayList<HostReserve> list = (ArrayList<HostReserve>) request.getAttribute("list");
+	for(int i = 0; i < list.size(); i++){
+		System.out.println(list.get(i));
+	}
+	
+	
+	
 %>
 
 <!DOCTYPE html>
@@ -114,7 +114,7 @@
 		<%@ include file="../../common/aside.jsp"%>
 		<div class="colMenu">
 		<label class="colMenuTitle">공간 일정 관리</label>
-		<a class="colMenuButton selectedButton" href="/login/views/host/manageReserve/reserveStep1.jsp">예약 일정 관리</a>
+		<a class="colMenuButton selectedButton" href="<%=request.getContextPath()%>/selectReserve.ho">예약 일정 관리</a>
 		<a class="colMenuButton" href="/login/views/host/manageReserve/rounge1.jsp">라운지 회원 관리</a>
 		<a class="colMenuButton" href="<%=request.getContextPath()%>/select.pr">예약 승인 요청</a>
 	<br><br>
@@ -160,15 +160,17 @@
 		</form>
 		<br>
 		<table align="center" id="table1">
+			<tr>
 		</table>
 	</section>
 	<script>
 	var col = 31;
-	var row = 7
+	var row = 18;
 	var spaceInfo = 1;
-	var startInfo = 7;
+	var startInfo = 4;
 	var dayInfo = 15;
 	var name = "최우아";
+	var reserveNo = 3;
 	$(function(){
 		   $('#table1').append(function(){
 	        var sentence = "";
@@ -195,7 +197,7 @@
 	                sentence+='<td';
 	                if(spaceInfo == i){
 	                	if(startInfo == j){
-		                	sentence+=' colspan="' + dayInfo + '" style="background:red; color:white; text-align:center;"><button class="reserveBtn">' + name + '</button>';
+		                	sentence+=' colspan="' + dayInfo + '" style="background:red; color:white; text-align:center;"><button class="reserveBtn" name="' + reserveNo + '">' + name + '</button>';
 		                	j+= dayInfo-1;
 		                } else {
 			                sentence+='>';
@@ -213,7 +215,7 @@
 	
 	$("reserveBtn").onclick(function(){
 		window.open("/views/host/manageReserve/reserveUpdate.jsp", 'Window2', 'width=500, height=550');
-	})
+	});
 
 	</script>
 	
@@ -221,7 +223,7 @@
 	
 	
 	
-	<footer><%@ include file="../../common/footer.jsp"%></footer>
+	<footer><%@ include file="../../common/footer.jsp" %></footer>
 	
 
 

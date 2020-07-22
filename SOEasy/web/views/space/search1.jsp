@@ -322,7 +322,7 @@ section {
 	               var num = $(this).find(".sendSpaceNo").val();
 	               console.log(num);
 	               
-				location.href="<%=request.getContextPath()%>/select.se?num=" + num;
+				location.href="<%=request.getContextPath()%>/selectOneSpaceInfo?spaceNo=" + num;
 			});
 		});
 		
