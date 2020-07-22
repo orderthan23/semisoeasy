@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.login.member.model.vo.Member;
 import com.kh.login.space.model.service.SpaceReservationService;
+import com.kh.login.space.model.vo.SpaceInfo;
 import com.kh.login.space.model.vo.SpaceReservation;
 
 /**
@@ -36,6 +37,7 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		
 		//vo에서 int형으로 선언해준것들은 파싱해줌
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		
 		
 		//reservNo는 시퀀스로
 		int guestNo = loginUser.getMemberNo();

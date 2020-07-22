@@ -1,9 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.login.space.model.vo.*" %>
+    pageEncoding="UTF-8" import="com.kh.login.space.model.vo.*, java.util.*" %>
     
 <%
-	SpaceInfo si = (SpaceInfo) request.getAttribute("spaceInfo");
+
+ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) request.getAttribute("introList");
+HashMap<String, Object> hmap = list.get(0);
+
+SpaceInfo si = (SpaceInfo) hmap.get("spaceInfo");
+
+ArrayList<Image> imgList = (ArrayList<Image>) hmap.get("imgList");
+ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
+ArrayList<QnA> qnaList = (ArrayList<QnA>) hmap.get("qnaList");
+
+String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];  
+
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,7 +105,6 @@
         	outline: 0px;
         }
         
-
     </style>
 </head>
 <body>
@@ -101,21 +112,29 @@
 	<br><br>
 	<section>
 	<div style="width:75%; margin-left:auto; margin-right:auto;">
-	<form id="insertReservation" action="<%= request.getContextPath()%>/insertReservationInfo" method="post">
+	
 	<%-- <input type="hidden" name="spaceNo" value="<%= si.getSpaceNo()%>"> --%>
 	
 	<!-- 공간명 / 가격 -->
 	<table>
 		<tr>
 			<td id="title">
-				<p style="color:#40a4b6;  font-weight: bolder; margin-top:0; font-size:30px;">성수동 인생공간 코워킹스페이스</p>
+				<p style="color:#40a4b6;  font-weight: bolder; margin-top:0; font-size:30px;"><%= si.getSpaceName() %></p>
 				<input type="hidden" value=5 name="officeNo">
 			</td>
 		</tr>
 	</table>
 	<table>
 		<tr>
-			<td id="price" style="color:#c4c4c4; font-size:25px;">300,000원 / 1개월 </td>
+			<td id="price" style="color:#c4c4c4; font-size:25px;">
+				<% if (si.getDayPay() == 0) { %>
+					월 / <%= si.getMonthPay() %>원
+				<% } else if (si.getMonthPay() == 0) { %>
+					일 / <%= si.getDayPay() %>원
+				<% } else if (si.getDayPay() != 0 && si.getMonthPay() != 0) { %>
+					일 <%= si.getDayPay() %>원 / 월 <%= si.getMonthPay() %>원
+				<% } %>
+			</td>
 		<tr>
 	</table>
 	<br><br>
@@ -123,57 +142,26 @@
 	<!-- 사진 가운데정렬 -->
 	<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<div class="visual">
-			<div 
-				style="background-image: url(<%=request.getContextPath() %>/images/area/area22-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
-			</div>
-			<div 
-				style="background-image: url(<%=request.getContextPath() %>/images/area/area23-2.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
-			</div>
-			<div 
-				style="background-image: url(<%=request.getContextPath() %>/images/area/area23-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
-			</div>
+			<%-- <div 
+				style="background-image: url(<%=re'quest.getContextPath() %>/images/area/area22-4.png); display: block; width: 500px; height:700px; background-repeat : no-repeat; background-size : cover;">
+			</div> --%>
+			<% for (Image i : imgList) { 
+			String url = request.getContextPath()+i.getFilePath() + i.getChangeName();
+			System.out.println(url);
+			%>
+				<div style="background-image: url(<%=url%>); display:block; width:500px; height:700px; background-repeat:no-repeat; background-size:cover;"></div>
+			<% } %>
 		</div>
 	<br><br>
 	
 	<!-- 공간 소개 창 --> 
 	<div align="center">
-		<div id="spaceIntroInfo" style="border-radius:10px; width:700px; height:500px; background:white; border:3px solid lightgray; text-align:left; padding:20px;">
-			따뜻한 사람들을 위한 코워킹스페이스 성수동 인생공간입니다.<br><br>
-
-			성수동 인생공간은 자신의 인생일(천직)을 찾고, 이를 완성해나가는 사람들이 채워나가는 코<br>
-			워킹스페이스입니다.<br>
-			다른 코워킹스페이스와는 달리 인생공간은 성수동의 느낌을 살린 빈티지스러운 인테리어가<br>
-			특징적인 공간입니다.<br><br>
-
-			스타트업, 프리랜서, 프로젝트 팀 등 뜨거운 열정을 가지고 자신의 인생일을 찾아나서는 분들 <br>
-			모두 환영합니다.<br>
-			모든 것이 준비되어 있습니다. 열정과 재능만 가지고 오세요. 최적의 업무공간을 경험하실 수 <br>
-			있습니다.<br><br>
-
-			OFFICE 정보<br>
-			- 4~5인 기준의 독립된 PRIVATE OFFICE (3층 위치)<br><br>
-
-			1~2인의 경우 SHARE OFFICE로 이용가능<br>
-			- 공동현관 도어락, 개별 오피스 열쇠 제공<br>
-			- 24시간 첨단경호시스템<br>
-			- 복사기, 프린트, Wifi, 개별 냉난방 서비스 제공<br>
-			- 월 1회 무료 변호사, 변리사, 세무사 등 서비스 제공<br>
+		<div id="spaceIntroInfo" style="border-radius:10px; width:700px; background:white; border:3px solid lightgray; text-align:left; padding:20px;">
+			<%= si.getSpaceIntro() %>
 		</div>
 	</div>
 	<Br><br>
 	
-	<!-- 가격 정책 -->
-	<p id="priceRule" style="color:#40a4b6; font-size:20px;"><b>
-		가격정책
-	</b></p>
-	<div align="center">
-		<div id="priceRuleInfo" style="border-radius:10px; width:700px; height:100px; background:white; border:3px solid lightgray; text-align:left; padding:20px;">
-			3개월 이상 결제 시 일당 3천원 할인
-			<br><br>
-			6개월 이상 결제 시 일당 5천원 할인	
-		</div>
-	</div>
-	<Br><br>
 	
 	<!-- 운영시간 -->
 	<p id="opTime" style="color:#40a4b6; font-size:20px;"><b>
@@ -182,23 +170,23 @@
 		
 		<table id="opTimeTb" style="border-spacing:15px;">
 			<tr>
-				<td id="mon" style="padding:10px;"><b>월 </b>00:00 ~ 24:00</td>
-				<td id="sat" style="padding:10px;"><span style="color:blue;"><b>토 </b></span>00:00 ~ 24:00</td>
+				<td id="mon" style="padding:10px;"><b>월 </b><%= si.getStartTimes()[0] %> ~ <%= si.getEndTimes()[0] %></td>
+				<td id="sat" style="padding:10px;"><span style="color:blue;"><b>토 </b></span><%= si.getStartTimes()[5] %> ~ <%= si.getEndTimes()[5] %></td>
 			</tr>
 			<tr>
-				<td id="tue" style="padding:10px;"><b>화 </b>00:00 ~ 24:00</td>
-				<td id="sun" style="padding:10px;"><span style="color:red;"><b>일 </b></span>00:00 ~ 24:00</td>
+				<td id="tue" style="padding:10px;"><b>화 </b><%= si.getStartTimes()[1] %> ~ <%= si.getEndTimes()[1] %></td>
+				<td id="sun" style="padding:10px;"><span style="color:red;"><b>일 </b></span><%= si.getStartTimes()[6] %> ~ <%= si.getEndTimes()[6] %></td>
 			</tr>
 			<tr>
-				<td id="wed" style="padding:10px;"><b>수 </b>00:00 ~ 24:00</td>
+				<td id="wed" style="padding:10px;"><b>수 </b><%= si.getStartTimes()[2] %> ~ <%= si.getEndTimes()[2] %></td>
 				<td style="padding:10px;"></td>
 			</tr>
 			<tr>
-				<td id="thu" style="padding:10px;"><b>목 </b>00:00 ~ 24:00</td>
+				<td id="thu" style="padding:10px;"><b>목 </b><%= si.getStartTimes()[3] %> ~ <%= si.getEndTimes()[3] %></td>
 				<td style="padding:10px;"></td>
 			</tr>
 			<tr>
-				<td id="fri" style="padding:10px;"><b>금 </b>00:00 ~ 24:00</td>
+				<td id="fri" style="padding:10px;"><b>금 </b><%= si.getStartTimes()[4] %> ~ <%= si.getEndTimes()[4] %></td>
 				<td style="padding:10px;"></td>
 			</tr>
 		</table>
@@ -208,15 +196,21 @@
 		<table id="plusTb">
 			<tr>
 				<td id="add" width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>공간주소</b></td>
-				<td id="addInfo">서울특별시 강남구 역삼로 215 남국빌딩 2층</td>
+				<td id="addInfo"><%= si.getSpaceAddress() %></td>
 			</tr>
 			<tr>
 				<td id="spaceType" width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>공간 유형</b></td>
-				<td id="spaceTypeInfo">코워킹스페이스 / 지정석</td>
+				<td id="spaceTypeInfo">
+					<% if (si.getSpaceKind() == 1) { %>
+						독립오피스
+					<% } else { %>
+						코워킹스페이스
+					<% } %>
+				</td>
 			</tr>
 			<tr>
 				<td id="accPer" width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>예약 가능 인원</b></td>
-				<td id="accPerInfo">1~5명</td>
+				<td id="accPerInfo"><%= si.getSpaceContainCount() %></td>
 			</tr>
 			<tr>
 				<td id="reserDate" width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>예약 일정 설정</b></td>
@@ -225,11 +219,12 @@
 		</table>
 		
 		<!-- 캘린더 api 대신 일단 사진 -->
-		<div align="center">
+<!-- 		<div align="center">
 			<img src="../../images/etc/calendar.png" width="600px">
 		</div>
-		<br>
+		<br> -->
 		
+		<form id="insertReservation" action="<%= request.getContextPath()%>/insertReservationInfo" method="post">
 		<!-- 날짜 ~부터 ~까지 -->
 		<table align="center" width="500px">
 			<tr>
@@ -289,27 +284,27 @@
 			<tr>
 				<td style="color:#40a4b6; font-size:20px; width:200px; height:50px;"><b>호스트 정보</b></td>
 				<td width="110px"><b>상호명</b></td>
-				<td id="storeNm">보케이션베케이션 코리아</td>
+				<td id="storeNm"><%= si.getBsnsName() %></td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td id="chairmanNm" width="110px"><b>대표자명</b></td>
-				<td>류재언</td>
+				<td><%= si.getRepresentName() %></td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="110px"><b>소재지</b></td>
-				<td id="address">서울특별시 성동구 성수동 2가 299-182 성수동 인생공간</td>
+				<td id="address"><%= si.getBsnsAddress() %></td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="110px"><b>사업자번호</b></td>
-				<td id="busOpNum">3898600362</td>
+				<td id="busOpNum"><%= si.getBsnsLicenseNo() %></td>
 			</tr>
 			<tr> 
 				<td width="200px" height="50px"></td>
 				<td width="110px"><b>연락처</b></td>
-				<td id="comm">0504-0905-6915 yourspacelife@gmail.com</td>
+				<td id="comm"><%= si.getCalPhone() %> / <%= si.getCalEmail() %></td>
 			</tr>
 		</table>
 		<br><br>
@@ -319,47 +314,47 @@
 			<tr>
 				<td style="color:#40a4b6; font-size:20px; width:200px; height:50px;"><b>환불 정책</b></td>
 				<td id="8ago" width="200px"><b>이용 8일 전</b></td>
-				<td id="8agoInfo">100% 환불</td>
+				<td id="8agoInfo"><%= (int)si.getSpaceRefundPolicy()[8] %> %</td>
 			</tr>
 			<tr>
 				<td height="50px"></td>
 				<td id="7ago" width="200px"><b>이용 7일 전</b></td>
-				<td id="7agoInfo">90% 환불</td>
+				<td id="7agoInfo"><%= (int)si.getSpaceRefundPolicy()[7] %> %</td>
 			</tr>
 			<tr>
 				<td height="50px"></td>
 				<td id="6ago" width="200px"><b>이용 6일 전</b></td>
-				<td id="6agoInfo">90% 환불</td>
+				<td id="6agoInfo"><%= (int)si.getSpaceRefundPolicy()[6] %> %</td>
 			</tr>
 			<tr>
 				<td height="50px"></td>
 				<td id="5ago" width="200px"><b>이용 5일 전</b></td>
-				<td id="5agoInfo">90% 환불</td>
+				<td id="5agoInfo"><%= (int)si.getSpaceRefundPolicy()[5] %> %</td>
 			</tr>
 			<tr>
 				<td height="50px"></td>
 				<td id="4ago" width="200px"><b>이용 4일 전</b></td>
-				<td id="4agoInfo">90% 환불</td>
+				<td id="4agoInfo"><%= (int)si.getSpaceRefundPolicy()[4] %> %</td>
 			</tr>
 			<tr>
 				<td height="50px"></td>
 				<td id="3ago" width="200px"><b>이용 3일 전</b></td>
-				<td id="3agoInfo">90% 환불</td>
+				<td id="3agoInfo"><%= (int)si.getSpaceRefundPolicy()[3] %> %</td>
 			</tr>
 			<tr>
 				<td height="50px"></td>
 				<td id="2ago" width="200px"><b>이용 2일 전</b></td>
-				<td id="2agoInfo">90% 환불</td>
+				<td id="2agoInfo"><%= (int)si.getSpaceRefundPolicy()[2] %> %</td>
 			</tr>
 			<tr>
 				<td height="50px"></td>
 				<td id="1ago" width="200px"><b>이용 1일 전</b></td>
-				<td id="1agoInfo">90% 환불</td>
+				<td id="1agoInfo"><%= (int)si.getSpaceRefundPolicy()[1] %> %</td>
 			</tr>
 			<tr>
 				<td height="50px"></td>
 				<td id="dday" width="200px"><b>이용 당일</b></td>
-				<td id="ddayInfo" style="color:red;">환불 불가</td>
+				<td id="ddayInfo" style="color:red;"><%= (int)si.getSpaceRefundPolicy()[0] %> %</td>
 			</tr>
 		</table>
 		<br><br>
@@ -424,6 +419,8 @@
 				</table>
 			</div>
 		</div>
+		</form>
+		</section>
 		<br><br>
 		
 		<!-- 예약 버튼 -->
@@ -432,7 +429,7 @@
 		</div>
 		</form>
 		</div>
-		</section>
+		
 		<br><br><br>
 	<footer><%@ include file="../common/footer.jsp" %></footer>
 
