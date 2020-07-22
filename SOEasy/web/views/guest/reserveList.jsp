@@ -181,7 +181,7 @@ th {
 					<td><%=reserveList.get(i).getPayMethod() %></td>
 					<td><label class="payProgress"></label></td>
 					<td><label class="agreeProgress"></label></td>
-					<td><label class="reserveStatus"></label></td>
+					<td class="reserveSpace"><label class="reserveStatus"></label><input type="hidden" class="reserveNumber" value=<%=reserveList.get(i).getReserveNo() %>></td>
 					<td><a href="#" class="reviewExistance"></a></td>
 					<td class="cancleZone"><button type="button" class="cancle" >취소</button></td>
 				</tr>
@@ -234,11 +234,11 @@ th {
 					}
 				%>
 			</table>
-			<form id="payInfo">
-				<input type="hidden" id="amount">
-				<input type="hidden" id="payNo">
-				<input type="hidden" id="reservNo">
-				<input type="hidden" id="methodCode">
+			<form id="payInfo" action="<%=request.getContextPath()%>/payments/complete" method="post">
+				<input type="hidden" id="amount" name="amount">
+				<input type="hidden" id="payNo" name="payNo">
+				<input type="hidden" id="reservNo" name="reserveNo">
+				<input type="hidden" id="methodCode" name="methodCode">
 	
 			</form>
 		</div>
@@ -251,9 +251,10 @@ th {
 			$('.letsPay').click(function(){
 				var spaceName = $(this).parent().siblings('.spaceNames').text();
 				var charge = $(this).parent().siblings('.spaceCharge').text();
-				
+				var reserveNum = $(this).parent().siblings('.reserveSpace').children('.reserveNumber').val();
+				 
 				console.log(spaceName);
-				
+				console.log(reserveNum);
 				IMP.request_pay({
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
@@ -270,6 +271,7 @@ th {
 				        msg += '상점 거래ID : ' + rsp.merchant_uid;
 				        msg += '결제 금액 : ' + rsp.paid_amount;
 				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				        msg += '결제 수단  :'+rsp.pay_method;
 				       /*  $.ajax({
 				        	url:"login/insertPayHistory",
 				        	data: {payId : rsp.merchant_uid,
@@ -277,19 +279,13 @@ th {
 				        			cardApplyNum : rsp.apply_num
 				        	}
 				        }); */
-				        console.log(rsp.imp_uid);
-				        IMP.init('imp14313139');	
-				        jQuery.ajax({
-				            url: "<%=request.getContextPath()%>/payments/complete", // 가맹점 서버
-				            method: "POST",
-				            headers: { "Content-Type": "application/json;" },
-				           
-				            data: {
-		        				  merchant_uid : rsp.merchant_uid
-				            }
-				        }).done(function (data) {
-				         	console.log(data);
-				        })
+				        $('#amount').val(rsp.paid_amount);
+				        $('#payNo').val(rsp.merchant_uid);
+				        $('#methodCode').val(rsp.pay_method);
+				        $('#reservNo').val(reserveNum); 
+				        console.log(rsp.pay_method)
+				        alert("결제가 완료 되었습니다 "+msg);
+				        $('#payInfo').submit();
 				      } else {
 				        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
 				      }

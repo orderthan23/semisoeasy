@@ -26,12 +26,18 @@ public class insertPayHistoryServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//org.json.simple.parser.JSONParser jsonparsor = new org.json.simple.parser.JSONParser();
-		System.out.println("너 여기옴?");
+		
+		String payNo = request.getParameter("payNo");
+		int amount = Integer.parseInt(request.getParameter("amount"));
+		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
+		String methodCode = request.getParameter("methodCode");
+		
+		System.out.println(payNo);
+		System.out.println(amount);
+		System.out.println(reserveNo);
+		System.out.println(methodCode);
 		
 		
-		String merchant_uid = request.getParameter("merchant_uid");
-		System.out.println("impuid: "+merchant_uid);
-		PrintWriter out = response.getWriter();
 		
 		
 		//out.append(imp_uid);
