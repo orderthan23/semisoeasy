@@ -175,8 +175,8 @@ section {
 							<option value="1">독립오피스</option>
 							<option value="2">코워킹스페이스</option>
 					</select>
-					 바로예약 여부 <input type="checkBox" name="didHostOk" value=3> <!-- DID_HOST_OK 3번 바로예약 -->
-					</td>
+<!-- 					 바로예약 여부 <input type="checkBox" name="didHostOk" value=3> DID_HOST_OK 3번 바로예약-->					
+ 					</td>
 					<td><select class="location" name="location">
 							<option value=null>==지역유형==</option>
 							<option value="서울">서울</option>
@@ -214,16 +214,14 @@ section {
 						<div class="price-box">
 							가격
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="text" name="lowPrice" class="price" value="">~<input type="text" name="highPrice" class="price" value="">
+							<input type="text" name="lowPrice" class="price" value="0" placeholder="0">~<input type="text" name="highPrice" class="price" value="100000000">
 						</div>
 						
 					</td>
 					<td><select class="sort" name="sort">
 							<option value=null>==정렬==</option>
-							<option value="recommendSort">평점 높은순</option>
 							<option value="lowPriceSort">가격 낮은순</option>
 							<option value="highPriceSort">가격 높은순</option>
-							<option value="popularitySort">리뷰 많은순</option>
 					</select></td>
 					<td></td>
 				</tr>
@@ -248,7 +246,7 @@ section {
 				HashMap<String, Object> hmap = list.get(i);
 				%>
 				<div class="spaceBoard" align="center">
-					<input type="hidden" value="<%=hmap.get("spaceNo") %>">
+					<input type="hidden" class="sendSpaceNo" value="<%=hmap.get("spaceNo") %>">
 					<%-- <% System.out.println("spaceNo"); %> --%>
 					<div class="text">
 						<img src="<%=request.getContextPath() %>/images/area/<%=hmap.get("changeName") %>" width="400" height="265">
@@ -266,7 +264,7 @@ section {
 					int cut = hmap.get("spaceLocationFilter").indexOf(",");
 					String realFilter = hmap.get("spaceLocationFilter").substring(cut);
 					%> --%>
-					<p>지역 : <%= hmap.get("spaceLocationFilter") %></p>
+					<p style="font-size:9px">지역 : <%= hmap.get("spaceLocationFilter") %></p>
 					<br>
 					</div>
 					
@@ -321,10 +319,10 @@ section {
 		$(function(){
 	           $(".spaceBoard").click(function() {
 	               //var num = $(this).children().children().eq(0).val();
-	               var num = $(this).find("").val();
+	               var num = $(this).find(".sendSpaceNo").val();
 	               console.log(num);
 	               
-				location.href="<%=request.getContextPath()%>/selectOne.se?num=" + num;
+				location.href="<%=request.getContextPath()%>/select.se?num=" + num;
 			});
 		});
 		

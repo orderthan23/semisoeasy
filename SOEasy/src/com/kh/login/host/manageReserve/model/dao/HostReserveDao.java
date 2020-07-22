@@ -15,6 +15,7 @@ import com.kh.jsp.notice.model.vo.Notice;
 import com.kh.login.host.manageReserve.model.vo.HostReserve;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.host.manageReserve.model.vo.PaymentRequest;
+import com.kh.login.space.model.vo.SpaceReservation;
 
 import static com.kh.jsp.common.JDBCTemplate.close;
 import static com.kh.login.common.JDBCTemplate.*;
@@ -176,7 +177,7 @@ public class HostReserveDao {
 	public ArrayList<HostReserve> selectHostReserve(Connection con, int hostNo, int spaceNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		HostReserve  hostReserve = null;
+		ArrayList<HostReserve>  hostReserve = null;
 		
 		String query = prop.getProperty("selectHostReserve");
 		
@@ -187,7 +188,7 @@ public class HostReserveDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				hostReserve = new HostReserve();
+				hostReserve = new ArrayList<HostReserve>();
 				
 				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));
 				hostReserve.setReserveNo(rset.getInt("RESERV_NO"));
@@ -214,6 +215,38 @@ public class HostReserveDao {
 			close(rset);
 		}
 		return hostReserve;
+	}
+
+	public int insertHostReserve(Connection con, SpaceReservation requestMember) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("insertHostReserve");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setInt(1, requestMember.getGuestNo());
+			pstmt.setInt(2, requestMember.getSpaceNo());
+			pstmt.setString(3, requestMember.getFixUnfix());
+			pstmt.setInt(4, requestMember.getOfficeNo());
+			pstmt.setString(5, requestMember.getStartDate());
+			pstmt.setString(6, requestMember.getEndDate());
+			pstmt.setInt(7, requestMember.getReservPersonCount());
+			pstmt.setInt(8, requestMember.getExpectPay());
+			pstmt.setString(9, requestMember.getUserName());
+			pstmt.setString(10, requestMember.getUserPhone());
+			pstmt.setString(11, requestMember.getUserEmail());
+			pstmt.setString(12, requestMember.getRequestContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 
