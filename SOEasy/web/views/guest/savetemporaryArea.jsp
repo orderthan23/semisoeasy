@@ -119,11 +119,11 @@
 			<% if(siList.get(i).getsStatus().equals("Y")) { %>
 			<td><button class=inspectionStatus style="color:green; borderColor:green;">운영 중</button></td>
 			<td><button class="updateSpaceInfo">공간 정보 수정</button></td>
-			<td><button class="deleteRequset" onclick="deleteRequest(<%=siList.get(i).getSpaceNo()%>);">공간 정보 삭제 요청</button></td>
+			<td><button class="deleteRequest">공간 정보 삭제 요청</button></td>
 			<% } else if(siList.get(i).getsStatus().equals("N")) { %>
 			<td><button class=inspectionStatus style="color:gray; borderColor:gray;">작성 중</button></td>
-			<td><button class="updateSpaceInfo" onclick="updateSpaceInfo(<%=siList.get(i).getSpaceNo()%>);">공간 정보 수정</button></td>
-			<td><button class="deleteSpace" onclick="deleteSpace(<%=siList.get(i).getSpaceNo()%>);">미완성 공간 정보 삭제</button></td>
+			<td><button class="updateSpaceInfo">공간 정보 수정</button></td>
+			<td><button class="deleteSpace">미완성 공간 정보 삭제</button></td>
 			<% } else if(siList.get(i).getsStatus().equals("IW")) { %>
 			<td><button class=inspectionStatus style="color:purple; borderColor:purple;">공간 검수 대기 중</button></td>
 			<td><button disabled="disabled">공간 정보 수정</button> </td>
@@ -131,7 +131,7 @@
 			<% } else { %>
 			<td><button class=inspectionStatus style="color:red; borderColor:red;">공간 삭제 대기 중</button></td>
 			<td><button disabled="disabled">공간 정보 수정</button> </td>
-			<td><button class="cancleDeleteRequset" onclick="cancleDeleteRequest(<%=siList.get(i).getSpaceNo()%>);">공간 정보 삭제 취소</button></td>
+			<td><button class="cancleDeleteRequset">공간 정보 삭제 취소</button></td>
 			<% } %>
 		</tr>
 		<% } %>
@@ -147,6 +147,13 @@
 		var spaceNo = $(this).parent().siblings(".spaceNameZone").find(".hiddenSpaceNo").val();
 		/* console.log(spaceNo); */
 		location.href = "<%=request.getContextPath()%>/intoUpdateSpace?sNo="+spaceNo;
+	});
+	
+	$(".deleteRequest").click(function(){
+		if(confirm("공간정보 삭제를 요청하시겠습니까?")){
+			var spaceNo = $(this).parent().siblings(".spaceNameZone").find(".hiddenSpaceNo").val();
+			location.href = "<%=request.getContextPath()%>/deleteRequest?sNo="+spaceNo;
+		}
 	});
 	
 	$(function(){
