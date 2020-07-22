@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.kh.login.board.model.vo.Qna;
+import com.kh.login.member.model.vo.Member;
 
 @WebServlet("/insert.mm")
 public class InsertMtoMServlet extends HttpServlet {
@@ -13,22 +17,30 @@ public class InsertMtoMServlet extends HttpServlet {
        
      public InsertMtoMServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
+	
+     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	 String id = request.getParameter("id");
+ 		String title = request.getParameter("title");
+ 		String content = request.getParameter("content");
+ 		int category = Integer.parseInt(request.getParameter("category"));
+ 		HttpSession session = request.getSession();
+ 		Member loginUser = (Member) session.getAttribute("loginUser");
+ 		
+ 		int qno = loginUser.getMemberNo(); 
+ 		String nick = loginUser.getmNick();
+ 		String nickname = loginUser.getmNick();
+     
+ 		
+ 		String page = "";
+ 		Qna qna = new Qna();
+ 		qna.setQcontent(content);
+ 		qna.setQmember(qno);
+ 		qna.setQkind(category);
+ 		 
+     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

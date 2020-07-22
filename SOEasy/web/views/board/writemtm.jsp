@@ -75,8 +75,8 @@
 	<label><font size="6" color="gray" style=text-align:>1대1 문의</font></label>
 	
 	<br>
-	
-	<form method="post"  action="<%=request.getContextPath()%>/insert.no" name="boardForm">
+
+	<form method="post"  action="<%=request.getContextPath()%>/insert.mm" name="boardForm">
 	<input type="hidden" name="id" value="<%=loginUser.getmId()%>>">
 	<table width:700 border="3" bordercolor="lightgray" align="center">
 			<tr>
