@@ -1,7 +1,7 @@
 package com.kh.login.guest.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
-import jdk.nashorn.internal.parser.JSONParser;
+import com.kh.login.guest.model.service.GuestService;
 
 /**
  * Servlet implementation class insertPayHistoryServlet
@@ -37,10 +35,25 @@ public class insertPayHistoryServlet extends HttpServlet {
 		System.out.println(reserveNo);
 		System.out.println(methodCode);
 		
+		HashMap<String,Object> payHistory = new HashMap<>();
+		payHistory.put("payNo", payNo);
+		payHistory.put("amount", amount);
+		payHistory.put("reserveNo", reserveNo);
+		payHistory.put("methodCode", methodCode);
 		
 		
+		int result =  new GuestService().insertPayHistory(payHistory);
 		
-		//out.append(imp_uid);
+		
+		if(result >0) {
+			response.sendRedirect("../SelectUserReservHistory");
+		}else {
+			request.setAttribute("msg", "결제정보 업데이트 실패!");
+			request.getRequestDispatcher("/views/common/errorPage.jsp");
+		}
+		
+
+		
 	
 	}
 

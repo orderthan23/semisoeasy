@@ -1,5 +1,7 @@
 package com.kh.login.guest.model.dao;
 
+import static com.kh.login.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,8 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
-import static com.kh.login.common.JDBCTemplate.*;
+
 import com.kh.login.guest.model.vo.ReserveHistory;
 import com.kh.login.member.model.dao.MemberDao;
 
@@ -107,6 +110,46 @@ public class GuestDao {
 		
 		
 		return reserveListCount;
+	}
+
+	public int insertPayHistory(Connection con, HashMap<String, Object> payHistory) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query  = prop.getProperty("insertPayHistory");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, (String)payHistory.get("payNo"));
+			pstmt.setInt(2, (int)payHistory.get("reserveNo"));
+			pstmt.setString(3, (String)payHistory.get("methodCode"));
+			pstmt.setInt(4, (int)payHistory.get("amount"));
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+		
+		
+		return result;
+	}
+
+	public int updateRstatus(Connection con, int reservNo, int rStatus) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateRstatus");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, rStatus);
+			pstmt.setInt(2, reservNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} close(pstmt);
+		
+		
+		return result;
 	}
 
 }
