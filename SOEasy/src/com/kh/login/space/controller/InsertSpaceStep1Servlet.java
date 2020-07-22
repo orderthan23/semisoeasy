@@ -40,15 +40,15 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("들어오십니까?");
+//		System.out.println("들어오십니까?");
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 			int memberNo = loginUser.getMemberNo();
-			String memberNick = loginUser.getmNick();
+			String memberId = loginUser.getmId();
 			
-			System.out.println(memberNo);
+//			System.out.println(memberNo);
 			
 			//이미지 파일들 불러오기
 			int maxSize = 1024 * 1024 * 20;
@@ -58,7 +58,7 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			String savePath = "/uploadFiles/space";
 			String realPath = root + savePath;
 			
-			MultipartRequest multiRequest = new MultipartRequest(request, realPath, maxSize, "UTF-8", new SoEasyFileRenamePolicy(memberNick));
+			MultipartRequest multiRequest = new MultipartRequest(request, realPath, maxSize, "UTF-8", new SoEasyFileRenamePolicy("space" + memberId));
 			
 			ArrayList<String> saveFiles = new ArrayList<>();
 			ArrayList<String> originFiles = new ArrayList<>();
