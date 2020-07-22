@@ -1,29 +1,23 @@
 package com.kh.login.host.manageReserve.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.login.host.manageReserve.model.service.HostReserveService;
-import com.kh.login.host.manageReserve.model.vo.HostReserve;
-import com.kh.login.member.model.vo.Member;
-
 /**
- * Servlet implementation class SelectHostReserveServlet
+ * Servlet implementation class SelectHostRoungeServlet
  */
-@WebServlet("/selectReserve.ho")
-public class SelectHostReserveServlet extends HttpServlet {
+@WebServlet("/Select.ro")
+public class SelectHostRoungeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectHostReserveServlet() {
+    public SelectHostRoungeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,33 +26,17 @@ public class SelectHostReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Member loginUser = ;
-//		
-//		String sHostNo = request.getParameter("hostNo");
-//		String sSpaceNo = request.getParameter("spaceNo");
 		
-		int hostNo = 41;
-		int spaceNo = 16;
 		
-		ArrayList<HostReserve> list = new HostReserveService().selectReserveInfo(hostNo, spaceNo);
-		
-		for(HostReserve o : list) {
-			System.out.println("servlet : " + o);
-		}
-		
-		int officeCount = new HostReserveService().selectOfficeCount(spaceNo);
-		
-		System.out.println("servlet officeCount : " + officeCount);
-		
+		int result = 1;
 		String page = "";
-		if(list != null) {
-			page = "/views/host/manageReserve/reserveStep1.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("officeCount", officeCount);
+		if(result > 0) {
+			page = "/views/common/selectHostReserve.jsp";
+			request.setAttribute("reserveNo", "insertReservationInfo");
 			request.getRequestDispatcher(page).forward(request, response);
 		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "직접예약 보기 실패!");
+			page = "/views/common/errorPage.jsp";
+			request.setAttribute("msg", "예약정보 insert 실패");
 			request.getRequestDispatcher(page).forward(request, response);
 		}
 	}

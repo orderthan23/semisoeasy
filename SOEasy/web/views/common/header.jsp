@@ -123,7 +123,7 @@
 			case 1:$('#firstHeaderMenu').attr("href","<%=request.getContextPath()%>/logout.me").text("로그아웃");
 		    $('#secondHeaderMenu').attr("href","/login/views/member/updateMember.jsp").text("마이페이지"); break;
 			case 2: $('#firstHeaderMenu').attr("href","<%=request.getContextPath()%>/logout.me").text("로그아웃");
-				    $('#secondHeaderMenu').attr("href","/login/views/host/manageReserve/reserveStep1.jsp").text("마이페이지"); break;
+				    $('#secondHeaderMenu').attr("href","<%=request.getContextPath()%>/selectReserve.ho").text("마이페이지"); break;
 					
 			case 3: $('#firstHeaderMenu').attr("href","<%=request.getContextPath()%>/logout.me").text("로그아웃");
 					$('#secondHeaderMenu').attr("href","<%=request.getContextPath()%>/selectAll.me").text("회원관리"); 
@@ -132,7 +132,6 @@
 			default: break;
 				
 			}
-			
 			
 		});
 		/* $(function(){

@@ -367,5 +367,5 @@ public class HostReserve {
 				+ userName + ", reserveTerm=" + reserveTerm + "]";
 	}
 	
-	
+
 }

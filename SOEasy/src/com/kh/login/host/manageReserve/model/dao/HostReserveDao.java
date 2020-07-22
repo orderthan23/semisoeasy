@@ -11,13 +11,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.jsp.notice.model.vo.Notice;
 import com.kh.login.host.manageReserve.model.vo.HostReserve;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.host.manageReserve.model.vo.PaymentRequest;
 import com.kh.login.space.model.vo.SpaceReservation;
 
-import static com.kh.jsp.common.JDBCTemplate.close;
 import static com.kh.login.common.JDBCTemplate.*;
 
 public class HostReserveDao {
@@ -174,29 +172,30 @@ public class HostReserveDao {
 		return result;
 	}
 
+	//호스트 예약내역 조회
 	public ArrayList<HostReserve> selectHostReserve(Connection con, int hostNo, int spaceNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<HostReserve>  hostReserve = null;
+		ArrayList<HostReserve>  list = new ArrayList<HostReserve>();
 		
 		String query = prop.getProperty("selectHostReserve");
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, hostNo);
+			pstmt.setInt(1, spaceNo);
+			pstmt.setInt(2, hostNo);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				hostReserve = new ArrayList<HostReserve>();
+				HostReserve hostReserve = new HostReserve();
 				
-				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));
+				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));			
+				hostReserve.setHostNo(rset.getInt("HOST_NO"));
 				hostReserve.setReserveNo(rset.getInt("RESERV_NO"));
 				hostReserve.setOfficeNo(rset.getString("OFFICE_NO"));
-				hostReserve.setSpaceName(rset.getString("SPACE_NO"));
+				hostReserve.setSpaceName(rset.getString("SPACE_NAME"));
 				hostReserve.setSpaceKind(rset.getInt("SPACE_KIND"));
-//				hostReserve.setDidDayReserve(rset.getString("DID_DAY_RESERV"));
-//				hostReserve.setDidMonthReserve(rset.getString("DID_MONTH_RESERV"));
 				hostReserve.setDidHostOk(rset.getInt("DID_HOST_OK"));
 				hostReserve.setReservePersonCount(rset.getInt("RESERV_PERSON_COUNT"));
 				hostReserve.setReserveStatus(rset.getInt("RESERV_STATUS"));
@@ -205,7 +204,7 @@ public class HostReserveDao {
 				hostReserve.setReserveDate(rset.getDate("RESERV_DATE"));
 				hostReserve.setUserName(rset.getString("USER_NAME"));
 				
-				
+				list.add(hostReserve);
 			}
 			
 		} catch (SQLException e) {
@@ -214,7 +213,7 @@ public class HostReserveDao {
 			close(pstmt);
 			close(rset);
 		}
-		return hostReserve;
+		return list;
 	}
 
 	public int insertHostReserve(Connection con, SpaceReservation requestMember) {
@@ -245,6 +244,30 @@ public class HostReserveDao {
 		} finally {
 			close(pstmt);
 		}
+		
+		return result;
+	}
+
+	public int getOfficeCount(Connection con, int spaceNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("selectOfficeCount");
+		System.out.println("dao nno : " + spaceNo);
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		System.out.println("officeCount dao : " + result);
+		
 		
 		return result;
 	}
