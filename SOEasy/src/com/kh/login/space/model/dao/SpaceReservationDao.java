@@ -6,10 +6,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import static com.kh.login.common.JDBCTemplate.*;
 
+import com.kh.login.space.model.vo.SpaceInfo;
 import com.kh.login.space.model.vo.SpaceReservation;
 
 public class SpaceReservationDao {
@@ -28,27 +32,26 @@ public class SpaceReservationDao {
 		
 	}
 
-	public int insertReservation(Connection con, SpaceReservation requestMember) {
+	public int insertReservationCowork(Connection con, SpaceReservation requestMember, SpaceInfo si) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = prop.getProperty("insertReserv");
+		String query = prop.getProperty("insertReservCo");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setInt(1, requestMember.getGuestNo());
-			pstmt.setInt(2, requestMember.getSpaceNo());
+			pstmt.setInt(2, si.getSpaceNo());
 			pstmt.setString(3, requestMember.getFixUnfix());
-			pstmt.setInt(4, requestMember.getOfficeNo());
-			pstmt.setString(5, requestMember.getStartDate());
-			pstmt.setString(6, requestMember.getEndDate());
-			pstmt.setInt(7, requestMember.getReservPersonCount());
-			pstmt.setInt(8, requestMember.getExpectPay());
-			pstmt.setString(9, requestMember.getUserName());
-			pstmt.setString(10, requestMember.getUserPhone());
-			pstmt.setString(11, requestMember.getUserEmail());
-			pstmt.setString(12, requestMember.getRequestContent());
+			pstmt.setString(4, requestMember.getStartDate());
+			pstmt.setString(5, requestMember.getEndDate());
+			pstmt.setInt(6, requestMember.getReservPersonCount());
+			pstmt.setInt(7, requestMember.getExpectPay());
+			pstmt.setString(8, requestMember.getUserName());
+			pstmt.setString(9, requestMember.getUserPhone());
+			pstmt.setString(10, requestMember.getUserEmail());
+			pstmt.setString(11, requestMember.getRequestContent());
 			
 			result = pstmt.executeUpdate();
 			
@@ -59,6 +62,39 @@ public class SpaceReservationDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<SpaceReservation> selectAllMyReser(Connection con, int guestNo) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<SpaceReservation> returnList = null;
+		
+		String query = prop.getProperty("selectMyReserv");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, guestNo);
+			rset = pstmt.executeQuery();
+			
+			returnList = new ArrayList<>();
+			
+			while(rset.next()) {
+				
+				SpaceReservation sr = new SpaceReservation();
+				
+				
+				//returnList.add(sr);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return returnList;
 	}
 
 }

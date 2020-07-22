@@ -167,8 +167,8 @@
 			</div> --%>
 			
 			<% for (Image i : imgList) { %>
-				<div style="background-image: url(<%= request.getContextPath() %>파일패쓰랑 체인지네임 들고오기); display: block; width: 500px; height: 700px; background-repeat : no-repeat; background-size: cover;"></div>
-			<%} %>
+				<div style="background-image: url(<%= request.getContextPath() + i.getFilePath() + i.getChangeName()%>); display: block; width: 500px; height: 700px; background-repeat : no-repeat; background-size: cover;"></div>
+			<% } %>
 			
 		</div>
 		
@@ -449,7 +449,7 @@
 		<footer><%@ include file="../common/footer.jsp"%></footer>
 		<script>
 			function test1() {
-				location.href="<%=request.getContextPath()%>/views/space/spaceReser.jsp";
+				location.href="<%=request.getContextPath()%>/intoReservation?spaceNo=<%= si.getSpaceNo()%>";
 			}
 			
 			function register() {
@@ -467,48 +467,6 @@
 		</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
