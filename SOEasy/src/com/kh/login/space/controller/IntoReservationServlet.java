@@ -18,7 +18,7 @@ import com.kh.login.space.model.service.SpaceService;
 @WebServlet("/intoReservation")
 public class IntoReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,14 +32,17 @@ public class IntoReservationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int sNo = Integer.parseInt(request.getParameter("spaceNo"));
-		System.out.println("너 값넘어왔냐?"+sNo);
-		
+
+		System.out.println("너 값넘어왔냐?" + sNo);
+
 		ArrayList<HashMap<String,Object>> list = new SpaceService().selectOneSpaceInfo(sNo);
-		
+
 		String page = "";
 		if(list != null) {
 			page ="/views/space/spaceReser.jsp";
-			request.setAttribute("introList", list);
+			request.getSession().setAttribute("introList", list);
+
+	
 			request.getRequestDispatcher(page).forward(request, response);
 		} else {
 			page = "views/common/errorPage.jsp";
@@ -56,4 +59,8 @@ public class IntoReservationServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+
 }
+
+
+

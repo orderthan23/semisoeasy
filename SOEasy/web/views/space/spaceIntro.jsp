@@ -159,6 +159,7 @@
 			<% for (Image i : imgList) { %>
 				<div style="background-image: url(<%= request.getContextPath() + i.getFilePath() + i.getChangeName()%>); display: block; width: 500px; height: 700px; background-repeat : no-repeat; background-size: cover;"></div>
 			<% } %>
+
 		</div>
 		
 		<br><br>
@@ -456,48 +457,6 @@
 		</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
