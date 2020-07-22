@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import com.kh.login.board.model.dao.BoardDao;
 import com.kh.login.board.model.vo.Board;
+import com.kh.login.board.model.vo.Qna;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 
 import static com.kh.login.common.JDBCTemplate.*;
@@ -165,6 +166,43 @@ public class BoardService {
 			}
 			
 			return result;
+			
+		}
+
+
+		public int insertM(Qna qna) {
+			Connection con = getConnection();
+			int result = new BoardDao().insertM(con,qna);
+			
+			if(result>0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+			
+			return result;
+		}
+
+
+		public int getMtoMListCount() {
+			Connection con = getConnection();
+			int listCount = new BoardDao().getMtoMListCount(con);
+			
+			close(con);
+			
+			return listCount;	
+		}
+
+
+		public ArrayList<Qna> selectMtoMList(PageInfo pi) {
+			
+			  Connection con = getConnection();
+		      
+		      ArrayList<Qna> list = new BoardDao().selectMtoMList(con,pi);
+		      
+		      close(con);
+		      
+		      return list;
 			
 		}
 

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="/login/css/layout.css">
 ​
 <style>
 ​
@@ -116,6 +116,7 @@
 			</td>
 		</tr>
 	</table>	
+		
 	</form>
 	</section>
 	 <%@ include file="../common/footer.jsp"%> 

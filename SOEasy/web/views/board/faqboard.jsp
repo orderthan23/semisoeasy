@@ -81,7 +81,7 @@
 	<div class="colMenu" style=margin-top:20px;>
 		<a class="colMenuButton" href="/login/selectList.no">공지사항</a>
 		<a class="colMenuButton selectedButton" href="/login/selectList.faq">자주 묻는 질문</a>
-		<a class="colMenuButton" href="/login/views/board/mtmboard.jsp">1대1문의</a>
+		<a class="colMenuButton" href="/login/select.mtm">1대1문의</a>
 	<br><br>
 	</div>
 	<hr style="margin : 0">
