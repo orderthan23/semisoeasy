@@ -35,8 +35,8 @@ public class InsertMtoMServlet extends HttpServlet {
  		qna.setQcontent(content);
  		qna.setQtitle(title);
  		qna.setQkind(category);
- 		qna.setrMnick(nick);
  		qna.setQmember(qMemberNo);
+ 		qna.setqMnick(nick);
  		
  		System.out.println("1대1 문의 제목 : " + title);
  		System.out.println("1대1 문의 분류 : " + category);
@@ -45,12 +45,8 @@ public class InsertMtoMServlet extends HttpServlet {
  		System.out.println("1대1 문의 질문자 번호 : " + qMemberNo);
  		int result = new BoardService().insertM(qna);
 		System.out.println("board : " + qna);
-		if(result>0 && category < 5) {
+		if(result>0 ) {
 			response.sendRedirect("/login/select.mtm");
-		}
-		// result>0이고, category의 value가 5이면 selectLIst.faq로 보내줘라
-		else if (result>0 && category == 5){
-			response.sendRedirect("/login/selectList.faq");
 		}
 		 else {
 			request.setAttribute("msg", "게시판 작성 실패");

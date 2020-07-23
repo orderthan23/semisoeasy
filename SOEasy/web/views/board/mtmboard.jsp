@@ -137,7 +137,6 @@
 					<td class="info" style="text-align: center;"><%= qna.getQtitle() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getqMnick() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getQdate() %></td>
-					<td class="info" style="text-align: center;">안녕하세요</td>
 				</tr>
 				<% } %>
 			</table>

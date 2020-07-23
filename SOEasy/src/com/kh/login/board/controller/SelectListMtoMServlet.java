@@ -65,7 +65,7 @@ public class SelectListMtoMServlet extends HttpServlet {
 	      
 	      //재 조회
 	      ArrayList<Qna> list = new BoardService().selectMtoMList(pi);
-	   
+	      System.out.println(list);
 	      String page = "";
 	      if(list != null) {
 	         page = "views/board/mtmboard.jsp";

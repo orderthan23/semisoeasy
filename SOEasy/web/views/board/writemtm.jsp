@@ -91,9 +91,9 @@
 			<td  style=text-align:center style="text-align:center; background:#60B4A6">
 			<select class="category" name="category" id="category" style="text-align:center; background:#60B4A6">
 					<option class="category" style="text-align:center">선택</option>
-					<option class="category" value="1">시스템관련</option>
-					<option class="category" value="2">계정관련</option>
-					<option class="category" value="3">결제관련</option>
+					<option class="category" value="2">시스템관련</option>
+					<option class="category" value="3">계정관련</option>
+					<option class="category" value="4">결제관련</option>
 					<option class="category"></option>
 				</select>
 			</td>
