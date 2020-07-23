@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.login.host.manageReserve.model.vo.HostReservation;
 import com.kh.login.host.manageReserve.model.vo.HostReserve;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.host.manageReserve.model.vo.PaymentRequest;
@@ -176,10 +177,11 @@ public class HostReserveDao {
 	public ArrayList<HostReserve> selectHostReserve(Connection con, int hostNo, int spaceNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<HostReserve>  list = new ArrayList<HostReserve>();
+		ArrayList<HostReserve> list = new ArrayList<HostReserve>();
 		
 		String query = prop.getProperty("selectHostReserve");
 		
+		System.out.println("호스트 예약정보 테이블 출력 : " + query);
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, spaceNo);
@@ -190,7 +192,8 @@ public class HostReserveDao {
 			if(rset.next()) {
 				HostReserve hostReserve = new HostReserve();
 				
-				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));			
+				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));	
+				hostReserve.setPayStatus(rset.getInt("PAY_STATUS"));					
 				hostReserve.setHostNo(rset.getInt("HOST_NO"));
 				hostReserve.setReserveNo(rset.getInt("RESERV_NO"));
 				hostReserve.setOfficeNo(rset.getString("OFFICE_NO"));
@@ -199,9 +202,9 @@ public class HostReserveDao {
 				hostReserve.setDidHostOk(rset.getInt("DID_HOST_OK"));
 				hostReserve.setReservePersonCount(rset.getInt("RESERV_PERSON_COUNT"));
 				hostReserve.setReserveStatus(rset.getInt("RESERV_STATUS"));
-				hostReserve.setStartDay(rset.getDate("START_DATE"));
-				hostReserve.setEndDay(rset.getDate("END_DATE"));
-				hostReserve.setReserveDate(rset.getDate("RESERV_DATE"));
+				hostReserve.setStartDay(rset.getString("START_DATE"));
+				hostReserve.setEndDay(rset.getString("END_DATE"));
+				hostReserve.setReserveDate(rset.getString("RESERV_DATE"));
 				hostReserve.setUserName(rset.getString("USER_NAME"));
 				
 				list.add(hostReserve);
@@ -216,7 +219,7 @@ public class HostReserveDao {
 		return list;
 	}
 
-	public int insertHostReserve(Connection con, SpaceReservation requestMember) {
+	public int insertHostReserve(Connection con, HostReservation requestMember) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = prop.getProperty("insertHostReserve");
@@ -255,7 +258,7 @@ public class HostReserveDao {
 		int result = 0;
 		
 		String query = prop.getProperty("selectOfficeCount");
-		System.out.println("dao nno : " + spaceNo);
+		System.out.println("dao spaceNo : " + spaceNo);
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -291,6 +294,9 @@ public class HostReserveDao {
 			if(rset.next()) {
 				HostReserve hostReserve = new HostReserve();
 				
+				hostReserve.setStartDay(rset.getString("START_DATE"));
+				hostReserve.setEndDay(rset.getString("END_DATE"));
+				hostReserve.setReserveDate(rset.getString("RESERV_DATE"));
 				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));			
 				hostReserve.setHostNo(rset.getInt("HOST_NO"));
 				hostReserve.setReserveNo(rset.getInt("RESERV_NO"));
@@ -300,9 +306,6 @@ public class HostReserveDao {
 				hostReserve.setDidHostOk(rset.getInt("DID_HOST_OK"));
 				hostReserve.setReservePersonCount(rset.getInt("RESERV_PERSON_COUNT"));
 				hostReserve.setReserveStatus(rset.getInt("RESERV_STATUS"));
-				hostReserve.setStartDay(rset.getDate("START_DATE"));
-				hostReserve.setEndDay(rset.getDate("END_DATE"));
-				hostReserve.setReserveDate(rset.getDate("RESERV_DATE"));
 				hostReserve.setUserName(rset.getString("USER_NAME"));
 				
 				list.add(hostReserve);
@@ -364,9 +367,9 @@ public class HostReserveDao {
 				hostReserve.setDidHostOk(rset.getInt("DID_HOST_OK"));
 				hostReserve.setReservePersonCount(rset.getInt("RESERV_PERSON_COUNT"));
 				hostReserve.setReserveStatus(rset.getInt("RESERV_STATUS"));
-				hostReserve.setStartDay(rset.getDate("START_DATE"));
-				hostReserve.setEndDay(rset.getDate("END_DATE"));
-				hostReserve.setReserveDate(rset.getDate("RESERV_DATE"));
+				hostReserve.setStartDay(rset.getString("START_DATE"));
+				hostReserve.setEndDay(rset.getString("END_DATE"));
+				hostReserve.setReserveDate(rset.getString("RESERV_DATE"));
 				hostReserve.setUserName(rset.getString("USER_NAME"));
 				
 			}
@@ -378,6 +381,29 @@ public class HostReserveDao {
 			close(rset);
 		}
 		return list;
+	}
+
+	public int updateOne(Connection con, int reserveNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateOne");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, reserveNo);
+			
+			
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
 	}
 
 
