@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.login.host.manageReserve.model.service.HostReserveService;
+import com.kh.login.host.manageReserve.model.vo.HostReservation;
 import com.kh.login.member.model.vo.Member;
-import com.kh.login.space.model.vo.SpaceReservation;
 
 /**
  * Servlet implementation class InsertHostReserveServlet
@@ -72,7 +72,7 @@ public class InsertHostReserveServlet extends HttpServlet {
 		System.out.println("requestContent : " + requestContent);
 		
 		
-		SpaceReservation requestMember = new SpaceReservation();
+		HostReservation requestMember = new HostReservation();
 		requestMember.setGuestNo(guestNo);
 		requestMember.setSpaceNo(spaceNo);
 		requestMember.setFixUnfix(fixUnfix);

@@ -96,9 +96,9 @@ h1 {
 		<div style="width:90%; margin-left:auto; margin-right:auto;">
 		<h1>테마전!</h1>
 		<div style="display:inline-block; width:60%;" id="themeList" >
-			<button type="button" class="themeButton" value="코워킹스페이스">외근이 잦아요!<br> 코워킹 스페이스</button>
-			<button type="button" class="themeButton" value="임대사무실">직원이 많아요!<br>임대사무실</button>
-			<button type="button" class="themeButton" value="코워킹라운지">하루만 이용!<br> 코워킹라운지</button>
+			<button type="button" class="themeButton" value="코워킹스페이">외근이 잦아요!<br> 코워킹 스페이스</button>
+			<button type="button" class="themeButton" value="오피스">직원이 많아요!<br>임대사무실</button>
+			<button type="button" class="themeButton" value="라운지">하루만 이용!<br> 코워킹라운지</button>
 			<br><br>
 		</div>
 		

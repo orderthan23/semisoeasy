@@ -118,7 +118,7 @@
 			<tr><td></td></tr>
 			<tr>
 				<td>사용자명</td>
-				<td class="tInfo"><input type="text" class="info" id="name2"><br>
+				<td class="tInfo"><input type="text" class="info" id="name2" namd="realUserName"><br>
 				<input type="checkbox" id="reserSame">예약자와 동일</td>
 			</tr>
 			<tr>

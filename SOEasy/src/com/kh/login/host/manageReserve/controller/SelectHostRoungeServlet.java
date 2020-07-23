@@ -32,13 +32,13 @@ public class SelectHostRoungeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int hostNo = 35;
-		int spaceNo = 10;
+		int hostNo = 26;
+		int spaceNo = 1;
 		
 		ArrayList<HostReserve> list = new HostReserveService().selectRoungeInfo(hostNo, spaceNo);
 		
-		for(HostReserve o : list) {
-			System.out.println("rounge servlet : " + o);
+		for(HostReserve h : list) {
+			System.out.println("rounge servlet list : " + h);
 		}
 		
 		

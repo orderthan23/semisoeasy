@@ -171,6 +171,7 @@
 				<% } %>
 			</tr>
 			<% for(int i = 1; i <= officeCount; i++) {%>
+			
 			<tr>
 				<td><%= officeInfo %>호실</td>
 				<% for(int j = 1; j < 31; j++) { %>
