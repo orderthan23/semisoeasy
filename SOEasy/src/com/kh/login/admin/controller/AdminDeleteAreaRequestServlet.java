@@ -21,7 +21,7 @@ public class AdminDeleteAreaRequestServlet extends HttpServlet {
     public AdminDeleteAreaRequestServlet() {
         super();
     }
-
+//
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int currentPage; //현재 페이지를 표시할 변수
 		int limit; //한 페이지에 게시글이 몇 개 보여질 것인지 표시
