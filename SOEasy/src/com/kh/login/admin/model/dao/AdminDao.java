@@ -4,12 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
+import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.member.model.vo.RecoverMember;
 
 import static com.kh.login.common.JDBCTemplate.*;
@@ -198,6 +201,130 @@ public class AdminDao {
 		
 		
 		return recoverList;
+	}
+
+
+
+
+
+
+	public int getDeleteRequestListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		String query = prop.getProperty("getDeleteRequestCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		
+		return listCount;
+	}
+
+
+
+
+
+
+	public ArrayList<HashMap<String, Object>> selectAllDeleteList(Connection con, PageInfo pi) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			ArrayList<HashMap<String, Object>> deleteList = null;
+			String query = prop.getProperty("selectAllDeleteList");
+			int startRow =(pi.getCurrentPage()-1)*pi.getLimit()+1;
+			int endRow = startRow + pi.getLimit()-1;
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2,endRow);
+				rset = pstmt.executeQuery();
+				deleteList = new ArrayList<>();
+				while(rset.next()) {
+					HashMap<String, Object> hmap = new HashMap<>();
+					hmap.put("spaceNo", rset.getInt("SPACE_NO"));
+					hmap.put("spaceName", rset.getString("SPACE_NAME"));
+					if(rset.getInt("SPACE_KIND")==1) {
+						hmap.put("spaceKind", "독립오피스");
+					}else if(rset.getInt("SPACE_KIND")==2) {
+						hmap.put("spaceKind", "코워킹스페이스");
+					}
+					hmap.put("userId", rset.getString("M_ID"));
+					hmap.put("userEmail", rset.getString("M_EMAIL"));
+					hmap.put("userPhone", rset.getString("M_PHONE"));
+					if(rset.getString("S_STATUS").equals("DW")) {
+					 hmap.put("status", "삭제 대기 중");
+					}
+					
+					
+					deleteList.add(hmap);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rset);
+			}
+			
+		
+		return deleteList;
+	}
+
+
+
+
+
+
+	public int insertDeleteSpaceTable(Connection con, int spaceNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("insertDeleteSpaceTable");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+
+
+
+	public int updateSpaceStatus(Connection con, int spaceNo, String status) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateSpaceStatus");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, status);
+			pstmt.setInt(2, spaceNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
