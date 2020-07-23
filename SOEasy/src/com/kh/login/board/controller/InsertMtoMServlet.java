@@ -37,14 +37,13 @@ public class InsertMtoMServlet extends HttpServlet {
  		qna.setQkind(category);
  		qna.setQmember(qMemberNo);
  		qna.setqMnick(nick);
- 		
  		System.out.println("1대1 문의 제목 : " + title);
  		System.out.println("1대1 문의 분류 : " + category);
  		System.out.println("1대1 문의 내용 : " + content);
  		System.out.println("1대1 문의 질문자닉 : " + nick);
  		System.out.println("1대1 문의 질문자 번호 : " + qMemberNo);
  		int result = new BoardService().insertM(qna);
-		System.out.println("board : " + qna);
+		System.out.println("qna : " + qna);
 		if(result>0 ) {
 			response.sendRedirect("/login/select.mtm");
 		}

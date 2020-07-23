@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.login.board.model.service.BoardService;
 import com.kh.login.board.model.vo.Qna;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
+import com.kh.login.member.model.vo.Member;
 
 @WebServlet("/select.mtm")
 public class SelectListMtoMServlet extends HttpServlet {
@@ -22,6 +23,9 @@ public class SelectListMtoMServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		  
+		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		int memberNo = loginUser.getMemberNo();
 		  int currentPage; //현재 페이지를 표시할 변수
 	      int limit; // 한 페이지에 게시글이 몇 개 보여질 것인지 표시
 	      int maxPage; //전체 페이지에서 가장 마지막 페이지
@@ -64,21 +68,21 @@ public class SelectListMtoMServlet extends HttpServlet {
 	      PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 	      
 	      //재 조회
-	      ArrayList<Qna> list = new BoardService().selectMtoMList(pi);
+	      ArrayList<Qna> list = new BoardService().selectMtoMList(memberNo, pi);
 	      System.out.println(list);
 	      String page = "";
-	      if(list != null) {
+	      if(list != null ) {
 	         page = "views/board/mtmboard.jsp";
 	         request.setAttribute("list", list);
 	         request.setAttribute("pi", pi);
+	
 	      } else {
-	         page = "views/common/errorPage.jsp";
-	         request.setAttribute("msg", "게시판 조회 실패!");
+		         page = "views/common/errorPage.jsp";
+		         request.setAttribute("msg", "게시판 조회 실패!");
+		      
 	      }
-	      
 	      request.getRequestDispatcher(page).forward(request, response);
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

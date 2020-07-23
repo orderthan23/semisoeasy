@@ -37,11 +37,10 @@
 #boardTable tr th{
 
   background:#60B4A6;
-  color: white;
   text-align: center;
 ​
 }
-#boardTable tr{
+#mtmTable tr{
 	height : 50px;
 }
 #searchWrap{
@@ -102,9 +101,8 @@
 		<br>
 		<div style="width:90%; margin-left:auto; margin-right:auto;">
 		</div>
-		<table style="width: 100%; border-collapse: collapse;"id="boardTable">
+		<table style="width: 100%; border-collapse: collapse;" id="mtmTable" class="mtmTable">
 		<tr>
-			<td></td>
 			<td align="center">
 				<select class="category">
 					<option class="category">계정관련</option>
@@ -128,17 +126,31 @@
 					<th>작성일자</th>
 					<th>답변여부</th>
 				</tr>
-				
 				<tr>
 					<% for(Qna qna : list) { %>
+					<%if(loginUser.getMemberNo() == qna.getQmember()) { %>
 				<tr>
 					<td class="info" style="text-align: center;"><%= qna.getQno() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getQkind() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getQtitle() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getqMnick() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getQdate() %></td>
+					<td class="info" style="text-align: center;"></td>
+					
 				</tr>
-				<% } %>
+				<% } else if(loginUser.getMemberNo() == 1) {  %>
+				<tr>
+					<td class="info" style="text-align: center;"><%= qna.getQno() %></td>
+					<td class="info" style="text-align: center;"><%= qna.getQkind() %></td>
+					<td class="info" style="text-align: center;"><%= qna.getQtitle() %></td>
+					<td class="info" style="text-align: center;"><%= qna.getqMnick() %></td>
+					<td class="info" style="text-align: center;"><%= qna.getQdate() %></td>
+					<td class="info" style="text-align: center;"></td>
+					
+				</tr>
+			<% } %>
+			<% } %>
+			
 			</table>
 ​<!-- 페이징 처리 버튼 -->
       <div class="pagingArea" align="center">
@@ -165,17 +177,25 @@
          <% } else { %>
          <button onclick="location.href='<%=request.getContextPath()%>/select.mtm?currentPage=<%=currentPage + 1%>'">></button>
          <% } %>
-      	
          <button onclick="location.href='<%=request.getContextPath()%>/select.mtm?currentPage=<%=maxPage%>'">>></button>
       </div>
 		
 		</div>
 	</section>
 	 <%@ include file="../common/footer.jsp"%> 
-​
-​
-	
-				
+​	 <script>
+		 var userStatus = <%=userStatus%>;
+		$(function(){
+			$("#mtmTable td").mouseenter(function() {
+				$(this).parent().css({"background" : "#60B4A6", "cursor" : "pointer"});
+			}).mouseout(function() {
+				$(this).parent().css({"background" : "white"});
+			}).click(function() {
+				var num = $(this).parent().children().eq(0).text();
+				location.href="<%=request.getContextPath()%>/detail.mm?num=" + num;
+			})
+		});
+	</script>
 			
 </body>
 </html>

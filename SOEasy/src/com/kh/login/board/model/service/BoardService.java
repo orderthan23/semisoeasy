@@ -194,16 +194,47 @@ public class BoardService {
 		}
 
 
-		public ArrayList<Qna> selectMtoMList(PageInfo pi) {
+		public ArrayList<Qna> selectMtoMList(int memberNo, PageInfo pi) {
 			
 			  Connection con = getConnection();
 		      
-		      ArrayList<Qna> list = new BoardDao().selectMtoMList(con,pi);
+		      ArrayList<Qna> list = new BoardDao().selectMtoMList(con, memberNo, pi);
 		      
 		      close(con);
 		      
 		      return list;
 			
+		}
+
+
+		public Qna detailQna(int qno) {
+				Connection con = getConnection();
+			
+			
+			Qna qna = new BoardDao().detailQna(con, qno);
+			
+			if(qna != null) {
+					commit(con);
+			} else {
+					rollback(con);
+			} 
+			close(con);
+			
+			return qna;
+		}
+
+
+		public int updateqna(Qna requestQna) {
+			Connection con = getConnection();
+			int result = new BoardDao().updateqna(con,requestQna);
+			
+			if(result > 0 ) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+			
+			return result;
 		}
 
 

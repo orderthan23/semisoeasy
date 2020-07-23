@@ -102,15 +102,6 @@
 			<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
 			<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a>
 				<% } %>				
-			<table id="searchWrap" text-align="center" align="center">
-				<tr>
-					<td><input type=search placeholder="검색어를 입력하세요"></td>
-					<td><button type="submit">
-							<img src="/login/images/icon/search2.png" width="25px"
-								height="25px">
-						</button>
-				</tr>
-			</table>
 			<br>
 		
 			<table style="width: 100%; border-collapse: collapse;" id="boardTable">
@@ -188,7 +179,6 @@
 	<br><br><br>
 	<%@ include file="../common/footer.jsp"%>
 	<script>
-	
 		 var userStatus = <%=userStatus%>;
 		 console.log(category);
 		$(function(){

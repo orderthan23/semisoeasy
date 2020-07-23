@@ -454,11 +454,10 @@ public class BoardDao {
 		return listCount;
 	}
 
-	public ArrayList<Qna> selectMtoMList(Connection con, PageInfo pi) {
+	public ArrayList<Qna> selectMtoMList(Connection con, int memberNo, PageInfo pi) {
 		  PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      ArrayList<Qna> list = null;
-	      
 	      String query = prop.getProperty("selectMtoMList");
 	      
 	      try {
@@ -467,6 +466,7 @@ public class BoardDao {
 	         int startRow = (pi.getCurrentPage() - 1) * pi.getCurrentPage() + 1;
 	         int endRow = startRow + pi.getLimit() -1;
 	         
+	        // pstmt.setInt(1, memberNo);
 	         pstmt.setInt(1, startRow);
 	         pstmt.setInt(2, endRow);
 	         
@@ -476,17 +476,20 @@ public class BoardDao {
 	         list = new ArrayList<>(); 
 	         
 	         while(rset.next()) {
+	        	
 	    		Qna qna = new Qna();
 	    		System.out.println("rset in?");
 	    		qna.setQno(rset.getInt("Q_NO"));
 	    		qna.setQmember(rset.getInt("Q_MEM_NO"));
-	    		qna.setRmember(rset.getInt("R_MEM_NO"));
 	    		qna.setQdate(rset.getDate("Q_ENROLL_DATE"));
 	    		qna.setQcontent(rset.getString("Q_CONTENT"));
-	    		qna.setRcontent(rset.getString("R_CONTENT"));
-	    		qna.setRdate(rset.getDate("R_ENROLL_DATE"));
 	    		qna.setQkind(rset.getInt("Q_KIND"));
 	    		qna.setQtitle(rset.getString("Q_TITLE"));
+	    		qna.setRcontent(rset.getString("R_CONTENT"));
+	    		qna.setRdate(rset.getDate("R_ENROLL_DATE"));
+	    		qna.setRmember(rset.getInt("R_MEM_NO"));
+	    		qna.setqMnick(rset.getString("Q_MEM_NICK"));
+	    		qna.setrMnick(rset.getString("R_MEM_NICK"));
 	    		list.add(qna);
 	    		System.out.println("list의 값 "  + list);
 	         }
@@ -500,10 +503,57 @@ public class BoardDao {
 	      }
 	      
 	      System.out.println(list);
-	      System.out.println(list.size());
 	      return list;
 	}
 
+	public Qna detailQna(Connection con, int qno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Qna qna = null;
+		
+		String query = prop.getProperty("detailQna");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, qno);
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				qna = new Qna();
+				System.out.println("rset in?");
+	    		qna.setQno(rset.getInt("Q_NO"));
+	    		qna.setQmember(rset.getInt("Q_MEM_NO"));
+	    		qna.setQdate(rset.getDate("Q_ENROLL_DATE"));
+	    		qna.setQcontent(rset.getString("Q_CONTENT"));
+	    		qna.setQkind(rset.getInt("Q_KIND"));
+	    		qna.setQtitle(rset.getString("Q_TITLE"));
+	    		qna.setRcontent(rset.getString("R_CONTENT"));
+	    		qna.setRdate(rset.getDate("R_ENROLL_DATE"));
+	    		qna.setRmember(rset.getInt("R_MEM_NO"));
+	    		qna.setqMnick(rset.getString("Q_MEM_NICK"));
+	    		qna.setrMnick(rset.getString("R_MEM_NICK"));
+				System.out.println("읽어온 mtom 정보 : " + qna);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return qna;
+	}
+
+	public int updateqna(Connection con, Qna requestQna) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateqna");
+		
+		return result;
+	}
 	
 
 }
