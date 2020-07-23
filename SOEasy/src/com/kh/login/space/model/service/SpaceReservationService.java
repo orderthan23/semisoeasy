@@ -24,12 +24,12 @@ public class SpaceReservationService {
 			result = srd.insertReservationCowork(con, requestMember, si);
 		}
 		
-		ArrayList<HashMap<String, Object>> returnList = null;
+		ArrayList<HashMap<String, Object>> returnList = new ArrayList<>();
 		HashMap<String, Object> hmap = new HashMap<>();
 		ArrayList<SpaceReservation> sr = null;
 		
 		if(result > 0) {
-//			commit(con);
+//			commit(con);	//테스트용 풀지말것.
 			sr = new SpaceReservationDao().selectAllMyReser(con, requestMember.getGuestNo());
 				if(sr != null && si != null) {
 					commit(con);
@@ -38,11 +38,11 @@ public class SpaceReservationService {
 					returnList = null;
 				}
 		} else {
-			rollback(con);
+			//rollback(con);
 			returnList = null; //혹시몰라서
 		}
 		
-		hmap.put("spaceReser", sr);
+		hmap.put("spaceReser", sr); 
 		hmap.put("spaceInfo", si);
 		returnList.add(hmap);
 		

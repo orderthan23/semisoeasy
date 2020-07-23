@@ -3,17 +3,17 @@
     
 <%
 
-ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) session.getAttribute("introList");
+	ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) session.getAttribute("introList");
 
-HashMap<String, Object> hmap = list.get(0);
+	HashMap<String, Object> hmap = list.get(0);
 
-SpaceInfo si = (SpaceInfo) hmap.get("spaceInfo");
+	SpaceInfo si = (SpaceInfo) hmap.get("spaceInfo");
 
-ArrayList<Image> imgList = (ArrayList<Image>) hmap.get("imgList");
-ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
-ArrayList<QnA> qnaList = (ArrayList<QnA>) hmap.get("qnaList");
+	ArrayList<Image> imgList = (ArrayList<Image>) hmap.get("imgList");
+	ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
+	ArrayList<QnA> qnaList = (ArrayList<QnA>) hmap.get("qnaList");
 
-String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];  
+	String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];  
 
 %>
 
@@ -147,7 +147,6 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 			<% for (Image i : imgList) { 
 				String url = request.getContextPath()+i.getFilePath() + i.getChangeName();
 				System.out.println(url);
-
 			%>
 				<div style="background-image: url(<%=url%>); display:block; width:500px; height:700px; background-repeat:no-repeat; background-size:cover;"></div>
 			<% } %>
@@ -203,7 +202,7 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 				<td id="spaceTypeInfo">
 					<% if (si.getSpaceKind() == 1) { %>
 						독립오피스
-					<% } else { %>
+					<% } else if (si.getSpaceKind() == 2) { %>
 						코워킹스페이스
 					<% } %>
 				</td>
@@ -212,10 +211,6 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 				<td id="accPer" width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>예약 가능 인원</b></td>
 				<td id="accPerInfo"><%= si.getSpaceContainCount() %></td>
 			</tr>
-			<tr>
-				<td id="reserDate" width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>예약 일정 설정</b></td>
-				<td></td>
-			</tr>
 		</table>
 
 
@@ -223,14 +218,16 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 		
 		
 		<form id="insertReservation" action="<%= request.getContextPath()%>/insertReservationInfo" method="post">
+		
 		<!-- 날짜 ~부터 ~까지 -->
-		<table align="center" width="500px">
+		<table align="center" width="800">
 			<tr>
-				<td colspan="2" align="center"><input id="date1" name="startDate" style="border: 1.5px solid #40a4b6;" type="date"> 부터</td>
-				<td colsapn="2" align="center"><input id="date2" name="endDate" style="border: 1.5px solid #40a4b6;" type="date"> 까지</td>
+				<td style="color:#40a4b6; font-size:20px; width:200px;"><b>예약 일정 설정</b></td>
+				<td style="width:400px;" colspan="2"><input id="date1" name="startDate" style="border: 1.5px solid #40a4b6;" type="date"> 부터</td>
+				<td style="width:400px;"><input id="date2" name="endDate" style="border: 1.5px solid #40a4b6;" type="date"> 까지</td>
 			</tr>
 		</table>
-		<br><br><br>
+		<br><br>
 		
 		<!-- 예약 인원 선택 -->
 		<table align="center" width="800">
@@ -238,6 +235,41 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 				<td style="color:#40a4b6; font-size:20px; width:200px;"><b>예약 인원 선택</b></td>
 				<td style="width:200px;" colspan="2"><input type="number" id="choosePer" value="1" min="1" name="reservPersonCount"></td>
 				<td style="width:400px;">명</td>
+			</tr>
+		</table>
+		<br><br>
+		
+		<!-- 코워킹스페이스/독립오피스일경우 자유석지정석 호실 선택하는거 -->
+		<table align="center" width="800">
+			<tr>
+				<% if (si.getSpaceKind() == 1) { %>
+					<!-- 독립오피스 호실 가져오기 -->
+					<td style="color:#40a4b6; font-size:20px; width:200px;"><b>호실</b></td>
+					<td>
+						<select name="officeNo" style="width:175px; border: 1.5px solid #40a4b6;">
+							<% for (int i = 0; i < si.getOfficeNo().length; i++) { %>
+								<option value="<%= si.getOfficeNo()[i]%>"><%= si.getOfficeNo()[i] %></option>
+							<% } %>
+						</select>
+					</td>
+				<% } else if (si.getSpaceKind() == 2) { %>
+					<!-- 코워킹스페이스 또 if문 돌려야함 -->
+					<td style="color:#40a4b6; font-size:20px; width:200px;"><b>좌석</b></td>
+					<% if (si.getUnfixSeat() > 0 && si.getFixSeat() > 0) { %>
+						<td>
+							<input type="radio" id="rdBtn1" value="F" name="seat"><label for="rdBtn1">지정석</label>
+							<input type="radio" id="rdBtn2" value="U" name="seat"><label for="rdBtn2">자유석</label>
+						</td>
+					<% } else if (si.getUnfixSeat() == 0) { %>
+						<td>
+							지정석<input type="hidden" name="seat" value="F">
+						</td>
+					<% } else if (si.getFixSeat() == 0) { %>
+						<td>
+							자유석<input type="hidden" name="seat" value="U">
+						</td>
+					<% } %>
+				<% } %>
 			</tr>
 		</table>
 		<br><br>
@@ -489,14 +521,10 @@ String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];
 		//입력 안한 칸 있으면 못넘어가게 하기
 		
 		//결제버튼 눌렀을때	
-		/* function push() {
-			if() {
-				
-			} else {
-				alert('결제버튼 누름 / API로 연결');
-				$("#insertReservation").submit();
-			}
-		}; */
+		function push() {
+			alert('결제버튼 누름 / API로 연결');
+			$("#insertReservation").submit();
+		};
 		
 		
 		//공간사진 슬라이드
