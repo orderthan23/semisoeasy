@@ -455,7 +455,7 @@ public class BoardDao {
 	}
 
 	public ArrayList<Qna> selectMtoMList(Connection con, PageInfo pi) {
-		PreparedStatement pstmt = null;
+		  PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      ArrayList<Qna> list = null;
 	      
@@ -470,13 +470,14 @@ public class BoardDao {
 	         pstmt.setInt(1, startRow);
 	         pstmt.setInt(2, endRow);
 	         
-	         
 	         rset = pstmt.executeQuery();
-	         
+	         //System.out.println(query);
+	         System.out.println(rset.next());
 	         list = new ArrayList<>(); 
 	         
 	         while(rset.next()) {
 	    		Qna qna = new Qna();
+	    		System.out.println("rset in?");
 	    		qna.setQno(rset.getInt("Q_NO"));
 	    		qna.setQmember(rset.getInt("Q_MEM_NO"));
 	    		qna.setRmember(rset.getInt("R_MEM_NO"));
@@ -486,8 +487,8 @@ public class BoardDao {
 	    		qna.setRdate(rset.getDate("R_ENROLL_DATE"));
 	    		qna.setQkind(rset.getInt("Q_KIND"));
 	    		qna.setQtitle(rset.getString("Q_TITLE"));
-				
 	    		list.add(qna);
+	    		System.out.println("list의 값 "  + list);
 	         }
 	         
 	         
@@ -498,7 +499,8 @@ public class BoardDao {
 	         close(pstmt);
 	      }
 	      
-	      
+	      System.out.println(list);
+	      System.out.println(list.size());
 	      return list;
 	}
 
