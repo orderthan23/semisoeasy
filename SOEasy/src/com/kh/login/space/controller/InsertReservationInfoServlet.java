@@ -50,10 +50,18 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		
 		//reservNo는 시퀀스로
 		int guestNo = loginUser.getMemberNo();
-		//int spaceNo = //나중에 이미 등록된 공간정보에서 공간번호 빼와야할듯 ..?
-//		int spaceNo = 1; //얘는 임시;
-		String fixUnfix = "F"; 
-//		int officeNo = 101;		
+		int spaceNo = si.getSpaceNo();
+		
+		String fixUnfix = "";
+		if (request.getParameter("seat") != null && request.getParameter("seat") != "") {
+			fixUnfix = request.getParameter("seat");
+		}
+		
+		String officeNo = "";
+		if (request.getParameter("officeNo") != null && request.getParameter("officeNo") != "") {
+			officeNo = request.getParameter("officeNo");
+		}
+		
 		String[] startDates = request.getParameter("startDate").split("-");
 		String startDate = startDates[0] + startDates[1] + startDates[2];
 		String[] endDates = request.getParameter("endDate").split("-");
@@ -74,7 +82,7 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		requestMember.setGuestNo(guestNo);
 //		requestMember.setSpaceNo(spaceNo);
 		requestMember.setFixUnfix(fixUnfix);
-//		requestMember.setOfficeNo(officeNo);
+		requestMember.setOfficeNo(officeNo);
 		requestMember.setStartDate(startDate);
 		requestMember.setEndDate(endDate);
 		requestMember.setReservPersonCount(reservPersonCount);
