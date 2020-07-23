@@ -118,8 +118,8 @@
 		</table>
 		<a href="writeboard.jsp" class="writeButton">글쓰기</a> 
 		<br>
-		
-					<input type="hidden" name="id" value="<%=loginUser.getmId()%>">
+			<form method="post"  id="updateMtM"  name="updateMtm">
+				<input type="hidden" name="id" value="<%=loginUser.getmId()%>">
 				<table style = "width: 100%; border-collapse: collapse; " id="boardTable">
 						<tr>
 							<th>번호</th>
@@ -129,7 +129,6 @@
 							<th>작성일자</th>
 							<th>답변여부</th>
 						</tr>
-				
 						<tr style="border-bottom: solid 1px  #60B4A6;">
 							<td class="info" style="text-align: center;"><%=qna.getQno() %></td>
 							<td class="info" style="text-align: center;"><%=qna.getQkind() %></td>
@@ -153,23 +152,30 @@
 								<div style="width:94%; margin-left:auto; margin-right:auto; margin-top:20px;">
 									<p class="aTitle">답변 &nbsp; <label style=" float:right; font-size : 15px; font-weight:bolder; "><%= qna.getRdate() %></label></p>
 									<hr>
-									<textArea style="width:100%; resize:none; border:none;" class="answer" readonly class="QandA" ><%= qna.getRcontent() %></textArea>
+									<textArea name="rcontent"style="width:100%; resize:none; border:none;" class="answer" class="QandA" ><%= qna.getRcontent() %></textArea>
 									<div style="float:right;">
-									<%if(loginUser != null && loginUser.getMemberNo() == 1) { %>
-									<button   style="text-align:center; background:#60B4A6; color:white" onclick="location.href='<%= request.getContextPath()%>/selectBoard.mm?num=<%= qna.getQno()%>'" >답변하기 </button>
-									<button type="button" onclick="stopAnswer();" class="stopBtn">삭제</button>
+									<%if(loginUser != null && loginUser.getMemberNo() ==1 ) { %>
+									<button type="button" onclick="complete();" class="startBtn">답변완료</button>
 									<% } %>
 									</div>
 								</div>
 							</td>
 						</tr>
 				</table>
+	</form>
 	</div>
 	</section>
 	<br><br>
 	<footer><%@ include file="../common/footer.jsp"%></footer>
-	<script>
 	
+	<script>
+
+	$(function(){
+		function complete(){
+			$("#updateMtm").attr("action", "<%=request.getContextPath()%>/updateBoard.mm");
+		}
+	});
+		
 	</script>
 	
 </body>
