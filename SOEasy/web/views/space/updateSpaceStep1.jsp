@@ -387,12 +387,12 @@
 				<tr>
 					<td></td>
 					<td>공간 주소 *</td>
-					<td><input type="text" placeholder="공간 주소를 입력하세요." id="roadFullAddr"  name="space-address" readonly>&nbsp;&nbsp;<button type="button" onclick="goPopup();">검색</button></td>
+					<td><input type="text" placeholder="공간 주소를 입력하세요." id="roadFullAddr"  name="space-address" value="<%=si.getSpaceAddress()%>" readonly>&nbsp;&nbsp;<button type="button" onclick="goPopup();">검색</button></td>
 					<td>
-						<input type="hidden" id="siNm"  name="siNm" />
-						<input type="hidden" id="sggNm"  name="sggNm" />
-						<input type="hidden" id="emdNm"  name="emdNm" />
-						<input type="hidden" id="roadAddrPart1"  name="roadAddrPart1" />
+						<input type="hidden" id="siNm"  name="siNm" value="<%=siNm%>"/>
+						<input type="hidden" id="sggNm"  name="sggNm" value="<%=sggNm%>" />
+						<input type="hidden" id="emdNm"  name="emdNm" value="<%=emdNm%>" />
+						<input type="hidden" id="roadAddrPart1"  name="roadAddrPart1" value="<%=roadAddrPart1%>" />
 					</td>
 				</tr>
 				<tr>
@@ -426,7 +426,7 @@
 				<br><br><br><br><br><br>
 			</div>
 			<div id="fileArea">
-					<input type="file" id="cap-img" name="capital-img" onchange="load(this);" accept="image/*">
+					<input type="file" id="cap-img" name="thumbnailImg0" onchange="load(this);" accept="image/*">
 					<input class="thumb" type="file" id="thumbnailImg1" name="thumbnailImg1" onchange="loadImg(this, 1);" accept="image/*">
 					<input class="thumb" type="file" id="thumbnailImg2" name="thumbnailImg2" onchange="loadImg(this, 2);" accept="image/*">
 					<input class="thumb" type="file" id="thumbnailImg3" name="thumbnailImg3" onchange="loadImg(this, 3);" accept="image/*">
@@ -439,7 +439,11 @@
 	<footer>
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
-	<script>	
+	<script>
+		var checkUnload = true;
+	    $(window).on("beforeunload", function(){
+	        if(checkUnload) return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+	    });
 	
 		$(function(){
 			initSet();
@@ -537,6 +541,8 @@
 			<% for(int i = 1; i < imgList.size(); i++) { %>
 				$("#thumnail-<%=i%>").attr("src", "<%=request.getContextPath() + imgList.get(i).getFilePath() + "/" + imgList.get(i).getChangeName()%>");
 			<% } %>
+			
+			countSeat();
 		}
 			
 			

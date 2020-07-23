@@ -407,7 +407,7 @@
 				<br><br><br><br><br><br>
 			</div>
 			<div id="fileArea">
-					<input type="file" id="cap-img" name="capital-img" onchange="load(this);" accept="image/*">
+					<input type="file" id="cap-img" name="thumbnailImg0" onchange="load(this);" accept="image/*">
 					<input class="thumb" type="file" id="thumbnailImg1" name="thumbnailImg1" onchange="loadImg(this, 1);" accept="image/*">
 					<input class="thumb" type="file" id="thumbnailImg2" name="thumbnailImg2" onchange="loadImg(this, 2);" accept="image/*">
 					<input class="thumb" type="file" id="thumbnailImg3" name="thumbnailImg3" onchange="loadImg(this, 3);" accept="image/*">
