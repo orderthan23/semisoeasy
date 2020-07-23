@@ -20,7 +20,7 @@ public class SpaceReservationService {
 		int result = 0;
 		
 		if(si.getSpaceKind() == 1) {
-			
+			result = srd.insertReservationIndepen(con, requestMember, si);
 		} else if(si.getSpaceKind() == 2) {
 			result = srd.insertReservationCowork(con, requestMember, si);
 		}
