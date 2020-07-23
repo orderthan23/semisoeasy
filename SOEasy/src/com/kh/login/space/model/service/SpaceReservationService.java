@@ -12,7 +12,6 @@ import com.kh.login.space.model.vo.SpaceReservation;
 
 public class SpaceReservationService {
 
-	//예약정보 db에 인서트하기
 	public ArrayList<HashMap<String, Object>> insertReservation(SpaceReservation requestMember, SpaceInfo si) {
 
 		Connection con = getConnection();
