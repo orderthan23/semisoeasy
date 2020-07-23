@@ -967,4 +967,137 @@ public class SpaceDao {
 		
 		return result;
 	}
+
+	//수정된 SPACE_INF 업데이트 메소드
+	public int updateSpaceInfo(Connection con, SpaceInfo si) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateSpaceInfo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, si.getSpaceName());
+			pstmt.setInt(2, si.getSpaceKind());
+			pstmt.setString(3, si.getSpaceAddress());
+			pstmt.setString(4, si.getSpaceIntro());
+			pstmt.setString(5, si.getSpaceShortIntro());
+			pstmt.setString(6, si.getSpaceLocationFilter());
+			pstmt.setInt(7, si.getSpaceNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	//기존 OFFICE 정보 삭제용 메소드
+	public int deleteOldOffice(Connection con, int spaceNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteOldOffice");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	//COWORK 업데이트용 메소드
+	public int updateCowork(Connection con, SpaceInfo si) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateCowork");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, si.getTotalSeat());
+			pstmt.setInt(2, si.getMaxReserv());
+			pstmt.setInt(3, si.getFixSeat());
+			pstmt.setInt(4, si.getUnfixSeat());
+			pstmt.setInt(5, si.getSpaceNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	//기존 편의시설 삭제용 메소드
+	public int deleteConv(Connection con, int spaceNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteConv");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	//기존 사진 업데이트용 메소드
+	public int updateSpaceImg(Connection con, Image image) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateSpaceImg");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, image.getOriginName());
+			pstmt.setString(2, image.getFilePath());
+			pstmt.setString(3, image.getChangeName());
+			pstmt.setInt(4, image.getSpaceNo());
+			pstmt.setInt(5, image.getImgNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
