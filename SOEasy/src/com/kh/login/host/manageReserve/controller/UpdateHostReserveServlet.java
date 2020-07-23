@@ -1,28 +1,23 @@
 package com.kh.login.host.manageReserve.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.login.host.manageReserve.model.service.HostReserveService;
-import com.kh.login.host.manageReserve.model.vo.HostReserve;
-
 /**
- * Servlet implementation class SelectHostRoungeServlet
+ * Servlet implementation class UpdateHostReserveServlet
  */
-@WebServlet("/Select.ro")
-public class SelectHostRoungeServlet extends HttpServlet {
+@WebServlet("/update.hr")
+public class UpdateHostReserveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectHostRoungeServlet() {
+    public UpdateHostReserveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +27,10 @@ public class SelectHostRoungeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int hostNo = 35;
-		int spaceNo = 10;
-		
-		ArrayList<HostReserve> list = new HostReserveService().selectRoungeInfo(hostNo, spaceNo);
-		
-		for(HostReserve o : list) {
-			System.out.println("rounge servlet : " + o);
-		}
 		
 		
-		String page = "";
-		if(list != null) {
-			page = "/views/host/manageReserve/rounge1.jsp";
-			request.setAttribute("list", list);
-			request.getRequestDispatcher(page).forward(request, response);
-		} else {
-			page = "/views/common/errorPage.jsp";
-			request.setAttribute("msg", "예약정보 insert 실패");
-			request.getRequestDispatcher(page).forward(request, response);
-		}
+		
+		
 	}
 
 	/**

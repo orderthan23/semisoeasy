@@ -14,8 +14,11 @@
 		System.out.println(list.get(i));
 	}
 	
-	
-	
+	int officeInfo = 401;
+	int startDay = 5;
+	int term = 14;
+	int reserveNo = 9;
+	String name= "이호정";
 %>
 
 <!DOCTYPE html>
@@ -115,8 +118,9 @@
 		<div class="colMenu">
 		<label class="colMenuTitle">공간 일정 관리</label>
 		<a class="colMenuButton selectedButton" href="<%=request.getContextPath()%>/selectReserve.ho">예약 일정 관리</a>
-		<a class="colMenuButton" href="/login/views/host/manageReserve/rounge1.jsp">라운지 회원 관리</a>
+		<a class="colMenuButton" href="<%=request.getContextPath()%>/Select.ro">라운지 회원 관리</a>
 		<a class="colMenuButton" href="<%=request.getContextPath()%>/select.pr">예약 승인 요청</a>
+		<a class="colMenuButton" href="<%=request.getContextPath()%>/selectTempSpace?memberNo=<%=loginUser.getMemberNo()%>">내 공간 관리</a>
 	<br><br>
 	</div>
 	<hr style="margin : 0">
@@ -161,57 +165,33 @@
 		<br>
 		<table align="center" id="table1">
 			<tr>
+				<td>호실</td>
+				<% for(int i = 1; i <= 31; i++) {%>
+					<td><%=i %></td>
+				<% } %>
+			</tr>
+			<% for(int i = 1; i <= officeCount; i++) {%>
+			<tr>
+				<td><%= officeInfo %>호실</td>
+				<% for(int j = 1; j < 31; j++) { %>
+				<% if(j > 31) {break;} %>
+				<td
+				<% if(officeInfo == 401) { %>
+					<% if(startDay == j) { 
+					j += term -2; %>
+					colspan="<%= term %>" style="background:red; color:white; text-align:center;"><button class="reserveBtn" name="<%= reserveNo %>"><%= name %></button>
+					<% } else { %>
+					>
+					<% } %>
+				<% } %>
+				</td>
+				<% } %>
+			</tr>
+			<% } %>
 		</table>
 	</section>
 	<script>
-	var col = 31;
-	var row = 18;
-	var spaceInfo = 1;
-	var startInfo = 4;
-	var dayInfo = 15;
-	var name = "최우아";
-	var reserveNo = 3;
-	$(function(){
-		   $('#table1').append(function(){
-	        var sentence = "";
-	        sentence +='<tr>';
-	        for(var i=1; i<=32; i++){
-	        	if(i == 1){
-	        		sentence +='<td>호실</td>';
-	        	} else {
-                sentence+='<td>'+(i-1)+'</td>';
-	        	}
-                console.log(i);
-            }
-	        sentence +="</tr>";
-	        for(var i =1; i<=row; i++){
-	        	sentence +="<tr>";
-	            sentence +='<td>' + i + '호실</td>';
-	            for(var j=1; j<=col; j++){
-	                if(i>col){
-	                    break;
-	                }
-	                if(j>31){
-	                	break;
-	                }
-	                sentence+='<td';
-	                if(spaceInfo == i){
-	                	if(startInfo == j){
-		                	sentence+=' colspan="' + dayInfo + '" style="background:red; color:white; text-align:center;"><button class="reserveBtn" name="' + reserveNo + '">' + name + '</button>';
-		                	j+= dayInfo-1;
-		                } else {
-			                sentence+='>';
-		                }
-	                } else {
-			                sentence+='>';
-	                }
-		            sentence+='</td>';
-	            }
-	            sentence +="</tr>";
-	        }
-	        return sentence;
-	    });
-	});
+	
 	
 	$("reserveBtn").onclick(function(){
 		window.open("/views/host/manageReserve/reserveUpdate.jsp", 'Window2', 'width=500, height=550');

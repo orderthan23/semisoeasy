@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.kh.login.host.manageReserve.model.vo.*"%>
 <!DOCTYPE html>
+<%
+	ArrayList<HostReserve> list = (ArrayList<HostReserve>) request.getAttribute("list");
+	for(HostReserve h : list) {
+		System.out.println(h);
+	}
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -9,10 +15,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>SO Easy</title>
 <style>
-	body {
+	/* body {
 		background-color:#ECECEC;
 		
-	}
+	} */
 	#reserve {
 		background: #3DB6AE;
 		width: 100px;
@@ -45,12 +51,12 @@
 		margin-right: 5%;
 		background-color: white;
 	}
-	#btn3 {
+	.roungeBtn {
 		width: 120px;
 		height: 90px;
 		margin:1%;
 		border: lightgrey 2px solid;
-		background: white;
+		/* background: white; */
 		 
 	}
 	#day {
@@ -106,44 +112,77 @@
 	.kind {
 		align: right;
 	}
+	#select {
+		margin-left: 5%;
+	}
 	
 </style>
 </head>
 <body>
 	<header><%@ include file="../../common/header.jsp"%></header>
 	<nav>
+		<%@ include file="../../common/aside.jsp"%>
 		<div class="colMenu">
 		<label class="colMenuTitle">공간 일정 관리</label>
 		<a class="colMenuButton" href="<%=request.getContextPath()%>/selectReserve.ho">예약 일정 관리</a>
-		<a class="colMenuButton selectedButton" href="/login/views/host/manageReserve/rounge1.jsp">라운지 회원 관리</a>
-		<a class="colMenuButton" href="/login/views/host/manageReserve/paymentRequest.jsp">결제 요청</a>
+		<a class="colMenuButton selectedButton" href="<%=request.getContextPath()%>/Select.ro">라운지 회원 관리</a>
+		<a class="colMenuButton" href="<%=request.getContextPath()%>/select.pr">예약 승인 요청</a>
+		<a class="colMenuButton" href="<%=request.getContextPath()%>/selectTempSpace?memberNo=<%=loginUser.getMemberNo()%>">내 공간 관리</a>
 	<br><br>
 	</div>
 	<hr style="margin : 0">
 	</nav>
-
-	<br>
-	<hr>
-	<br>
+	
+	
 	<section>
+	<br>
 		<button class="reserve" id="reserve" onclick="window.open('/login/views/host/manageReserve/reserveModal1.jsp', 'PopupWin', 'width=500, height=550')">직접 예약</button>
 		
 		<div class="l1" align="center">
 			라운지 이용고객 관리
 		</div>
+		<label id="select">공간선택</label> <select name="place" size="1" >
+				<option value="place1" onclick=test1()>센터1</option>
+				<option value="place2">센터2</option>
+				<option value="place3">센터3</option>
+				<option value="place4">센터4</option>
+				<option value="place5">센터5</option>
+			</select>
+		<br>
 		<br>
 		<div class="l2" align="right">
 			<textarea class="kind"  id="unpaidT" cols="6" rows="1" style="resize:none" readonly>미결제</textarea>
 			<textarea class="kind" id="expT" cols="6" rows="1" style="resize:none" readonly>기간만료</textarea>
 			<textarea class="kind" id="monthT" cols="6" rows="1" style="resize:none" readonly>월 회원</textarea>
 			<textarea class="kind" id="dayT" cols="6" rows="1" style="resize:none" readonly>일 회원</textarea>
-		
+			
 		</div>
 
 		
 		<div id="box">
-		
-		
+		<% if(list != null) { 
+			for(HostReserve h : list) { %>
+			<button class="roungeBtn" style="
+			<% if(h.getReserveStatus() == 4) { %>
+				 background:red;">
+			<% } else {%>
+				<% if(h.getStartDay() == h.getEndDay()) {%>
+				 background:skyblue;">
+				<% } else {%>
+				background:white;">
+				<% } %>
+			<% } %>
+			<label><%= "1개월권" %></label><br>
+			
+			<label><%= h.getUserName() %></label><br>
+			
+			<label>라운지 이용</label><br>
+			
+			<label><%= h.getStartDay() %> ~ <%= h.getEndDay() %></label>
+			
+			</button>
+			<% } %>
+		<% } %>
 		
 		<button id="month">
 		<label>1개월권</label><br>
@@ -268,45 +307,10 @@
 		
 		
 		<script>
-		var month = 12;
-		var day = 7;
-		var pay = 2;
-		var expiration = 3;
-		
-		var month = 12;
-		var day = 7;
-		var pay = 2;
-		var expiration = 3;
-		
-		var name = "이호정";
-		var kind = "일권"
-		var nKind = 1;
-		var term = "7/4 - 8/3";
-		
-		
-		$(function(){
-			$('#btn2').append(function(){
-				var kinds = null;
-				var bgId = null;
-				switch(kinds){
-				case month: bgId = month; break;
-				case pay: bgId = pay; break;
-				case exp: bgId = exp; break;
-				case day: bgId = day; break;
-				}
-		        var sentence = "";
-		        sentence +='<button id=' + bgId + '>';
-		        sentence +='<div>' + nKind + kind + '</div>';
-		        sentence+='<div>'+ name +'</div>';
-		        sentence+='<div>라운지 이용</div>';
-		        sentence+='<div>'+ term +'</div>';
-	            sentence +="</button>";
-		        
-		        return sentence;
-		    });
-		});
-	
-			
+		function(){
+			if(h)
+			$(".btn3").css(style="border:lightgrey 2px dashed;");
+		}
 		</script>
 	</section>
 

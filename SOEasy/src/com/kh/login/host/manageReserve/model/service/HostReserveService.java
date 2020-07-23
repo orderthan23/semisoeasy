@@ -110,6 +110,39 @@ public class HostReserveService {
 		
 		return officeCount;
 	}
+
+	public ArrayList<HostReserve> selectRoungeInfo(int hostNo, int spaceNo) {
+		Connection con = getConnection();
+		
+		ArrayList<HostReserve> selectHostReserve = new HostReserveDao().selectRoungeInfo(con, hostNo, spaceNo);
+		
+		
+		
+		close(con);
+		
+		return selectHostReserve;
+	}
+
+	public HostReserve selectOne(int reserveNo) {
+		Connection con = getConnection();
+		
+		HostReserve hostReserve = null;
+		int result = 0;
+		
+		result = new HostReserveDao().updateCount(con, reserveNo);
+		hostReserve = new HostReserveDao().selectOne(con, reserveNo);
+		
+		if(result > 0 && hostReserve != null) {
+			commit(con);
+		} else {
+			rollback(con);
+			hostReserve = null;
+		}
+		
+		close(con);
+		
+		return hostReserve;
+	}
 	
 //	public int updateReserveRequest(int nno, int rno) {
 //		Connection con = getConnection();

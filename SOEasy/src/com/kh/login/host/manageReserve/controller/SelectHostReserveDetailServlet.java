@@ -1,8 +1,6 @@
 package com.kh.login.host.manageReserve.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +11,16 @@ import com.kh.login.host.manageReserve.model.service.HostReserveService;
 import com.kh.login.host.manageReserve.model.vo.HostReserve;
 
 /**
- * Servlet implementation class SelectHostRoungeServlet
+ * Servlet implementation class SelectHostReserveDetailServlet
  */
-@WebServlet("/Select.ro")
-public class SelectHostRoungeServlet extends HttpServlet {
+@WebServlet("/select.hr")
+public class SelectHostReserveDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectHostRoungeServlet() {
+    public SelectHostReserveDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,27 +29,22 @@ public class SelectHostRoungeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
+		System.out.println("select Reserve Detail reserveNo : " + reserveNo);
 		
-		int hostNo = 35;
-		int spaceNo = 10;
+		HostReserve hostReserve = new HostReserveService().selectOne(reserveNo);
 		
-		ArrayList<HostReserve> list = new HostReserveService().selectRoungeInfo(hostNo, spaceNo);
+		System.out.println("select Reserve Detail hostReserve : " + hostReserve);
 		
-		for(HostReserve o : list) {
-			System.out.println("rounge servlet : " + o);
-		}
-		
-		
-		String page = "";
-		if(list != null) {
-			page = "/views/host/manageReserve/rounge1.jsp";
-			request.setAttribute("list", list);
-			request.getRequestDispatcher(page).forward(request, response);
+		String page="";
+		if(hostReserve != null) {
+			page = "views/host/manageReserve/hostReserveView.jsp";
+			request.setAttribute("hostReserve", hostReserve);
 		} else {
-			page = "/views/common/errorPage.jsp";
-			request.setAttribute("msg", "예약정보 insert 실패");
-			request.getRequestDispatcher(page).forward(request, response);
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "예약 상세 조회 실패!");
 		}
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

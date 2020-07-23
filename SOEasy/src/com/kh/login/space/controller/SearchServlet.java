@@ -36,9 +36,8 @@ public class SearchServlet extends HttpServlet {
 		String search = request.getParameter("search");
 		System.out.println("search : " + search);
 		
-		String root = request.getRequestURI();
-		String url = PageInfo.customQString(request.getQueryString(), 2);
-		
+//		String root = request.getRequestURI();
+//		String url = PageInfo.customQString(request.getQueryString(), 2);
 		int currentPage;
 		int limit;
 		int maxPage;
@@ -46,6 +45,11 @@ public class SearchServlet extends HttpServlet {
 		int endPage;
 		
 		currentPage = 1;
+		String url = "?";
+		System.out.println(url);
+		String root = request.getRequestURI();
+		System.out.println(root);
+		
 		
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));

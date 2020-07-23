@@ -221,6 +221,8 @@ public class HostReserveDao {
 		int result = 0;
 		String query = prop.getProperty("insertHostReserve");
 		
+		
+		
 		try {
 			pstmt = con.prepareStatement(query);
 			
@@ -270,6 +272,112 @@ public class HostReserveDao {
 		
 		
 		return result;
+	}
+
+	public ArrayList<HostReserve> selectRoungeInfo(Connection con, int hostNo, int spaceNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HostReserve>  list = new ArrayList<HostReserve>();
+		
+		String query = prop.getProperty("selectRoungeInfo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			pstmt.setInt(2, hostNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				HostReserve hostReserve = new HostReserve();
+				
+				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));			
+				hostReserve.setHostNo(rset.getInt("HOST_NO"));
+				hostReserve.setReserveNo(rset.getInt("RESERV_NO"));
+				hostReserve.setOfficeNo(rset.getString("OFFICE_NO"));
+				hostReserve.setSpaceName(rset.getString("SPACE_NAME"));
+				hostReserve.setSpaceKind(rset.getInt("SPACE_KIND"));
+				hostReserve.setDidHostOk(rset.getInt("DID_HOST_OK"));
+				hostReserve.setReservePersonCount(rset.getInt("RESERV_PERSON_COUNT"));
+				hostReserve.setReserveStatus(rset.getInt("RESERV_STATUS"));
+				hostReserve.setStartDay(rset.getDate("START_DATE"));
+				hostReserve.setEndDay(rset.getDate("END_DATE"));
+				hostReserve.setReserveDate(rset.getDate("RESERV_DATE"));
+				hostReserve.setUserName(rset.getString("USER_NAME"));
+				
+				list.add(hostReserve);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return list;
+	}
+
+	public int updateCount(Connection con, int reserveNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, reserveNo);
+			pstmt.setInt(2, reserveNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public HostReserve selectOne(Connection con, int reserveNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HostReserve  list = new HostReserve();
+		
+		String query = prop.getProperty("selectOne");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, reserveNo);
+			pstmt.setInt(2, reserveNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				HostReserve hostReserve = new HostReserve();
+				
+				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));			
+				hostReserve.setHostNo(rset.getInt("HOST_NO"));
+				hostReserve.setReserveNo(rset.getInt("RESERV_NO"));
+				hostReserve.setOfficeNo(rset.getString("OFFICE_NO"));
+				hostReserve.setSpaceName(rset.getString("SPACE_NAME"));
+				hostReserve.setSpaceKind(rset.getInt("SPACE_KIND"));
+				hostReserve.setDidHostOk(rset.getInt("DID_HOST_OK"));
+				hostReserve.setReservePersonCount(rset.getInt("RESERV_PERSON_COUNT"));
+				hostReserve.setReserveStatus(rset.getInt("RESERV_STATUS"));
+				hostReserve.setStartDay(rset.getDate("START_DATE"));
+				hostReserve.setEndDay(rset.getDate("END_DATE"));
+				hostReserve.setReserveDate(rset.getDate("RESERV_DATE"));
+				hostReserve.setUserName(rset.getString("USER_NAME"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return list;
 	}
 
 
