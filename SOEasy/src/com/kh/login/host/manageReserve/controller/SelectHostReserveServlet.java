@@ -43,7 +43,7 @@ public class SelectHostReserveServlet extends HttpServlet {
 		ArrayList<HostReserve> list = new HostReserveService().selectReserveInfo(hostNo, spaceNo);
 		
 		for(HostReserve o : list) {
-			System.out.println("servlet : " + o);
+			System.out.println("table servlet : " + o);
 		}
 		
 		int officeCount = new HostReserveService().selectOfficeCount(spaceNo);
