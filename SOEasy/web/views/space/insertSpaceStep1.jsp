@@ -240,14 +240,14 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td align="right"><p class="text-limit" id="intro-limit">0 / 400</p></td>
+					<td align="right"><p class="text-limit" id="intro-limit">0 / 800</p></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td>공간 소개 *</td>
 					<td>
-						<textarea rows="8" maxlength="400" name="space-intro" id="space-intro"></textarea>
+						<textarea rows="8" maxlength="800" name="space-intro" id="space-intro"></textarea>
 					</td>
 					<td></td>
 				</tr>
@@ -548,12 +548,12 @@
 			$("#space-intro").on("keyup", function(){
 				var si = $("#space-intro").val();
 				var len = si.length;
-				var maxlen = 400;
+				var maxlen = 800;
 				$("#intro-limit").text(len + " / " + maxlen);
 			}).on("keypress", function(){
 				var si = $("#space-intro").val();
 				var len = si.length;
-				var maxlen = 400;
+				var maxlen = 800;
 				$("#intro-limit").text(len + " / " + maxlen)
 			});
 			

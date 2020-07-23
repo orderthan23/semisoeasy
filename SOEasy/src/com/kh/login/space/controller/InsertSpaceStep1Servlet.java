@@ -49,7 +49,7 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			String memberId = loginUser.getmId();
 			
 			//이미지 파일들 불러오기
-			int maxSize = 1024 * 1024 * 20;
+			int maxSize = 1024 * 1024 * 100;
 			
 			String root = request.getSession().getServletContext().getRealPath("/");
 			
@@ -82,7 +82,7 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			//이미지 파일리스트
 			ArrayList<Image> fileList = new ArrayList<>();
 			
-			for(int i = saveFiles.size(); i >= 0; i--) {
+			for(int i = saveFiles.size()-1; i >= 0; i--) {
 
 				Image img = new Image();
 				img.setFilePath(savePath);

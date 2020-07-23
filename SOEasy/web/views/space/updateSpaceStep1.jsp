@@ -257,14 +257,14 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td align="right"><p class="text-limit" id="intro-limit">0 / 400</p></td>
+					<td align="right"><p class="text-limit" id="intro-limit">0 / 800</p></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td>공간 소개 *</td>
 					<td>
-						<textarea rows="8" maxlength="400" name="space-intro" id="space-intro"><%=si.getSpaceIntro()%></textarea>
+						<textarea rows="8" maxlength="800" name="space-intro" id="space-intro"><%=si.getSpaceIntro()%></textarea>
 					</td>
 					<td></td>
 				</tr>
@@ -493,7 +493,7 @@
 			
 			var si = $("#space-intro").val();
 			var len = si.length;
-			var maxlen = 400;
+			var maxlen = 800;
 			$("#intro-limit").text(len + " / " + maxlen);
 			
 			var str = $("#space-name").val();
@@ -536,11 +536,13 @@
 			case 'plug' : $("#plug").prop("checked",true); break;
 			}
 			<% } %>
-			
+
 			$("#capital-img").attr("src", "<%=request.getContextPath() + imgList.get(0).getFilePath() + "/" + imgList.get(0).getChangeName()%>");
-			<% for(int i = 1; i < imgList.size(); i++) { %>
-				$("#thumnail-<%=i%>").attr("src", "<%=request.getContextPath() + imgList.get(i).getFilePath() + "/" + imgList.get(i).getChangeName()%>");
-			<% } %>
+			<% for(int i = 1; i < 7; i++) { 
+				if(imgList.get(i).getFileLevel() == i) { %>
+					$("#thumnail-<%=i%>").attr("src", "<%=request.getContextPath() + imgList.get(i).getFilePath() + "/" + imgList.get(i).getChangeName()%>");
+			<% }
+			}	%>
 			
 			countSeat();
 		}
@@ -623,12 +625,12 @@
 			$("#space-intro").on("keyup", function(){
 				var si = $("#space-intro").val();
 				var len = si.length;
-				var maxlen = 400;
+				var maxlen = 800;
 				$("#intro-limit").text(len + " / " + maxlen);
 			}).on("keypress", function(){
 				var si = $("#space-intro").val();
 				var len = si.length;
-				var maxlen = 400;
+				var maxlen = 800;
 				$("#intro-limit").text(len + " / " + maxlen)
 			});
 			

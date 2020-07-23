@@ -65,6 +65,7 @@ public class SpaceService {
 				//이미지 파일에 공간번호 부여 및 IMAGE 입력 메소드
 				for(int i = 0; i < fileList.size(); i++) {
 					fileList.get(i).setSpaceNo(sNo);
+					fileList.get(i).setImgDiv(0);
 //					System.out.println(fileList.size());
 //					System.out.println("service img originname :" + fileList.get(i).getOriginName());
 					imgResult += new SpaceDao().insertSpaceImg(con, fileList.get(i));
@@ -259,6 +260,82 @@ public class SpaceService {
 		close(con);
 		
 		return result;
+	}
+	
+	//공간정보 1 업데이트
+	public SpaceInfo updateSpaceStep1(HashMap<String, Object> imgHmap, SpaceInfo si) {
+
+		Connection con = getConnection();
+		
+		SpaceInfo returnSi = null;
+		
+		int siResult = 0;		//SPACE_INF 업데이트 확인
+		int delOffice = 0;		//KIND OFFICE인 경우 공간번호에 해당하는 OFFICE 삭제 확인
+		int updOffice = 0;		//삭제 후 OFFICE 갯수만큼 다시 삽입 확인
+		int necessary = 0;		//OFFICE인 경우 업데이트 횟수 확인
+		int updCowork = 0;		//KIND COWORK인 경우 업데이트 확인
+		int delConv = 0;		//기존 공간 편의시설 삭제 확인
+		int updConv = 0;		//새로운 공간 편의시설 삽입 확인
+		int updImgResult = 0;	//updateImgList 업데이트 확인
+		int insImgResult = 0;	//insertImgList 인서트 확인
+		
+		ArrayList<Image> updateImgList = (ArrayList<Image>) imgHmap.get("updateImgList");
+		ArrayList<Image> insertImgList = (ArrayList<Image>) imgHmap.get("updateImgList");
+		
+		//SPACE_INF 정보 입력
+		siResult = new SpaceDao().updateSpaceInfo(con, si);
+		
+		//SPACE_KIND에 따라 입력메소드 분리
+		if(si.getSpaceKind() == 1) {
+			//1. 기존 독립오피스 정보 삭제
+			delOffice = new SpaceDao().deleteOldOffice(con, si.getSpaceNo());
+			//2. 새로 입력받은 오피스 정보 입력
+			necessary = si.getSpaceRoomCount();
+			// 업데이트 후 마지막 유효성검사에서 kind2Result값을 확인하기 때문에 변경해준다
+			updCowork = 1;
+			for(int i = 0; i < si.getSpaceRoomCount(); i++) {
+				String officeNo = si.getSpaceName() + (i + 1);
+				
+				updOffice += new SpaceDao().insertOffice(con, si, officeNo);
+			}
+		} else if(si.getSpaceKind() == 2) {
+			updCowork = new SpaceDao().updateCowork(con, si);
+		}
+		
+		//기존 SPACE_CONV 삭제
+		delConv = new SpaceDao().deleteConv(con, si.getSpaceNo());
+		
+		//새로 입력받은 공간 편의시설 삽입
+		for(int i = 0; i < si.getConv().length; i++) {
+			//String conv[] 에 포함된 길이만큼 반복하면서 conv[i]와 일치하는 편의시설번호를 가져온다.
+			String convNo = new SpaceDao().selectConvDetail(con, si.getConv()[i]);
+			//convResult는 conv[]의 길이만큼 insert된 결과를 의미한다.
+			updConv += new SpaceDao().insertSpaceConv(con, si.getSpaceNo(), convNo);
+		}
+		
+		//기존 파일을 수정된 파일로 업데이트
+		for(int i = 0; i < updateImgList.size(); i++) {
+			updateImgList.get(i).setSpaceNo(si.getSpaceNo());
+			//지금 보내는 파일은 이름, 경로, 기존 파일이미지 번호를 가져감
+			updImgResult += new SpaceDao().updateSpaceImg(con, updateImgList.get(i));
+		}
+		//새로 등록된 파일 업데이트
+		for(int i = 0; i < insertImgList.size(); i++) {
+			insertImgList.get(i).setSpaceNo(si.getSpaceNo());
+			insertImgList.get(i).setImgDiv(0);
+			insImgResult += new SpaceDao().insertSpaceImg(con, insertImgList.get(i));
+		}
+		
+		if(siResult > 0 && delOffice > 0 && updOffice == necessary && updCowork > 0 && delConv > 0 && updConv == si.getConv().length && updImgResult == updateImgList.size() || insImgResult == insertImgList.size()) {
+			commit(con);
+			returnSi = new SpaceDao().selectCurrentSpaceInfo(con, si.getSpaceNo());
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return returnSi;
 	}
 
 }
