@@ -48,8 +48,6 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			int memberNo = loginUser.getMemberNo();
 			String memberId = loginUser.getmId();
 			
-//			System.out.println(memberNo);
-			
 			//이미지 파일들 불러오기
 			int maxSize = 1024 * 1024 * 20;
 			
@@ -60,6 +58,7 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, realPath, maxSize, "UTF-8", new SoEasyFileRenamePolicy("space" + memberId));
 			
+			ArrayList<Integer> fileLevel = new ArrayList<>();
 			ArrayList<String> saveFiles = new ArrayList<>();
 			ArrayList<String> originFiles = new ArrayList<>();
 			
@@ -74,6 +73,8 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 				if(multiRequest.getFilesystemName(name) == null) {
 					
 				} else {
+					int fileLev = Integer.parseInt(name.substring(name.length()-1, name.length()));
+					fileLevel.add(fileLev);
 					saveFiles.add(multiRequest.getFilesystemName(name));
 					originFiles.add(multiRequest.getOriginalFileName(name));
 				}
@@ -81,20 +82,16 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			//이미지 파일리스트
 			ArrayList<Image> fileList = new ArrayList<>();
 			
-			for(int i = originFiles.size() - 1; i >= 0; i--) {
+			for(int i = saveFiles.size(); i >= 0; i--) {
+
 				Image img = new Image();
-				
 				img.setFilePath(savePath);
 				img.setOriginName(originFiles.get(i));
 				img.setChangeName(saveFiles.get(i));
-				
-				if(i == originFiles.size() -1) {
-					img.setFileLevel(0);
-				} else {
-					img.setFileLevel(1);
-				}
-				
+				img.setFileLevel(fileLevel.get(i));
+
 				fileList.add(img);
+				
 			}
 			
 			String kinds = multiRequest.getParameter("kinds");
@@ -154,7 +151,7 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/views/space/insertSpaceStep2.jsp");
 			} else {
 				for(int i = 0; i < fileList.size(); i++) {
-					File failedFile = new File(savePath + saveFiles.get(i));
+					File failedFile = new File(realPath + "/" + saveFiles.get(i));
 					
 					failedFile.delete();
 				}

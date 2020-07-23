@@ -78,7 +78,8 @@
 
 <section>
 	<div id ="wrapper">
-	<h1>내 공간 관리</h1>
+	<br><br>
+	<h1 style="margin:0;">내 공간 관리</h1>
 	<p>현재 등록 대기 중인 공간이 <label id="undone"></label> 개 있습니다.</p>
 	<select>
 		<option>검수 상태</option>
@@ -108,7 +109,7 @@
 		%>
 		
 		<tr id = tableResource>
-			<td class="spaceNameZone"><p>"<%=siList.get(i).getSpaceName()%>"</p> <input type="hidden" class="hiddenSpaceNo" value=<%= siList.get(i).getSpaceNo() %>></td>
+			<td class="spaceNameZone"><p><%=siList.get(i).getSpaceName()%></p> <input type="hidden" class="hiddenSpaceNo" value=<%= siList.get(i).getSpaceNo() %>></td>
 			
 			<% 	if(siList.get(i).getSpaceKind() == 1){ %>
 			<td><p>독립 오피스</p> </td>

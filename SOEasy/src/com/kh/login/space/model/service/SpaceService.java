@@ -57,6 +57,7 @@ public class SpaceService {
 				for(int i = 0; i < si.getConv().length; i ++) {
 					//String conv[] 에 포함된 길이만큼 반복하면서 conv[i]와 일치하는 편의시설번호를 가져온다.
 					String convNo = new SpaceDao().selectConvDetail(con, si.getConv()[i]);
+					System.out.println(convNo);
 					//convResult는 conv[]의 길이만큼 insert된 결과를 의미한다.
 					convResult += new SpaceDao().insertSpaceConv(con, si.getSpaceNo(), convNo);
 				}
