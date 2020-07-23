@@ -12,7 +12,6 @@ import com.kh.login.space.model.vo.SpaceReservation;
 
 public class SpaceReservationService {
 
-	//예약정보 db에 인서트하기
 	public ArrayList<HashMap<String, Object>> insertReservation(SpaceReservation requestMember, SpaceInfo si) {
 
 		Connection con = getConnection();
@@ -20,7 +19,7 @@ public class SpaceReservationService {
 		int result = 0;
 		
 		if(si.getSpaceKind() == 1) {
-			
+			result = srd.insertReservationIndepen(con, requestMember, si);
 		} else if(si.getSpaceKind() == 2) {
 			result = srd.insertReservationCowork(con, requestMember, si);
 		}

@@ -54,7 +54,7 @@ public class SpaceReservationDao {
 			pstmt.setString(11, requestMember.getRequestContent());
 			
 			result = pstmt.executeUpdate();
-			
+			 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -64,6 +64,43 @@ public class SpaceReservationDao {
 		return result;
 	}
 
+	public int insertReservationIndepen(Connection con, SpaceReservation requestMember, SpaceInfo si) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertReservIdepen");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+//			1 INT guestNo
+//			2 int  spaceNo
+//			3 num officeNo
+//			4        startDate
+//			5        endDate
+//			6 num  예약인원
+//			7 num  결제예상금액
+//			8 str    사용자명
+//			9 str    사용자연락처
+//			10 str  사용자 이메일
+//			11 str  사용자 요청사항
+			
+			pstmt.setInt(1, requestMember.getGuestNo());
+			pstmt.setInt(2, si.getSpaceNo());
+			//pstmt.setString(3, si.getOfficeNo());
+			
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	public ArrayList<SpaceReservation> selectAllMyReser(Connection con, int guestNo) {
 
 		PreparedStatement pstmt = null;
