@@ -280,7 +280,7 @@ public class SpaceService {
 		int insImgResult = 0;	//insertImgList 인서트 확인
 		
 		ArrayList<Image> updateImgList = (ArrayList<Image>) imgHmap.get("updateImgList");
-		ArrayList<Image> insertImgList = (ArrayList<Image>) imgHmap.get("updateImgList");
+		ArrayList<Image> insertImgList = (ArrayList<Image>) imgHmap.get("insertImgList");
 		
 		//SPACE_INF 정보 입력
 		siResult = new SpaceDao().updateSpaceInfo(con, si);
@@ -333,6 +333,50 @@ public class SpaceService {
 			rollback(con);
 		}
 		
+		close(con);
+		
+		return updateResult;
+	}
+
+	public int updateSpaceStep2(SpaceInfo si) {
+		
+		Connection con = getConnection();
+		
+		int updateResult = 0;
+		
+		int spaceInfOpResult = 0;
+		int optimeResult = 0;
+		int refundResult = 0;
+		
+		//SPACE_INF SPACE_POLICY, DID_DAY_RESERV, DAY_PAY, DID_MONTH_RESERV, MONTH_PAY 입력
+		spaceInfOpResult = new SpaceDao().updateSpaceInfOp(con, si);
+
+		int sNo = si.getSpaceNo();
+		
+		//SPACE_OPTIME 입력
+		for(int i = 0; i < 7; i++) {
+			int day = i;
+			int startTime = si.getStartTimes()[i];
+			int endTime = si.getEndTimes()[i];
+			String openCheck = si.getOpenChecks()[i];
+			
+			optimeResult += new SpaceDao().updateSpaceOptime(con, sNo, day, startTime, endTime, openCheck);
+		}
+		
+		//REFUND_POLICY 입력
+		for(int i = 8; i >= 0; i--) {
+			double rate = si.getSpaceRefundPolicy()[i];
+			int date = i;
+			
+			refundResult += new SpaceDao().updateRefundPolicy(con, sNo, rate, date);
+		}
+		
+		if(spaceInfOpResult > 0 && optimeResult == si.getOpenChecks().length && refundResult == si.getSpaceRefundPolicy().length) {
+			commit(con);
+			updateResult = 1; 
+		} else {
+			rollback(con);
+		}
 		close(con);
 		
 		return updateResult;

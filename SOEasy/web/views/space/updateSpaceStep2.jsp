@@ -82,7 +82,7 @@
 			<h1 align="center" style="margin:0;">가격 정보</h1>
 			<br><br>
 		</div>
-		<form action="<%= request.getContextPath() %>/insertSpaceStep2" method="post">
+		<form action="<%= request.getContextPath() %>/updateSpaceStep2" method="post">
 			<table class="space-insert" align="center" width="70%">
 				<tr>
 					<td></td>
@@ -99,14 +99,14 @@
 								<tr>
 									<td width="30%">월 단위</td>
 									<td width="60%">
-										<input type="text" name="month-pay" size="30%" onclick="this.select();" style="text-align:center;">
+										<input type="text" name="month-pay" size="30%" onclick="this.select();" style="text-align:center;" value="<%=si.getMonthPay()%>">
 									</td>
 									<td>원</td>
 								</tr>
 								<tr>
 									<td width="30%">일 단위</td>
 									<td width="60%">
-										<input type="text" name="day-pay" size="30%" onclick="this.select();" style="text-align:center;">
+										<input type="text" name="day-pay" size="30%" onclick="this.select();" style="text-align:center;" value="<%=si.getDayPay()%>">
 									</td>
 									<td>원</td>
 								</tr>
@@ -711,6 +711,8 @@
 		
 		$(function(){
 			$(".warning").show();
+			
+			<%-- <% for(int i = 0; i < ) %> --%>
 		});
 		//가격 정책 입력시 글자 수 표시
 		/* $("#policy-intro").on("keyup", function(){

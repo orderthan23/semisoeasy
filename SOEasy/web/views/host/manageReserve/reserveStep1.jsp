@@ -176,7 +176,7 @@
 			
 			<tr>
 				<td><%= i + 401 %>호실</td>
-				<% for(int j = 1; j < 31; j++) { %>
+				<% for(int j = 1; j <= 31; j++) { %>
 				<% if(j > 31) {break;} %>
 				<td
 				<% if(officeInfo == i+401) { %>

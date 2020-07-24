@@ -362,7 +362,7 @@ th {
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
 				    name : spaceName,
-				    amount : /*charge*/ 1000,
+				    amount : charge,
 				    buyer_email : "<%=loginUser.getmEmail()%>",
 				    buyer_name : "<%=loginUser.getmName()%>",
 				    buyer_tel : "<%=loginUser.getmPhone()%>",
