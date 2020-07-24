@@ -7,7 +7,7 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="/login/css/layout.css">
 ​
 <style>
 #wrapper{
@@ -155,7 +155,7 @@
 									<textArea name="rcontent"style="width:100%; resize:none; border:none;" class="answer" class="QandA" ><%= qna.getRcontent() %></textArea>
 									<div style="float:right;">
 									<%if(loginUser != null && loginUser.getMemberNo() ==1 ) { %>
-									<button type="button" onclick="complete();" class="startBtn">답변완료</button>
+									<button type="button" onclick="done();" class="startBtn">답변완료</button>
 									<% } %>
 									</div>
 								</div>
@@ -170,11 +170,9 @@
 	
 	<script>
 
-	$(function(){
-		function complete(){
-			$("#updateMtm").attr("action", "<%=request.getContextPath()%>/updateBoard.mm");
-		}
-	});
+		function done(){
+			$("#updateMtM").attr("action", "<%=request.getContextPath()%>/updateBoard.mm");
+		};
 		
 	</script>
 	

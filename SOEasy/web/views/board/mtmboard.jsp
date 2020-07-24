@@ -136,7 +136,6 @@
 					<td class="info" style="text-align: center;"><%= qna.getqMnick() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getQdate() %></td>
 					<td class="info" style="text-align: center;"></td>
-					
 				</tr>
 				<% } else if(loginUser.getMemberNo() == 1) {  %>
 				<tr>

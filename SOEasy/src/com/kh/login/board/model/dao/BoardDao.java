@@ -547,10 +547,22 @@ public class BoardDao {
 
 	public int updateqna(Connection con, Qna requestQna) {
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 		int result = 0;
 		
 		String query = prop.getProperty("updateqna");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, requestQna.getRcontent());
+			pstmt.setInt(2, requestQna.getQno());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		
 		return result;
 	}
