@@ -14,6 +14,8 @@
 	String siNm = si.getSpaceLocationFilter().split(",")[1];
 	String sggNm = si.getSpaceLocationFilter().split(",")[2];
 	String emdNm = si.getSpaceLocationFilter().split(",")[3];
+	
+	//System.out.println("왜 안들어오냐? : "+si.getHostNo());
 %>
 <!DOCTYPE html>
 <html>
@@ -21,19 +23,6 @@
 <meta charset="UTF-8">
 <title>SO Easy - 공간 정보 수정</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-	function goPopup(){
-		var pop = window.open("../../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-	}
-
-	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
-		$("#roadFullAddr").val(roadFullAddr);
-		$("#siNm").val(siNm);
-		$("#sggNm").val(sggNm);
-		$("#emdNm").val(emdNm);
-		$("#roadAddrPart1").val(roadAddrPart1);
-	}
-</script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/layout.css">
 <style>
 
@@ -426,13 +415,13 @@
 				<br><br><br><br><br><br>
 			</div>
 			<div id="fileArea">
-					<input type="file" id="cap-img" name="thumbnailImg0" onchange="load(this);" accept="image/*">
-					<input class="thumb" type="file" id="thumbnailImg1" name="thumbnailImg1" onchange="loadImg(this, 1);" accept="image/*">
-					<input class="thumb" type="file" id="thumbnailImg2" name="thumbnailImg2" onchange="loadImg(this, 2);" accept="image/*">
-					<input class="thumb" type="file" id="thumbnailImg3" name="thumbnailImg3" onchange="loadImg(this, 3);" accept="image/*">
-					<input class="thumb" type="file" id="thumbnailImg4" name="thumbnailImg4" onchange="loadImg(this, 4);" accept="image/*">
-					<input class="thumb" type="file" id="thumbnailImg5" name="thumbnailImg5" onchange="loadImg(this, 5);" accept="image/*">
-					<input class="thumb" type="file" id="thumbnailImg6" name="thumbnailImg6" onchange="loadImg(this, 6);" accept="image/*">
+				<input type="file" id="cap-img" name="thumbnailImg0" onchange="load(this);" accept="image/*">
+				<input class="thumb" type="file" id="thumbnailImg1" name="thumbnailImg1" onchange="loadImg(this, 1);" accept="image/*">
+				<input class="thumb" type="file" id="thumbnailImg2" name="thumbnailImg2" onchange="loadImg(this, 2);" accept="image/*">
+				<input class="thumb" type="file" id="thumbnailImg3" name="thumbnailImg3" onchange="loadImg(this, 3);" accept="image/*">
+				<input class="thumb" type="file" id="thumbnailImg4" name="thumbnailImg4" onchange="loadImg(this, 4);" accept="image/*">
+				<input class="thumb" type="file" id="thumbnailImg5" name="thumbnailImg5" onchange="loadImg(this, 5);" accept="image/*">
+				<input class="thumb" type="file" id="thumbnailImg6" name="thumbnailImg6" onchange="loadImg(this, 6);" accept="image/*">
 			</div>
 		</form>
 	</section>
@@ -440,30 +429,31 @@
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
 	<script>
-		var checkUnload = true;
-	    $(window).on("beforeunload", function(){
-	        if(checkUnload) return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
-	    });
+		console.log("여긴 됩니가");
+		function goPopup(){
+			var pop = window.open("../../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+		}
+	
+		function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+			$("#roadFullAddr").val(roadFullAddr);
+			$("#siNm").val(siNm);
+			$("#sggNm").val(sggNm);
+			$("#emdNm").val(emdNm);
+			$("#roadAddrPart1").val(roadAddrPart1);
+		}
+		console.log("스크립트");
+		$(document).ready(function(){
+			console.log("제발");
+		});
 	
 		$(function(){
 			initSet();
 			initEvent();
-			
+			console.log("여기는 요?");
 		});
 		
 		function initSet(){
 			$(".warning").show();
-			
-			for(var i = 1; i <= 6; i++){
-				if($("#thumbnailImg" + i).val() != "<%=request.getContextPath()%>/images/icon/addImg.png"){
-					count ++;
-					console.log(count);
-					break;
-				}
-			}
-			if(count >= 4){
-				$("#thumbnail-img-not").hide();
-			}
 			
 			var spaceKindCheck = <%=si.getSpaceKind()%>;
 			console.log(spaceKindCheck);
@@ -539,9 +529,13 @@
 
 			$("#capital-img").attr("src", "<%=request.getContextPath() + imgList.get(0).getFilePath() + "/" + imgList.get(0).getChangeName()%>");
 			<% for(int i = 1; i < 7; i++) { 
-				if(imgList.get(i).getFileLevel() == i) { %>
-					$("#thumnail-<%=i%>").attr("src", "<%=request.getContextPath() + imgList.get(i).getFilePath() + "/" + imgList.get(i).getChangeName()%>");
-			<% }
+				for(int j = 0; j < imgList.size(); j++) {
+					if(imgList.get(j).getFileLevel() == i) { %>
+						$("#thumnail-<%=i%>").attr("src", "<%=request.getContextPath() + imgList.get(j).getFilePath() + "/" + imgList.get(j).getChangeName()%>");
+			<%		} else {
+				
+					}
+				}
 			}	%>
 			
 			countSeat();
@@ -661,7 +655,7 @@
 			$("#max-reserv").val(totalSeat);
 		};
 		
-		var count = 0;
+		<%-- var count = 0;
 		$(".thumb").on("change", function(){
 			for(var i = 1; i <= 6; i++){
 				if($("#thumbnailImg" + i).val() != "<%=request.getContextPath()%>/images/icon/addImg.png"){
@@ -673,7 +667,7 @@
 			if(count >= 4){
 				$("#thumbnail-img-not").hide();
 			}
-		});
+		}); --%>
 		
 		
 		//태그 추가하기
