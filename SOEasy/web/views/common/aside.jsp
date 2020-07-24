@@ -226,8 +226,8 @@ span.bar {
    		<li><hr id="thirdHr"></li>
         <li class="mainTitle"><a href='#' class="mainNav" id="thirdMainNav">기타</a></li>
         <li class="subTitle"><a href='/login/views/member/updateMember.jsp' class="subNav" id="seventhSubNav">개인 정보 관리</a></li>
-        <li class="subTitle"><a href='/login/views/board/board.jsp' class="subNav" id="eighthSubNav">공지 사항</a></li>
-        <li class="subTitle"><a href='#' class="subNav" id="ninthSubNav">Q & A</a></li>
+        <li class="subTitle"><a href='<%=request.getContextPath() %>/selectList.no' class="subNav" id="eighthSubNav">공지 사항</a></li>
+        <li class="subTitle"><a href="<%=request.getContextPath()%>/selectList.faq" class="subNav" id="ninthSubNav">Q & A</a></li>
           
           
       </ul>
@@ -250,6 +250,7 @@ span.bar {
 				break;
 			
 			case 2:
+				$('#grade').text("HOST");
 				$('#profileZone').html("<img src='<%=request.getContextPath()+loginUser.getFilePath()+loginUser.getChangeName()%>'>");
 				$('#nickNameZone').html("<%=loginUser.getmNick() %>");
 				break;
@@ -266,9 +267,9 @@ span.bar {
 				$('#fourthSubNav').attr("href","<%=request.getContextPath()%>/selectAll.me").text("회원 관리");
 				$('#fifthSubNav').attr("href","<%=request.getContextPath()%>/selectRecover.me").text("회원 복구 요청");
 				$('#sixthSubNav').attr("href","#").text("신고 건 조회");
-				$('#seventhSubNav').attr("href","#").text("Q&A 관리");
-				$('#eighthSubNav').attr("href","#").text("공지사항 작성");
-				$('#ninthSubNav').attr("href","#").text("관리자 홈");
+				$('#seventhSubNav').attr("href","<%=request.getContextPath()%>/selectList.faq").text("Q&A 관리");
+				$('#eighthSubNav').attr("href","<%=request.getContextPath()%>/insert.no").text("공지사항 작성");
+				$('#ninthSubNav').attr("href","<%=request.getContextPath()%>/adminHome.ad").text("관리자 홈");
 				break;
 			default :
 				$('#nickNameZone').text("");

@@ -87,7 +87,7 @@ window.history.forward();
 		<label class="colMenuTitle">개인 정보 관리</label>
 		<a class="colMenuButton" href="/login/views/member/updateMember.jsp">개인 정보 수정</a>
 		<a class="colMenuButton  selectedButton" href="/login/views/member/deleteMember.jsp">회원 탈퇴</a>
-		<a class="colMenuButton" href="/login/views/guest/savetemporaryArea.jsp">임시 공간 저장</a>
+		<a class="colMenuButton" id="selectTempSpace">내 공간 관리</a>
 		<br><br>
 	</div>
 	<hr style="margin:0">
@@ -144,6 +144,28 @@ window.history.forward();
 		
 	</section>
 	<script>
+	
+	
+	$("#selectTempSpace").click(function(){
+		var userNo ="<%=loginUser.getMemberNo()%>";
+		$.ajax({
+			url:"/login/haveTempSpaceInfo",
+			data:{userNo:userNo},
+			type:"post",
+			success: function(data){
+				if(data == "fail"){
+					alert("등록된 공간 정보가 없습니다!");
+				} else {
+					location.href="<%=request.getContextPath()%>/selectTempSpace?memberNo="+userNo;
+				}
+			},
+			error: function(data){
+				console.log("공간 관리 진입 실패!");
+			}
+		});
+		
+	});
+	
 		function deleteMember(){
 		var password = "<%=loginUser.getmPassword()%>";
 			var inputPassword =$("input[name=password]").val();

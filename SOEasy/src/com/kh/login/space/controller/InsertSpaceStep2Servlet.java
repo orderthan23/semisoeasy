@@ -133,8 +133,12 @@ public class InsertSpaceStep2Servlet extends HttpServlet {
 		System.out.println("step2 returnSi : " + returnSi);
 		
 		if(returnSi != null) {
-			request.getSession().setAttribute("spaceInfo", returnSi);
-			request.getRequestDispatcher("views/space/insertSpaceStep3.jsp").forward(request, response);;
+			if(loginUser.getpType() == 1) {
+				request.getSession().setAttribute("spaceInfo", returnSi);
+				response.sendRedirect("views/space/insertSpaceStep3.jsp");
+			} else {
+				response.sendRedirect(request.getContextPath() + "/selectTempSpace?memberNo=" + loginUser.getMemberNo());
+			}
 		} else {
 			request.setAttribute("msg", "공간등록 실패!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
