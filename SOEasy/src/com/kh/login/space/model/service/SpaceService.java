@@ -263,11 +263,11 @@ public class SpaceService {
 	}
 	
 	//공간정보 1 업데이트
-	public SpaceInfo updateSpaceStep1(HashMap<String, Object> imgHmap, SpaceInfo si) {
+	public int updateSpaceStep1(HashMap<String, Object> imgHmap, SpaceInfo si) {
 
 		Connection con = getConnection();
 		
-		SpaceInfo returnSi = null;
+		int updateResult = 0;
 		
 		int siResult = 0;		//SPACE_INF 업데이트 확인
 		int delOffice = 0;		//KIND OFFICE인 경우 공간번호에 해당하는 OFFICE 삭제 확인
@@ -328,14 +328,14 @@ public class SpaceService {
 		
 		if(siResult > 0 && delOffice > 0 && updOffice == necessary && updCowork > 0 && delConv > 0 && updConv == si.getConv().length && updImgResult == updateImgList.size() || insImgResult == insertImgList.size()) {
 			commit(con);
-			returnSi = new SpaceDao().selectCurrentSpaceInfo(con, si.getSpaceNo());
+			updateResult = 1;
 		} else {
 			rollback(con);
 		}
 		
 		close(con);
 		
-		return returnSi;
+		return updateResult;
 	}
 
 }

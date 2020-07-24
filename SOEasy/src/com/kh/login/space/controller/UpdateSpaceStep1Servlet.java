@@ -192,10 +192,19 @@ public class UpdateSpaceStep1Servlet extends HttpServlet {
 			si.setSpaceAddress(spaceAddress);
 			si.setSpaceLocationFilter(spaceLocationFilter);
 			
-			SpaceInfo reSi = new SpaceService().updateSpaceStep1(imgHmap, si);
+			int updateResult = new SpaceService().updateSpaceStep1(imgHmap, si);
 			
+			ArrayList<HashMap<String,Object>> returnList = null;
+			
+			if(updateResult > 0) {
+				returnList = new SpaceService().selectOneSpaceInfo(si.getSpaceNo());
+				request.getSession().setAttribute("siList", returnList);
+				response.sendRedirect(request.getContextPath() + "/views/space/updateSpaceStep2.jsp");
+			} else {
+				request.setAttribute("msg", "공간 정보 수정 실패.");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}
 		}
-		
 	}
 
 	/**
