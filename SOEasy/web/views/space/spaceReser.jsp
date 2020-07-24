@@ -23,8 +23,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
 
 <style>
         .visual{
@@ -110,6 +111,12 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
+		<%
+		if(userStatus == 0 || loginUser == null || !loginUser.getmStatus().equals("Y")){
+			response.sendRedirect(request.getContextPath() + "/views/member/loginForm.jsp");
+		} else{
+		
+		%>
 	<br><br>
 	<section>
 	<div style="width:75%; margin-left:auto; margin-right:auto;">
@@ -478,8 +485,9 @@
 						<td id="agree4"><label for="agr4"><input type="checkbox" id="agr4">개인정보 수집 및 이용 동의</label></td>
 				</table>
 			</div>
-		</div>
+		
 		</form>
+		</div>
 		</section>
 		<br><br>
 		
@@ -487,8 +495,10 @@
 		<div align="center">
 			<button id="reserBtn" onclick="push();" style="color:white; background:#40a4b6; width:120px; height:50px; font-size:20px; border:0; border-radius:10px; cursor:pointer;">예약 하기</button>
 		</div>
-		</form>
-		</div>
+		
+		
+		<% } %>
+		
 		
 		<br><br><br>
 	<footer><%@ include file="../common/footer.jsp" %></footer>

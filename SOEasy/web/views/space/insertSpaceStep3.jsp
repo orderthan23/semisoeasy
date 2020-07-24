@@ -12,7 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function goPopup(){
-		var pop = window.open("../../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+		var pop = window.open("<%=request.getContextPath()%>/popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	}
 
 
@@ -262,7 +262,7 @@
 					<td>
 						<input type="text" placeholder="사업장 주소를 입력하세요." id="roadFullAddr"  name="bsns-address" readonly>&nbsp;&nbsp;
 						<button type="button" onclick="goPopup();">검색</button>
-						<br><div style="text-align:right;"><label style="font-size:13px;"><input type="checkbox" id="equal-space" style="height:10px;"> 공간 주소와 동일</label></div><!-- 공간주소 받아와서 체크시 자동으로 입력되게 -->
+						<br><div style="text-align:right;"><label style="font-size:13px;"><input type="checkbox" id="equal-space" style="height:10px;" onclick="sameAdd();"> 공간 주소와 동일</label></div><!-- 공간주소 받아와서 체크시 자동으로 입력되게 -->
 					</td>
 					<td></td>
 				</tr>
@@ -370,7 +370,11 @@
 	<footer>
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
+</body>
 	<script>
+		/* function sameAddr(){
+			
+		} */
 		$(function(){
 			initSet();
 			initEvent();
@@ -429,5 +433,4 @@
 			$("form").submit();
 		});
 	</script>
-</body>
 </html>
