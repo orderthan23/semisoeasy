@@ -184,16 +184,13 @@ public class HostReserveDao {
 		System.out.println("호스트 예약정보 테이블 출력 : " + query);
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, spaceNo);
-			pstmt.setInt(2, hostNo);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				HostReserve hostReserve = new HostReserve();
 				
-				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));	
-				hostReserve.setPayStatus(rset.getInt("PAY_STATUS"));					
+				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));				
 				hostReserve.setHostNo(rset.getInt("HOST_NO"));
 				hostReserve.setReserveNo(rset.getInt("RESERV_NO"));
 				hostReserve.setOfficeNo(rset.getString("OFFICE_NO"));
@@ -324,7 +321,7 @@ public class HostReserveDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = prop.getProperty("updateCount");
+		String query = prop.getProperty("updateReserve");
 		
 		try {
 			pstmt = con.prepareStatement(query);
