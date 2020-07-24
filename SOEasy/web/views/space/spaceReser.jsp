@@ -199,7 +199,7 @@
 		<br>
 		
 		<!-- 공간 주소 / 공간 유형 / 예약가능인원 / 예약일정설정 -->
-		<table id="plusTb">
+		<table id="plusTb" align="center" width="800">
 			<tr>
 				<td id="add" width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>공간주소</b></td>
 				<td id="addInfo"><%= si.getSpaceAddress() %></td>
@@ -219,10 +219,7 @@
 				<td id="accPerInfo"><%= si.getMaxReserv() %></td>
 			</tr>
 		</table>
-
-
-
-		
+		<br><br>
 		
 		<form id="insertReservation" action="<%= request.getContextPath()%>/insertReservationInfo" method="post">
 		
@@ -240,7 +237,7 @@
 		<table align="center" width="800">
 			<tr>
 				<td style="color:#40a4b6; font-size:20px; width:200px;"><b>예약 인원 선택</b></td>
-				<td style="width:200px;" colspan="2"><input type="number" id="choosePer" value="1" min="1" name="reservPersonCount"></td>
+				<td style="width:200px;" colspan="2"><input type="number" onclick="this.select();" id="choosePer" value="1" min="1" name="reservPersonCount"></td>
 				<td style="width:400px;">명</td>
 			</tr>
 		</table>
