@@ -116,8 +116,8 @@
 					<td style="font-size:13px;" id="option">
 					<% int rs = h.getDidHostOk(); %>
 					<% if(rs == 1) { %>
-						<button style="border:1px solid red;background:white;color:red" onclick="location.href='<%=request.getContextPath()%>/update.pr?num=<%=2%>&reserveNo=<%=28%>'">승인</button>
-						<button style="border:1px solid blue;background:white;color:blue" onclick="location.href='<%=request.getContextPath()%>/update.pr?num=<%=4%>&reserveNo=<%=28%>'">거절</button>
+						<button style="border:1px solid red;background:white;color:red" onclick="location.href='<%=request.getContextPath()%>/update.pr?num=<%=2%>&reserveNo=<%= h.getReserveNo() %>'">승인</button>
+						<button style="border:1px solid blue;background:white;color:blue" onclick="location.href='<%=request.getContextPath()%>/update.pr?num=<%=4%>&reserveNo=<%= h.getReserveNo() %>'">거절</button>
 					<% } else if(rs == 2) { %>
 						승인 완료
 					<% } else if(rs == 3) { %>
@@ -136,7 +136,7 @@
 				</tr>
 				
 				<% } %>
-				<% if(listCount == 0){ %>
+				<% if(requestCount == 0){ %>
 					<tr>
 						<td colspan="10" align="center" style="background:white; height:100px;">예약 승인 요청건이 없습니다.</td>
 					</tr>
