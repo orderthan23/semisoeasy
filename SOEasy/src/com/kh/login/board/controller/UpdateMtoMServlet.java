@@ -22,8 +22,6 @@ public class UpdateMtoMServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String rcontent = request.getParameter("rcontent");
 		String num = request.getParameter("qno");
-		String content = request.getParameter("content");
-		int category = Integer.parseInt(request.getParameter("category"));
 		
 		int qno = 0;
 		if(num != "" && num!= null) {
@@ -32,6 +30,7 @@ public class UpdateMtoMServlet extends HttpServlet {
 
 		Qna requestQna = new Qna();
 		requestQna.setRcontent(rcontent);
+		requestQna.setQno(qno);
 		
 		int result = new BoardService().updateqna(requestQna);
 		
@@ -39,7 +38,6 @@ public class UpdateMtoMServlet extends HttpServlet {
 		
 		String page = "";
 		if(result > 0 ) {
-			
 			Qna qna =  new BoardService().detailQna(qno);
 			
 			if(qna != null) {

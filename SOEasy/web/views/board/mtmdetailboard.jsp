@@ -156,7 +156,7 @@
 									<textArea style="width:100%; resize:none; border:none;" class="answer" readonly class="QandA" ><%= qna.getRcontent() %></textArea>
 									<div style="float:right;">
 									<%if(loginUser != null && loginUser.getMemberNo() == 1) { %>
-									<button   style="text-align:center; background:#60B4A6; color:white" onclick="location.href='<%= request.getContextPath()%>/selectBoard.mm?num=<%= qna.getQno()%>'" >답변하기 </button>
+									<button style="text-align:center; background:#60B4A6; color:white;" onclick="location.href='<%= request.getContextPath()%>/selectBoard.mm?num=<%= qna.getQno()%>'" >답변하기 </button>
 									<button type="button" onclick="stopAnswer();" class="stopBtn">삭제</button>
 									<% } %>
 									</div>
