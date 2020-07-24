@@ -40,7 +40,7 @@ public class IntoReservationServlet extends HttpServlet {
 		String page = "";
 		if(list != null) {
 			page ="/views/space/spaceReser.jsp";
-			request.getSession().setAttribute("introList", list);
+		request.getSession().setAttribute("introList", list);
 
 	
 			request.getRequestDispatcher(page).forward(request, response);
