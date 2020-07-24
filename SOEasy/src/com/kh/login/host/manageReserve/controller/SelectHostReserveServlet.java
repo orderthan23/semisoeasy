@@ -37,8 +37,8 @@ public class SelectHostReserveServlet extends HttpServlet {
 //		String sHostNo = request.getParameter("hostNo");
 //		String sSpaceNo = request.getParameter("spaceNo");
 		
-		int hostNo = 40;
-		int spaceNo = 15;
+		int hostNo = 26;
+		int spaceNo = 1;
 		
 		ArrayList<HostReserve> list = new HostReserveService().selectReserveInfo(hostNo, spaceNo);
 		

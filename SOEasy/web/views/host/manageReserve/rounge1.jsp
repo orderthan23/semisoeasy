@@ -64,7 +64,7 @@
 		width: 120px;
 		height: 90px;
 		border: lightgrey 2px solid;
-		background-color: lightblue;
+		background-color: #A5C1DA;
 	}
 	#month {
 		margin:1%;
@@ -91,12 +91,12 @@
 	#dayT {
 		margin:5px;
 		border: lightgrey 2px solid;
-		background-color: lightblue;
+		background-color: white;
 	}
 	#monthT {
 		margin:5px;
 		border: lightgrey 2px solid;
-		background-color: white;
+		background-color: #A5C1DA;
 	}
 	#expT {
 		margin:5px;
@@ -141,8 +141,9 @@
 		<div class="l1" align="center">
 			라운지 이용고객 관리
 		</div>
-		<label id="select">공간선택</label> <select name="place" size="1" >
-				<option value="place1" onclick=test1()>센터1</option>
+		<label id="select">공간선택</label>
+			<select name="place" size="1" >
+				<option value="place1">센터1</option>
 				<option value="place2">센터2</option>
 				<option value="place3">센터3</option>
 				<option value="place4">센터4</option>
@@ -164,12 +165,12 @@
 			for(HostReserve h : list) { %>
 			<button class="roungeBtn" style="
 			<% if(h.getReserveStatus() == 4) { %>
-				 background:red;">
+				 background:pink;">
 			<% } else {%>
-				<% if(h.getStartDay() == h.getEndDay()) {%>
-				 background:skyblue;">
+				<% if(h.getStartDay().equals(h.getEndDay())) {%>
+				 background:white;">
 				<% } else {%>
-				background:white;">
+				background:#A5C1DA;">
 				<% } %>
 			<% } %>
 			<label><%= "1개월권" %></label><br>
@@ -184,7 +185,7 @@
 			<% } %>
 		<% } %>
 		
-		<button id="month">
+		<!-- <button id="month">
 		<label>1개월권</label><br>
 		<label>이호정</label><br>
 		<label>라운지 이용</label><br>
@@ -297,7 +298,7 @@
 		<label>장욱</label><br>
 		<label>라운지 이용</label><br>
 		<label>6/29</label>
-		</button>
+		</button> -->
 		
 		<div class="btn2" id="btn2"></div>
 		

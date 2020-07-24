@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -74,8 +75,7 @@ public class HostReserveDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, 1);
-			pstmt.setInt(2, 1);
+			pstmt.setInt(1, 26);
 
 			rset = pstmt.executeQuery();
 
@@ -111,7 +111,7 @@ public class HostReserveDao {
 
 			pstmt.setInt(1, 1);
 			pstmt.setInt(2, 2);
-			pstmt.setInt(3, 17);
+			pstmt.setInt(3, 26);
 			pstmt.setInt(4, startRow);
 			pstmt.setInt(5, endRow);
 
@@ -184,10 +184,12 @@ public class HostReserveDao {
 		System.out.println("호스트 예약정보 테이블 출력 : " + query);
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			pstmt.setInt(2, hostNo);
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
 				HostReserve hostReserve = new HostReserve();
 				
 				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));				
@@ -199,9 +201,13 @@ public class HostReserveDao {
 				hostReserve.setDidHostOk(rset.getInt("DID_HOST_OK"));
 				hostReserve.setReservePersonCount(rset.getInt("RESERV_PERSON_COUNT"));
 				hostReserve.setReserveStatus(rset.getInt("RESERV_STATUS"));
-				hostReserve.setStartDay(rset.getString("START_DATE"));
-				hostReserve.setEndDay(rset.getString("END_DATE"));
-				hostReserve.setReserveDate(rset.getString("RESERV_DATE"));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String sDay = sdf.format(rset.getTimestamp("START_DATE"));
+				String eDay = sdf.format(rset.getTimestamp("END_DATE"));
+				String rDay = sdf.format(rset.getTimestamp("RESERV_DATE"));
+				hostReserve.setStartDay(sDay);
+				hostReserve.setEndDay(eDay);
+				hostReserve.setReserveDate(rDay);
 				hostReserve.setUserName(rset.getString("USER_NAME"));
 				
 				list.add(hostReserve);
@@ -277,22 +283,26 @@ public class HostReserveDao {
 	public ArrayList<HostReserve> selectRoungeInfo(Connection con, int hostNo, int spaceNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<HostReserve>  list = new ArrayList<HostReserve>();
+		ArrayList<HostReserve>  list = null;
 		
 		String query = prop.getProperty("selectRoungeInfo");
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, spaceNo);
-			pstmt.setInt(2, hostNo);
+//			pstmt.setInt(1, spaceNo);
+			pstmt.setInt(1, hostNo);
 			
 			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
+			list = new ArrayList<HostReserve>();
+			while(rset.next()) {
+				
 				HostReserve hostReserve = new HostReserve();
 				
-				hostReserve.setStartDay(rset.getString("START_DATE"));
-				hostReserve.setEndDay(rset.getString("END_DATE"));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String sDay = sdf.format(rset.getTimestamp("START_DATE"));
+				String eDay = sdf.format(rset.getTimestamp("END_DATE"));
+				hostReserve.setStartDay(sDay);
+				hostReserve.setEndDay(eDay);
 				hostReserve.setReserveDate(rset.getString("RESERV_DATE"));
 				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));			
 				hostReserve.setHostNo(rset.getInt("HOST_NO"));
@@ -352,7 +362,7 @@ public class HostReserveDao {
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
 				HostReserve hostReserve = new HostReserve();
 				
 				hostReserve.setSpaceNo(rset.getInt("SPACE_NO"));			

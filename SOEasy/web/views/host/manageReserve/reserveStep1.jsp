@@ -14,6 +14,7 @@
 		System.out.println(list.get(i));
 	}
 	
+	
 	int officeInfo = 401;
 	int startDay = 5;
 	int term = 30;
@@ -171,14 +172,14 @@
 					<td><%=i %></td>
 				<% } %>
 			</tr>
-			<% for(int i = 1; i <= officeCount; i++) {%>
+			<% for(int i = 0; i < list.size(); i++) { %>
 			
 			<tr>
-				<td><%= officeInfo %>호실</td>
+				<td><%= i + 401 %>호실</td>
 				<% for(int j = 1; j < 31; j++) { %>
 				<% if(j > 31) {break;} %>
 				<td
-				<% if(officeInfo == 401) { %>
+				<% if(officeInfo == i+401) { %>
 					<% if(startDay == j) { 
 					j += term -2; %>
 					colspan="<%= term %>" style="background:#A5C1DA; color:white; text-align:center;"><button class="reserveBtn" name="<%= reserveNo %>"><%= name %></button>
@@ -198,7 +199,8 @@
 	$("reserveBtn").onclick(function(){
 		window.open("/views/host/manageReserve/reserveUpdate.jsp", 'Window2', 'width=500, height=550');
 	});
-
+	
+	$('.zone:nth(3) ~ .zone:nth(5)').css("background","red");
 	</script>
 	
 	
