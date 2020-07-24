@@ -16,9 +16,10 @@
 	
 	int officeInfo = 401;
 	int startDay = 5;
-	int term = 14;
+	int term = 30;
 	int reserveNo = 9;
 	String name= "이호정";
+	
 %>
 
 <!DOCTYPE html>
@@ -180,7 +181,7 @@
 				<% if(officeInfo == 401) { %>
 					<% if(startDay == j) { 
 					j += term -2; %>
-					colspan="<%= term %>" style="background:red; color:white; text-align:center;"><button class="reserveBtn" name="<%= reserveNo %>"><%= name %></button>
+					colspan="<%= term %>" style="background:#A5C1DA; color:white; text-align:center;"><button class="reserveBtn" name="<%= reserveNo %>"><%= name %></button>
 					<% } else { %>
 					>
 					<% } %>
