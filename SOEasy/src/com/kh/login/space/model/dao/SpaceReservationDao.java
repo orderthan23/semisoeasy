@@ -115,7 +115,7 @@ public class SpaceReservationDao {
 			while(rset.next()) {
 				
 				SpaceReservation sr = new SpaceReservation();
-				
+				//sr.set
 				
 				//returnList.add(sr);
 			}

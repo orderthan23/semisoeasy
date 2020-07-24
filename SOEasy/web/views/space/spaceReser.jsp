@@ -209,7 +209,7 @@
 			</tr>
 			<tr>
 				<td id="accPer" width="180px;" height="50px;" style="color:#40a4b6; font-size:20px;"><b>예약 가능 인원</b></td>
-				<td id="accPerInfo"><%= si.getSpaceContainCount() %></td>
+				<td id="accPerInfo"><%= si.getMaxReserv() %></td>
 			</tr>
 		</table>
 
@@ -279,7 +279,7 @@
 			<tr>
 				<td style="color:#40a4b6; font-size:20px; width:200px; height:50px;"><b>예약자 정보</b></td>
 				<td width="150px"><b >예약자명</b></td>
-				<td id="reserName" width="200px"><input style="border: 1.5px solid #40a4b6;" type="text" id="reserNm" name="reservName"></td>
+				<td id="reserName" width="200px"><input style="border: 1.5px solid #40a4b6;" type="text" id="reserNm" name="reservName" value="<%= loginUser.getmName() %>" readonly></td>
 				<td width="200px"></td>
 			</tr>
 			<tr>
@@ -314,27 +314,57 @@
 			<tr>
 				<td style="color:#40a4b6; font-size:20px; width:200px; height:50px;"><b>호스트 정보</b></td>
 				<td width="110px"><b>상호명</b></td>
-				<td id="storeNm"><%= si.getBsnsName() %></td>
+				<td id="storeNm">
+					<% if (si.getBsnsName() == null || si.getBsnsName() == "") { %>
+						-
+					<% } else { %>
+						<%= si.getBsnsName() %>
+					<% } %>
+				</td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td id="chairmanNm" width="110px"><b>대표자명</b></td>
-				<td><%= si.getRepresentName() %></td>
+				<td>
+					<% if (si.getRepresentName() == null || si.getRepresentName() == "") { %>
+						-
+					<% } else { %>
+						<%= si.getRepresentName() %>
+					<% } %>
+				</td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="110px"><b>소재지</b></td>
-				<td id="address"><%= si.getBsnsAddress() %></td>
+				<td id="address">
+					<% if (si.getBsnsAddress() == null || si.getBsnsAddress() == "") { %>
+						-
+					<% } else { %>
+						<%= si.getBsnsAddress() %>
+					<% } %>
+				</td>
 			</tr>
 			<tr>
 				<td width="200px" height="50px"></td>
 				<td width="110px"><b>사업자번호</b></td>
-				<td id="busOpNum"><%= si.getBsnsLicenseNo() %></td>
+				<td id="busOpNum">
+					<% if (si.getBsnsLicenseNo() == null || si.getBsnsLicenseNo() == "") { %>
+						-
+					<% } else { %>
+						<%= si.getBsnsLicenseNo() %>
+					<% } %>
+				</td>
 			</tr>
 			<tr> 
 				<td width="200px" height="50px"></td>
 				<td width="110px"><b>연락처</b></td>
-				<td id="comm"><%= si.getCalPhone() %> / <%= si.getCalEmail() %></td>
+				<td id="comm">
+					<% if ((si.getCalPhone() == null && si.getCalEmail() == null) || (si.getCalPhone() == "" && si.getCalEmail() == "")) { %>
+						-
+					<% } else { %>
+						<%= si.getCalPhone() %> / <%= si.getCalEmail() %>
+					<% } %>
+				</td>
 			</tr>
 		</table>
 		<br><br>
@@ -455,7 +485,7 @@
 		
 		<!-- 예약 버튼 -->
 		<div align="center">
-			<button id="reserBtn" onclick="push();" style="color:white; background:#40a4b6; width:120px; height:50px; font-size:20px; border:0; border-radius:10px; cursor:pointer;">결제하기</button>
+			<button id="reserBtn" onclick="push();" style="color:white; background:#40a4b6; width:120px; height:50px; font-size:20px; border:0; border-radius:10px; cursor:pointer;">예약 하기</button>
 		</div>
 		</form>
 		</div>
@@ -522,7 +552,7 @@
 		
 		//결제버튼 눌렀을때	
 		function push() {
-			alert('결제버튼 누름 / API로 연결');
+		
 			$("#insertReservation").submit();
 		};
 		

@@ -102,9 +102,7 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		
 		String page = "";
 		if(returnList != null) {
-			page = "/views/common/successPage.jsp";
-			request.setAttribute("successCode", "insertReservationInfo");
-			request.getRequestDispatcher(page).forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/SelectUserReservHistory");
 		} else {
 			page = "/views/common/errorPage.jsp";
 			request.setAttribute("msg", "예약정보 insert 실패");

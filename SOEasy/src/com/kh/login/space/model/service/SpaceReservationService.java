@@ -37,7 +37,7 @@ public class SpaceReservationService {
 					rollback(con);
 					returnList = null;
 				}
-		} else {
+		} else { 
 			//rollback(con);
 			returnList = null; //혹시몰라서
 		}
