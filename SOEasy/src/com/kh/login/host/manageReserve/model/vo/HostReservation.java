@@ -6,7 +6,7 @@ public class HostReservation implements java.io.Serializable {
 	private int guestNo;			//게스트번호
 	private int spaceNo;			//공간번호
 	private String fixUnfix;		//자유지정석여부
-	private int officeNo;			//호실번호
+	private String officeNo;			//호실번호
 	private String startDate;		//사용시작날짜
 	private String endDate;			//사용종료날짜
 	private int reservPersonCount;	//예약인원
@@ -24,7 +24,7 @@ public class HostReservation implements java.io.Serializable {
 
 	}
 
-	public HostReservation(int reservNo, int guestNo, int spaceNo, String fixUnfix, int officeNo, String startDate,
+	public HostReservation(int reservNo, int guestNo, int spaceNo, String fixUnfix, String officeNo, String startDate,
 			String endDate, int reservPersonCount, int didHostOk, int reservStatus, String didReview, String reservDate,
 			int expectPay, String userName, String userPhone, String userEmail, String requestContent) {
 		super();
@@ -63,7 +63,7 @@ public class HostReservation implements java.io.Serializable {
 		return fixUnfix;
 	}
 
-	public int getOfficeNo() {
+	public String getOfficeNo() {
 		return officeNo;
 	}
 
@@ -131,7 +131,7 @@ public class HostReservation implements java.io.Serializable {
 		this.fixUnfix = fixUnfix;
 	}
 
-	public void setOfficeNo(int officeNo) {
+	public void setOfficeNo(String officeNo) {
 		this.officeNo = officeNo;
 	}
 
