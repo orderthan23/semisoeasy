@@ -27,7 +27,7 @@ public class UpdateMtoMServlet extends HttpServlet {
 		if(num != "" && num!= null) {
 			qno = Integer.parseInt(num);
 		}
-
+		System.out.println("qno" + qno);
 		Qna requestQna = new Qna();
 		requestQna.setRcontent(rcontent);
 		requestQna.setQno(qno);

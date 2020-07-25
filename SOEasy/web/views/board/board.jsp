@@ -77,9 +77,6 @@
 	border: 1px solid #60B4A6;
 }
 
-.noticeLogo {
-	color: #60B4A6
-}
 </style>
 <title>SO Easy</title>
 </head>
@@ -98,7 +95,7 @@
 	<section>
 		<div id="wrapper">
 			<h2 class="noticelogo"
-				style="margin: 0; font-size: 30px; font-weight: bolder">공지사항</h2>
+				style="margin: 0; color: #60B4A6; font-size: 30px; font-weight: bolder">공지사항</h2>
 			<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
 			<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a>
 				<% } %>				
@@ -109,7 +106,7 @@
 					<td colspan="1"></td>
 					<td align="center" style=>
 						<select class="category" id="category">
-							<option class="category" style="text-align: center">선택</option>
+							<option class="category" style="text-align: center; hidden">선택</option>
 							<option class="category" value=1>시스템관련</option>
 							<option class="category" value=2>계정관련</option>
 							<option class="category" value=3>결제관련</option>
@@ -129,15 +126,23 @@
 					<th>작성일자</th>
 					<th></th>
 				</tr>
-				<% for(Board b : list) { %>
+				<%-- <% for(Board b : list) { %>
+				 --%>
+				 <%for(int i = 1; i < list.size(); i++) %>
+				 <%if(Board.) {
+					 
+					}%>
+				
+
+					
 				<tr>
-					<td class="info" style="text-align: center;"><%= b.getNoticeNo() %></td>
-					<td class="info" style="text-align: center;"><%= b.getnCategory() %></td>
-					<td class="info" style="text-align: center;"><%= b.getnTitle() %></td>
-					<td class="info" style="text-align: center;"><%= b.getmNick() %></td>
-					<td class="info" style="text-align: center;"><%= b.getnDate() %></td>
+					<td class="info" style="text-align: center;"><%= list.getNoticeNo(i) %></td>
+					<td class="cinfo" style="text-align: center;"><%= list.getnCategory(i) %></td>
+					<td class="info" style="text-align: center;"><%= list.getnTitle(i) %></td>
+					<td class="info" style="text-align: center;"><%= list.getmNick(i) %></td>
+					<td class="info" style="text-align: center;"><%= list.getnDate(i) %></td>
 				<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
-					<td class="info" style="text-align: center; color:green"><%=b.getnStatus() %></td>
+					<td class="info" style="text-align: center; color:green"><%=list.getnStatus() %></td>
 						<% } %>
 				</tr>
 				<% } %>
