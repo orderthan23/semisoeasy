@@ -138,6 +138,13 @@ public class UpdateSpaceStep2Servlet extends HttpServlet {
 		
 		int result = new SpaceService().updateSpaceStep2(si);
 		
+		if(result > 0 ) {
+			response.sendRedirect(request.getContextPath() + "/selectTempSpace?memberNo=" + loginUser.getMemberNo());
+		} else {
+			request.setAttribute("msg", "공간 가격정보 수정 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+		
 	}
 
 	/**

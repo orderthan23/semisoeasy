@@ -767,10 +767,10 @@
 			}
 		});
 		
-		$("#mon24hr").is(":checked", function(){
-			$("#mon-start-time option[value=00]").prop("selected", true);
+		$("#mon24hr").on("click", function(){
+			$("#mon-start-time").removeAttr("selected").filter("[value=00]").attr("selected",true);
+			$("#mon-end-time").removeAttr("selected").filter("[value=24]").attr("selected",true);
 		});
-		
 	</script>
 </body>
 </html>

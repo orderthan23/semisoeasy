@@ -348,8 +348,8 @@ public class SpaceService {
 		int optimeResult = 0;
 		int refundResult = 0;
 		
-		//SPACE_INF SPACE_POLICY, DID_DAY_RESERV, DAY_PAY, DID_MONTH_RESERV, MONTH_PAY 입력
-		spaceInfOpResult = new SpaceDao().updateSpaceInfOp(con, si);
+		//기존에 있던 업데이트 메소드 사용
+		spaceInfOpResult = new SpaceDao().insertSpaceInfOp(con, si);
 
 		int sNo = si.getSpaceNo();
 		
@@ -380,6 +380,24 @@ public class SpaceService {
 		close(con);
 		
 		return updateResult;
+	}
+	
+	//검수 신청용 메소드
+	public int updateInspection(int spaceNo) {
+		
+		Connection con = getConnection();
+		int result = 0;
+		
+		result = new SpaceDao().updateInspection(con, spaceNo);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
 	}
 
 }
