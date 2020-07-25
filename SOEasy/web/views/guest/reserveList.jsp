@@ -246,7 +246,7 @@ th {
 					<td><label class="payProgress"></label></td>
 					<td><label class="agreeProgress"></label></td>
 					<td class="reserveSpace"><label class="reserveStatus"></label><input type="hidden" class="reserveNumber" value=<%=reserveList.get(i).getReserveNo() %>></td>
-					<td><a href="#" class="reviewExistance"></a></td>
+					<td><p  class="reviewExistance" style="margin : 0"></p></td>
 					<td class="cancleZone"><button type="button" class="cancle" >취소</button></td>
 				</tr>
 				
@@ -279,10 +279,11 @@ th {
 			}
 			
 			var rvNum = "<%=hasReviewArr.get(i)%>"
+			console.log(rvNum);
 			switch(rvNum){
 			case "작성대기": $('.reviewExistance:nth(<%=i%>)').text("-"); break;
-			case "작성가능": $('.reviewExistance:nth(<%=i%>)').text("작성하기"); break;
-			case "작성완료": $('.reviewExistance:nth(<%=i%>)').text("보러가기").css({color:"#3DB6AE"}); break;
+			case "작성가능": $('.reviewExistance:nth(<%=i%>)').text("작성하기").addClass('popReview'); break;
+			case "작성완료": $('.reviewExistance:nth(<%=i%>)').text("보러가기").css({color:"#3DB6AE"}).attr("onclick", "showMyReviews();"); break;
 			
 			}
 			if((aNum=="승인완료" || aNum=="바로예약") && rNum=="사용전" &&pNum=="결제완료"){
@@ -314,8 +315,13 @@ th {
 		
 		%> 
 		<script>
+		var hasReview = "<%=hasReviewArr.get(i)%>";
+		var countLength = 0;
+		if(hasReview != "COMP"){
 		reserv['reserv<%=i%>'] = "<%=reserveNum%>";
 		reserv['reservNo<%=i%>'] = "<%=reserveList.get(i).getReserveNo()%>";
+		countLength++;	
+		}
 		</script>
 		<%}%>
 		
@@ -331,13 +337,29 @@ th {
 				<input type="hidden" id="reservNo" name="reserveNo">
 				<input type="hidden" id="methodCode" name="methodCode">
 			</form>
+			
+			<input type = "hidden" id= "hiddenSpaceName">
+			<input type = "hidden" id= "hiddenSpaceNo">
 		</div>
 	</section>
 	<footer><%@ include file="../../views/common/footer.jsp" %></footer>
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 	<script>
 		$(function(){
-			reserv["length"] = "<%=reserveStatusArr.size()%>";	
+			var windowObj = null;
+			$('.popReview').click(function(){
+				
+				console.log("작동됨");
+			 	var spaceNames = $(this).parent().siblings('.spaceNames').text();
+					
+					console.log(spaceNames);
+					$('#hiddenSpaceName').val(spaceNames); 
+				 windowObj = window.open('<%=request.getContextPath()%>/views/space/reviewPop.jsp', 'window팝업', 'width=830px, height=500px, menubar=no, status=no, resizable=no, toolbar=no');  
+			});
+			
+			
+			
+			reserv["length"] = countLength;	
 			console.log(reserv);
 			$.ajax({
 				url : "<%=request.getContextPath()%>/updateRstatus",
@@ -400,6 +422,8 @@ th {
 			});
 			
 			
+				
+		
 		
 	
 		

@@ -197,6 +197,7 @@
 				case "Y" : isActiveArr.add("활성화"); break;
 				case "X" : isActiveArr.add("정지"); break;
 				case "N" : isActiveArr.add("탈퇴"); break;
+				case "W" : isActiveArr.add("복구요청"); break;
 				} 
 				
 				phoneArr.add(m.getmPhone());
@@ -272,7 +273,15 @@
 				</tr>
 				
 
-				<%for(int i=0; i<list.size(); i++) {%>
+				<%System.out.println("list-size :"+list.size());
+					System.out.println("nameArr.size :"+nameArr.size());
+					System.out.println("typeArr.size :"+typeArr.size());
+					System.out.println("isActiveArr.size :"+isActiveArr.size());
+					System.out.println("phoneArr.size :"+phoneArr.size());
+					System.out.println("emailArr.size :"+emailArr.size());
+					System.out.println("idArr.size :"+idArr.size());
+					
+				for(int i=0; i<list.size(); i++) {%>
 				<tr class="pCompleteInfo">
 					<td>
 						<select class="stage" name="block">
@@ -303,7 +312,7 @@
 			<% if(currentPage <= 1) { %>
 			<button disabled><</button>
 			<% } else { %>
-			<button onclick="location.href='<%=root+url%>currentPage=currentPage=<%=currentPage -1 %>'"><</button>
+			<button onclick="location.href='<%=root+url%>currentPage=<%=currentPage -1 %>'"><</button>
 			<% } %>
 			
 			<% for(int p = startPage; p<= endPage; p++){ 

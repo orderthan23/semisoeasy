@@ -23,15 +23,14 @@ public class SearchOptionServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//String isActive = request.getParameter("isActive");
 		int activeCode = Integer.parseInt(request.getParameter("isActive"));
 		String isActive="";
 		switch(activeCode) {
-		case 1: isActive="M_STATUS IN('N','X','Y')"; break;
+		case 1: isActive="M_STATUS IN('W','N','X','Y')"; break;
 		case 2: isActive="M_STATUS='Y'"; break;
-		case 3: isActive="M_STATUS IN('N','X')"; break;
+		case 3: isActive="M_STATUS IN('W','N','X')"; break;
 		}
-		
+		System.out.println("이즈액티브"+isActive);
 		String root = request.getRequestURI();
 		
 		String power = "";
