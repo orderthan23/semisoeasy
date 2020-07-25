@@ -128,7 +128,6 @@
 	<script>
 	
 	function submit() {
-		alert('등록버튼');
 		$("#insertReview").submit();
 	}
 	
