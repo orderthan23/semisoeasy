@@ -52,7 +52,9 @@ public class UpdateSpaceStep1Servlet extends HttpServlet {
 			HashMap<String, Object> hmap = siList.get(0);
 			SpaceInfo oriSi = (SpaceInfo) hmap.get("spaceInfo");
 			ArrayList<Image> imgList = (ArrayList<Image>) hmap.get("imgList");
-			
+			int imgListLen = imgList.size();
+			System.out.println("기존 이미지리스트 : " + imgList);
+			System.out.println("기존 이미지리스트 길이 : " + imgListLen);
 			//이미지 파일들 불러오기
 			int maxSize = 1024 * 1024 * 100;
 			
@@ -77,6 +79,9 @@ public class UpdateSpaceStep1Servlet extends HttpServlet {
 			
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
+				System.out.println("UPDATE TagName : " + name);
+				System.out.println("UPDATE sysname : " + multiRequest.getFilesystemName(name));
+				System.out.println("UPDATE originname : " + multiRequest.getOriginalFileName(name));
 				if(multiRequest.getFilesystemName(name) == null) {
 					
 				} else {
@@ -86,10 +91,15 @@ public class UpdateSpaceStep1Servlet extends HttpServlet {
 					allOriginFiles.add(multiRequest.getOriginalFileName(name));
 				}
 			}
+			System.out.println("모든 업데이트 파일 레벨 : "+allFileLevels);
+			System.out.println("모든 업데이트 파일 변경명 : " + allSaveFiles);
+			System.out.println("모든 업데이트 파일 진짜명 : " + allOriginFiles);
 			
 			for(int i = allFileLevels.size()-1; i >= 0; i--) {
-				for(int j = 0; j < imgList.size()-1; j++) {
+				System.out.println("혹시 여기는?");
+				for(int j = 0; j < imgList.size(); j++) {
 					if(allFileLevels.get(i) == imgList.get(j).getFileLevel()) {
+						System.out.println("기존 이미지 리스트 파일레벨 : " + imgList.get(j).getFileLevel());
 						Image img = new Image();
 						img.setImgNo(imgList.get(j).getImgNo());
 						img.setFileLevel(allFileLevels.get(i));
@@ -104,20 +114,32 @@ public class UpdateSpaceStep1Servlet extends HttpServlet {
 			}
 			
 			for(int i = allFileLevels.size()-1; i >= 0; i--) {
-				for(int j = 0; j < updateImgList.size(); i++) {
-					if(allFileLevels.get(i) != updateImgList.get(j).getFileLevel()) {
-						Image img = new Image();
-						
-						img.setFileLevel(allFileLevels.get(i));
-						img.setChangeName(allSaveFiles.get(i));
-						img.setOriginName(allOriginFiles.get(i));
-//						insertFileLevels.add(allFileLevels.get(i));
-//						insertSaveFiles.add(allSaveFiles.get(i));
-//						insertOriginFiles.add(allOriginFiles.get(i));
-						insertImgList.add(img);
+				if(updateImgList.size() == 0) {
+					Image img = new Image();
+					
+					img.setFileLevel(allFileLevels.get(i));
+					img.setFilePath(savePath);
+					img.setChangeName(allSaveFiles.get(i));
+					img.setOriginName(allOriginFiles.get(i));
+					insertImgList.add(img);
+				} else {
+					for(int j = 0; j < updateImgList.size(); i++) {
+						if(allFileLevels.get(i) != updateImgList.get(j).getFileLevel()) {
+							System.out.println("인서트 리스트 진입");
+							Image img = new Image();
+							
+							img.setFileLevel(allFileLevels.get(i));
+							img.setFilePath(savePath);
+							img.setChangeName(allSaveFiles.get(i));
+							img.setOriginName(allOriginFiles.get(i));
+							insertImgList.add(img);
+						}
+					
 					}
 				}
 			}
+			
+			System.out.println("업데이트 중 인서트 이미지리스트 : "+insertImgList);
 			
 			imgHmap.put("updateImgList", updateImgList);
 			imgHmap.put("insertImgList", insertImgList);

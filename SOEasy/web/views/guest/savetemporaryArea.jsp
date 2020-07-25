@@ -26,7 +26,6 @@
 	
 	}
 	#tableHeader th{
-		width : 20%;
 		height : 60px;
 	}
 	
@@ -98,11 +97,10 @@
 	<br><br>
 	<table	id="areaListTable">
 		<tr id = tableHeader>
-			<th>공간명</th>
-			<th>공간종류</th>
-			<th>공간상태</th>
-			<th>공간정보수정</th>
-			<th>공간정보삭제</th>
+			<th width="20%">공간명</th>
+			<th width="15%">공간종류</th>
+			<th width="15%">공간상태</th>
+			<th width="30%" colspan="3">공간정보관리</th>
 		</tr>
 		<%
 			for(int i = 0; i < siList.size(); i++) {
@@ -119,20 +117,29 @@
 			
 			<% if(siList.get(i).getsStatus().equals("Y")) { %>
 			<td><button class=inspectionStatus style="color:green; borderColor:green;">운영 중</button></td>
-			<td><button class="updateSpaceInfo">공간 정보 수정</button></td>
-			<td><button class="deleteRequest">공간 정보 삭제 요청</button></td>
+			<td width="10%"><button class="updateSpaceInfo">공간 정보 수정</button></td>
+			<td width="10%"><button class="deleteRequest">공간 정보 삭제 요청</button></td>
+			<td width="10%"></td>
 			<% } else if(siList.get(i).getsStatus().equals("N")) { %>
 			<td><button class=inspectionStatus style="color:gray; borderColor:gray;">작성 중</button></td>
-			<td><button class="updateSpaceInfo">공간 정보 수정</button></td>
-			<td><button class="deleteSpace">미완성 공간 정보 삭제</button></td>
+			<td width="10%"><button class="updateSpaceInfo">공간 정보 수정</button></td>
+			<td width="10%"><button class="deleteSpace">미완성 공간 정보 삭제</button></td>
+			<td width="10%"><button class="inspectionRequest">공간 검수 신청</button></td>
 			<% } else if(siList.get(i).getsStatus().equals("IW")) { %>
 			<td><button class=inspectionStatus style="color:purple; borderColor:purple;">공간 검수 대기 중</button></td>
-			<td><button disabled="disabled">공간 정보 수정</button> </td>
-			<td><button disabled="disabled">공간 정보 삭제 요청</button></td>
-			<% } else { %>
+			<td width="10%"><button disabled="disabled">공간 정보 수정</button> </td>
+			<td width="10%"><button disabled="disabled">공간 정보 삭제 요청</button></td>
+			<td width="10%"></td>
+			<% } else if(siList.get(i).getsStatus().equals("DW")) { %>
 			<td><button class=inspectionStatus style="color:red; borderColor:red;">공간 삭제 대기 중</button></td>
-			<td><button disabled="disabled">공간 정보 수정</button> </td>
-			<td><button class="cancleDeleteRequset">공간 정보 삭제 취소</button></td>
+			<td width="10%"><button disabled="disabled">공간 정보 수정</button> </td>
+			<td width="10%"><button class="cancleDeleteRequset">공간 정보 삭제 취소</button></td>
+			<td width="10%"></td>
+			<% } else if(siList.get(i).getsStatus().equals("ID")) { %>
+			<td><button class=inspectionStatus style="color:red; borderColor:red;">공간 등록 거절</button></td>
+			<td width="10%"><button class="updateSpaceInfo">공간 정보 수정</button></td>
+			<td width="10%"><button class="deleteSpace">미완성 공간 정보 삭제</button></td>
+			<td width="10%"><button class="inspectionRequest">공간 검수 신청</button></td>
 			<% } %>
 		</tr>
 		<% } %>
@@ -157,11 +164,16 @@
 		}
 	});
 	
+	$(".inspectionRequest").click(function(){
+		var spaceNo = $(this).parent().siblings(".spaceNameZone").find(".hiddenSpaceNo").val();
+		location.href = "<%=request.getContextPath()%>/inspectionRequest?sNo="+spaceNo;
+	});
+	
 	$(function(){
 		<% 
 		int cnt = 0;
 		for(SpaceInfo s : siList) { 
-			if(s.getsStatus().equals("N")) {
+			if(s.getsStatus().equals("N") || s.getsStatus().equals("ID") || s.getsStatus().equals("IW")) {
 				cnt ++;%>
 			<% } %>
 		<% } %>

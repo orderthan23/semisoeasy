@@ -1101,21 +1101,78 @@ public class SpaceDao {
 		return result;
 	}
 
-
-	public int updateSpaceInfOp(Connection con, SpaceInfo si) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
+	//공간 운영시간 업데이트
 	public int updateSpaceOptime(Connection con, int sNo, int day, int startTime, int endTime, String openCheck) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateSpaceOptime");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, startTime);
+			pstmt.setInt(2, endTime);
+			pstmt.setString(3, openCheck);
+			pstmt.setInt(4, sNo);
+			pstmt.setInt(5, day);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 
 	public int updateRefundPolicy(Connection con, int sNo, double rate, int date) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateRefundPolicy");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, date);
+			pstmt.setInt(2, sNo);
+			pstmt.setInt(3, date);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	//검수 신청 업데이트용 메소드
+	public int updateInspection(Connection con, int spaceNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateInspection");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

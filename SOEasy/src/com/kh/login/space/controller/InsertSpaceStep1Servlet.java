@@ -95,7 +95,7 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			}
 			
 			String kinds = multiRequest.getParameter("kinds");
-			System.out.println("insertSpaceStep1 kinds : " + kinds);
+			//System.out.println("insertSpaceStep1 kinds : " + kinds);
 			
 			//공간정보 vo
 			SpaceInfo si = new SpaceInfo();
@@ -139,12 +139,12 @@ public class InsertSpaceStep1Servlet extends HttpServlet {
 			si.setSpaceLocationFilter(spaceLocationFilter);
 			
 			
-			System.out.println("insertSpace1 fileList : " + fileList);
-			System.out.println("insertSpace1 si : " + si);
+			//System.out.println("insertSpace1 fileList : " + fileList);
+			//System.out.println("insertSpace1 si : " + si);
 			
 			SpaceInfo returnSi = new SpaceService().insertSpaceStep1(fileList, si);
 			
-			System.out.println(returnSi);
+			//System.out.println(returnSi);
 			
 			if(returnSi != null) {
 				request.getSession().setAttribute("spaceInfo", returnSi);
