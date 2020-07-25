@@ -125,7 +125,7 @@
 				<button style="text-align:center; background:#60B4A6" onclick="complete();">수정완료</button>
 				<button style="text-align:center; color:white; background:#60B4A6" type="button" id="post" onclick="posting();" >최종게시</button>
 				<button style="text-align:center; color:white; background:#60B4A6" id="downPost" type="button" onclick="downPosting();" >내리기</button>
-
+			<%}  %>
 			</td>
 		</tr>
 	</table>	
@@ -158,10 +158,6 @@
 		function downPosting(){
 			$("#updateForm").attr("action", "<%=request.getContextPath()%>/downpost.no").submit();
 			}
-		<% } else { 
-			request.setAttribute("msg", "잘못된 경로로 접근");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		} %>
 	</script>
 
 

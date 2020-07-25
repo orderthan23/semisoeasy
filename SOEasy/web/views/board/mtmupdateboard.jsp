@@ -7,7 +7,7 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="/login/css/layout.css">
+<link rel="stylesheet" href="css/layout.css">
 ​
 <style>
 #wrapper{
@@ -118,8 +118,8 @@
 		</table>
 		<a href="writeboard.jsp" class="writeButton">글쓰기</a> 
 		<br>
-			<form method="post"  id="updateMtM"  name="updateMtm">
 				<input type="hidden" name="id" value="<%=loginUser.getmId()%>">
+			<form method="post"  id="updateMtM"  name="updateMtm">
 				<table style = "width: 100%; border-collapse: collapse; " id="boardTable">
 						<tr>
 							<th>번호</th>
@@ -154,9 +154,7 @@
 									<hr>
 									<textArea name="rcontent"style="width:100%; resize:none; border:none;" class="answer" class="QandA" ><%= qna.getRcontent() %></textArea>
 									<div style="float:right;">
-									<%if(loginUser != null && loginUser.getMemberNo() ==1 ) { %>
-									<button type="button" onclick="done();" class="startBtn">답변완료</button>
-									<% } %>
+									<button type="button" id="post" onclick="done();" class="startBtn">답변완료</button>
 									</div>
 								</div>
 							</td>
@@ -167,14 +165,13 @@
 	</section>
 	<br><br>
 	<footer><%@ include file="../common/footer.jsp"%></footer>
-	
 	<script>
-
+		
 		function done(){
-			$("#updateMtM").attr("action", "<%=request.getContextPath()%>/updateBoard.mm");
-		};
+			$("#updateMtM").attr("action", "<%=request.getContextPath()%>/updateBoard.mm?qno=<%=qna.getQno()%>").submit();
+			console.log("버튼눌림");
+		}
 		
 	</script>
-	
 </body>
 </html>
