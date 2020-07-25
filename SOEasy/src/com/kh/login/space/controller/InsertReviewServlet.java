@@ -1,6 +1,9 @@
 package com.kh.login.space.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,10 +36,16 @@ public class InsertReviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+//		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>) request.getSession().getAttribute("introList");
+//		HashMap<String, Object> hmap = list.get(0);
+//		ArrayList<Review> reviewList = (ArrayList<Review>) hmap.get("reviewList");
+//		SpaceInfo si = (SpaceInfo) hmap.get("spaceInfo");
 		
 		//reviewNo는 시퀀스로 주기
-		int spaceNo = 1; //getParameter로 다른데서 가져오기 (임시로 1넣어놓음)
-		int memberNo = loginUser.getMemberNo(); //로그인 안되있음 에러
+//		int spaceNo = si.getSpaceNo();
+//		int memberNo = loginUser.getMemberNo(); //로그인 안되있음 에러
+		int spaceNo = 4;
+		int memberNo = 7;
 		String reviewContent = request.getParameter("reviewContent");
 		int rPoint = Integer.parseInt(request.getParameter("rPoint"));
 		String enrollDate = "SYSDATE";

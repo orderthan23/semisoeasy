@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -134,7 +135,7 @@
 		
 	});
 	function submit() {
-		alert('등록버튼');
+		
 		$("#insertReview").submit();
 	}
 	
@@ -199,4 +200,5 @@
 </section>
 
 </body>
+
 </html>

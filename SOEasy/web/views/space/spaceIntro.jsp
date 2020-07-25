@@ -137,11 +137,11 @@
          <tr>
             <td id="price" style="color:#c4c4c4; font-size:25px;">
                <% if (si.getDayPay() == 0) { %>
-                  월 / <%= si.getMonthPay() %>원
+                  	월 / <%= si.getMonthPay() %>원
                <% } else if (si.getMonthPay() == 0) { %>
-                  일 / <%= si.getDayPay() %>원
+                  	일 / <%= si.getDayPay() %>원
                <% } else if (si.getDayPay() != 0 && si.getMonthPay() != 0) { %>
-                  일 <%= si.getDayPay() %>원 / 월 <%= si.getMonthPay() %>원
+                  	일 <%= si.getDayPay() %>원 / 월 <%= si.getMonthPay() %>원
                <% } %>
             </td>
             <td width="100px;"><button id="reserBtn" onclick="test1();" style="float:right;">예  약</button></td>
@@ -251,38 +251,39 @@
       <!-- 편의시설 사진들 넣기 -->
       <table id="amenityTb" style="border-spacing:15px;">
          <tr>
-            <td id="24h" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/24h.png" width="100px" style="opacity:0.2;"></td>
-            <td id="365days" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/365days.png" width="100px"></td>
-            <td id="airCon" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/airCon.png" width="100px"></td>
-            <td id="animal" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/animal.png" width="100px" style="opacity:0.2;"></td>
-            <td id="beam" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/beam.png" width="100px" style="opacity:0.2;"></td>
-            <td id="board" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/board.png" width="100px"></td>
+            <td style="padding:22px;"><img id="24h" src="<%=request.getContextPath() %>/images/icon/24h.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="365days" src="<%=request.getContextPath() %>/images/icon/365days.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="airCon" src="<%=request.getContextPath() %>/images/icon/airCon.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="animal" src="<%=request.getContextPath() %>/images/icon/animal.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="beam" src="<%=request.getContextPath() %>/images/icon/beam.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="board" src="<%=request.getContextPath() %>/images/icon/board.png" width="100px" style="opacity:0.2;"></td>
          </tr>
          <tr>
-            <td id="cafe" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/cafe.png" width="100px" style="opacity:0.2;"></td>
-            <td id="copyPrint" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/copyPrint.png" width="100px"></td>
-            <td id="delivery" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/delivery.png" width="100px" style="opacity:0.2;"></td>
-            <td id="doorLock" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/doorLock.png" width="100px"></td>
-            <td id="fax" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/fax.png" width="100px"></td>
-            <td id="heater" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/heater.png" width="100px"></td>
+            <td style="padding:22px;"><img id="cafe" src="<%=request.getContextPath() %>/images/icon/cafe.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="copyPrint" src="<%=request.getContextPath() %>/images/icon/copyPrint.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="delivery" src="<%=request.getContextPath() %>/images/icon/delivery.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="doorLock" src="<%=request.getContextPath() %>/images/icon/doorLock.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="fax" src="<%=request.getContextPath() %>/images/icon/fax.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="heater" src="<%=request.getContextPath() %>/images/icon/heater.png" width="100px" style="opacity:0.2;"></td>
          </tr>
          <tr>
-            <td id="kitchen" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/kitchen.png" width="100px" style="opacity:0.2;"></td>
-            <td id="locker" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/locker.png" width="100px" style="opacity:0.2;"></td>
-            <td id="mail" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/mail.png" width="100px"></td>
-            <td id="parking" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/parking.png" width="100px"></td>
-            <td id="rounge" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/rounge.png" width="100px"></td>
-            <td id="snack" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/snack.png" width="100px" style="opacity:0.2;"></td>
-         </tr>
+            <td style="padding:22px;"><img id="kitchen" src="<%=request.getContextPath() %>/images/icon/kitchen.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="locker" src="<%=request.getContextPath() %>/images/icon/locker.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="mail" src="<%=request.getContextPath() %>/images/icon/mail.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="parking" src="<%=request.getContextPath() %>/images/icon/parking.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="rounge" src="<%=request.getContextPath() %>/images/icon/rounge.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="snack" src="<%=request.getContextPath() %>/images/icon/snack.png" width="100px" style="opacity:0.2;"></td>
+         </tr> 
          <tr>
-            <td id="terrace" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/terrace.png" width="100px"></td>
-            <td id="tv" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/tv.png" width="100px"></td>
-            <td id="wareHouse" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/wareHouse.png" width="100px" style="opacity:0.2;"></td>
-            <td id="waterMachine" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/waterMachine.png" width="100px"></td>
-            <td id="wifi" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/wifi.png" width="100px"></td>
-            <td id="plug" style="padding:22px;"><img src="<%=request.getContextPath() %>/images/icon/plug.png" width="100px"></td>
+            <td style="padding:22px;"><img id="terrace" src="<%=request.getContextPath() %>/images/icon/terrace.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="tv" src="<%=request.getContextPath() %>/images/icon/tv.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="wareHouse" src="<%=request.getContextPath() %>/images/icon/wareHouse.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="waterMachine" src="<%=request.getContextPath() %>/images/icon/waterMachine.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="wifi" src="<%=request.getContextPath() %>/images/icon/wifi.png" width="100px" style="opacity:0.2;"></td>
+            <td style="padding:22px;"><img id="plug" src="<%=request.getContextPath() %>/images/icon/plug.png" width="100px" style="opacity:0.2;"></td>
          </tr>
       </table>
+     
 
       <br><br>   
       <p id="usePeriod" style="color:#40a4b6; font-size:20px;"><b>
@@ -469,6 +470,41 @@
               autoplay: true,
               autoplaySpeed: 2000,
          });
+         
+         $(function(){
+			<% for (int i = 0; i < si.getConv().length; i++) {%>
+ 			
+        		var conv = "<%=si.getConv()[i]%>";
+        				
+        		switch(conv) {
+        			case '24h' : $("#24h").css({"opacity":"0.9"}); break;
+        			case '365days' : $("#365days").css({"opacity":"0.9"}); break;
+        			case 'airCon' : $("#airCon").css({"opacity":"0.9"}); break;
+        			case 'animal' : $("#animal").css({"opacity":"0.9"}); break;
+        			case 'beam' : $("#beam").css({"opacity":"0.9"}); break;
+        			case 'board' : $("#board").css({"opacity":"0.9"}); break;
+        			case 'cafe' : $("#cafe").css({"opacity":"0.9"}); break;
+        			case 'copyPrint' : $("#copyPrint").css({"opacity":"0.9"}); break;
+        			case 'delivery' : $("#delivery").css({"opacity":"0.9"}); break;
+        			case 'doorLock' : $("#doorLock").css({"opacity":"0.9"}); break;
+        			case 'fax' : $("#fax").css({"opacity":"0.9"}); break;
+        			case 'heater' : $("#heater").css({"opacity":"0.9"}); break;
+        			case 'kitchen' : $("#kitchen").css({"opacity":"0.9"}); break;
+        			case 'locker' : $("#locker").css({"opacity":"0.9"}); break;
+        			case 'mail' : $("#mail").css({"opacity":"0.9"}); break;
+        			case 'parcking' : $("#parcking").css({"opacity":"0.9"}); break;
+        			case 'rounge' : $("#rounge").css({"opacity":"0.9"}); break;
+        			case 'snack' : $("#snack").css({"opacity":"0.9"}); break;
+        			case 'terrace' : $("#terrace").css({"opacity":"0.9"}); break;
+        			case 'tv' : $("#tv").css({"opacity":"0.9"}); break;
+        			case 'wareHouse' : $("#wareHouse").css({"opacity":"0.9"}); break;
+        			case 'waterMachine' : $("#waterMachine").css({"opacity":"0.9"}); break;
+        			case 'wifi' : $("#wifi").css({"opacity":"0.9"}); break;
+        			case 'plug' : $("#plug").css({"opacity":"0.9"}); break;
+        		}
+        	<% } %>
+         });
+         
       </script>
 </body>
 </html>
