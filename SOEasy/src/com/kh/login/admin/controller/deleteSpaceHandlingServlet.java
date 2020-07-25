@@ -1,4 +1,4 @@
-package com.kh.login.guest.controller;
+package com.kh.login.admin.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,6 +34,7 @@ public class deleteSpaceHandlingServlet extends HttpServlet {
 		int result = 0;
 		String status = "";
 		String emailContent = request.getParameter("emailContent");// 이메일 내용
+		System.out.println("processType : "+processType);
 		if(processType ==1) {
 			
 			status = "D";

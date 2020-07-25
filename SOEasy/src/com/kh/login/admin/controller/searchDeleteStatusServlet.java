@@ -11,18 +11,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.login.admin.model.service.AdminService;
-import com.kh.login.guest.model.service.GuestService;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 
-@WebServlet("/adminDeleteAreaRequest.ad")
-public class AdminDeleteAreaRequestServlet extends HttpServlet {
+@WebServlet("/searchDeleteStatus.ad")
+public class searchDeleteStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AdminDeleteAreaRequestServlet() {
+    public searchDeleteStatusServlet() {
         super();
     }
-//
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int dStatusCode = Integer.parseInt(request.getParameter("dStatus"));
+		String dStatus = "";
+		switch(dStatusCode) {
+		case 1: dStatus = "S_STATUS IN('DW','D')"; break;
+		case 2: dStatus = "S_STATUS = 'DW'"; break;
+		case 3: dStatus = "S_STATUS = 'D'"; break;
+		}
+		String root = request.getRequestURI();
+		String url = PageInfo.customQString(request.getQueryString(), 1);
+		
 		int currentPage; //현재 페이지를 표시할 변수
 		int limit; //한 페이지에 게시글이 몇 개 보여질 것인지 표시
 		int maxPage; //전체 페이지에서 가장 마지막 페이지
@@ -30,19 +39,12 @@ public class AdminDeleteAreaRequestServlet extends HttpServlet {
 		int endPage; // 한번에 표시
 		
 		currentPage = 1;
-		String url = "?";
-		System.out.println(url);
-		String root = request.getRequestURI();
-		
-			
-		
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
 		limit = 10;
-		int listCount = new AdminService().getDeleteRequestListCount();
-		System.out.println("list count : "+ listCount);
+		int listCount = new AdminService().getDeleteRequestListCount(dStatus);
 		maxPage = (int)((double) listCount / limit +0.9);
 		startPage = (((int)((double) currentPage / 10 + 0.9))-1) * 10+1; 
 		endPage = startPage + 10-1;
@@ -52,23 +54,22 @@ public class AdminDeleteAreaRequestServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage,0);
+		ArrayList<HashMap<String,Object>> deleteList = new AdminService().selectAllDeleteList(pi,dStatus);
 		
-		ArrayList<HashMap<String,Object>> deleteList = new AdminService().selectAllDeleteList(pi);
-		System.out.println(deleteList);
 		String page = "";
+		
 		if(deleteList != null) {
-			page = "/views/admin/deleteAreaRequest.jsp";
+			page = "views/admin/deleteAreaRequest.jsp";
 			request.setAttribute("list", deleteList);
 			request.setAttribute("pi", pi);
-			request.setAttribute("root", root);
 			request.setAttribute("url", url);
-		} else {
-			page = "/views/common/errorPage.jsp";
-			request.setAttribute("msg", "공간 삭제 요청 로드 실패!");
+			request.setAttribute("root", root);
+		}else {
+			page="views/common/errorPage.jsp";
+			request.setAttribute("msg", "삭제 요청 목록  조회 실패 !");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
-	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

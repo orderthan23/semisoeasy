@@ -35,7 +35,7 @@
     }
    
     .pCompleteInfo td a{
-       	text-decoration: underline;
+       	text-decoration:none;
        	color : black;
     }
     #wrapper h1{
@@ -187,8 +187,8 @@
 								<td>
 									<select id="processType">
 										<option disabled="disabled" selected="selected">처리방식 선택</option>
-										<option value=2>공간삭제</option>
-										<option value=3>삭제보류</option>
+										<option value=1>공간삭제</option>
+										<option value=2>삭제보류</option>
 									</select>
 								</td>
 							</tr>
@@ -224,12 +224,16 @@
 		<br>
 		
 		<h1 style="margin : 0;">공간 삭제 요청 내역</h1>
-		<select>
-		<option>삭제 처리 결과: 전체</option>
-		<option>삭제 처리 결과: 대기중</option>
-		<option>삭제 처리 결과: 삭제완료</option>
+		<form action = "searchDeleteStatus.ad" id="searchDeleteStatus.ad">
+		
+		<select name ="dStatus" id="dStatus">
+		<option value=1>삭제 처리 결과: 전체</option>
+		<option value=2>삭제 처리 결과: 대기중</option>
+		<option value=3>삭제 처리 결과: 삭제완료</option>
 		</select>
-	
+		<button style="float:right; height:24px; line-height:20px; margin-right:10px;"type="submit" id="searchOption">조회</button>
+		</form>
+		<br><br>
 		
 		
 		<table align="center"  style="margin:0; width:100%;"  >
@@ -252,14 +256,24 @@
 					<td><%=list.get(i).get("userPhone")%></td>
 					<td id="result">
 						<select class="stage">
-							<option selected="selected" value=1 style="text-align:center;"><%=list.get(i).get("status") %></option>
+							<option class="statusZone" selected="selected" value=1 style="text-align:center;"><%=list.get(i).get("status") %></option>
 							<option>처리하기</option>
 						</select>
 						<input type=hidden value="<%=list.get(i).get("spaceNo")%>">
 					</td>
 					
 				</tr>
+				<script>
+				$(function(){
+					var text = $('.statusZone:nth(<%=i%>)').text();
+					console.log(text);
+					if(text == "삭제 완료" ){
+						$('.stage:nth(<%=i%>)').attr('disabled',true).css("color","blue");
+					}
+				});
+				</script>
 				<%
+				
 					}
 				%>
 			</table>
@@ -305,6 +319,7 @@
 	
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
 	<script>
+	
 	var userId
 	var userEmail
 	 var userNo 

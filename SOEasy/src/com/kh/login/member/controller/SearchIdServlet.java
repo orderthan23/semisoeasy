@@ -35,7 +35,7 @@ public class SearchIdServlet extends HttpServlet {
 		currentPage = 1;
 	
 
-		String url = PageInfo.customQString(request.getQueryString(), 2);
+		String url = PageInfo.customQString(request.getQueryString(), 1);
 		
 		String root = request.getRequestURI();
 		if(request.getParameter("currentPage")!=null) {

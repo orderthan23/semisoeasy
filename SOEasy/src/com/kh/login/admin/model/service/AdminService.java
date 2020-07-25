@@ -1,10 +1,11 @@
 package com.kh.login.admin.model.service;
 
-import static com.kh.login.common.JDBCTemplate.*;
+import static com.kh.login.common.JDBCTemplate.close;
+import static com.kh.login.common.JDBCTemplate.commit;
 import static com.kh.login.common.JDBCTemplate.getConnection;
+import static com.kh.login.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -112,6 +113,55 @@ public class AdminService {
 		}
 		close(con);
 		return result;
+	}
+
+	public int getDeleteRequestListCount(String dStatus) {
+		Connection con = getConnection();
+		int listCount = new AdminDao().getDeleteRequestListCount(con,dStatus);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	public ArrayList<HashMap<String, Object>> selectAllDeleteList(PageInfo pi, String dStatus) {
+		Connection con = getConnection();
+		ArrayList<HashMap<String, Object>> deleteList = new AdminDao().selectAllDeleteList(con,pi,dStatus);
+		
+		close(con);
+		
+		return deleteList;
+		
+		
+	}
+
+	public int getWaitingSpaceListCount() {
+		Connection con = getConnection();
+		int listCount = new AdminDao().getWaitingSpaceListCount(con);
+		
+		close(con);
+		
+		return listCount;
+		
+		
+	}
+
+	public ArrayList<HashMap<String, Object>> selectAllWaitingList(PageInfo pi) {
+
+		Connection con = getConnection();
+		ArrayList<HashMap<String, Object>> waitingList = new AdminDao().selectAllWaitingList(con,pi);
+		
+		close(con);
+		
+		return waitingList;
+	}
+
+	public ArrayList<HashMap<String, Object>> getLatestDeleteList() {
+		Connection con = getConnection();
+		ArrayList<HashMap<String, Object>> deleteList = new AdminDao().getLatestDeleteList(con);
+		
+		close(con);
+		return deleteList;
 	}
 
 }

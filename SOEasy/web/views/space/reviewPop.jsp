@@ -89,6 +89,7 @@
 					<button class="btn" align="center">
 						별점
 					</button>
+					<input type ="hidden" id="spaceName">
 				</td>
 				<td>
           			<div class="rating left">
@@ -126,7 +127,12 @@
 	</form>
 	
 	<script>
-	
+	$(function(){
+		var spaceName =opener.document.getElementById('hiddenSpaceName').value;
+		$('#spaceName').val(spaceName);
+		console.log($('#spaceName').val());
+		
+	});
 	function submit() {
 		alert('등록버튼');
 		$("#insertReview").submit();
@@ -148,6 +154,9 @@
 	
 	//별점 매기기
 	jQuery(document).ready(function($) {
+				
+	 
+		
 		  $('.rating .star').hover(function() {
 		    $(this).addClass('to_rate');
 		    $(this).parent().find('.star:lt(' + $(this).index() + ')').addClass('to_rate');
