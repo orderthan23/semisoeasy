@@ -116,7 +116,7 @@ public class UpdateSpaceStep2Servlet extends HttpServlet {
 		
 		for(int i = 8; i >= 0; i --) {
 			if(request.getParameter("day" + i + "-rate") == null || request.getParameter("day" + i + "-rate") == "") {
-				
+				System.out.println("혹시 값이 널입니까?");
 			} else {
 				if(i == 0) {
 					spaceRefundPolicy[i] = 0;
@@ -137,6 +137,8 @@ public class UpdateSpaceStep2Servlet extends HttpServlet {
 		si.setSpaceRefundPolicy(spaceRefundPolicy);
 		
 		int result = new SpaceService().updateSpaceStep2(si);
+		
+		System.out.println("update2 si : " + si);
 		
 		if(result > 0 ) {
 			response.sendRedirect(request.getContextPath() + "/selectTempSpace?memberNo=" + loginUser.getMemberNo());

@@ -621,7 +621,7 @@
 								<tr>
 									<td width="30%">6일 전</td>
 									<td width="60%">
-										<input type="text" class="refund-input" name="day8-rate" id="day6-rate" size="30%" value="90" readonly>
+										<input type="text" class="refund-input" name="day6-rate" id="day6-rate" size="30%" value="90" readonly>
 									</td>
 									<td width="10%">%</td>
 								</tr>

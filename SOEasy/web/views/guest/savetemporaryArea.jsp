@@ -127,12 +127,12 @@
 			<td width="10%"><button class="inspectionRequest">공간 검수 신청</button></td>
 			<% } else if(siList.get(i).getsStatus().equals("IW")) { %>
 			<td><button class=inspectionStatus style="color:purple; borderColor:purple;">공간 검수 대기 중</button></td>
-			<td width="10%"><button disabled="disabled">공간 정보 수정</button> </td>
-			<td width="10%"><button disabled="disabled">공간 정보 삭제 요청</button></td>
+			<td width="10%"></td>
+			<td width="10%"><button class="inspectionCancle">검수 신청 취소</button></td>
 			<td width="10%"></td>
 			<% } else if(siList.get(i).getsStatus().equals("DW")) { %>
 			<td><button class=inspectionStatus style="color:red; borderColor:red;">공간 삭제 대기 중</button></td>
-			<td width="10%"><button disabled="disabled">공간 정보 수정</button> </td>
+			<td width="10%"> </td>
 			<td width="10%"><button class="cancleDeleteRequset">공간 정보 삭제 취소</button></td>
 			<td width="10%"></td>
 			<% } else if(siList.get(i).getsStatus().equals("ID")) { %>
@@ -165,8 +165,31 @@
 	});
 	
 	$(".inspectionRequest").click(function(){
-		var spaceNo = $(this).parent().siblings(".spaceNameZone").find(".hiddenSpaceNo").val();
-		location.href = "<%=request.getContextPath()%>/inspectionRequest?sNo="+spaceNo;
+		if(confirm("공간검수를 신청하시겠습니까?")){
+			var spaceNo = $(this).parent().siblings(".spaceNameZone").find(".hiddenSpaceNo").val();
+			location.href = "<%=request.getContextPath()%>/inspectionRequest?sNo="+spaceNo;
+		}
+	});
+	
+	$(".deleteSpace").click(function(){
+		if(confirm("미완성 공간 정보를 삭제하시겠습니까?")){
+			var spaceNo = $(this).parent().siblings(".spaceNameZone").find(".hiddenSpaceNo").val();
+			location.href = "<%=request.getContextPath()%>/deleteSpace?sNo="+spaceNo;
+		}
+	});
+	
+	$(".cancleDeleteRequset").click(function(){
+		if(confirm("공간 삭제 요청을 취소하시겠습니까?")){
+			var spaceNo = $(this).parent().siblings(".spaceNameZone").find(".hiddenSpaceNo").val();
+			location.href = "<%=request.getContextPath()%>/cancleDeleteRequset?sNo="+spaceNo;
+		}
+	});
+	
+	$(".inspectionCancle").click(function(){
+		if(confirm("검수 신청을 취소하시겠습니까?")){
+			var spaceNo = $(this).parent().siblings(".spaceNameZone").find(".hiddenSpaceNo").val();
+			location.href = "<%=request.getContextPath()%>/inspectionCancle?sNo="+spaceNo;
+		}
 	});
 	
 	$(function(){
