@@ -2,6 +2,7 @@ package com.kh.login.host.manageReserve.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.login.host.manageReserve.model.dao.HostReserveDao;
 import com.kh.login.host.manageReserve.model.vo.HostReservation;
@@ -85,9 +86,13 @@ public class HostReserveService {
 		return selectHostReserve;
 	}
 
-	public int insertHostReserve(HostReservation requestMember) {
+	public ArrayList<HashMap<String, Object>> insertHostReserve(HostReservation hostReservation) {
 		Connection con = getConnection();
-		int result = new HostReserveDao().insertHostReserve(con, requestMember);
+		HostReserveDao hrd = new HostReserveDao();
+		int result = 0;
+		
+		ArrayList<HashMap<String, Object>> list = new HostReserveDao().insertHostReserve(con, hostReservation);
+		
 		
 		if(result > 0) {
 			commit(con);
@@ -97,7 +102,7 @@ public class HostReserveService {
 		
 		close(con);
 		
-		return result;
+		return list;
 	}
 
 	public int selectOfficeCount(int spaceNo) {

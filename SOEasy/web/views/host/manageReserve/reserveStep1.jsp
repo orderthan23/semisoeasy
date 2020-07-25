@@ -174,7 +174,7 @@
 			</tr>
 			<% for(int i = 0; i < list.size(); i++) { %>
 			
-			<tr>
+			<tr class="zone">
 				<td><%= i + 401 %>호실</td>
 				<% for(int j = 1; j <= 31; j++) { %>
 				<% if(j > 31) {break;} %>
