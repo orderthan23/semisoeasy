@@ -71,14 +71,19 @@ th {
 </head>
 <body>
 	<header><%@ include file="../../views/common/header.jsp" %></header>
-
-	<nav><%@ include file="../../views/common/aside.jsp" %>
-	<%
+	
+	
+	<%if ( loginUser==null || !loginUser.getmStatus().equals("Y")) {
+		request.setAttribute("msg", "잘못된 경로입니다.");
+		request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
+	}else{
 		ArrayList<ReserveHistory> reserveList = (ArrayList<ReserveHistory>) request.getAttribute("reserveList");
 		String msg = (String) request.getAttribute("msg");
 		PageInfo pi = (PageInfo) request.getAttribute("pi");
 		String url = (String) request.getAttribute("url");
 		String root = (String) request.getAttribute("root");
+		String userName  = (String)request.getAttribute("userName");
+		int memberNo = (int)request.getAttribute("memberNo");
 
 		int listCount = pi.getListCount();
 		int currentPage = pi.getCurrentPage();
@@ -182,8 +187,7 @@ th {
 					reserveStatusArr.add("사용전");
 				
 		 	}
-		 	System.out.println("너 예약  시작했닝 :"+nowUse);
-		 	System.out.println("너 예약  끝났닝 :"+useEnd);
+		 	
 			
 		 	}
 		 	}
@@ -202,7 +206,7 @@ th {
 
 		}
 	%>
-	
+	<nav><%@ include file="../../views/common/aside.jsp" %>
 		<div class="colMenu">
 			<label class="colMenuTitle">예약 목록</label>
 			 <a class="colMenuButton selectedButton" href="/login/views/guest/reserveList.jsp">예약 내역 리스트</a>
@@ -216,7 +220,7 @@ th {
 		<br>
 		<div id="wrapper">
 		<br>
-		<h1 style="margin : 0;"><%=loginUser.getmName()+"님의 " +msg %></h1>
+		<h1 style="margin : 0;"><%=userName+"님의 " +msg %></h1>
 		<br><br>
 		<table align="center"  style="margin:0; width:100%;"  >
 				<tr>
@@ -295,6 +299,8 @@ th {
 			}else{
 				$('.cancle:nth(<%=i%>)').hide();
 			}
+			
+			
 		});
 		</script>
 				<%
@@ -342,10 +348,18 @@ th {
 			<input type = "hidden" id= "hiddenSpaceNo">
 		</div>
 	</section>
+	<% } %>
 	<footer><%@ include file="../../views/common/footer.jsp" %></footer>
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 	<script>
 		$(function(){
+			var userStatus =parseInt("<%=loginUser.getpType()%>");
+		
+			if(userStatus == 3){
+				$('.cancleZone').hide();
+				$('.letsPay').hide();
+				$('.reviewExistance').hide();
+			}
 			var windowObj = null;
 			$('.popReview').click(function(){
 				

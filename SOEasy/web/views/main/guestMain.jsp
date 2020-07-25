@@ -176,7 +176,17 @@ h1 {
 				unit = "/ 일";
 			}
 			spacePriceArr.add(price+unit);
-			location.add((String)hmap.get("spaceLocationFilter"));
+			String locateEx = (String)hmap.get("spaceLocationFilter");
+			String[] locateArr = locateEx.split(",");
+			String locate = "";
+			for(int i=1; i<locateArr.length; i++){
+				if(i==1){
+				 locate +=locateArr[i];
+				}else{
+					locate +=" "+locateArr[i];
+				}	
+			}
+			location.add(locate);
 			
 		}
 		
@@ -201,7 +211,7 @@ h1 {
 									value=<%=spaceNoArr.get(i)%>>
 							</form>
 							<img class="space-title-photo"
-								src="<%=request.getContextPath() + filePathArr.get(i) + changeNameArr.get(i)%>"
+								src="<%=request.getContextPath() + filePathArr.get(i)+"/" + changeNameArr.get(i)%>"
 								width="400" height="265">
 							<p><%=spaceNameArr.get(i)%></p>
 							<p><%=spaceShortIntroArr.get(i)%></p>

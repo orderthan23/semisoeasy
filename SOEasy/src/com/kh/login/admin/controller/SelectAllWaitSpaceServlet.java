@@ -51,6 +51,20 @@ public class SelectAllWaitSpaceServlet extends HttpServlet {
 		
 		ArrayList<HashMap<String,Object>> waitingList = new AdminService().selectAllWaitingList(pi);
 		
+		String page = "";
+		
+		if(waitingList != null) {
+			page = "/views/admin/manageArea.jsp";
+			request.setAttribute("list", waitingList);
+			request.setAttribute("pi", pi);
+			request.setAttribute("root", root);
+			request.setAttribute("url", url);
+		}else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "전체 공간 조회 실패!");
+		}
+		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

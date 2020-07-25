@@ -1,4 +1,4 @@
-package com.kh.login.guest.controller;
+package com.kh.login.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,16 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.login.guest.model.service.GuestService;
 import com.kh.login.guest.model.vo.ReserveHistory;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
-import com.kh.login.member.model.service.MemberService;
-import com.kh.login.member.model.vo.Member;
 
-
-//로그인 된 회원의 정보를 받아 그 회원의 모든 예약정보를 출력하는 서블렛
-@WebServlet("/SelectUserReservHistory")
-public class SelectUserReservHistoryServlet extends HttpServlet {
+@WebServlet("/adminFindReserve.ad")
+public class AdminFindReserveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public SelectUserReservHistoryServlet() {
+  
+    public AdminFindReserveServlet() {
         super();
     }
 
@@ -31,13 +28,9 @@ public class SelectUserReservHistoryServlet extends HttpServlet {
 		int maxPage; //전체 페이지에서 가장 마지막 페이지
 		int startPage;// 한번에 표시될 페이지가 시작할 페이지
 		int endPage; // 한번에 표시
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		String userName = request.getParameter("userName");
 		
-
-		
-		
-		Member loginMember = (Member) request.getSession().getAttribute("loginUser");
-		int memberNo =loginMember.getMemberNo();
-		String userName = loginMember.getmName();
 		currentPage = 1;
 		String url = "?";
 		System.out.println(url);
@@ -84,7 +77,6 @@ public class SelectUserReservHistoryServlet extends HttpServlet {
 			request.setAttribute("msg", "예약 건이 총 "+listCount+" 건이 있습니다");
 			request.setAttribute("memberNo", memberNo);
 			request.setAttribute("userName", userName);
-		
 			page = "/views/guest/reserveList.jsp";
 		
 		}else {
@@ -99,18 +91,14 @@ public class SelectUserReservHistoryServlet extends HttpServlet {
 				request.setAttribute("msg", "예약한 기록이 없습니다");
 				request.setAttribute("memberNo", memberNo);
 				request.setAttribute("userName", userName);
-				
+			
 				page = "/views/guest/reserveList.jsp";
 			}
 		}
 		request.getRequestDispatcher(page).forward(request, response);
-	
 	}
-			
-		
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
