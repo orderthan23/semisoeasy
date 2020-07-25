@@ -170,6 +170,7 @@
 		HashMap<String,Object> hmap = (HashMap<String,Object>)request.getAttribute("adminInfo");
 		ArrayList<RecoverMember> recoverList =(ArrayList<RecoverMember>)hmap.get("recoverList");
 		Synthesis synth = (Synthesis)hmap.get("synth");
+		ArrayList<HashMap<String,Object>> deleteList = (ArrayList<HashMap<String,Object>>)hmap.get("deleteList");
 
 	%>
 	<br><br><br>

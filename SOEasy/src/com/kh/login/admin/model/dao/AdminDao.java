@@ -265,6 +265,8 @@ public class AdminDao {
 					hmap.put("userPhone", rset.getString("M_PHONE"));
 					if(rset.getString("S_STATUS").equals("DW")) {
 					 hmap.put("status", "삭제 대기 중");
+					}else if(rset.getString("S_STATUS").equals("D")) {
+						hmap.put("status", "삭제 완료");
 					}
 					
 					
@@ -325,6 +327,226 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+
+
+
+
+
+	public int getDeleteRequestListCount(Connection con, String dStatus) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		String query = prop.getProperty("getDeleteRequestListCount2")+" "+dStatus;
+		System.out.println(query);
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return listCount;
+	
+	}
+
+
+
+
+
+
+	public ArrayList<HashMap<String, Object>> selectAllDeleteList(Connection con, PageInfo pi, String dStatus) {
+
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>> deleteList = null;
+		int startRow =(pi.getCurrentPage()-1)*pi.getLimit()+1;
+		int endRow = startRow + pi.getLimit()-1;
+		String query1 = prop.getProperty("selectAllDeleteList2");
+		String query2 = dStatus+" ORDER BY SPACE_NO DESC)) WHERE RNUM BETWEEN "+startRow+ " AND "+endRow; 
+		String query = query1+" "+query2;
+		System.out.println(query);
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			deleteList = new ArrayList<>();
+			while(rset.next()) {
+				HashMap<String, Object> hmap = new HashMap<>();
+				hmap.put("spaceNo", rset.getInt("SPACE_NO"));
+				hmap.put("spaceName", rset.getString("SPACE_NAME"));
+				if(rset.getInt("SPACE_KIND")==1) {
+					hmap.put("spaceKind", "독립오피스");
+				}else if(rset.getInt("SPACE_KIND")==2) {
+					hmap.put("spaceKind", "코워킹스페이스");
+				}
+				hmap.put("userId", rset.getString("M_ID"));
+				hmap.put("userEmail", rset.getString("M_EMAIL"));
+				hmap.put("userPhone", rset.getString("M_PHONE"));
+				if(rset.getString("S_STATUS").equals("DW")) {
+				 hmap.put("status", "삭제 대기 중");
+				}else if(rset.getString("S_STATUS").equals("D")) {
+					hmap.put("status", "삭제 완료");
+				}
+				
+				
+				deleteList.add(hmap);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+	
+	return deleteList;
+	}
+
+
+
+
+
+
+	public int getWaitingSpaceListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int listCount = 0;
+		String query = prop.getProperty("getWaitingRequestCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		
+		return listCount;
+	
+	}
+
+
+
+
+
+
+	public ArrayList<HashMap<String, Object>> selectAllWaitingList(Connection con, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>> deleteList = null;
+		String query = prop.getProperty("selectAllWaitingList");
+		int startRow =(pi.getCurrentPage()-1)*pi.getLimit()+1;
+		int endRow = startRow + pi.getLimit()-1;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2,endRow);
+			rset = pstmt.executeQuery();
+			deleteList = new ArrayList<>();
+			while(rset.next()) {
+				HashMap<String, Object> hmap = new HashMap<>();
+				hmap.put("spaceNo", rset.getInt("SPACE_NO"));
+				hmap.put("spaceName", rset.getString("SPACE_NAME"));
+				if(rset.getInt("SPACE_KIND")==1) {
+					hmap.put("spaceKind", "독립오피스");
+				}else if(rset.getInt("SPACE_KIND")==2) {
+					hmap.put("spaceKind", "코워킹스페이스");
+				}
+				hmap.put("userId", rset.getString("M_ID"));
+				hmap.put("userEmail", rset.getString("M_EMAIL"));
+				hmap.put("userPhone", rset.getString("M_PHONE"));
+				if(rset.getString("S_STATUS").equals("DW")) {
+				 hmap.put("status", "삭제 대기 중");
+				}else if(rset.getString("S_STATUS").equals("D")) {
+					hmap.put("status", "삭제 완료");
+				}
+				
+				
+				deleteList.add(hmap);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+	return deleteList;
+	}
+
+
+
+
+
+	//가장 최근 5개의 공간 삭제 요청을 보여주는 메소드
+	public ArrayList<HashMap<String, Object>> getLatestDeleteList(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>> deleteList = null;
+		String query = prop.getProperty("selectAllDeleteList");
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			deleteList = new ArrayList<>();
+			
+			while(rset.next()) {
+				int count = 0;  //최신 목록 5개만 삽입
+				if(count == 5) {
+					break;
+				}
+				HashMap<String, Object> hmap = new HashMap();
+				
+				hmap.put("spaceNo", rset.getInt("SPACE_NO"));
+				hmap.put("spaceName", rset.getString("SPACE_NAME"));
+				if(rset.getInt("SPACE_KIND")==1) {
+					hmap.put("spaceKind", "독립오피스");
+				}else if(rset.getInt("SPACE_KIND")==2) {
+					hmap.put("spaceKind", "코워킹스페이스");
+				}
+				hmap.put("userId", rset.getString("M_ID"));
+				hmap.put("userEmail", rset.getString("M_EMAIL"));
+				hmap.put("userPhone", rset.getString("M_PHONE"));
+				if(rset.getString("S_STATUS").equals("DW")) {
+				 hmap.put("status", "삭제 대기 중");
+				}else if(rset.getString("S_STATUS").equals("D")) {
+					hmap.put("status", "삭제 완료");
+				}
+				
+				
+				deleteList.add(hmap);
+				count++;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+	
+ 		
+		return deleteList;
 	}
 
 }

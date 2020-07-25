@@ -137,11 +137,21 @@ public class GuestDao {
 	public int updateRstatus(Connection con, int reservNo, int rStatus) {
 		PreparedStatement pstmt = null;
 		int result = 0;
+		String didReview = "";
+		System.out.println(rStatus);
+		switch(rStatus) {
+		case 1: didReview = "WAIT"; break;
+		case 2: didReview = "WAIT"; break;
+		case 3: didReview = "WAIT"; break;
+		case 4: didReview = "ABLE"; break;
+		case 5: didReview = "WAIT"; break;
+		}
 		String query = prop.getProperty("updateRstatus");
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, rStatus);
-			pstmt.setInt(2, reservNo);
+			pstmt.setString(2,didReview);
+			pstmt.setInt(3, reservNo);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -23,19 +23,21 @@ public class AdminHomeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//통계
 		Synthesis synth = new AdminService().getAllSynth();
+		//회원 복구 건
 		ArrayList<RecoverMember> recoverList = new AdminService().getLatestRecoverList();
-		HashMap<String,Object> adminInfo = null;
-		//정산 이의 신청 건
 		// 공간 삭제 요청 건
+		ArrayList<HashMap<String, Object>> deleteList = new AdminService(). getLatestDeleteList();
+		//정산 이의 신청 건
 		// 악성 신고 건 현재 조회 불가
+		HashMap<String,Object> adminInfo = null;
 		String page = "";
-		if(synth != null && recoverList != null) {
+		if(synth != null && recoverList != null && deleteList != null) {
 			adminInfo = new HashMap<>();
 			adminInfo.put("synth", synth);
 			adminInfo.put("recoverList", recoverList);
-		
+			adminInfo.put("deleteList", deleteList);
 				request.setAttribute("adminInfo", adminInfo);
 				page = "/views/admin/adminHome.jsp";
 		}
