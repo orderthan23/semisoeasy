@@ -20,16 +20,16 @@ import com.kh.login.space.model.vo.SpaceInfo;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class InsertSpaceStep3Servlet
+ * Servlet implementation class UpdateSpaceStep3Servlet
  */
-@WebServlet("/insertSpaceStep3")
-public class InsertSpaceStep3Servlet extends HttpServlet {
+@WebServlet("/updateSpaceStep3")
+public class UpdateSpaceStep3Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertSpaceStep3Servlet() {
+    public UpdateSpaceStep3Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,9 +38,9 @@ public class InsertSpaceStep3Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		if(ServletFileUpload.isMultipartContent(request)) {
-			
+			System.out.println("update3 진입");
 			Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 			SpaceInfo si = (SpaceInfo) request.getSession().getAttribute("spaceInfo");
 			
@@ -112,14 +112,14 @@ public class InsertSpaceStep3Servlet extends HttpServlet {
 			si.setCalAcctHolder(calAcctHolder);
 			si.setCalAcctNo(calAcctNo);
 			
-			int result = new SpaceService().insertSpaceStep3(si, licenseImage);
-			
+			int result = new SpaceService().updateSpaceStep3(si, licenseImage);
+			System.out.println("update3 결과값 : "+result);
 			request.getSession().removeAttribute("spaceInfo");
 			
 			if(result > 0) {
 				response.sendRedirect(request.getContextPath() + "/selectTempSpace?memberNo=" + loginUser.getMemberNo());
 			} else {
-				File failedFile = new File(savePath + saveFile);
+				File failedFile = new File(savePath + "/" + saveFile);
 				failedFile.delete();
 				request.setAttribute("msg", "공간 정산 정보 등록 실패!");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

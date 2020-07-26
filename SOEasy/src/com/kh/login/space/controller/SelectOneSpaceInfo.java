@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.login.member.model.vo.Member;
 import com.kh.login.space.model.service.SpaceService;
 
 /**

@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.login.space.model.vo.*" %>
-<%
-	SpaceInfo si = (SpaceInfo) session.getAttribute("spaceInfo");
-%>
+    pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SO Easy - 공간 정보 수정</title>
+<title>SO Easy - 공간등록</title>
 <link rel="stylesheet" href="../../css/layout.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function goPopup(){
-		var pop = window.open("../../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+		var pop = window.open("<%=request.getContextPath()%>/popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	}
 
 
@@ -121,13 +118,19 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
+	<%
+		if(userStatus == 0 || loginUser==null){
+			request.setAttribute("msg", "잘못된 경로입니다.");
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request,response);
+		}
+	%>
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 		<div>
 			<h1 align="center" style="margin: 0px;">정산 정보</h1>
 			<br><br>
 		</div>
-		<form action="<%= request.getContextPath() %>/updateSpaceStep3" method="post" encType="multipart/form-data">
+		<form action="<%= request.getContextPath() %>/insertSpaceStep3" method="post" encType="multipart/form-data">
 			<table class="space-insert" align="center" width="70%">
 				<tr>
 					<td></td>
@@ -139,7 +142,7 @@
 					<td width="5%"></td>
 					<td width="20%">상호명 *</td>
 					<td width="40%">
-						<input type="text" maxlength="20" name="bsns-name" id="bsns-name" value="<%=si.getBsnsName()%>">
+						<input type="text" maxlength="20" name="bsns-name" id="bsns-name">
 					</td>
 					<td width="5%"></td>
 				</tr>
@@ -150,7 +153,7 @@
 					<td width="5%"></td>
 					<td width="20%">대표자명 *</td>
 					<td width="40%">
-						<input type="text" maxlength="20" name="bsns-represent-name" id="bsns-represent-name" style="width:61%;" value="<%=si.getRepresentName()%>">
+						<input type="text" maxlength="20" name="bsns-represent-name" id="bsns-represent-name" style="width:61%;">
 					</td>
 					<td width="5%"></td>
 				</tr>
@@ -161,7 +164,7 @@
 					<td></td>
 					<td style="vertical-align:top;">사업자등록번호 *</td>
 					<td>
-						<input type="text" name="bsns-license-no" id="bsns-license-no" style="width:61%;" value="<%=si.getBsnsLicenseNo()%>">
+						<input type="text" name="bsns-license-no" id="bsns-license-no" style="width:61%;">
 						<br><br>
 						<div class="box-file-input">
 							<p class="filename" style="width: 60%;">파일을 선택해주세요.</p>
@@ -178,7 +181,7 @@
 							<table align="center" width="90%">
 								<tr>
 									<td width="40%" style="text-align:center;">
-										<input type="radio" name="bsns-type" id="bsns-type1" value="1" checked>
+										<input type="radio" name="bsns-type" id="bsns-type1" value="1">
 									</td>
 									<td width="60%">
 										<label for="bsns-type1">간이 과세자</label>
@@ -232,7 +235,7 @@
 					<td></td>
 					<td>주 업태 *</td>
 					<td>
-						<input type="text" name="bsns-condition" style="width:40%;" onclick="this.select();" value="<%=si.getBsnsCondition()%>">
+						<input type="text" name="bsns-condition" style="width:40%;" onclick="this.select();">
 					</td>
 					<td></td>
 				</tr>
@@ -243,7 +246,7 @@
 					<td></td>
 					<td>주 종목 *</td>
 					<td>
-						<input type="text" name="bsns-event" style="width:40%;" onclick="this.select();" value="<%=si.getBsnsEvent()%>">
+						<input type="text" name="bsns-event" style="width:40%;" onclick="this.select();">
 					</td>
 					<td></td>
 				</tr>
@@ -254,7 +257,7 @@
 					<td></td>
 					<td>사업장 주소 *</td>
 					<td>
-						<input type="text" placeholder="사업장 주소를 입력하세요." id="roadFullAddr"  name="bsns-address" value="<%=si.getBsnsAddress()%>" readonly>&nbsp;&nbsp;
+						<input type="text" placeholder="사업장 주소를 입력하세요." id="roadFullAddr"  name="bsns-address" readonly>&nbsp;&nbsp;
 						<button type="button" onclick="goPopup();">검색</button>
 					</td>
 					<td></td>
@@ -268,9 +271,9 @@
 					<td>정산용 이메일 *</td>
 					<td>
 						<div>
-							<input type="text" class="email" name="cal-email1" id="cal-email1" value="<%=si.getCalEmail().split("@")[0]%>">
+							<input type="text" class="email" name="cal-email1" id="cal-email1">
 							&nbsp;@&nbsp;
-							<input type="text" class="email" name="cal-email2" id="cal-email2" value="<%=si.getCalEmail().split("@")[1]%>">
+							<input type="text" class="email" name="cal-email2" id="cal-email2">
 						</div>
 					</td>
 					<td>
@@ -292,11 +295,11 @@
 					<td>정산용 연락처 *</td>
 					<td>
 						<div>
-							<input type="text" class="phone" name="cal-phone1" id="cal-phone1" maxlength="3" value="<%=si.getCalPhone().split("-")[0]%>">
+							<input type="text" class="phone" name="cal-phone1" id="cal-phone1" maxlength="3">
 							&nbsp;-&nbsp;
-							<input type="text" class="phone" name="cal-phone2" id="cal-phone2" maxlength="4" value="<%=si.getCalPhone().split("-")[1]%>">
+							<input type="text" class="phone" name="cal-phone2" id="cal-phone2" maxlength="4">
 							&nbsp;-&nbsp;
-							<input type="text" class="phone" name="cal-phone3" id="cal-phone3" maxlength="4" value="<%=si.getCalPhone().split("-")[2]%>">
+							<input type="text" class="phone" name="cal-phone3" id="cal-phone3" maxlength="4">
 						</div>
 					</td>
 				</tr>
@@ -338,13 +341,13 @@
 							<tr>
 								<td>예금주</td>
 								<td>
-									<input type="text" name="cal-acct-holder" style="width:50%;" value="<%=si.getCalAcctHolder()%>">
+									<input type="text" name="cal-acct-holder" style="width:50%;">
 								</td>
 							</tr>
 							<tr>
 								<td>계좌번호</td>
 								<td>
-									<input type="text" name="cal-acct-no" value="<%=si.getCalAcctNo()%>">
+									<input type="text" name="cal-acct-no">
 								</td>
 							</tr>
 						</table>
@@ -355,7 +358,7 @@
 				<br><br><br><br><br><br>
 				<button type="button" onclick="callBack();">이전으로</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit">저장하기</button>
+				<button type="button" id="gonext">저장하기</button>
 				<br><br><br><br><br><br>
 			</div>
 		</form>
@@ -363,7 +366,11 @@
 	<footer>
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
+</body>
 	<script>
+		/* function sameAddr(){
+			
+		} */
 		$(function(){
 			initSet();
 			initEvent();
@@ -412,9 +419,14 @@
 			}
 		});
 		
-	    function callBack(){
-	    	history.go(-1);
-	    };
+	    var checkUnload = true;
+	    $(window).on("beforeunload", function(){
+	        if(checkUnload) return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+	    });
+	    
+	    $("#gonext").click(function(){
+			checkUnload = false;
+			$("form").submit();
+		});
 	</script>
-</body>
 </html>

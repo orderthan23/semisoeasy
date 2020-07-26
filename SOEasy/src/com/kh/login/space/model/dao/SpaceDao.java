@@ -394,7 +394,7 @@ public class SpaceDao {
 			pstmt.setString(2, licenseImage.getFilePath());
 			pstmt.setString(3, licenseImage.getChangeName());
 			pstmt.setInt(4, licenseImage.getImgDiv());
-			pstmt.setInt(5, licenseImage.getSpaceNo());
+			pstmt.setInt(5, licenseImage.getMemberNo());
 			
 			imgResult = pstmt.executeUpdate();
 			
@@ -695,7 +695,7 @@ public class SpaceDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, si.getSpaceNo());
+			pstmt.setInt(1, si.getHostNo());
 			
 			rset = pstmt.executeQuery();
 			returnSi = new SpaceInfo();
@@ -1323,6 +1323,84 @@ public class SpaceDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int haveHostInf(Connection con, SpaceInfo si) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("selectHostInf");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, si.getHostNo());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = 1;
+			} else {
+				result = 0;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return result;
+	}
+
+	
+	//정산정보 업데이트 전 삭제용 메소드
+	public int deleteHostInf(Connection con, SpaceInfo si) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteHostInf");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, si.getHostNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	//정산정보 업데이트 전 삭제용 메소드
+	public int deleteBusinessImg(Connection con, Image licenseImage) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteBusinessImg");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, licenseImage.getMemberNo());
 			
 			result = pstmt.executeUpdate();
 			
