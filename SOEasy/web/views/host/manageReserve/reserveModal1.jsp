@@ -81,6 +81,7 @@
 <div align="center" id="moHead"><p id="moText1">&nbsp;&nbsp;&nbsp;&nbsp;직접 예약</p></div>
 <div align="center">
 	<form id="hostReserveForm" action="/login/insertReserve.ho" method="post">
+	
 		<table>
 			<tr>
 				<td class="title"><b>예약 일정 선택   </b></td>
@@ -93,19 +94,20 @@
 					<input class=number type=text name=reservPersonCount value=1>
 					<input class=btn1 type=button value=">" onclick="plusCount();">
 				</td>
-				
+				<hidden name="expectPay" value=0>
 			</tr>
 			<tr>
 				<td class="title"><b>호실 선택</b></td>
 				<td colspan="2" id="select">
-					<select name="place">
+					<select name="spaceNo">
 						<option>=====선택=====</option>
-						<option value="place1" label="센터1">1호실</option>
-						<option value="place2" label="센터2">2호실</option>
-						<option value="place3" label="센터3">3호실</option>
-						<option value="place4" label="센터4">4호실</option>
-						<option value="place5" label="센터5">5호실</option>
+						<option value="1" label="센터1">1호실</option>
+						<option value="1" label="센터2">2호실</option>
+						<option value="1" label="센터3">3호실</option>
+						<option value="1" label="센터4">4호실</option>
+						<option value="1" label="센터5">5호실</option>
 					</select>
+					
 				</td>
 			</tr>
 			<tr>
@@ -118,7 +120,7 @@
 			<tr><td></td></tr>
 			<tr>
 				<td>사용자명</td>
-				<td class="tInfo"><input type="text" class="info" id="name2" namd="realUserName"><br>
+				<td class="tInfo"><input type="text" class="info" id="name2" name="realUserName"><br>
 				<input type="checkbox" id="reserSame">예약자와 동일</td>
 			</tr>
 			<tr>

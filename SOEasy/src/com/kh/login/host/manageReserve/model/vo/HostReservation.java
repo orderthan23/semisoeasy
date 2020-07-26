@@ -3,7 +3,7 @@ package com.kh.login.host.manageReserve.model.vo;
 public class HostReservation implements java.io.Serializable {
 
 	private int reservNo;			//예약번호
-	private int guestNo;			//게스트번호
+	private int hostNo;			//게스트번호
 	private int spaceNo;			//공간번호
 	private String fixUnfix;		//자유지정석여부
 	private String officeNo;			//호실번호
@@ -29,7 +29,7 @@ public class HostReservation implements java.io.Serializable {
 			int expectPay, String userName, String userPhone, String userEmail, String requestContent) {
 		super();
 		this.reservNo = reservNo;
-		this.guestNo = guestNo;
+		this.hostNo = guestNo;
 		this.spaceNo = spaceNo;
 		this.fixUnfix = fixUnfix;
 		this.officeNo = officeNo;
@@ -51,8 +51,8 @@ public class HostReservation implements java.io.Serializable {
 		return reservNo;
 	}
 
-	public int getGuestNo() {
-		return guestNo;
+	public int getHostNo() {
+		return hostNo;
 	}
 
 	public int getSpaceNo() {
@@ -119,8 +119,8 @@ public class HostReservation implements java.io.Serializable {
 		this.reservNo = reservNo;
 	}
 
-	public void setGuestNo(int guestNo) {
-		this.guestNo = guestNo;
+	public void setHostNo(int hostNo) {
+		this.hostNo = hostNo;
 	}
 
 	public void setSpaceNo(int spaceNo) {
@@ -185,7 +185,7 @@ public class HostReservation implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "HostReservation [reservNo=" + reservNo + ", guestNo=" + guestNo + ", spaceNo=" + spaceNo + ", fixUnfix="
+		return "HostReservation [reservNo=" + reservNo + ", guestNo=" + hostNo + ", spaceNo=" + spaceNo + ", fixUnfix="
 				+ fixUnfix + ", officeNo=" + officeNo + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", reservPersonCount=" + reservPersonCount + ", didHostOk=" + didHostOk + ", reservStatus="
 				+ reservStatus + ", didReview=" + didReview + ", reservDate=" + reservDate + ", expectPay=" + expectPay

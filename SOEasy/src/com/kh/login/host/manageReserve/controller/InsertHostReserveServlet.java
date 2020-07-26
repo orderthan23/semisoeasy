@@ -40,7 +40,7 @@ public class InsertHostReserveServlet extends HttpServlet {
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
 		
-		int guestNo = loginUser.getMemberNo();
+		int hostNo = loginUser.getMemberNo();
 		
 		String fixUnfix = "";
 		if (request.getParameter("seat") != null && request.getParameter("seat") != "") {
@@ -70,7 +70,7 @@ public class InsertHostReserveServlet extends HttpServlet {
 		String requestContent =request.getParameter("requestContent");
 		
 		HostReservation hostReservation = new HostReservation();
-		hostReservation.setGuestNo(guestNo);
+		hostReservation.setHostNo(hostNo);
 		hostReservation.setSpaceNo(spaceNo);
 		hostReservation.setFixUnfix(fixUnfix);
 		hostReservation.setOfficeNo(officeNo);
@@ -87,16 +87,14 @@ public class InsertHostReserveServlet extends HttpServlet {
 		hostReservation.setRequestContent(requestContent);
 		
 //		int result = new SpaceReservationService().insertReservation(requestMember);
-		ArrayList<HashMap<String,Object>> list = new HostReserveService().insertHostReserve(hostReservation);
+		ArrayList<HashMap<String,Object>> list = new HostReserveService().insertHostReserve(hostReservation, hostNo, spaceNo);
 		
-		for(HostReservation h : list) {
-			System.out.println(list);
-		}
+		
 		
 		
 		String page = "";
-		if(list > null) {
-			page = "/views/common/selectHostReserve.jsp";
+		if(list != null) {
+			page = "/views/host/manageReserve/selectHostReserve.jsp";
 			request.setAttribute("reserveNo", "insertReservationInfo");
 			request.setAttribute("list", list);
 			request.getRequestDispatcher(page).forward(request, response);
