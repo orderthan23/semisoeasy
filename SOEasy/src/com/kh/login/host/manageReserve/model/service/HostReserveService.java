@@ -86,23 +86,32 @@ public class HostReserveService {
 		return selectHostReserve;
 	}
 
-	public ArrayList<HashMap<String, Object>> insertHostReserve(HostReservation hostReservation) {
+	public ArrayList<HashMap<String, Object>> insertHostReserve(HostReservation hostReservation, int hostNo, int spaceNo) {
 		Connection con = getConnection();
 		HostReserveDao hrd = new HostReserveDao();
 		int result = 0;
 		
-		ArrayList<HashMap<String, Object>> list = new HostReserveDao().insertHostReserve(con, hostReservation);
+		int list = new HostReserveDao().insertHostReserve(con, hostReservation);
+		
+		ArrayList<HashMap<String, Object>> selectList = new ArrayList<>();
+		HashMap<String, Object> hmap = new HashMap<>();
+		ArrayList<HostReserve> hr = null;
+		
 		
 		
 		if(result > 0) {
+			hr = new HostReserveDao().selectHostReserve(con, hostNo, spaceNo);
 			commit(con);
+			for(HostReserve h : hr) {
+				System.out.println(h);
+			}
 		} else {
 			rollback(con);
 		}
 		
 		close(con);
 		
-		return list;
+		return selectList;
 	}
 
 	public int selectOfficeCount(int spaceNo) {
