@@ -90,32 +90,9 @@
 	<section>
     <div id="wrapper">
 		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">자주 묻는 질문</h2>
-		<a href="login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a> 
-		<table id="searchWrap" text-align="center" align="center">
-			<tr>
-			<td><input type=search placeholder="검색어를 입력하세요"></td>
-			<td><button type="submit"><img src="/login/images/icon/search2.png" width="25px" height="25px"></button>
-			</tr>
-		</table>
-		<br>
-		<div style="width:90%; margin-left:auto; margin-right:auto;">
-		</div>
+		<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a> 
 		<table style="width: 100%; border-collapse: collapse" id="faqTable" >
 		<tr>
-			<td colspan="1"></td>
-			<td align="center" style=>
-				<select class="category">
-					<option class="category" style="text-align:center">선택</option>
-					<option class="category" value=1>시스템관련</option>
-					<option class="category" value=2>계정관련</option>
-					<option class="category" value=3>결제관련</option>
-					<option class="category" value=4>이용관련</option>
-					<option class="category" value=5>자주묻는게시판</option>
-				</select>
-			</td>
-			<td colspan="3"></td>
-				<td align="center">
-				</td>	
 				<tr>
 					<th>번호</th>
 					<th>분류</th>
@@ -124,10 +101,23 @@
 					<th>작성일자</th>
 					<th></th>
 				</tr>
-				<% for(Board b : list) { %>
+				<% for(Board b : list) { 
+					String category = "";
+				if(b.getnCategory() == 1) {
+					category = "시스템관련";					
+				}else if(b.getnCategory() == 2){
+					category = "계정관련";
+				}else if(b.getnCategory() == 3 ){
+					category = "결제관련";
+				}else if(b.getnCategory() == 4) {
+					category = "이용관련";
+				}else {
+					category = "자주묻는 질문";
+				}
+				%>
 				<tr>
 					<td class="info" style="text-align: center;"><%= b.getNoticeNo() %></td>
-					<td class="info" style="text-align: center;"><%= b.getnCategory() %></td>
+					<td class="info" style="text-align: center;"><%= category %></td>
 					<td class="info" style="text-align: center;"><%= b.getnTitle() %></td>
 					<td class="info" style="text-align: center;"><%= b.getmNick() %></td>
 					<td class="info" style="text-align: center;"><%= b.getnDate() %></td>

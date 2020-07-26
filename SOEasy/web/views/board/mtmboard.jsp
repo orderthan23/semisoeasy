@@ -85,48 +85,21 @@
 		<a class="colMenuButton selectedButton" href="/login/select.mtm">1대1문의</a>
 	<br><br>
 	</div>
-	<hr style="margin : 0">
 	 <br>
 	
 	<section>
     <div id="wrapper">
-		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">1대1문의</h2>
-		<a href="/login/views/board/writemtm.jsp" id="writeButton" class="writeButton">글쓰기</a> 
-		<table id="searchWrap" text-align="center" align="center">
-			<tr>
-			<td><input type=search placeholder="검색어를 입력하세요"></td>
-			<td><button type="submit"><img src="/login/images/icon/search2.png" width="25px" height="25px"></button>
-			</tr>
-		</table>
-		<br>
-		<div style="width:90%; margin-left:auto; margin-right:auto;">
-		</div>
-		<table style="width: 100%; border-collapse: collapse;" id="mtmTable" class="mtmTable">
+		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">자주 묻는 질문</h2>
+		<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a> 
+		<table style="width: 100%; border-collapse: collapse" id="mtmTable" >
 		<tr>
-			<td align="center">
-				<select class="category">
-					<option class="category">계정관련</option>
-					<option class="category">결제관련</option>
-				</select>
-			</td>
-			<td colspan="3"></td>
-				<td align="center">
-					<select class="OX" style="">
-						<option class="OX">선택</option>
-						<option class="OX">O</option>
-						<option class="OX">X</option>
-					</select>
-				</td>	
-		</tr>
 				<tr>
 					<th>번호</th>
 					<th>분류</th>
 					<th>제목</th>
 					<th>작성자</th>
 					<th>작성일자</th>
-					<th>답변여부</th>
 				</tr>
-				<tr>
 					<% for(Qna qna : list) { %>
 					<%if(loginUser.getMemberNo() == qna.getQmember()) { %>
 				<tr>
@@ -135,7 +108,6 @@
 					<td class="info" style="text-align: center;"><%= qna.getQtitle() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getqMnick() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getQdate() %></td>
-					<td class="info" style="text-align: center;"></td>
 				</tr>
 				<% } else if(loginUser.getMemberNo() == 1) {  %>
 				<tr>
@@ -144,8 +116,6 @@
 					<td class="info" style="text-align: center;"><%= qna.getQtitle() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getqMnick() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getQdate() %></td>
-					<td class="info" style="text-align: center;"></td>
-					
 				</tr>
 			<% } %>
 			<% } %>
