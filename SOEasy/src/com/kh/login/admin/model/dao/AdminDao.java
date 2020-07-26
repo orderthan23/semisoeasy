@@ -615,6 +615,52 @@ public class AdminDao {
 
 
 
+	public ArrayList<HashMap<String, Object>> getLatestWaitList(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String,Object>> waitList = null;
+		String query = prop.getProperty("getLatestWaitList");
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			waitList = new ArrayList<>();
+			while(rset.next()) {
+				HashMap<String,Object> hmap = new HashMap<>();
+				hmap.put("spaceNo", rset.getInt("SPACE_NO"));
+				hmap.put("spaceName", rset.getString("SPACE_NAME"));
+				if(rset.getInt("SPACE_KIND")==1) {
+					hmap.put("spaceKind", "독립오피스");
+				}else if(rset.getInt("SPACE_KIND")==2) {
+					hmap.put("spaceKind", "코워킹스페이스");
+				}
+				hmap.put("memberNo", rset.getInt("MEMBER_NO"));
+				hmap.put("userId", rset.getString("M_ID"));
+				hmap.put("userEmail", rset.getString("M_EMAIL"));
+				hmap.put("userPhone", rset.getString("M_PHONE"));
+				if(rset.getString("S_STATUS").equals("IW")) {
+					hmap.put("status", "검수 대기중");
+				}
+				
+				waitList.add(hmap);
+			
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+			
+		return waitList;
+	}
+
+
+
+
+
+
 	
 
 }
