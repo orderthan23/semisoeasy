@@ -102,21 +102,6 @@
 			<br>
 		
 			<table style="width: 100%; border-collapse: collapse;" id="boardTable">
-				<tr>
-					<td colspan="1"></td>
-					<td align="center" style=>
-						<select class="category" id="category">
-							<option class="category" style="text-align: center; hidden">선택</option>
-							<option class="category" value=1>시스템관련</option>
-							<option class="category" value=2>계정관련</option>
-							<option class="category" value=3>결제관련</option>
-							<option class="category" value=4>이용관련</option>
-							<option class="category" value=5>자주묻는게시판</option>
-						</select>
-					</td>
-						<td colspan="3"></td>
-						<td align="center"></td>
-				</tr>
 
 				<tr>
 					<th>번호</th>
@@ -193,7 +178,6 @@
 	<%@ include file="../common/footer.jsp"%>
 	<script>
 		 var userStatus = <%=userStatus%>;
-		 console.log(category);
 		$(function(){
 			$("#boardTable td").mouseenter(function() {
 				$(this).parent().css({"background" : "#60B4A6", "cursor" : "pointer"});
