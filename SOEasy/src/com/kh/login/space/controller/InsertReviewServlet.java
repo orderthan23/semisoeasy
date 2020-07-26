@@ -43,12 +43,13 @@ public class InsertReviewServlet extends HttpServlet {
 		
 		//reviewNo는 시퀀스로 주기
 //		int spaceNo = si.getSpaceNo();
-		int memberNo = loginUser.getMemberNo(); //로그인 안되있음 에러
+		int memberNo = loginUser.getMemberNo();
 		int spaceNo = 4;
 		String reviewContent = request.getParameter("reviewContent");
 		int rPoint = Integer.parseInt(request.getParameter("rPoint"));
 		String enrollDate = "SYSDATE";
 		//reservNo 는 시퀀스
+		
 		
 		Review requestMember = new Review();
 		requestMember.setSpaceNo(spaceNo);
