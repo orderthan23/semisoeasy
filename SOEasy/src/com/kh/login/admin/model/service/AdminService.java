@@ -189,4 +189,12 @@ public class AdminService {
 		return result;
 	}
 
+	public ArrayList<HashMap<String, Object>> getLatestWaitList() {
+		Connection con = getConnection();
+		ArrayList<HashMap<String,Object>> waitList = new AdminDao().getLatestWaitList(con);
+		
+		close(con);
+		return waitList;
+	}
+
 }

@@ -29,7 +29,8 @@ public class AdminHomeServlet extends HttpServlet {
 		ArrayList<RecoverMember> recoverList = new AdminService().getLatestRecoverList();
 		// 공간 삭제 요청 건
 		ArrayList<HashMap<String, Object>> deleteList = new AdminService(). getLatestDeleteList();
-		//정산 이의 신청 건
+		// 공간 검수 요청 건
+		ArrayList<HashMap<String, Object>> waitList = new AdminService().getLatestWaitList();
 		// 악성 신고 건 현재 조회 불가
 		HashMap<String,Object> adminInfo = null;
 		String page = "";
@@ -38,6 +39,7 @@ public class AdminHomeServlet extends HttpServlet {
 			adminInfo.put("synth", synth);
 			adminInfo.put("recoverList", recoverList);
 			adminInfo.put("deleteList", deleteList);
+			adminInfo.put("waitList", waitList);
 				request.setAttribute("adminInfo", adminInfo);
 				page = "/views/admin/adminHome.jsp";
 		}

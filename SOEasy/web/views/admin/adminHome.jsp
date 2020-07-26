@@ -171,6 +171,7 @@
 		ArrayList<RecoverMember> recoverList =(ArrayList<RecoverMember>)hmap.get("recoverList");
 		Synthesis synth = (Synthesis)hmap.get("synth");
 		ArrayList<HashMap<String,Object>> deleteList = (ArrayList<HashMap<String,Object>>)hmap.get("deleteList");
+		ArrayList<HashMap<String,Object>> waitList = (ArrayList<HashMap<String,Object>>)hmap.get("waitList");
 
 	%>
 	<br><br><br>
@@ -300,36 +301,39 @@
 			
 			<div id="research2">
 		 		<div class="adminTitles">
-			 		<h1 align="center" style="margin:0; margin-top:10px;">정산 이의 신청 건</h1>
+			 		<h1 align="center" style="margin:0; margin-top:10px;">검수 대기 건</h1>
 		 		</div>
 		 		<div class="hide3 adminPreview">
-		 			<p>2개의 새로운 정산 이의 건이 있습니다.</p>
+		 			<p><%=waitList.size()%>개의 검수 대기 건이 있습니다.</p>
 		 			<table align="center">
 		 				<tr>
-		 					<th>의뢰 번호</th>
-		 					<th>요청일</th>
-		 					<th>단위 정산 기간</th>
-		 					<th>공간 명</th>
-		 					<th>회원 명</th>
-		 					<th>진행 결과</th>
-		 					<th>세부 내용</th>
+		 					<th>공간명</th>
+		 					<th>공간 종류</th>
+		 					<th>호스트 아이디</th>
+		 					<th>호스트 이메일</th>
+		 					<th>호스트 연락처</th>
+		 					<th>등록 상태</th>
 		 					
 		 					
 		 				</tr>
-		 				<% for(int i=0; i<5; i++){%>
+		 				<%if(waitList.size()>5){
+		 					maximum = 5;
+		 				} else{
+		 					maximum = waitList.size();
+		 				}
+		 				
+		 				for(int i=0; i<maximum; i++){%>
 		 					<tr>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td><a>자세히 보기</a></td>
-		 					
+		 						<td><%=waitList.get(i).get("spaceName") %></td>
+		 						<td><%=waitList.get(i).get("spaceKind") %></td>
+		 						<td><%=waitList.get(i).get("userId") %></td>
+		 						<td><%=waitList.get(i).get("userEmail") %></td>
+		 						<td><%=waitList.get(i).get("userPhone") %></td>
+		 						<td><%=waitList.get(i).get("status") %></td>
 		 					</tr>
 		 				<%} %>
 		 			</table>
-		 			<button class="seeMore">자세히 보기</button>
+		 			<button class="seeMore" onclick ="location.href ='<%=request.getContextPath()%>/selectAllWaitSpace.ad' ">자세히 보기</button>
 		 			<br><br>
 		 		</div>
 			</div>
