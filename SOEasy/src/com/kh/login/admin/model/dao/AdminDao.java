@@ -470,18 +470,28 @@ public class AdminDao {
 				}else if(rset.getInt("SPACE_KIND")==2) {
 					hmap.put("spaceKind", "코워킹스페이스");
 				}
+				hmap.put("memberNo", rset.getInt("MEMBER_NO"));
 				hmap.put("userId", rset.getString("M_ID"));
 				hmap.put("userEmail", rset.getString("M_EMAIL"));
 				hmap.put("userPhone", rset.getString("M_PHONE"));
 				if(rset.getString("S_STATUS").equals("DW")) {
-				 hmap.put("status", "삭제 대기 중");
+				 hmap.put("status", "삭제 대기중");
 				}else if(rset.getString("S_STATUS").equals("D")) {
 					hmap.put("status", "삭제 완료");
+				}else if(rset.getString("S_STATUS").equals("IW")) {
+					hmap.put("status", "검수 대기중");
+				}else if(rset.getString("S_STATUS").equals("N")) {
+					hmap.put("status", "작성중");
+				}else if(rset.getString("S_STATUS").equals("Y")) {
+					hmap.put("status", "활성화");
+				}else if(rset.getString("S_STATUS").equals("ID")) {
+					hmap.put("status", "검수 거절됨");
 				}
 				
 				
 				deleteList.add(hmap);
 			}
+			System.out.println(deleteList);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -500,13 +510,15 @@ public class AdminDao {
 
 	//가장 최근 5개의 공간 삭제 요청을 보여주는 메소드
 	public ArrayList<HashMap<String, Object>> getLatestDeleteList(Connection con) {
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<HashMap<String, Object>> deleteList = null;
 		String query = prop.getProperty("selectAllDeleteList");
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, 5);
+			rset = pstmt.executeQuery();
 			deleteList = new ArrayList<>();
 			
 			while(rset.next()) {
@@ -541,12 +553,68 @@ public class AdminDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			close(stmt);
+			close(pstmt);
 			close(rset);
 		}
 	
  		
 		return deleteList;
 	}
+
+
+
+
+
+
+	public int updatingSpaceStatus(Connection con, String processType, int spaceNo) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("updateSpaceStatus");
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, processType);
+				pstmt.setInt(2, spaceNo);
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			
+		
+		return result;
+	}
+
+
+
+
+
+
+	public int updateMemberStatus(Connection con, String userId) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("updateToHost");
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, userId);
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+		
+		return result;
+	}
+
+
+
+
+
+
+	
 
 }
