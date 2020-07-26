@@ -126,25 +126,33 @@
 					<th>작성일자</th>
 					<th></th>
 				</tr>
-				<%-- <% for(Board b : list) { %>
-				 --%>
-				 <%for(int i = 1; i < list.size(); i++) %>
-				 <%if(Board.) {
-					 
-					}%>
+				<% for(Board b : list) { 
+					String category = "";
+				if(b.getnCategory() == 1) {
+					category = "시스템관련";					
+				}else if(b.getnCategory() == 2){
+					category = "계정관련";
+				}else if(b.getnCategory() == 3 ){
+					category = "결제관련";
+				}else if(b.getnCategory() == 4) {
+					category = "이용관련";
+				}else {
+					category = "자주묻는 질문";
+				}
+				%>
 				
 
 					
 				<tr>
-					<td class="info" style="text-align: center;"><%= list.getNoticeNo(i) %></td>
-					<td class="cinfo" style="text-align: center;"><%= list.getnCategory(i) %></td>
-					<td class="info" style="text-align: center;"><%= list.getnTitle(i) %></td>
-					<td class="info" style="text-align: center;"><%= list.getmNick(i) %></td>
-					<td class="info" style="text-align: center;"><%= list.getnDate(i) %></td>
+					<td class="info" style="text-align: center;"><%= b.getNoticeNo() %></td>
+					<td class="cinfo" style="text-align: center;"><%= category %></td>
+					<td class="info" style="text-align: center;"><%= b.getnTitle() %></td>
+					<td class="info" style="text-align: center;"><%= b.getmNick() %></td>
+					<td class="info" style="text-align: center;"><%= b.getnDate() %></td>
 				<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
-					<td class="info" style="text-align: center; color:green"><%=list.getnStatus() %></td>
-						<% } %>
+					<td class="info" style="text-align: center; color:green"><%=b.getnStatus() %></td>
 				</tr>
+				<% } %>
 				<% } %>
 			</table>
 			<BR>
