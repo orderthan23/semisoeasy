@@ -1,6 +1,9 @@
 package com.kh.login.space.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.login.member.model.vo.Member;
 import com.kh.login.space.model.service.SpaceService;
+import com.kh.login.space.model.vo.Image;
 
 /**
  * Servlet implementation class DeleteSpaceServlet
@@ -43,9 +47,17 @@ public class DeleteSpaceServlet extends HttpServlet {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
+		ArrayList<Image> imgList = new SpaceService().selectSpaceImg(spaceNo);
+		String root = request.getSession().getServletContext().getRealPath("/");
+		
 		result = new SpaceService().deleteSpaceInfoAll(spaceNo, kind);
 		
 		if(result > 0 && kind != 0) {
+			for(int i = 0; i < imgList.size(); i++) {
+				File failedFile = new File(root + imgList.get(i).getFilePath() + "/" + imgList.get(i).getChangeName());
+				failedFile.delete();
+			}
+			
 			response.sendRedirect(request.getContextPath() + "/selectTempSpace?memberNo=" + loginUser.getMemberNo());
 		} else {
 			request.setAttribute("msg", "미완성 공간 삭제 실패");
