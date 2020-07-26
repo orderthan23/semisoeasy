@@ -409,7 +409,7 @@
 			</table>
 			<div class="btnArea" align="center">
 				<br><br><br><br><br><br>
-				<button type="reset">초기화</button>
+				<button id="goList" type="button">내 공간 목록으로</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button id="gonext" type="button">다음으로</button>
 				<br><br><br><br><br><br>
@@ -429,7 +429,7 @@
 		<%@ include file="../common/footer.jsp"%>
 	</footer>
 	<script>
-		console.log("여긴 됩니가");
+		
 		function goPopup(){
 			var pop = window.open("../../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 		}
@@ -776,6 +776,10 @@
 			} else {
 				$("form").submit();
 			}
+		});
+		
+		$("#goList").click(function(){
+			history.go(-1);
 		});
 	</script>
 </body>

@@ -738,9 +738,6 @@ public class SpaceDao {
 			returnSi.setOpenChecks(si.getOpenChecks());
 			returnSi.setSpaceRefundPolicy(si.getSpaceRefundPolicy());
 			
-
-			System.out.println("selectHostSi : "+returnSi);
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -1101,57 +1098,57 @@ public class SpaceDao {
 		return result;
 	}
 
-	//공간 운영시간 업데이트
-	public int updateSpaceOptime(Connection con, int sNo, int day, int startTime, int endTime, String openCheck) {
-		
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = prop.getProperty("updateSpaceOptime");
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, startTime);
-			pstmt.setInt(2, endTime);
-			pstmt.setString(3, openCheck);
-			pstmt.setInt(4, sNo);
-			pstmt.setInt(5, day);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
+//	//공간 운영시간 업데이트
+//	public int updateSpaceOptime(Connection con, int sNo, int day, int startTime, int endTime, String openCheck) {
+//		
+//		PreparedStatement pstmt = null;
+//		int result = 0;
+//		
+//		String query = prop.getProperty("updateSpaceOptime");
+//		System.out.println(sNo + ", " + day + ", " + startTime + ", " + endTime + ", " + openCheck);
+//		try {
+//			pstmt = con.prepareStatement(query);
+//			pstmt.setInt(1, startTime);
+//			pstmt.setInt(2, endTime);
+//			pstmt.setString(3, openCheck);
+//			pstmt.setInt(4, sNo);
+//			pstmt.setInt(5, day);
+//			
+//			result = pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(pstmt);
+//		}
+//		
+//		return result;
+//	}
 
 
-	public int updateRefundPolicy(Connection con, int sNo, double rate, int date) {
-		
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = prop.getProperty("updateRefundPolicy");
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, date);
-			pstmt.setInt(2, sNo);
-			pstmt.setInt(3, date);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
+//	public int updateRefundPolicy(Connection con, int sNo, double rate, int date) {
+//		
+//		PreparedStatement pstmt = null;
+//		int result = 0;
+//		
+//		String query = prop.getProperty("updateRefundPolicy");
+//		
+//		try {
+//			pstmt = con.prepareStatement(query);
+//			pstmt.setInt(1, date);
+//			pstmt.setInt(2, sNo);
+//			pstmt.setInt(3, date);
+//			
+//			result = pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(pstmt);
+//		}
+//		
+//		return result;
+//	}
 
 	//검수 신청 업데이트용 메소드
 	public int updateInspection(Connection con, int spaceNo) {
@@ -1160,6 +1157,168 @@ public class SpaceDao {
 		int result = 0;
 		
 		String query = prop.getProperty("updateInspection");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	//코웤 삭제용 메소드
+	public int deleteOldCowork(Connection con, int spaceNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteOldCowork");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int deleteOptime(Connection con, int spaceNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteOptime");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int deleteRefund(Connection con, int spaceNo) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteRefund");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int deleteImg(Connection con, int spaceNo) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteImg");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int deleteSpaceInf(Connection con, int spaceNo) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteSpaceInf");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	//삭제 요청 취소용 메소드
+	public int cancleDelReq(Connection con, int spaceNo) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("cancleDelReq");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, spaceNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	//검수 신청 취소용 메소드
+	public int cancleInspection(Connection con, int spaceNo) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("cancleInspection");
 		
 		try {
 			pstmt = con.prepareStatement(query);

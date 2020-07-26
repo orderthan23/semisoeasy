@@ -189,7 +189,7 @@ public class SpaceService {
 		//공간 환불정책 조회
 		si = new SpaceDao().selectRefundPolicy(con, si);
 		//호스트 정보 조회
-//		si = new SpaceDao().selectHostInf(con,si);
+		si = new SpaceDao().selectHostInf(con,si);
 		
 		si.setConv(conv);
 		
@@ -345,7 +345,9 @@ public class SpaceService {
 		int updateResult = 0;
 		
 		int spaceInfOpResult = 0;
+		int delOp = 0;
 		int optimeResult = 0;
+		int delRef = 0;
 		int refundResult = 0;
 		
 		//기존에 있던 업데이트 메소드 사용
@@ -353,27 +355,38 @@ public class SpaceService {
 
 		int sNo = si.getSpaceNo();
 		
-		//SPACE_OPTIME 입력
+		//SPACE_OPTIME 삭제 후 입력
+		
+		delOp = new SpaceDao().deleteOptime(con, sNo);
+		
 		for(int i = 0; i < 7; i++) {
 			int day = i;
 			int startTime = si.getStartTimes()[i];
 			int endTime = si.getEndTimes()[i];
 			String openCheck = si.getOpenChecks()[i];
 			
-			optimeResult += new SpaceDao().updateSpaceOptime(con, sNo, day, startTime, endTime, openCheck);
+			optimeResult += new SpaceDao().insertSpaceOptime(con, sNo, day, startTime, endTime, openCheck);
 		}
 		
-		//REFUND_POLICY 입력
+		//REFUND_POLICY 삭제 후 입력
+		
+		delRef = new SpaceDao().deleteRefund(con, sNo);
+		
 		for(int i = 8; i >= 0; i--) {
 			double rate = si.getSpaceRefundPolicy()[i];
 			int date = i;
 			
-			refundResult += new SpaceDao().updateRefundPolicy(con, sNo, rate, date);
+			refundResult += new SpaceDao().insertRefundPolicy(con, sNo, rate, date);
 		}
+		
+		System.out.println("update2 service check1 : " + spaceInfOpResult);
+		System.out.println("update2 service check2 : " + optimeResult);
+		System.out.println("update2 service check3 : " + refundResult);
 		
 		if(spaceInfOpResult > 0 && optimeResult == si.getOpenChecks().length && refundResult == si.getSpaceRefundPolicy().length) {
 			commit(con);
 			updateResult = 1; 
+			System.out.println("들어옴?");
 		} else {
 			rollback(con);
 		}
@@ -392,6 +405,102 @@ public class SpaceService {
 		
 		if(result > 0) {
 			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+	
+	
+	//미완성 공간 정보 삭제용 메소드
+	public int deleteSpaceInfoAll(int spaceNo, int kind) {
+		
+		Connection con = getConnection();
+		int result = 0;
+		
+		int offDel = 0;
+		int cowDel = 0;
+		int convDel = 0;
+		int opDel = 0;
+		int refDel = 0;
+		int imgDel = 0;
+		int siDel = 0;
+		
+		if(kind == 1) {
+			offDel = new SpaceDao().deleteOldOffice(con, spaceNo);
+			cowDel = 1;
+		} else if (kind == 2) {
+			cowDel = new SpaceDao().deleteOldCowork(con, spaceNo);
+			offDel = 1;
+		}
+		
+		convDel = new SpaceDao().deleteConv(con, spaceNo);
+		
+		opDel = new SpaceDao().deleteOptime(con, spaceNo);
+		
+		refDel = new SpaceDao().deleteRefund(con, spaceNo);
+		
+		imgDel = new SpaceDao().deleteImg(con, spaceNo);
+		
+		siDel = new SpaceDao().deleteSpaceInf(con, spaceNo);
+		
+		if(offDel > 0 && cowDel > 0 && convDel > 0 && opDel > 0 && refDel > 0 && imgDel > 0 && siDel > 0) {
+			commit(con);
+			result = 1;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+
+	public int searchKind(int spaceNo) {
+		
+		Connection con = getConnection();
+		int kind = 0;
+		kind = new SpaceDao().selectKind(con, spaceNo);
+		
+		close(con);
+		
+		return kind;
+	}
+	
+	
+	//공간 삭제 요청 취소
+	public int cancleDelReq(int spaceNo) {
+		
+		Connection con = getConnection();
+		
+		int result = 0;
+		
+		result = new SpaceDao().cancleDelReq(con, spaceNo);
+		
+		if(result > 0) {
+			commit(con);
+			result = 1;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+	
+	//검수 신청 취소
+	public int cancleInspection(int spaceNo) {
+
+		Connection con = getConnection();
+		
+		int result = 0;
+		
+		result = new SpaceDao().cancleInspection(con, spaceNo);
+		
+		if(result > 0) {
+			commit(con);
+			result = 1;
 		} else {
 			rollback(con);
 		}
