@@ -233,31 +233,29 @@
 			 		<h1 align="center" style="margin:0; margin-top:10px;">공간 삭제 요청 건</h1>
 		 		</div>
 		 		<div class="hide1 adminPreview">
-		 			<p>2개의 새로운 삭제 요청 건이 있습니다.</p>
+		 			<p>가장 최근 올라온 공간 삭제 요청 입니다.</p>
 		 			<table align="center">
 		 				<tr>
 		 					<th colspan="2">공간명</th>
 		 					<th>공간종류</th>
 		 					<th>호스트ID</th>
-		 					<th>요청날짜</th>
-		 					<th>삭제 사유</th>
-		 					<th>삭제 사유</th>
+		 					<th>호스트이메일</th>
+		 					<th>호스트 연락처</th>
 		 					<th>삭제 처리 결과</th>
 		 					
 		 				</tr>
-		 				<% for(int i=0; i<3; i++){%>
+		 				<% for(int i=0; i<deleteList.size(); i++){%>
 		 					<tr>
-		 						<td colspan="2">린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
-		 						<td>린가드</td>
+		 						<td colspan="2"><%=deleteList.get(i).get("spaceName") %></td>
+		 						<td><%=deleteList.get(i).get("spaceKind") %></td>
+		 						<td><%=deleteList.get(i).get("userId") %></td>
+		 						<td><%=deleteList.get(i).get("userEmail") %></td>
+		 						<td><%=deleteList.get(i).get("userPhone") %></td>
+		 						<td><%=deleteList.get(i).get("status") %></td>
 		 					</tr>
 		 				<%} %>
 		 			</table>
-		 			<button class="seeMore">자세히 보기</button>
+		 			<button class="seeMore" type="button" onclick ="location.href ='<%=request.getContextPath()%>/adminDeleteAreaRequest.ad' ">자세히 보기</button>
 		 			<br><br>
 		 		</div>
 			</div>
@@ -295,7 +293,7 @@
 		 					</tr>
 		 				<%} %>
 		 			</table>
-		 			<button class="seeMore">자세히 보기</button>
+		 			<button class="seeMore" type="button" onclick ="location.href ='<%=request.getContextPath()%>/selectRecover.me' ">자세히 보기</button>
 		 			<br><br>
 		 		</div>
 			</div>
@@ -318,7 +316,7 @@
 		 					
 		 					
 		 				</tr>
-		 				<% for(int i=0; i<3; i++){%>
+		 				<% for(int i=0; i<5; i++){%>
 		 					<tr>
 		 						<td>린가드</td>
 		 						<td>린가드</td>
@@ -375,6 +373,7 @@
 		
 			
 		</div>
+		<br><br><br><br>
 	</section>
 	
 	<footer><%@ include file="../../views/common/footer.jsp" %></footer>

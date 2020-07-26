@@ -273,15 +273,7 @@
 				</tr>
 				
 
-				<%System.out.println("list-size :"+list.size());
-					System.out.println("nameArr.size :"+nameArr.size());
-					System.out.println("typeArr.size :"+typeArr.size());
-					System.out.println("isActiveArr.size :"+isActiveArr.size());
-					System.out.println("phoneArr.size :"+phoneArr.size());
-					System.out.println("emailArr.size :"+emailArr.size());
-					System.out.println("idArr.size :"+idArr.size());
-					
-				for(int i=0; i<list.size(); i++) {%>
+				<%for(int i=0; i<list.size(); i++) {%>
 				<tr class="pCompleteInfo">
 					<td>
 						<select class="stage" name="block">
@@ -295,7 +287,12 @@
 					<td><%=isActiveArr.get(i)%> </td>
 					<td><%=phoneArr.get(i) %></td>
 					<td><%=emailArr.get(i) %>
-					<td><a href="해당회원의 예약내역">보기</a></td>
+					<td><p style="margin :0;" class="showMemberReserve">보기</p>
+						<form class="transMemNo" action = "<%=request.getContextPath()%>/adminFindReserve.ad" method ="post">
+							<input type= hidden name ="memberNo" value=<%=list.get(i).getMemberNo() %>>
+							<input type= hidden name ="userName" value=<%=list.get(i).getmName() %>>
+						</form>
+					</td>
 				</tr>
 				<%
 					}
@@ -343,6 +340,12 @@
 	<br><br>
 	<footer><%@ include file = "/views/common/footer.jsp" %></footer>
 	<script>
+	$('.showMemberReserve').click(function(){
+		$(this).siblings('.transMemNo').submit();
+	});
+	
+	
+	
 	var blockDays; //정지 일자
 	var blockUser; //정지당할 사람
 	function closeModal(){

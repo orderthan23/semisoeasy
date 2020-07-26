@@ -156,7 +156,11 @@
       <br>
         <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
       <div class="visual">
-         <% for (Image i : imgList) { %>
+
+         <% for (Image i : imgList) { 
+         	String asd = request.getContextPath() + i.getFilePath() +"/"+ i.getChangeName();
+         	System.out.println(asd);%>
+
             <div style="background-image: url(<%= request.getContextPath() + i.getFilePath() + "/" + i.getChangeName()%>); display: block; width: 500px; height: 700px; background-repeat : no-repeat; background-size: cover;"></div>
          <% } %>
 

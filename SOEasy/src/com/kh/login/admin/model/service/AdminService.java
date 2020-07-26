@@ -164,4 +164,29 @@ public class AdminService {
 		return deleteList;
 	}
 
+	public int SpacingCheckUp(String userId, String processType, int spaceNo) {
+		Connection con = getConnection();
+		int result1 = 0;
+		int result2 = 0;
+		int result = 0;
+		
+		result1 = new AdminDao().updatingSpaceStatus(con,processType,spaceNo);
+		if(processType.equals("Y")) {
+			result2 = new AdminDao().updateMemberStatus(con,userId);
+		}else if(processType.equals("ID")) {
+			result2 = 1;
+		}
+		
+		if(result1>0 && result2>0) {
+			commit(con);
+			result = 1;
+		}else {
+			rollback(con);
+		}
+			
+		close(con);
+		
+		return result;
+	}
+
 }
