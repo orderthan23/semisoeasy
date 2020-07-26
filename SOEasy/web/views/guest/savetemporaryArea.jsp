@@ -81,20 +81,15 @@
 	<h1 style="margin:0;">내 공간 관리</h1>
 	<p>현재 등록 대기 중인 공간이 <label id="undone"></label> 개 있습니다.</p>
 	<select>
-		<option>검수 상태</option>
-		<option>검수 요청 전</option>
-		<option>검수 대기중</option>
-		<option>검수 진행중</option>
-		<option>검수 탈락</option>
-		<option>검수 완료</option>
+		<option>공간 상태</option>
+		<option>운영 중</option>
+		<option>공간 검수 대기 중</option>
+		<option>공간 등록 거절</option>
+		<option>작성 중</option>
+		<option>공간 삭제 대기 중</option>
 	</select>
-	<select>
-     	<option>작성 상태</option>
-     	<option>작성 진행중</option>
-     	<option>작성 완료</option>
-     
-	</select>
-	<br><br>
+	<button class="updateHostInf" style="float: right; margin-right: 5%;">정산 정보 수정</button>
+	<br><br><br><br>
 	<table	id="areaListTable">
 		<tr id = tableHeader>
 			<th width="20%">공간명</th>
@@ -104,45 +99,47 @@
 		</tr>
 		<%
 			for(int i = 0; i < siList.size(); i++) {
+				if(!siList.get(i).getsStatus().equals("D")) {
 		%>
-		
-		<tr id = tableResource>
-			<td class="spaceNameZone"><p><%=siList.get(i).getSpaceName()%></p> <input type="hidden" class="hiddenSpaceNo" value=<%= siList.get(i).getSpaceNo() %>></td>
-			
-			<% 	if(siList.get(i).getSpaceKind() == 1){ %>
-			<td><p>독립 오피스</p> </td>
-			<% } else { %>
-			<td><p>코워킹 스페이스</p> </td>
-			<% } %>
-			
-			<% if(siList.get(i).getsStatus().equals("Y")) { %>
-			<td><button class=inspectionStatus style="color:green; borderColor:green;">운영 중</button></td>
-			<td width="10%"><button class="updateSpaceInfo">공간 정보 수정</button></td>
-			<td width="10%"><button class="deleteRequest">공간 정보 삭제 요청</button></td>
-			<td width="10%"></td>
-			<% } else if(siList.get(i).getsStatus().equals("N")) { %>
-			<td><button class=inspectionStatus style="color:gray; borderColor:gray;">작성 중</button></td>
-			<td width="10%"><button class="updateSpaceInfo">공간 정보 수정</button></td>
-			<td width="10%"><button class="deleteSpace">미완성 공간 정보 삭제</button></td>
-			<td width="10%"><button class="inspectionRequest">공간 검수 신청</button></td>
-			<% } else if(siList.get(i).getsStatus().equals("IW")) { %>
-			<td><button class=inspectionStatus style="color:purple; borderColor:purple;">공간 검수 대기 중</button></td>
-			<td width="10%"></td>
-			<td width="10%"><button class="inspectionCancle">검수 신청 취소</button></td>
-			<td width="10%"></td>
-			<% } else if(siList.get(i).getsStatus().equals("DW")) { %>
-			<td><button class=inspectionStatus style="color:red; borderColor:red;">공간 삭제 대기 중</button></td>
-			<td width="10%"> </td>
-			<td width="10%"><button class="cancleDeleteRequset">공간 정보 삭제 취소</button></td>
-			<td width="10%"></td>
-			<% } else if(siList.get(i).getsStatus().equals("ID")) { %>
-			<td><button class=inspectionStatus style="color:red; borderColor:red;">공간 등록 거절</button></td>
-			<td width="10%"><button class="updateSpaceInfo">공간 정보 수정</button></td>
-			<td width="10%"><button class="deleteSpace">미완성 공간 정보 삭제</button></td>
-			<td width="10%"><button class="inspectionRequest">공간 검수 신청</button></td>
-			<% } %>
-		</tr>
-		<% } %>
+			<tr id = tableResource>
+				<td class="spaceNameZone"><p><%=siList.get(i).getSpaceName()%></p> <input type="hidden" class="hiddenSpaceNo" value=<%= siList.get(i).getSpaceNo() %>></td>
+				
+				<% 	if(siList.get(i).getSpaceKind() == 1){ %>
+				<td><p>독립 오피스</p> </td>
+				<% } else { %>
+				<td><p>코워킹 스페이스</p> </td>
+				<% } %>
+				
+				<% if(siList.get(i).getsStatus().equals("Y")) { %>
+				<td><button class=inspectionStatus style="color:green; borderColor:green;">운영 중</button></td>
+				<td width="10%"><button class="updateSpaceInfo">공간 정보 수정</button></td>
+				<td width="10%"><button class="deleteRequest">공간 정보 삭제 요청</button></td>
+				<td width="10%"></td>
+				<% } else if(siList.get(i).getsStatus().equals("N")) { %>
+				<td><button class=inspectionStatus style="color:gray; borderColor:gray;">작성 중</button></td>
+				<td width="10%"><button class="updateSpaceInfo">공간 정보 수정</button></td>
+				<td width="10%"><button class="deleteSpace">미완성 공간 정보 삭제</button></td>
+				<td width="10%"><button class="inspectionRequest">공간 검수 신청</button></td>
+				<% } else if(siList.get(i).getsStatus().equals("IW")) { %>
+				<td><button class=inspectionStatus style="color:purple; borderColor:purple;">공간 검수 대기 중</button></td>
+				<td width="10%"></td>
+				<td width="10%"><button class="inspectionCancle">검수 신청 취소</button></td>
+				<td width="10%"></td>
+				<% } else if(siList.get(i).getsStatus().equals("DW")) { %>
+				<td><button class=inspectionStatus style="color:red; borderColor:red;">공간 삭제 대기 중</button></td>
+				<td width="10%"> </td>
+				<td width="10%"><button class="cancleDeleteRequset">공간 정보 삭제 취소</button></td>
+				<td width="10%"></td>
+				<% } else if(siList.get(i).getsStatus().equals("ID")) { %>
+				<td><button class=inspectionStatus style="color:red; borderColor:red;">공간 등록 거절</button></td>
+				<td width="10%"><button class="updateSpaceInfo">공간 정보 수정</button></td>
+				<td width="10%"><button class="deleteSpace">미완성 공간 정보 삭제</button></td>
+				<td width="10%"><button class="inspectionRequest">공간 검수 신청</button></td>
+				<% } %>
+			</tr>
+		<% } else {
+		}
+	}%>
 	</table>
 	
 	
@@ -190,6 +187,28 @@
 			var spaceNo = $(this).parent().siblings(".spaceNameZone").find(".hiddenSpaceNo").val();
 			location.href = "<%=request.getContextPath()%>/inspectionCancle?sNo="+spaceNo;
 		}
+	});
+	
+	$(".updateHostInf").click(function(){
+		var memberNo = "<%=loginUser.getMemberNo()%>";
+		$.ajax({
+			url:"login/haveHostInf",
+			date:{memberNo:memberNo},
+			type:"post",
+			success: function(date){
+				if(data == "hasInf"){
+					location.href="<%=request.getContextPath()%>/intoHostUpdate?memberNo="+memberNo;
+				} else {
+					alert("등록된 정산 정보가 없어 정산 정보 입력페이지로 이동합니다.");
+					location.href="<%=request.getContextPath()%>/intoHostInsert?memberNo="+memberNo;
+				}
+			},
+			error: function(date){
+				console.log("정산 정보 진입 실패!");
+			}
+		});
+		
+		location.href = "<%=request.getContextPath()%>/updateHostInf?memberNo=<%=loginUser.getMemberNo()%>";
 	});
 	
 	$(function(){

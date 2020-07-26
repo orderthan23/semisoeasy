@@ -445,7 +445,7 @@ public class SpaceService {
 		imgDel = new SpaceDao().deleteImg(con, spaceNo);
 		
 		siDel = new SpaceDao().deleteSpaceInf(con, spaceNo);
-		
+//		System.out.println("offDel : " + offDel + " cowDel : " + cowDel + " convDel : " + convDel + " opDel : " + opDel + " refDel : " + refDel + " imgDel : " + imgDel + " siDel : " + siDel);
 		if(offDel > 0 && cowDel > 0 && convDel > 0 && opDel > 0 && refDel > 0 && imgDel > 0 && siDel > 0) {
 			commit(con);
 			result = 1;
@@ -507,6 +507,21 @@ public class SpaceService {
 		close(con);
 		
 		return result;
+	}
+	
+	
+	//기존 이미지 리스트 경로 조회용
+	public ArrayList<Image> selectSpaceImg(int spaceNo) {
+		
+		Connection con = getConnection();
+		
+		ArrayList<Image> imgList = null;
+		
+		imgList = new SpaceDao().selectSpaceImgList(con, spaceNo);
+		
+		close(con);
+		
+		return imgList;
 	}
 
 }
