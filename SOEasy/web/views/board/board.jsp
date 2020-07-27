@@ -83,10 +83,12 @@
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
 	<BR>
-	<div class="colMenu" style="margin-top: 20px;">
+	<div class="colMenu">
 		<a class="colMenuButton selectedButton"	href="/login/selectList.no">공지사항</a>
 		<a class="colMenuButton" href="/login/selectList.faq">자주 묻는 질문</a> 
+		<% if(loginUser != null) { %>
 		<a class="colMenuButton" href="/login/select.mtm">1대1문의</a>
+		<% } %>	
 	</div>
 	<BR>
 	<hr style="margin: 0">

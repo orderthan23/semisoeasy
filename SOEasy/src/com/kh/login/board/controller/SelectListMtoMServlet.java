@@ -31,7 +31,6 @@ public class SelectListMtoMServlet extends HttpServlet {
 	      int maxPage; //전체 페이지에서 가장 마지막 페이지
 	      int startPage; //한번에 표시될 페이지가 시작할 페이지
 	      int endPage; //한번에 표시될 페이지가 끝나는 페이지
-	   
 	      //게시판은 1부터 시작함
 	      currentPage = 1;
 	      
@@ -71,18 +70,18 @@ public class SelectListMtoMServlet extends HttpServlet {
 	      ArrayList<Qna> list = new BoardService().selectMtoMList(memberNo, pi);
 	      System.out.println(list);
 	      String page = "";
-	      if(list != null ) {
+	      if(loginUser !=null && list != null ) {
 	         page = "views/board/mtmboard.jsp";
 	         request.setAttribute("list", list);
 	         request.setAttribute("pi", pi);
-	
-	      } else {
-		         page = "views/common/errorPage.jsp";
-		         request.setAttribute("msg", "게시판 조회 실패!");
-		      
 	      }
-	      request.getRequestDispatcher(page).forward(request, response);
+	       else {
+		     page = "views/common/errorPage.jsp";
+		     request.setAttribute("msg", "게시판 조회 실패!");
+		     request.getRequestDispatcher(page).forward(request, response);
+	      }
 	}
+	      
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
