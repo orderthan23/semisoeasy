@@ -42,6 +42,8 @@ public class DeleteSpaceServlet extends HttpServlet {
 		
 		kind = new SpaceService().searchKind(spaceNo);
 		
+		System.out.println("delete servlet kind : " + kind);
+		
 		if(kind == 0) {
 			request.setAttribute("msg", "미완성 공간 삭제 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
@@ -55,6 +57,7 @@ public class DeleteSpaceServlet extends HttpServlet {
 		if(result > 0 && kind != 0) {
 			for(int i = 0; i < imgList.size(); i++) {
 				File failedFile = new File(root + imgList.get(i).getFilePath() + "/" + imgList.get(i).getChangeName());
+				//System.out.println(root + imgList.get(i).getFilePath() + "/" + imgList.get(i).getChangeName());
 				failedFile.delete();
 			}
 			

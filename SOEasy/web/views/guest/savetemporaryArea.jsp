@@ -192,23 +192,21 @@
 	$(".updateHostInf").click(function(){
 		var memberNo = "<%=loginUser.getMemberNo()%>";
 		$.ajax({
-			url:"login/haveHostInf",
-			date:{memberNo:memberNo},
+			url:"/login/haveHostInf",
+			data:{memberNo:memberNo},
 			type:"post",
-			success: function(date){
+			success: function(data){
 				if(data == "hasInf"){
 					location.href="<%=request.getContextPath()%>/intoHostUpdate?memberNo="+memberNo;
 				} else {
 					alert("등록된 정산 정보가 없어 정산 정보 입력페이지로 이동합니다.");
-					location.href="<%=request.getContextPath()%>/intoHostInsert?memberNo="+memberNo;
+					location.href="<%=request.getContextPath()%>/views/space/insertHostInf.jsp";
 				}
 			},
-			error: function(date){
+			error: function(data){
 				console.log("정산 정보 진입 실패!");
 			}
 		});
-		
-		location.href = "<%=request.getContextPath()%>/updateHostInf?memberNo=<%=loginUser.getMemberNo()%>";
 	});
 	
 	$(function(){

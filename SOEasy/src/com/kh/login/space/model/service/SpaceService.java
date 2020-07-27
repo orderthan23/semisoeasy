@@ -446,7 +446,7 @@ public class SpaceService {
 		
 		siDel = new SpaceDao().deleteSpaceInf(con, spaceNo);
 //		System.out.println("offDel : " + offDel + " cowDel : " + cowDel + " convDel : " + convDel + " opDel : " + opDel + " refDel : " + refDel + " imgDel : " + imgDel + " siDel : " + siDel);
-		if(offDel > 0 && cowDel > 0 && convDel > 0 && opDel > 0 && refDel > 0 && imgDel > 0 && siDel > 0) {
+		if(siDel > 0) {
 			commit(con);
 			result = 1;
 		} else {
@@ -522,6 +522,72 @@ public class SpaceService {
 		close(con);
 		
 		return imgList;
+	}
+	
+	//호스트 정보 존재여부 조회용 메소드
+	public int haveHostInf(int memberNo) {
+		
+		Connection con = getConnection();
+		
+		int result = 0;
+		SpaceInfo si = new SpaceInfo();
+		si.setHostNo(memberNo);
+		
+		result = new SpaceDao().haveHostInf(con, si);
+		
+		close(con);
+		
+		return result;
+	}
+
+	//호스트 정보 조회용 메소드
+	public SpaceInfo selectHostInf(int memberNo) {
+
+		Connection con = getConnection();
+		
+		SpaceInfo si = new SpaceInfo();
+		si.setHostNo(memberNo);
+		
+		SpaceInfo reSi = new SpaceDao().selectHostInf(con, si);
+		
+		close(con);
+		
+		return reSi;
+	}
+
+	public int updateSpaceStep3(SpaceInfo si, Image licenseImage) {
+
+		Connection con = getConnection();
+		
+		int hostDelResult = 0;
+		int hostInfResult = 0;
+		int imgDelResult = 0;
+		int imgResult = 0;
+		int result = 0;
+		
+		//HOST_INF 정산정보 삭제 후 입력
+		hostDelResult = new SpaceDao().deleteHostInf(con, si);
+		hostInfResult = new SpaceDao().insertHostInf(con, si);
+		
+		//IMAGE 사업자등록증 이미지 입력
+		//null처리
+		if(licenseImage.getOriginName() == null || licenseImage.getOriginName() == "") {
+			imgDelResult = 1;
+			imgResult = 1;
+		} else {
+			imgDelResult = new SpaceDao().deleteBusinessImg(con, licenseImage);
+			imgResult = new SpaceDao().insertBusinessImg(con, licenseImage);
+		}
+		
+		if(hostDelResult > 0 && hostInfResult > 0 && imgDelResult > 0 && imgResult > 0) {
+			commit(con);
+			result = 1;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
 	}
 
 }
