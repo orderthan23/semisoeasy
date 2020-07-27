@@ -81,7 +81,9 @@
 	<div class="colMenu" style=margin-top:20px;>
 		<a class="colMenuButton" href="/login/selectList.no">공지사항</a>
 		<a class="colMenuButton selectedButton" href="/login/selectList.faq">자주 묻는 질문</a>
+			<% if(loginUser != null) { %>
 		<a class="colMenuButton" href="/login/select.mtm">1대1문의</a>
+		<% } %>	
 	<br><br>
 	</div>
 	<hr style="margin : 0">
@@ -90,7 +92,9 @@
 	<section>
     <div id="wrapper">
 		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">자주 묻는 질문</h2>
-		<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a> 
+			<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
+			<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a>
+				<% } %>	 
 		<table style="width: 100%; border-collapse: collapse" id="faqTable" >
 		<tr>
 				<tr>

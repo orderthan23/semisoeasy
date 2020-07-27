@@ -83,10 +83,12 @@
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
 	<BR>
-	<div class="colMenu" style="margin-top: 20px;">
+	<div class="colMenu" >
 		<a class="colMenuButton selectedButton"	href="/login/selectList.no">공지사항</a>
 		<a class="colMenuButton" href="/login/selectList.faq">자주 묻는 질문</a> 
+		<% if(loginUser != null) { %>
 		<a class="colMenuButton" href="/login/select.mtm">1대1문의</a>
+		<% } %>	
 	</div>
 	<BR>
 	<hr style="margin: 0">
@@ -125,18 +127,23 @@
 					category = "자주묻는 질문";
 				}
 				%>
-				
-
-					
+				<% if(loginUser != null && loginUser.getMemberNo() == 1) { %> 
 				<tr>
 					<td class="info" style="text-align: center;"><%= b.getNoticeNo() %></td>
 					<td class="cinfo" style="text-align: center;"><%= category %></td>
 					<td class="info" style="text-align: center;"><%= b.getnTitle() %></td>
 					<td class="info" style="text-align: center;"><%= b.getmNick() %></td>
 					<td class="info" style="text-align: center;"><%= b.getnDate() %></td>
-				<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
 					<td class="info" style="text-align: center; color:green"><%=b.getnStatus() %></td>
 				</tr>
+				<% } else { %>
+					<tr>
+					<td class="info" style="text-align: center;"><%= b.getNoticeNo() %></td>
+					<td class="cinfo" style="text-align: center;"><%= category %></td>
+					<td class="info" style="text-align: center;"><%= b.getnTitle() %></td>
+					<td class="info" style="text-align: center;"><%= b.getmNick() %></td>
+					<td class="info" style="text-align: center;"><%= b.getnDate() %></td>
+					<td class="info" style="text-align: center; color:green; visibility:hidden; display:none;"><%=b.getnStatus() %></td>
 				<% } %>
 				<% } %>
 			</table>
