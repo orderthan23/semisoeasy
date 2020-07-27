@@ -107,6 +107,12 @@
         	outline: 0px;
         }
         
+        #realPays {
+        	float:right;
+        	color:#40a4b6;
+        	font-size:30px;
+        }
+        
     </style>
 </head>
 <body>
@@ -152,7 +158,8 @@
 	<div class="visual">
 
 			<% for (Image i : imgList) { 
-				String url = request.getContextPath()+i.getFilePath() + i.getChangeName();
+				String url = request.getContextPath()+i.getFilePath()+ "/" +  i.getChangeName();
+			
 				System.out.println(url);
 			%>
 				<div style="background-image: url(<%=url%>); display:block; width:500px; height:700px; background-repeat:no-repeat; background-size:cover;"></div>
@@ -444,16 +451,30 @@
 					<tr>
 						<td width="150px" height="50px"></td>
 						<td></td>
-						<td id="priceInfo" colspan="2" style="text-align:right; font-size:20px; color:gray;">300,000원 / 1개월 × 1 명</td>
+						<td id="priceInfo" colspan="2" style="text-align:right; font-size:20px; color:gray;">
+							<% if (si.getDayPay() == 0) { %>
+								월 / <%= si.getMonthPay() %>원
+							<% } else if (si.getMonthPay() == 0) { %>
+								일 / <%= si.getDayPay() %>원
+							<% } else if (si.getDayPay() != 0 && si.getMonthPay() != 0) { %>
+								일 <%= si.getDayPay() %>원 / 월 <%= si.getMonthPay() %>원
+							<% } %>
+						</td>
 					</tr>
 					<tr>
 						<td width="150px" height="50px"></td>
 						<td></td>
-						<td colspan="2"><input type="text" id="lastPrice" name="expectPay" value=300000 readonly></td>
+						<td colspan="2" id="reservPay" style=" "><input type="text" id="lastPrice" name="expectPay" value=
+							"<% if (si.getDayPay() == 0) { %>
+								<%= si.getMonthPay() %>
+							<% } else if (si.getMonthPay() == 0) { %>
+								<%= si.getDayPay() %>
+							<% } %>" readonly>
+							</td>
 					</tr>
 					<tr>
 						<td width="150px" height="50px"></td>
-						<td></td>
+						<td style="float:right;"></td>
 						<td colspan="2" style="text-align:right; font-size:15px; color:#c4c4c4;">VAT 포함 가격</td>
 					</tr>
 				</table>
@@ -501,7 +522,7 @@
 	<footer><%@ include file="../common/footer.jsp" %></footer>
 
 	<script>
-	
+	 
 		//인원 선택한거 예약결과에 보여지게 하기
 		$("#choosePer").change(function(){
 			var chooseMem = $("#choosePer").val();
@@ -551,6 +572,8 @@
 					$("#agr4").prop("checked", false);
 				}
 			});
+			
+			
 		});
 		
 		
@@ -572,6 +595,44 @@
 			  cssEase: 'linear',
 			  autoplay: true,
 			  autoplaySpeed: 2000,
+		});
+		var personCount = 1;
+	
+		var monthPay = parseInt("<%=si.getMonthPay()%>");
+		var dayPay = parseInt("<%=si.getDayPay()%>");
+		
+		var realPay;
+			
+			
+	
+		$('#choosePer').change(function(){
+		 
+			personCount  = parseInt($('#choosePer').val());
+			var startDate = $('#date1').val();
+			var endDate = $('#date2').val();
+			var ar1 = startDate.split('-');
+		    var ar2 = endDate.split('-');
+		    var da1 = new Date(ar1[0], ar1[1], ar1[2]);
+		    var da2 = new Date(ar2[0], ar2[1], ar2[2]);
+			var howlongDays =(Math.ceil((da2-da1)/(1000*3600*24)));
+			console.log(startDate);
+			console.log(endDate);
+			console.log(personCount);
+			console.log(dayPay);
+			console.log(monthPay);
+			console.log(howlongDays);
+	
+		
+		 if(howlongDays % 30 == 0){
+			 realPay = personCount *monthPay*(howlongDays/30);
+		 }else{
+			 realPay = personCount * dayPay * howlongDays;
+		 }
+		console.log('realpay :'+realPay);
+	
+		 $('#reservPay').html('<p id="realPays" >'+realPay+'원'+ '</p>');
+			
+			
 		});
 		
 	</script>

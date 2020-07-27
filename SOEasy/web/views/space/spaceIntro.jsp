@@ -183,23 +183,23 @@
       </b></p>
       <table id="opTimeTb" style="border-spacing:15px;">
          <tr>
-            <td id="mon" style="padding:20px;"><b>월 </b><%= si.getStartTimes()[0] %> ~ <%= si.getEndTimes()[0] %></td>
-            <td id="sat" style="padding:20px;"><span style="color:blue;"><b>토 </b></span><%= si.getStartTimes()[5] %> ~ <%= si.getEndTimes()[5] %></td>
+            <td id="mon" style="padding:20px;"><b>월 </b><%= si.getStartTimes()[0] %> ~ <%= si.getEndTimes()[0] %> 시</td>
+            <td id="sat" style="padding:20px;"><span style="color:blue;"><b>토 </b></span><%= si.getStartTimes()[5] %> ~ <%= si.getEndTimes()[5] %> 시</td>
          </tr>
          <tr>
-            <td id="tue" style="padding:20px;"><b>화 </b><%= si.getStartTimes()[1] %> ~ <%= si.getEndTimes()[1] %></td>
-            <td id="sun" style="padding:20px;"><span style="color:red;"><b>일 </b></span><%= si.getStartTimes()[6] %> ~ <%= si.getEndTimes()[6] %></td>
+            <td id="tue" style="padding:20px;"><b>화 </b><%= si.getStartTimes()[1] %> ~ <%= si.getEndTimes()[1] %> 시</td>
+            <td id="sun" style="padding:20px;"><span style="color:red;"><b>일 </b></span><%= si.getStartTimes()[6] %> ~ <%= si.getEndTimes()[6] %> 시</td>
          </tr>
          <tr>
-            <td id="wed" style="padding:20px;"><b>수 </b><%= si.getStartTimes()[2] %> ~ <%= si.getEndTimes()[2] %></td>
+            <td id="wed" style="padding:20px;"><b>수 </b><%= si.getStartTimes()[2] %> ~ <%= si.getEndTimes()[2] %> 시</td>
             <td style="padding:20px;"></td>
          </tr>
          <tr>
-            <td id="thu" style="padding:20px;"><b>목 </b><%= si.getStartTimes()[3] %> ~ <%= si.getEndTimes()[3] %></td>
+            <td id="thu" style="padding:20px;"><b>목 </b><%= si.getStartTimes()[3] %> ~ <%= si.getEndTimes()[3] %> 시</td>
             <td style="padding:20px;"></td>
          </tr>
          <tr>
-            <td id="fri" style="padding:20px;"><b>금 </b><%= si.getStartTimes()[4] %> ~ <%= si.getEndTimes()[4] %></td>
+            <td id="fri" style="padding:20px;"><b>금 </b><%= si.getStartTimes()[4] %> ~ <%= si.getEndTimes()[4] %> 시</td>
             <td style="padding:20px;"></td>
          </tr>
       </table>
@@ -337,9 +337,7 @@
       <!-- 카카오맵 api -->
       <p style="margin-top:-12px">
        <em class="link">
-        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
-               혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
-        </a>
+        
        </em>
       </p>
       <div id="map" style="width:100%;height:500px;"></div>
@@ -477,7 +475,7 @@
          
          $(function(){
 			<% for (int i = 0; i < si.getConv().length; i++) {%>
- 			
+ 				
         		var conv = "<%=si.getConv()[i]%>";
         				
         		switch(conv) {
@@ -508,7 +506,7 @@
         		}
         	<% } %>
          });
-         
+        
       </script>
 </body>
 </html>
