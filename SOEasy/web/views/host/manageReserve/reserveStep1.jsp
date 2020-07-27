@@ -11,7 +11,7 @@
 	}
 	ArrayList<HostReserve> list = (ArrayList<HostReserve>) request.getAttribute("list");
 	for(int i = 0; i < list.size(); i++){
-		System.out.println(list.get(i));
+		
 	}
 	
 	
@@ -172,17 +172,25 @@
 					<td><%=i %></td>
 				<% } %>
 			</tr>
-			<% for(int i = 0; i < list.size(); i++) { %>
-			
+			<%-- <% for(int i = 0; i < list.size(); i++) { %> --%>
+			<% for(HostReserve h : list) {%>
 			<tr class="zone">
-				<td><%= i + 401 %>호실</td>
+				<td><%= h.getOfficeNo() %>호실</td>
 				<% for(int j = 1; j <= 31; j++) { %>
 				<% if(j > 31) {break;} %>
 				<td
-				<% if(officeInfo == i+401) { %>
-					<% if(startDay == j) { 
-					j += term -2; %>
-					colspan="<%= term %>" style="background:#A5C1DA; color:white; text-align:center;"><button class="reserveBtn" name="<%= reserveNo %>"><%= name %></button>
+				<% if(h.getOfficeNo() == (h.getOfficeNo())) {
+					String jj = "" + j;
+					if(j<10){
+						jj = "0" + j;
+					}
+				
+					%>
+					
+					<% if(h.getStartDay().equals("2020-07-"+ jj)) { 
+					
+					j += term -1; %>
+					colspan="<%= term %>" style="background:#A5C1DA; color:white; text-align:center;"><button class="reserveBtn" name="<%= reserveNo %>" onclick="location.href='<%=request.getContextPath()%>/select.hr?reserveNo=' + '<%= h.getReserveNo() %>'"><%= h.getUserName() %></button>
 					<% } else { %>
 					>
 					<% } %>

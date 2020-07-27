@@ -29,7 +29,13 @@ public class SelectHostReserveDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
+		String reserveNoStr = request.getParameter("reserveNo");
+		System.out.println("!!" + reserveNoStr);
+		int reserveNo = 78;
+		if(request.getParameter("reserveNo") != null) {
+			Integer.parseInt(request.getParameter("reserveNo"));
+		}
+		
 		System.out.println("select Reserve Detail reserveNo : " + reserveNo);
 		
 		HostReserve hostReserve = new HostReserveService().selectOne(reserveNo);

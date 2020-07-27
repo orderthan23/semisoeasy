@@ -27,7 +27,7 @@ section {
 	width: 100%;
 }
 .photobox {
-	padding: 20px;
+	padding: 15px;
 	padding-bottom: 10px;
 }
 
@@ -249,7 +249,7 @@ section {
 					<input type="hidden" class="sendSpaceNo" value="<%=hmap.get("spaceNo") %>">
 					<%-- <% System.out.println("spaceNo"); %> --%>
 					<div class="text">
-						<img src="<%=request.getContextPath() %>/images/area/<%=hmap.get("changeName") %>" width="400" height="265">
+						<img src="<%=request.getContextPath() %>/images/area/<%=hmap.get("changeName") %>" width="380" height="240">
 					<p><%= hmap.get("spaceName") %></p>
 					<p><%= hmap.get("spaceShortIntro") %>
 					<!-- 가 -->

@@ -140,10 +140,6 @@ FusionCharts.ready(function(){
 		}, { 
 			"category": [
 				{ 
-				/* "start": "2020/07/00", 
-				"end": "2020/07/00", 
-				"label": "1일" 
-			}, { */
 				"start": "2020/07/01", 
 				"end": "2020/07/01", 
 				"label": "1일" 
@@ -280,7 +276,7 @@ FusionCharts.ready(function(){
 			, "process": [
 				{ "label": "역삼코워킹스페이스", "id": "301" }, 
 				{ "label": "역삼코워킹스페이스", "id": "401" }, 
-				{ "label": "역삼코워킹스페이스" , ""}, 
+				{ "label": "역삼코워킹스페이스" }, 
 				{ "label": "역삼코워킹스페이스" }, 
 				{ "label": "역삼코워킹스페이스" }, 
 				{ "label": "역삼코워킹스페이스" }, 
@@ -389,7 +385,7 @@ FusionCharts.ready(function(){
 		</form>
 	
 	
-	<div align="center" id="chart-container">FusionCharts XT will load here!</div>
+	<div align="center" id="chart-container">마이페이지 로딩중</div>
 	
 	<br><br><br>
 	<footer><%@ include file="../../common/footer.jsp" %></footer>

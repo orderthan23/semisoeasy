@@ -91,17 +91,17 @@ public class HostReserveService {
 		HostReserveDao hrd = new HostReserveDao();
 		int result = 0;
 		
-		int list = new HostReserveDao().insertHostReserve(con, hostReservation);
+		result = new HostReserveDao().insertHostReserve(con, hostReservation);
 		
 		ArrayList<HashMap<String, Object>> selectList = new ArrayList<>();
 		HashMap<String, Object> hmap = new HashMap<>();
-		ArrayList<HostReserve> hr = null;
+		ArrayList<HostReserve> hr = new ArrayList<>();
 		
-		
+		System.out.println("서비스 ??");
 		
 		if(result > 0) {
-			hr = new HostReserveDao().selectHostReserve(con, hostNo, spaceNo);
 			commit(con);
+			hr = new HostReserveDao().selectHostReserve(con, hostNo, spaceNo);
 			for(HostReserve h : hr) {
 				System.out.println(h);
 			}
@@ -144,8 +144,8 @@ public class HostReserveService {
 		HostReserve hostReserve = null;
 		int result = 0;
 		
-		result = new HostReserveDao().updateCount(con, reserveNo);
 		hostReserve = new HostReserveDao().selectOne(con, reserveNo);
+		result = new HostReserveDao().updateCount(con, reserveNo);
 		
 		if(result > 0 && hostReserve != null) {
 			commit(con);
