@@ -105,6 +105,13 @@
 </head>
 <body>
 	<header><%@ include file="../common/header.jsp"%></header>
+	 <div class="colMenu" style="margin-top: 20px;">
+		<a class="colMenuButton"	href="/login/selectList.no">공지사항</a>
+		<a class="colMenuButton" href="/login/selectList.faq">자주 묻는 질문</a> 
+		<a class="colMenuButton  selectedButton" href="/login/select.mtm">1대1문의</a>
+	</div>
+	<hr style="margin: 0">
+	<br>
 	<nav><%@ include file="../common/aside.jsp"%></nav>
 	<section>
 	<div id="wrapper">
@@ -116,7 +123,7 @@
 			<tr>
 			</tr>
 		</table>
-		<a href="writeboard.jsp" class="writeButton">글쓰기</a> 
+		<button  class="writeButton" type="button" onclick="back();">돌아가기</button><br><br><br>
 		<br>
 		
 					<input type="hidden" name="id" value="<%=loginUser.getmId()%>">
@@ -161,6 +168,7 @@
 									<% } %>
 									</div>
 								</div>
+							
 							</td>
 						</tr>
 				</table>
@@ -169,7 +177,10 @@
 	<br><br>
 	<footer><%@ include file="../common/footer.jsp"%></footer>
 	<script>
-	
+		function back(){
+			
+			history.go(-1);
+		}
 	</script>
 	
 </body>

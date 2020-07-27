@@ -249,7 +249,7 @@ section {
 					<input type="hidden" class="sendSpaceNo" value="<%=hmap.get("spaceNo") %>">
 					<%-- <% System.out.println("spaceNo"); %> --%>
 					<div class="text">
-						<img src="<%=request.getContextPath() %>/images/area/<%=hmap.get("changeName") %>" width="380" height="240">
+						<img src="<%=request.getContextPath()+ hmap.get("filePath")+"/"+hmap.get("changeName") %>" width="380" height="240">
 					<p><%= hmap.get("spaceName") %></p>
 					<p><%= hmap.get("spaceShortIntro") %>
 					<!-- 가 -->

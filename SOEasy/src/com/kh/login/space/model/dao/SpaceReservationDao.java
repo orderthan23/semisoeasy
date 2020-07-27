@@ -76,7 +76,7 @@ public class SpaceReservationDao {
 			//(SEQ_RESERV.NEXTVAL, ?, ?, NULL, ?, TO_CHAR(?, 'YYYYMMDD'), TO_CHAR(?, 'YYYYMMDD'), ?, DEFAULT, DEFAULT, DEFAULT, SYSDATE, ?, ?, ?, ?, ?);
 			pstmt.setInt(1, requestMember.getGuestNo());
 			pstmt.setInt(2, si.getSpaceNo());
-			pstmt.setString(3, requestMember.getFixUnfix());
+			pstmt.setString(3, requestMember.getOfficeNo());
 			pstmt.setString(4, requestMember.getStartDate());
 			pstmt.setString(5, requestMember.getEndDate());
 			pstmt.setInt(6, requestMember.getReservPersonCount());

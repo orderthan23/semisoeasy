@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" import="com.kh.login.space.model.vo.*" %>
 <%
 	SpaceInfo si = (SpaceInfo) session.getAttribute("spaceInfo");
+	String[] phone = si.getCalPhone().split("-");
+	String[] email = si.getCalEmail().split("@");
 %>
 <!DOCTYPE html>
 <html>
@@ -268,9 +270,9 @@
 					<td>정산용 이메일 *</td>
 					<td>
 						<div>
-							<input type="text" class="email" name="cal-email1" id="cal-email1" value="<%=si.getCalEmail().split("@")[0]%>">
+							<input type="text" class="email" name="cal-email1" id="cal-email1">
 							&nbsp;@&nbsp;
-							<input type="text" class="email" name="cal-email2" id="cal-email2" value="<%=si.getCalEmail().split("@")[1]%>">
+							<input type="text" class="email" name="cal-email2" id="cal-email2">
 						</div>
 					</td>
 					<td>
@@ -292,11 +294,11 @@
 					<td>정산용 연락처 *</td>
 					<td>
 						<div>
-							<input type="text" class="phone" name="cal-phone1" id="cal-phone1" maxlength="3" value="<%=si.getCalPhone().split("-")[0]%>">
+							<input type="text" class="phone" name="cal-phone1" id="cal-phone1" maxlength="3">
 							&nbsp;-&nbsp;
-							<input type="text" class="phone" name="cal-phone2" id="cal-phone2" maxlength="4" value="<%=si.getCalPhone().split("-")[1]%>">
+							<input type="text" class="phone" name="cal-phone2" id="cal-phone2" maxlength="4">
 							&nbsp;-&nbsp;
-							<input type="text" class="phone" name="cal-phone3" id="cal-phone3" maxlength="4" value="<%=si.getCalPhone().split("-")[2]%>">
+							<input type="text" class="phone" name="cal-phone3" id="cal-phone3" maxlength="4">
 						</div>
 					</td>
 				</tr>
@@ -371,6 +373,14 @@
 		
 		function initSet(){
 			$(".warning").show();
+			
+			<% for(int i = 0; i < phone.length; i ++) { %>
+				$("#cal-phone + <%=i + 1%>").val("<%=phone[i]%>");
+			<% } %>
+			
+			<% for(int i = 0; i < email.length; i++) { %>
+				$("#cal-email + <%=i + 1%>").val("<%=email[i]%>");
+			<% } %>
 		}
 	
 		function initEvent(){

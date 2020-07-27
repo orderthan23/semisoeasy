@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.login.host.manageReserve.model.service.HostReserveService;
 import com.kh.login.host.manageReserve.model.vo.HostReserve;
+import com.kh.login.member.model.vo.Member;
 
 /**
  * Servlet implementation class SelectHostRoungeServlet
@@ -31,15 +32,14 @@ public class SelectHostRoungeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
-		int hostNo = 26;
-		int spaceNo = 1;
+		int hostNo = loginUser.getMemberNo();
+		int spaceNo = new HostReserveService().findspaceNo(hostNo);
+		System.out.println(spaceNo);
 		
 		ArrayList<HostReserve> list = new HostReserveService().selectRoungeInfo(hostNo, spaceNo);
 		
-		for(HostReserve h : list) {
-			System.out.println("rounge servlet list : " + h);
-		}
 		
 		
 		String page = "";

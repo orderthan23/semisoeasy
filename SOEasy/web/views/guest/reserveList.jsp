@@ -130,14 +130,17 @@ th {
 				payStatusArr.add("본인취소");
 				break;
 			}
-
-			switch (rh.getSeatType()) {
-			case "U":
-				seatTypeArr.add("자유석");
-				break;
-			case "F":
-				seatTypeArr.add("지정석");
-				break;
+			if(rh.getSeatType() == null){
+				seatTypeArr.add("");
+			} else {
+				switch (rh.getSeatType()) {
+				case "U":
+					seatTypeArr.add("자유석");
+					break;
+				case "F":
+					seatTypeArr.add("지정석");
+					break;
+				}
 			}
 
 			switch (rh.getSpaceType()) {
@@ -398,7 +401,7 @@ th {
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
 				    name : spaceName,
-				    amount : charge,
+				    amount : charge/1000,
 				    buyer_email : "<%=loginUser.getmEmail()%>",
 				    buyer_name : "<%=loginUser.getmName()%>",
 				    buyer_tel : "<%=loginUser.getmPhone()%>",

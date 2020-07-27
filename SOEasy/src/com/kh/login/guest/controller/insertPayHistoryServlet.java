@@ -26,7 +26,7 @@ public class insertPayHistoryServlet extends HttpServlet {
 		//org.json.simple.parser.JSONParser jsonparsor = new org.json.simple.parser.JSONParser();
 		
 		String payNo = request.getParameter("payNo");
-		int amount = Integer.parseInt(request.getParameter("amount"));
+		int amount = Integer.parseInt(request.getParameter("amount"))*1000;
 		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
 		String methodCode = request.getParameter("methodCode");
 		

@@ -99,6 +99,7 @@ public class InsertSpaceStep3Servlet extends HttpServlet {
 			String calAcctHolder = multiRequest.getParameter("cal-acct-holder");
 			String calAcctNo = multiRequest.getParameter("cal-acct-no");
 			
+			si.setHostNo(loginUser.getMemberNo());
 			si.setBsnsName(bsnsName);
 			si.setRepresentName(representName);
 			si.setBsnsLicenseNo(bsnsLicenseNo);

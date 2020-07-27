@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.login.host.manageReserve.model.service.HostReserveService;
-import com.kh.login.host.manageReserve.model.vo.HostReserve;
 import com.kh.login.host.manageReserve.model.vo.PageInfo;
 import com.kh.login.host.manageReserve.model.vo.PaymentRequest;
+import com.kh.login.member.model.vo.Member;
 
 /**
  * Servlet implementation class UpdatePaymentRequest
@@ -33,8 +33,10 @@ public class UpdatePaymentRequest extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
 		String num = request.getParameter("num");
 		String reserveNo = request.getParameter("reserveNo");
+		String hno = request.getParameter("hostNo");
 		int result = 0;
 		
 		
@@ -50,7 +52,12 @@ public class UpdatePaymentRequest extends HttpServlet {
 			System.out.println("update num : " + num);
 			System.out.println("update nno : " + nno);
 		}
-		
+		int hostNo = 0;
+		if(hno != "" && hno != null) {
+			hostNo = Integer.parseInt(hno);
+			System.out.println("update hostNo : " + hostNo);
+			System.out.println("update nno : " + hno);
+		}
 		
 		
 		int currentPage;
@@ -67,8 +74,8 @@ public class UpdatePaymentRequest extends HttpServlet {
 		
 		limit = 10;
 		
-		int listCount = new HostReserveService().getListCount();
-		int requestCount = new HostReserveService().getRequestCount();
+		int listCount = new HostReserveService().getListCount(hostNo);
+		int requestCount = new HostReserveService().getRequestCount(hostNo);
 		
 		
 		maxPage = (int) ((double) listCount / limit + 0.9);
@@ -95,15 +102,16 @@ public class UpdatePaymentRequest extends HttpServlet {
 		
 		String page = "";
 		if(list != null) {
-			page = "/views/host/manageReserve/paymentRequest.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("pi", pi);
+//			page = "/views/host/manageReserve/paymentRequest.jsp";
+//			request.setAttribute("list", list);
+//			request.setAttribute("pi", pi);
+			response.sendRedirect(request.getContextPath() + "/select.pr?hostNo=" + loginUser.getMemberNo());
 		} else {
 			page = "/views/host/manageReserve/paymentRequest.jsp";
 			request.setAttribute("list", list);
+			request.getRequestDispatcher(page).forward(request, response);
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

@@ -45,11 +45,11 @@ public class SearchServlet extends HttpServlet {
 		int endPage;
 		
 		currentPage = 1;
-		String url = "?";
-		System.out.println(url);
+		
+	
 		String root = request.getRequestURI();
 		System.out.println(root);
-		
+		String url = PageInfo.customQString(request.getQueryString(), 1);
 		
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));

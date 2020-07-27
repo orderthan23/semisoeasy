@@ -32,13 +32,14 @@ public class SelectHostReserveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Member loginUser = ;
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 //		
-//		String sHostNo = request.getParameter("hostNo");
-//		String sSpaceNo = request.getParameter("spaceNo");
+		String sHostNo = request.getParameter("hostNo");
+		String sSpaceNo = request.getParameter("spaceNo");
 		
-		int hostNo = 26;
-		int spaceNo = 1;
+		int hostNo = loginUser.getMemberNo();
+		int spaceNo = new HostReserveService().findspaceNo(hostNo);
+		System.out.println(spaceNo);
 		
 		ArrayList<HostReserve> list = new HostReserveService().selectReserveInfo(hostNo, spaceNo);
 		

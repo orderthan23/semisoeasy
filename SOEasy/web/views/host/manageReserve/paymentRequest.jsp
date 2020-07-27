@@ -6,9 +6,7 @@
 	int statement = 0;
 	
 	ArrayList<PaymentRequest> list = (ArrayList<PaymentRequest>) request.getAttribute("list");
-	for(PaymentRequest pr : list){
-		System.out.println(pr);
-	}
+	
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -16,6 +14,7 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int requestCount = pi.getRequestCount();
+	//int requestCount = 2;
 %>
 <!DOCTYPE html>
 <html>
@@ -65,7 +64,7 @@
 		<label class="colMenuTitle">공간 일정 관리</label>
 		<a class="colMenuButton" href="<%=request.getContextPath()%>/selectReserve.ho">예약 일정 관리</a>
 		<a class="colMenuButton" href="<%=request.getContextPath()%>/Select.ro">라운지 회원 관리</a>
-		<a class="colMenuButton selectedButton" href="<%=request.getContextPath()%>/select.pr">예약 승인 요청</a>
+		<a class="colMenuButton selectedButton" href="<%=request.getContextPath()%>/select.pr?hostNo=<%=loginUser.getMemberNo()%>">예약 승인 요청</a>
 		<a class="colMenuButton" href="<%=request.getContextPath()%>/selectTempSpace?memberNo=<%=loginUser.getMemberNo()%>">내 공간 관리</a>
 	<br><br>
 	</div>
@@ -136,7 +135,7 @@
 				</tr>
 				
 				<% } %>
-				<% if(requestCount == 0){ %>
+				<% if(requestCount < 1){ %>
 					<tr>
 						<td colspan="10" align="center" style="background:white; height:100px;">예약 승인 요청건이 없습니다.</td>
 					</tr>

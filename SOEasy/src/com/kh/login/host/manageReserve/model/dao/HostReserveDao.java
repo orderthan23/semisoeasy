@@ -36,7 +36,7 @@ public class HostReserveDao {
 	}
 
 	//예약 승인 리스트 번호 조회
-	public int getListCount(Connection con) {
+	public int getListCount(Connection con, int hostNo) {
 		PreparedStatement pstmt = null;
 		int listCount = 0;
 		ResultSet rset = null;
@@ -46,7 +46,7 @@ public class HostReserveDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, 17);
+			pstmt.setInt(1, hostNo);
 
 			rset = pstmt.executeQuery();
 
@@ -66,7 +66,7 @@ public class HostReserveDao {
 	}
 
 	//예약대기 리스트 카운트
-	public int getRequestCount(Connection con) {
+	public int getRequestCount(Connection con, int hostNo) {
 		PreparedStatement pstmt = null;
 		int requestCount = 0;
 		ResultSet rset = null;
@@ -75,8 +75,9 @@ public class HostReserveDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, 26);
-
+			pstmt.setInt(1, hostNo);
+			
+			System.out.println("wpqkf hostno : " + hostNo);
 			rset = pstmt.executeQuery();
 
 			if(rset.next()) {
@@ -96,7 +97,7 @@ public class HostReserveDao {
 
 
 	//예약 승인 요청 관리 목록 조회
-	public ArrayList<PaymentRequest> selectList(Connection con, PageInfo pi) {
+	public ArrayList<PaymentRequest> selectList(Connection con, PageInfo pi, int hostNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<PaymentRequest> list = null;
@@ -111,7 +112,7 @@ public class HostReserveDao {
 
 			pstmt.setInt(1, 1);
 			pstmt.setInt(2, 2);
-			pstmt.setInt(3, 26);
+			pstmt.setInt(3, hostNo);
 			pstmt.setInt(4, startRow);
 			pstmt.setInt(5, endRow);
 
@@ -128,7 +129,7 @@ public class HostReserveDao {
 				pr.setEndDay(rset.getDate("END_DATE"));
 				pr.setReservePersonCount(rset.getInt("RESERV_PERSON_COUNT"));
 				pr.setSpaceName(rset.getString("SPACE_NAME"));
-				pr.setOfficeNo(rset.getInt("OFFICE_NO"));
+				pr.setOfficeNo(rset.getString("OFFICE_NO"));
 				pr.setExpectPay(rset.getInt("EXPECT_PAY"));
 				pr.setDidHostOk(rset.getInt("DID_HOST_OK"));
 
@@ -232,10 +233,10 @@ public class HostReserveDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			
-			pstmt.setInt(1, requestMember.getGuestNo());
+			pstmt.setInt(1, requestMember.getHostNo());
 			pstmt.setInt(2, requestMember.getSpaceNo());
 			pstmt.setString(3, requestMember.getFixUnfix());
-			pstmt.setInt(4, requestMember.getOfficeNo());
+			pstmt.setString(4, requestMember.getOfficeNo());
 			pstmt.setString(5, requestMember.getStartDate());
 			pstmt.setString(6, requestMember.getEndDate());
 			pstmt.setInt(7, requestMember.getReservPersonCount());
@@ -411,6 +412,31 @@ public class HostReserveDao {
 		
 		
 		return result;
+	}
+
+	public int findSpaceNo(Connection con, int hostNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int spaceNo = -1;
+		String query = prop.getProperty("findSpaceNo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, hostNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				spaceNo = rset.getInt("SPACE_NO");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return spaceNo;
 	}
 
 

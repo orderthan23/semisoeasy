@@ -15,10 +15,10 @@ import static com.kh.login.common.JDBCTemplate.*;
 
 public class HostReserveService {
 
-	public int getListCount() {
+	public int getListCount(int hostNo) {
 		Connection con = getConnection();
 		
-		int listCount = new HostReserveDao().getListCount(con);
+		int listCount = new HostReserveDao().getListCount(con, hostNo);
 		
 		close(con);
 		
@@ -27,10 +27,10 @@ public class HostReserveService {
 		return listCount;
 	}
 	
-	public int getRequestCount() {
+	public int getRequestCount(int hostNo) {
 		Connection con = getConnection();
 		
-		int requestCount = new HostReserveDao().getRequestCount(con);
+		int requestCount = new HostReserveDao().getRequestCount(con, hostNo);
 		
 		close(con);
 		
@@ -39,10 +39,10 @@ public class HostReserveService {
 		return requestCount;
 	}
 
-	public ArrayList<PaymentRequest> selectList(PageInfo pi) {
+	public ArrayList<PaymentRequest> selectList(PageInfo pi, int hostNo) {
 		Connection con = getConnection();
 		
-		ArrayList<PaymentRequest> list = new HostReserveDao().selectList(con, pi);
+		ArrayList<PaymentRequest> list = new HostReserveDao().selectList(con, pi, hostNo);
 		
 		close(con);
 		
@@ -63,7 +63,7 @@ public class HostReserveService {
 		
 		if(result > 0) {
 			commit(con);
-			updateList = new HostReserveDao().selectList(con, pi);
+			updateList = new HostReserveDao().selectList(con, pi, rno);
 		} else {
 			rollback(con);
 		}
@@ -179,6 +179,13 @@ public class HostReserveService {
 		close(con);
 		
 		return updateOne;
+	}
+
+	public int findspaceNo(int hostNo) {
+		Connection con = getConnection();
+		int spaceNo = new HostReserveDao().findSpaceNo(con, hostNo);
+		close(con);
+		return spaceNo;
 	}
 	
 //	public int updateReserveRequest(int nno, int rno) {

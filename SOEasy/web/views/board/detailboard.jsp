@@ -73,8 +73,8 @@
 	 <header><%@ include file="../common/header.jsp"%></header>
 	 <div class="colMenu" style="margin-top: 20px;">
 		<a class="colMenuButton selectedButton"	href="/login/selectList.no">공지사항</a>
-		<a class="colMenuButton" href="/login/views/board/faqboard.jsp">자주 묻는 질문</a> 
-		<a class="colMenuButton" href="/login/views/board/mtmboard.jsp">1대1문의</a>
+		<a class="colMenuButton" href="/login/selectList.faq">자주 묻는 질문</a> 
+		<a class="colMenuButton" href="/login/select.mtm">1대1문의</a>
 	</div>
 	<hr style="margin: 0">
 	<br>
@@ -109,7 +109,7 @@
 			</tr>
 			<tr align="center" valign="middle" style="text-align:center; background:#60B4A6">
 				<td colspan="5">
-				<button style="text-align:center; background:#60B4A6; color:white" onclick="location.href='<%= request.getContextPath()%>/selectList.no'">메뉴로 돌아가기</button>
+				<button style="text-align:center; background:#60B4A6; color:white" onclick="location.href='<%= request.getContextPath()%>/selectList.faq'">메뉴로 돌아가기</button>
 				<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
 				<button   style="text-align:center; background:#60B4A6; color:white" onclick="location.href='<%= request.getContextPath()%>/selectBoard.no?num=<%= board.getNoticeNo()%>'" >수정하기 </button>
 				<% } %>

@@ -121,7 +121,7 @@
 		<label class="colMenuTitle">공간 일정 관리</label>
 		<a class="colMenuButton selectedButton" href="<%=request.getContextPath()%>/selectReserve.ho">예약 일정 관리</a>
 		<a class="colMenuButton" href="<%=request.getContextPath()%>/Select.ro">라운지 회원 관리</a>
-		<a class="colMenuButton" href="<%=request.getContextPath()%>/select.pr">예약 승인 요청</a>
+		<a class="colMenuButton" href="<%=request.getContextPath()%>/select.pr?hostNo=<%=loginUser.getMemberNo()%>">예약 승인 요청</a>
 		<a class="colMenuButton" href="<%=request.getContextPath()%>/selectTempSpace?memberNo=<%=loginUser.getMemberNo()%>">내 공간 관리</a>
 	<br><br>
 	</div>

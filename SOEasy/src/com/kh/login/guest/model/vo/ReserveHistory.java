@@ -12,7 +12,7 @@ public class ReserveHistory implements java.io.Serializable {
 	private String guestEmail; //결제자 이메일
 	private int spaceNo; //예약된 공간 번호
 	private String seatType; //자유석 지정석 여부 (fix_unfix)
-	private int seatNo; //호실 번호
+	private String seatNo; //호실 번호
 	private String spaceName; //공간명
 	private int spaceType; //공간 종류
 	private Date startUse; //공간 사용 시작일
@@ -38,7 +38,7 @@ public class ReserveHistory implements java.io.Serializable {
 	
 
 	public ReserveHistory(int reserveNo, int guestNo, String userId, String guestName, String guestEmail, int spaceNo,
-			String seatType, int seatNo, String spaceName, int spaceType, Date startUse, Date endUse, Date reserveDate,
+			String seatType, String seatNo, String spaceName, int spaceType, Date startUse, Date endUse, Date reserveDate,
 			int personCount, int charge, String payMethod, int payStatus, int acceptStatus, int reserveStatus,
 			String hasReview, String userName, String userPhone, String userEmail) {
 		super();
@@ -132,12 +132,12 @@ public class ReserveHistory implements java.io.Serializable {
 	}
 
 
-	public int getSeatNo() {
+	public String getSeatNo() {
 		return seatNo;
 	}
 
 
-	public void setSeatNo(int seatNo) {
+	public void setSeatNo(String seatNo) {
 		this.seatNo = seatNo;
 	}
 

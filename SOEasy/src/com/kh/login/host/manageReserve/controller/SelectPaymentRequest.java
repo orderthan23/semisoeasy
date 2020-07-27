@@ -40,14 +40,33 @@ public class SelectPaymentRequest extends HttpServlet {
 		
 		currentPage = 1;
 		
+		String reserveNo = request.getParameter("reserveNo");
+		String hostNo = request.getParameter("hostNo");
+		int result = 0;
+		
+		
+		
+		int rno = 0;
+		if(reserveNo != "" && reserveNo != null) {
+			rno = Integer.parseInt(reserveNo);
+			System.out.println("update rno : " + reserveNo);
+			System.out.println("update rno : " + rno);
+		}
+		int hno = 0;
+		if(hostNo != "" && hostNo != null) {
+			hno = Integer.parseInt(hostNo);
+			System.out.println("update rno : " + hostNo);
+			System.out.println("update rno : " + hno);
+		}
+		
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
 		limit = 10;
 		
-		int listCount = new HostReserveService().getListCount();
-		int requestCount = new HostReserveService().getRequestCount();
+		int listCount = new HostReserveService().getListCount(hno);
+		int requestCount = new HostReserveService().getRequestCount(rno);
 		
 		
 		maxPage = (int) ((double) listCount / limit + 0.9);
@@ -70,7 +89,8 @@ public class SelectPaymentRequest extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage, requestCount);
 		
-		ArrayList<PaymentRequest> list = new HostReserveService().selectList(pi);
+		ArrayList<PaymentRequest> list = new HostReserveService().selectList(pi, hno);
+		System.out.println("pay list:" + list);
 		
 		String page = "";
 		if(list != null) {

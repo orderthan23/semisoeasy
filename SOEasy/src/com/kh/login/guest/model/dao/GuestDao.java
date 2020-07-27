@@ -55,7 +55,7 @@ public class GuestDao {
 				rh.setUserId(rset.getString("M_ID"));
 				rh.setSpaceName(rset.getString("SPACE_NAME"));
 				rh.setSeatType(rset.getString("FIX_UNFIX"));
-				rh.setSeatNo(rset.getInt("OFFICE_NO"));
+				rh.setSeatNo(rset.getString("OFFICE_NO"));
 				rh.setStartUse(rset.getDate("START_DATE"));
 				rh.setEndUse(rset.getDate("END_DATE"));
 				rh.setPersonCount(rset.getInt("RESERV_PERSON_COUNT"));

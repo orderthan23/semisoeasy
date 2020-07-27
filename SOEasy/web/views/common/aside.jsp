@@ -267,8 +267,8 @@ span.bar {
 				$('#fourthSubNav').attr("href","<%=request.getContextPath()%>/selectAll.me").text("회원 관리");
 				$('#fifthSubNav').attr("href","<%=request.getContextPath()%>/selectRecover.me").text("회원 복구 요청");
 				$('#sixthSubNav').attr("href","#").text("신고 건 조회");
-				$('#seventhSubNav').attr("href","<%=request.getContextPath()%>/selectList.faq").text("Q&A 관리");
-				$('#eighthSubNav').attr("href","<%=request.getContextPath()%>/insert.no").text("공지사항 작성");
+				$('#seventhSubNav').attr("href","<%=request.getContextPath()%>/select.mtm").text("Q&A 관리");
+				$('#eighthSubNav').attr("href","<%=request.getContextPath()%>/selectList.no").text("공지사항");
 				$('#ninthSubNav').attr("href","<%=request.getContextPath()%>/adminHome.ad").text("관리자 홈");
 				break;
 			default :

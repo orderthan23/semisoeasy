@@ -268,7 +268,7 @@
 					<td style="color:#40a4b6; font-size:20px; width:200px;"><b>좌석</b></td>
 					<% if (si.getUnfixSeat() > 0 && si.getFixSeat() > 0) { %>
 						<td>
-							<input type="radio" id="rdBtn1" value="F" name="seat"><label for="rdBtn1">지정석</label>
+							<input type="radio" id="rdBtn1" value="F" name="seat" checked><label for="rdBtn1">지정석</label>
 							<input type="radio" id="rdBtn2" value="U" name="seat"><label for="rdBtn2">자유석</label>
 						</td>
 					<% } else if (si.getUnfixSeat() == 0) { %>
@@ -464,7 +464,7 @@
 					<tr>
 						<td width="150px" height="50px"></td>
 						<td></td>
-						<td colspan="2" id="reservPay" style=" "><input type="text" id="lastPrice" name="expectPay" value=
+						<td colspan="2" id="reservPay" style=" "><input type="text" id="lastPrice"  value=
 							"<% if (si.getDayPay() == 0) { %>
 								<%= si.getMonthPay() %>
 							<% } else if (si.getMonthPay() == 0) { %>
@@ -503,7 +503,7 @@
 						<td id="agree4"><label for="agr4"><input type="checkbox" id="agr4">개인정보 수집 및 이용 동의</label></td>
 				</table>
 			</div>
-		
+			<input type="hidden" id="realPayment" name="expectPay">
 		</form>
 		</div>
 		</section>
@@ -631,7 +631,7 @@
 		console.log('realpay :'+realPay);
 	
 		 $('#reservPay').html('<p id="realPays" >'+realPay+'원'+ '</p>');
-			
+		 $('#realPayment').val(realPay);
 			
 		});
 		
