@@ -475,7 +475,7 @@
          
          $(function(){
 			<% for (int i = 0; i < si.getConv().length; i++) {%>
- 			
+ 				
         		var conv = "<%=si.getConv()[i]%>";
         				
         		switch(conv) {
@@ -506,7 +506,7 @@
         		}
         	<% } %>
          });
-         
+        
       </script>
 </body>
 </html>
