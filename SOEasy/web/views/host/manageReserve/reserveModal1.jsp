@@ -94,21 +94,45 @@
 					<input class=number type=text name=reservPersonCount value=1>
 					<input class=btn1 type=button value=">" onclick="plusCount();">
 				</td>
-				<hidden name="expectPay" value=0>
+			</tr>
+			<tr>
+				<td class="title"><b>유형 선택</b></td>
+				<td colspan="2" id="select">
+					<select name="fixUnfix">
+						<option>=====선택=====</option>
+						<option value="U">자유석</option>
+						<option value="F">고정석</option>
+					</select>
+					
+				</td>
 			</tr>
 			<tr>
 				<td class="title"><b>호실 선택</b></td>
 				<td colspan="2" id="select">
-					<select name="spaceNo">
+					<select name="officeNo">
 						<option>=====선택=====</option>
-						<option value="1" label="센터1">1호실</option>
-						<option value="1" label="센터2">2호실</option>
-						<option value="1" label="센터3">3호실</option>
-						<option value="1" label="센터4">4호실</option>
-						<option value="1" label="센터5">5호실</option>
+						<option value="301">301</option>
+						<option value="302">302</option>
+						<option value="302">303</option>
+						<option value="401">401</option>
+						<option value="402">402</option>
+						<option value="403">403</option>
+						<option value="501">501</option>
+						<option value="502">502</option>
+						<option value="503">503</option>
+						<option value="504">504</option>
+						<option value="601">601</option>
+						<option value="602">602</option>
+						<option value="701">701</option>
+						<option value="702">702</option>
+						<option value="702">703</option>
 					</select>
-					
+			
 				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="title">결제 예상 금액</td>
+				<td colspan="2"><input type="number" name="espectPay"></td>
 			</tr>
 			<tr>
 				<td rowspan="6" class="title" id="rInfo">예약자 정보<br><br><br><br><br><br></td>

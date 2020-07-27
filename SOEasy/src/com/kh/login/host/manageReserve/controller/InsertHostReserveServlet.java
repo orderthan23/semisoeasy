@@ -52,18 +52,25 @@ public class InsertHostReserveServlet extends HttpServlet {
 			officeNo = request.getParameter("officeNo");
 		}
 		
+		
 		String[] startDates = request.getParameter("startDate").split("-");
 		String startDate = startDates[0] + startDates[1] + startDates[2];
 		String[] endDates = request.getParameter("endDate").split("-");
 		String endDate = endDates[0] + endDates[1] + endDates[2];
 		System.out.println(startDate + ", " + endDate);
 		int reservPersonCount = Integer.parseInt(request.getParameter("reservPersonCount"));
-		int spaceNo = Integer.parseInt(request.getParameter("spaceNo"));
+		int spaceNo = 1;
+		if(request.getParameter("spaceNo") != null) {
+			spaceNo = Integer.parseInt(request.getParameter("spaceNo"));
+		}
 		int didHostOk = 1;
 		int reservStatus = 1;
 		String didReview = "WAIT";
 		String reservDate = "SYSDATE"; //SYSDATE
-		int expectPay = Integer.parseInt(request.getParameter("expectPay"));
+		int expectPay = 0;
+		if(request.getParameter("expectPay") != null) {
+			expectPay = Integer.parseInt(request.getParameter("expectPay"));
+		}
 		String userName = request.getParameter("userName");
 		String userPhone = request.getParameter("userPhone");
 		String userEmail = request.getParameter("userEmail");
@@ -90,14 +97,17 @@ public class InsertHostReserveServlet extends HttpServlet {
 		ArrayList<HashMap<String,Object>> list = new HostReserveService().insertHostReserve(hostReservation, hostNo, spaceNo);
 		
 		
-		
+		System.out.println(userName);
 		
 		String page = "";
 		if(list != null) {
-			page = "/views/host/manageReserve/selectHostReserve.jsp";
-			request.setAttribute("reserveNo", "insertReservationInfo");
-			request.setAttribute("list", list);
+			page = "/views/common/errorPage.jsp";
+			request.setAttribute("msg", "예약이 성공적으로 완료되었습니다.");
 			request.getRequestDispatcher(page).forward(request, response);
+//			page = "/views/host/manageReserve/hostReserveView.jsp";
+//			request.setAttribute("reserveNo", "insertReservationInfo");
+//			request.setAttribute("list", list);
+//			request.getRequestDispatcher(page).forward(request, response);
 		} else {
 			page = "/views/common/errorPage.jsp";
 			request.setAttribute("msg", "예약정보 insert 실패");
