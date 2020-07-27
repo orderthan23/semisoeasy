@@ -30,9 +30,6 @@ public class InsertReviewServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
@@ -49,7 +46,6 @@ public class InsertReviewServlet extends HttpServlet {
 		int rPoint = Integer.parseInt(request.getParameter("rPoint"));
 		String enrollDate = "SYSDATE";
 		//reservNo 는 시퀀스
-		
 		
 		Review requestMember = new Review();
 		requestMember.setSpaceNo(spaceNo);
