@@ -29,10 +29,7 @@ public class InsertReservationInfoServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//★젤 복잡함★
-		
-		//vo에서 int형으로 선언해준것들은 파싱해줌
+
 		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>) request.getSession().getAttribute("introList");
 		HashMap<String, Object> hmap = list.get(0);
@@ -45,10 +42,6 @@ public class InsertReservationInfoServlet extends HttpServlet {
 
 		String roadAddrPart1 = si.getSpaceLocationFilter().split(",")[0];  
 		
-//		System.out.println(si);
-		
-		
-		//reservNo는 시퀀스로
 		int guestNo = loginUser.getMemberNo();
 		int spaceNo = si.getSpaceNo();
 		
@@ -71,7 +64,7 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		int didHostOk = 1;
 		int reservStatus = 1;
 		String didReview = "WAIT";
-		String reservDate = "SYSDATE"; //SYSDATE
+		String reservDate = "SYSDATE";
 		int expectPay = Integer.parseInt(request.getParameter("expectPay"));
 		String userName = request.getParameter("userName");
 		String userPhone = request.getParameter("userPhone");
@@ -80,7 +73,6 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		
 		SpaceReservation requestMember = new SpaceReservation();
 		requestMember.setGuestNo(guestNo);
-//		requestMember.setSpaceNo(spaceNo);
 		requestMember.setFixUnfix(fixUnfix);
 		requestMember.setOfficeNo(officeNo);
 		requestMember.setStartDate(startDate);
@@ -89,16 +81,13 @@ public class InsertReservationInfoServlet extends HttpServlet {
 		requestMember.setDidHostOk(didHostOk);
 		requestMember.setReservStatus(reservStatus);
 		requestMember.setDidReview(didReview);
-		//reservDate는 쿼리문에서 SYSDATE로 넣을거기 때문에 여기서 전달 X
 		requestMember.setExpectPay(expectPay);
 		requestMember.setUserName(userName);
 		requestMember.setUserPhone(userPhone);
 		requestMember.setUserEmail(userEmail);
 		requestMember.setRequestContent(requestContent);
 		
-//		int result = new SpaceReservationService().insertReservation(requestMember);
 		ArrayList<HashMap<String,Object>> returnList = new SpaceReservationService().insertReservation(requestMember, si);
-		
 		
 		String page = "";
 		if(returnList != null) {
