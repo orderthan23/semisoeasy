@@ -445,12 +445,20 @@
 					<tr>
 						<td width="150px" height="50px"></td>
 						<td></td>
-						<td id="priceInfo" colspan="2" style="text-align:right; font-size:20px; color:gray;">300,000원 / 1개월 × 1 명</td>
+						<td id="priceInfo" colspan="2" style="text-align:right; font-size:20px; color:gray;">
+							<% if (si.getDayPay() == 0) { %>
+								월 / <%= si.getMonthPay() %>원
+							<% } else if (si.getMonthPay() == 0) { %>
+								일 / <%= si.getDayPay() %>원
+							<% } else if (si.getDayPay() != 0 && si.getMonthPay() != 0) { %>
+								일 <%= si.getDayPay() %>원 / 월 <%= si.getMonthPay() %>원
+							<% } %>
+						</td>
 					</tr>
 					<tr>
 						<td width="150px" height="50px"></td>
 						<td></td>
-						<td colspan="2"><input type="text" id="lastPrice" name="expectPay" value=300000 readonly></td>
+						<td colspan="2"><input type="text" id="lastPrice" name="expectPay" value=<%= si.getMonthPay() %> readonly></td>
 					</tr>
 					<tr>
 						<td width="150px" height="50px"></td>
