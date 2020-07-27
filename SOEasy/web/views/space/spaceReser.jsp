@@ -152,7 +152,8 @@
 	<div class="visual">
 
 			<% for (Image i : imgList) { 
-				String url = request.getContextPath()+i.getFilePath() + i.getChangeName();
+				String url = request.getContextPath()+i.getFilePath()+ "/" +  i.getChangeName();
+			
 				System.out.println(url);
 			%>
 				<div style="background-image: url(<%=url%>); display:block; width:500px; height:700px; background-repeat:no-repeat; background-size:cover;"></div>
