@@ -92,7 +92,9 @@
 	<section>
     <div id="wrapper">
 		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">자주 묻는 질문</h2>
-		<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a> 
+			<% if(loginUser != null && loginUser.getmId().equals("admin")) { %>
+			<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a>
+				<% } %>	 
 		<table style="width: 100%; border-collapse: collapse" id="faqTable" >
 		<tr>
 				<tr>

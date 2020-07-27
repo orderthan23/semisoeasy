@@ -74,6 +74,7 @@ public class SelectListMtoMServlet extends HttpServlet {
 	         page = "views/board/mtmboard.jsp";
 	         request.setAttribute("list", list);
 	         request.setAttribute("pi", pi);
+	         request.getRequestDispatcher(page).forward(request, response);
 	      }
 	       else {
 		     page = "views/common/errorPage.jsp";

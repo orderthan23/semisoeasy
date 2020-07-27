@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*, com.kh.login.board.model.vo.*,
 	com.kh.login.host.manageReserve.model.vo.*"%>
+	
 	<% ArrayList<Qna> list = (ArrayList<Qna>) request.getAttribute("list"); 
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -90,7 +92,7 @@
 	<section>
     <div id="wrapper">
 		<h2 class="logo" style="margin:0; font-size:30px; font-weight:bolder">자주 묻는 질문</h2>
-		<a href="/login/views/board/writeboard.jsp" id="writeButton" class="writeButton">글쓰기</a> 
+		<a href="/login/views/board/writemtm.jsp" id="writeButton" class="writeButton">글쓰기</a> 
 		<table style="width: 100%; border-collapse: collapse" id="mtmTable" >
 		<tr>
 				<tr>
@@ -109,7 +111,7 @@
 					<td class="info" style="text-align: center;"><%= qna.getqMnick() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getQdate() %></td>
 				</tr>
-				<% } else if(loginUser.getMemberNo() == 1) {  %>
+					<% } else if(loginUser.getMemberNo() == 1) {  %>
 				<tr>
 					<td class="info" style="text-align: center;"><%= qna.getQno() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getQkind() %></td>
@@ -117,8 +119,8 @@
 					<td class="info" style="text-align: center;"><%= qna.getqMnick() %></td>
 					<td class="info" style="text-align: center;"><%= qna.getQdate() %></td>
 				</tr>
-			<% } %>
-			<% } %>
+						<% } %>
+					<% } %>
 			
 			</table>
 ​<!-- 페이징 처리 버튼 -->
