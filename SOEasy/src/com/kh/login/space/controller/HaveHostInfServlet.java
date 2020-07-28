@@ -32,7 +32,6 @@ public class HaveHostInfServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		System.out.println("들어옴?");
 		int result = new SpaceService().haveHostInf(memberNo);
 		
 		PrintWriter out = response.getWriter();

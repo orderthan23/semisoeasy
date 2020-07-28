@@ -85,7 +85,6 @@
 	
 	<br>
 	
-	<input type="hidden" name="id" value="<%=loginUser.getmId()%>">
 	<table width:700 border="3" bordercolor="lightgray" align="center">
 			<tr>
 				<td style="text-align:center; background:#60B4A6">제목</td>

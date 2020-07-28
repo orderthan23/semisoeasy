@@ -79,9 +79,6 @@ public class UpdateSpaceStep1Servlet extends HttpServlet {
 			
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
-//				System.out.println("UPDATE TagName : " + name);
-//				System.out.println("UPDATE sysname : " + multiRequest.getFilesystemName(name));
-//				System.out.println("UPDATE originname : " + multiRequest.getOriginalFileName(name));
 				if(multiRequest.getFilesystemName(name) == null) {
 					
 				} else {
@@ -91,29 +88,19 @@ public class UpdateSpaceStep1Servlet extends HttpServlet {
 					allOriginFiles.add(multiRequest.getOriginalFileName(name));
 				}
 			}
-//			System.out.println("모든 업데이트 파일 레벨 : "+allFileLevels);
-//			System.out.println("모든 업데이트 파일 변경명 : " + allSaveFiles);
-//			System.out.println("모든 업데이트 파일 진짜명 : " + allOriginFiles);
-			
 			for(int i = allFileLevels.size()-1; i >= 0; i--) {
-//				System.out.println("혹시 여기는?");
 				for(int j = 0; j < imgList.size(); j++) {
 					if(allFileLevels.get(i) == imgList.get(j).getFileLevel()) {
-//						System.out.println("기존 이미지 리스트 파일레벨 : " + imgList.get(j).getFileLevel());
 						Image img = new Image();
 						img.setImgNo(imgList.get(j).getImgNo());
 						img.setFilePath(savePath);
 						img.setFileLevel(allFileLevels.get(i));
 						img.setChangeName(allSaveFiles.get(i));
 						img.setOriginName(allOriginFiles.get(i));
-//						updateFileLevels.add(allFileLevels.get(i));
-//						updateSaveFiles.add(allSaveFiles.get(i));
-//						updateOriginFiles.add(allOriginFiles.get(i));
 						updateImgList.add(img);
 					}
 				}
 			}
-			
 			for(int i = allFileLevels.size()-1; i >= 0; i--) {
 				if(updateImgList.size() == 0) {
 					Image img = new Image();
@@ -126,7 +113,6 @@ public class UpdateSpaceStep1Servlet extends HttpServlet {
 				} else {
 					for(int j = 0; j < updateImgList.size(); j++) {
 						if(allFileLevels.get(i) != updateImgList.get(j).getFileLevel()) {
-//							System.out.println("인서트 리스트 진입");
 							Image img = new Image();
 							
 							img.setFileLevel(allFileLevels.get(i));
@@ -135,44 +121,16 @@ public class UpdateSpaceStep1Servlet extends HttpServlet {
 							img.setOriginName(allOriginFiles.get(i));
 							insertImgList.add(img);
 						}
-					
 					}
 				}
 			}
 			
-//			System.out.println("업데이트 중 인서트 이미지리스트 : "+insertImgList);
 			
 			imgHmap.put("updateImgList", updateImgList);
 			imgHmap.put("insertImgList", insertImgList);
-//			int originFilesLen = imgList.size();
-//			int updateFilesLen = allSaveFiles.size();
-//			int insertNum = updateFilesLen - originFilesLen;
-//			
-//			for(int i = 0; i < updateFilesLen; i++) {
-//				if(i < originFilesLen) {
-//					updateSaveFiles.add(allSaveFiles.get(i));
-//					updateOriginFiles.add(allOriginFiles.get(i));
-//				} else {
-//					insertSaveFiles.add(allSaveFiles.get(i));
-//					insertOriginFiles.add(allOriginFiles.get(i));
-//				}
-//			}
-//			
-//			for(int i = 0; i < updateFileLevels.size(); i++) {
-//				Image img = new Image();
-//				img.setFilePath(savePath);
-//				img.setFileLevel(updateFileLevels.get(i));
-//				img.setOriginName(updateOriginFiles.get(i));
-//				img.setChangeName(updateSaveFiles.get(i));
-//				
-//				updateImgList.add(img);
-//			}
-//			
-//			for(int i = 0; i < insertFileLevels.size(); i++) {
-//				
-//			}
+			
+			
 			String kinds = multiRequest.getParameter("kinds");
-//			System.out.println("updateSpaceStep1 kinds : " + kinds);
 			
 			//공간정보 vo
 			SpaceInfo si = new SpaceInfo();
