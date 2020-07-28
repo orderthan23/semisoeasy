@@ -41,6 +41,8 @@ public class InsertHostReserveServlet extends HttpServlet {
 		
 		
 		int hostNo = loginUser.getMemberNo();
+		int spaceNo = 6;
+		spaceNo = new HostReserveService().findspaceNo(hostNo);
 		
 		String fixUnfix = "";
 		if (request.getParameter("seat") != null && request.getParameter("seat") != "") {
@@ -59,10 +61,10 @@ public class InsertHostReserveServlet extends HttpServlet {
 		String endDate = endDates[0] + endDates[1] + endDates[2];
 		System.out.println(startDate + ", " + endDate);
 		int reservPersonCount = Integer.parseInt(request.getParameter("reservPersonCount"));
-		int spaceNo = 1;
-		if(request.getParameter("spaceNo") != null) {
-			spaceNo = Integer.parseInt(request.getParameter("spaceNo"));
-		}
+		
+//		if(request.getParameter("spaceNo") != null) {
+//			spaceNo = Integer.parseInt(request.getParameter("spaceNo"));
+//		}
 		int didHostOk = 1;
 		int reservStatus = 1;
 		String didReview = "WAIT";

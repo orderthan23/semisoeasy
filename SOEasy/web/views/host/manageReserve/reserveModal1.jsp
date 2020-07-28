@@ -111,21 +111,10 @@
 				<td colspan="2" id="select">
 					<select name="officeNo">
 						<option>=====선택=====</option>
-						<option value="301">301</option>
-						<option value="302">302</option>
-						<option value="302">303</option>
-						<option value="401">401</option>
-						<option value="402">402</option>
-						<option value="403">403</option>
-						<option value="501">501</option>
-						<option value="502">502</option>
-						<option value="503">503</option>
-						<option value="504">504</option>
-						<option value="601">601</option>
-						<option value="602">602</option>
-						<option value="701">701</option>
-						<option value="702">702</option>
-						<option value="702">703</option>
+						<option value="한승공간 역삼코워킹스페이스 1인실 1">1호실</option>
+						<option value="한승공간 역삼코워킹스페이스 1인실 2">2호실</option>
+						<option value="한승공간 역삼코워킹스페이스 1인실 3">3호실</option>
+						<option value="한승공간 역삼코워킹스페이스 1인실 4">4호실</option>
 					</select>
 			
 				</td>

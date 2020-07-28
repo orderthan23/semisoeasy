@@ -144,11 +144,11 @@
 
 		</div>
 		<div align="right" id="kind">
-			<textarea class="kind" id="expT" cols="6" rows="1" style="resize: none"
+			<textarea class="kind" id="expT" cols="9" rows="1" style="resize: none"
 				readonly>이용 종료</textarea>
-			<textarea class="kind" id="monthT" cols="6" rows="1" style="resize: none"
+			<textarea class="kind" id="monthT" cols="9" rows="1" style="resize: none"
 				readonly>월 회원</textarea>
-			<textarea class="kind" id="dayT" cols="6" rows="1" style="resize: none"
+			<textarea class="kind" id="dayT" cols="9" rows="1" style="resize: none"
 				readonly>일 회원</textarea>
 
 
