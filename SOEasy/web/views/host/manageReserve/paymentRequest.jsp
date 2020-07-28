@@ -75,7 +75,7 @@
 		<div id="wrapper">
 		<br>
 		<h1 style="margin : 0;">예약 승인 요청</h1>
-		<h3>플랫폼을 통해 예약 승인 대기중인 건이 <%= requestCount %> 건 있습니다</h3>
+		<!-- <h3>플랫폼을 통해 예약 승인 대기중인 건이 <%= requestCount %> 건 있습니다</h3> -->
 		
 		<!-- <select>
 		<option>==센터 선택==</option>
@@ -137,7 +137,7 @@
 				<% } %>
 				<% if(requestCount < 1){ %>
 					<tr>
-						<td colspan="10" align="center" style="background:white; height:100px;">예약 승인 요청건이 없습니다.</td>
+						<!-- <td colspan="10" align="center" style="background:white; height:100px;">예약 승인 요청건이 없습니다.</td> -->
 					</tr>
 				<% } %>
 			</table>

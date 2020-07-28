@@ -43,7 +43,7 @@
 			<div
 				style="width: 100%; height: 60px; background: #3DB6AE; margin: 0;">
 
-				<h1 align="center" style="line-height: 60px; margin: 0; font-size:40px;">WARNING ERROR</h1>
+				<h1 align="center" style="line-height: 60px; margin: 0; font-size:40px;">SO EASY</h1>
 			</div>
 			<br> <br> <br>
 			<h1 style="text-align: center"><%=msg%></h1>

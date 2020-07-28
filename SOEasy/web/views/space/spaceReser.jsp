@@ -614,7 +614,7 @@
 		    var ar2 = endDate.split('-');
 		    var da1 = new Date(ar1[0], ar1[1], ar1[2]);
 		    var da2 = new Date(ar2[0], ar2[1], ar2[2]);
-			var howlongDays =(Math.ceil((da2-da1)/(1000*3600*24)));
+			var howlongDays =(Math.ceil((da2-da1)/(1000*3600*24))) + 1;
 			console.log(startDate);
 			console.log(endDate);
 			console.log(personCount);
