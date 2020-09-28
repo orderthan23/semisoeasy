@@ -48,7 +48,7 @@ public class AdminWaitHandlingServlet extends HttpServlet {
 			String toEmail = userEmail;
 			String host = "smtp.naver.com";
 			String user = "hg121500@naver.com";
-			String password = "emailtest1!";
+			String password = "비밀번호";
 
 			Properties props = new Properties();
 			props.put("mail.smtp.host", host);
